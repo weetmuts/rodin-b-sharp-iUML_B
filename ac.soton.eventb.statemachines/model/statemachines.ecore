@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statemachines"
+    nsURI="http://soton.ac.uk/models/eventb/statemachines" nsPrefix="statemachines">
+  <eClassifiers xsi:type="ecore:EClass" name="StatemachineCollection" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension #//StatemachineOwner">
+    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" abstract="true"
+      eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//AbstractNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement #//EventBLabeled">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//AbstractNode" eOpposite="#//AbstractNode/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elaborates" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedStatemachine" eSuperTypes="#//AbstractStatemachine #//EventBLabeled">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
+        eType="#//AbstractStatemachine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="#//AbstractStatemachine ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="translation" eType="#//TranslationKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TranslationKind">
+    <eLiterals name="MULTIVAR"/>
+    <eLiterals name="SINGLEVAR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventBLabeled" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractNode ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed #//StatemachineOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//AbstractNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ANY" eSuperTypes="#//AbstractNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//AbstractNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//AbstractNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatemachineOwner" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"
+        eType="#//AbstractStatemachine" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>
