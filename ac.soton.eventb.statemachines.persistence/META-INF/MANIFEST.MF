@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Statemachines Persistence Plugin
+Bundle-SymbolicName: ac.soton.eventb.statemachines.persistence;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: ac.soton.eventb.statemachines.persistence.StatemachinesPersistencePlugin
+Bundle-Vendor: University of Southampton
+Require-Bundle: org.eclipse.core.runtime,
+ ac.soton.eventb.statemachines;bundle-version="1.0.0",
+ org.eventb.emf.persistence;bundle-version="2.2.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

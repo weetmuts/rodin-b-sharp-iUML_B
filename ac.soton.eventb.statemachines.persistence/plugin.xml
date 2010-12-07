@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.rodinp.core.internalElementTypes">
+      <internalElementType
+            class="ac.soton.eventb.statemachines.persistence.StatemachineCollection"
+            id="statemachineCollection"
+            name="StatemachineCollection">
+      </internalElementType>
+   </extension>
+   <extension
+         point="org.rodinp.core.attributeTypes">
+      <attributeType
+            id="statemachines"
+            kind="string"
+            name="Statemachines">
+      </attributeType>
+   </extension>
+   <extension
+         point="org.eventb.emf.persistence.synchroniser">
+      <emfPackage
+            name="Statemachines Package"
+            nsURI="http://soton.ac.uk/models/eventb/statemachines">
+         <synchroniser
+               emf_class="StatemachineCollection"
+               name="StatemachineCollection"
+               rodin_id="ac.soton.eventb.statemachines.persistence.statemachineCollection"
+               synchroniser_class="ac.soton.eventb.statemachines.persistence.synchroniser.StatemachineSynchroniser">
+         </synchroniser>
+      </emfPackage>
+   </extension>
+
+</plugin>
