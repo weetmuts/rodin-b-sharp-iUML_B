@@ -9,10 +9,12 @@
 package ac.soton.eventb.statemachines.impl;
 
 import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
 import ac.soton.eventb.statemachines.EventBLabeled;
 import ac.soton.eventb.statemachines.Final;
 import ac.soton.eventb.statemachines.Initial;
+import ac.soton.eventb.statemachines.RefinedState;
 import ac.soton.eventb.statemachines.RefinedStatemachine;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
@@ -139,6 +141,20 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * @generated
 	 */
 	private EClass statemachineOwnerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass refinedStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractStateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -405,15 +421,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getANY_EReference0() {
-		return (EReference)anyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getFinal() {
 		return finalEClass;
 	}
@@ -434,6 +441,33 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 */
 	public EReference getStatemachineOwner_Statemachines() {
 		return (EReference)statemachineOwnerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRefinedState() {
+		return refinedStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRefinedState_Refines() {
+		return (EReference)refinedStateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractState() {
+		return abstractStateEClass;
 	}
 
 	/**
@@ -504,12 +538,16 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		orEClass = createEClass(OR);
 
 		anyEClass = createEClass(ANY);
-		createEReference(anyEClass, ANY__EREFERENCE0);
 
 		finalEClass = createEClass(FINAL);
 
 		statemachineOwnerEClass = createEClass(STATEMACHINE_OWNER);
 		createEReference(statemachineOwnerEClass, STATEMACHINE_OWNER__STATEMACHINES);
+
+		refinedStateEClass = createEClass(REFINED_STATE);
+		createEReference(refinedStateEClass, REFINED_STATE__REFINES);
+
+		abstractStateEClass = createEClass(ABSTRACT_STATE);
 
 		// Create enums
 		translationKindEEnum = createEEnum(TRANSLATION_KIND);
@@ -556,13 +594,16 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		refinedStatemachineEClass.getESuperTypes().add(this.getEventBLabeled());
 		statemachineEClass.getESuperTypes().add(this.getAbstractStatemachine());
 		statemachineEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
-		stateEClass.getESuperTypes().add(this.getAbstractNode());
+		stateEClass.getESuperTypes().add(this.getAbstractState());
 		stateEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
-		stateEClass.getESuperTypes().add(this.getStatemachineOwner());
 		initialEClass.getESuperTypes().add(this.getAbstractNode());
 		orEClass.getESuperTypes().add(this.getAbstractNode());
 		anyEClass.getESuperTypes().add(this.getAbstractNode());
 		finalEClass.getESuperTypes().add(this.getAbstractNode());
+		refinedStateEClass.getESuperTypes().add(this.getAbstractState());
+		refinedStateEClass.getESuperTypes().add(this.getEventBLabeled());
+		abstractStateEClass.getESuperTypes().add(this.getAbstractNode());
+		abstractStateEClass.getESuperTypes().add(this.getStatemachineOwner());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(statemachineCollectionEClass, StatemachineCollection.class, "StatemachineCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -578,7 +619,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Target(), this.getAbstractNode(), this.getAbstractNode_Incoming(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Source(), this.getAbstractNode(), this.getAbstractNode_Outgoing(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransition_Elaborates(), theCorePackage.getEventBCommentedElement(), null, "elaborates", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_Elaborates(), theCorePackage.getEventBCommentedElement(), null, "elaborates", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(refinedStatemachineEClass, RefinedStatemachine.class, "RefinedStatemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRefinedStatemachine_Refines(), this.getAbstractStatemachine(), null, "refines", null, 1, 1, RefinedStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -596,12 +637,16 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEClass(orEClass, ac.soton.eventb.statemachines.OR.class, "OR", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(anyEClass, ac.soton.eventb.statemachines.ANY.class, "ANY", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getANY_EReference0(), this.getAbstractNode(), null, "EReference0", null, 0, 1, ac.soton.eventb.statemachines.ANY.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(finalEClass, Final.class, "Final", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(statemachineOwnerEClass, StatemachineOwner.class, "StatemachineOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStatemachineOwner_Statemachines(), this.getAbstractStatemachine(), null, "statemachines", null, 0, -1, StatemachineOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(refinedStateEClass, RefinedState.class, "RefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRefinedState_Refines(), this.getAbstractNode(), null, "refines", null, 1, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractStateEClass, AbstractState.class, "AbstractState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");

@@ -41,12 +41,14 @@
     <genClasses ecoreClass="statemachines.ecore#//State"/>
     <genClasses ecoreClass="statemachines.ecore#//Initial"/>
     <genClasses ecoreClass="statemachines.ecore#//OR"/>
-    <genClasses ecoreClass="statemachines.ecore#//ANY">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//ANY/EReference0"/>
-    </genClasses>
+    <genClasses ecoreClass="statemachines.ecore#//ANY"/>
     <genClasses ecoreClass="statemachines.ecore#//Final"/>
     <genClasses image="false" ecoreClass="statemachines.ecore#//StatemachineOwner">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//StatemachineOwner/statemachines"/>
     </genClasses>
+    <genClasses ecoreClass="statemachines.ecore#//RefinedState" labelFeature="#//statemachines/EventBLabeled/label">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedState/refines"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="statemachines.ecore#//AbstractState"/>
   </genPackages>
 </genmodel:GenModel>

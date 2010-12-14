@@ -24,7 +24,8 @@
         eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/outgoing"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elaborates" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elaborates" lowerBound="1"
+        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefinedStatemachine" eSuperTypes="#//AbstractStatemachine #//EventBLabeled">
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
@@ -41,15 +42,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractNode ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed #//StatemachineOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed"/>
   <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//AbstractNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ANY" eSuperTypes="#//AbstractNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//AbstractNode"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ANY" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="StatemachineOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"
         eType="#//AbstractStatemachine" containment="true" resolveProxies="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//AbstractState #//EventBLabeled">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
+        eType="#//AbstractNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true" eSuperTypes="#//AbstractNode #//StatemachineOwner"/>
 </ecore:EPackage>

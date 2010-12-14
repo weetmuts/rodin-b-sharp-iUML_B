@@ -116,6 +116,15 @@ public interface StatemachinesFactory extends EFactory {
 	Final createFinal();
 
 	/**
+	 * Returns a new object of class '<em>Refined State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Refined State</em>'.
+	 * @generated
+	 */
+	RefinedState createRefinedState();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -103,7 +103,7 @@ public interface Transition extends EventBCommentedElement, EventBLabeled {
 	 * @return the value of the '<em>Elaborates</em>' reference.
 	 * @see #setElaborates(EventBCommentedElement)
 	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Elaborates()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	EventBCommentedElement getElaborates();

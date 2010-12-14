@@ -20,7 +20,7 @@ import org.eventb.emf.core.EventBNamed;
  * @model
  * @generated
  */
-public interface State extends AbstractNode, EventBNamed, StatemachineOwner {
+public interface State extends AbstractState, EventBNamed {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

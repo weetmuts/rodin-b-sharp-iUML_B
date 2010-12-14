@@ -321,6 +321,29 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.RefinedState} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RefinedStateItemProvider refinedStateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.RefinedState}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRefinedStateAdapter() {
+		if (refinedStateItemProvider == null) {
+			refinedStateItemProvider = new RefinedStateItemProvider(this);
+		}
+
+		return refinedStateItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -455,6 +478,7 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 		if (orItemProvider != null) orItemProvider.dispose();
 		if (anyItemProvider != null) anyItemProvider.dispose();
 		if (finalItemProvider != null) finalItemProvider.dispose();
+		if (refinedStateItemProvider != null) refinedStateItemProvider.dispose();
 	}
 
 	/**
@@ -597,6 +621,14 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
 							 StatemachinesFactory.eINSTANCE.createFinal()));
+
+				
+				annotation = StatemachinesPackage.Literals.REFINED_STATE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 StatemachinesFactory.eINSTANCE.createRefinedState()));
 
 				return null;
 			}

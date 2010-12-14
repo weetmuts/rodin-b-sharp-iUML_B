@@ -5,16 +5,21 @@
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
+import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
-import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.EventBLabeled;
+import ac.soton.eventb.statemachines.RefinedState;
 import ac.soton.eventb.statemachines.StatemachineOwner;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -22,27 +27,26 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>State</b></em>'.
+ * An implementation of the model object '<em><b>Refined State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.RefinedStateImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.RefinedStateImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StateImpl extends AbstractStateImpl implements State {
+public class RefinedStateImpl extends AbstractStateImpl implements RefinedState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,21 +55,31 @@ public class StateImpl extends AbstractStateImpl implements State {
 	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getLabel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "";
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefines()
+	 * @generated
+	 * @ordered
+	 */
+	protected AbstractNode refines;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StateImpl() {
+	protected RefinedStateImpl() {
 		super();
 	}
 
@@ -76,7 +90,7 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StatemachinesPackage.Literals.STATE;
+		return StatemachinesPackage.Literals.REFINED_STATE;
 	}
 
 	/**
@@ -84,16 +98,12 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getName() {
-		return doGetName();	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void setName(String newName) {
-		doSetName(newName);
+	public String getLabel() {
+		if (getRefines() instanceof EventBNamed){
+			return ((EventBNamed) getRefines()).getName();
+		}else if (getRefines() instanceof EventBLabeled){
+			return ((EventBLabeled) getRefines()).getLabel();
+		}else return "<no label - fix refines>";
 	}
 
 	/**
@@ -101,12 +111,10 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String doGetName() {
-		assert (this instanceof EventBElement);
-		String reference = ((EventBElement)this).getReferenceWithoutResolving();
-		return reference.length() > this.eStaticClass().getInstanceClassName().length() ?
-			reference.substring(this.eStaticClass().getInstanceClassName().length()+1)
-			: "";
+	public void setLabel(String newLabel) {
+		// TODO: implement this method to set the 'Label' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -114,8 +122,37 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void doSetName(String newName) {
-		((EventBElement)this).setReference(this.eStaticClass().getInstanceClassName()+"."+newName);
+	public AbstractNode getRefines() {
+		if (refines != null && refines.eIsProxy()) {
+			InternalEObject oldRefines = (InternalEObject)refines;
+			refines = (AbstractNode)eResolveProxy(oldRefines);
+			if (refines != oldRefines) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.REFINED_STATE__REFINES, oldRefines, refines));
+			}
+		}
+		return refines;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractNode basicGetRefines() {
+		return refines;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRefines(AbstractNode newRefines) {
+		AbstractNode oldRefines = refines;
+		refines = newRefines;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.REFINED_STATE__REFINES, oldRefines, refines));
 	}
 
 	/**
@@ -126,8 +163,11 @@ public class StateImpl extends AbstractStateImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				return getName();
+			case StatemachinesPackage.REFINED_STATE__LABEL:
+				return getLabel();
+			case StatemachinesPackage.REFINED_STATE__REFINES:
+				if (resolve) return getRefines();
+				return basicGetRefines();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,8 +181,11 @@ public class StateImpl extends AbstractStateImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				setName((String)newValue);
+			case StatemachinesPackage.REFINED_STATE__LABEL:
+				setLabel((String)newValue);
+				return;
+			case StatemachinesPackage.REFINED_STATE__REFINES:
+				setRefines((AbstractNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,8 +199,11 @@ public class StateImpl extends AbstractStateImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				setName(NAME_EDEFAULT);
+			case StatemachinesPackage.REFINED_STATE__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
+			case StatemachinesPackage.REFINED_STATE__REFINES:
+				setRefines((AbstractNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -171,8 +217,10 @@ public class StateImpl extends AbstractStateImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+			case StatemachinesPackage.REFINED_STATE__LABEL:
+				return LABEL_EDEFAULT == null ? getLabel() != null : !LABEL_EDEFAULT.equals(getLabel());
+			case StatemachinesPackage.REFINED_STATE__REFINES:
+				return refines != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -184,9 +232,9 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBLabeled.class) {
 			switch (derivedFeatureID) {
-				case StatemachinesPackage.STATE__NAME: return CorePackage.EVENT_BNAMED__NAME;
+				case StatemachinesPackage.REFINED_STATE__LABEL: return StatemachinesPackage.EVENT_BLABELED__LABEL;
 				default: return -1;
 			}
 		}
@@ -200,13 +248,13 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBLabeled.class) {
 			switch (baseFeatureID) {
-				case CorePackage.EVENT_BNAMED__NAME: return StatemachinesPackage.STATE__NAME;
+				case StatemachinesPackage.EVENT_BLABELED__LABEL: return StatemachinesPackage.REFINED_STATE__LABEL;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-} //StateImpl
+} //RefinedStateImpl

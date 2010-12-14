@@ -140,6 +140,14 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createStatemachineOwnerAdapter();
 			}
 			@Override
+			public Adapter caseRefinedState(RefinedState object) {
+				return createRefinedStateAdapter();
+			}
+			@Override
+			public Adapter caseAbstractState(AbstractState object) {
+				return createAbstractStateAdapter();
+			}
+			@Override
 			public Adapter caseEventBObject(EventBObject object) {
 				return createEventBObjectAdapter();
 			}
@@ -362,6 +370,34 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStatemachineOwnerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.RefinedState <em>Refined State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.statemachines.RefinedState
+	 * @generated
+	 */
+	public Adapter createRefinedStateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.AbstractState <em>Abstract State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.statemachines.AbstractState
+	 * @generated
+	 */
+	public Adapter createAbstractStateAdapter() {
 		return null;
 	}
 

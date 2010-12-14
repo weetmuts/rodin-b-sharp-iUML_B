@@ -92,7 +92,7 @@ public class RefinedStatemachineImpl extends AbstractStatemachineImpl implements
 			return ((EventBNamed) getRefines()).getName();
 		}else if (getRefines() instanceof EventBLabeled){
 			return ((EventBLabeled) getRefines()).getLabel();
-		}else return "<no label - fix elaborates>";
+		}else return "<no label - fix refines>";
 	}
 
 	/**

@@ -187,6 +187,11 @@ public class AbstractStatemachineItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StatemachinesPackage.Literals.ABSTRACT_STATEMACHINE__NODES,
+				 StatemachinesFactory.eINSTANCE.createRefinedState()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StatemachinesPackage.Literals.ABSTRACT_STATEMACHINE__TRANSITIONS,
 				 StatemachinesFactory.eINSTANCE.createTransition()));
 	}

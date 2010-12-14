@@ -40,7 +40,7 @@ import org.eventb.emf.core.CorePackage;
  * @generated
  */
 public class StateItemProvider
-	extends AbstractNodeItemProvider
+	extends AbstractStateItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -103,36 +103,6 @@ public class StateItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns State.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,9 +142,6 @@ public class StateItemProvider
 			case StatemachinesPackage.STATE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StatemachinesPackage.STATE__STATEMACHINES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -189,16 +156,6 @@ public class StateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
-				 StatemachinesFactory.eINSTANCE.createRefinedStatemachine()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
-				 StatemachinesFactory.eINSTANCE.createStatemachine()));
 	}
 
 }

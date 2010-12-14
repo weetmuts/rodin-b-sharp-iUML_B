@@ -79,6 +79,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			case StatemachinesPackage.OR: return createOR();
 			case StatemachinesPackage.ANY: return createANY();
 			case StatemachinesPackage.FINAL: return createFinal();
+			case StatemachinesPackage.REFINED_STATE: return createRefinedState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -202,6 +203,16 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public Final createFinal() {
 		FinalImpl final_ = new FinalImpl();
 		return final_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RefinedState createRefinedState() {
+		RefinedStateImpl refinedState = new RefinedStateImpl();
+		return refinedState;
 	}
 
 	/**

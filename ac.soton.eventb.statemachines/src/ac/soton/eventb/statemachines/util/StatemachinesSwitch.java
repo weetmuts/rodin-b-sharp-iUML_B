@@ -175,8 +175,9 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
-				if (result == null) result = caseAbstractNode(state);
+				if (result == null) result = caseAbstractState(state);
 				if (result == null) result = caseEventBNamed(state);
+				if (result == null) result = caseAbstractNode(state);
 				if (result == null) result = caseStatemachineOwner(state);
 				if (result == null) result = caseEventBElement(state);
 				if (result == null) result = caseEventBObject(state);
@@ -222,6 +223,28 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.STATEMACHINE_OWNER: {
 				StatemachineOwner statemachineOwner = (StatemachineOwner)theEObject;
 				T result = caseStatemachineOwner(statemachineOwner);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.REFINED_STATE: {
+				RefinedState refinedState = (RefinedState)theEObject;
+				T result = caseRefinedState(refinedState);
+				if (result == null) result = caseAbstractState(refinedState);
+				if (result == null) result = caseEventBLabeled(refinedState);
+				if (result == null) result = caseAbstractNode(refinedState);
+				if (result == null) result = caseStatemachineOwner(refinedState);
+				if (result == null) result = caseEventBElement(refinedState);
+				if (result == null) result = caseEventBObject(refinedState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.ABSTRACT_STATE: {
+				AbstractState abstractState = (AbstractState)theEObject;
+				T result = caseAbstractState(abstractState);
+				if (result == null) result = caseAbstractNode(abstractState);
+				if (result == null) result = caseStatemachineOwner(abstractState);
+				if (result == null) result = caseEventBElement(abstractState);
+				if (result == null) result = caseEventBObject(abstractState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -421,6 +444,36 @@ public class StatemachinesSwitch<T> {
 	 * @generated
 	 */
 	public T caseStatemachineOwner(StatemachineOwner object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Refined State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Refined State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRefinedState(RefinedState object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractState(AbstractState object) {
 		return null;
 	}
 
