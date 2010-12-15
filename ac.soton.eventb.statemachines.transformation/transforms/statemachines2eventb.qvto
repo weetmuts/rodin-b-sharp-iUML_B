@@ -7,7 +7,6 @@ property machine : eventb::machine::Machine = null;
 property initevent : eventb::machine::Event = null;
 property initialisation : String = "INITIALISATION";
 
-property generated : String = "@generated";
 property B_EQ : String = " = ";
 property B_BEQ : String = " ≔ ";
 property B_IN : String = " ∈ ";
@@ -37,21 +36,22 @@ when { self.extensions[statemachines::StatemachineCollection]->size() > 0 } {
 
 // remove generated stuff in machine
 mapping inout eventb::machine::Machine::removeGenerated() {
-	variables := variables->reject(v | generated.equalsIgnoreCase(v.comment));
-	invariants := invariants->reject(i | generated.equalsIgnoreCase(i.comment));
+	variables := variables->reject(v | v.generated = true);
+	invariants := invariants->reject(i | i.generated = true);
 	events.map removeGenerated();
 }
 
 // remove generated stuff in event
 mapping inout eventb::machine::Event::removeGenerated() {
-	guards := guards->reject(g | generated.equalsIgnoreCase(g.comment));
-	actions := actions->reject(a | generated.equalsIgnoreCase(a.comment));
+	guards := guards->reject(g | g.generated = true);
+	actions := actions->reject(a | a.generated = true);
 }
 
 // abstract statemachine -> states, refined states and transitions
 mapping inout statemachines::AbstractStatemachine::statemachine2eventb() {
 	nodes[statemachines::State].map state2eventb();
 	nodes[statemachines::RefinedState].map state2eventb();
+	nodes[statemachines::State].map disjoin();
 	transitions->select(t | t.elaborates <> initevent).map transition2eventb();
 }
 
@@ -68,29 +68,19 @@ mapping inout statemachines::State::state2eventb() {
 	// variable
 	machine.variables += object eventb::machine::Variable {
 		name := self.name;
-		comment := generated;
+		generated := true;
 	};
 	// type invariant
 	machine.invariants += object eventb::machine::Invariant {
 		name := self.name + ".type";
 		predicate := self.name + B_IN + B_BOOL;
-		comment := generated;
-	};
-	// disjoint invariant
-	self.eContainer()[statemachines::State]->forEach(s) {
-		if (s->resolve(statemachines::State) <> null) then {
-			machine.invariants += object eventb::machine::Invariant {
-				name := "disjointStates " + self.name + "," + s.name;
-				predicate := B_NOT + B_LPAR + self.name + B_EQ + B_TRUE + B_AND + s.name + B_EQ + B_TRUE + B_RPAR;
-				comment := generated;
-			};
-		} endif;
+		generated := true;
 	};
 	// INITIALISATION action
 	initevent.actions += object eventb::machine::Action {
 		name := self.name + ".init";
 		action := self.name + B_BEQ + initvalue;
-		comment := generated;
+		generated := true;
 	};
 	self.statemachines.map statemachine2eventb();
 }
@@ -108,15 +98,29 @@ mapping inout statemachines::RefinedState::state2eventb() {
 	// variable
 	machine.variables += object eventb::machine::Variable {
 		name := self.label;
-		comment := generated;
+		generated := true;
 	};
 	// INITIALISATION action
 	initevent.actions += object eventb::machine::Action {
 		name := self.label + ".init";
 		action := self.label + B_BEQ + initvalue;
-		comment := generated;
+		generated := true;
 	};
 	self.statemachines.map statemachine2eventb();
+}
+
+// add disjoint invariant
+mapping inout statemachines::State::disjoin() {
+	self.eContainer().oclAsType(statemachines::AbstractStatemachine).nodes[statemachines::State]->forEach(s | s <> self) {
+		// don't duplicate
+		if (machine.invariants->name[endsWith(s.name + "," + self.name)]->isEmpty()) then {
+			machine.invariants += object eventb::machine::Invariant {
+				name := "disjointStates " + self.name + "," + s.name;
+				predicate := B_NOT + B_LPAR + self.name + B_EQ + B_TRUE + B_AND + s.name + B_EQ + B_TRUE + B_RPAR;
+				generated := true;
+			};
+		} endif;
+	};
 }
 
 // transition -> event guard and actions
@@ -144,12 +148,12 @@ mapping inout statemachines::Transition::transition2eventb() {
 		event.guards += object eventb::machine::Guard {
 			name := statemachineName + "_isin_" + sourceName;
 			predicate := sourceName + B_EQ + B_TRUE;
-			comment := generated;
+			generated := true;
 		};
 		event.actions += object eventb::machine::Action {
 			name := statemachineName + "_leaveState_" + sourceName;
 			action := sourceName + B_BEQ + B_FALSE;
-			comment := generated;
+			generated := true;
 		};
 	} endif;
 	// target state enter action
@@ -157,7 +161,7 @@ mapping inout statemachines::Transition::transition2eventb() {
 		event.actions += object eventb::machine::Action {
 			name := statemachineName + "_enterState_" + targetName;
 			action := targetName + B_BEQ + B_TRUE;
-			comment := generated;
+			generated := true;
 		};
 	} endif;
 }
