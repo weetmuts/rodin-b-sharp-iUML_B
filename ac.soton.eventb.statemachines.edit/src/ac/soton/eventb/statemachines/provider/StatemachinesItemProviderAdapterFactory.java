@@ -137,6 +137,29 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.AbstractStatemachine} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbstractStatemachineItemProvider abstractStatemachineItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.AbstractStatemachine}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAbstractStatemachineAdapter() {
+		if (abstractStatemachineItemProvider == null) {
+			abstractStatemachineItemProvider = new AbstractStatemachineItemProvider(this);
+		}
+
+		return abstractStatemachineItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.Transition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -470,6 +493,7 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	 */
 	public void dispose() {
 		if (statemachineCollectionItemProvider != null) statemachineCollectionItemProvider.dispose();
+		if (abstractStatemachineItemProvider != null) abstractStatemachineItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (refinedStatemachineItemProvider != null) refinedStatemachineItemProvider.dispose();
 		if (statemachineItemProvider != null) statemachineItemProvider.dispose();
@@ -557,6 +581,14 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
 							 StatemachinesFactory.eINSTANCE.createStatemachineCollection()));
+
+				
+				annotation = StatemachinesPackage.Literals.ABSTRACT_STATEMACHINE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 StatemachinesFactory.eINSTANCE.createAbstractStatemachine()));
 
 				
 				annotation = StatemachinesPackage.Literals.TRANSITION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");

@@ -118,6 +118,24 @@ public interface StatemachinesPackage extends EPackage {
 	int STATEMACHINE_COLLECTION__REFERENCE = CorePackage.ABSTRACT_EXTENSION__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE_COLLECTION__GENERATED = CorePackage.ABSTRACT_EXTENSION__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE_COLLECTION__LOCAL_GENERATED = CorePackage.ABSTRACT_EXTENSION__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Extension Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,6 +207,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_STATEMACHINE__REFERENCE = CorePackage.EVENT_BCOMMENTED_ELEMENT__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATEMACHINE__GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATEMACHINE__LOCAL_GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -273,6 +309,24 @@ public interface StatemachinesPackage extends EPackage {
 	int ABSTRACT_NODE__REFERENCE = CorePackage.EVENT_BELEMENT__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__GENERATED = CorePackage.EVENT_BELEMENT__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__LOCAL_GENERATED = CorePackage.EVENT_BELEMENT__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,6 +398,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSITION__REFERENCE = CorePackage.EVENT_BCOMMENTED_ELEMENT__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__LOCAL_GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -446,6 +518,24 @@ public interface StatemachinesPackage extends EPackage {
 	int REFINED_STATEMACHINE__REFERENCE = ABSTRACT_STATEMACHINE__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATEMACHINE__GENERATED = ABSTRACT_STATEMACHINE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATEMACHINE__LOCAL_GENERATED = ABSTRACT_STATEMACHINE__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -544,6 +634,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATEMACHINE__REFERENCE = ABSTRACT_STATEMACHINE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__GENERATED = ABSTRACT_STATEMACHINE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__LOCAL_GENERATED = ABSTRACT_STATEMACHINE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -674,6 +782,24 @@ public interface StatemachinesPackage extends EPackage {
 	int ABSTRACT_STATE__REFERENCE = ABSTRACT_NODE__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATE__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATE__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -754,6 +880,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__REFERENCE = ABSTRACT_STATE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__GENERATED = ABSTRACT_STATE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__LOCAL_GENERATED = ABSTRACT_STATE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -847,6 +991,24 @@ public interface StatemachinesPackage extends EPackage {
 	int INITIAL__REFERENCE = ABSTRACT_NODE__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -918,6 +1080,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OR__REFERENCE = ABSTRACT_NODE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -993,6 +1173,24 @@ public interface StatemachinesPackage extends EPackage {
 	int ANY__REFERENCE = ABSTRACT_NODE__REFERENCE;
 
 	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1064,6 +1262,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL__REFERENCE = ABSTRACT_NODE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -1165,6 +1381,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFINED_STATE__REFERENCE = ABSTRACT_STATE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATE__GENERATED = ABSTRACT_STATE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATE__LOCAL_GENERATED = ABSTRACT_STATE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.

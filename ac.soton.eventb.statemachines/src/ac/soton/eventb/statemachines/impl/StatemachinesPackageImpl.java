@@ -608,7 +608,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		// Initialize classes and features; add operations and parameters
 		initEClass(statemachineCollectionEClass, StatemachineCollection.class, "StatemachineCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(abstractStatemachineEClass, AbstractStatemachine.class, "AbstractStatemachine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(abstractStatemachineEClass, AbstractStatemachine.class, "AbstractStatemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractStatemachine_Nodes(), this.getAbstractNode(), null, "nodes", null, 0, -1, AbstractStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractStatemachine_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, AbstractStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

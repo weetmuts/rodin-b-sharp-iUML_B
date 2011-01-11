@@ -41,7 +41,7 @@ import org.eventb.emf.core.impl.EventBCommentedElementImpl;
  *
  * @generated
  */
-public abstract class AbstractStatemachineImpl extends EventBCommentedElementImpl implements AbstractStatemachine {
+public class AbstractStatemachineImpl extends EventBCommentedElementImpl implements AbstractStatemachine {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

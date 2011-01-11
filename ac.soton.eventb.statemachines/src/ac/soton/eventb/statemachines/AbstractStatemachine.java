@@ -26,7 +26,7 @@ import org.eventb.emf.core.EventBCommentedElement;
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getAbstractStatemachine()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface AbstractStatemachine extends EventBCommentedElement {

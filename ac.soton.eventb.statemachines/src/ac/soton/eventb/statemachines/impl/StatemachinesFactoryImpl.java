@@ -71,6 +71,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case StatemachinesPackage.STATEMACHINE_COLLECTION: return createStatemachineCollection();
+			case StatemachinesPackage.ABSTRACT_STATEMACHINE: return createAbstractStatemachine();
 			case StatemachinesPackage.TRANSITION: return createTransition();
 			case StatemachinesPackage.REFINED_STATEMACHINE: return createRefinedStatemachine();
 			case StatemachinesPackage.STATEMACHINE: return createStatemachine();
@@ -123,6 +124,16 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public StatemachineCollection createStatemachineCollection() {
 		StatemachineCollectionImpl statemachineCollection = new StatemachineCollectionImpl();
 		return statemachineCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractStatemachine createAbstractStatemachine() {
+		AbstractStatemachineImpl abstractStatemachine = new AbstractStatemachineImpl();
+		return abstractStatemachine;
 	}
 
 	/**

@@ -153,6 +153,11 @@ public class StatemachineOwnerItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
+				 StatemachinesFactory.eINSTANCE.createAbstractStatemachine()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
 				 StatemachinesFactory.eINSTANCE.createRefinedStatemachine()));
 
 		newChildDescriptors.add

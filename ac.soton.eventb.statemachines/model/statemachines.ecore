@@ -6,8 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StatemachineCollection" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension #//StatemachineOwner">
     <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" abstract="true"
-      eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//AbstractNode" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"

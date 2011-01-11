@@ -44,6 +44,15 @@ public interface StatemachinesFactory extends EFactory {
 	StatemachineCollection createStatemachineCollection();
 
 	/**
+	 * Returns a new object of class '<em>Abstract Statemachine</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Statemachine</em>'.
+	 * @generated
+	 */
+	AbstractStatemachine createAbstractStatemachine();
+
+	/**
 	 * Returns a new object of class '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
