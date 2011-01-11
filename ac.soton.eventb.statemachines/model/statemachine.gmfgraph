@@ -2,7 +2,7 @@
 <gmfgraph:Canvas xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="statemachines">
+    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="statemachine">
   <figures
       name="Default">
     <descriptors
@@ -14,9 +14,9 @@
             xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="200"
-            green="250"
-            blue="50"/>
+            red="224"
+            green="255"
+            blue="204"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StatemachineNameFigure"
@@ -80,11 +80,16 @@
         name="TransitionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="TransitionFigure">
+          name="TransitionFigure"
+          targetDecoration="//@figures.0/@descriptors.2/@actualFigure/@children.1">
         <children
             xsi:type="gmfgraph:Label"
             name="TransitionLabelFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:PolylineDecoration"
+            name="OpenArrowDecoration"
+            fill="false"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
@@ -93,18 +98,20 @@
         name="StateFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="StateFigure"
-          cornerWidth="15"
-          cornerHeight="15">
+          name="StateFigure">
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="130"
-            blue="240"/>
+            red="255"
+            green="204"
+            blue="255"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StateNameFigure"
-            text="&lt;...>"/>
+            text="&lt;...>">
+          <insets
+              left="5"
+              right="5"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
@@ -113,13 +120,15 @@
         name="RefinedStateFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="RefinedStateFigure"
-          cornerWidth="15"
-          cornerHeight="15">
+          name="RefinedStateFigure">
         <children
             xsi:type="gmfgraph:Label"
             name="RefinedStateLabelFigure"
-            text="&lt;...>"/>
+            text="&lt;...>">
+          <insets
+              left="5"
+              right="5"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
@@ -142,9 +151,16 @@
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
           name="FinalFigure">
+        <layout
+            xsi:type="gmfgraph:StackLayout"/>
         <preferredSize
             dx="40"
             dy="40"/>
+        <insets
+            top="4"
+            left="4"
+            bottom="4"
+            right="4"/>
         <children
             xsi:type="gmfgraph:Ellipse"
             name="InnerEllipse">
@@ -154,9 +170,6 @@
           <preferredSize
               dx="32"
               dy="32"/>
-          <location
-              x="4"
-              y="4"/>
         </children>
       </actualFigure>
     </descriptors>
@@ -165,6 +178,8 @@
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
           name="ANYFigure">
+        <layout
+            xsi:type="gmfgraph:StackLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
@@ -228,54 +243,91 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="StateTransitionFigure">
+        name="StatemachineTransitionFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
-          name="StateTransitionFigure"/>
+          name="StatemachineTransitionFigure"/>
+    </descriptors>
+    <descriptors
+        name="RefinedStatemachineTransitionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="RefinedStatemachineTransitionFigure"/>
     </descriptors>
   </figures>
-  <nodes
-      name="RefinedStatemachine"
-      figure="RefinedStatemachineFigure"/>
   <nodes
       name="Statemachine"
       figure="StatemachineFigure"/>
   <nodes
+      name="RefinedStatemachine"
+      figure="RefinedStatemachineFigure"/>
+  <nodes
       name="State"
       figure="StateFigure"/>
+  <nodes
+      name="RefinedState"
+      figure="RefinedStateFigure"/>
   <nodes
       name="Initial"
       figure="InitialFigure"/>
   <nodes
-      name="ANY"
-      figure="ANYFigure"/>
-  <nodes
       name="Final"
       figure="FinalFigure"/>
   <nodes
-      name="RefinedState"
-      figure="RefinedStateFigure"/>
+      name="ANY"
+      figure="ANYFigure"/>
   <connections
       name="Transition"
       figure="TransitionFigure"/>
-  <labels
-      name="TransitionLabel"
-      figure="TransitionFigure"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
-  <labels
-      name="RefinedStatemachineLabel"
+  <compartments
+      name="StatemachineTransitions"
+      figure="StatemachineFigure"
+      collapsible="true"/>
+  <compartments
+      name="RefinedStatemachineTransitions"
       figure="RefinedStatemachineFigure"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      collapsible="true"/>
+  <compartments
+      name="StateStatemachines"
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
+  <compartments
+      name="RefinedStateStatemachines"
+      figure="RefinedStateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <labels
       name="StatemachineName"
       figure="StatemachineFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels
+      name="RefinedStatemachineLabel"
+      figure="RefinedStatemachineFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="StateName"
       figure="StateFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="RefinedStateLabel"
       figure="RefinedStateFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels
+      name="TransitionLabel"
+      figure="TransitionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels
+      name="StatemachineTransitionLabel"
+      figure="StatemachineTransitionFigure"
+      elementIcon="false"/>
+  <labels
+      name="RefinedStatemachineTransitionLabel"
+      figure="RefinedStatemachineTransitionFigure"
+      elementIcon="false"/>
 </gmfgraph:Canvas>
