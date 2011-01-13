@@ -827,13 +827,22 @@ public interface StatemachinesPackage extends EPackage {
 	int ABSTRACT_STATE__STATEMACHINES = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATE__CONSTRAINTS = ABSTRACT_NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Abstract State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 1;
+	int ABSTRACT_STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
@@ -925,6 +934,15 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__STATEMACHINES = ABSTRACT_STATE__STATEMACHINES;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__CONSTRAINTS = ABSTRACT_STATE__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1428,6 +1446,15 @@ public interface StatemachinesPackage extends EPackage {
 	int REFINED_STATE__STATEMACHINES = ABSTRACT_STATE__STATEMACHINES;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATE__CONSTRAINTS = ABSTRACT_STATE__CONSTRAINTS;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1748,6 +1775,17 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getAbstractState();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.AbstractState#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
+	 * @see ac.soton.eventb.statemachines.AbstractState#getConstraints()
+	 * @see #getAbstractState()
+	 * @generated
+	 */
+	EReference getAbstractState_Constraints();
+
+	/**
 	 * Returns the meta object for enum '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2024,6 +2062,14 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ABSTRACT_STATE = eINSTANCE.getAbstractState();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_STATE__CONSTRAINTS = eINSTANCE.getAbstractState_Constraints();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}' enum.

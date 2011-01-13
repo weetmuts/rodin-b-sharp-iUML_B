@@ -15,6 +15,7 @@
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
         xsi:type="gmfgen:MetamodelType"
+        displayName="Canvas"
         editHelperClassName="AbstractStatemachineEditHelper"/>
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
@@ -23,13 +24,12 @@
         href="statemachines.genmodel#//statemachines/AbstractStatemachine"/>
     <childNodes
         visualID="3001"
-        editPartClassName="StatemachineEditPart"
-        itemSemanticEditPolicyClassName="StatemachineItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineViewFactory"
-        canonicalEditPolicyClassName="StatemachineCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.1"
-        graphicalNodeEditPolicyClassName="StatemachineGraphicalNodeEditPolicy"
-        createCommandClassName="StatemachineCreateCommand"
+        editPartClassName="StateStatemachineEditPart"
+        itemSemanticEditPolicyClassName="StateStatemachineItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStatemachineCanonicalEditPolicy"
+        compartments="//@diagram/@compartments.2"
+        graphicalNodeEditPolicyClassName="StateStatemachineGraphicalNodeEditPolicy"
+        createCommandClassName="StateStatemachineCreateCommand"
         containers="//@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -39,7 +39,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStatemachineCompartmentFigure.setFill(false);&#xA;fFigureStatemachineCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStatemachineCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
@@ -55,13 +55,155 @@
       <labels
           visualID="5001"
           editPartClassName="StatemachineNameEditPart"
-          itemSemanticEditPolicyClassName="StatemachineNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="StatemachineNameViewFactory">
+          itemSemanticEditPolicyClassName="StatemachineNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigureStatemachineNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
+    <childNodes
+        visualID="3006"
+        editPartClassName="InternalInitialEditPart"
+        itemSemanticEditPolicyClassName="InternalInitialItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="InternalInitialCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InternalInitialGraphicalNodeEditPolicy"
+        createCommandClassName="InternalInitialCreateCommand"
+        containers="//@diagram/@compartments.2 //@diagram/@compartments.5 //@diagram/@compartments.6">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.0/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InitialFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InitialFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InitialFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            height="40"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Initial"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+    </childNodes>
+    <childNodes
+        visualID="3007"
+        editPartClassName="InternalFinalEditPart"
+        itemSemanticEditPolicyClassName="InternalFinalItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="InternalFinalCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InternalFinalGraphicalNodeEditPolicy"
+        createCommandClassName="InternalFinalCreateCommand"
+        containers="//@diagram/@compartments.2 //@diagram/@compartments.5 //@diagram/@compartments.6">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.1/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="FinalFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FinalFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FinalFigure() {&#xA;&#x9;&#x9;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;&#xA;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(4)&#xA;, getMapMode().DPtoLP(4)&#xA;, getMapMode().DPtoLP(4)&#xA;, getMapMode().DPtoLP(4)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.Ellipse innerEllipse0 = new org.eclipse.draw2d.Ellipse();&#xA;&#x9;innerEllipse0.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;innerEllipse0.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(32)&#xA;, getMapMode().DPtoLP(32)&#xA;));&#xA;&#xA;this.add(innerEllipse0);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            height="40"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Final"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+    </childNodes>
+    <childNodes
+        visualID="3008"
+        editPartClassName="InternalANYEditPart"
+        itemSemanticEditPolicyClassName="InternalANYItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="InternalANYCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InternalANYGraphicalNodeEditPolicy"
+        createCommandClassName="InternalANYCreateCommand"
+        containers="//@diagram/@compartments.2 //@diagram/@compartments.5 //@diagram/@compartments.6">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.2/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ANYFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ANYFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ANYFigure() {&#xA;&#x9;&#x9;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.PolygonShape eighthornFigureShape0 = new org.eclipse.draw2d.PolygonShape();&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;eighthornFigureShape0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;eighthornFigureShape0.setFill(true);&#xA;&#x9;eighthornFigureShape0.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#xA;this.add(eighthornFigureShape0);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            height="40"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/ANY"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+    </childNodes>
+    <childNodes
+        visualID="3009"
+        editPartClassName="StateStateEditPart"
+        itemSemanticEditPolicyClassName="StateStateItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStateCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="StateStateGraphicalNodeEditPolicy"
+        createCommandClassName="StateStateCreateCommand"
+        containers="//@diagram/@compartments.2">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.3/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateStatemachinesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateInvariantsCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStateStatemachinesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateStatemachinesCompartmentFigure.setFill(false);&#xA;fFigureStateStatemachinesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateStatemachinesCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#xA;fFigureStateInvariantsCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateInvariantsCompartmentFigure.setFill(false);&#xA;fFigureStateInvariantsCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateInvariantsCompartmentFigure, org.eclipse.draw2d.BorderLayout.BOTTOM);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateStatemachinesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateStatemachinesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateInvariantsCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateInvariantsCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 204, 255);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/State"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+      <labels
+          visualID="5006"
+          editPartClassName="StateName2EditPart"
+          itemSemanticEditPolicyClassName="StateName2ItemSemanticEditPolicy">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureStateNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
@@ -74,131 +216,45 @@
     <childNodes
         xsi:type="gmfgen:GenChildLabelNode"
         visualID="3002"
-        editPartClassName="TransitionEditPart"
-        itemSemanticEditPolicyClassName="TransitionItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
-        canonicalEditPolicyClassName="TransitionCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="TransitionGraphicalNodeEditPolicy"
-        createCommandClassName="TransitionCreateCommand"
+        editPartClassName="StateInvariantEditPart"
+        itemSemanticEditPolicyClassName="StateInvariantItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateInvariantCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="StateInvariantGraphicalNodeEditPolicy"
+        createCommandClassName="StateInvariantCreateCommand"
         containers="//@diagram/@compartments.1"
-        labelReadOnly="true">
+        labelElementIcon="true">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="TransitionEditHelper"/>
+          editHelperClassName="InvariantEditHelper"/>
       <viewmap
           xsi:type="gmfgen:FigureViewmap"
           figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
       <modelFacet>
         <metaClass
-            href="statemachines.genmodel#//statemachines/Transition"/>
+            href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/machine/Invariant"/>
         <containmentMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
+            href="statemachines.genmodel#//statemachines/AbstractState/constraints"/>
         <childMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
+            href="statemachines.genmodel#//statemachines/AbstractState/constraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           parser="//@labelParsers/@implementations.0">
         <metaFeatures
-            href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
+            href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBPredicate/predicate"/>
       </labelModelFacet>
     </childNodes>
     <childNodes
         visualID="3003"
-        editPartClassName="Statemachine2EditPart"
-        itemSemanticEditPolicyClassName="Statemachine2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineViewFactory"
-        canonicalEditPolicyClassName="Statemachine2CanonicalEditPolicy"
-        compartments="//@diagram/@compartments.3"
-        graphicalNodeEditPolicyClassName="Statemachine2GraphicalNodeEditPolicy"
-        createCommandClassName="Statemachine2CreateCommand"
-        containers="//@diagram/@compartments.2">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@childNodes.0/@elementType"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="statemachines.genmodel#//statemachines/Statemachine"/>
-        <containmentMetaFeature
-            href="statemachines.genmodel#//statemachines/StatemachineOwner/statemachines"/>
-        <childMetaFeature
-            href="statemachines.genmodel#//statemachines/StatemachineOwner/statemachines"/>
-      </modelFacet>
-      <labels
-          visualID="5003"
-          editPartClassName="StatemachineName2EditPart"
-          itemSemanticEditPolicyClassName="StatemachineName2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="StatemachineNameViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStatemachineNameFigure"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            parser="//@labelParsers/@implementations.0">
-          <metaFeatures
-              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
-        </modelFacet>
-      </labels>
-    </childNodes>
-    <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
-        visualID="3004"
-        editPartClassName="Transition2EditPart"
-        itemSemanticEditPolicyClassName="Transition2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
-        canonicalEditPolicyClassName="Transition2CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="Transition2GraphicalNodeEditPolicy"
-        createCommandClassName="Transition2CreateCommand"
-        containers="//@diagram/@compartments.3"
-        labelReadOnly="true">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@childNodes.1/@elementType"/>
-      <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-      <modelFacet>
-        <metaClass
-            href="statemachines.genmodel#//statemachines/Transition"/>
-        <containmentMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
-        <childMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
-      </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet"
-          parser="//@labelParsers/@implementations.0">
-        <metaFeatures
-            href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
-      </labelModelFacet>
-    </childNodes>
-    <childNodes
-        visualID="3005"
-        editPartClassName="RefinedStatemachineEditPart"
-        itemSemanticEditPolicyClassName="RefinedStatemachineItemSemanticEditPolicy"
-        notationViewFactoryClassName="RefinedStatemachineViewFactory"
-        canonicalEditPolicyClassName="RefinedStatemachineCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.4"
-        graphicalNodeEditPolicyClassName="RefinedStatemachineGraphicalNodeEditPolicy"
-        createCommandClassName="RefinedStatemachineCreateCommand"
-        containers="//@diagram/@compartments.2">
+        editPartClassName="RefinedStateRefinedStatemachineEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateRefinedStatemachineItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateRefinedStatemachineCanonicalEditPolicy"
+        compartments="//@diagram/@compartments.5"
+        graphicalNodeEditPolicyClassName="RefinedStateRefinedStatemachineGraphicalNodeEditPolicy"
+        createCommandClassName="RefinedStateRefinedStatemachineCreateCommand"
+        containers="//@diagram/@compartments.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -207,7 +263,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="RefinedStatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStatemachineLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStatemachineLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStatemachineLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStatemachineLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStatemachineLabelFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureRefinedStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStatemachineLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStatemachineLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStatemachineCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStatemachineLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStatemachineLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStatemachineLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStatemachineLabelFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStatemachineCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureRefinedStatemachineCompartmentFigure.setFill(false);&#xA;fFigureRefinedStatemachineCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureRefinedStatemachineCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStatemachineLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStatemachineCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
       <modelFacet>
         <metaClass
             href="statemachines.genmodel#//statemachines/RefinedStatemachine"/>
@@ -217,10 +273,9 @@
             href="statemachines.genmodel#//statemachines/StatemachineOwner/statemachines"/>
       </modelFacet>
       <labels
-          visualID="5004"
+          visualID="5003"
           editPartClassName="RefinedStatemachineLabelEditPart"
           itemSemanticEditPolicyClassName="RefinedStatemachineLabelItemSemanticEditPolicy"
-          notationViewFactoryClassName="RefinedStatemachineLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -237,44 +292,181 @@
       </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
-        visualID="3006"
-        editPartClassName="Transition3EditPart"
-        itemSemanticEditPolicyClassName="Transition3ItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
-        canonicalEditPolicyClassName="Transition3CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="Transition3GraphicalNodeEditPolicy"
-        createCommandClassName="Transition3CreateCommand"
-        containers="//@diagram/@compartments.4"
-        labelReadOnly="true">
+        visualID="3010"
+        editPartClassName="RefinedStateRefinedStateEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateRefinedStateItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateRefinedStateCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="RefinedStateRefinedStateGraphicalNodeEditPolicy"
+        createCommandClassName="RefinedStateRefinedStateCreateCommand"
+        containers="//@diagram/@compartments.5">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@childNodes.1/@elementType"/>
+          metamodelType="//@diagram/@topLevelNodes.4/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="RefinedStateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStateLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStateStatemachinesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStateInvariantsCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStateLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStateLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStateLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStateLabelFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStateStatemachinesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureRefinedStateStatemachinesCompartmentFigure.setFill(false);&#xA;fFigureRefinedStateStatemachinesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureRefinedStateStatemachinesCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStateInvariantsCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureRefinedStateInvariantsCompartmentFigure.setFill(false);&#xA;fFigureRefinedStateInvariantsCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureRefinedStateInvariantsCompartmentFigure, org.eclipse.draw2d.BorderLayout.BOTTOM);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStateLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStateStatemachinesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateStatemachinesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStateInvariantsCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateInvariantsCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/RefinedState"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+      <labels
+          visualID="5007"
+          editPartClassName="RefinedStateLabel2EditPart"
+          itemSemanticEditPolicyClassName="RefinedStateLabel2ItemSemanticEditPolicy"
+          readOnly="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureRefinedStateLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
+    <childNodes
+        visualID="3004"
+        editPartClassName="RefinedStateStatemachineEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateStatemachineItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateStatemachineCanonicalEditPolicy"
+        compartments="//@diagram/@compartments.6"
+        graphicalNodeEditPolicyClassName="RefinedStateStatemachineGraphicalNodeEditPolicy"
+        createCommandClassName="RefinedStateStatemachineCreateCommand"
+        containers="//@diagram/@compartments.3">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.0/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StatemachineFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStatemachineCompartmentFigure.setFill(false);&#xA;fFigureStatemachineCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStatemachineCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Statemachine"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/StatemachineOwner/statemachines"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/StatemachineOwner/statemachines"/>
+      </modelFacet>
+      <labels
+          visualID="5004"
+          editPartClassName="StatemachineName2EditPart"
+          itemSemanticEditPolicyClassName="StatemachineName2ItemSemanticEditPolicy">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureStatemachineNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
+    <childNodes
+        visualID="3011"
+        editPartClassName="RefinedStateStateEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateStateItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateStateCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="RefinedStateStateGraphicalNodeEditPolicy"
+        createCommandClassName="RefinedStateStateCreateCommand"
+        containers="//@diagram/@compartments.6">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@topLevelNodes.3/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateStatemachinesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateInvariantsCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStateStatemachinesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateStatemachinesCompartmentFigure.setFill(false);&#xA;fFigureStateStatemachinesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateStatemachinesCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#xA;fFigureStateInvariantsCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateInvariantsCompartmentFigure.setFill(false);&#xA;fFigureStateInvariantsCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateInvariantsCompartmentFigure, org.eclipse.draw2d.BorderLayout.BOTTOM);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateStatemachinesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateStatemachinesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateInvariantsCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateInvariantsCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 204, 255);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/State"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/AbstractStatemachine/nodes"/>
+      </modelFacet>
+      <labels
+          visualID="5008"
+          editPartClassName="StateName3EditPart"
+          itemSemanticEditPolicyClassName="StateName3ItemSemanticEditPolicy">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureStateNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
+          <metaFeatures
+              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
+        </modelFacet>
+      </labels>
+    </childNodes>
+    <childNodes
+        xsi:type="gmfgen:GenChildLabelNode"
+        visualID="3005"
+        editPartClassName="RefinedStateInvariantEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateInvariantItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateInvariantCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="RefinedStateInvariantGraphicalNodeEditPolicy"
+        createCommandClassName="RefinedStateInvariantCreateCommand"
+        containers="//@diagram/@compartments.4"
+        labelElementIcon="true">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.5/@elementType"/>
       <viewmap
           xsi:type="gmfgen:FigureViewmap"
           figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
       <modelFacet>
         <metaClass
-            href="statemachines.genmodel#//statemachines/Transition"/>
+            href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/machine/Invariant"/>
         <containmentMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
+            href="statemachines.genmodel#//statemachines/AbstractState/constraints"/>
         <childMetaFeature
-            href="statemachines.genmodel#//statemachines/AbstractStatemachine/transitions"/>
+            href="statemachines.genmodel#//statemachines/AbstractState/constraints"/>
       </modelFacet>
       <labelModelFacet
           xsi:type="gmfgen:FeatureLabelModelFacet"
           parser="//@labelParsers/@implementations.0">
         <metaFeatures
-            href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
+            href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBPredicate/predicate"/>
       </labelModelFacet>
     </childNodes>
     <topLevelNodes
         visualID="2001"
         editPartClassName="InitialEditPart"
         itemSemanticEditPolicyClassName="InitialItemSemanticEditPolicy"
-        notationViewFactoryClassName="InitialViewFactory"
         canonicalEditPolicyClassName="InitialCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InitialGraphicalNodeEditPolicy"
         createCommandClassName="InitialCreateCommand">
@@ -307,7 +499,6 @@
         visualID="2002"
         editPartClassName="FinalEditPart"
         itemSemanticEditPolicyClassName="FinalItemSemanticEditPolicy"
-        notationViewFactoryClassName="FinalViewFactory"
         canonicalEditPolicyClassName="FinalCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="FinalGraphicalNodeEditPolicy"
         createCommandClassName="FinalCreateCommand">
@@ -337,7 +528,6 @@
         visualID="2003"
         editPartClassName="ANYEditPart"
         itemSemanticEditPolicyClassName="ANYItemSemanticEditPolicy"
-        notationViewFactoryClassName="ANYViewFactory"
         canonicalEditPolicyClassName="ANYCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="ANYGraphicalNodeEditPolicy"
         createCommandClassName="ANYCreateCommand">
@@ -370,9 +560,8 @@
         visualID="2004"
         editPartClassName="StateEditPart"
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.0"
+        compartments="//@diagram/@compartments.0 //@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="StateGraphicalNodeEditPolicy"
         createCommandClassName="StateCreateCommand">
       <diagramRunTimeClass
@@ -383,7 +572,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 204, 255);&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateStatemachinesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStateInvariantsCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStateStatemachinesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateStatemachinesCompartmentFigure.setFill(false);&#xA;fFigureStateStatemachinesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateStatemachinesCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#xA;fFigureStateInvariantsCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureStateInvariantsCompartmentFigure.setFill(false);&#xA;fFigureStateInvariantsCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureStateInvariantsCompartmentFigure, org.eclipse.draw2d.BorderLayout.BOTTOM);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateStatemachinesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateStatemachinesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStateInvariantsCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureStateInvariantsCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 204, 255);&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
@@ -399,8 +588,7 @@
       <labels
           visualID="5002"
           editPartClassName="StateNameEditPart"
-          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateNameViewFactory">
+          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -419,9 +607,8 @@
         visualID="2005"
         editPartClassName="RefinedStateEditPart"
         itemSemanticEditPolicyClassName="RefinedStateItemSemanticEditPolicy"
-        notationViewFactoryClassName="RefinedStateViewFactory"
         canonicalEditPolicyClassName="RefinedStateCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.2"
+        compartments="//@diagram/@compartments.3 //@diagram/@compartments.4"
         graphicalNodeEditPolicyClassName="RefinedStateGraphicalNodeEditPolicy"
         createCommandClassName="RefinedStateCreateCommand">
       <diagramRunTimeClass
@@ -432,7 +619,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="RefinedStateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStateLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStateLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStateLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStateLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStateLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStateLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStateLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStateStatemachinesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStateInvariantsCompartmentFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStateLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStateLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStateLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStateLabelFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStateStatemachinesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureRefinedStateStatemachinesCompartmentFigure.setFill(false);&#xA;fFigureRefinedStateStatemachinesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureRefinedStateStatemachinesCompartmentFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStateInvariantsCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureRefinedStateInvariantsCompartmentFigure.setFill(false);&#xA;fFigureRefinedStateInvariantsCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureRefinedStateInvariantsCompartmentFigure, org.eclipse.draw2d.BorderLayout.BOTTOM);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStateLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStateStatemachinesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateStatemachinesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStateInvariantsCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateInvariantsCompartmentFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
       <modelFacet>
         <metaClass
             href="statemachines.genmodel#//statemachines/RefinedState"/>
@@ -445,7 +632,6 @@
           visualID="5005"
           editPartClassName="RefinedStateLabelEditPart"
           itemSemanticEditPolicyClassName="RefinedStateLabelItemSemanticEditPolicy"
-          notationViewFactoryClassName="RefinedStateLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -463,16 +649,15 @@
     </topLevelNodes>
     <links
         visualID="4001"
-        editPartClassName="Transition4EditPart"
-        itemSemanticEditPolicyClassName="Transition4ItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
-        createCommandClassName="Transition4CreateCommand"
+        editPartClassName="TransitionEditPart"
+        itemSemanticEditPolicyClassName="TransitionItemSemanticEditPolicy"
+        createCommandClassName="TransitionCreateCommand"
         reorientCommandClassName="TransitionReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
-          xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@childNodes.1/@elementType"/>
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="TransitionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="TransitionFigure"
@@ -494,7 +679,6 @@
           visualID="6001"
           editPartClassName="TransitionLabelEditPart"
           itemSemanticEditPolicyClassName="TransitionLabelItemSemanticEditPolicy"
-          notationViewFactoryClassName="TransitionLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -516,100 +700,114 @@
     </links>
     <compartments
         visualID="7001"
-        editPartClassName="StateStateStatemachinesEditPart"
-        itemSemanticEditPolicyClassName="StateStateStatemachinesItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateStateStatemachinesViewFactory"
-        canonicalEditPolicyClassName="StateStateStatemachinesCanonicalEditPolicy"
+        editPartClassName="StateStatemachinesCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateStatemachinesCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
-        title="StateStatemachines"
-        node="//@diagram/@topLevelNodes.3"
-        listLayout="false">
+        title="Statemachines"
+        node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 255, 204, 255);&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStateStatemachinesCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
         visualID="7002"
-        editPartClassName="StatemachineStatemachineTransitionsEditPart"
-        itemSemanticEditPolicyClassName="StatemachineStatemachineTransitionsItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineStatemachineTransitionsViewFactory"
-        canonicalEditPolicyClassName="StatemachineStatemachineTransitionsCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.1"
-        title="StatemachineTransitions"
-        needsTitle="false"
-        node="//@diagram/@childNodes.0">
+        editPartClassName="StateInvariantsCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateInvariantsCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateInvariantsCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.5"
+        title="Invariants"
+        node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStateInvariantsCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7003"
-        editPartClassName="RefinedStateRefinedStateStatemachinesEditPart"
-        itemSemanticEditPolicyClassName="RefinedStateRefinedStateStatemachinesItemSemanticEditPolicy"
-        notationViewFactoryClassName="RefinedStateRefinedStateStatemachinesViewFactory"
-        canonicalEditPolicyClassName="RefinedStateRefinedStateStatemachinesCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.2 //@diagram/@childNodes.4"
-        title="RefinedStateStatemachines"
-        node="//@diagram/@topLevelNodes.4"
+        visualID="7005"
+        editPartClassName="StateStatemachineCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StatemachineCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStatemachineCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4"
+        title=""
+        needsTitle="false"
+        node="//@diagram/@childNodes.0"
         listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="RefinedStateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStateLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStateLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStateLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStateLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStateLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStateLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStateLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStatemachineCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
+    </compartments>
+    <compartments
+        visualID="7003"
+        editPartClassName="RefinedStateStatemachinesCompartmentEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateStatemachinesCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateStatemachinesCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.6 //@diagram/@childNodes.8"
+        title="Statemachines"
+        node="//@diagram/@topLevelNodes.4">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureRefinedStateStatemachinesCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
         visualID="7004"
-        editPartClassName="StatemachineStatemachineTransitions2EditPart"
-        itemSemanticEditPolicyClassName="StatemachineStatemachineTransitions2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineStatemachineTransitionsViewFactory"
-        canonicalEditPolicyClassName="StatemachineStatemachineTransitions2CanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.3"
-        title="StatemachineTransitions"
-        needsTitle="false"
-        node="//@diagram/@childNodes.2">
+        editPartClassName="RefinedStateInvariantsCompartmentEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateInvariantsCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateInvariantsCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.10"
+        title="Invariants"
+        node="//@diagram/@topLevelNodes.4">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStatemachineNameFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStatemachineNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStatemachineNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureStatemachineNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureStatemachineNameFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStatemachineNameFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineNameFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 224, 255, 204);&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureRefinedStateInvariantsCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7005"
-        editPartClassName="RefinedStatemachineRefinedStatemachineTransitionsEditPart"
-        itemSemanticEditPolicyClassName="RefinedStatemachineRefinedStatemachineTransitionsItemSemanticEditPolicy"
-        notationViewFactoryClassName="RefinedStatemachineRefinedStatemachineTransitionsViewFactory"
-        canonicalEditPolicyClassName="RefinedStatemachineRefinedStatemachineTransitionsCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.5"
-        title="RefinedStatemachineTransitions"
+        visualID="7006"
+        editPartClassName="RefinedStateRefinedStatemachineCompartmentEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateRefinedStatemachineCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateRefinedStatemachineCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.7"
+        title=""
         needsTitle="false"
-        node="//@diagram/@childNodes.4">
+        node="//@diagram/@childNodes.6"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="RefinedStatemachineFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RefinedStatemachineFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRefinedStatemachineLabelFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureRefinedStatemachineTransitionsFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RefinedStatemachineFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;org.eclipse.draw2d.BorderLayout layoutThis = new org.eclipse.draw2d.BorderLayout();&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureRefinedStatemachineLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureRefinedStatemachineLabelFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureRefinedStatemachineLabelFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#xA;this.add(fFigureRefinedStatemachineLabelFigure, org.eclipse.draw2d.BorderLayout.TOP);&#xA;&#xA;&#xA;&#xA;fFigureRefinedStatemachineTransitionsFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureRefinedStatemachineTransitionsFigure, org.eclipse.draw2d.BorderLayout.CENTER);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRefinedStatemachineLabelFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineLabelFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureRefinedStatemachineTransitionsFigure() {&#xA;&#x9;&#x9;return fFigureRefinedStatemachineTransitionsFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureRefinedStatemachineCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
+    </compartments>
+    <compartments
+        visualID="7007"
+        editPartClassName="RefinedStateStatemachineCompartmentEditPart"
+        itemSemanticEditPolicyClassName="RefinedStateStatemachineCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="RefinedStateStatemachineCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.9"
+        title=""
+        needsTitle="false"
+        node="//@diagram/@childNodes.8"
+        listLayout="false">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStatemachineCompartmentFigure"
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <palette>
       <groups
@@ -619,41 +817,46 @@
             xsi:type="gmfgen:ToolEntry"
             title="State"
             description="Create new State"
-            genNodes="//@diagram/@topLevelNodes.3"/>
+            genNodes="//@diagram/@topLevelNodes.3 //@diagram/@childNodes.4 //@diagram/@childNodes.9"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Initial"
             description="Create new Initial State"
-            genNodes="//@diagram/@topLevelNodes.0"/>
+            genNodes="//@diagram/@topLevelNodes.0 //@diagram/@childNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Final"
             description="Create new Final State"
-            genNodes="//@diagram/@topLevelNodes.1"/>
+            genNodes="//@diagram/@topLevelNodes.1 //@diagram/@childNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="ANY"
             description="Create new ANY State"
-            genNodes="//@diagram/@topLevelNodes.2"/>
+            genNodes="//@diagram/@topLevelNodes.2 //@diagram/@childNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Refined State"
             description="Create new Refined State"
-            genNodes="//@diagram/@topLevelNodes.4"/>
+            genNodes="//@diagram/@topLevelNodes.4 //@diagram/@childNodes.7"/>
       </groups>
       <groups
           title="State Features"
           collapse="true">
         <entries
             xsi:type="gmfgen:ToolEntry"
+            title="Invariant"
+            description="Create new Invariant"
+            genNodes="//@diagram/@childNodes.5 //@diagram/@childNodes.10"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
             title="State-machine"
             description="Create new State-machine"
-            genNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.2"/>
+            genNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.8"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Refined State-machine"
             description="Create new Refined State-machine"
-            genNodes="//@diagram/@childNodes.4"/>
+            genNodes="//@diagram/@childNodes.6"/>
       </groups>
       <groups
           title="State Links"
@@ -712,23 +915,56 @@
         parent="//@diagram/@childNodes.0"
         child="//@diagram/@childNodes.1"/>
     <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.2"/>
+    <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.3"/>
+    <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.4"/>
+    <childReferences
         parent="//@diagram/@topLevelNodes.3"
         child="//@diagram/@childNodes.0"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@childNodes.5"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.3"/>
     <childReferences
-        parent="//@diagram/@childNodes.2"
-        child="//@diagram/@childNodes.3"/>
+        parent="//@diagram/@childNodes.6"
+        child="//@diagram/@childNodes.1"/>
     <childReferences
-        parent="//@diagram/@topLevelNodes.4"
+        parent="//@diagram/@childNodes.6"
         child="//@diagram/@childNodes.2"/>
     <childReferences
-        parent="//@diagram/@childNodes.4"
-        child="//@diagram/@childNodes.5"/>
+        parent="//@diagram/@childNodes.6"
+        child="//@diagram/@childNodes.3"/>
+    <childReferences
+        parent="//@diagram/@childNodes.6"
+        child="//@diagram/@childNodes.7"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.4"
-        child="//@diagram/@childNodes.4"/>
+        child="//@diagram/@childNodes.6"/>
+    <childReferences
+        parent="//@diagram/@childNodes.8"
+        child="//@diagram/@childNodes.1"/>
+    <childReferences
+        parent="//@diagram/@childNodes.8"
+        child="//@diagram/@childNodes.2"/>
+    <childReferences
+        parent="//@diagram/@childNodes.8"
+        child="//@diagram/@childNodes.3"/>
+    <childReferences
+        parent="//@diagram/@childNodes.8"
+        child="//@diagram/@childNodes.9"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@childNodes.8"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@childNodes.10"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.4"/>
@@ -799,6 +1035,78 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.1"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.1"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.2"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.2"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.3"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.4"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.7"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.7"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.9"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.9"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -857,6 +1165,78 @@
         referenceType="out_target"
         groupName="outgoing links"
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.1"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.1"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.2"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.2"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.3"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.4"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.7"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.7"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.9"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.9"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
   </navigator>
   <diagramUpdater/>
   <propertySheet>
@@ -884,7 +1264,7 @@
       extensibleViaService="true">
     <implementations
         xsi:type="gmfgen:PredefinedParser"
-        uses="//@diagram/@childNodes.1/@labelModelFacet //@diagram/@childNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@childNodes.3/@labelModelFacet //@diagram/@childNodes.2/@labels.0/@modelFacet //@diagram/@childNodes.5/@labelModelFacet //@diagram/@childNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet"/>
+        uses="//@diagram/@childNodes.4/@labels.0/@modelFacet //@diagram/@childNodes.0/@labels.0/@modelFacet //@diagram/@childNodes.5/@labelModelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@childNodes.7/@labels.0/@modelFacet //@diagram/@childNodes.6/@labels.0/@modelFacet //@diagram/@childNodes.9/@labels.0/@modelFacet //@diagram/@childNodes.8/@labels.0/@modelFacet //@diagram/@childNodes.10/@labelModelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet"/>
   </labelParsers>
   <contextMenus
       context="//@diagram">

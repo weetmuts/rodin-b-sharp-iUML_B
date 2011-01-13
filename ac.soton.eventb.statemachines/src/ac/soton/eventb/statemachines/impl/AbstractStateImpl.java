@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eventb.emf.core.machine.Invariant;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.impl.AbstractStateImpl#getStatemachines <em>Statemachines</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.AbstractStateImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +55,16 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 	 * @ordered
 	 */
 	protected EList<AbstractStatemachine> statemachines;
+
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Invariant> constraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,11 +102,25 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Invariant> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList.Resolving<Invariant>(Invariant.class, this, StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StatemachinesPackage.ABSTRACT_STATE__STATEMACHINES:
 				return ((InternalEList<?>)getStatemachines()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -109,6 +135,8 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 		switch (featureID) {
 			case StatemachinesPackage.ABSTRACT_STATE__STATEMACHINES:
 				return getStatemachines();
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -126,6 +154,10 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 				getStatemachines().clear();
 				getStatemachines().addAll((Collection<? extends AbstractStatemachine>)newValue);
 				return;
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Invariant>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -141,6 +173,9 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 			case StatemachinesPackage.ABSTRACT_STATE__STATEMACHINES:
 				getStatemachines().clear();
 				return;
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -155,6 +190,8 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 		switch (featureID) {
 			case StatemachinesPackage.ABSTRACT_STATE__STATEMACHINES:
 				return statemachines != null && !statemachines.isEmpty();
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

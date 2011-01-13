@@ -54,5 +54,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
         eType="#//AbstractNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true" eSuperTypes="#//AbstractNode #//StatemachineOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true" eSuperTypes="#//AbstractNode #//StatemachineOwner">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

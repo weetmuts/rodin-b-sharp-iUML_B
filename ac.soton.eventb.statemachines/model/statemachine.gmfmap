@@ -78,39 +78,85 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
           <diagramNode
               href="statemachine.gmfgraph#Statemachine"/>
           <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.0/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.1/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.2/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
               compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
             <containmentFeature
-                href="statemachines.ecore#//AbstractStatemachine/transitions"/>
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
             <ownedChild>
               <domainMetaElement
-                  href="statemachines.ecore#//Transition"/>
+                  href="statemachines.ecore#//State"/>
               <labelMappings
-                  xsi:type="gmfmap:FeatureLabelMapping"
-                  readOnly="true">
+                  xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
-                    href="statemachine.gmfgraph#StatemachineTransitionLabel"/>
+                    href="statemachine.gmfgraph#StateName"/>
                 <features
-                    href="statemachines.ecore#//EventBLabeled/label"/>
+                    href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
               </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="statemachine.gmftool#//@palette/@tools.0/@tools.0"/>
               <diagramNode
-                  href="statemachine.gmfgraph#StatemachineTransitionLabel"/>
+                  href="statemachine.gmfgraph#State"/>
             </ownedChild>
           </children>
           <compartments
-              children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0">
+              children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3">
             <compartment
-                href="statemachine.gmfgraph#StatemachineTransitions"/>
+                href="statemachine.gmfgraph#StatemachineCompartment"/>
           </compartments>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.3/@ownedChild/@compartments.1">
+        <containmentFeature
+            href="statemachines.ecore#//AbstractState/constraints"/>
+        <ownedChild>
+          <domainMetaElement
+              href="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="statemachine.gmfgraph#InvariantLabel"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>
+          <diagramNode
+              href="statemachine.gmfgraph#InvariantLabel"/>
         </ownedChild>
       </children>
       <compartments
           children="//@nodes.3/@ownedChild/@children.0">
         <compartment
-            href="statemachine.gmfgraph#StateStatemachines"/>
+            href="statemachine.gmfgraph#StateStatemachinesCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.3/@ownedChild/@children.1">
+        <compartment
+            href="statemachine.gmfgraph#StateInvariantsCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>
@@ -139,51 +185,6 @@
             href="statemachines.ecore#//StatemachineOwner/statemachines"/>
         <ownedChild>
           <domainMetaElement
-              href="statemachines.ecore#//Statemachine"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
-            <diagramLabel
-                href="statemachine.gmfgraph#StatemachineName"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>
-          <diagramNode
-              href="statemachine.gmfgraph#Statemachine"/>
-          <children
-              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0">
-            <containmentFeature
-                href="statemachines.ecore#//AbstractStatemachine/transitions"/>
-            <ownedChild>
-              <domainMetaElement
-                  href="statemachines.ecore#//Transition"/>
-              <labelMappings
-                  xsi:type="gmfmap:FeatureLabelMapping"
-                  readOnly="true">
-                <diagramLabel
-                    href="statemachine.gmfgraph#StatemachineTransitionLabel"/>
-                <features
-                    href="statemachines.ecore#//EventBLabeled/label"/>
-              </labelMappings>
-              <diagramNode
-                  href="statemachine.gmfgraph#StatemachineTransitionLabel"/>
-            </ownedChild>
-          </children>
-          <compartments
-              children="//@nodes.4/@ownedChild/@children.0/@ownedChild/@children.0">
-            <compartment
-                href="statemachine.gmfgraph#StatemachineTransitions"/>
-          </compartments>
-        </ownedChild>
-      </children>
-      <children
-          compartment="//@nodes.4/@ownedChild/@compartments.0">
-        <containmentFeature
-            href="statemachines.ecore#//StatemachineOwner/statemachines"/>
-        <ownedChild>
-          <domainMetaElement
               href="statemachines.ecore#//RefinedStatemachine"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
@@ -195,39 +196,151 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.2"/>
           <diagramNode
               href="statemachine.gmfgraph#RefinedStatemachine"/>
           <children
-              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0">
+              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.0/@ownedChild">
             <containmentFeature
-                href="statemachines.ecore#//AbstractStatemachine/transitions"/>
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.1/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.2/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
             <ownedChild>
               <domainMetaElement
-                  href="statemachines.ecore#//Transition"/>
+                  href="statemachines.ecore#//RefinedState"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping"
                   readOnly="true">
                 <diagramLabel
-                    href="statemachine.gmfgraph#RefinedStatemachineTransitionLabel"/>
+                    href="statemachine.gmfgraph#RefinedStateLabel"/>
                 <features
                     href="statemachines.ecore#//EventBLabeled/label"/>
               </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
               <diagramNode
-                  href="statemachine.gmfgraph#RefinedStatemachineTransitionLabel"/>
+                  href="statemachine.gmfgraph#RefinedState"/>
             </ownedChild>
           </children>
           <compartments
-              children="//@nodes.4/@ownedChild/@children.1/@ownedChild/@children.0">
+              children="//@nodes.4/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.3">
             <compartment
-                href="statemachine.gmfgraph#RefinedStatemachineTransitions"/>
+                href="statemachine.gmfgraph#RefinedStatemachineCompartment"/>
           </compartments>
         </ownedChild>
       </children>
+      <children
+          compartment="//@nodes.4/@ownedChild/@compartments.0">
+        <containmentFeature
+            href="statemachines.ecore#//StatemachineOwner/statemachines"/>
+        <ownedChild>
+          <domainMetaElement
+              href="statemachines.ecore#//Statemachine"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="statemachine.gmfgraph#StatemachineName"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
+          <diagramNode
+              href="statemachine.gmfgraph#Statemachine"/>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.0/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.1/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.2/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="statemachines.ecore#//AbstractStatemachine/nodes"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="statemachines.ecore#//State"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="statemachine.gmfgraph#StateName"/>
+                <features
+                    href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="statemachine.gmftool#//@palette/@tools.0/@tools.0"/>
+              <diagramNode
+                  href="statemachine.gmfgraph#State"/>
+            </ownedChild>
+          </children>
+          <compartments
+              children="//@nodes.4/@ownedChild/@children.1/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.1 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.3 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.2">
+            <compartment
+                href="statemachine.gmfgraph#StatemachineCompartment"/>
+          </compartments>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.4/@ownedChild/@compartments.1">
+        <containmentFeature
+            href="statemachines.ecore#//AbstractState/constraints"/>
+        <ownedChild>
+          <domainMetaElement
+              href="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="statemachine.gmfgraph#InvariantLabel"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>
+          <diagramNode
+              href="statemachine.gmfgraph#InvariantLabel"/>
+        </ownedChild>
+      </children>
       <compartments
-          children="//@nodes.4/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.1">
+          children="//@nodes.4/@ownedChild/@children.1 //@nodes.4/@ownedChild/@children.0">
         <compartment
-            href="statemachine.gmfgraph#RefinedStateStatemachines"/>
+            href="statemachine.gmfgraph#RefinedStateStatemachinesCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.4/@ownedChild/@children.2">
+        <compartment
+            href="statemachine.gmfgraph#RefinedStateInvariantsCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>

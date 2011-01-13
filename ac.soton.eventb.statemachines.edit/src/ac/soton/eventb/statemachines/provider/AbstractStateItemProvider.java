@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eventb.emf.core.machine.MachineFactory;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.AbstractState} object.
@@ -89,6 +90,7 @@ public class AbstractStateItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES);
+			childrenFeatures.add(StatemachinesPackage.Literals.ABSTRACT_STATE__CONSTRAINTS);
 		}
 		return childrenFeatures;
 	}
@@ -133,6 +135,7 @@ public class AbstractStateItemProvider
 
 		switch (notification.getFeatureID(AbstractState.class)) {
 			case StatemachinesPackage.ABSTRACT_STATE__STATEMACHINES:
+			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -164,6 +167,11 @@ public class AbstractStateItemProvider
 			(createChildParameter
 				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
 				 StatemachinesFactory.eINSTANCE.createStatemachine()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatemachinesPackage.Literals.ABSTRACT_STATE__CONSTRAINTS,
+				 MachineFactory.eINSTANCE.createInvariant()));
 	}
 
 }

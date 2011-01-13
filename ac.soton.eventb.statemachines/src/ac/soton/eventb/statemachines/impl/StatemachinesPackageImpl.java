@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.machine.MachinePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -475,6 +476,15 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractState_Constraints() {
+		return (EReference)abstractStateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTranslationKind() {
 		return translationKindEEnum;
 	}
@@ -548,6 +558,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(refinedStateEClass, REFINED_STATE__REFINES);
 
 		abstractStateEClass = createEClass(ABSTRACT_STATE);
+		createEReference(abstractStateEClass, ABSTRACT_STATE__CONSTRAINTS);
 
 		// Create enums
 		translationKindEEnum = createEEnum(TRANSLATION_KIND);
@@ -578,6 +589,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 
 		// Obtain other dependent packages
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+		MachinePackage theMachinePackage = (MachinePackage)EPackage.Registry.INSTANCE.getEPackage(MachinePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -647,6 +659,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getRefinedState_Refines(), this.getAbstractNode(), null, "refines", null, 1, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractStateEClass, AbstractState.class, "AbstractState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractState_Constraints(), theMachinePackage.getInvariant(), null, "constraints", null, 0, -1, AbstractState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");

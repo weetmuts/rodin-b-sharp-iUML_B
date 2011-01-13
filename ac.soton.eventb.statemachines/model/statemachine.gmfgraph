@@ -6,99 +6,12 @@
   <figures
       name="Default">
     <descriptors
-        name="StatemachineFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="StatemachineFigure">
-        <layout
-            xsi:type="gmfgraph:BorderLayout"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="224"
-            green="255"
-            blue="204"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StatemachineNameFigure"
-            text="&lt;...>">
-          <layoutData
-              xsi:type="gmfgraph:BorderLayoutData"
-              alignment="BEGINNING"
-              vertical="true"/>
-          <insets
-              left="5"
-              right="5"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="StatemachineTransitionsFigure">
-          <layoutData
-              xsi:type="gmfgraph:BorderLayoutData"
-              alignment="FILL"
-              vertical="true"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="RefinedStatemachineFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="RefinedStatemachineFigure">
-        <layout
-            xsi:type="gmfgraph:BorderLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="RefinedStatemachineLabelFigure"
-            text="&lt;...>">
-          <layoutData
-              xsi:type="gmfgraph:BorderLayoutData"
-              alignment="BEGINNING"
-              vertical="true"/>
-          <insets
-              left="5"
-              right="5"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="RefinedStatemachineTransitionsFigure">
-          <layoutData
-              xsi:type="gmfgraph:BorderLayoutData"
-              alignment="FILL"
-              vertical="true"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="TransitionFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="TransitionFigure"
-          targetDecoration="//@figures.0/@descriptors.2/@actualFigure/@children.1">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="TransitionLabelFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:PolylineDecoration"
-            name="OpenArrowDecoration"
-            fill="false"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
         name="StateFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
           name="StateFigure">
+        <layout
+            xsi:type="gmfgraph:BorderLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
@@ -108,30 +21,87 @@
             xsi:type="gmfgraph:Label"
             name="StateNameFigure"
             text="&lt;...>">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
           <insets
               left="5"
               right="5"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="StateStatemachinesCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="FILL"
+              vertical="true"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="StateInvariantsCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="END"
+              vertical="true"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="RefinedStateFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
           name="RefinedStateFigure">
+        <layout
+            xsi:type="gmfgraph:BorderLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="RefinedStateLabelFigure"
             text="&lt;...>">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
           <insets
               left="5"
               right="5"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="RefinedStateStatemachinesCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              vertical="true"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="RefinedStateInvariantsCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="END"
+              vertical="true"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InitialFigure">
@@ -243,16 +213,101 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="StatemachineTransitionFigure">
+        name="InvariantFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
-          name="StatemachineTransitionFigure"/>
+          name="InvariantFigure"/>
     </descriptors>
     <descriptors
-        name="RefinedStatemachineTransitionFigure">
+        name="StatemachineFigure">
       <actualFigure
-          xsi:type="gmfgraph:Label"
-          name="RefinedStatemachineTransitionFigure"/>
+          xsi:type="gmfgraph:Rectangle"
+          name="StatemachineFigure">
+        <layout
+            xsi:type="gmfgraph:BorderLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="224"
+            green="255"
+            blue="204"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StatemachineNameFigure"
+            text="&lt;...>">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
+          <insets
+              left="5"
+              right="5"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="StatemachineCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              vertical="true"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="RefinedStatemachineFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="RefinedStatemachineFigure">
+        <layout
+            xsi:type="gmfgraph:BorderLayout"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RefinedStatemachineLabelFigure"
+            text="&lt;...>">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
+          <insets
+              left="5"
+              right="5"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="RefinedStatemachineCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              vertical="true"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="TransitionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="TransitionFigure"
+          targetDecoration="//@figures.0/@descriptors.8/@actualFigure/@children.1">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="TransitionLabelFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:PolylineDecoration"
+            name="OpenArrowDecoration"
+            fill="false"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -280,54 +335,65 @@
       name="Transition"
       figure="TransitionFigure"/>
   <compartments
-      name="StatemachineTransitions"
-      figure="StatemachineFigure"
-      collapsible="true"/>
-  <compartments
-      name="RefinedStatemachineTransitions"
-      figure="RefinedStatemachineFigure"
-      collapsible="true"/>
-  <compartments
-      name="StateStatemachines"
+      name="StateStatemachinesCompartment"
       figure="StateFigure"
       collapsible="true"
-      needsTitle="true"/>
+      needsTitle="true"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
   <compartments
-      name="RefinedStateStatemachines"
+      name="RefinedStateStatemachinesCompartment"
       figure="RefinedStateFigure"
       collapsible="true"
-      needsTitle="true"/>
+      needsTitle="true"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+  <compartments
+      name="StateInvariantsCompartment"
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"
+      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
+  <compartments
+      name="RefinedStateInvariantsCompartment"
+      figure="RefinedStateFigure"
+      collapsible="true"
+      needsTitle="true"
+      accessor="//@figures.0/@descriptors.1/@accessors.2"/>
+  <compartments
+      name="StatemachineCompartment"
+      figure="StatemachineFigure"
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
+  <compartments
+      name="RefinedStatemachineCompartment"
+      figure="RefinedStatemachineFigure"
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
   <labels
       name="StatemachineName"
       figure="StatemachineFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
   <labels
       name="RefinedStatemachineLabel"
       figure="RefinedStatemachineFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
       name="StateName"
       figure="StateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="RefinedStateLabel"
       figure="RefinedStateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="TransitionLabel"
       figure="TransitionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
   <labels
-      name="StatemachineTransitionLabel"
-      figure="StatemachineTransitionFigure"
-      elementIcon="false"/>
-  <labels
-      name="RefinedStatemachineTransitionLabel"
-      figure="RefinedStatemachineTransitionFigure"
-      elementIcon="false"/>
+      name="InvariantLabel"
+      figure="InvariantFigure"/>
 </gmfgraph:Canvas>
