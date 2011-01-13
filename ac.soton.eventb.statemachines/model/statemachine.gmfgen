@@ -26,6 +26,7 @@
         visualID="3001"
         editPartClassName="StateStatemachineEditPart"
         itemSemanticEditPolicyClassName="StateStatemachineItemSemanticEditPolicy"
+        notationViewFactoryClassName="StatemachineViewFactory"
         canonicalEditPolicyClassName="StateStatemachineCanonicalEditPolicy"
         compartments="//@diagram/@compartments.2"
         graphicalNodeEditPolicyClassName="StateStatemachineGraphicalNodeEditPolicy"
@@ -55,7 +56,8 @@
       <labels
           visualID="5001"
           editPartClassName="StatemachineNameEditPart"
-          itemSemanticEditPolicyClassName="StatemachineNameItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StatemachineNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="StatemachineNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -74,6 +76,7 @@
         visualID="3006"
         editPartClassName="InternalInitialEditPart"
         itemSemanticEditPolicyClassName="InternalInitialItemSemanticEditPolicy"
+        notationViewFactoryClassName="InitialViewFactory"
         canonicalEditPolicyClassName="InternalInitialCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InternalInitialGraphicalNodeEditPolicy"
         createCommandClassName="InternalInitialCreateCommand"
@@ -107,6 +110,7 @@
         visualID="3007"
         editPartClassName="InternalFinalEditPart"
         itemSemanticEditPolicyClassName="InternalFinalItemSemanticEditPolicy"
+        notationViewFactoryClassName="FinalViewFactory"
         canonicalEditPolicyClassName="InternalFinalCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InternalFinalGraphicalNodeEditPolicy"
         createCommandClassName="InternalFinalCreateCommand"
@@ -137,6 +141,7 @@
         visualID="3008"
         editPartClassName="InternalANYEditPart"
         itemSemanticEditPolicyClassName="InternalANYItemSemanticEditPolicy"
+        notationViewFactoryClassName="ANYViewFactory"
         canonicalEditPolicyClassName="InternalANYCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InternalANYGraphicalNodeEditPolicy"
         createCommandClassName="InternalANYCreateCommand"
@@ -170,6 +175,7 @@
         visualID="3009"
         editPartClassName="StateStateEditPart"
         itemSemanticEditPolicyClassName="StateStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateStateCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="StateStateGraphicalNodeEditPolicy"
         createCommandClassName="StateStateCreateCommand"
@@ -198,7 +204,8 @@
       <labels
           visualID="5006"
           editPartClassName="StateName2EditPart"
-          itemSemanticEditPolicyClassName="StateName2ItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StateName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="StateNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -218,6 +225,7 @@
         visualID="3002"
         editPartClassName="StateInvariantEditPart"
         itemSemanticEditPolicyClassName="StateInvariantItemSemanticEditPolicy"
+        notationViewFactoryClassName="InvariantViewFactory"
         canonicalEditPolicyClassName="StateInvariantCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="StateInvariantGraphicalNodeEditPolicy"
         createCommandClassName="StateInvariantCreateCommand"
@@ -250,6 +258,7 @@
         visualID="3003"
         editPartClassName="RefinedStateRefinedStatemachineEditPart"
         itemSemanticEditPolicyClassName="RefinedStateRefinedStatemachineItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStatemachineViewFactory"
         canonicalEditPolicyClassName="RefinedStateRefinedStatemachineCanonicalEditPolicy"
         compartments="//@diagram/@compartments.5"
         graphicalNodeEditPolicyClassName="RefinedStateRefinedStatemachineGraphicalNodeEditPolicy"
@@ -276,6 +285,7 @@
           visualID="5003"
           editPartClassName="RefinedStatemachineLabelEditPart"
           itemSemanticEditPolicyClassName="RefinedStatemachineLabelItemSemanticEditPolicy"
+          notationViewFactoryClassName="RefinedStatemachineLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -295,6 +305,7 @@
         visualID="3010"
         editPartClassName="RefinedStateRefinedStateEditPart"
         itemSemanticEditPolicyClassName="RefinedStateRefinedStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStateViewFactory"
         canonicalEditPolicyClassName="RefinedStateRefinedStateCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="RefinedStateRefinedStateGraphicalNodeEditPolicy"
         createCommandClassName="RefinedStateRefinedStateCreateCommand"
@@ -320,6 +331,7 @@
           visualID="5007"
           editPartClassName="RefinedStateLabel2EditPart"
           itemSemanticEditPolicyClassName="RefinedStateLabel2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="RefinedStateLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -339,6 +351,7 @@
         visualID="3004"
         editPartClassName="RefinedStateStatemachineEditPart"
         itemSemanticEditPolicyClassName="RefinedStateStatemachineItemSemanticEditPolicy"
+        notationViewFactoryClassName="StatemachineViewFactory"
         canonicalEditPolicyClassName="RefinedStateStatemachineCanonicalEditPolicy"
         compartments="//@diagram/@compartments.6"
         graphicalNodeEditPolicyClassName="RefinedStateStatemachineGraphicalNodeEditPolicy"
@@ -368,7 +381,8 @@
       <labels
           visualID="5004"
           editPartClassName="StatemachineName2EditPart"
-          itemSemanticEditPolicyClassName="StatemachineName2ItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StatemachineName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="StatemachineNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -387,6 +401,7 @@
         visualID="3011"
         editPartClassName="RefinedStateStateEditPart"
         itemSemanticEditPolicyClassName="RefinedStateStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="RefinedStateStateCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="RefinedStateStateGraphicalNodeEditPolicy"
         createCommandClassName="RefinedStateStateCreateCommand"
@@ -415,7 +430,8 @@
       <labels
           visualID="5008"
           editPartClassName="StateName3EditPart"
-          itemSemanticEditPolicyClassName="StateName3ItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StateName3ItemSemanticEditPolicy"
+          notationViewFactoryClassName="StateNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -435,6 +451,7 @@
         visualID="3005"
         editPartClassName="RefinedStateInvariantEditPart"
         itemSemanticEditPolicyClassName="RefinedStateInvariantItemSemanticEditPolicy"
+        notationViewFactoryClassName="InvariantViewFactory"
         canonicalEditPolicyClassName="RefinedStateInvariantCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="RefinedStateInvariantGraphicalNodeEditPolicy"
         createCommandClassName="RefinedStateInvariantCreateCommand"
@@ -467,6 +484,7 @@
         visualID="2001"
         editPartClassName="InitialEditPart"
         itemSemanticEditPolicyClassName="InitialItemSemanticEditPolicy"
+        notationViewFactoryClassName="InitialViewFactory"
         canonicalEditPolicyClassName="InitialCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InitialGraphicalNodeEditPolicy"
         createCommandClassName="InitialCreateCommand">
@@ -499,6 +517,7 @@
         visualID="2002"
         editPartClassName="FinalEditPart"
         itemSemanticEditPolicyClassName="FinalItemSemanticEditPolicy"
+        notationViewFactoryClassName="FinalViewFactory"
         canonicalEditPolicyClassName="FinalCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="FinalGraphicalNodeEditPolicy"
         createCommandClassName="FinalCreateCommand">
@@ -528,6 +547,7 @@
         visualID="2003"
         editPartClassName="ANYEditPart"
         itemSemanticEditPolicyClassName="ANYItemSemanticEditPolicy"
+        notationViewFactoryClassName="ANYViewFactory"
         canonicalEditPolicyClassName="ANYCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="ANYGraphicalNodeEditPolicy"
         createCommandClassName="ANYCreateCommand">
@@ -560,6 +580,7 @@
         visualID="2004"
         editPartClassName="StateEditPart"
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateCanonicalEditPolicy"
         compartments="//@diagram/@compartments.0 //@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="StateGraphicalNodeEditPolicy"
@@ -588,7 +609,8 @@
       <labels
           visualID="5002"
           editPartClassName="StateNameEditPart"
-          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="StateNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -607,6 +629,7 @@
         visualID="2005"
         editPartClassName="RefinedStateEditPart"
         itemSemanticEditPolicyClassName="RefinedStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStateViewFactory"
         canonicalEditPolicyClassName="RefinedStateCanonicalEditPolicy"
         compartments="//@diagram/@compartments.3 //@diagram/@compartments.4"
         graphicalNodeEditPolicyClassName="RefinedStateGraphicalNodeEditPolicy"
@@ -632,6 +655,7 @@
           visualID="5005"
           editPartClassName="RefinedStateLabelEditPart"
           itemSemanticEditPolicyClassName="RefinedStateLabelItemSemanticEditPolicy"
+          notationViewFactoryClassName="RefinedStateLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -651,6 +675,7 @@
         visualID="4001"
         editPartClassName="TransitionEditPart"
         itemSemanticEditPolicyClassName="TransitionItemSemanticEditPolicy"
+        notationViewFactoryClassName="TransitionViewFactory"
         createCommandClassName="TransitionCreateCommand"
         reorientCommandClassName="TransitionReorientCommand">
       <diagramRunTimeClass
@@ -679,6 +704,7 @@
           visualID="6001"
           editPartClassName="TransitionLabelEditPart"
           itemSemanticEditPolicyClassName="TransitionLabelItemSemanticEditPolicy"
+          notationViewFactoryClassName="TransitionLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -697,14 +723,18 @@
               href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
         </modelFacet>
       </labels>
+      <creationConstraints
+          sourceEnd="//@expressionProviders/@providers.0/@expressions.0"
+          targetEnd="//@expressionProviders/@providers.0/@expressions.1"/>
     </links>
     <compartments
         visualID="7001"
         editPartClassName="StateStatemachinesCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateStatemachinesCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateStatemachinesViewFactory"
         canonicalEditPolicyClassName="StateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
-        title="Statemachines"
+        title="StateStatemachinesCompartment"
         node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -717,9 +747,10 @@
         visualID="7002"
         editPartClassName="StateInvariantsCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateInvariantsCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateInvariantsViewFactory"
         canonicalEditPolicyClassName="StateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
-        title="Invariants"
+        title="StateInvariantsCompartment"
         node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -732,9 +763,10 @@
         visualID="7005"
         editPartClassName="StateStatemachineCompartmentEditPart"
         itemSemanticEditPolicyClassName="StatemachineCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StatemachineCompartmentViewFactory"
         canonicalEditPolicyClassName="StateStatemachineCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4"
-        title=""
+        title="StatemachineCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.0"
         listLayout="false">
@@ -749,9 +781,10 @@
         visualID="7003"
         editPartClassName="RefinedStateStatemachinesCompartmentEditPart"
         itemSemanticEditPolicyClassName="RefinedStateStatemachinesCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStateStatemachinesViewFactory"
         canonicalEditPolicyClassName="RefinedStateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6 //@diagram/@childNodes.8"
-        title="Statemachines"
+        title="RefinedStateStatemachinesCompartment"
         node="//@diagram/@topLevelNodes.4">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -764,9 +797,10 @@
         visualID="7004"
         editPartClassName="RefinedStateInvariantsCompartmentEditPart"
         itemSemanticEditPolicyClassName="RefinedStateInvariantsCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStateInvariantsViewFactory"
         canonicalEditPolicyClassName="RefinedStateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.10"
-        title="Invariants"
+        title="RefinedStateInvariantsCompartment"
         node="//@diagram/@topLevelNodes.4">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -779,9 +813,10 @@
         visualID="7006"
         editPartClassName="RefinedStateRefinedStatemachineCompartmentEditPart"
         itemSemanticEditPolicyClassName="RefinedStateRefinedStatemachineCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="RefinedStatemachineCompartmentViewFactory"
         canonicalEditPolicyClassName="RefinedStateRefinedStatemachineCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.7"
-        title=""
+        title="RefinedStatemachineCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.6"
         listLayout="false">
@@ -796,9 +831,10 @@
         visualID="7007"
         editPartClassName="RefinedStateStatemachineCompartmentEditPart"
         itemSemanticEditPolicyClassName="RefinedStateStatemachineCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StatemachineCompartmentViewFactory"
         canonicalEditPolicyClassName="RefinedStateStatemachineCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.9"
-        title=""
+        title="StatemachineCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.8"
         listLayout="false">
@@ -1260,6 +1296,17 @@
   </propertySheet>
   <domainGenModel
       href="statemachines.genmodel#/"/>
+  <expressionProviders>
+    <providers
+        xsi:type="gmfgen:GenExpressionInterpreter">
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="-- source constraint --&#xA;not &#xA;&#x9;(self.oclIsTypeOf(Final)&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;-- not from final&#xA;&#x9;or oppositeEnd.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;-- not to initial&#xA;&#x9;or (self.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;&#x9;&#x9;-- if initial then not to self or final&#xA;&#x9;&#x9;and (self = oppositeEnd&#xA;&#x9;&#x9;or oppositeEnd.oclIsTypeOf(Final))))"/>
+      <expressions
+          xsi:type="gmfgen:GenConstraint"
+          body="-- target constraint --&#xA;not Statemachine.allInstances()->select(&#xA;&#x9;m : Statemachine |&#xA;&#x9;m.nodes->includes(self)&#xA;&#x9;and m.nodes->includes(oppositeEnd))->isEmpty()"/>
+    </providers>
+  </expressionProviders>
   <labelParsers
       extensibleViaService="true">
     <implementations

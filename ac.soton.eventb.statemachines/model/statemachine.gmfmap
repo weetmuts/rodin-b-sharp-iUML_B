@@ -368,6 +368,12 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="statemachines.ecore#//Transition/target"/>
+    <creationConstraints>
+      <sourceEnd
+          body="-- source constraint --&#xA;not &#xA;&#x9;(self.oclIsTypeOf(Final)&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;-- not from final&#xA;&#x9;or oppositeEnd.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;-- not to initial&#xA;&#x9;or (self.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;&#x9;&#x9;-- if initial then not to self or final&#xA;&#x9;&#x9;and (self = oppositeEnd&#xA;&#x9;&#x9;or oppositeEnd.oclIsTypeOf(Final))))"/>
+      <targetEnd
+          body="-- target constraint --&#xA;not Statemachine.allInstances()->select(&#xA;&#x9;m : Statemachine |&#xA;&#x9;m.nodes->includes(self)&#xA;&#x9;and m.nodes->includes(oppositeEnd))->isEmpty()"/>
+    </creationConstraints>
   </links>
   <diagram>
     <diagramCanvas
