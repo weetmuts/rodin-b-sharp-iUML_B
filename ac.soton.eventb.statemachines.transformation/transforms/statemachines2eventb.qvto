@@ -18,6 +18,7 @@ property B_AND : String = " ∧ ";
 property B_OR : String = " ∨ ";
 property B_LPAR : String = "(";
 property B_RPAR : String = ")";
+property B_IMPL : String = " ⇒ ";
 
 main() {
 	inoutModel.rootObjects()[eventb::machine::Machine]->map umlb2eventb();
@@ -82,6 +83,7 @@ mapping inout statemachines::State::state2eventb() {
 		action := self.name + B_BEQ + initvalue;
 		generated := true;
 	};
+	self.constraints.map constraint2eventb(self);
 	self.statemachines.map statemachine2eventb();
 }
 
@@ -106,13 +108,32 @@ mapping inout statemachines::RefinedState::state2eventb() {
 		action := self.label + B_BEQ + initvalue;
 		generated := true;
 	};
+	self.constraints.map constraint2eventb(self);
 	self.statemachines.map statemachine2eventb();
+}
+
+// state invariant -> eventb machine invariant
+mapping inout eventb::machine::Invariant::constraint2eventb(in state : statemachines::State) {
+	machine.invariants += object eventb::machine::Invariant {
+		name := self.name;
+		predicate := B_LPAR + state.name + B_EQ + B_TRUE + B_RPAR + B_IMPL + B_LPAR + self.predicate + B_RPAR;
+		generated := true;
+	};
+}
+
+// refined state invariant -> eventb machine invariant
+mapping inout eventb::machine::Invariant::constraint2eventb(in refstate : statemachines::RefinedState) {
+	machine.invariants += object eventb::machine::Invariant {
+		name := self.name;
+		predicate := B_LPAR + refstate.label + B_EQ + B_TRUE + B_RPAR + B_IMPL + B_LPAR + self.predicate + B_RPAR;
+		generated := true;
+	};
 }
 
 // add disjoint invariant
 mapping inout statemachines::State::disjoin() {
 	self.eContainer().oclAsType(statemachines::AbstractStatemachine).nodes[statemachines::State]->forEach(s | s <> self) {
-		// don't duplicate
+		// don't duplicate (ckeck if no invariant created already for these states)
 		if (machine.invariants->name[endsWith(s.name + "," + self.name)]->isEmpty()) then {
 			machine.invariants += object eventb::machine::Invariant {
 				name := "disjointStates " + self.name + "," + s.name;
