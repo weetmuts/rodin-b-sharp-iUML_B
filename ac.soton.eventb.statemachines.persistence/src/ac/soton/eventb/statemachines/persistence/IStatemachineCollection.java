@@ -10,6 +10,7 @@ package ac.soton.eventb.statemachines.persistence;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.rodinp.core.IAttributeType;
+import org.rodinp.core.IInternalElement;
 import org.rodinp.core.IInternalElementType;
 import org.rodinp.core.RodinCore;
 import org.rodinp.core.RodinDBException;
@@ -20,7 +21,7 @@ import org.rodinp.core.RodinDBException;
  * @author vitaly
  *
  */
-public interface IStatemachineCollection {
+public interface IStatemachineCollection extends IInternalElement {
 	
 	public static IInternalElementType<StatemachineCollection> ELEMENT_TYPE = RodinCore.getInternalElementType(StatemachinesPersistencePlugin.PLUGIN_ID + ".statemachineCollection");
 	public static IAttributeType.String STATEMACHINES_ATTRIBUTE = RodinCore.getStringAttrType(StatemachinesPersistencePlugin.PLUGIN_ID + ".statemachines");
