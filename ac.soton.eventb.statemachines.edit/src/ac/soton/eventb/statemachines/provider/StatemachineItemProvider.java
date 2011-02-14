@@ -37,7 +37,7 @@ import org.eventb.emf.core.CorePackage;
  * @generated
  */
 public class StatemachineItemProvider
-	extends AbstractStatemachineItemProvider
+	extends DiagramRootItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -73,6 +73,7 @@ public class StatemachineItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addExtensionIdPropertyDescriptor(object);
 			addTranslationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -92,6 +93,28 @@ public class StatemachineItemProvider
 				 getString("_UI_EventBNamed_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_EventBNamed_name_feature", "_UI_EventBNamed_type"),
 				 CorePackage.Literals.EVENT_BNAMED__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Extension Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExtensionIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractExtension_extensionId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractExtension_extensionId_feature", "_UI_AbstractExtension_type"),
+				 CorePackage.Literals.ABSTRACT_EXTENSION__EXTENSION_ID,
 				 true,
 				 false,
 				 false,
@@ -160,6 +183,7 @@ public class StatemachineItemProvider
 
 		switch (notification.getFeatureID(Statemachine.class)) {
 			case StatemachinesPackage.STATEMACHINE__NAME:
+			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

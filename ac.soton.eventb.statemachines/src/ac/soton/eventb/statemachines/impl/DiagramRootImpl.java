@@ -5,24 +5,26 @@
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
-import ac.soton.eventb.statemachines.ANY;
+import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>ANY</b></em>'.
+ * An implementation of the model object '<em><b>Diagram Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ANYImpl extends AbstractNodeImpl implements ANY {
+public class DiagramRootImpl extends AbstractStatemachineImpl implements DiagramRoot {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -35,7 +37,7 @@ public class ANYImpl extends AbstractNodeImpl implements ANY {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ANYImpl() {
+	protected DiagramRootImpl() {
 		super();
 	}
 
@@ -46,7 +48,7 @@ public class ANYImpl extends AbstractNodeImpl implements ANY {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StatemachinesPackage.Literals.ANY;
+		return StatemachinesPackage.Literals.DIAGRAM_ROOT;
 	}
 
-} //ANYImpl
+} //DiagramRootImpl

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
@@ -30,13 +31,14 @@ import org.eventb.emf.core.EventBNamed;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getExtensionId <em>Extension Id</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTranslation <em>Translation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatemachineImpl extends AbstractStatemachineImpl implements Statemachine {
+public class StatemachineImpl extends DiagramRootImpl implements Statemachine {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,6 +55,26 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = "";
+
+	/**
+	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXTENSION_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String extensionId = EXTENSION_ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTranslation() <em>Translation</em>}' attribute.
@@ -107,7 +129,31 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
+		String oldName = getName();
 		doSetName(newName);
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldName, newName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getExtensionId() {
+		return extensionId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtensionId(String newExtensionId) {
+		String oldExtensionId = extensionId;
+		extensionId = newExtensionId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__EXTENSION_ID, oldExtensionId, extensionId));
 	}
 
 	/**
@@ -163,6 +209,8 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__NAME:
 				return getName();
+			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
+				return getExtensionId();
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				return getTranslation();
 		}
@@ -179,6 +227,9 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__NAME:
 				setName((String)newValue);
+				return;
+			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
+				setExtensionId((String)newValue);
 				return;
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				setTranslation((TranslationKind)newValue);
@@ -198,6 +249,9 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 			case StatemachinesPackage.STATEMACHINE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
+				setExtensionId(EXTENSION_ID_EDEFAULT);
+				return;
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				setTranslation(TRANSLATION_EDEFAULT);
 				return;
@@ -215,6 +269,8 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__NAME:
 				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
+				return EXTENSION_ID_EDEFAULT == null ? extensionId != null : !EXTENSION_ID_EDEFAULT.equals(extensionId);
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				return translation != TRANSLATION_EDEFAULT;
 		}
@@ -234,6 +290,12 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractExtension.class) {
+			switch (derivedFeatureID) {
+				case StatemachinesPackage.STATEMACHINE__EXTENSION_ID: return CorePackage.ABSTRACT_EXTENSION__EXTENSION_ID;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -250,6 +312,12 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractExtension.class) {
+			switch (baseFeatureID) {
+				case CorePackage.ABSTRACT_EXTENSION__EXTENSION_ID: return StatemachinesPackage.STATEMACHINE__EXTENSION_ID;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -263,7 +331,9 @@ public class StatemachineImpl extends AbstractStatemachineImpl implements Statem
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (translation: ");
+		result.append(" (extensionId: ");
+		result.append(extensionId);
+		result.append(", translation: ");
 		result.append(translation);
 		result.append(')');
 		return result.toString();

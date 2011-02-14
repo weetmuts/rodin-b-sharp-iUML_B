@@ -8,23 +8,25 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
-import ac.soton.eventb.statemachines.AbstractNode;
-import ac.soton.eventb.statemachines.EventBLabeled;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.Transition;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eventb.emf.core.EventBCommentedElement;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
-
 import org.eventb.emf.core.impl.EventBCommentedElementImpl;
+import org.eventb.emf.core.machine.Event;
+
+import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,10 +35,12 @@ import org.eventb.emf.core.impl.EventBCommentedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSourceContainer <em>Source Container</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTargetContainer <em>Target Container</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,14 +55,14 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -81,14 +85,34 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	protected AbstractNode source;
 
 	/**
-	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
+	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getElaborates()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventBCommentedElement elaborates;
+	protected EList<Event> elaborates;
+
+	/**
+	 * The cached value of the '{@link #getSourceContainer() <em>Source Container</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventBElement sourceContainer;
+
+	/**
+	 * The cached value of the '{@link #getTargetContainer() <em>Target Container</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventBElement targetContainer;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,27 +136,23 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Returns either a name or if not set a list of elaborated transitions.
+	 * If neither name, nor elaboration is set returns a warning name.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getLabel() {
-		if (getElaborates() instanceof EventBNamed){
-			return ((EventBNamed) getElaborates()).getName();
-		}else if (getElaborates() instanceof EventBLabeled){
-			return ((EventBLabeled) getElaborates()).getLabel();
-		}else return "<no label - fix elaborates>";
-	}
-	
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLabel(String newLabel) {
-		// TODO: implement this method to set the 'Label' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public String getName() {
+		String name = doGetName();
+		if (name.equals(NAME_EDEFAULT)) {
+			EList<Event> events = getElaborates();
+			if (events.isEmpty())
+				return "<no name - fix elaborates>";
+			ArrayList<String> result = new ArrayList<String>(getElaborates().size());
+			for (Event event : getElaborates())
+				result.add(event.getName());
+			return result.toString().replaceAll("(^.)|(.$)", "");
+		}
+		return name;
 	}
 
 	/**
@@ -260,14 +280,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventBCommentedElement getElaborates() {
-		if (elaborates != null && elaborates.eIsProxy()) {
-			InternalEObject oldElaborates = (InternalEObject)elaborates;
-			elaborates = (EventBCommentedElement)eResolveProxy(oldElaborates);
-			if (elaborates != oldElaborates) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__ELABORATES, oldElaborates, elaborates));
-			}
+	public EList<Event> getElaborates() {
+		if (elaborates == null) {
+			elaborates = new EObjectResolvingEList<Event>(Event.class, this, StatemachinesPackage.TRANSITION__ELABORATES);
 		}
 		return elaborates;
 	}
@@ -275,10 +290,40 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EventBCommentedElement basicGetElaborates() {
-		return elaborates;
+	public void setName(String newName) {
+		String oldName = getName();
+		doSetName(newName);
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, oldName, newName));
+	}
+
+	@Override
+	public void eNotify(Notification notification) {
+//		if (StatemachinesPackage.eINSTANCE.getTransition_Elaborates().equals(notification.getFeature()))
+//			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, notification.getOldValue(), notification.getNewValue()));
+		super.eNotify(notification);
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EventBElement getSourceContainer() {
+		if (sourceContainer != null && sourceContainer.eIsProxy()) {
+			InternalEObject oldSourceContainer = (InternalEObject)sourceContainer;
+			sourceContainer = (EventBElement)eResolveProxy(oldSourceContainer);
+			if (sourceContainer != oldSourceContainer) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__SOURCE_CONTAINER, oldSourceContainer, sourceContainer));
+			}
+		} else if (sourceContainer == null) {
+			return getSource();
+		}
+		return sourceContainer;
 	}
 
 	/**
@@ -286,11 +331,82 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElaborates(EventBCommentedElement newElaborates) {
-		EventBCommentedElement oldElaborates = elaborates;
-		elaborates = newElaborates;
+	public EventBElement basicGetSourceContainer() {
+		return sourceContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourceContainer(EventBElement newSourceContainer) {
+		EventBElement oldSourceContainer = sourceContainer;
+		sourceContainer = newSourceContainer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__ELABORATES, oldElaborates, elaborates));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__SOURCE_CONTAINER, oldSourceContainer, sourceContainer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EventBElement getTargetContainer() {
+		if (targetContainer != null && targetContainer.eIsProxy()) {
+			InternalEObject oldTargetContainer = (InternalEObject)targetContainer;
+			targetContainer = (EventBElement)eResolveProxy(oldTargetContainer);
+			if (targetContainer != oldTargetContainer) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__TARGET_CONTAINER, oldTargetContainer, targetContainer));
+			}
+		} else if (targetContainer == null) {
+			return getTarget();
+		}
+		return targetContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBElement basicGetTargetContainer() {
+		return targetContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetContainer(EventBElement newTargetContainer) {
+		EventBElement oldTargetContainer = targetContainer;
+		targetContainer = newTargetContainer;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__TARGET_CONTAINER, oldTargetContainer, targetContainer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String doGetName() {
+		assert (this instanceof EventBElement);
+		String reference = ((EventBElement)this).getReferenceWithoutResolving();
+		return reference.length() > this.eStaticClass().getInstanceClassName().length() ?
+			reference.substring(this.eStaticClass().getInstanceClassName().length()+1)
+			: "";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void doSetName(String newName) {
+		((EventBElement)this).setReference(this.eStaticClass().getInstanceClassName()+"."+newName);
 	}
 
 	/**
@@ -337,8 +453,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__LABEL:
-				return getLabel();
+			case StatemachinesPackage.TRANSITION__NAME:
+				return getName();
 			case StatemachinesPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -346,8 +462,13 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				if (resolve) return getSource();
 				return basicGetSource();
 			case StatemachinesPackage.TRANSITION__ELABORATES:
-				if (resolve) return getElaborates();
-				return basicGetElaborates();
+				return getElaborates();
+			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
+				if (resolve) return getSourceContainer();
+				return basicGetSourceContainer();
+			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
+				if (resolve) return getTargetContainer();
+				return basicGetTargetContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -357,11 +478,12 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__LABEL:
-				setLabel((String)newValue);
+			case StatemachinesPackage.TRANSITION__NAME:
+				setName((String)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)newValue);
@@ -370,7 +492,14 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				setSource((AbstractNode)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__ELABORATES:
-				setElaborates((EventBCommentedElement)newValue);
+				getElaborates().clear();
+				getElaborates().addAll((Collection<? extends Event>)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
+				setSourceContainer((EventBElement)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
+				setTargetContainer((EventBElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -384,8 +513,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case StatemachinesPackage.TRANSITION__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)null);
@@ -394,7 +523,13 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				setSource((AbstractNode)null);
 				return;
 			case StatemachinesPackage.TRANSITION__ELABORATES:
-				setElaborates((EventBCommentedElement)null);
+				getElaborates().clear();
+				return;
+			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
+				setSourceContainer((EventBElement)null);
+				return;
+			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
+				setTargetContainer((EventBElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -408,14 +543,18 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__LABEL:
-				return LABEL_EDEFAULT == null ? getLabel() != null : !LABEL_EDEFAULT.equals(getLabel());
+			case StatemachinesPackage.TRANSITION__NAME:
+				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 			case StatemachinesPackage.TRANSITION__TARGET:
 				return target != null;
 			case StatemachinesPackage.TRANSITION__SOURCE:
 				return source != null;
 			case StatemachinesPackage.TRANSITION__ELABORATES:
-				return elaborates != null;
+				return elaborates != null && !elaborates.isEmpty();
+			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
+				return sourceContainer != null;
+			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
+				return targetContainer != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -427,9 +566,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBLabeled.class) {
+		if (baseClass == EventBNamed.class) {
 			switch (derivedFeatureID) {
-				case StatemachinesPackage.TRANSITION__LABEL: return StatemachinesPackage.EVENT_BLABELED__LABEL;
+				case StatemachinesPackage.TRANSITION__NAME: return CorePackage.EVENT_BNAMED__NAME;
 				default: return -1;
 			}
 		}
@@ -443,9 +582,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBLabeled.class) {
+		if (baseClass == EventBNamed.class) {
 			switch (baseFeatureID) {
-				case StatemachinesPackage.EVENT_BLABELED__LABEL: return StatemachinesPackage.TRANSITION__LABEL;
+				case CorePackage.EVENT_BNAMED__NAME: return StatemachinesPackage.TRANSITION__NAME;
 				default: return -1;
 			}
 		}

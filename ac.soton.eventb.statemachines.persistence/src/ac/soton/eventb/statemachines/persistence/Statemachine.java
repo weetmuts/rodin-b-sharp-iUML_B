@@ -9,25 +9,25 @@
 package ac.soton.eventb.statemachines.persistence;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eventb.core.basis.EventBElement;
 import org.rodinp.core.IInternalElement;
 import org.rodinp.core.IInternalElementType;
 import org.rodinp.core.IRodinElement;
 import org.rodinp.core.RodinDBException;
-import org.rodinp.core.basis.InternalElement;
 
 /**
- * Implementation of a Rodin internal element for StatemachineCollection.
+ * Implementation of a Rodin internal element for Statemachine.
  * 
  * @author vitaly
  *
  */
-public class StatemachineCollection extends InternalElement implements IStatemachineCollection {
+public class Statemachine extends EventBElement implements IStatemachine {
 
-	public StatemachineCollection(String name, IRodinElement parent) {
+	public Statemachine(String name, IRodinElement parent) {
 		super(name, parent);
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see org.rodinp.core.basis.InternalElement#getElementType()
 	 */
 	@Override
@@ -35,29 +35,29 @@ public class StatemachineCollection extends InternalElement implements IStatemac
 		return ELEMENT_TYPE;
 	}
 
-	/* (non-Javadoc)
-	 * @see ac.soton.eventb.statemachines.persistence.IStatemachineCollection#hasSerialisedString()
+	/**
+	 * @see ac.soton.eventb.statemachines.persistence.IAbstractStatemachine#hasSerialised()
 	 */
 	@Override
-	public boolean hasSerialisedString() throws RodinDBException {
-		return hasAttribute(STATEMACHINES_ATTRIBUTE);
+	public boolean hasSerialised() throws RodinDBException {
+		return hasAttribute(SERIALISED_ATTRIBUTE);
 	}
 
-	/* (non-Javadoc)
-	 * @see ac.soton.eventb.statemachines.persistence.IStatemachineCollection#getSerialisedString()
+	/**
+	 * @see ac.soton.eventb.statemachines.persistence.IAbstractStatemachine#getSerialised()
 	 */
 	@Override
-	public String getSerialisedString() throws RodinDBException {
-		return getAttributeValue(STATEMACHINES_ATTRIBUTE);
+	public String getSerialised() throws RodinDBException {
+		return getAttributeValue(SERIALISED_ATTRIBUTE);
 	}
 
-	/* (non-Javadoc)
-	 * @see ac.soton.eventb.statemachines.persistence.IStatemachineCollection#setSerialisedString(java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
+	/**
+	 * @see ac.soton.eventb.statemachines.persistence.IAbstractStatemachine#setSerialised(java.lang.String, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public void setSerialisedString(String string, IProgressMonitor monitor)
+	public void setSerialised(String string, IProgressMonitor monitor)
 			throws RodinDBException {
-		setAttributeValue(STATEMACHINES_ATTRIBUTE, string, monitor);
+		setAttributeValue(SERIALISED_ATTRIBUTE, string, monitor);
 	}
 
 }

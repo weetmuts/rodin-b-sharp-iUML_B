@@ -15,22 +15,23 @@
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//TranslationKind/MULTIVAR"/>
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//TranslationKind/SINGLEVAR"/>
     </genEnums>
-    <genClasses ecoreClass="statemachines.ecore#//StatemachineCollection"/>
     <genClasses image="false" ecoreClass="statemachines.ecore#//AbstractStatemachine">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractStatemachine/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractStatemachine/transitions"/>
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//AbstractNode">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractNode/incoming"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractNode/outgoing"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractNode/incoming"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractNode/outgoing"/>
     </genClasses>
-    <genClasses ecoreClass="statemachines.ecore#//Transition" labelFeature="#//statemachines/EventBLabeled/label">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/target"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/elaborates"/>
+    <genClasses ecoreClass="statemachines.ecore#//Transition">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/target"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/source"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/elaborates"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/sourceContainer"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/targetContainer"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//RefinedStatemachine" labelFeature="#//statemachines/EventBLabeled/label">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedStatemachine/refines"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedStatemachine/refines"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//Statemachine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//Statemachine/translation"/>
@@ -47,10 +48,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//StatemachineOwner/statemachines"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//RefinedState" labelFeature="#//statemachines/EventBLabeled/label">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedState/refines"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedState/refines"/>
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//AbstractState">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractState/constraints"/>
     </genClasses>
+    <genClasses ecoreClass="statemachines.ecore#//DiagramRoot"/>
   </genPackages>
 </genmodel:GenModel>

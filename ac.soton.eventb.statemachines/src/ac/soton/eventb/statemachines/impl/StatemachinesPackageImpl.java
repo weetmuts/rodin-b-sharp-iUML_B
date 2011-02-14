@@ -8,9 +8,21 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.machine.MachinePackage;
+
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
+import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.EventBLabeled;
 import ac.soton.eventb.statemachines.Final;
 import ac.soton.eventb.statemachines.Initial;
@@ -18,25 +30,12 @@ import ac.soton.eventb.statemachines.RefinedState;
 import ac.soton.eventb.statemachines.RefinedStatemachine;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
-import ac.soton.eventb.statemachines.StatemachineCollection;
 import ac.soton.eventb.statemachines.StatemachineOwner;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.TranslationKind;
-
-import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.machine.MachinePackage;
+import ac.soton.eventb.statemachines.util.StatemachinesValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,13 +50,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass statemachineCollectionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +154,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass diagramRootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum translationKindEEnum = null;
 
 	/**
@@ -219,6 +218,15 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		// Initialize created meta-data
 		theStatemachinesPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theStatemachinesPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return StatemachinesValidator.INSTANCE;
+				 }
+			 });
+
 		// Mark meta-data to indicate it can't be changed
 		theStatemachinesPackage.freeze();
 
@@ -226,15 +234,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(StatemachinesPackage.eNS_URI, theStatemachinesPackage);
 		return theStatemachinesPackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getStatemachineCollection() {
-		return statemachineCollectionEClass;
 	}
 
 	/**
@@ -325,6 +324,24 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 */
 	public EReference getTransition_Elaborates() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_SourceContainer() {
+		return (EReference)transitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_TargetContainer() {
+		return (EReference)transitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -485,6 +502,15 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDiagramRoot() {
+		return diagramRootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTranslationKind() {
 		return translationKindEEnum;
 	}
@@ -517,8 +543,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		isCreated = true;
 
 		// Create classes and their features
-		statemachineCollectionEClass = createEClass(STATEMACHINE_COLLECTION);
-
 		abstractStatemachineEClass = createEClass(ABSTRACT_STATEMACHINE);
 		createEReference(abstractStatemachineEClass, ABSTRACT_STATEMACHINE__NODES);
 		createEReference(abstractStatemachineEClass, ABSTRACT_STATEMACHINE__TRANSITIONS);
@@ -531,6 +555,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(transitionEClass, TRANSITION__TARGET);
 		createEReference(transitionEClass, TRANSITION__SOURCE);
 		createEReference(transitionEClass, TRANSITION__ELABORATES);
+		createEReference(transitionEClass, TRANSITION__SOURCE_CONTAINER);
+		createEReference(transitionEClass, TRANSITION__TARGET_CONTAINER);
 
 		refinedStatemachineEClass = createEClass(REFINED_STATEMACHINE);
 		createEReference(refinedStatemachineEClass, REFINED_STATEMACHINE__REFINES);
@@ -559,6 +585,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 
 		abstractStateEClass = createEClass(ABSTRACT_STATE);
 		createEReference(abstractStateEClass, ABSTRACT_STATE__CONSTRAINTS);
+
+		diagramRootEClass = createEClass(DIAGRAM_ROOT);
 
 		// Create enums
 		translationKindEEnum = createEEnum(TRANSLATION_KIND);
@@ -596,16 +624,16 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		statemachineCollectionEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
-		statemachineCollectionEClass.getESuperTypes().add(this.getStatemachineOwner());
 		abstractStatemachineEClass.getESuperTypes().add(theCorePackage.getEventBCommentedElement());
 		abstractNodeEClass.getESuperTypes().add(theCorePackage.getEventBElement());
 		transitionEClass.getESuperTypes().add(theCorePackage.getEventBCommentedElement());
-		transitionEClass.getESuperTypes().add(this.getEventBLabeled());
-		refinedStatemachineEClass.getESuperTypes().add(this.getAbstractStatemachine());
+		transitionEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
+		refinedStatemachineEClass.getESuperTypes().add(this.getDiagramRoot());
 		refinedStatemachineEClass.getESuperTypes().add(this.getEventBLabeled());
-		statemachineEClass.getESuperTypes().add(this.getAbstractStatemachine());
+		refinedStatemachineEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
+		statemachineEClass.getESuperTypes().add(this.getDiagramRoot());
 		statemachineEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
+		statemachineEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		stateEClass.getESuperTypes().add(this.getAbstractState());
 		stateEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
 		initialEClass.getESuperTypes().add(this.getAbstractNode());
@@ -616,11 +644,10 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		refinedStateEClass.getESuperTypes().add(this.getEventBLabeled());
 		abstractStateEClass.getESuperTypes().add(this.getAbstractNode());
 		abstractStateEClass.getESuperTypes().add(this.getStatemachineOwner());
+		diagramRootEClass.getESuperTypes().add(this.getAbstractStatemachine());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(statemachineCollectionEClass, StatemachineCollection.class, "StatemachineCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(abstractStatemachineEClass, AbstractStatemachine.class, "AbstractStatemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(abstractStatemachineEClass, AbstractStatemachine.class, "AbstractStatemachine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractStatemachine_Nodes(), this.getAbstractNode(), null, "nodes", null, 0, -1, AbstractStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractStatemachine_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, AbstractStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -631,7 +658,9 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Target(), this.getAbstractNode(), this.getAbstractNode_Incoming(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_Source(), this.getAbstractNode(), this.getAbstractNode_Outgoing(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransition_Elaborates(), theCorePackage.getEventBCommentedElement(), null, "elaborates", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_Elaborates(), theMachinePackage.getEvent(), null, "elaborates", null, 1, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_SourceContainer(), theCorePackage.getEventBElement(), null, "sourceContainer", null, 0, 1, Transition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_TargetContainer(), theCorePackage.getEventBElement(), null, "targetContainer", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(refinedStatemachineEClass, RefinedStatemachine.class, "RefinedStatemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRefinedStatemachine_Refines(), this.getAbstractStatemachine(), null, "refines", null, 1, 1, RefinedStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -656,10 +685,12 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getStatemachineOwner_Statemachines(), this.getAbstractStatemachine(), null, "statemachines", null, 0, -1, StatemachineOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(refinedStateEClass, RefinedState.class, "RefinedState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRefinedState_Refines(), this.getAbstractNode(), null, "refines", null, 1, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRefinedState_Refines(), this.getAbstractState(), null, "refines", null, 1, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractStateEClass, AbstractState.class, "AbstractState", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractState_Constraints(), theMachinePackage.getInvariant(), null, "constraints", null, 0, -1, AbstractState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(diagramRootEClass, DiagramRoot.class, "DiagramRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");
@@ -670,6 +701,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// org.eventb.emf.core.extendedMetaClasses
 		createOrgAnnotations();
 	}
@@ -681,14 +714,68 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * @generated
 	 */
 	protected void createOrgAnnotations() {
-		String source = "org.eventb.emf.core.extendedMetaClasses";		
+		String source = "org.eventb.emf.core.extendedMetaClasses";					
 		addAnnotation
-		  (statemachineCollectionEClass, 
+		  (refinedStatemachineEClass, 
 		   source, 
 		   new String[] {
 		   },
 		   new URI[] {
 			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
+		   });			
+		addAnnotation
+		  (statemachineEClass, 
+		   source, 
+		   new String[] {
+		   },
+		   new URI[] {
+			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
+		   });		
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
+		addAnnotation
+		  (abstractStatemachineEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "topLevelHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal"
+		   });		
+		addAnnotation
+		  (transitionEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "isNotToInitial\nisNotFromFinal\nisNotInitialSelf\nisNotInitialToFinal"
+		   });		
+		addAnnotation
+		  (refinedStatemachineEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "hasNoStates"
+		   });			
+		addAnnotation
+		  (statemachineEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "hasNoRefinedStates"
+		   });			
+		addAnnotation
+		  (stateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "hasNoRefinedStatemachines"
+		   });		
+		addAnnotation
+		  (initialEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "hasOutgoingOnTopLevel\nhasOutgoingOnNestedLevelIfExternalIncoming"
 		   });
 	}
 

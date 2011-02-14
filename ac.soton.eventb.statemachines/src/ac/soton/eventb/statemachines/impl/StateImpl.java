@@ -8,26 +8,15 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
-import ac.soton.eventb.statemachines.AbstractStatemachine;
-import ac.soton.eventb.statemachines.State;
-import ac.soton.eventb.statemachines.StatemachineOwner;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
+
+import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,7 +82,10 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
+		String oldName = getName();
 		doSetName(newName);
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, newName));
 	}
 
 	/**
@@ -137,7 +129,6 @@ public class StateImpl extends AbstractStateImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

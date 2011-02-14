@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eventb.emf.core.CorePackage;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.RefinedStatemachine} object.
@@ -35,7 +36,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class RefinedStatemachineItemProvider
-	extends AbstractStatemachineItemProvider
+	extends DiagramRootItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -71,6 +72,7 @@ public class RefinedStatemachineItemProvider
 			super.getPropertyDescriptors(object);
 
 			addLabelPropertyDescriptor(object);
+			addExtensionIdPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -90,6 +92,28 @@ public class RefinedStatemachineItemProvider
 				 getString("_UI_EventBLabeled_label_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_EventBLabeled_label_feature", "_UI_EventBLabeled_type"),
 				 StatemachinesPackage.Literals.EVENT_BLABELED__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Extension Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExtensionIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractExtension_extensionId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractExtension_extensionId_feature", "_UI_AbstractExtension_type"),
+				 CorePackage.Literals.ABSTRACT_EXTENSION__EXTENSION_ID,
 				 true,
 				 false,
 				 false,
@@ -158,6 +182,8 @@ public class RefinedStatemachineItemProvider
 
 		switch (notification.getFeatureID(RefinedStatemachine.class)) {
 			case StatemachinesPackage.REFINED_STATEMACHINE__LABEL:
+			case StatemachinesPackage.REFINED_STATEMACHINE__EXTENSION_ID:
+			case StatemachinesPackage.REFINED_STATEMACHINE__REFINES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

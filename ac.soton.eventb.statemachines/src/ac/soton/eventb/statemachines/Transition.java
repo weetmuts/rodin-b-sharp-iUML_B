@@ -8,7 +8,11 @@
  */
 package ac.soton.eventb.statemachines;
 
+import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.EventBCommentedElement;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.machine.Event;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,14 +25,16 @@ import org.eventb.emf.core.EventBCommentedElement;
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}</li>
  * </ul>
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isNotToInitial\nisNotFromFinal\nisNotInitialSelf\nisNotInitialToFinal'"
  * @generated
  */
-public interface Transition extends EventBCommentedElement, EventBLabeled {
+public interface Transition extends EventBCommentedElement, EventBNamed {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,29 +99,71 @@ public interface Transition extends EventBCommentedElement, EventBLabeled {
 	void setSource(AbstractNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Elaborates</b></em>' reference.
+	 * Returns the value of the '<em><b>Elaborates</b></em>' reference list.
+	 * The list contents are of type {@link org.eventb.emf.core.machine.Event}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Elaborates</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Elaborates</em>' reference.
-	 * @see #setElaborates(EventBCommentedElement)
+	 * @return the value of the '<em>Elaborates</em>' reference list.
 	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Elaborates()
 	 * @model required="true"
 	 * @generated
 	 */
-	EventBCommentedElement getElaborates();
+	EList<Event> getElaborates();
 
 	/**
-	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}' reference.
+	 * Returns the value of the '<em><b>Source Container</b></em>' reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Container</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Elaborates</em>' reference.
-	 * @see #getElaborates()
+	 * @return the value of the '<em>Source Container</em>' reference.
+	 * @see #setSourceContainer(EventBElement)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_SourceContainer()
+	 * @model transient="true"
 	 * @generated
 	 */
-	void setElaborates(EventBCommentedElement value);
+	EventBElement getSourceContainer();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Container</em>' reference.
+	 * @see #getSourceContainer()
+	 * @generated
+	 */
+	void setSourceContainer(EventBElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Container</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Container</em>' reference.
+	 * @see #setTargetContainer(EventBElement)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_TargetContainer()
+	 * @model
+	 * @generated
+	 */
+	EventBElement getTargetContainer();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Container</em>' reference.
+	 * @see #getTargetContainer()
+	 * @generated
+	 */
+	void setTargetContainer(EventBElement value);
 
 } // Transition

@@ -9,18 +9,32 @@
 package ac.soton.eventb.statemachines.util;
 
 import ac.soton.eventb.statemachines.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBObject;
+
+import ac.soton.eventb.statemachines.ANY;
+import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.AbstractState;
+import ac.soton.eventb.statemachines.AbstractStatemachine;
+import ac.soton.eventb.statemachines.EventBLabeled;
+import ac.soton.eventb.statemachines.Final;
+import ac.soton.eventb.statemachines.Initial;
+import ac.soton.eventb.statemachines.OR;
+import ac.soton.eventb.statemachines.RefinedState;
+import ac.soton.eventb.statemachines.RefinedStatemachine;
+import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.statemachines.StatemachineOwner;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,16 +117,6 @@ public class StatemachinesSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case StatemachinesPackage.STATEMACHINE_COLLECTION: {
-				StatemachineCollection statemachineCollection = (StatemachineCollection)theEObject;
-				T result = caseStatemachineCollection(statemachineCollection);
-				if (result == null) result = caseAbstractExtension(statemachineCollection);
-				if (result == null) result = caseStatemachineOwner(statemachineCollection);
-				if (result == null) result = caseEventBElement(statemachineCollection);
-				if (result == null) result = caseEventBObject(statemachineCollection);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StatemachinesPackage.ABSTRACT_STATEMACHINE: {
 				AbstractStatemachine abstractStatemachine = (AbstractStatemachine)theEObject;
 				T result = caseAbstractStatemachine(abstractStatemachine);
@@ -135,7 +139,7 @@ public class StatemachinesSwitch<T> {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = caseEventBCommentedElement(transition);
-				if (result == null) result = caseEventBLabeled(transition);
+				if (result == null) result = caseEventBNamed(transition);
 				if (result == null) result = caseEventBElement(transition);
 				if (result == null) result = caseEventBCommented(transition);
 				if (result == null) result = caseEventBObject(transition);
@@ -145,8 +149,10 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.REFINED_STATEMACHINE: {
 				RefinedStatemachine refinedStatemachine = (RefinedStatemachine)theEObject;
 				T result = caseRefinedStatemachine(refinedStatemachine);
-				if (result == null) result = caseAbstractStatemachine(refinedStatemachine);
+				if (result == null) result = caseDiagramRoot(refinedStatemachine);
 				if (result == null) result = caseEventBLabeled(refinedStatemachine);
+				if (result == null) result = caseAbstractExtension(refinedStatemachine);
+				if (result == null) result = caseAbstractStatemachine(refinedStatemachine);
 				if (result == null) result = caseEventBCommentedElement(refinedStatemachine);
 				if (result == null) result = caseEventBElement(refinedStatemachine);
 				if (result == null) result = caseEventBCommented(refinedStatemachine);
@@ -157,8 +163,10 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.STATEMACHINE: {
 				Statemachine statemachine = (Statemachine)theEObject;
 				T result = caseStatemachine(statemachine);
-				if (result == null) result = caseAbstractStatemachine(statemachine);
+				if (result == null) result = caseDiagramRoot(statemachine);
 				if (result == null) result = caseEventBNamed(statemachine);
+				if (result == null) result = caseAbstractExtension(statemachine);
+				if (result == null) result = caseAbstractStatemachine(statemachine);
 				if (result == null) result = caseEventBCommentedElement(statemachine);
 				if (result == null) result = caseEventBElement(statemachine);
 				if (result == null) result = caseEventBCommented(statemachine);
@@ -248,23 +256,19 @@ public class StatemachinesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StatemachinesPackage.DIAGRAM_ROOT: {
+				DiagramRoot diagramRoot = (DiagramRoot)theEObject;
+				T result = caseDiagramRoot(diagramRoot);
+				if (result == null) result = caseAbstractStatemachine(diagramRoot);
+				if (result == null) result = caseEventBCommentedElement(diagramRoot);
+				if (result == null) result = caseEventBElement(diagramRoot);
+				if (result == null) result = caseEventBCommented(diagramRoot);
+				if (result == null) result = caseEventBObject(diagramRoot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Statemachine Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Statemachine Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStatemachineCollection(StatemachineCollection object) {
-		return null;
 	}
 
 	/**
@@ -478,6 +482,21 @@ public class StatemachinesSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Diagram Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Diagram Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDiagramRoot(DiagramRoot object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Event BObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -508,21 +527,6 @@ public class StatemachinesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractExtension(AbstractExtension object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Event BCommented</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -549,6 +553,21 @@ public class StatemachinesSwitch<T> {
 	 * @generated
 	 */
 	public T caseEventBCommentedElement(EventBCommentedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Extension</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Extension</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractExtension(AbstractExtension object) {
 		return null;
 	}
 

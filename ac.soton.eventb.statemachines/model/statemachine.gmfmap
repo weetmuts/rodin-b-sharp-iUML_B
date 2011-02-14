@@ -51,10 +51,15 @@
       <domainMetaElement
           href="statemachines.ecore#//State"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern=""
+          editorPattern=""
+          editPattern="">
         <diagramLabel
             href="statemachine.gmfgraph#StateName"/>
         <features
+            href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+        <editableFeatures
             href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
       </labelMappings>
       <tool
@@ -66,14 +71,18 @@
           compartment="//@nodes.3/@ownedChild/@compartments.0">
         <containmentFeature
             href="statemachines.ecore#//StatemachineOwner/statemachines"/>
-        <ownedChild>
+        <ownedChild
+            relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//Statemachine"/>
           <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="">
             <diagramLabel
                 href="statemachine.gmfgraph#StatemachineName"/>
             <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+            <editableFeatures
                 href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
           </labelMappings>
           <tool
@@ -100,30 +109,15 @@
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
           </children>
           <children
-              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.3/@ownedChild">
             <containmentFeature
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
-            <ownedChild>
-              <domainMetaElement
-                  href="statemachines.ecore#//State"/>
-              <labelMappings
-                  xsi:type="gmfmap:FeatureLabelMapping">
-                <diagramLabel
-                    href="statemachine.gmfgraph#StateName"/>
-                <features
-                    href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-              </labelMappings>
-              <tool
-                  xsi:type="gmftool:CreationTool"
-                  href="statemachine.gmftool#//@palette/@tools.0/@tools.0"/>
-              <diagramNode
-                  href="statemachine.gmfgraph#State"/>
-            </ownedChild>
           </children>
           <compartments
               children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3">
             <compartment
-                href="statemachine.gmfgraph#StatemachineCompartment"/>
+                href="statemachine.gmfgraph#StatemachineStatesCompartment"/>
           </compartments>
         </ownedChild>
       </children>
@@ -135,10 +129,15 @@
           <domainMetaElement
               href="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"/>
           <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="{0}">
             <diagramLabel
                 href="statemachine.gmfgraph#InvariantLabel"/>
             <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBDerived/theorem"/>
+            <editableFeatures
                 href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
           </labelMappings>
           <tool
@@ -168,7 +167,10 @@
           href="statemachines.ecore#//RefinedState"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
-          readOnly="true">
+          readOnly="true"
+          viewPattern=""
+          editorPattern=""
+          editPattern="">
         <diagramLabel
             href="statemachine.gmfgraph#RefinedStateLabel"/>
         <features
@@ -183,12 +185,14 @@
           compartment="//@nodes.4/@ownedChild/@compartments.0">
         <containmentFeature
             href="statemachines.ecore#//StatemachineOwner/statemachines"/>
-        <ownedChild>
+        <ownedChild
+            relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//RefinedStatemachine"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true">
+              readOnly="true"
+              viewPattern="">
             <diagramLabel
                 href="statemachine.gmfgraph#RefinedStatemachineLabel"/>
             <features
@@ -218,31 +222,15 @@
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
           </children>
           <children
-              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0">
+              compartment="//@nodes.4/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.4/@ownedChild">
             <containmentFeature
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
-            <ownedChild>
-              <domainMetaElement
-                  href="statemachines.ecore#//RefinedState"/>
-              <labelMappings
-                  xsi:type="gmfmap:FeatureLabelMapping"
-                  readOnly="true">
-                <diagramLabel
-                    href="statemachine.gmfgraph#RefinedStateLabel"/>
-                <features
-                    href="statemachines.ecore#//EventBLabeled/label"/>
-              </labelMappings>
-              <tool
-                  xsi:type="gmftool:CreationTool"
-                  href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
-              <diagramNode
-                  href="statemachine.gmfgraph#RefinedState"/>
-            </ownedChild>
           </children>
           <compartments
               children="//@nodes.4/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.4/@ownedChild/@children.0/@ownedChild/@children.3">
             <compartment
-                href="statemachine.gmfgraph#RefinedStatemachineCompartment"/>
+                href="statemachine.gmfgraph#RefinedStatemachineStatesCompartment"/>
           </compartments>
         </ownedChild>
       </children>
@@ -250,14 +238,18 @@
           compartment="//@nodes.4/@ownedChild/@compartments.0">
         <containmentFeature
             href="statemachines.ecore#//StatemachineOwner/statemachines"/>
-        <ownedChild>
+        <ownedChild
+            relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//Statemachine"/>
           <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="">
             <diagramLabel
                 href="statemachine.gmfgraph#StatemachineName"/>
             <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+            <editableFeatures
                 href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
           </labelMappings>
           <tool
@@ -284,30 +276,15 @@
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
           </children>
           <children
-              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0">
+              compartment="//@nodes.4/@ownedChild/@children.1/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.3/@ownedChild">
             <containmentFeature
                 href="statemachines.ecore#//AbstractStatemachine/nodes"/>
-            <ownedChild>
-              <domainMetaElement
-                  href="statemachines.ecore#//State"/>
-              <labelMappings
-                  xsi:type="gmfmap:FeatureLabelMapping">
-                <diagramLabel
-                    href="statemachine.gmfgraph#StateName"/>
-                <features
-                    href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-              </labelMappings>
-              <tool
-                  xsi:type="gmftool:CreationTool"
-                  href="statemachine.gmftool#//@palette/@tools.0/@tools.0"/>
-              <diagramNode
-                  href="statemachine.gmfgraph#State"/>
-            </ownedChild>
           </children>
           <compartments
               children="//@nodes.4/@ownedChild/@children.1/@ownedChild/@children.0 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.1 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.3 //@nodes.4/@ownedChild/@children.1/@ownedChild/@children.2">
             <compartment
-                href="statemachine.gmfgraph#StatemachineCompartment"/>
+                href="statemachine.gmfgraph#StatemachineStatesCompartment"/>
           </compartments>
         </ownedChild>
       </children>
@@ -319,10 +296,15 @@
           <domainMetaElement
               href="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"/>
           <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="{0}">
             <diagramLabel
                 href="statemachine.gmfgraph#InvariantLabel"/>
             <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBDerived/theorem"/>
+            <editableFeatures
                 href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
           </labelMappings>
           <tool
@@ -347,13 +329,17 @@
   <links>
     <domainMetaElement
         href="statemachines.ecore#//Transition"/>
+    <domainSpecialization
+        body="self.source = self.sourceContainer and self.target = self.targetContainer"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        readOnly="true">
+        viewPattern="">
       <diagramLabel
           href="statemachine.gmfgraph#TransitionLabel"/>
       <features
-          href="statemachines.ecore#//EventBLabeled/label"/>
+          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+      <editableFeatures
+          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
     </labelMappings>
     <containmentFeature
         href="statemachines.ecore#//AbstractStatemachine/transitions"/>
@@ -368,12 +354,32 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="statemachines.ecore#//Transition/target"/>
-    <creationConstraints>
-      <sourceEnd
-          body="-- source constraint --&#xA;not &#xA;&#x9;(self.oclIsTypeOf(Final)&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;-- not from final&#xA;&#x9;or oppositeEnd.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;-- not to initial&#xA;&#x9;or (self.oclIsTypeOf(Initial)&#x9;&#x9;&#x9;&#x9;&#x9;-- if initial then not to self or final&#xA;&#x9;&#x9;and (self = oppositeEnd&#xA;&#x9;&#x9;or oppositeEnd.oclIsTypeOf(Final))))"/>
-      <targetEnd
-          body="-- target constraint --&#xA;not Statemachine.allInstances()->select(&#xA;&#x9;m : Statemachine |&#xA;&#x9;m.nodes->includes(self)&#xA;&#x9;and m.nodes->includes(oppositeEnd))->isEmpty()"/>
-    </creationConstraints>
+  </links>
+  <links>
+    <domainMetaElement
+        href="statemachines.ecore#//Transition"/>
+    <domainSpecialization
+        body="self.source &lt;> self.sourceContainer or self.target &lt;> self.targetContainer"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern="">
+      <diagramLabel
+          href="statemachine.gmfgraph#TransitionLabel"/>
+      <features
+          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+      <editableFeatures
+          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="statemachines.ecore#//AbstractStatemachine/transitions"/>
+    <diagramLink
+        href="statemachine.gmfgraph#Transition"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="statemachines.ecore#//Transition/sourceContainer"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="statemachines.ecore#//Transition/targetContainer"/>
   </links>
   <diagram>
     <diagramCanvas
@@ -381,7 +387,7 @@
     <domainModel
         href="statemachines.ecore#/"/>
     <domainMetaElement
-        href="statemachines.ecore#//AbstractStatemachine"/>
+        href="statemachines.ecore#//DiagramRoot"/>
     <palette
         href="statemachine.gmftool#//@palette"/>
   </diagram>

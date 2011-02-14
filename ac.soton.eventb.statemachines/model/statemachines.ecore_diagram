@@ -268,6 +268,26 @@
     <element xmi:type="ecore:EClass" href="statemachines.ecore#//AbstractState"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="__ZEBcQeiEeC90NrIadQigA" x="296" y="592"/>
   </children>
+  <children xmi:type="notation:Shape" xmi:id="_1yaWACotEeCCeOkZQlxELw" type="2001" fontName="Ubuntu">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_1ycLOSotEeCCeOkZQlxELw" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_1ycLOiotEeCCeOkZQlxELw" key="modelID" value="Ecore"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1ybkICotEeCCeOkZQlxELw" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1ycLMCotEeCCeOkZQlxELw" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1ycLMSotEeCCeOkZQlxELw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1ycLMiotEeCCeOkZQlxELw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1ycLMyotEeCCeOkZQlxELw" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1ycLNCotEeCCeOkZQlxELw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1ycLNSotEeCCeOkZQlxELw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1ycLNiotEeCCeOkZQlxELw" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1ycLNyotEeCCeOkZQlxELw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1ycLOCotEeCCeOkZQlxELw"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="platform:/resource/org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1yaWASotEeCCeOkZQlxELw" x="1012" y="524"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_bYwhEgNyEeC3KtD8oLaUMQ"/>
   <element xmi:type="ecore:EPackage" href="statemachines.ecore#/"/>
   <edges xmi:type="notation:Connector" xmi:id="_bo6c8ANyEeC3KtD8oLaUMQ" type="4004" source="_bms2cANyEeC3KtD8oLaUMQ" target="_bm5qygNyEeC3KtD8oLaUMQ">

@@ -44,12 +44,12 @@ public interface RefinedState extends AbstractState, EventBLabeled {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Refines</em>' reference.
-	 * @see #setRefines(AbstractNode)
+	 * @see #setRefines(AbstractState)
 	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getRefinedState_Refines()
 	 * @model required="true"
 	 * @generated
 	 */
-	AbstractNode getRefines();
+	AbstractState getRefines();
 
 	/**
 	 * Sets the value of the '{@link ac.soton.eventb.statemachines.RefinedState#getRefines <em>Refines</em>}' reference.
@@ -59,6 +59,6 @@ public interface RefinedState extends AbstractState, EventBLabeled {
 	 * @see #getRefines()
 	 * @generated
 	 */
-	void setRefines(AbstractNode value);
+	void setRefines(AbstractState value);
 
 } // RefinedState

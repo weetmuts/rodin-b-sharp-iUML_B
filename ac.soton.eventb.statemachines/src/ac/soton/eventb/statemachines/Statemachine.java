@@ -8,6 +8,7 @@
  */
 package ac.soton.eventb.statemachines;
 
+import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBNamed;
 
 /**
@@ -23,10 +24,10 @@ import org.eventb.emf.core.EventBNamed;
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasNoRefinedStates'"
  * @generated
  */
-public interface Statemachine extends AbstractStatemachine, EventBNamed {
+public interface Statemachine extends DiagramRoot, EventBNamed, AbstractExtension {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

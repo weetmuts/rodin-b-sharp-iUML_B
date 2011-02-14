@@ -34,21 +34,21 @@ import org.rodinp.core.IRodinElement;
 import org.rodinp.core.RodinCore;
 import org.rodinp.core.RodinDBException;
 
-import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.statemachines.RefinedStatemachine;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.persistence.IAbstractStatemachine;
-import ac.soton.eventb.statemachines.persistence.IStatemachine;
+import ac.soton.eventb.statemachines.persistence.IRefinedStatemachine;
 import ac.soton.eventb.statemachines.persistence.StatemachinesPersistencePlugin;
 
 /**
- * Statemachine synchroniser.
- * Serialises statemachine to a string attribute and deserialises it back to EMF object.
+ * RefinedStatemachine synchroniser.
+ * Serialises refined statemachine to a string attribute and deserialises it back to EMF object.
  * 
  * @author vitaly
  *
  */
-public class StatemachineSynchroniser extends AbstractSynchroniser {
+public class RefinedStatemachineSynchroniser extends AbstractSynchroniser {
 
 	private static final Set<IAttributeType> handledAttributes = new HashSet<IAttributeType>();
 
@@ -58,7 +58,7 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 
 	@Override
 	protected IInternalElementType<?> getRodinType() {
-		return IStatemachine.ELEMENT_TYPE;
+		return IRefinedStatemachine.ELEMENT_TYPE;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 
 	@Override
 	protected EventBElement createEventBElement() {
-		return StatemachinesFactory.eINSTANCE.createStatemachine();
+		return StatemachinesFactory.eINSTANCE.createRefinedStatemachine();
 	}
 
 	@Override
@@ -81,11 +81,11 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 			IRodinElement rodinElement, EventBElement emfParent,
 			IProgressMonitor monitor) throws RodinDBException {
 		
-		assert rodinElement instanceof IStatemachine;
-		IStatemachine statemachine = (IStatemachine) rodinElement;
+		assert rodinElement instanceof IRefinedStatemachine;
+		IRefinedStatemachine statemachine = (IRefinedStatemachine) rodinElement;
 		
 		// create EMF node
-		Statemachine eventBElement = (Statemachine) super.load(rodinElement, emfParent, monitor);
+		RefinedStatemachine eventBElement = (RefinedStatemachine) super.load(rodinElement, emfParent, monitor);
 		
 		if (statemachine.hasSerialised() && !statemachine.getSerialised().isEmpty()) {
 			String loadString = statemachine.getSerialised();
@@ -101,15 +101,15 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 				ReadableInputStream in = new ReadableInputStream(new StringReader(loadString));
 				resource.load(in, null);
 				if (!resource.getContents().isEmpty()) {
-					Statemachine sm = (Statemachine) resource.getContents().get(0);
-					eventBElement.getNodes().addAll(sm.getNodes());
-					eventBElement.getTransitions().addAll(sm.getTransitions());
-					eventBElement.setTranslation(sm.getTranslation());
+					RefinedStatemachine rsm = (RefinedStatemachine) resource.getContents().get(0);
+					eventBElement.getNodes().addAll(rsm.getNodes());
+					eventBElement.getTransitions().addAll(rsm.getTransitions());
+					eventBElement.setRefines(rsm.getRefines());
 				}
 			}
 			catch (IOException e) {
 				RodinCore.getPlugin().getLog().log(
-						new Status(IStatus.ERROR, StatemachinesPersistencePlugin.PLUGIN_ID, "Error when trying to deserialise a Statemachine.", e));
+						new Status(IStatus.ERROR, StatemachinesPersistencePlugin.PLUGIN_ID, "Error when trying to deserialise a Refined Statemachine.", e));
 				return null;
 			}
 		}
@@ -124,14 +124,14 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 		
 		// create Rodin element
 		IRodinElement rodinElement = super.save(emfElement, rodinParent, monitor);
-		if (rodinElement instanceof IStatemachine && emfElement instanceof Statemachine) {
+		if (rodinElement instanceof IRefinedStatemachine && emfElement instanceof RefinedStatemachine) {
 			String saveString;
 			try {
 				saveString = XMIHelperImpl.saveString(Collections.emptyMap(), Collections.singletonList(emfElement), "UTF-8", null);
-				((IStatemachine) rodinElement).setSerialised(saveString, monitor);
+				((IRefinedStatemachine) rodinElement).setSerialised(saveString, monitor);
 			} catch (Exception e) {
 				RodinCore.getPlugin().getLog().log(
-						new Status(IStatus.ERROR, StatemachinesPersistencePlugin.PLUGIN_ID, "Error when trying to serialise a Statemachine.", e));
+						new Status(IStatus.ERROR, StatemachinesPersistencePlugin.PLUGIN_ID, "Error when trying to serialise a Refined Statemachine.", e));
 				return null;
 			}
 		}

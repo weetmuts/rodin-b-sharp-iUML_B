@@ -3,10 +3,11 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statemachines"
     nsURI="http://soton.ac.uk/models/eventb/statemachines" nsPrefix="statemachines">
-  <eClassifiers xsi:type="ecore:EClass" name="StatemachineCollection" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension #//StatemachineOwner">
-    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" abstract="true"
+      eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="topLevelHasInitial&#xA;hasAtMostOneInitial&#xA;hasInitialIfIncomingExternal&#xA;hasInitialIfOutgoingLocal"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//AbstractNode" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
@@ -18,19 +19,33 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/source"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement #//EventBLabeled">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="isNotToInitial&#xA;isNotFromFinal&#xA;isNotInitialSelf&#xA;isNotInitialToFinal"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elaborates" lowerBound="1"
-        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement"/>
+        upperBound="-1" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceContainer" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBElement"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetContainer" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RefinedStatemachine" eSuperTypes="#//AbstractStatemachine #//EventBLabeled">
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedStatemachine" eSuperTypes="#//DiagramRoot #//EventBLabeled ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasNoStates"/>
+    </eAnnotations>
+    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
         eType="#//AbstractStatemachine"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="#//AbstractStatemachine ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
+  <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="#//DiagramRoot ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasNoRefinedStates"/>
+    </eAnnotations>
+    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="translation" eType="#//TranslationKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TranslationKind">
@@ -41,8 +56,16 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasNoRefinedStatemachines"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasOutgoingOnTopLevel&#xA;hasOutgoingOnNestedLevelIfExternalIncoming"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ANY" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//AbstractNode"/>
@@ -52,11 +75,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefinedState" eSuperTypes="#//AbstractState #//EventBLabeled">
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
-        eType="#//AbstractNode"/>
+        eType="#//AbstractState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true" eSuperTypes="#//AbstractNode #//StatemachineOwner">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Invariant"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiagramRoot" eSuperTypes="#//AbstractStatemachine"/>
 </ecore:EPackage>

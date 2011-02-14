@@ -35,24 +35,6 @@ public interface StatemachinesFactory extends EFactory {
 	StatemachinesFactory eINSTANCE = ac.soton.eventb.statemachines.impl.StatemachinesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Statemachine Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Statemachine Collection</em>'.
-	 * @generated
-	 */
-	StatemachineCollection createStatemachineCollection();
-
-	/**
-	 * Returns a new object of class '<em>Abstract Statemachine</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Statemachine</em>'.
-	 * @generated
-	 */
-	AbstractStatemachine createAbstractStatemachine();
-
-	/**
 	 * Returns a new object of class '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,6 +114,15 @@ public interface StatemachinesFactory extends EFactory {
 	 * @generated
 	 */
 	RefinedState createRefinedState();
+
+	/**
+	 * Returns a new object of class '<em>Diagram Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diagram Root</em>'.
+	 * @generated
+	 */
+	DiagramRoot createDiagramRoot();
 
 	/**
 	 * Returns the package supported by this factory.

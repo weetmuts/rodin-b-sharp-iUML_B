@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.machine.MachineFactory;
 
 /**
@@ -156,7 +157,7 @@ public class AbstractStateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES,
-				 StatemachinesFactory.eINSTANCE.createAbstractStatemachine()));
+				 StatemachinesFactory.eINSTANCE.createDiagramRoot()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -172,6 +173,29 @@ public class AbstractStateItemProvider
 			(createChildParameter
 				(StatemachinesPackage.Literals.ABSTRACT_STATE__CONSTRAINTS,
 				 MachineFactory.eINSTANCE.createInvariant()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS ||
+			childFeature == StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

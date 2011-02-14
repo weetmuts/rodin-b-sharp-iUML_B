@@ -17,7 +17,7 @@ import org.eventb.emf.core.EventBNamed;
  *
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getState()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasNoRefinedStatemachines'"
  * @generated
  */
 public interface State extends AbstractState, EventBNamed {

@@ -9,46 +9,49 @@
 package ac.soton.eventb.statemachines.persistence;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eventb.core.ICommentedElement;
+import org.eventb.core.IIdentifierElement;
 import org.rodinp.core.IAttributeType;
-import org.rodinp.core.IInternalElement;
-import org.rodinp.core.IInternalElementType;
 import org.rodinp.core.RodinCore;
 import org.rodinp.core.RodinDBException;
 
 /**
- * Interface for Rodin internal type corresponding to EMF StatemachineCollection.
+ * Interface for Rodin internal type corresponding to EMF AbstractStatemachine.
+ * Stores AbstractStatemachine as a serialised string in named attribute.
  * 
  * @author vitaly
  *
  */
-public interface IStatemachineCollection extends IInternalElement {
-	
-	public static IInternalElementType<StatemachineCollection> ELEMENT_TYPE = RodinCore.getInternalElementType(StatemachinesPersistencePlugin.PLUGIN_ID + ".statemachineCollection");
-	public static IAttributeType.String STATEMACHINES_ATTRIBUTE = RodinCore.getStringAttrType(StatemachinesPersistencePlugin.PLUGIN_ID + ".statemachines");
-	
+public interface IAbstractStatemachine extends IIdentifierElement, ICommentedElement {
+
+	public static IAttributeType.String SERIALISED_ATTRIBUTE = RodinCore
+			.getStringAttrType(StatemachinesPersistencePlugin.PLUGIN_ID
+					+ ".serialised");
+
 	/**
-	 * Tests whether a serialised string of StatemachineCollection is set.
+	 * Tests whether a serialised string of AbsractStatemachine is set.
 	 * 
 	 * @return true if set, otherwise false
 	 * @throws RodinDBException if there was a problem accessing the database
 	 */
-	boolean hasSerialisedString() throws RodinDBException;
-	
+	public abstract boolean hasSerialised() throws RodinDBException;
+
 	/**
-	 * Returns a serialised string.
+	 * Returns serialised string.
 	 * 
-	 * @return a string representation of a serialised StatemachineCollection object
+	 * @return a string representation of a serialised AbsractStatemachine
 	 * @throws RodinDBException if there was a problem accessing the database
 	 */
-	String getSerialisedString() throws RodinDBException;
-	
+	public abstract String getSerialised() throws RodinDBException;
+
 	/**
-	 * Sets the serialised string.
+	 * Sets serialised string.
 	 * 
-	 * @param string a serialised StatemachineCollection string
+	 * @param string a serialised AbsractStatemachine
 	 * @param monitor progress monitor
 	 * @throws RodinDBException if there was a problem accessing the database
 	 */
-	void setSerialisedString(String string, IProgressMonitor monitor) throws RodinDBException;
+	public abstract void setSerialised(String string,
+			IProgressMonitor monitor) throws RodinDBException;
 
 }

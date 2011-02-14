@@ -8,11 +8,6 @@
  */
 package ac.soton.eventb.statemachines.provider;
 
-import ac.soton.eventb.statemachines.StatemachinesFactory;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-
-import ac.soton.eventb.statemachines.util.StatemachinesAdapterFactory;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,16 +15,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.edit.command.CommandParameter;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ChildCreationExtenderManager;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -43,12 +33,14 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eventb.emf.core.Annotation;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
-
 import org.eventb.emf.core.util.CoreSwitch;
+
+import ac.soton.eventb.statemachines.StatemachinesFactory;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.util.StatemachinesAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -111,52 +103,6 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.StatemachineCollection} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StatemachineCollectionItemProvider statemachineCollectionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.StatemachineCollection}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStatemachineCollectionAdapter() {
-		if (statemachineCollectionItemProvider == null) {
-			statemachineCollectionItemProvider = new StatemachineCollectionItemProvider(this);
-		}
-
-		return statemachineCollectionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.AbstractStatemachine} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractStatemachineItemProvider abstractStatemachineItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.AbstractStatemachine}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAbstractStatemachineAdapter() {
-		if (abstractStatemachineItemProvider == null) {
-			abstractStatemachineItemProvider = new AbstractStatemachineItemProvider(this);
-		}
-
-		return abstractStatemachineItemProvider;
 	}
 
 	/**
@@ -367,6 +313,29 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.DiagramRoot} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DiagramRootItemProvider diagramRootItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.DiagramRoot}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDiagramRootAdapter() {
+		if (diagramRootItemProvider == null) {
+			diagramRootItemProvider = new DiagramRootItemProvider(this);
+		}
+
+		return diagramRootItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -492,8 +461,6 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	 * @generated
 	 */
 	public void dispose() {
-		if (statemachineCollectionItemProvider != null) statemachineCollectionItemProvider.dispose();
-		if (abstractStatemachineItemProvider != null) abstractStatemachineItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (refinedStatemachineItemProvider != null) refinedStatemachineItemProvider.dispose();
 		if (statemachineItemProvider != null) statemachineItemProvider.dispose();
@@ -503,6 +470,7 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 		if (anyItemProvider != null) anyItemProvider.dispose();
 		if (finalItemProvider != null) finalItemProvider.dispose();
 		if (refinedStateItemProvider != null) refinedStateItemProvider.dispose();
+		if (diagramRootItemProvider != null) diagramRootItemProvider.dispose();
 	}
 
 	/**
@@ -555,16 +523,23 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 			
 			EAnnotation annotation = null;
 				
-				annotation = StatemachinesPackage.Literals.STATEMACHINE_COLLECTION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				annotation = StatemachinesPackage.Literals.REFINED_STATEMACHINE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
 				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
 					newChildDescriptors.add
 						(createChildParameter
 							(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
-							 StatemachinesFactory.eINSTANCE.createStatemachineCollection()));
+							 StatemachinesFactory.eINSTANCE.createRefinedStatemachine()));
+
+				
+				annotation = StatemachinesPackage.Literals.STATEMACHINE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
+							 StatemachinesFactory.eINSTANCE.createStatemachine()));
 
 				return null;
 			}
- 
 			/**
 			 * <!-- begin-user-doc -->
 			 * <!-- end-user-doc -->
@@ -575,28 +550,20 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 			
 			EAnnotation annotation = null;
 				
-				annotation = StatemachinesPackage.Literals.STATEMACHINE_COLLECTION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
-				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
-					newChildDescriptors.add
-						(createChildParameter
-							(CorePackage.Literals.ANNOTATION__CONTENTS,
-							 StatemachinesFactory.eINSTANCE.createStatemachineCollection()));
-
-				
-				annotation = StatemachinesPackage.Literals.ABSTRACT_STATEMACHINE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
-				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
-					newChildDescriptors.add
-						(createChildParameter
-							(CorePackage.Literals.ANNOTATION__CONTENTS,
-							 StatemachinesFactory.eINSTANCE.createAbstractStatemachine()));
-
-				
 				annotation = StatemachinesPackage.Literals.TRANSITION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
 				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
 					newChildDescriptors.add
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
 							 StatemachinesFactory.eINSTANCE.createTransition()));
+
+				
+				annotation = StatemachinesPackage.Literals.DIAGRAM_ROOT.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 StatemachinesFactory.eINSTANCE.createDiagramRoot()));
 
 				
 				annotation = StatemachinesPackage.Literals.REFINED_STATEMACHINE.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");

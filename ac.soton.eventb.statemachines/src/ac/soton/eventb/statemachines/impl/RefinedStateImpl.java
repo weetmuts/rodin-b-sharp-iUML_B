@@ -10,27 +10,19 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
-import ac.soton.eventb.statemachines.AbstractNode;
-import ac.soton.eventb.statemachines.AbstractStatemachine;
-import ac.soton.eventb.statemachines.EventBLabeled;
-import ac.soton.eventb.statemachines.RefinedState;
-import ac.soton.eventb.statemachines.StatemachineOwner;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.EventBNamed;
+
+import ac.soton.eventb.statemachines.AbstractState;
+import ac.soton.eventb.statemachines.EventBLabeled;
+import ac.soton.eventb.statemachines.RefinedState;
+import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,7 +64,7 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractNode refines;
+	protected AbstractState refines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,16 +111,25 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added adapter to refined state to get notified about its label change.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public AbstractNode getRefines() {
+	public AbstractState getRefines() {
 		if (refines != null && refines.eIsProxy()) {
 			InternalEObject oldRefines = (InternalEObject)refines;
-			refines = (AbstractNode)eResolveProxy(oldRefines);
+			refines = (AbstractState)eResolveProxy(oldRefines);
 			if (refines != oldRefines) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.REFINED_STATE__REFINES, oldRefines, refines));
+			}
+		}
+		if (refines != refinedStateAdapter.getTarget()) {
+			if (refinedStateAdapter.getTarget() != null) {
+				refinedStateAdapter.getTarget().eAdapters().remove(refinedStateAdapter);
+			}
+			if (refines != null) {
+				refines.eAdapters().add(refinedStateAdapter);
 			}
 		}
 		return refines;
@@ -139,20 +140,23 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractNode basicGetRefines() {
+	public AbstractState basicGetRefines() {
 		return refines;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added label notification.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void setRefines(AbstractNode newRefines) {
-		AbstractNode oldRefines = refines;
+	public void setRefines(AbstractState newRefines) {
+		AbstractState oldRefines = refines;
 		refines = newRefines;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.REFINED_STATE__REFINES, oldRefines, refines));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.REFINED_STATE__LABEL, oldRefines, refines));
+		}
 	}
 
 	/**
@@ -177,7 +181,6 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -185,7 +188,7 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 				setLabel((String)newValue);
 				return;
 			case StatemachinesPackage.REFINED_STATE__REFINES:
-				setRefines((AbstractNode)newValue);
+				setRefines((AbstractState)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -203,7 +206,7 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 				setLabel(LABEL_EDEFAULT);
 				return;
 			case StatemachinesPackage.REFINED_STATE__REFINES:
-				setRefines((AbstractNode)null);
+				setRefines((AbstractState)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -256,5 +259,17 @@ public class RefinedStateImpl extends AbstractStateImpl implements RefinedState 
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
+	
+	/**
+	 * An adapter for a state refined by this state to get notified about the referenced state's name/label changes
+	 * and update this state's label.
+	 */
+	protected Adapter refinedStateAdapter = new AdapterImpl() {
+		public void notifyChanged(Notification notification) {
+			if (notification.getFeatureID(State.class) == StatemachinesPackage.STATE__NAME
+					|| notification.getFeatureID(RefinedState.class) == StatemachinesPackage.REFINED_STATE__LABEL)
+				eNotify(new ENotificationImpl(RefinedStateImpl.this, Notification.SET, StatemachinesPackage.REFINED_STATE__LABEL, notification.getOldValue(), notification.getNewValue()));
+		}
+	};
 
 } //RefinedStateImpl

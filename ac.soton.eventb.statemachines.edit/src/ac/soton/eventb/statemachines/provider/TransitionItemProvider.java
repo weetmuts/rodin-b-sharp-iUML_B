@@ -10,15 +10,11 @@ package ac.soton.eventb.statemachines.provider;
 
 
 import ac.soton.eventb.statemachines.StatemachinesFactory;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.Transition;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -28,10 +24,11 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eventb.emf.core.CorePackage;
-
 import org.eventb.emf.core.provider.EventBCommentedElementItemProvider;
+
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.Transition} object.
@@ -75,28 +72,30 @@ public class TransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLabelPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addSourcePropertyDescriptor(object);
 			addElaboratesPropertyDescriptor(object);
+			addSourceContainerPropertyDescriptor(object);
+			addTargetContainerPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Label feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventBLabeled_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventBLabeled_label_feature", "_UI_EventBLabeled_type"),
-				 StatemachinesPackage.Literals.EVENT_BLABELED__LABEL,
+				 getString("_UI_EventBNamed_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBNamed_name_feature", "_UI_EventBNamed_type"),
+				 CorePackage.Literals.EVENT_BNAMED__NAME,
 				 true,
 				 false,
 				 false,
@@ -172,6 +171,50 @@ public class TransitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Source Container feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSourceContainerPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Transition_sourceContainer_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_sourceContainer_feature", "_UI_Transition_type"),
+				 StatemachinesPackage.Literals.TRANSITION__SOURCE_CONTAINER,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Target Container feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetContainerPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Transition_targetContainer_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_targetContainer_feature", "_UI_Transition_type"),
+				 StatemachinesPackage.Literals.TRANSITION__TARGET_CONTAINER,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Transition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -190,7 +233,7 @@ public class TransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Transition)object).getLabel();
+		String label = ((Transition)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Transition_type") :
 			getString("_UI_Transition_type") + " " + label;
@@ -208,7 +251,12 @@ public class TransitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Transition.class)) {
-			case StatemachinesPackage.TRANSITION__LABEL:
+			case StatemachinesPackage.TRANSITION__NAME:
+			case StatemachinesPackage.TRANSITION__TARGET:
+			case StatemachinesPackage.TRANSITION__SOURCE:
+			case StatemachinesPackage.TRANSITION__ELABORATES:
+			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
+			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -229,7 +277,12 @@ public class TransitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
-				 StatemachinesFactory.eINSTANCE.createStatemachineCollection()));
+				 StatemachinesFactory.eINSTANCE.createRefinedStatemachine()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
+				 StatemachinesFactory.eINSTANCE.createStatemachine()));
 	}
 
 }

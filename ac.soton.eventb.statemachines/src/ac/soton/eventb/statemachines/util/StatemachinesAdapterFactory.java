@@ -9,20 +9,32 @@
 package ac.soton.eventb.statemachines.util;
 
 import ac.soton.eventb.statemachines.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBObject;
+
+import ac.soton.eventb.statemachines.ANY;
+import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.AbstractState;
+import ac.soton.eventb.statemachines.AbstractStatemachine;
+import ac.soton.eventb.statemachines.EventBLabeled;
+import ac.soton.eventb.statemachines.Final;
+import ac.soton.eventb.statemachines.Initial;
+import ac.soton.eventb.statemachines.OR;
+import ac.soton.eventb.statemachines.RefinedState;
+import ac.soton.eventb.statemachines.RefinedStatemachine;
+import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.statemachines.StatemachineOwner;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,10 +100,6 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	protected StatemachinesSwitch<Adapter> modelSwitch =
 		new StatemachinesSwitch<Adapter>() {
 			@Override
-			public Adapter caseStatemachineCollection(StatemachineCollection object) {
-				return createStatemachineCollectionAdapter();
-			}
-			@Override
 			public Adapter caseAbstractStatemachine(AbstractStatemachine object) {
 				return createAbstractStatemachineAdapter();
 			}
@@ -148,16 +156,16 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractStateAdapter();
 			}
 			@Override
+			public Adapter caseDiagramRoot(DiagramRoot object) {
+				return createDiagramRootAdapter();
+			}
+			@Override
 			public Adapter caseEventBObject(EventBObject object) {
 				return createEventBObjectAdapter();
 			}
 			@Override
 			public Adapter caseEventBElement(EventBElement object) {
 				return createEventBElementAdapter();
-			}
-			@Override
-			public Adapter caseAbstractExtension(AbstractExtension object) {
-				return createAbstractExtensionAdapter();
 			}
 			@Override
 			public Adapter caseEventBCommented(EventBCommented object) {
@@ -170,6 +178,10 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEventBNamed(EventBNamed object) {
 				return createEventBNamedAdapter();
+			}
+			@Override
+			public Adapter caseAbstractExtension(AbstractExtension object) {
+				return createAbstractExtensionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -190,20 +202,6 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.StatemachineCollection <em>Statemachine Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.statemachines.StatemachineCollection
-	 * @generated
-	 */
-	public Adapter createStatemachineCollectionAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.AbstractStatemachine <em>Abstract Statemachine</em>}'.
@@ -402,6 +400,20 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.DiagramRoot <em>Diagram Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.statemachines.DiagramRoot
+	 * @generated
+	 */
+	public Adapter createDiagramRootAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBObject <em>Event BObject</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -430,20 +442,6 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.AbstractExtension <em>Abstract Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.AbstractExtension
-	 * @generated
-	 */
-	public Adapter createAbstractExtensionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBCommented <em>Event BCommented</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -468,6 +466,20 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEventBCommentedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.AbstractExtension <em>Abstract Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eventb.emf.core.AbstractExtension
+	 * @generated
+	 */
+	public Adapter createAbstractExtensionAdapter() {
 		return null;
 	}
 

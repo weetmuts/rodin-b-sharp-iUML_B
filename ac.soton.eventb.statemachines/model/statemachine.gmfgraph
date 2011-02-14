@@ -107,13 +107,14 @@
         name="InitialFigure">
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
-          name="InitialFigure">
+          name="InitialFigure"
+          outline="false">
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
         <preferredSize
-            dx="40"
-            dy="40"/>
+            dx="20"
+            dy="20"/>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -123,9 +124,12 @@
           name="FinalFigure">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <preferredSize
-            dx="40"
-            dy="40"/>
+            dx="28"
+            dy="28"/>
         <insets
             top="4"
             left="4"
@@ -133,13 +137,14 @@
             right="4"/>
         <children
             xsi:type="gmfgraph:Ellipse"
-            name="InnerEllipse">
+            name="InnerEllipse"
+            outline="false">
           <backgroundColor
               xsi:type="gmfgraph:ConstantColor"
               value="black"/>
           <preferredSize
-              dx="32"
-              dy="32"/>
+              dx="20"
+              dy="20"/>
         </children>
       </actualFigure>
     </descriptors>
@@ -147,68 +152,70 @@
         name="ANYFigure">
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
-          name="ANYFigure">
+          name="ANYFigure"
+          outline="false">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
         <preferredSize
-            dx="40"
-            dy="40"/>
+            dx="21"
+            dy="21"/>
         <children
             xsi:type="gmfgraph:Polygon"
-            name="EighthornFigureShape">
+            name="EighthornFigureShape"
+            outline="false">
           <backgroundColor
               xsi:type="gmfgraph:ConstantColor"/>
           <template
-              x="20"/>
+              x="10"/>
           <template
-              x="24"
-              y="10"/>
+              x="12"
+              y="5"/>
           <template
-              x="34"
-              y="6"/>
+              x="17"
+              y="3"/>
           <template
-              x="30"
-              y="16"/>
-          <template
-              x="40"
-              y="20"/>
-          <template
-              x="30"
-              y="24"/>
-          <template
-              x="34"
-              y="34"/>
-          <template
-              x="24"
-              y="30"/>
+              x="15"
+              y="8"/>
           <template
               x="20"
-              y="40"/>
-          <template
-              x="16"
-              y="30"/>
-          <template
-              x="6"
-              y="34"/>
-          <template
-              x="10"
-              y="24"/>
-          <template
-              y="20"/>
-          <template
-              x="10"
-              y="16"/>
-          <template
-              x="6"
-              y="6"/>
-          <template
-              x="16"
               y="10"/>
           <template
-              x="20"/>
+              x="15"
+              y="12"/>
+          <template
+              x="17"
+              y="17"/>
+          <template
+              x="12"
+              y="15"/>
+          <template
+              x="10"
+              y="20"/>
+          <template
+              x="8"
+              y="15"/>
+          <template
+              x="3"
+              y="17"/>
+          <template
+              x="5"
+              y="12"/>
+          <template
+              y="10"/>
+          <template
+              x="5"
+              y="8"/>
+          <template
+              x="3"
+              y="3"/>
+          <template
+              x="8"
+              y="5"/>
+          <template
+              x="10"/>
         </children>
       </actualFigure>
     </descriptors>
@@ -230,6 +237,9 @@
             red="224"
             green="255"
             blue="204"/>
+        <minimumSize
+            dx="100"
+            dy="80"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StatemachineNameFigure"
@@ -264,6 +274,9 @@
           name="RefinedStatemachineFigure">
         <layout
             xsi:type="gmfgraph:BorderLayout"/>
+        <maximumSize
+            dx="100"
+            dy="80"/>
         <children
             xsi:type="gmfgraph:Label"
             name="RefinedStatemachineLabelFigure"
@@ -338,33 +351,29 @@
       name="StateStatemachinesCompartment"
       figure="StateFigure"
       collapsible="true"
-      needsTitle="true"
       accessor="//@figures.0/@descriptors.0/@accessors.1"/>
   <compartments
       name="RefinedStateStatemachinesCompartment"
       figure="RefinedStateFigure"
       collapsible="true"
-      needsTitle="true"
       accessor="//@figures.0/@descriptors.1/@accessors.1"/>
   <compartments
       name="StateInvariantsCompartment"
       figure="StateFigure"
       collapsible="true"
-      needsTitle="true"
       accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <compartments
       name="RefinedStateInvariantsCompartment"
       figure="RefinedStateFigure"
       collapsible="true"
-      needsTitle="true"
       accessor="//@figures.0/@descriptors.1/@accessors.2"/>
   <compartments
-      name="StatemachineCompartment"
+      name="StatemachineStatesCompartment"
       figure="StatemachineFigure"
       collapsible="true"
       accessor="//@figures.0/@descriptors.6/@accessors.1"/>
   <compartments
-      name="RefinedStatemachineCompartment"
+      name="RefinedStatemachineStatesCompartment"
       figure="RefinedStatemachineFigure"
       collapsible="true"
       accessor="//@figures.0/@descriptors.7/@accessors.1"/>
@@ -392,7 +401,15 @@
       name="TransitionLabel"
       figure="TransitionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.0">
+    <facets
+        xsi:type="gmfgraph:LabelOffsetFacet"
+        x="-5"
+        y="-5"/>
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="CENTER"/>
+  </labels>
   <labels
       name="InvariantLabel"
       figure="InvariantFigure"/>

@@ -70,8 +70,6 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case StatemachinesPackage.STATEMACHINE_COLLECTION: return createStatemachineCollection();
-			case StatemachinesPackage.ABSTRACT_STATEMACHINE: return createAbstractStatemachine();
 			case StatemachinesPackage.TRANSITION: return createTransition();
 			case StatemachinesPackage.REFINED_STATEMACHINE: return createRefinedStatemachine();
 			case StatemachinesPackage.STATEMACHINE: return createStatemachine();
@@ -81,6 +79,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			case StatemachinesPackage.ANY: return createANY();
 			case StatemachinesPackage.FINAL: return createFinal();
 			case StatemachinesPackage.REFINED_STATE: return createRefinedState();
+			case StatemachinesPackage.DIAGRAM_ROOT: return createDiagramRoot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,26 +113,6 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StatemachineCollection createStatemachineCollection() {
-		StatemachineCollectionImpl statemachineCollection = new StatemachineCollectionImpl();
-		return statemachineCollection;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AbstractStatemachine createAbstractStatemachine() {
-		AbstractStatemachineImpl abstractStatemachine = new AbstractStatemachineImpl();
-		return abstractStatemachine;
 	}
 
 	/**
@@ -224,6 +203,16 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public RefinedState createRefinedState() {
 		RefinedStateImpl refinedState = new RefinedStateImpl();
 		return refinedState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DiagramRoot createDiagramRoot() {
+		DiagramRootImpl diagramRoot = new DiagramRootImpl();
+		return diagramRoot;
 	}
 
 	/**

@@ -72,97 +72,6 @@ public interface StatemachinesPackage extends EPackage {
 	StatemachinesPackage eINSTANCE = ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StatemachineCollectionImpl <em>Statemachine Collection</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.StatemachineCollectionImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachineCollection()
-	 * @generated
-	 */
-	int STATEMACHINE_COLLECTION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__ANNOTATIONS = CorePackage.ABSTRACT_EXTENSION__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__EXTENSIONS = CorePackage.ABSTRACT_EXTENSION__EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__ATTRIBUTES = CorePackage.ABSTRACT_EXTENSION__ATTRIBUTES;
-
-	/**
-	 * The feature id for the '<em><b>Reference</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__REFERENCE = CorePackage.ABSTRACT_EXTENSION__REFERENCE;
-
-	/**
-	 * The feature id for the '<em><b>Generated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__GENERATED = CorePackage.ABSTRACT_EXTENSION__GENERATED;
-
-	/**
-	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__LOCAL_GENERATED = CorePackage.ABSTRACT_EXTENSION__LOCAL_GENERATED;
-
-	/**
-	 * The feature id for the '<em><b>Extension Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__EXTENSION_ID = CorePackage.ABSTRACT_EXTENSION__EXTENSION_ID;
-
-	/**
-	 * The feature id for the '<em><b>Statemachines</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION__STATEMACHINES = CorePackage.ABSTRACT_EXTENSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Statemachine Collection</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMACHINE_COLLECTION_FEATURE_COUNT = CorePackage.ABSTRACT_EXTENSION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.AbstractStatemachineImpl <em>Abstract Statemachine</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -170,7 +79,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractStatemachine()
 	 * @generated
 	 */
-	int ABSTRACT_STATEMACHINE = 1;
+	int ABSTRACT_STATEMACHINE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -270,7 +179,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractNode()
 	 * @generated
 	 */
-	int ABSTRACT_NODE = 2;
+	int ABSTRACT_NODE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -361,7 +270,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getTransition()
 	 * @generated
 	 */
-	int TRANSITION = 3;
+	int TRANSITION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -427,13 +336,13 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__COMMENT = CorePackage.EVENT_BCOMMENTED_ELEMENT__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__LABEL = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 0;
+	int TRANSITION__NAME = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -454,7 +363,7 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__SOURCE = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Elaborates</b></em>' reference.
+	 * The feature id for the '<em><b>Elaborates</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -463,13 +372,131 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__ELABORATES = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Source Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__SOURCE_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Target Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__TARGET_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 4;
+	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.DiagramRootImpl <em>Diagram Root</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.DiagramRootImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getDiagramRoot()
+	 * @generated
+	 */
+	int DIAGRAM_ROOT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__ANNOTATIONS = ABSTRACT_STATEMACHINE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__EXTENSIONS = ABSTRACT_STATEMACHINE__EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__ATTRIBUTES = ABSTRACT_STATEMACHINE__ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__REFERENCE = ABSTRACT_STATEMACHINE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__GENERATED = ABSTRACT_STATEMACHINE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__LOCAL_GENERATED = ABSTRACT_STATEMACHINE__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__COMMENT = ABSTRACT_STATEMACHINE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__NODES = ABSTRACT_STATEMACHINE__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT__TRANSITIONS = ABSTRACT_STATEMACHINE__TRANSITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Diagram Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM_ROOT_FEATURE_COUNT = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.RefinedStatemachineImpl <em>Refined Statemachine</em>}' class.
@@ -479,7 +506,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getRefinedStatemachine()
 	 * @generated
 	 */
-	int REFINED_STATEMACHINE = 4;
+	int REFINED_STATEMACHINE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -488,7 +515,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__ANNOTATIONS = ABSTRACT_STATEMACHINE__ANNOTATIONS;
+	int REFINED_STATEMACHINE__ANNOTATIONS = DIAGRAM_ROOT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -497,7 +524,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__EXTENSIONS = ABSTRACT_STATEMACHINE__EXTENSIONS;
+	int REFINED_STATEMACHINE__EXTENSIONS = DIAGRAM_ROOT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -506,7 +533,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__ATTRIBUTES = ABSTRACT_STATEMACHINE__ATTRIBUTES;
+	int REFINED_STATEMACHINE__ATTRIBUTES = DIAGRAM_ROOT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -515,7 +542,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__REFERENCE = ABSTRACT_STATEMACHINE__REFERENCE;
+	int REFINED_STATEMACHINE__REFERENCE = DIAGRAM_ROOT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -524,7 +551,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__GENERATED = ABSTRACT_STATEMACHINE__GENERATED;
+	int REFINED_STATEMACHINE__GENERATED = DIAGRAM_ROOT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -533,7 +560,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__LOCAL_GENERATED = ABSTRACT_STATEMACHINE__LOCAL_GENERATED;
+	int REFINED_STATEMACHINE__LOCAL_GENERATED = DIAGRAM_ROOT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -542,7 +569,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__COMMENT = ABSTRACT_STATEMACHINE__COMMENT;
+	int REFINED_STATEMACHINE__COMMENT = DIAGRAM_ROOT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -551,7 +578,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__NODES = ABSTRACT_STATEMACHINE__NODES;
+	int REFINED_STATEMACHINE__NODES = DIAGRAM_ROOT__NODES;
 
 	/**
 	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
@@ -560,7 +587,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__TRANSITIONS = ABSTRACT_STATEMACHINE__TRANSITIONS;
+	int REFINED_STATEMACHINE__TRANSITIONS = DIAGRAM_ROOT__TRANSITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -569,7 +596,16 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__LABEL = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 0;
+	int REFINED_STATEMACHINE__LABEL = DIAGRAM_ROOT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Extension Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATEMACHINE__EXTENSION_ID = DIAGRAM_ROOT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -578,7 +614,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE__REFINES = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 1;
+	int REFINED_STATEMACHINE__REFINES = DIAGRAM_ROOT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Refined Statemachine</em>' class.
@@ -587,7 +623,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFINED_STATEMACHINE_FEATURE_COUNT = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 2;
+	int REFINED_STATEMACHINE_FEATURE_COUNT = DIAGRAM_ROOT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StatemachineImpl <em>Statemachine</em>}' class.
@@ -597,7 +633,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachine()
 	 * @generated
 	 */
-	int STATEMACHINE = 5;
+	int STATEMACHINE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -606,7 +642,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__ANNOTATIONS = ABSTRACT_STATEMACHINE__ANNOTATIONS;
+	int STATEMACHINE__ANNOTATIONS = DIAGRAM_ROOT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -615,7 +651,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__EXTENSIONS = ABSTRACT_STATEMACHINE__EXTENSIONS;
+	int STATEMACHINE__EXTENSIONS = DIAGRAM_ROOT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -624,7 +660,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__ATTRIBUTES = ABSTRACT_STATEMACHINE__ATTRIBUTES;
+	int STATEMACHINE__ATTRIBUTES = DIAGRAM_ROOT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -633,7 +669,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__REFERENCE = ABSTRACT_STATEMACHINE__REFERENCE;
+	int STATEMACHINE__REFERENCE = DIAGRAM_ROOT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -642,7 +678,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__GENERATED = ABSTRACT_STATEMACHINE__GENERATED;
+	int STATEMACHINE__GENERATED = DIAGRAM_ROOT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -651,7 +687,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__LOCAL_GENERATED = ABSTRACT_STATEMACHINE__LOCAL_GENERATED;
+	int STATEMACHINE__LOCAL_GENERATED = DIAGRAM_ROOT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -660,7 +696,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__COMMENT = ABSTRACT_STATEMACHINE__COMMENT;
+	int STATEMACHINE__COMMENT = DIAGRAM_ROOT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -669,7 +705,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__NODES = ABSTRACT_STATEMACHINE__NODES;
+	int STATEMACHINE__NODES = DIAGRAM_ROOT__NODES;
 
 	/**
 	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
@@ -678,7 +714,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__TRANSITIONS = ABSTRACT_STATEMACHINE__TRANSITIONS;
+	int STATEMACHINE__TRANSITIONS = DIAGRAM_ROOT__TRANSITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -687,7 +723,16 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__NAME = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 0;
+	int STATEMACHINE__NAME = DIAGRAM_ROOT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Extension Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__EXTENSION_ID = DIAGRAM_ROOT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Translation</b></em>' attribute.
@@ -696,7 +741,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE__TRANSLATION = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 1;
+	int STATEMACHINE__TRANSLATION = DIAGRAM_ROOT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Statemachine</em>' class.
@@ -705,7 +750,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE_FEATURE_COUNT = ABSTRACT_STATEMACHINE_FEATURE_COUNT + 2;
+	int STATEMACHINE_FEATURE_COUNT = DIAGRAM_ROOT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.EventBLabeledImpl <em>Event BLabeled</em>}' class.
@@ -715,7 +760,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getEventBLabeled()
 	 * @generated
 	 */
-	int EVENT_BLABELED = 6;
+	int EVENT_BLABELED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -743,7 +788,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractState()
 	 * @generated
 	 */
-	int ABSTRACT_STATE = 14;
+	int ABSTRACT_STATE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -852,7 +897,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 7;
+	int STATE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -970,7 +1015,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getInitial()
 	 * @generated
 	 */
-	int INITIAL = 8;
+	int INITIAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1061,7 +1106,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getOR()
 	 * @generated
 	 */
-	int OR = 9;
+	int OR = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1152,7 +1197,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getANY()
 	 * @generated
 	 */
-	int ANY = 10;
+	int ANY = 9;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1243,7 +1288,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getFinal()
 	 * @generated
 	 */
-	int FINAL = 11;
+	int FINAL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1334,7 +1379,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachineOwner()
 	 * @generated
 	 */
-	int STATEMACHINE_OWNER = 12;
+	int STATEMACHINE_OWNER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Statemachines</b></em>' containment reference list.
@@ -1362,7 +1407,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getRefinedState()
 	 * @generated
 	 */
-	int REFINED_STATE = 13;
+	int REFINED_STATE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1493,16 +1538,6 @@ public interface StatemachinesPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.StatemachineCollection <em>Statemachine Collection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statemachine Collection</em>'.
-	 * @see ac.soton.eventb.statemachines.StatemachineCollection
-	 * @generated
-	 */
-	EClass getStatemachineCollection();
-
-	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.AbstractStatemachine <em>Abstract Statemachine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1599,15 +1634,37 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getTransition_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}'.
+	 * Returns the meta object for the reference list '{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Elaborates</em>'.
+	 * @return the meta object for the reference list '<em>Elaborates</em>'.
 	 * @see ac.soton.eventb.statemachines.Transition#getElaborates()
 	 * @see #getTransition()
 	 * @generated
 	 */
 	EReference getTransition_Elaborates();
+
+	/**
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source Container</em>'.
+	 * @see ac.soton.eventb.statemachines.Transition#getSourceContainer()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EReference getTransition_SourceContainer();
+
+	/**
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Container</em>'.
+	 * @see ac.soton.eventb.statemachines.Transition#getTargetContainer()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EReference getTransition_TargetContainer();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.RefinedStatemachine <em>Refined Statemachine</em>}'.
@@ -1786,6 +1843,16 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getAbstractState_Constraints();
 
 	/**
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.DiagramRoot <em>Diagram Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Diagram Root</em>'.
+	 * @see ac.soton.eventb.statemachines.DiagramRoot
+	 * @generated
+	 */
+	EClass getDiagramRoot();
+
+	/**
 	 * Returns the meta object for enum '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1817,16 +1884,6 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineCollectionImpl <em>Statemachine Collection</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.statemachines.impl.StatemachineCollectionImpl
-		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachineCollection()
-		 * @generated
-		 */
-		EClass STATEMACHINE_COLLECTION = eINSTANCE.getStatemachineCollection();
-
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.AbstractStatemachineImpl <em>Abstract Statemachine</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1906,12 +1963,28 @@ public interface StatemachinesPackage extends EPackage {
 		EReference TRANSITION__SOURCE = eINSTANCE.getTransition_Source();
 
 		/**
-		 * The meta object literal for the '<em><b>Elaborates</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Elaborates</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRANSITION__ELABORATES = eINSTANCE.getTransition_Elaborates();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Container</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__SOURCE_CONTAINER = eINSTANCE.getTransition_SourceContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Container</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__TARGET_CONTAINER = eINSTANCE.getTransition_TargetContainer();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.RefinedStatemachineImpl <em>Refined Statemachine</em>}' class.
@@ -2070,6 +2143,16 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_STATE__CONSTRAINTS = eINSTANCE.getAbstractState_Constraints();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.DiagramRootImpl <em>Diagram Root</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.statemachines.impl.DiagramRootImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getDiagramRoot()
+		 * @generated
+		 */
+		EClass DIAGRAM_ROOT = eINSTANCE.getDiagramRoot();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}' enum.

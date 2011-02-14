@@ -5,17 +5,22 @@
    <extension
          point="org.rodinp.core.internalElementTypes">
       <internalElementType
-            class="ac.soton.eventb.statemachines.persistence.StatemachineCollection"
-            id="statemachineCollection"
-            name="StatemachineCollection">
+            class="ac.soton.eventb.statemachines.persistence.Statemachine"
+            id="statemachine"
+            name="Statemachine">
+      </internalElementType>
+      <internalElementType
+            class="ac.soton.eventb.statemachines.persistence.RefinedStatemachine"
+            id="refinedStatemachine"
+            name="Refined Statemachine">
       </internalElementType>
    </extension>
    <extension
          point="org.rodinp.core.attributeTypes">
       <attributeType
-            id="statemachines"
+            id="serialised"
             kind="string"
-            name="Statemachines">
+            name="Serialised">
       </attributeType>
    </extension>
    <extension
@@ -24,10 +29,16 @@
             name="Statemachines Package"
             nsURI="http://soton.ac.uk/models/eventb/statemachines">
          <synchroniser
-               emf_class="StatemachineCollection"
-               name="StatemachineCollection"
-               rodin_id="ac.soton.eventb.statemachines.persistence.statemachineCollection"
+               emf_class="Statemachine"
+               name="Statemachine"
+               rodin_id="ac.soton.eventb.statemachines.persistence.statemachine"
                synchroniser_class="ac.soton.eventb.statemachines.persistence.synchroniser.StatemachineSynchroniser">
+         </synchroniser>
+         <synchroniser
+               emf_class="RefinedStatemachine"
+               name="Refined Statemachine"
+               rodin_id="ac.soton.eventb.statemachines.persistence.refinedStatemachine"
+               synchroniser_class="ac.soton.eventb.statemachines.persistence.synchroniser.RefinedStatemachineSynchroniser">
          </synchroniser>
       </emfPackage>
    </extension>
