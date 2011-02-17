@@ -9,8 +9,6 @@
 package ac.soton.eventb.statemachines;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommentedElement;
 
 /**

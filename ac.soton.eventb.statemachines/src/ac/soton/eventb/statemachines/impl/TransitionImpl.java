@@ -299,14 +299,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, oldName, newName));
 	}
 
-	@Override
-	public void eNotify(Notification notification) {
-//		if (StatemachinesPackage.eINSTANCE.getTransition_Elaborates().equals(notification.getFeature()))
-//			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, notification.getOldValue(), notification.getNewValue()));
-		super.eNotify(notification);
-		
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

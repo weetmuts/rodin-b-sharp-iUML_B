@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="0.0.1"
+      version="0.1.0"
       provider-name="%providerName">
 
    <description url="http://www.example.com/description">
@@ -40,7 +40,14 @@
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.statemachines.editor"
+         id="ac.soton.eventb.statemachines.diagram"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ac.soton.eventb.statemachines.persistence"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -7,12 +7,12 @@
       <internalElementType
             class="ac.soton.eventb.statemachines.persistence.Statemachine"
             id="statemachine"
-            name="Statemachine">
+            name="%internalElementType.statemachine">
       </internalElementType>
       <internalElementType
             class="ac.soton.eventb.statemachines.persistence.RefinedStatemachine"
             id="refinedStatemachine"
-            name="Refined Statemachine">
+            name="%internalElementType.refinedStatemachine">
       </internalElementType>
    </extension>
    <extension
@@ -20,7 +20,7 @@
       <attributeType
             id="serialised"
             kind="string"
-            name="Serialised">
+            name="%attributeType.serialised">
       </attributeType>
    </extension>
    <extension
