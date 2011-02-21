@@ -24,13 +24,13 @@ import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes
 /**
  * @generated
  */
-public class AbstractStatemachineItemSemanticEditPolicy extends
+public class DiagramRootItemSemanticEditPolicy extends
 		StatemachinesBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
-	public AbstractStatemachineItemSemanticEditPolicy() {
+	public DiagramRootItemSemanticEditPolicy() {
 		super(StatemachinesElementTypes.DiagramRoot_1000);
 	}
 

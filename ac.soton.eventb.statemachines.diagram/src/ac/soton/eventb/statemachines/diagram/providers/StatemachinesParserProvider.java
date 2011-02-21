@@ -30,7 +30,7 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStateStatemachine
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStatemachineLabelEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateNameEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineNameEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionGhostNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionNameEditPart;
 import ac.soton.eventb.statemachines.diagram.parsers.MessageFormatParser;
@@ -281,7 +281,7 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 			return getStateName_5003Parser();
 		case RefinedStateLabelEditPart.VISUAL_ID:
 			return getRefinedStateLabel_5007Parser();
-		case StateStatemachineNameEditPart.VISUAL_ID:
+		case StatemachineNameEditPart.VISUAL_ID:
 			return getStatemachineName_5002Parser();
 		case InnerStateNameEditPart.VISUAL_ID:
 			return getStateName_5001Parser();

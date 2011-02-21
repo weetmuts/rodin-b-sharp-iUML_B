@@ -110,7 +110,7 @@ public class TransitionGhostNameEditPart extends LabelEditPart implements
 		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new StatemachinesTextSelectionEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new AbstractStatemachineEditPart.LinkLabelDragPolicy());
+				new DiagramRootEditPart.LinkLabelDragPolicy());
 	}
 
 	/**

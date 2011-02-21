@@ -38,7 +38,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerANYEditPart;
@@ -50,7 +50,7 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStateStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionGhostEditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramUpdater;
@@ -61,8 +61,7 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 /**
  * @generated
  */
-public class AbstractStatemachineCanonicalEditPolicy extends
-		CanonicalEditPolicy {
+public class DiagramRootCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	/**
 	 * @generated
@@ -259,13 +258,13 @@ public class AbstractStatemachineCanonicalEditPolicy extends
 	 */
 	private Collection<StatemachinesLinkDescriptor> collectAllLinks(View view,
 			Map<EObject, View> domain2NotationMap) {
-		if (!AbstractStatemachineEditPart.MODEL_ID
-				.equals(StatemachinesVisualIDRegistry.getModelID(view))) {
+		if (!DiagramRootEditPart.MODEL_ID.equals(StatemachinesVisualIDRegistry
+				.getModelID(view))) {
 			return Collections.emptyList();
 		}
 		LinkedList<StatemachinesLinkDescriptor> result = new LinkedList<StatemachinesLinkDescriptor>();
 		switch (StatemachinesVisualIDRegistry.getVisualID(view)) {
-		case AbstractStatemachineEditPart.VISUAL_ID: {
+		case DiagramRootEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(StatemachinesDiagramUpdater
 						.getDiagramRoot_1000ContainedLinks(view));
@@ -331,7 +330,7 @@ public class AbstractStatemachineCanonicalEditPolicy extends
 			}
 			break;
 		}
-		case StateStatemachineEditPart.VISUAL_ID: {
+		case StatemachineEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(StatemachinesDiagramUpdater
 						.getStatemachine_3001ContainedLinks(view));

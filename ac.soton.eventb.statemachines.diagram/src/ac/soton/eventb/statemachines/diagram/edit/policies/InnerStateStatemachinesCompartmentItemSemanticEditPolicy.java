@@ -10,7 +10,7 @@ package ac.soton.eventb.statemachines.diagram.edit.policies;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 
-import ac.soton.eventb.statemachines.diagram.edit.commands.StateStatemachineCreateCommand;
+import ac.soton.eventb.statemachines.diagram.edit.commands.StatemachineCreateCommand;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -31,7 +31,7 @@ public class InnerStateStatemachinesCompartmentItemSemanticEditPolicy extends
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (StatemachinesElementTypes.Statemachine_3001 == req.getElementType()) {
-			return getGEFWrapper(new StateStatemachineCreateCommand(req));
+			return getGEFWrapper(new StatemachineCreateCommand(req));
 		}
 		return super.getCreateCommand(req);
 	}

@@ -26,7 +26,7 @@ import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerANYEditPart;
@@ -40,7 +40,7 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStateStatemachine
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionGhostEditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
@@ -139,6 +139,7 @@ public class StatemachinesElementTypes {
 	 * @generated
 	 */
 	public static final IElementType Transition_4001 = getElementType("ac.soton.eventb.statemachines.diagram.Transition_4001"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
@@ -346,7 +347,7 @@ public class StatemachinesElementTypes {
 	 */
 	public static IElementType getElementType(int visualID) {
 		switch (visualID) {
-		case AbstractStatemachineEditPart.VISUAL_ID:
+		case DiagramRootEditPart.VISUAL_ID:
 			return DiagramRoot_1000;
 		case InitialEditPart.VISUAL_ID:
 			return Initial_2001;
@@ -358,7 +359,7 @@ public class StatemachinesElementTypes {
 			return State_2004;
 		case RefinedStateEditPart.VISUAL_ID:
 			return RefinedState_2005;
-		case StateStatemachineEditPart.VISUAL_ID:
+		case StatemachineEditPart.VISUAL_ID:
 			return Statemachine_3001;
 		case InnerInitialEditPart.VISUAL_ID:
 			return Initial_3002;

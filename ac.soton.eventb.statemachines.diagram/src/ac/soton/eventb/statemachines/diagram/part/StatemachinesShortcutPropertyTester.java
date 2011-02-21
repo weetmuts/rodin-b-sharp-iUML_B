@@ -11,7 +11,7 @@ import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.gmf.runtime.notation.View;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 
 /**
  * @generated
@@ -35,7 +35,7 @@ public class StatemachinesShortcutPropertyTester extends PropertyTester {
 		if (SHORTCUT_PROPERTY.equals(method)) {
 			EAnnotation annotation = view.getEAnnotation("Shortcut"); //$NON-NLS-1$
 			if (annotation != null) {
-				return AbstractStatemachineEditPart.MODEL_ID.equals(annotation
+				return DiagramRootEditPart.MODEL_ID.equals(annotation
 						.getDetails().get("modelID")); //$NON-NLS-1$
 			}
 		}

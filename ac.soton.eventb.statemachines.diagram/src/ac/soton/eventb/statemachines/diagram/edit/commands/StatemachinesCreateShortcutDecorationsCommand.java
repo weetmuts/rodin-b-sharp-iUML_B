@@ -22,7 +22,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.View;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 
 /**
  * @generated
@@ -69,7 +69,7 @@ public class StatemachinesCreateShortcutDecorationsCommand extends
 						.createEAnnotation();
 				shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
 				shortcutAnnotation.getDetails().put(
-						"modelID", AbstractStatemachineEditPart.MODEL_ID); //$NON-NLS-1$
+						"modelID", DiagramRootEditPart.MODEL_ID); //$NON-NLS-1$
 				view.getEAnnotations().add(shortcutAnnotation);
 			}
 		}

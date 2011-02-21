@@ -58,7 +58,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 
 /**
  * @generated
@@ -188,7 +188,7 @@ public class StatemachinesDiagramEditorUtil {
 				Diagram diagram = ViewService
 						.createDiagram(
 								model,
-								AbstractStatemachineEditPart.MODEL_ID,
+								DiagramRootEditPart.MODEL_ID,
 								StatemachinesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {
 					diagramResource.getContents().add(diagram);

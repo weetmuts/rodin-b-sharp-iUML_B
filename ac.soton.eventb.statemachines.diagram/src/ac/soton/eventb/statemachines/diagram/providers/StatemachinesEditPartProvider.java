@@ -18,7 +18,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateGraphicEditPar
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachinesEditPartFactory;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 
@@ -129,7 +129,7 @@ public class StatemachinesEditPartProvider extends AbstractEditPartProvider {
 	public synchronized boolean provides(IOperation operation) {
 		if (operation instanceof CreateGraphicEditPartOperation) {
 			View view = ((IEditPartOperation) operation).getView();
-			if (!AbstractStatemachineEditPart.MODEL_ID
+			if (!DiagramRootEditPart.MODEL_ID
 					.equals(StatemachinesVisualIDRegistry.getModelID(view))) {
 				return false;
 			}

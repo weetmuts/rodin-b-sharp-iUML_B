@@ -54,8 +54,8 @@ import ac.soton.eventb.statemachines.diagram.providers.StatemachinesParserProvid
 /**
  * @generated
  */
-public class StateStatemachineNameEditPart extends CompartmentEditPart
-		implements ITextAwareEditPart {
+public class StatemachineNameEditPart extends CompartmentEditPart implements
+		ITextAwareEditPart {
 
 	/**
 	 * @generated
@@ -85,7 +85,7 @@ public class StateStatemachineNameEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public StateStatemachineNameEditPart(View view) {
+	public StatemachineNameEditPart(View view) {
 		super(view);
 	}
 
@@ -99,7 +99,7 @@ public class StateStatemachineNameEditPart extends CompartmentEditPart
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new AbstractStatemachineEditPart.NodeLabelDragPolicy());
+				new DiagramRootEditPart.NodeLabelDragPolicy());
 	}
 
 	/**
@@ -303,7 +303,7 @@ public class StateStatemachineNameEditPart extends CompartmentEditPart
 							StatemachinesElementTypes.Statemachine_3001,
 							getParserElement(),
 							StatemachinesVisualIDRegistry
-									.getType(ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineNameEditPart.VISUAL_ID));
+									.getType(ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineNameEditPart.VISUAL_ID));
 		}
 		return parser;
 	}

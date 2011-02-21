@@ -37,13 +37,13 @@ import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes
 /**
  * @generated
  */
-public class StateStatemachineItemSemanticEditPolicy extends
+public class StatemachineItemSemanticEditPolicy extends
 		StatemachinesBaseItemSemanticEditPolicy {
 
 	/**
 	 * @generated
 	 */
-	public StateStatemachineItemSemanticEditPolicy() {
+	public StatemachineItemSemanticEditPolicy() {
 		super(StatemachinesElementTypes.Statemachine_3001);
 	}
 

@@ -37,14 +37,14 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
 import ac.soton.eventb.statemachines.diagram.edit.policies.OpenDiagramEditPolicy;
-import ac.soton.eventb.statemachines.diagram.edit.policies.StateStatemachineItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachineItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
  * @generated
  */
-public class StateStatemachineEditPart extends ShapeNodeEditPart {
+public class StatemachineEditPart extends ShapeNodeEditPart {
 
 	/**
 	 * @generated
@@ -64,7 +64,7 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public StateStatemachineEditPart(View view) {
+	public StatemachineEditPart(View view) {
 		super(view);
 	}
 
@@ -74,7 +74,7 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new StateStatemachineItemSemanticEditPolicy());
+				new StatemachineItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		installEditPolicy(EditPolicyRoles.OPEN_ROLE,
 				new OpenDiagramEditPolicy());
@@ -126,8 +126,8 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof StateStatemachineNameEditPart) {
-			((StateStatemachineNameEditPart) childEditPart)
+		if (childEditPart instanceof StatemachineNameEditPart) {
+			((StatemachineNameEditPart) childEditPart)
 					.setLabel(getPrimaryShape()
 							.getFigureStatemachineNameFigure());
 			return true;
@@ -147,7 +147,7 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof StateStatemachineNameEditPart) {
+		if (childEditPart instanceof StatemachineNameEditPart) {
 			return true;
 		}
 		if (childEditPart instanceof StatemachineStatesCompartmentEditPart) {
@@ -282,7 +282,7 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(StatemachinesVisualIDRegistry
-				.getType(StateStatemachineNameEditPart.VISUAL_ID));
+				.getType(StatemachineNameEditPart.VISUAL_ID));
 	}
 
 	/**
@@ -315,7 +315,7 @@ public class StateStatemachineEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof RefinedStateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart) {
+		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
 		if (targetEditPart instanceof InnerInitialEditPart) {

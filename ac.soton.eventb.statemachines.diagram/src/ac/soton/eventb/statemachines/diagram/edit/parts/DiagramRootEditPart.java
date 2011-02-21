@@ -30,13 +30,13 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.statemachines.diagram.edit.commands.StatemachinesCreateShortcutDecorationsCommand;
-import ac.soton.eventb.statemachines.diagram.edit.policies.AbstractStatemachineCanonicalEditPolicy;
-import ac.soton.eventb.statemachines.diagram.edit.policies.AbstractStatemachineItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.edit.policies.DiagramRootCanonicalEditPolicy;
+import ac.soton.eventb.statemachines.diagram.edit.policies.DiagramRootItemSemanticEditPolicy;
 
 /**
  * @generated
  */
-public class AbstractStatemachineEditPart extends DiagramEditPart {
+public class DiagramRootEditPart extends DiagramEditPart {
 
 	/**
 	 * @generated
@@ -51,7 +51,7 @@ public class AbstractStatemachineEditPart extends DiagramEditPart {
 	/**
 	 * @generated
 	 */
-	public AbstractStatemachineEditPart(View view) {
+	public DiagramRootEditPart(View view) {
 		super(view);
 	}
 
@@ -61,9 +61,9 @@ public class AbstractStatemachineEditPart extends DiagramEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new AbstractStatemachineItemSemanticEditPolicy());
+				new DiagramRootItemSemanticEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
-				new AbstractStatemachineCanonicalEditPolicy());
+				new DiagramRootCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
 				new DiagramDragDropEditPolicy() {
 					public Command getDropObjectsCommand(

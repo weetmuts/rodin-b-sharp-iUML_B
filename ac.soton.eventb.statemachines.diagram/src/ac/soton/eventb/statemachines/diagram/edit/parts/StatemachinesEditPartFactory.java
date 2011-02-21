@@ -36,8 +36,8 @@ public class StatemachinesEditPartFactory implements EditPartFactory {
 			View view = (View) model;
 			switch (StatemachinesVisualIDRegistry.getVisualID(view)) {
 
-			case AbstractStatemachineEditPart.VISUAL_ID:
-				return new AbstractStatemachineEditPart(view);
+			case DiagramRootEditPart.VISUAL_ID:
+				return new DiagramRootEditPart(view);
 
 			case InitialEditPart.VISUAL_ID:
 				return new InitialEditPart(view);
@@ -60,11 +60,11 @@ public class StatemachinesEditPartFactory implements EditPartFactory {
 			case RefinedStateLabelEditPart.VISUAL_ID:
 				return new RefinedStateLabelEditPart(view);
 
-			case StateStatemachineEditPart.VISUAL_ID:
-				return new StateStatemachineEditPart(view);
+			case StatemachineEditPart.VISUAL_ID:
+				return new StatemachineEditPart(view);
 
-			case StateStatemachineNameEditPart.VISUAL_ID:
-				return new StateStatemachineNameEditPart(view);
+			case StatemachineNameEditPart.VISUAL_ID:
+				return new StatemachineNameEditPart(view);
 
 			case InnerInitialEditPart.VISUAL_ID:
 				return new InnerInitialEditPart(view);

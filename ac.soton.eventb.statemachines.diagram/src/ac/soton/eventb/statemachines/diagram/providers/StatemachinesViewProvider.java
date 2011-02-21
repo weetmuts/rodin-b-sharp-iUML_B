@@ -51,7 +51,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerANYEditPart;
@@ -79,9 +79,9 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantsCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateNameEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachinesCompartmentEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartment2EditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionEditPart;
@@ -131,8 +131,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected boolean provides(CreateDiagramViewOperation op) {
-		return AbstractStatemachineEditPart.MODEL_ID.equals(op
-				.getSemanticHint())
+		return DiagramRootEditPart.MODEL_ID.equals(op.getSemanticHint())
 				&& StatemachinesVisualIDRegistry
 						.getDiagramVisualID(getSemanticElement(op
 								.getSemanticAdapter())) != -1;
@@ -178,7 +177,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 					return false; // visual id for node EClass should match visual id from element type
 				}
 			} else {
-				if (!AbstractStatemachineEditPart.MODEL_ID
+				if (!DiagramRootEditPart.MODEL_ID
 						.equals(StatemachinesVisualIDRegistry.getModelID(op
 								.getContainerView()))) {
 					return false; // foreign diagram
@@ -189,7 +188,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 				case ANYEditPart.VISUAL_ID:
 				case StateEditPart.VISUAL_ID:
 				case RefinedStateEditPart.VISUAL_ID:
-				case StateStatemachineEditPart.VISUAL_ID:
+				case StatemachineEditPart.VISUAL_ID:
 				case StateInvariantEditPart.VISUAL_ID:
 				case RefinedStatemachineEditPart.VISUAL_ID:
 				case InnerInitialEditPart.VISUAL_ID:
@@ -216,7 +215,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 				|| ANYEditPart.VISUAL_ID == visualID
 				|| StateEditPart.VISUAL_ID == visualID
 				|| RefinedStateEditPart.VISUAL_ID == visualID
-				|| StateStatemachineEditPart.VISUAL_ID == visualID
+				|| StatemachineEditPart.VISUAL_ID == visualID
 				|| InnerInitialEditPart.VISUAL_ID == visualID
 				|| InnerFinalEditPart.VISUAL_ID == visualID
 				|| InnerANYEditPart.VISUAL_ID == visualID
@@ -262,7 +261,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 			String diagramKind, PreferencesHint preferencesHint) {
 		Diagram diagram = NotationFactory.eINSTANCE.createDiagram();
 		diagram.getStyles().add(NotationFactory.eINSTANCE.createDiagramStyle());
-		diagram.setType(AbstractStatemachineEditPart.MODEL_ID);
+		diagram.setType(DiagramRootEditPart.MODEL_ID);
 		diagram.setElement(getSemanticElement(semanticAdapter));
 		diagram.setMeasurementUnit(MeasurementUnit.PIXEL_LITERAL);
 		return diagram;
@@ -298,7 +297,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 		case RefinedStateEditPart.VISUAL_ID:
 			return createRefinedState_2005(domainElement, containerView, index,
 					persisted, preferencesHint);
-		case StateStatemachineEditPart.VISUAL_ID:
+		case StatemachineEditPart.VISUAL_ID:
 			return createStatemachine_3001(domainElement, containerView, index,
 					persisted, preferencesHint);
 		case InnerInitialEditPart.VISUAL_ID:
@@ -604,7 +603,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 				NotationFactory.eINSTANCE.createHintedDiagramLinkStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
 		node.setType(StatemachinesVisualIDRegistry
-				.getType(StateStatemachineEditPart.VISUAL_ID));
+				.getType(StatemachineEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		// initializeFromPreferences 
@@ -632,7 +631,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 		}
 		Node label5002 = createLabel(node,
 				StatemachinesVisualIDRegistry
-						.getType(StateStatemachineNameEditPart.VISUAL_ID));
+						.getType(StatemachineNameEditPart.VISUAL_ID));
 		createCompartment(
 				node,
 				StatemachinesVisualIDRegistry
@@ -1133,13 +1132,13 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	private void stampShortcut(View containerView, Node target) {
-		if (!AbstractStatemachineEditPart.MODEL_ID
-				.equals(StatemachinesVisualIDRegistry.getModelID(containerView))) {
+		if (!DiagramRootEditPart.MODEL_ID.equals(StatemachinesVisualIDRegistry
+				.getModelID(containerView))) {
 			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
 					.createEAnnotation();
 			shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
 			shortcutAnnotation.getDetails().put(
-					"modelID", AbstractStatemachineEditPart.MODEL_ID); //$NON-NLS-1$
+					"modelID", DiagramRootEditPart.MODEL_ID); //$NON-NLS-1$
 			target.getEAnnotations().add(shortcutAnnotation);
 		}
 	}

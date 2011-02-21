@@ -29,7 +29,7 @@ import org.eclipse.ui.navigator.ICommonActionExtensionSite;
 import org.eclipse.ui.navigator.ICommonViewerWorkbenchSite;
 import org.eclipse.ui.part.FileEditorInput;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.part.Messages;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
@@ -131,7 +131,7 @@ public class StatemachinesNavigatorActionProvider extends CommonActionProvider {
 				}
 				if (selectedElement instanceof Diagram) {
 					Diagram diagram = (Diagram) selectedElement;
-					if (AbstractStatemachineEditPart.MODEL_ID
+					if (DiagramRootEditPart.MODEL_ID
 							.equals(StatemachinesVisualIDRegistry
 									.getModelID(diagram))) {
 						myDiagram = diagram;

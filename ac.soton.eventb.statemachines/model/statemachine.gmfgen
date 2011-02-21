@@ -4,12 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" diagramFileExtension="smd"
     domainFileExtension="bum"
+    templateDirectory="/ac.soton.eventb.statemachines/templates/gmf"
     copyrightText="Copyright (c) 2010 University of Southampton.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html">
   <diagram
       visualID="1000"
-      editPartClassName="AbstractStatemachineEditPart"
-      itemSemanticEditPolicyClassName="AbstractStatemachineItemSemanticEditPolicy"
-      canonicalEditPolicyClassName="AbstractStatemachineCanonicalEditPolicy"
+      editPartClassName="DiagramRootEditPart"
+      itemSemanticEditPolicyClassName="DiagramRootItemSemanticEditPolicy"
+      canonicalEditPolicyClassName="DiagramRootCanonicalEditPolicy"
       iconProviderPriority="Low"
       validationProviderPriority="Low"
       validationEnabled="true"
@@ -28,13 +29,13 @@
         href="statemachines.genmodel#//statemachines/DiagramRoot"/>
     <childNodes
         visualID="3001"
-        editPartClassName="StateStatemachineEditPart"
-        itemSemanticEditPolicyClassName="StateStatemachineItemSemanticEditPolicy"
+        editPartClassName="StatemachineEditPart"
+        itemSemanticEditPolicyClassName="StatemachineItemSemanticEditPolicy"
         notationViewFactoryClassName="StatemachineViewFactory"
-        canonicalEditPolicyClassName="StateStatemachineCanonicalEditPolicy"
+        canonicalEditPolicyClassName="StatemachineCanonicalEditPolicy"
         compartments="//@diagram/@compartments.2"
-        graphicalNodeEditPolicyClassName="StateStatemachineGraphicalNodeEditPolicy"
-        createCommandClassName="StateStatemachineCreateCommand"
+        graphicalNodeEditPolicyClassName="StatemachineGraphicalNodeEditPolicy"
+        createCommandClassName="StatemachineCreateCommand"
         containers="//@diagram/@compartments.3 //@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -65,8 +66,8 @@
       </modelFacet>
       <labels
           visualID="5002"
-          editPartClassName="StateStatemachineNameEditPart"
-          itemSemanticEditPolicyClassName="StateStatemachineNameItemSemanticEditPolicy"
+          editPartClassName="StatemachineNameEditPart"
+          itemSemanticEditPolicyClassName="StatemachineNameItemSemanticEditPolicy"
           notationViewFactoryClassName="StatemachineNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -816,7 +817,7 @@
         notationViewFactoryClassName="StateStateStatemachinesCompartmentViewFactory"
         canonicalEditPolicyClassName="StateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
-        title="StateStatemachinesCompartment"
+        title="Statemachines"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
@@ -837,7 +838,7 @@
         notationViewFactoryClassName="StateStateInvariantsCompartmentViewFactory"
         canonicalEditPolicyClassName="StateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
-        title="StateInvariantsCompartment"
+        title="Invariants"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.3">
       <diagramRunTimeClass
@@ -854,7 +855,7 @@
         notationViewFactoryClassName="StatemachineStatemachineStatesCompartmentViewFactory"
         canonicalEditPolicyClassName="StatemachineStatesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4"
-        title="StatemachineStatesCompartment"
+        title="States"
         needsTitle="false"
         node="//@diagram/@childNodes.0"
         listLayout="false">
@@ -876,7 +877,7 @@
         notationViewFactoryClassName="StateStateStatemachinesCompartmentViewFactory"
         canonicalEditPolicyClassName="InnerStateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
-        title="StateStatemachinesCompartment"
+        title="Statemachines"
         needsTitle="false"
         node="//@diagram/@childNodes.4">
       <diagramRunTimeClass
@@ -897,7 +898,7 @@
         notationViewFactoryClassName="StateStateInvariantsCompartmentViewFactory"
         canonicalEditPolicyClassName="InnerStateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
-        title="StateInvariantsCompartment"
+        title="Invariants"
         needsTitle="false"
         node="//@diagram/@childNodes.4">
       <diagramRunTimeClass
@@ -914,7 +915,7 @@
         notationViewFactoryClassName="RefinedStateRefinedStateStatemachinesCompartmentViewFactory"
         canonicalEditPolicyClassName="RefinedStateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6 //@diagram/@childNodes.8"
-        title="RefinedStateStatemachinesCompartment"
+        title="Statemachines"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.4">
       <diagramRunTimeClass
@@ -935,7 +936,7 @@
         notationViewFactoryClassName="RefinedStateRefinedStateInvariantsCompartmentViewFactory"
         canonicalEditPolicyClassName="RefinedStateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.9"
-        title="RefinedStateInvariantsCompartment"
+        title="Invariants"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.4">
       <diagramRunTimeClass
@@ -952,7 +953,7 @@
         notationViewFactoryClassName="RefinedStatemachineRefinedStatemachineStatesCompartmentViewFactory"
         canonicalEditPolicyClassName="RefinedStatemachineStatesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.7"
-        title="RefinedStatemachineStatesCompartment"
+        title="States"
         needsTitle="false"
         node="//@diagram/@childNodes.6"
         listLayout="false">
@@ -974,7 +975,7 @@
         notationViewFactoryClassName="RefinedStateRefinedStateStatemachinesCompartmentViewFactory"
         canonicalEditPolicyClassName="InnerRefinedStateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6 //@diagram/@childNodes.8"
-        title="RefinedStateStatemachinesCompartment"
+        title="Statemachines"
         needsTitle="false"
         node="//@diagram/@childNodes.7">
       <diagramRunTimeClass
@@ -995,7 +996,7 @@
         notationViewFactoryClassName="RefinedStateRefinedStateInvariantsCompartmentViewFactory"
         canonicalEditPolicyClassName="InnerRefinedStateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.9"
-        title="RefinedStateInvariantsCompartment"
+        title="Invariants"
         needsTitle="false"
         node="//@diagram/@childNodes.7">
       <diagramRunTimeClass
@@ -1012,7 +1013,7 @@
         notationViewFactoryClassName="StatemachineStatemachineStatesCompartmentViewFactory"
         canonicalEditPolicyClassName="StatemachineStatesCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4"
-        title="StatemachineStatesCompartment"
+        title="States"
         needsTitle="false"
         node="//@diagram/@childNodes.8"
         listLayout="false">
@@ -1035,26 +1036,31 @@
             xsi:type="gmfgen:ToolEntry"
             title="State"
             description="Create new State"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/State.png"
             genNodes="//@diagram/@topLevelNodes.3 //@diagram/@childNodes.4"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="Initial"
-            description="Create new Initial State"
-            genNodes="//@diagram/@topLevelNodes.0 //@diagram/@childNodes.1"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="Final"
-            description="Create new Final State"
-            genNodes="//@diagram/@topLevelNodes.1 //@diagram/@childNodes.2"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="ANY"
-            description="Create new ANY State"
-            genNodes="//@diagram/@topLevelNodes.2 //@diagram/@childNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Refined State"
             description="Create new Refined State"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/RefinedState.png"
+            genNodes="//@diagram/@topLevelNodes.0 //@diagram/@childNodes.1"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Initial"
+            description="Create new Initial State"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Initial.png"
+            genNodes="//@diagram/@topLevelNodes.1 //@diagram/@childNodes.2"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Final"
+            description="Create new Final State"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Final.png"
+            genNodes="//@diagram/@topLevelNodes.2 //@diagram/@childNodes.3"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ANY"
+            description="Create new ANY State"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Any.png"
             genNodes="//@diagram/@topLevelNodes.4 //@diagram/@childNodes.7"/>
       </groups>
       <groups
@@ -1062,18 +1068,21 @@
           collapse="true">
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="Invariant"
-            description="Create new Invariant"
-            genNodes="//@diagram/@childNodes.5 //@diagram/@childNodes.9"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
             title="Statemachine"
             description="Create new Statemachine"
-            genNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.8"/>
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Statemachine.png"
+            genNodes="//@diagram/@childNodes.5 //@diagram/@childNodes.9"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Refined Statemachine"
             description="Create new Refined Statemachine"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/RefinedStatemachine.png"
+            genNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.8"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Invariant"
+            description="Create new Invariant"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Invariant.png"
             genNodes="//@diagram/@childNodes.6"/>
       </groups>
       <groups
@@ -1083,6 +1092,7 @@
             xsi:type="gmfgen:ToolEntry"
             title="Transition"
             description="Create new Transition"
+            smallIconPath="/ac.soton.eventb.statemachines/icons/Transition.png"
             genLinks="//@diagram/@links.0"/>
       </groups>
     </palette>
@@ -1115,12 +1125,13 @@
   <plugin
       name="Statemachines Diagram Plugin"
       provider="University of Southampton"
+      version="0.1.0.qualifier"
       printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>
   <editor
-      iconPath="icons/obj16/StatemachinesDiagramFile.gif"/>
+      iconPath="/icons/StatemachinesDiagramFile.png"/>
   <navigator>
     <childReferences
         child="//@diagram"/>

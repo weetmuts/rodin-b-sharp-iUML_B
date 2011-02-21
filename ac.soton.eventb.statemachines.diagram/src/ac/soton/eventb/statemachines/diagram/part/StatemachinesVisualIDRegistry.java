@@ -18,7 +18,7 @@ import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerANYEditPart;
@@ -46,9 +46,9 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantsCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateNameEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachinesCompartmentEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartment2EditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionEditPart;
@@ -76,8 +76,8 @@ public class StatemachinesVisualIDRegistry {
 	 */
 	public static int getVisualID(View view) {
 		if (view instanceof Diagram) {
-			if (AbstractStatemachineEditPart.MODEL_ID.equals(view.getType())) {
-				return AbstractStatemachineEditPart.VISUAL_ID;
+			if (DiagramRootEditPart.MODEL_ID.equals(view.getType())) {
+				return DiagramRootEditPart.VISUAL_ID;
 			} else {
 				return -1;
 			}
@@ -135,7 +135,7 @@ public class StatemachinesVisualIDRegistry {
 		if (StatemachinesPackage.eINSTANCE.getDiagramRoot().isSuperTypeOf(
 				domainElement.eClass())
 				&& isDiagram((DiagramRoot) domainElement)) {
-			return AbstractStatemachineEditPart.VISUAL_ID;
+			return DiagramRootEditPart.VISUAL_ID;
 		}
 		return -1;
 	}
@@ -149,23 +149,23 @@ public class StatemachinesVisualIDRegistry {
 		}
 		String containerModelID = ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
 				.getModelID(containerView);
-		if (!AbstractStatemachineEditPart.MODEL_ID.equals(containerModelID)
+		if (!DiagramRootEditPart.MODEL_ID.equals(containerModelID)
 				&& !"statemachines".equals(containerModelID)) { //$NON-NLS-1$
 			return -1;
 		}
 		int containerVisualID;
-		if (AbstractStatemachineEditPart.MODEL_ID.equals(containerModelID)) {
+		if (DiagramRootEditPart.MODEL_ID.equals(containerModelID)) {
 			containerVisualID = ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
 					.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
-				containerVisualID = AbstractStatemachineEditPart.VISUAL_ID;
+				containerVisualID = DiagramRootEditPart.VISUAL_ID;
 			} else {
 				return -1;
 			}
 		}
 		switch (containerVisualID) {
-		case AbstractStatemachineEditPart.VISUAL_ID:
+		case DiagramRootEditPart.VISUAL_ID:
 			if (StatemachinesPackage.eINSTANCE.getInitial().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InitialEditPart.VISUAL_ID;
@@ -190,7 +190,7 @@ public class StatemachinesVisualIDRegistry {
 		case StateStatemachinesCompartmentEditPart.VISUAL_ID:
 			if (StatemachinesPackage.eINSTANCE.getStatemachine().isSuperTypeOf(
 					domainElement.eClass())) {
-				return StateStatemachineEditPart.VISUAL_ID;
+				return StatemachineEditPart.VISUAL_ID;
 			}
 			break;
 		case StateInvariantsCompartmentEditPart.VISUAL_ID:
@@ -220,7 +220,7 @@ public class StatemachinesVisualIDRegistry {
 		case InnerStateStatemachinesCompartmentEditPart.VISUAL_ID:
 			if (StatemachinesPackage.eINSTANCE.getStatemachine().isSuperTypeOf(
 					domainElement.eClass())) {
-				return StateStatemachineEditPart.VISUAL_ID;
+				return StatemachineEditPart.VISUAL_ID;
 			}
 			break;
 		case InnerStateInvariantsCompartmentEditPart.VISUAL_ID:
@@ -307,23 +307,23 @@ public class StatemachinesVisualIDRegistry {
 	public static boolean canCreateNode(View containerView, int nodeVisualID) {
 		String containerModelID = ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
 				.getModelID(containerView);
-		if (!AbstractStatemachineEditPart.MODEL_ID.equals(containerModelID)
+		if (!DiagramRootEditPart.MODEL_ID.equals(containerModelID)
 				&& !"statemachines".equals(containerModelID)) { //$NON-NLS-1$
 			return false;
 		}
 		int containerVisualID;
-		if (AbstractStatemachineEditPart.MODEL_ID.equals(containerModelID)) {
+		if (DiagramRootEditPart.MODEL_ID.equals(containerModelID)) {
 			containerVisualID = ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
 					.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
-				containerVisualID = AbstractStatemachineEditPart.VISUAL_ID;
+				containerVisualID = DiagramRootEditPart.VISUAL_ID;
 			} else {
 				return false;
 			}
 		}
 		switch (containerVisualID) {
-		case AbstractStatemachineEditPart.VISUAL_ID:
+		case DiagramRootEditPart.VISUAL_ID:
 			if (InitialEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
@@ -362,8 +362,8 @@ public class StatemachinesVisualIDRegistry {
 				return true;
 			}
 			break;
-		case StateStatemachineEditPart.VISUAL_ID:
-			if (StateStatemachineNameEditPart.VISUAL_ID == nodeVisualID) {
+		case StatemachineEditPart.VISUAL_ID:
+			if (StatemachineNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			if (StatemachineStatesCompartmentEditPart.VISUAL_ID == nodeVisualID) {
@@ -409,7 +409,7 @@ public class StatemachinesVisualIDRegistry {
 			}
 			break;
 		case StateStatemachinesCompartmentEditPart.VISUAL_ID:
-			if (StateStatemachineEditPart.VISUAL_ID == nodeVisualID) {
+			if (StatemachineEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -433,7 +433,7 @@ public class StatemachinesVisualIDRegistry {
 			}
 			break;
 		case InnerStateStatemachinesCompartmentEditPart.VISUAL_ID:
-			if (StateStatemachineEditPart.VISUAL_ID == nodeVisualID) {
+			if (StatemachineEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;

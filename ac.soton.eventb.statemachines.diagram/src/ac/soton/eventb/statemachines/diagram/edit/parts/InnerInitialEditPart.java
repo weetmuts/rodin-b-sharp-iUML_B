@@ -257,7 +257,7 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof RefinedStateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
-		if (targetEditPart instanceof StateStatemachineEditPart) {
+		if (targetEditPart instanceof StatemachineEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
 		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart) {

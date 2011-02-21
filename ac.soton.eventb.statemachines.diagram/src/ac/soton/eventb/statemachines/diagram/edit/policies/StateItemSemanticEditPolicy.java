@@ -28,8 +28,8 @@ import ac.soton.eventb.statemachines.diagram.edit.commands.TransitionGhostReorie
 import ac.soton.eventb.statemachines.diagram.edit.commands.TransitionReorientCommand;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantsCompartmentEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachinesCompartmentEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.TransitionGhostEditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -116,7 +116,7 @@ public class StateItemSemanticEditPolicy extends
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
 					switch (StatemachinesVisualIDRegistry.getVisualID(cnode)) {
-					case StateStatemachineEditPart.VISUAL_ID:
+					case StatemachineEditPart.VISUAL_ID:
 						for (Iterator<?> it = cnode.getTargetEdges().iterator(); it
 								.hasNext();) {
 							Edge incomingLink = (Edge) it.next();

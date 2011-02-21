@@ -35,7 +35,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 
 /**
  * @generated
@@ -74,7 +74,7 @@ public class StatemachinesNewDiagramFileWizard extends Wizard {
 		myFileCreationPage
 				.setDescription(NLS
 						.bind(Messages.StatemachinesNewDiagramFileWizard_CreationPageDescription,
-								AbstractStatemachineEditPart.MODEL_ID));
+								DiagramRootEditPart.MODEL_ID));
 		IPath filePath;
 		String fileName = URI.decode(domainModelURI.trimFileExtension()
 				.lastSegment());
@@ -135,7 +135,7 @@ public class StatemachinesNewDiagramFileWizard extends Wizard {
 				int diagramVID = StatemachinesVisualIDRegistry
 						.getDiagramVisualID(diagramRootElementSelectionPage
 								.getModelElement());
-				if (diagramVID != AbstractStatemachineEditPart.VISUAL_ID) {
+				if (diagramVID != DiagramRootEditPart.VISUAL_ID) {
 					return CommandResult
 							.newErrorCommandResult(Messages.StatemachinesNewDiagramFileWizard_IncorrectRootError);
 				}
@@ -143,7 +143,7 @@ public class StatemachinesNewDiagramFileWizard extends Wizard {
 						.createDiagram(
 								diagramRootElementSelectionPage
 										.getModelElement(),
-								AbstractStatemachineEditPart.MODEL_ID,
+								DiagramRootEditPart.MODEL_ID,
 								StatemachinesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				diagramResource.getContents().add(diagram);
 				return CommandResult.newOKCommandResult();
@@ -201,7 +201,7 @@ public class StatemachinesNewDiagramFileWizard extends Wizard {
 					.provides(
 							new CreateDiagramViewOperation(
 									new EObjectAdapter(selectedModelElement),
-									AbstractStatemachineEditPart.MODEL_ID,
+									DiagramRootEditPart.MODEL_ID,
 									StatemachinesDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT));
 			setErrorMessage(result ? null
 					: Messages.StatemachinesNewDiagramFileWizard_RootSelectionPageInvalidSelectionMessage);

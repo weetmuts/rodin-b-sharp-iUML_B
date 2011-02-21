@@ -28,7 +28,7 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramUpdater;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesNodeDescriptor;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -55,7 +55,7 @@ public class InnerStateStatemachinesCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		LinkedList<EObject> result = new LinkedList<EObject>();
 		List<StatemachinesNodeDescriptor> childDescriptors = StatemachinesDiagramUpdater
-				.getStateStateStatemachinesCompartment_7004SemanticChildren(viewObject);
+				.getStateStatemachines_7004SemanticChildren(viewObject);
 		for (StatemachinesNodeDescriptor d : childDescriptors) {
 			result.add(d.getModelElement());
 		}
@@ -75,7 +75,7 @@ public class InnerStateStatemachinesCompartmentCanonicalEditPolicy extends
 	 * @generated
 	 */
 	private boolean isMyDiagramElement(View view) {
-		return StateStatemachineEditPart.VISUAL_ID == StatemachinesVisualIDRegistry
+		return StatemachineEditPart.VISUAL_ID == StatemachinesVisualIDRegistry
 				.getVisualID(view);
 	}
 
@@ -88,7 +88,7 @@ public class InnerStateStatemachinesCompartmentCanonicalEditPolicy extends
 		}
 		LinkedList<IAdaptable> createdViews = new LinkedList<IAdaptable>();
 		List<StatemachinesNodeDescriptor> childDescriptors = StatemachinesDiagramUpdater
-				.getStateStateStatemachinesCompartment_7004SemanticChildren((View) getHost()
+				.getStateStatemachines_7004SemanticChildren((View) getHost()
 						.getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
 		// we care to check only views we recognize as ours

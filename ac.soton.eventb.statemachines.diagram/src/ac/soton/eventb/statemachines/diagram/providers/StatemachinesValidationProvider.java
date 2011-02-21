@@ -10,7 +10,7 @@ package ac.soton.eventb.statemachines.diagram.providers;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.notation.View;
 
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 
@@ -68,7 +68,7 @@ public class StatemachinesValidationProvider {
 		}
 		if (object instanceof View) {
 			return constraintsActive
-					&& AbstractStatemachineEditPart.MODEL_ID
+					&& DiagramRootEditPart.MODEL_ID
 							.equals(StatemachinesVisualIDRegistry
 									.getModelID((View) object));
 		}

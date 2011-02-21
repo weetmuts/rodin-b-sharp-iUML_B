@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.AbstractStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerANYEditPart;
@@ -42,7 +42,7 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStateStatemachine
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RefinedStatemachineStatesCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
-import ac.soton.eventb.statemachines.diagram.edit.parts.StateStatemachineEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartment2EditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineStatesCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.part.Messages;
@@ -60,7 +60,7 @@ public class StatemachinesModelingAssistantProvider extends
 	public List getTypesForPopupBar(IAdaptable host) {
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
-		if (editPart instanceof AbstractStatemachineEditPart) {
+		if (editPart instanceof DiagramRootEditPart) {
 			ArrayList<IElementType> types = new ArrayList<IElementType>(5);
 			types.add(StatemachinesElementTypes.Initial_2001);
 			types.add(StatemachinesElementTypes.Final_2002);
@@ -144,8 +144,8 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((RefinedStateEditPart) sourceEditPart)
 					.getMARelTypesOnSource();
 		}
-		if (sourceEditPart instanceof StateStatemachineEditPart) {
-			return ((StateStatemachineEditPart) sourceEditPart)
+		if (sourceEditPart instanceof StatemachineEditPart) {
+			return ((StatemachineEditPart) sourceEditPart)
 					.getMARelTypesOnSource();
 		}
 		if (sourceEditPart instanceof InnerInitialEditPart) {
@@ -200,8 +200,8 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((RefinedStateEditPart) targetEditPart)
 					.getMARelTypesOnTarget();
 		}
-		if (targetEditPart instanceof StateStatemachineEditPart) {
-			return ((StateStatemachineEditPart) targetEditPart)
+		if (targetEditPart instanceof StatemachineEditPart) {
+			return ((StatemachineEditPart) targetEditPart)
 					.getMARelTypesOnTarget();
 		}
 		if (targetEditPart instanceof InnerInitialEditPart) {
@@ -263,8 +263,8 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((RefinedStateEditPart) sourceEditPart)
 					.getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
-		if (sourceEditPart instanceof StateStatemachineEditPart) {
-			return ((StateStatemachineEditPart) sourceEditPart)
+		if (sourceEditPart instanceof StatemachineEditPart) {
+			return ((StatemachineEditPart) sourceEditPart)
 					.getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
 		if (sourceEditPart instanceof InnerInitialEditPart) {
@@ -325,8 +325,8 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((RefinedStateEditPart) targetEditPart)
 					.getMATypesForSource(relationshipType);
 		}
-		if (targetEditPart instanceof StateStatemachineEditPart) {
-			return ((StateStatemachineEditPart) targetEditPart)
+		if (targetEditPart instanceof StatemachineEditPart) {
+			return ((StatemachineEditPart) targetEditPart)
 					.getMATypesForSource(relationshipType);
 		}
 		if (targetEditPart instanceof InnerInitialEditPart) {
@@ -387,8 +387,8 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((RefinedStateEditPart) sourceEditPart)
 					.getMATypesForTarget(relationshipType);
 		}
-		if (sourceEditPart instanceof StateStatemachineEditPart) {
-			return ((StateStatemachineEditPart) sourceEditPart)
+		if (sourceEditPart instanceof StatemachineEditPart) {
+			return ((StatemachineEditPart) sourceEditPart)
 					.getMATypesForTarget(relationshipType);
 		}
 		if (sourceEditPart instanceof InnerInitialEditPart) {

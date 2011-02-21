@@ -260,7 +260,7 @@ public class FinalEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof RefinedStateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
-		if (targetEditPart instanceof StateStatemachineEditPart) {
+		if (targetEditPart instanceof StatemachineEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
 		if (targetEditPart instanceof InnerInitialEditPart) {

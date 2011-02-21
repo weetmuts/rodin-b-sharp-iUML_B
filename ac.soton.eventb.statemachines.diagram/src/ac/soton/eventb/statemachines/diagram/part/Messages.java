@@ -275,72 +275,72 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String Initial2CreationTool_title;
+	public static String RefinedState2CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Initial2CreationTool_desc;
+	public static String RefinedState2CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Final3CreationTool_title;
+	public static String Initial3CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Final3CreationTool_desc;
+	public static String Initial3CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String ANY4CreationTool_title;
+	public static String Final4CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String ANY4CreationTool_desc;
+	public static String Final4CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedState5CreationTool_title;
+	public static String ANY5CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedState5CreationTool_desc;
+	public static String ANY5CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Invariant1CreationTool_title;
+	public static String Statemachine1CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Invariant1CreationTool_desc;
+	public static String Statemachine1CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Statemachine2CreationTool_title;
+	public static String RefinedStatemachine2CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Statemachine2CreationTool_desc;
+	public static String RefinedStatemachine2CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedStatemachine3CreationTool_title;
+	public static String Invariant3CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedStatemachine3CreationTool_desc;
+	public static String Invariant3CreationTool_desc;
 
 	/**
 	 * @generated
@@ -415,6 +415,16 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String NavigatorGroupName_RefinedStatemachine_3007_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_RefinedStatemachine_3007_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
 	public static String NavigatorGroupName_ANY_3004_incominglinks;
 
 	/**
@@ -455,16 +465,6 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Statemachine_3001_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_Statemachine_3001_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
 	public static String NavigatorGroupName_DiagramRoot_1000_links;
 
 	/**
@@ -476,6 +476,36 @@ public class Messages extends NLS {
 	 * @generated
 	 */
 	public static String NavigatorGroupName_State_2004_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Final_3003_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Final_3003_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Statemachine_3001_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Statemachine_3001_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_RefinedState_2005_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_RefinedState_2005_outgoinglinks;
 
 	/**
 	 * @generated
@@ -500,26 +530,6 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Final_3003_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_Final_3003_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_RefinedState_2005_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_RefinedState_2005_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
 	public static String NavigatorGroupName_State_3005_incominglinks;
 
 	/**
@@ -530,22 +540,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String NavigatorGroupName_Statemachine_3009_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Statemachine_3009_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
 	public static String NavigatorGroupName_ANY_2003_incominglinks;
 
 	/**
 	 * @generated
 	 */
 	public static String NavigatorGroupName_ANY_2003_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_RefinedStatemachine_3007_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_RefinedStatemachine_3007_outgoinglinks;
 
 	/**
 	 * @generated
@@ -576,16 +586,6 @@ public class Messages extends NLS {
 	 * @generated
 	 */
 	public static String NavigatorGroupName_RefinedState_3008_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_Statemachine_3009_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_Statemachine_3009_outgoinglinks;
 
 	/**
 	 * @generated
