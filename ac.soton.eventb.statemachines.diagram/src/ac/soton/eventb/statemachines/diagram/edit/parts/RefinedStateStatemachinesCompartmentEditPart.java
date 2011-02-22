@@ -8,6 +8,7 @@
 package ac.soton.eventb.statemachines.diagram.edit.parts;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ListCompartmentEditPart;
@@ -57,12 +58,26 @@ public class RefinedStateStatemachinesCompartmentEditPart extends
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public IFigure createFigure() {
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
 				.createFigure();
 		result.setTitleVisibility(false);
+		// add margins
+		Insets insets = result.getContentPane().getInsets();
+		insets.top = 5;
+		insets.bottom = 5;
+		insets.left = 5;
+		insets.right = 5;
+		// use all space
+		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
+				.getContentPane().getLayoutManager();
+		layoutMgr.setVertical(true);
+		layoutMgr.setStretchMajorAxis(true);
+		layoutMgr.setStretchMinorAxis(true);
+		layoutMgr.setSpacing(5);
+
 		return result;
 	}
 

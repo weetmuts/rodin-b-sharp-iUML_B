@@ -29,7 +29,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.IHintedType;
-import org.eclipse.gmf.runtime.notation.Connector;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -41,7 +40,6 @@ import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.eclipse.gmf.runtime.notation.Routing;
-import org.eclipse.gmf.runtime.notation.Shape;
 import org.eclipse.gmf.runtime.notation.TitleStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
@@ -148,8 +146,9 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 				.getSemanticAdapter());
 		EObject domainElement = getSemanticElement(op.getSemanticAdapter());
 		int visualID;
-		if (op.getSemanticHint() == null) {
-			// Semantic hint is not specified. Can be a result of call from CanonicalEditPolicy.
+		if (op.getSemanticHint() == null
+				|| "Statemachines-CEP".equals(op.getSemanticHint())) {
+			// Semantic hint is not specified, or a factory hint value was provided (which can be a result of call from CanonicalEditPolicy).
 			// In this situation there should be NO elementType, visualID will be determined
 			// by VisualIDRegistry.getNodeVisualID() for domainElement.
 			if (elementType != null || domainElement == null) {
@@ -275,7 +274,7 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 			PreferencesHint preferencesHint) {
 		final EObject domainElement = getSemanticElement(semanticAdapter);
 		final int visualID;
-		if (semanticHint == null) {
+		if (semanticHint == null || "Statemachines-CEP".equals(semanticHint)) {
 			visualID = StatemachinesVisualIDRegistry.getNodeVisualID(
 					containerView, domainElement);
 		} else {
@@ -1023,8 +1022,8 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 		label6001.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
 		Location location6001 = (Location) label6001.getLayoutConstraint();
-		location6001.setX(-5);
-		location6001.setY(-5);
+		location6001.setX(-8);
+		location6001.setY(-8);
 		return edge;
 	}
 
@@ -1079,8 +1078,8 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 		label6002.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
 		Location location6002 = (Location) label6002.getLayoutConstraint();
-		location6002.setX(-5);
-		location6002.setY(-5);
+		location6002.setX(-8);
+		location6002.setY(-8);
 		return edge;
 	}
 

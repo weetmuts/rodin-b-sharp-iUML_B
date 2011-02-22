@@ -419,8 +419,8 @@
       accessor="//@figures.0/@descriptors.8/@accessors.0">
     <facets
         xsi:type="gmfgraph:LabelOffsetFacet"
-        x="-5"
-        y="-5"/>
+        x="-8"
+        y="-8"/>
     <facets
         xsi:type="gmfgraph:AlignmentFacet"
         alignment="CENTER"/>

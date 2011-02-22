@@ -90,7 +90,7 @@ public class TransitionNameEditPart extends LabelEditPart implements
 		registerSnapBackPosition(
 				StatemachinesVisualIDRegistry
 						.getType(ac.soton.eventb.statemachines.diagram.edit.parts.TransitionNameEditPart.VISUAL_ID),
-				new Point(-5, -5));
+				new Point(-8, -8));
 	}
 
 	/**
