@@ -7,6 +7,7 @@
  */
 package ac.soton.eventb.statemachines.diagram.edit.parts;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
@@ -123,6 +124,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		 * @generated
 		 */
 		public TransitionFigure() {
+			this.setForegroundColor(ColorConstants.gray);
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());

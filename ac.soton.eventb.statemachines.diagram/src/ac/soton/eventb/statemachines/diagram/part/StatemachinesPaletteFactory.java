@@ -100,8 +100,8 @@ public class StatemachinesPaletteFactory {
 	 */
 	private ToolEntry createRefinedState2CreationTool() {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Initial_2001);
-		types.add(StatemachinesElementTypes.Initial_3002);
+		types.add(StatemachinesElementTypes.RefinedState_2005);
+		types.add(StatemachinesElementTypes.RefinedState_3008);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.RefinedState2CreationTool_title,
 				Messages.RefinedState2CreationTool_desc, types);
@@ -117,8 +117,8 @@ public class StatemachinesPaletteFactory {
 	 */
 	private ToolEntry createInitial3CreationTool() {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Final_2002);
-		types.add(StatemachinesElementTypes.Final_3003);
+		types.add(StatemachinesElementTypes.Initial_2001);
+		types.add(StatemachinesElementTypes.Initial_3002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Initial3CreationTool_title,
 				Messages.Initial3CreationTool_desc, types);
@@ -134,8 +134,8 @@ public class StatemachinesPaletteFactory {
 	 */
 	private ToolEntry createFinal4CreationTool() {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.ANY_2003);
-		types.add(StatemachinesElementTypes.ANY_3004);
+		types.add(StatemachinesElementTypes.Final_2002);
+		types.add(StatemachinesElementTypes.Final_3003);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Final4CreationTool_title,
 				Messages.Final4CreationTool_desc, types);
@@ -151,8 +151,8 @@ public class StatemachinesPaletteFactory {
 	 */
 	private ToolEntry createANY5CreationTool() {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.RefinedState_2005);
-		types.add(StatemachinesElementTypes.RefinedState_3008);
+		types.add(StatemachinesElementTypes.ANY_2003);
+		types.add(StatemachinesElementTypes.ANY_3004);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.ANY5CreationTool_title,
 				Messages.ANY5CreationTool_desc, types);
@@ -168,8 +168,8 @@ public class StatemachinesPaletteFactory {
 	 */
 	private ToolEntry createStatemachine1CreationTool() {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Invariant_3006);
-		types.add(StatemachinesElementTypes.Invariant_3010);
+		types.add(StatemachinesElementTypes.Statemachine_3001);
+		types.add(StatemachinesElementTypes.Statemachine_3009);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Statemachine1CreationTool_title,
 				Messages.Statemachine1CreationTool_desc, types);
@@ -184,12 +184,11 @@ public class StatemachinesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createRefinedStatemachine2CreationTool() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Statemachine_3001);
-		types.add(StatemachinesElementTypes.Statemachine_3009);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.RefinedStatemachine2CreationTool_title,
-				Messages.RefinedStatemachine2CreationTool_desc, types);
+				Messages.RefinedStatemachine2CreationTool_desc,
+				Collections
+						.singletonList(StatemachinesElementTypes.RefinedStatemachine_3007));
 		entry.setId("createRefinedStatemachine2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
 				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/RefinedStatemachine.png")); //$NON-NLS-1$
@@ -201,11 +200,12 @@ public class StatemachinesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createInvariant3CreationTool() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
+		types.add(StatemachinesElementTypes.Invariant_3006);
+		types.add(StatemachinesElementTypes.Invariant_3010);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Invariant3CreationTool_title,
-				Messages.Invariant3CreationTool_desc,
-				Collections
-						.singletonList(StatemachinesElementTypes.RefinedStatemachine_3007));
+				Messages.Invariant3CreationTool_desc, types);
 		entry.setId("createInvariant3CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
 				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/Invariant.png")); //$NON-NLS-1$

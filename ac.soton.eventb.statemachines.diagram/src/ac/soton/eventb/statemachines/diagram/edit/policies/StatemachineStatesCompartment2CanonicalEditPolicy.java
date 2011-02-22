@@ -57,7 +57,7 @@ public class StatemachineStatesCompartment2CanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		LinkedList<EObject> result = new LinkedList<EObject>();
 		List<StatemachinesNodeDescriptor> childDescriptors = StatemachinesDiagramUpdater
-				.getStatemachineStates_7011SemanticChildren(viewObject);
+				.getStatemachineStatemachineStatesCompartment_7011SemanticChildren(viewObject);
 		for (StatemachinesNodeDescriptor d : childDescriptors) {
 			result.add(d.getModelElement());
 		}
@@ -97,7 +97,7 @@ public class StatemachineStatesCompartment2CanonicalEditPolicy extends
 		}
 		LinkedList<IAdaptable> createdViews = new LinkedList<IAdaptable>();
 		List<StatemachinesNodeDescriptor> childDescriptors = StatemachinesDiagramUpdater
-				.getStatemachineStates_7011SemanticChildren((View) getHost()
+				.getStatemachineStatemachineStatesCompartment_7011SemanticChildren((View) getHost()
 						.getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
 		// we care to check only views we recognize as ours

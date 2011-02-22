@@ -85,27 +85,27 @@ public class StatemachinesDiagramUpdater {
 		case DiagramRootEditPart.VISUAL_ID:
 			return getDiagramRoot_1000SemanticChildren(view);
 		case StateStatemachinesCompartmentEditPart.VISUAL_ID:
-			return getStateStatemachines_7001SemanticChildren(view);
+			return getStateStateStatemachinesCompartment_7001SemanticChildren(view);
 		case StateInvariantsCompartmentEditPart.VISUAL_ID:
-			return getStateInvariants_7002SemanticChildren(view);
+			return getStateStateInvariantsCompartment_7002SemanticChildren(view);
 		case StatemachineStatesCompartmentEditPart.VISUAL_ID:
-			return getStatemachineStates_7003SemanticChildren(view);
+			return getStatemachineStatemachineStatesCompartment_7003SemanticChildren(view);
 		case InnerStateStatemachinesCompartmentEditPart.VISUAL_ID:
-			return getStateStatemachines_7004SemanticChildren(view);
+			return getStateStateStatemachinesCompartment_7004SemanticChildren(view);
 		case InnerStateInvariantsCompartmentEditPart.VISUAL_ID:
-			return getStateInvariants_7005SemanticChildren(view);
+			return getStateStateInvariantsCompartment_7005SemanticChildren(view);
 		case RefinedStateStatemachinesCompartmentEditPart.VISUAL_ID:
-			return getRefinedStateStatemachines_7006SemanticChildren(view);
+			return getRefinedStateRefinedStateStatemachinesCompartment_7006SemanticChildren(view);
 		case RefinedStateInvariantsCompartmentEditPart.VISUAL_ID:
-			return getRefinedStateInvariants_7007SemanticChildren(view);
+			return getRefinedStateRefinedStateInvariantsCompartment_7007SemanticChildren(view);
 		case RefinedStatemachineStatesCompartmentEditPart.VISUAL_ID:
-			return getRefinedStatemachineStates_7008SemanticChildren(view);
+			return getRefinedStatemachineRefinedStatemachineStatesCompartment_7008SemanticChildren(view);
 		case InnerRefinedStateStatemachinesCompartmentEditPart.VISUAL_ID:
-			return getRefinedStateStatemachines_7009SemanticChildren(view);
+			return getRefinedStateRefinedStateStatemachinesCompartment_7009SemanticChildren(view);
 		case InnerRefinedStateInvariantsCompartmentEditPart.VISUAL_ID:
-			return getRefinedStateInvariants_7010SemanticChildren(view);
+			return getRefinedStateRefinedStateInvariantsCompartment_7010SemanticChildren(view);
 		case StatemachineStatesCompartment2EditPart.VISUAL_ID:
-			return getStatemachineStates_7011SemanticChildren(view);
+			return getStatemachineStatemachineStatesCompartment_7011SemanticChildren(view);
 		}
 		return Collections.emptyList();
 	}
@@ -156,7 +156,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStateStatemachines_7001SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStateStateStatemachinesCompartment_7001SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -185,7 +185,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStateInvariants_7002SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStateStateInvariantsCompartment_7002SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -213,7 +213,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStatemachineStates_7003SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStatemachineStatemachineStatesCompartment_7003SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -255,7 +255,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStateStatemachines_7004SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStateStateStatemachinesCompartment_7004SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -284,7 +284,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStateInvariants_7005SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStateStateInvariantsCompartment_7005SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -312,7 +312,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getRefinedStateStatemachines_7006SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getRefinedStateRefinedStateStatemachinesCompartment_7006SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -346,7 +346,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getRefinedStateInvariants_7007SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getRefinedStateRefinedStateInvariantsCompartment_7007SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -374,7 +374,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getRefinedStatemachineStates_7008SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getRefinedStatemachineRefinedStatemachineStatesCompartment_7008SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -417,7 +417,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getRefinedStateStatemachines_7009SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getRefinedStateRefinedStateStatemachinesCompartment_7009SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -451,7 +451,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getRefinedStateInvariants_7010SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getRefinedStateRefinedStateInvariantsCompartment_7010SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
@@ -479,7 +479,7 @@ public class StatemachinesDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<StatemachinesNodeDescriptor> getStatemachineStates_7011SemanticChildren(
+	public static List<StatemachinesNodeDescriptor> getStatemachineStatemachineStatesCompartment_7011SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
