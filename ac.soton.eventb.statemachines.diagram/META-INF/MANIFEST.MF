@@ -7,9 +7,19 @@ Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: ac.soton.eventb.statemachines.diagram.edit.parts,
+Export-Package: ac.soton.eventb.statemachines.diagram.edit.commands,
+ ac.soton.eventb.statemachines.diagram.edit.helpers,
+ ac.soton.eventb.statemachines.diagram.edit.parts,
+ ac.soton.eventb.statemachines.diagram.edit.policies,
+ ac.soton.eventb.statemachines.diagram.edit.policies.custom,
+ ac.soton.eventb.statemachines.diagram.expressions,
+ ac.soton.eventb.statemachines.diagram.navigator,
+ ac.soton.eventb.statemachines.diagram.parsers,
  ac.soton.eventb.statemachines.diagram.part,
- ac.soton.eventb.statemachines.diagram.providers
+ ac.soton.eventb.statemachines.diagram.preferences,
+ ac.soton.eventb.statemachines.diagram.providers,
+ ac.soton.eventb.statemachines.diagram.sheet,
+ ac.soton.eventb.statemachines.diagram.sheet.custom
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.core.expressions,

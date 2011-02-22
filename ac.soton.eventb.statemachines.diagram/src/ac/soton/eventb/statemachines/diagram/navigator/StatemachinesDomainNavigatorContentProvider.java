@@ -34,14 +34,14 @@ public class StatemachinesDomainNavigatorContentProvider implements
 		ICommonContentProvider {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
-	private AdapterFactoryContentProvider myAdapterFctoryContentProvier;
+	protected AdapterFactoryContentProvider myAdapterFctoryContentProvier;
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
-	private static final Object[] EMPTY_ARRAY = new Object[0];
+	protected static final Object[] EMPTY_ARRAY = new Object[0];
 
 	/**
 	 * @generated
@@ -49,9 +49,9 @@ public class StatemachinesDomainNavigatorContentProvider implements
 	private Viewer myViewer;
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
-	private AdapterFactoryEditingDomain myEditingDomain;
+	protected AdapterFactoryEditingDomain myEditingDomain;
 
 	/**
 	 * @generated
