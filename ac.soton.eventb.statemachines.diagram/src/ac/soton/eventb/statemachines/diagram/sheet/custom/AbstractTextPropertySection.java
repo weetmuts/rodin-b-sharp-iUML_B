@@ -15,7 +15,6 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import ac.soton.eventb.statemachines.diagram.sheet.StatemachinesSheetPropertyFilter;
 
 /**
  * General text property section, used for string properties of an object.
@@ -30,13 +29,27 @@ public abstract class AbstractTextPropertySection extends
 	protected Text createTextWidget(Composite parent) {
 		Text text = getWidgetFactory().createText(parent, StringStatics.BLANK);
 		FormData data = new FormData();
-		data.left = new FormAttachment(0, 100);
+		data.left = new FormAttachment(0, getPropertyLabelWidth(parent));
 		data.right = new FormAttachment(100, 0);
 		data.top = new FormAttachment(0, 0);
 		text.setLayoutData(data);
 		if (isReadOnly())
 			text.setEditable(false);
 		return text;
+	}
+
+	/**
+	 * Returns width of property label.
+	 * Standard implementation uses label text width to calculate the width.
+	 * Subclasses may overrride.
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	private int getPropertyLabelWidth(Composite parent) {
+		return 100;
+//		return getStandardLabelWidth(parent,
+//				getPropertyNameStringsArray());
 	}
 
 	@Override

@@ -198,7 +198,7 @@ http://www.eclipse.org/legal/epl-v10.html
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
-      <?gmfgen generated="true"?>   
+      <?gmfgen generated="false"?>   
       <propertyTabs contributorId="ac.soton.eventb.statemachines.diagram">
          <propertyTab
              category="visual"
@@ -209,14 +209,20 @@ http://www.eclipse.org/legal/epl-v10.html
              id="property.tab.DiagramPropertySection"
              label="%tab.diagram"/>
           <propertyTab
-             category="domain"
-             id="property.tab.domain"
-             label="%tab.domain"/>
+                afterTab="property.tab.overview"
+                category="domain"
+                id="property.tab.domain"
+                label="%tab.domain"/>
+          <propertyTab
+                category="domain"
+                id="property.tab.overview"
+                label="Overview">
+          </propertyTab>
       </propertyTabs>
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
-      <?gmfgen generated="true"?>   
+      <?gmfgen generated="false"?>   
       <propertySections contributorId="ac.soton.eventb.statemachines.diagram">
          <propertySection id="property.section.ConnectorAppearancePropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
@@ -245,6 +251,76 @@ http://www.eclipse.org/legal/epl-v10.html
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
             <input type="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesAbstractNavigatorItem"/>
+         </propertySection>
+         <propertySection
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.CommentPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$CommentedElementFilter"
+               id="property.section.comment"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.NamePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$NamedElementFilter"
+               id="property.section.name"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.LabelPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$LabeledElementFilter"
+               id="property.section.label"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
+               id="property.section.elaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.RefinesStatePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$RefinesStateFilter"
+               id="property.section.refines.state"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.RefinesStatemachinePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$RefinesStatemachineFilter"
+               id="property.section.refines.statemachine"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.refines.state"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.InvariantsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$AbstractStateFilter"
+               id="property.section.invariants"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.PredicatePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$InvariantFilter"
+               id="property.section.predicate"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.predicate"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.TheoremPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$InvariantFilter"
+               id="property.section.theorem"
+               tab="property.tab.overview">
          </propertySection>
       </propertySections>
    </extension>
