@@ -43,13 +43,19 @@ import org.eclipse.gmf.runtime.emf.ui.services.parser.ISemanticParser;
 import org.eclipse.gmf.runtime.notation.FontStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Text;
+import org.rodinp.keyboard.RodinKeyboardPlugin;
+import org.rodinp.keyboard.preferences.PreferenceConstants;
 
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateInvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
@@ -333,13 +339,24 @@ public class StateInvariantEditPart extends CompartmentEditPart implements
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected DirectEditManager getManager() {
 		if (manager == null) {
 			setManager(new TextDirectEditManager(this,
 					TextDirectEditManager.getTextCellEditorClass(this),
-					StatemachinesEditPartFactory.getTextCellEditorLocator(this)));
+					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
+//FIXME: refactor this to use a custom external class;
+				// maybe generate code from templates
+						@Override
+						protected void initCellEditor() {
+							super.initCellEditor();
+							Text text = (Text) getCellEditor().getControl();
+							Font font = JFaceResources.getFont(PreferenceConstants.RODIN_MATH_FONT);
+							text.setFont(font);
+							ModifyListener eventBListener = RodinKeyboardPlugin.getDefault().createRodinModifyListener();
+							text.addModifyListener(eventBListener);
+						}});
 		}
 		return manager;
 	}
