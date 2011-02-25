@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.command.MoveCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.jface.dialogs.Dialog;
@@ -23,11 +25,15 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.MachineFactory;
 
@@ -97,6 +103,76 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 			return null;
 		}
 	};
+	protected Button upButton;
+	protected Button downButton;
+
+	@Override
+	public void createControls(Composite parent,
+			TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+		
+		Control[] children = parent.getChildren();
+		FormData data;
+		
+		upButton = getWidgetFactory().createButton((Composite) children[0], "Up", SWT.PUSH);
+		data = new FormData();
+		data.left = new FormAttachment(removeButton, 0);
+		data.bottom = new FormAttachment(100, 0);
+		data.width = 50;
+		upButton.setLayoutData(data);
+		upButton.addSelectionListener(new SelectionAdapter() {
+
+			public void widgetSelected(SelectionEvent event) {
+				EditingDomain editingDomain = ((StatemachinesDiagramEditor) getPart())
+						.getEditingDomain();
+				Object object = table.getSelection()[0].getData();
+				int newIndex = table.getSelectionIndex() - 1;
+				editingDomain.getCommandStack().execute(
+						MoveCommand.create(editingDomain, eObject, getFeature(),
+								object, newIndex));
+				refresh();
+				table.select(newIndex);
+				table.notifyListeners(SWT.Selection, new Event());
+			}
+		});
+		
+		downButton = getWidgetFactory().createButton((Composite) children[0], "Down", SWT.PUSH);
+		data = new FormData();
+		data.left = new FormAttachment(upButton, 0);
+		data.bottom = new FormAttachment(100, 0);
+		data.width = 50;
+		downButton.setLayoutData(data);
+		downButton.addSelectionListener(new SelectionAdapter() {
+
+			public void widgetSelected(SelectionEvent event) {
+				EditingDomain editingDomain = ((StatemachinesDiagramEditor) getPart())
+						.getEditingDomain();
+				Object object = table.getSelection()[0].getData();
+				int newIndex = table.getSelectionIndex() + 1;
+				editingDomain.getCommandStack().execute(
+						MoveCommand.create(editingDomain, eObject, getFeature(),
+								object, newIndex));
+				refresh();
+				table.select(newIndex);
+				table.notifyListeners(SWT.Selection, new Event());
+			}
+		});
+		
+		table.addSelectionListener(new SelectionAdapter() {
+
+			public void widgetSelected(SelectionEvent event) {
+				upButton.setEnabled(table.getSelectionIndex() > 0);
+				downButton.setEnabled(table.getSelectionIndex() >= 0 && table.getSelectionIndex() < (table.getItemCount() - 1));
+			}
+		});
+	}
+
+	@Override
+	public void refresh() {
+		upButton.setEnabled(false);
+		downButton.setEnabled(false);
+		super.refresh();
+	}
 
 	@Override
 	protected String getButtonLabelText() {
@@ -106,11 +182,6 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 	@Override
 	protected List getOwnedRows() {
 		return ((AbstractState) eObject).getConstraints();
-	}
-
-	@Override
-	protected String getKeyForRow(Object object) {
-		return "";
 	}
 
 	@Override
@@ -159,6 +230,11 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 			EditPart part = selectedPart.findEditPart(null, (EObject) object);
 			if (part != null)
 				return new StructuredSelection(part);
+			if (selectedPart.getParent() != null) {
+				part = ((GraphicalEditPart) selectedPart.getParent()).findEditPart(null, (EObject) object);
+				if (part != null)
+					return new StructuredSelection(part);
+			}
 		}
 		return null;
 	}

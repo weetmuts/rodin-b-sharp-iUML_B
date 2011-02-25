@@ -20,7 +20,6 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.MouseAdapter;
@@ -179,11 +178,13 @@ public abstract class AbstractTablePropertySection
 		table.addMouseListener(new MouseAdapter() {
 
 			public void mouseDoubleClick(MouseEvent e) {
-				Object object = table.getSelection()[0].getData();
-				ISelection selection = getEditorSelection(object);
-				if (selection != null) {
-					((StatemachinesDiagramEditor) getPart()).getDiagramGraphicalViewer().setSelection(selection);
-					((StatemachinesDiagramEditor) getPart()).setFocus();
+				if (table.getSelection().length > 0) {
+					Object object = table.getSelection()[0].getData();
+					ISelection selection = getEditorSelection(object);
+					if (selection != null) {
+						((StatemachinesDiagramEditor) getPart()).getDiagramGraphicalViewer().setSelection(selection);
+						((StatemachinesDiagramEditor) getPart()).setFocus();
+					}
 				}
 			}
 		});
@@ -212,21 +213,9 @@ public abstract class AbstractTablePropertySection
 
 		for (Iterator i = getOwnedRows().iterator(); i.hasNext();) {
 			Object next = i.next();
-			String key = getKeyForRow(next);
-
-			// find index (for sorting purposes)
-			int k = 0;
-			int size = table.getItemCount();
-			while (k < size) {
-				String currentKey = table.getItem(k).getText();
-				if (key.compareToIgnoreCase(currentKey) < 0) {
-					break;
-				}
-				k++;
-			}
 
 			// create the table item
-			TableItem item = new TableItem(table, SWT.NONE, k);
+			TableItem item = new TableItem(table, SWT.NONE);
 			String[] values = new String[columns.size()];
 			List valuesForRow = getValuesForRow(next);
 			for (int j = 0; j < columns.size(); j++) {
@@ -255,16 +244,6 @@ public abstract class AbstractTablePropertySection
 	 * @return the list of the row objects.
 	 */
 	protected abstract List getOwnedRows();
-
-	/**
-	 * Get the key for the table that is used for sorting. Usually the table is
-	 * sorted by Name or some key string..
-	 * 
-	 * @param object
-	 *            an object in the row of the table.
-	 * @return the string for the key.
-	 */
-	protected abstract String getKeyForRow(Object object);
 
 	/**
 	 * Get the values for the row in the table.

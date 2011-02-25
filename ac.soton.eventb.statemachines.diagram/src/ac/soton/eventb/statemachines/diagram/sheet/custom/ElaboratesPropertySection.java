@@ -56,11 +56,6 @@ public class ElaboratesPropertySection extends AbstractTablePropertySection {
 	}
 
 	@Override
-	protected String getKeyForRow(Object object) {
-		return "";
-	}
-
-	@Override
 	protected List getValuesForRow(Object object) {
 		return Collections.singletonList(((Event) object).getName());
 	}
