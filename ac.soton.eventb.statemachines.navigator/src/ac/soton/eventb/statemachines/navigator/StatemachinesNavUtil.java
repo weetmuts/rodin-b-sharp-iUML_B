@@ -9,16 +9,23 @@ package ac.soton.eventb.statemachines.navigator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.PartInitException;
+import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachinePackage;
 import org.eventb.ui.EventBUIPlugin;
 
 import ac.soton.eventb.statemachines.AbstractStatemachine;
+import ac.soton.eventb.statemachines.EventBLabeled;
 import ac.soton.eventb.statemachines.RefinedStatemachine;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorUtil;
@@ -45,7 +52,7 @@ public class StatemachinesNavUtil {
 		String smName = abstractStatemachine instanceof Statemachine ? ((Statemachine) abstractStatemachine).getName() : ((RefinedStatemachine) abstractStatemachine).getLabel();
 		if (smName == null || smName.trim().isEmpty())
 			return StatemachinesDiagramEditorUtil.getUniqueFileName(containerFullPath, machineName, "smd");
-		return machineName + "." + smName + "." + "smd";
+		return (machineName.isEmpty() ? "" : machineName + ".") + smName + "." + "smd";
 	}
 
 	/**
@@ -67,5 +74,27 @@ public class StatemachinesNavUtil {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns diagram editor name for diagram element.
+	 * 
+	 * @param diagram diagram element
+	 * @return editor name
+	 */
+	public static String getEditorName(Diagram diagram) {
+		EObject element = diagram.getElement();
+		String name = element instanceof EventBNamed ? ((EventBNamed) element).getName()
+				: element instanceof EventBLabeled ? ((EventBLabeled) element).getLabel() : "";
+				
+		Machine machine = (Machine) ((EventBObject) element).getContaining(MachinePackage.eINSTANCE.getMachine());
+		name = (machine != null ? machine.getName() + "." : "") + name;
+		
+// full name including states				
+//		element = element.eContainer();
+//		for (; element != null && element instanceof Resource == false; element = element.eContainer())
+//			name = (element instanceof EventBNamed ? ((EventBNamed) element).getName()
+//					: element instanceof EventBLabeled ? ((EventBLabeled) element).getLabel() : "") + "." + name;
+		return name;
 	}
 }

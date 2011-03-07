@@ -9,7 +9,6 @@ package ac.soton.eventb.statemachines.navigator;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.ecore.EObject;
-import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem;
@@ -36,7 +35,7 @@ public class StatemachinesDomainNavigatorItemTester extends PropertyTester {
 		StatemachinesDomainNavigatorItem item = (StatemachinesDomainNavigatorItem) receiver;
 		if (PROPERTY_IS_ROOT.equals(property)) {
 			EObject element = item.getEObject();
-			return Boolean.parseBoolean(expectedValue.toString()) == element instanceof DiagramRoot && ((DiagramRoot) element).eContainer() instanceof Machine;
+			return Boolean.parseBoolean(expectedValue.toString()) == element instanceof DiagramRoot;
 		}
 		assert false;
 		return false;
