@@ -30,8 +30,8 @@ import org.eclipse.ui.navigator.ICommonActionExtensionSite;
 import org.eventb.ui.EventBUIPlugin;
 
 import ac.soton.eventb.statemachines.DiagramRoot;
+import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem;
-import ac.soton.eventb.statemachines.navigator.StatemachinesNavUtil;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
 
 /**
@@ -89,7 +89,7 @@ public class DeleteStatemachineAction extends Action implements
 				};
 
 				try {
-					if (StatemachinesNavUtil.isUnsavedEditorOpenFor(resource))
+					if (StatemachinesEditorUtil.isUnsavedEditorOpenFor(resource))
 						if (false == MessageDialog.openQuestion(
 										EventBUIPlugin.getActiveWorkbenchShell(),
 										"Warning: unsaved editors",

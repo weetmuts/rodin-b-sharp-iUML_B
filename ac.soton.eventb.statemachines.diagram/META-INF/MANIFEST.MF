@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: ac.soton.eventb.statemachines.diagram.edit.commands,
+Export-Package: ac.soton.eventb.statemachines.diagram,
+ ac.soton.eventb.statemachines.diagram.edit.commands,
  ac.soton.eventb.statemachines.diagram.edit.helpers,
  ac.soton.eventb.statemachines.diagram.edit.parts,
  ac.soton.eventb.statemachines.diagram.edit.policies,
@@ -53,6 +54,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.emf.validation;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
- org.rodinp.keyboard;bundle-version="1.1.0"
+ org.rodinp.keyboard;bundle-version="1.1.0",
+ org.eventb.ui;bundle-version="2.0.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -45,13 +45,13 @@ import org.eclipse.ui.navigator.ICommonActionExtensionSite;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.statemachines.DiagramRoot;
+import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem;
 import ac.soton.eventb.statemachines.diagram.part.Messages;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorUtil;
-import ac.soton.eventb.statemachines.navigator.StatemachinesNavUtil;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
 
 /**
@@ -125,7 +125,7 @@ public class OpenStatemachineAction extends Action implements
 			EObject root = statemachine;
 			for (; false == root.eContainer() instanceof Machine; root = root.eContainer());
 			IFile file = WorkspaceSynchronizer.getFile(root.eResource());
-			String diagramName = StatemachinesNavUtil.getDiagramFileName(file.getFullPath(),(DiagramRoot) root);
+			String diagramName = StatemachinesEditorUtil.getDiagramFileName(file.getFullPath(),(DiagramRoot) root);
 			IFile diagramFile = file.getProject().getFile(new Path(diagramName));
 			
 			try {
@@ -150,7 +150,7 @@ public class OpenStatemachineAction extends Action implements
 				
 				// open diagram in editor
 				URI uri = EcoreUtil.getURI(diagram);
-				String editorName = StatemachinesNavUtil.getEditorName(diagram);
+				String editorName = StatemachinesEditorUtil.getEditorName(diagram);
 				IEditorInput editorInput = new URIEditorInput(uri, editorName);
 				IWorkbenchPage page = PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage();

@@ -40,6 +40,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
+import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.part.Messages;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
@@ -94,7 +95,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		// FIXME canExecute if  !(readOnly && getDiagramToOpen == null), i.e. open works on ro diagrams only when there's associated diagram already
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 				IAdaptable info) throws ExecutionException {
@@ -104,8 +105,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 					diagram = intializeNewDiagram();
 				}
 				URI uri = EcoreUtil.getURI(diagram);
-				String editorName = uri.lastSegment() + '#'
-						+ diagram.eResource().getContents().indexOf(diagram);
+				String editorName = StatemachinesEditorUtil.getEditorName(diagram);
 				IEditorInput editorInput = new URIEditorInput(uri, editorName);
 				IWorkbenchPage page = PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage();

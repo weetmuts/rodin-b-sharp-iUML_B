@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package ac.soton.eventb.statemachines.navigator;
+package ac.soton.eventb.statemachines.diagram;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -34,7 +34,7 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorUtil
  * @author vitaly
  *
  */
-public class StatemachinesNavUtil {
+public class StatemachinesEditorUtil {
 	
 	/**
 	 * Returns a statemachine diagram file name for the corresponding statemachine element.

@@ -35,8 +35,8 @@ import org.eventb.ui.EventBUIPlugin;
 
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
+import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem;
-import ac.soton.eventb.statemachines.navigator.StatemachinesNavUtil;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
 import ac.soton.eventb.statemachines.util.StatemachinesAdapterFactory;
 
@@ -94,7 +94,7 @@ public class AddStatemachineAction extends Action implements ISelectionChangedLi
 		if (resource != null && resource.isLoaded()) {
 			// check for opened unsaved editors
 			try {
-				if (StatemachinesNavUtil.isUnsavedEditorOpenFor(resource))
+				if (StatemachinesEditorUtil.isUnsavedEditorOpenFor(resource))
 					if (false == MessageDialog.openQuestion(
 									EventBUIPlugin.getActiveWorkbenchShell(),
 									"Warning: unsaved editors",
