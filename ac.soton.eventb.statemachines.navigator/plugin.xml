@@ -25,10 +25,10 @@
                <instanceof
                      value="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem">
                </instanceof>
-            </or></possibleChildren><!--
+            </or></possibleChildren>
          <commonSorter
                class="ac.soton.eventb.statemachines.navigator.StatemachinesAntiSorter">
-         </commonSorter>-->
+         </commonSorter>
          <actionProvider
                class="ac.soton.eventb.statemachines.navigator.providers.StatemachinesActionProvider">
             <enablement>
