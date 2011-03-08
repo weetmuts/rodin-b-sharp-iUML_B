@@ -8,6 +8,8 @@
 package ac.soton.eventb.statemachines.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eventb.emf.core.machine.Invariant;
 
 /**
@@ -36,6 +38,14 @@ public class PredicatePropertySection extends AbstractTextPropertySection {
 	@Override
 	protected String getPropertyChangeCommandName() {
 		return "change predicate";
+	}
+
+	@Override
+	protected Text createTextWidget(Composite parent) {
+		Text text = super.createTextWidget(parent);
+		text.addModifyListener(PropertySectionUtil.eventBListener);
+		text.setFont(PropertySectionUtil.rodinFont);
+		return text;
 	}
 
 }

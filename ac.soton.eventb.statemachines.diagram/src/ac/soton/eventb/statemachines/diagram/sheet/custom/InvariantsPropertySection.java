@@ -19,15 +19,12 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
@@ -39,8 +36,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.MachineFactory;
-import org.rodinp.keyboard.RodinKeyboardPlugin;
-import org.rodinp.keyboard.preferences.PreferenceConstants;
 
 import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -53,9 +48,6 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
  *
  */
 public class InvariantsPropertySection extends AbstractTablePropertySection {
-	
-	private static final ModifyListener eventBListener = RodinKeyboardPlugin.getDefault().createRodinModifyListener();
-	private static final Font font = JFaceResources.getFont(PreferenceConstants.RODIN_MATH_FONT);
 
 	/**
 	 * New Invariant creation dialog.
@@ -84,8 +76,8 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 		@Override
 		protected Control createDialogArea(Composite parent) {
 			Composite composite = (Composite) super.createDialogArea(parent);
-			getText().addModifyListener(eventBListener);
-			getText().setFont(font);
+			getText().addModifyListener(PropertySectionUtil.eventBListener);
+			getText().setFont(PropertySectionUtil.rodinFont);
 			theoremButton = getWidgetFactory().createButton(composite, "Theorem", SWT.CHECK);
 			GridData data = new GridData(GridData.GRAB_HORIZONTAL
 	                | GridData.HORIZONTAL_ALIGN_FILL);
@@ -177,7 +169,7 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 			}
 		});
 		
-		table.setFont(font);
+		table.setFont(PropertySectionUtil.rodinFont);
 	}
 
 	@Override
