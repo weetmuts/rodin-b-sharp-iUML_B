@@ -346,17 +346,20 @@ public class StateInvariantEditPart extends CompartmentEditPart implements
 			setManager(new TextDirectEditManager(this,
 					TextDirectEditManager.getTextCellEditorClass(this),
 					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
-//FIXME: refactor this to use a custom external class;
+				//FIXME: refactor this to use a custom external class;
 				// maybe generate code from templates
-						@Override
-						protected void initCellEditor() {
-							super.initCellEditor();
-							Text text = (Text) getCellEditor().getControl();
-							Font font = JFaceResources.getFont(PreferenceConstants.RODIN_MATH_FONT);
-							text.setFont(font);
-							ModifyListener eventBListener = RodinKeyboardPlugin.getDefault().createRodinModifyListener();
-							text.addModifyListener(eventBListener);
-						}});
+				@Override
+				protected void initCellEditor() {
+					super.initCellEditor();
+					Text text = (Text) getCellEditor().getControl();
+					Font font = JFaceResources
+							.getFont(PreferenceConstants.RODIN_MATH_FONT);
+					text.setFont(font);
+					ModifyListener eventBListener = RodinKeyboardPlugin
+							.getDefault().createRodinModifyListener();
+					text.addModifyListener(eventBListener);
+				}
+			});
 		}
 		return manager;
 	}

@@ -17,8 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
@@ -26,7 +28,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -37,6 +39,7 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.parts.ANYEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
@@ -61,7 +64,8 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 /**
  * @generated
  */
-public class DiagramRootCanonicalEditPolicy extends CanonicalEditPolicy {
+public class DiagramRootCanonicalEditPolicy extends
+		CanonicalConnectionEditPolicy {
 
 	/**
 	 * @generated
@@ -511,5 +515,41 @@ public class DiagramRootCanonicalEditPolicy extends CanonicalEditPolicy {
 	 */
 	private Diagram getDiagram() {
 		return ((View) getHost().getModel()).getDiagram();
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	protected List<EObject> getSemanticConnectionsList() {
+		List<EObject> connections = new LinkedList<EObject>();
+		TreeIterator<Object> it = EcoreUtil.getAllContents(getDiagram()
+				.getElement(), true);
+		while (it.hasNext()) {
+			Object child = it.next();
+			if (child instanceof Transition)
+				connections.add((EObject) child);
+		}
+		return connections;
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	protected EObject getSourceElement(EObject relationship) {
+		if (relationship instanceof Transition)
+			return ((Transition) relationship).getSource();
+		return null;
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	protected EObject getTargetElement(EObject relationship) {
+		if (relationship instanceof Transition)
+			return ((Transition) relationship).getTarget();
+		return null;
 	}
 }
