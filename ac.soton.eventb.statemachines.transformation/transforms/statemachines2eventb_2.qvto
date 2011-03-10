@@ -1,0 +1,137 @@
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+transformation statemachines2eventb(inout inoutModel:eventb);
+
+// generator id key
+property generatorID : String = "org.eventb.emf.persistence.generator_ID";
+// current generator id
+property id : String = "ac.soton.eventb.statemachines";
+
+property INIT : String = "INITIALISATION";
+
+property B_EQ : String = " = ";
+property B_BEQ : String = " ≔ ";
+property B_IN : String = " ∈ ";
+property B_BOOL : String = "BOOL";
+property B_TRUE : String = "TRUE";
+property B_FALSE : String = "FALSE";
+property B_NOT : String = " ¬ ";
+property B_AND : String = " ∧ ";
+property B_OR : String = " ∨ ";
+property B_LPAR : String = "(";
+property B_RPAR : String = ")";
+property B_IMPL : String = " ⇒ ";
+
+
+main() {
+	inoutModel.rootObjects()[eventb::machine::Machine]->map iumlb2eventb();
+}
+
+/*
+ * Transforms iumlb to eventb.
+ */
+mapping inout eventb::machine::Machine::iumlb2eventb() {
+	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->union(variables->reject(isGenerated())->asSequence());
+	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->
+//		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
+		union(invariants->reject(isGenerated())->asSequence());
+}
+
+/*
+ * Transforms abstract statemachine to variables.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2variables() : Sequence(eventb::machine::Variable) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2variables();
+	}
+}
+
+/*
+ * Transforms abstract state to variables.
+ */
+mapping statemachines::AbstractState::abstractState2variables() : Sequence(eventb::machine::Variable) {
+	init {
+		result := self.map abstractState2variable()->asSequence()->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->flatten());
+	}
+}
+
+/*
+ * Transforms abstract state to variable.
+ */
+mapping statemachines::AbstractState::abstractState2variable() : eventb::machine::Variable {
+	name := self.getName();
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
+/*
+ * Transforms abstract statemachine to invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2invariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2invariants();
+	}
+}
+
+/*
+ * Transforms abstract state to invariants.
+ */
+mapping statemachines::AbstractState::abstractState2invariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self![statemachines::State].map state2invariant()->asSequence()->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->flatten());
+	}
+}
+
+/*
+ * Transforms state to invariant.
+ */
+mapping statemachines::State::state2invariant() : eventb::machine::Invariant {
+	name := self.name + ".type";
+	predicate := self.name + B_IN + B_BOOL;
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
+/*
+mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::State].map state2partitionInvariants();
+	}
+}
+*/
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// query and helper rules
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Returns if eventB element is generated or not.
+ */
+query eventb::EventBElement::isGenerated() : Boolean {
+	return self.generated = true and self.attributes![key = generatorID].value.value = id;
+}
+
+/*
+ * Returns 'generated' attribute.
+ */
+helper getGeneratedAttr() : StringToAttributeMapEntry {
+	return object StringToAttributeMapEntry {
+		key := generatorID;
+		value := object Attribute {
+			type := AttributeType::String;
+			value := id;
+		}
+	}
+}
+
+/*
+ * Returns the name of an abstract state.
+ */
+helper statemachines::AbstractState::getName() : String {
+	return if (self.oclIsTypeOf(statemachines::State)) 
+	then self.oclAsType(statemachines::State).name 
+	else self.oclAsType(statemachines::RefinedState).label endif;
+}
