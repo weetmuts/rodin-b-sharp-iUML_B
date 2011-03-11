@@ -37,10 +37,12 @@ main() {
  */
 mapping inout eventb::machine::Machine::iumlb2eventb() {
 	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->union(variables->reject(isGenerated())->asSequence());
-	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->
+	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
+		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants())->
 		union(invariants->reject(isGenerated())->asSequence());
-	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->union(events![name = INIT].actions->reject(isGenerated())->asSequence());
+	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->
+		union(events![name = INIT].actions->reject(isGenerated())->asSequence());
 }
 
 /*
@@ -72,28 +74,28 @@ mapping statemachines::AbstractState::abstractState2variable() : eventb::machine
 }
 
 /*
- * Transforms abstract statemachine to invariants.
+ * Transforms abstract statemachine to type invariants.
  */
-mapping statemachines::AbstractStatemachine::abstractStatemachine2invariants() : Sequence(eventb::machine::Invariant) {
+mapping statemachines::AbstractStatemachine::abstractStatemachine2typeInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.nodes[statemachines::AbstractState].map abstractState2invariants();
+		result := self.nodes[statemachines::AbstractState].map abstractState2typeInvariants();
 	}
 }
 
 /*
- * Transforms abstract state to invariants.
+ * Transforms abstract state to type invariants.
  */
-mapping statemachines::AbstractState::abstractState2invariants() : Sequence(eventb::machine::Invariant) {
+mapping statemachines::AbstractState::abstractState2typeInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::State].map state2invariant()->asSequence()->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->flatten());
+		result := self![statemachines::State].map state2typeInvariant()->asSequence()->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->flatten());
 	}
 }
 
 /*
- * Transforms state to invariant.
+ * Transforms state to type invariant.
  */
-mapping statemachines::State::state2invariant() : eventb::machine::Invariant {
+mapping statemachines::State::state2typeInvariant() : eventb::machine::Invariant {
 	name := self.name + ".type";
 	predicate := self.name + B_IN + B_BOOL;
 	generated := true;
@@ -129,6 +131,40 @@ mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb:
 mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
 		result := self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants();
+	}
+}
+
+/*
+ * Transforms abstract statemachine to constraint invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2constraintInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2constraintInvariants();
+	}
+}
+
+/*
+ * Transforms abstract state to constraint invariants.
+ */
+mapping statemachines::AbstractState::abstractState2constraintInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self![statemachines::State].map state2constraintInvariants()->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants()->flatten());
+	}
+}
+
+/*
+ * Transforms state to constraint invariants.
+ */
+mapping statemachines::State::state2constraintInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.constraints->collect(c | object eventb::machine::Invariant {
+			name := c.name;
+			theorem := c.theorem;
+			predicate := (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + c.predicate.parenthesize();
+			generated := true;
+			attributes += getGeneratedAttr();
+		});
 	}
 }
 
