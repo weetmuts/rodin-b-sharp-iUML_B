@@ -40,7 +40,7 @@ mapping inout eventb::machine::Machine::iumlb2eventb() {
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
 		union(invariants->reject(isGenerated())->asSequence());
-	events![name = INIT].actions += extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions();
+	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->union(events![name = INIT].actions->reject(isGenerated())->asSequence());
 }
 
 /*
