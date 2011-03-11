@@ -117,7 +117,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvar
 mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb::machine::Invariant
 	when { self.nodes[statemachines::State]->size() > 1 }
 {
-	name := self.name + ".partiotionedStates";
+	name := self.name + ".partitionedStates";
 	predicate := "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartiotions()->toString(B_COM)).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr();
