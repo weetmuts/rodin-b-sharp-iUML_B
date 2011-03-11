@@ -21,7 +21,11 @@ property B_AND : String = " ∧ ";
 property B_OR : String = " ∨ ";
 property B_LPAR : String = "(";
 property B_RPAR : String = ")";
+property B_LBRC : String = "{";
+property B_RBRC : String = "}";
+property B_COM : String = ", ";
 property B_IMPL : String = " ⇒ ";
+property B_UNION : String = " ∩ ";
 
 
 main() {
@@ -34,8 +38,9 @@ main() {
 mapping inout eventb::machine::Machine::iumlb2eventb() {
 	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->union(variables->reject(isGenerated())->asSequence());
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->
-//		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
+		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
 		union(invariants->reject(isGenerated())->asSequence());
+//	events![name = INIT].actions += extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions();
 }
 
 /*
@@ -96,13 +101,41 @@ mapping statemachines::State::state2invariant() : eventb::machine::Invariant {
 }
 
 /*
+ * Transforms abstract statemachine to partiotion invariants.
+ */
 mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.nodes[statemachines::State].map state2partitionInvariants();
+		result := self![statemachines::Statemachine].map statemachine2partitionInvariant()->asSequence()->
+			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants()->flatten());
 	}
 }
-*/
 
+/*
+ * Transforms statemachine to partition invariant.
+ * Only constructs an invariant if there is more than one state in a statemachine.
+ */
+mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb::machine::Invariant
+	when { self.nodes[statemachines::State]->size() > 1 }
+{
+	name := self.name + ".partiotionedStates";
+	predicate := "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartiotions()->toString(B_COM)).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
+/*
+ * Transforms abstract state to partition invariants.
+ */
+mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants();
+	}
+}
+/*
+mapping statemachines::AbstractStatemachine::abstractStatemachine2initActions() : Sequence(eventb::machine::Action) {
+	
+}
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // query and helper rules
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,4 +167,47 @@ helper statemachines::AbstractState::getName() : String {
 	return if (self.oclIsTypeOf(statemachines::State)) 
 	then self.oclAsType(statemachines::State).name 
 	else self.oclAsType(statemachines::RefinedState).label endif;
+}
+
+/*
+ * Returns a sequence of partition strings for state variables of a statemachine.
+ */
+helper statemachines::Statemachine::getStatePartiotions() : Sequence(String) {
+	return self.nodes[statemachines::State].map getPartition();
+}
+
+/*
+ * Returns partiotion string for a state variable.
+ */
+helper statemachines::State::getPartition() : String {
+	return self.name.asSet() + B_UNION + B_TRUE.asSet();
+}
+
+/*
+ * Returns original string surrounded by curly brackets.
+ */
+helper String::asSet() : String {
+	return B_LBRC + self + B_RBRC;
+}
+
+/*
+ * Returns original string surrounded by parentheses.
+ */
+helper String::parenthesize() : String {
+	return B_LPAR + self + B_RPAR;
+}
+
+/*
+ * Returns string representation of a sequence of strings, separated by separator.
+ */
+helper Sequence(String)::toString(in separator : String) : String {
+	var string : String := '';
+	var n : Integer := 1;
+	var size : Integer := self->size();
+	while (n <= size) {
+		string := string + self->at(n);
+		n := n + 1;
+		if n <= size then string := string + separator endif;
+	};
+	return string;
 }
