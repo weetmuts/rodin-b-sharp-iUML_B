@@ -40,7 +40,7 @@ mapping inout eventb::machine::Machine::iumlb2eventb() {
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2invariants()->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
 		union(invariants->reject(isGenerated())->asSequence());
-//	events![name = INIT].actions += extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions();
+	events![name = INIT].actions += extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions();
 }
 
 /*
@@ -131,11 +131,38 @@ mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequ
 		result := self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants();
 	}
 }
+
 /*
+ * Transforms abstract statemachine to state variable initialisation actions.
+ */
 mapping statemachines::AbstractStatemachine::abstractStatemachine2initActions() : Sequence(eventb::machine::Action) {
-	
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2initActions();
+	}
 }
-*/
+
+/*
+ * Transforms abstract state to state variable initialisation actions.
+ */
+mapping statemachines::AbstractState::abstractState2initActions() : Sequence(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2initAction()->asSequence()->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2initActions());
+	}
+}
+
+/*
+ * Transforms abstract state to its variable initialisation action.
+ * Initialises variable with TRUE if there is an incoming transition
+ * that elaborates INITIALISATION event, or with FALSE otherwise.
+ */
+mapping statemachines::AbstractState::abstractState2initAction() : eventb::machine::Action {
+	name := self.getName() + ".init";
+	action := self.getName() + B_BEQ + if self.incoming.elaborates.name->includes(INIT) then B_TRUE else B_FALSE endif;
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // query and helper rules
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
