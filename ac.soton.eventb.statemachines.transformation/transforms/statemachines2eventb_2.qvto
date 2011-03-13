@@ -62,7 +62,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2variables() : 
 mapping statemachines::AbstractState::abstractState2variables() : Sequence(eventb::machine::Variable) {
 	init {
 		result := self.map abstractState2variable()->asSequence()->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->flatten());
+			union(self.statemachines.map abstractStatemachine2variables()->flatten());
 	}
 }
 
@@ -90,7 +90,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2typeInvariants
 mapping statemachines::AbstractState::abstractState2typeInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
 		result := self![statemachines::State].map state2typeInvariant()->asSequence()->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->flatten());
+			union(self.statemachines.map abstractStatemachine2typeInvariants()->flatten());
 	}
 }
 
@@ -132,7 +132,7 @@ mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb:
  */
 mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants();
+		result := self.statemachines.map abstractStatemachine2partitionInvariants();
 	}
 }
 
@@ -151,7 +151,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2substateInvari
 mapping statemachines::AbstractState::abstractState2substateInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
 		result := self.statemachines.nodes[statemachines::AbstractState].map abstractState2substateInvariant(self)->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants()->flatten());
+			union(self.statemachines.map abstractStatemachine2substateInvariants()->flatten());
 	}
 }
 
@@ -180,7 +180,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2constraintInva
 mapping statemachines::AbstractState::abstractState2constraintInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
 		result := self![statemachines::State].map state2constraintInvariants()->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants()->flatten());
+			union(self.statemachines.map abstractStatemachine2constraintInvariants()->flatten());
 	}
 }
 
@@ -214,7 +214,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2initActions() 
 mapping statemachines::AbstractState::abstractState2initActions() : Sequence(eventb::machine::Action) {
 	init {
 		result := self.map abstractState2initAction()->asSequence()->
-			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2initActions());
+			union(self.statemachines.map abstractStatemachine2initActions());
 	}
 }
 
@@ -236,6 +236,13 @@ mapping statemachines::AbstractState::abstractState2initAction() : eventb::machi
 mapping statemachines::AbstractStatemachine::abstractStatemachine2events() {
 	self.transitions.map transition2events();
 	self.nodes[statemachines::AbstractState].map abstractState2events();
+}
+
+/*
+ * Transforms abstract state to events.
+ */
+mapping statemachines::AbstractState::abstractState2events() {
+	self.statemachines.map abstractStatemachine2events();
 }
 
 /*
@@ -261,13 +268,6 @@ mapping statemachines::AbstractState::abstractState2eventGuard(in transition : s
 	predicate := self.getName() + B_EQ + B_TRUE;
 	generated := true;
 	attributes += getGeneratedAttr();
-}
-
-/*
- * Transforms abstract state to events.
- */
-mapping statemachines::AbstractState::abstractState2events() {
-	self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2events();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
