@@ -43,6 +43,7 @@ mapping inout eventb::machine::Machine::iumlb2eventb() {
 		union(invariants->reject(isGenerated())->asSequence());
 	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->
 		union(events![name = INIT].actions->reject(isGenerated())->asSequence());
+	extensions[statemachines::AbstractStatemachine].map abstractStatemachine2events();
 }
 
 /*
@@ -199,6 +200,30 @@ mapping statemachines::AbstractState::abstractState2initAction() : eventb::machi
 	attributes += getGeneratedAttr();
 }
 
+mapping statemachines::AbstractStatemachine::abstractStatemachine2events() {
+	self.transitions.map transition2events();
+	self.nodes[statemachines::AbstractState].map abstractState2events();
+}
+
+mapping statemachines::AbstractState::abstractState2events() {
+	self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2events();
+}
+
+mapping statemachines::Transition::transition2events() {
+	self.elaborates[name <> INIT].map extendEvent(self);
+}
+
+mapping inout eventb::machine::Event::extendEvent(in transition : statemachines::Transition) {
+	self.guards := transition.getSource().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
+}
+
+mapping statemachines::AbstractState::abstractState2eventGuard(in transition : statemachines::Transition) : eventb::machine::Guard {
+	name := "isin_" + self.getName();
+	predicate := self.getName() + B_EQ + B_TRUE;
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // query and helper rules
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -273,4 +298,13 @@ helper Sequence(String)::toString(in separator : String) : String {
 		if n <= size then string := string + separator endif;
 	};
 	return string;
+}
+
+helper statemachines::Transition::getSource() : statemachines::AbstractState {
+	return if self.source.oclIsTypeOf(statemachines::ANY)
+		then if self.source.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
+			then self.source.eContainer().eContainer().oclAsType(statemachines::AbstractState)
+			endif
+		else self.source![statemachines::AbstractState]
+		endif;
 }
