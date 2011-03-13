@@ -39,6 +39,7 @@ mapping inout eventb::machine::Machine::iumlb2eventb() {
 	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->union(variables->reject(isGenerated())->asSequence());
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
+		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants())->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants())->
 		union(invariants->reject(isGenerated())->asSequence());
 	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->
@@ -136,6 +137,35 @@ mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequ
 }
 
 /*
+ * Transforms abstract statemachine to substate invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2substateInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2substateInvariants();
+	}
+}
+
+/*
+ * Transforms abstract state to its substates invaraints.
+ */
+mapping statemachines::AbstractState::abstractState2substateInvariants() : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.statemachines.nodes[statemachines::AbstractState].map abstractState2substateInvariant(self)->
+			union(self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants()->flatten());
+	}
+}
+
+/*
+ * Transforms abstract state to substate invariant on parent state.
+ */
+mapping statemachines::AbstractState::abstractState2substateInvariant(in parentState : statemachines::AbstractState) : eventb::machine::Invariant {
+	name := "substates " + self.getName() + B_COM + parentState.getName();
+	predicate := (self.getName() + B_EQ + B_TRUE).parenthesize() + B_IMPL + (parentState.getName() + B_EQ + B_TRUE).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
+/*
  * Transforms abstract statemachine to constraint invariants.
  */
 mapping statemachines::AbstractStatemachine::abstractStatemachine2constraintInvariants() : Sequence(eventb::machine::Invariant) {
@@ -200,28 +230,44 @@ mapping statemachines::AbstractState::abstractState2initAction() : eventb::machi
 	attributes += getGeneratedAttr();
 }
 
+/*
+ * Transforms abstract statemachine to events.
+ */
 mapping statemachines::AbstractStatemachine::abstractStatemachine2events() {
 	self.transitions.map transition2events();
 	self.nodes[statemachines::AbstractState].map abstractState2events();
 }
 
-mapping statemachines::AbstractState::abstractState2events() {
-	self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2events();
-}
-
+/*
+ * Transforms transition to events that it elaborates.
+ */
 mapping statemachines::Transition::transition2events() {
 	self.elaborates[name <> INIT].map extendEvent(self);
 }
 
+/*
+ * Extends existing event with generated stuff from transition, which elaborates this event.
+ */
 mapping inout eventb::machine::Event::extendEvent(in transition : statemachines::Transition) {
 	self.guards := transition.getSource().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
 }
 
+/*
+ * Transforms abstract state to event guard.
+ * Parameter is not used, but is compulsory as mapping can be called many times on the same input state, but for different transitions!
+ */
 mapping statemachines::AbstractState::abstractState2eventGuard(in transition : statemachines::Transition) : eventb::machine::Guard {
 	name := "isin_" + self.getName();
 	predicate := self.getName() + B_EQ + B_TRUE;
 	generated := true;
 	attributes += getGeneratedAttr();
+}
+
+/*
+ * Transforms abstract state to events.
+ */
+mapping statemachines::AbstractState::abstractState2events() {
+	self.statemachines[statemachines::AbstractStatemachine].map abstractStatemachine2events();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
