@@ -256,7 +256,10 @@ mapping statemachines::Transition::transition2events() {
  * Extends existing event with generated stuff from transition, which elaborates this event.
  */
 mapping inout eventb::machine::Event::extendEvent(in transition : statemachines::Transition) {
-	self.guards := transition.getSource().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
+	self.guards := transition.source.externalise().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
+	self.actions := transition.source.externalise().map sourceAbstractState2leaveActions(transition)->
+//		union(transition.target.externalise().map targetAbstractState2enterActions(transition))->
+		union(self.actions->reject(isGenerated())->asSequence());
 }
 
 /*
@@ -270,6 +273,57 @@ mapping statemachines::AbstractState::abstractState2eventGuard(in transition : s
 	attributes += getGeneratedAttr();
 }
 
+/*
+ * Transforms source abstract state of transition to leave actions.
+ * Produces leave actions for all superstates of source state (including itself) that are not common with superstates of target state
+ * and leave actions for all substates of source state, not including parallel statemachines if transition is local.
+ */
+mapping statemachines::AbstractState::sourceAbstractState2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.getSuperstates()->reject(s | transition.target.externalise().getSuperstates()->includes(s)).map abstractState2leaveAction(transition)->asSequence()->
+			union(self.statemachines->reject(transition.isLocal() and not contains(transition.target)).map abstractStatemachine2leaveActions(transition));
+	}
+}
+
+/*
+ * Transforms abstract statemachine to leave actions.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2leaveActions(transition);
+	}
+}
+
+/*
+ * Transforms abstract state to leave actions.
+ */
+mapping statemachines::AbstractState::abstractState2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2leaveAction(transition)->asSequence()->
+			union(self.statemachines.map abstractStatemachine2leaveActions(transition)->flatten());
+	}
+}
+
+/*
+ * Transforms abstract state to leave action.
+ * Ignores state if it is target state of transition.
+ */
+mapping statemachines::AbstractState::abstractState2leaveAction(in transition : statemachines::Transition) : eventb::machine::Action
+	when { self <> transition.target }
+{
+	name := "leave_" + self.getName();
+	action := self.getName() + B_BEQ + B_FALSE;
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+/*
+mapping statemachines::AbstractState::targetAbstractState2enterActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.getSuperstates()->reject(s | transition.source.externalise().getSuperstates()->includes(s)).map abstractState2enterAction(transition)->asSequence()->
+			union(self.statemachines.map abstractStatemachine2enterActions(transition));
+	}
+}
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // query and helper rules
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -346,11 +400,47 @@ helper Sequence(String)::toString(in separator : String) : String {
 	return string;
 }
 
-helper statemachines::Transition::getSource() : statemachines::AbstractState {
-	return if self.source.oclIsTypeOf(statemachines::ANY)
-		then if self.source.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
-			then self.source.eContainer().eContainer().oclAsType(statemachines::AbstractState)
+/*
+ * Externalises abstract node to abstract state.
+ * Returns 
+ * - itself, if already an abstract state
+ * - superstate, which is abstract state, if ANY state
+ * - otherwise null.
+ * This helper is required for local transitions (that use ANY state as source/target) to convert them to external for subsequent transformation.
+ */
+helper statemachines::AbstractNode::externalise() : statemachines::AbstractState {
+	return if self.oclIsTypeOf(statemachines::ANY)
+		then if self.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
+			then self.eContainer().eContainer().oclAsType(statemachines::AbstractState)
 			endif
-		else self.source![statemachines::AbstractState]
+		else self![statemachines::AbstractState]
 		endif;
+}
+
+/*
+ * Returns all abstract states that are superstates of input state.
+ * Result includes input state itself.
+ */
+helper statemachines::AbstractState::getSuperstates() : Sequence(statemachines::AbstractState) {
+	return if self.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
+		then self.eContainer().eContainer().oclAsType(statemachines::AbstractState).getSuperstates()->union(self->asSequence())
+		else self->asSequence()
+		endif;
+}
+
+/*
+ * Returns true if transition is local i.e.
+ * source state is ANY and target state is a substate of source's statemachine or
+ * target state is ANY and source state is a substate of target's statemachine.
+ */
+query statemachines::Transition::isLocal() : Boolean {
+	return (self.source.oclIsTypeOf(statemachines::ANY) and self.source.eContainer().oclAsType(statemachines::AbstractStatemachine).contains(self.target)) or
+		(self.target.oclIsTypeOf(statemachines::ANY) and self.target.eContainer().oclAsType(statemachines::AbstractStatemachine).contains(self.source));
+}
+
+/*
+ * Returns true if abstract satemachine contains a node amongst its states or substates.
+ */
+query statemachines::AbstractStatemachine::contains(in node : statemachines::AbstractNode) : Boolean {
+	return self.nodes->includes(node) or self.nodes[statemachines::AbstractState].statemachines->exists(contains(node));
 }
