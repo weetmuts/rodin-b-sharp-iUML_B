@@ -274,6 +274,22 @@ mapping statemachines::AbstractState::abstractState2eventGuard(in transition : s
 }
 
 /*
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------
+ * Algorithm for leaving states:
+ *
+ * prior step (applicable only for domain model with ANY state): externalise local transition's source and target i.e. if it's ANY state, make it superstate
+ *
+ * 1) find common superstate of source and target, including source itself in the result (in case of local transition)
+ * 2) leave all superstates of source up to result, found in 1), but not including it
+ * 3) leave all substates of source
+ *
+ * extended steps, to support parallel statemachines if exist:
+ * 2') also leave their (superstates') parallel statemachines, which don't include source
+ * 3') if transition is local, ignore parallel statemachines of source, which do not contain target (to avoid leaving and entering in parallel statemachines)
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+/*
  * Transforms source abstract state of transition to leave actions.
  * Produces leave actions for all superstates of source state (including source itself) that are not common with superstates of target state
  * and leave actions for all substates of source state, not including parallel statemachines if transition is local.
@@ -327,6 +343,22 @@ mapping statemachines::AbstractState::abstractState2leaveAction(in transition : 
 	generated := true;
 	attributes += getGeneratedAttr();
 }
+
+/*
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------
+ * Algorithm for entering states:
+ *
+ * prior step (applicable only for domain model with ANY state): externalise local transition's source and target i.e. if it's ANY state, make it superstate
+ *
+ * 1) find common superstate of target and source, including target itself in the result (in case of local transition)
+ * 2) enter all superstates of target up to result, found in 1), but not including it
+ * 3) enter all substates of target, if there are any initial states (by initial state understand not Initial-typed state, but state, connected with Initial)
+ *
+ * extended steps, to support parallel statemachines if exist:
+ * 2') also enter their (superstates') parallel statemachines, which don't include target
+ * 3') if transition is local, ignore parallel statemachines of target, which do not contain source (to avoid leaving and entering in parallel statemachines)
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
 
 /*
  * Transforms target abstract state to enter actions.
