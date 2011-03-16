@@ -280,8 +280,19 @@ mapping statemachines::AbstractState::abstractState2eventGuard(in transition : s
  */
 mapping statemachines::AbstractState::sourceAbstractState2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
 	init {
-		result := self.getSuperstates()->reject(s | transition.target.externalise().getSuperstates()->includes(s)).map abstractState2leaveAction(transition)->asSequence()->
+		result := self.getSuperstates()->reject(s | transition.target.externalise().getSuperstates()->includes(s)).map superstate2leaveActions(transition)->asSequence()->
 			union(self.statemachines->reject(transition.isLocal() and not contains(transition.target)).map abstractStatemachine2leaveActions(transition));
+	}
+}
+
+/*
+ * Transforms superstate to leave actions.
+ * Produced leave action for superstate and leave actions for all parallel statemachines of superstate, which do not contain source state.
+ */
+mapping statemachines::AbstractState::superstate2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2leaveAction(transition)->asSequence()->
+			union(self.statemachines[not contains(transition.source)].map abstractStatemachine2leaveActions(transition)->flatten());
 	}
 }
 
