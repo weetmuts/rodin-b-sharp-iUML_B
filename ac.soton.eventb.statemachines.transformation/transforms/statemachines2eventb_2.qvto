@@ -258,7 +258,7 @@ mapping statemachines::Transition::transition2events() {
 mapping inout eventb::machine::Event::extendEvent(in transition : statemachines::Transition) {
 	self.guards := transition.source.externalise().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
 	self.actions := transition.source.externalise().map sourceAbstractState2leaveActions(transition)->
-//		union(transition.target.externalise().map targetAbstractState2enterActions(transition))->
+		union(transition.target.externalise().map targetAbstractState2enterActions(transition))->
 		union(self.actions->reject(isGenerated())->asSequence());
 }
 
@@ -275,12 +275,12 @@ mapping statemachines::AbstractState::abstractState2eventGuard(in transition : s
 
 /*
  * Transforms source abstract state of transition to leave actions.
- * Produces leave actions for all superstates of source state (including itself) that are not common with superstates of target state
+ * Produces leave actions for all superstates of source state (including source itself) that are not common with superstates of target state
  * and leave actions for all substates of source state, not including parallel statemachines if transition is local.
  */
 mapping statemachines::AbstractState::sourceAbstractState2leaveActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
 	init {
-		result := self.getSuperstates()->reject(s | transition.target.externalise().getSuperstates()->includes(s)).map superstate2leaveActions(transition)->asSequence()->
+		result := self.getSuperstates()->reject(s | transition.target.externalise().getSuperstates()->includes(s)).map superstate2leaveActions(transition)->
 			union(self.statemachines->reject(transition.isLocal() and not contains(transition.target)).map abstractStatemachine2leaveActions(transition));
 	}
 }
@@ -327,14 +327,59 @@ mapping statemachines::AbstractState::abstractState2leaveAction(in transition : 
 	generated := true;
 	attributes += getGeneratedAttr();
 }
+
 /*
+ * Transforms target abstract state to enter actions.
+ * Produces enter actions for all superstates of target state (including target state itself) that are not common with superstates of source state
+ * and enter actions for substates of target state, not including parallel statemachines if transition is local.
+ */
 mapping statemachines::AbstractState::targetAbstractState2enterActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
 	init {
-		result := self.getSuperstates()->reject(s | transition.source.externalise().getSuperstates()->includes(s)).map abstractState2enterAction(transition)->asSequence()->
+		result := self.getSuperstates()->reject(s | transition.source.externalise().getSuperstates()->includes(s)).map superstate2enterActions(transition)->asSequence()->
+			union(self.statemachines->reject(transition.isLocal() and not contains(transition.source)).map abstractStatemachine2enterActions(transition));
+	}
+}
+
+/*
+ * Transforms superstate to enter actions.
+ * Produces enter action for superstate and enter actions for all parallel statemachines of superstate, which do not contain target.
+ */
+mapping statemachines::AbstractState::superstate2enterActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2enterAction(transition)->asSequence()->
+			union(self.statemachines[not contains(transition.target)].map abstractStatemachine2enterActions(transition));
+	}
+}
+
+/*
+ * Transforms abstract statemachine to enter actions.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2enterActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.getInitialState().map abstractState2enterActions(transition);
+	}
+}
+
+/*
+ * Transforms abstract state to enter actions.
+ */
+mapping statemachines::AbstractState::abstractState2enterActions(in transition : statemachines::Transition) : Sequence(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2enterAction(transition)->asSequence()->
 			union(self.statemachines.map abstractStatemachine2enterActions(transition));
 	}
 }
-*/
+
+/*
+ * Transforms abstract state to enter action.
+ */
+mapping statemachines::AbstractState::abstractState2enterAction(in transition : statemachines::Transition) : eventb::machine::Action {
+	name := "enter_" + self.getName();
+	action := self.getName() + B_BEQ + B_TRUE;
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // query and helper rules
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -454,4 +499,11 @@ query statemachines::Transition::isLocal() : Boolean {
  */
 query statemachines::AbstractStatemachine::contains(in node : statemachines::AbstractNode) : Boolean {
 	return self.nodes->includes(node) or self.nodes[statemachines::AbstractState].statemachines->exists(contains(node));
+}
+
+/*
+ * Returns first initial state found in statemachine i.e. abstract state that is linked by incoming transition from 'Initial' state.
+ */
+helper statemachines::AbstractStatemachine::getInitialState() : statemachines::AbstractState {
+	return self.nodes![statemachines::Initial].outgoing->first().target.oclAsType(statemachines::AbstractState);
 }
