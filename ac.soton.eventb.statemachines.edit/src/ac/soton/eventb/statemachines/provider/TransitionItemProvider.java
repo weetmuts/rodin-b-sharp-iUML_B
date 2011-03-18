@@ -78,6 +78,7 @@ public class TransitionItemProvider
 			addElaboratesPropertyDescriptor(object);
 			addSourceContainerPropertyDescriptor(object);
 			addTargetContainerPropertyDescriptor(object);
+			addOperationsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -215,6 +216,28 @@ public class TransitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Operations feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOperationsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Transition_operations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_operations_feature", "_UI_Transition_type"),
+				 StatemachinesPackage.Literals.TRANSITION__OPERATIONS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Transition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -257,6 +280,7 @@ public class TransitionItemProvider
 			case StatemachinesPackage.TRANSITION__ELABORATES:
 			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
+			case StatemachinesPackage.TRANSITION__OPERATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
