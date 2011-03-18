@@ -36,15 +36,35 @@ main() {
  * Transforms iumlb to eventb.
  */
 mapping inout eventb::machine::Machine::iumlb2eventb() {
-	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->union(variables->reject(isGenerated())->asSequence());
+	self.map machine2nonGeneratedMachine();
+	
+	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->
+		union(variables->asSequence());
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants())->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants())->
-		union(invariants->reject(isGenerated())->asSequence());
+		union(invariants->asSequence());
 	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->
-		union(events![name = INIT].actions->reject(isGenerated())->asSequence());
+		union(events![name = INIT].actions->asSequence());
 	extensions[statemachines::AbstractStatemachine].map abstractStatemachine2events();
+}
+
+/*
+ * Transforms machine to machine free from generated elements.
+ */
+mapping inout eventb::machine::Machine::machine2nonGeneratedMachine() {
+	variables := variables->reject(isGenerated());
+	invariants := invariants->reject(isGenerated());
+	events.map event2nonGeneratedEvent();
+}
+
+/*
+ * Transforms event to event free from generated elements.
+ */
+mapping inout eventb::machine::Event::event2nonGeneratedEvent() {
+	guards := guards->reject(isGenerated());
+	actions := actions->reject(isGenerated());
 }
 
 /*
@@ -230,6 +250,10 @@ mapping statemachines::AbstractState::abstractState2initAction() : eventb::machi
 	attributes += getGeneratedAttr();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event & transition transformation (most difficult!!!)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /*
  * Transforms abstract statemachine to events.
  */
@@ -256,10 +280,10 @@ mapping statemachines::Transition::transition2events() {
  * Extends existing event with generated stuff from transition, which elaborates this event.
  */
 mapping inout eventb::machine::Event::extendEvent(in transition : statemachines::Transition) {
-	self.guards := transition.source.externalise().map abstractState2eventGuard(transition)->union(self.guards->reject(isGenerated()));
+	self.guards := transition.source.externalise().map abstractState2eventGuard(transition)->union(self.guards);
 	self.actions := transition.source.externalise().map sourceAbstractState2leaveActions(transition)->
 		union(transition.target.externalise().map targetAbstractState2enterActions(transition))->
-		union(self.actions->reject(isGenerated())->asSequence());
+		union(self.actions->asSequence());
 }
 
 /*
