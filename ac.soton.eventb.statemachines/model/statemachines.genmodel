@@ -29,6 +29,7 @@
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/elaborates"/>
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/sourceContainer"/>
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/targetContainer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//Transition/operations"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//RefinedStatemachine" labelFeature="#//statemachines/EventBLabeled/label">
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedStatemachine/refines"/>
@@ -52,6 +53,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//AbstractState">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//AbstractState/constraints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//AbstractState/active"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//DiagramRoot"/>
   </genPackages>

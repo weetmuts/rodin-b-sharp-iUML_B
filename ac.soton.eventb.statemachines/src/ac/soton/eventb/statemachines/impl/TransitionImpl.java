@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
@@ -41,6 +42,7 @@ import ac.soton.eventb.statemachines.Transition;
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTargetContainer <em>Target Container</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +115,16 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * @ordered
 	 */
 	protected EventBElement targetContainer;
+
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Object> operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,6 +396,18 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Object> getOperations() {
+		if (operations == null) {
+			operations = new EDataTypeUniqueEList<Object>(Object.class, this, StatemachinesPackage.TRANSITION__OPERATIONS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String doGetName() {
 		assert (this instanceof EventBElement);
 		String reference = ((EventBElement)this).getReferenceWithoutResolving();
@@ -461,6 +485,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				if (resolve) return getTargetContainer();
 				return basicGetTargetContainer();
+			case StatemachinesPackage.TRANSITION__OPERATIONS:
+				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -493,6 +519,10 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				setTargetContainer((EventBElement)newValue);
 				return;
+			case StatemachinesPackage.TRANSITION__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection<? extends Object>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -523,6 +553,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				setTargetContainer((EventBElement)null);
 				return;
+			case StatemachinesPackage.TRANSITION__OPERATIONS:
+				getOperations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -547,6 +580,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				return sourceContainer != null;
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				return targetContainer != null;
+			case StatemachinesPackage.TRANSITION__OPERATIONS:
+				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -581,6 +616,22 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (operations: ");
+		result.append(operations);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TransitionImpl

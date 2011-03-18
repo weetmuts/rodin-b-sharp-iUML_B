@@ -61,10 +61,10 @@ public class StatemachineImpl extends DiagramRootImpl implements Statemachine {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExtensionId()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final String EXTENSION_ID_EDEFAULT = null;
+	protected static final String EXTENSION_ID_EDEFAULT = "ac.soton.eventb.statemachines";
 
 	/**
 	 * The cached value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.

@@ -23,6 +23,7 @@ import org.eventb.emf.core.machine.Invariant;
  * The following features are supported:
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.AbstractState#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.AbstractState#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,5 +54,31 @@ public interface AbstractState extends AbstractNode, StatemachineOwner {
 	 * @generated
 	 */
 	EList<Invariant> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active</em>' attribute.
+	 * @see #setActive(boolean)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getAbstractState_Active()
+	 * @model transient="true"
+	 * @generated
+	 */
+	boolean isActive();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.AbstractState#isActive <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active</em>' attribute.
+	 * @see #isActive()
+	 * @generated
+	 */
+	void setActive(boolean value);
 
 } // AbstractState

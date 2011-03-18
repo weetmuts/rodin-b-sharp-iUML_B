@@ -16,10 +16,12 @@ import ac.soton.eventb.statemachines.StatemachineOwner;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 import java.util.Collection;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.machine.Invariant;
@@ -33,6 +35,7 @@ import org.eventb.emf.core.machine.Invariant;
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.impl.AbstractStateImpl#getStatemachines <em>Statemachines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.AbstractStateImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.AbstractStateImpl#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,6 +68,26 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 	 * @ordered
 	 */
 	protected EList<Invariant> constraints;
+
+	/**
+	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ACTIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean active = ACTIVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,6 +137,27 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActive(boolean newActive) {
+		boolean oldActive = active;
+		active = newActive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.ABSTRACT_STATE__ACTIVE, oldActive, active));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -137,6 +181,8 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 				return getStatemachines();
 			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
 				return getConstraints();
+			case StatemachinesPackage.ABSTRACT_STATE__ACTIVE:
+				return isActive();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,6 +204,9 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Invariant>)newValue);
 				return;
+			case StatemachinesPackage.ABSTRACT_STATE__ACTIVE:
+				setActive((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -176,6 +225,9 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case StatemachinesPackage.ABSTRACT_STATE__ACTIVE:
+				setActive(ACTIVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,6 +244,8 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 				return statemachines != null && !statemachines.isEmpty();
 			case StatemachinesPackage.ABSTRACT_STATE__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case StatemachinesPackage.ABSTRACT_STATE__ACTIVE:
+				return active != ACTIVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -226,6 +280,22 @@ public abstract class AbstractStateImpl extends AbstractNodeImpl implements Abst
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (active: ");
+		result.append(active);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AbstractStateImpl

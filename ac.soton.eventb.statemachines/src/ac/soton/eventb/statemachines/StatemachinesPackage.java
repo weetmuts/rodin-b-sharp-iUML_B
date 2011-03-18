@@ -390,13 +390,22 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__TARGET_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Operations</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__OPERATIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.DiagramRootImpl <em>Diagram Root</em>}' class.
@@ -881,13 +890,22 @@ public interface StatemachinesPackage extends EPackage {
 	int ABSTRACT_STATE__CONSTRAINTS = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_STATE__ACTIVE = ABSTRACT_NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Abstract State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
+	int ABSTRACT_STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
@@ -988,6 +1006,15 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__CONSTRAINTS = ABSTRACT_STATE__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__ACTIVE = ABSTRACT_STATE__ACTIVE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1500,6 +1527,15 @@ public interface StatemachinesPackage extends EPackage {
 	int REFINED_STATE__CONSTRAINTS = ABSTRACT_STATE__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_STATE__ACTIVE = ABSTRACT_STATE__ACTIVE;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1665,6 +1701,17 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransition_TargetContainer();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Operations</em>'.
+	 * @see ac.soton.eventb.statemachines.Transition#getOperations()
+	 * @see #getTransition()
+	 * @generated
+	 */
+	EAttribute getTransition_Operations();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.RefinedStatemachine <em>Refined Statemachine</em>}'.
@@ -1843,6 +1890,17 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getAbstractState_Constraints();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.AbstractState#isActive <em>Active</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active</em>'.
+	 * @see ac.soton.eventb.statemachines.AbstractState#isActive()
+	 * @see #getAbstractState()
+	 * @generated
+	 */
+	EAttribute getAbstractState_Active();
+
+	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.DiagramRoot <em>Diagram Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1985,6 +2043,14 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION__TARGET_CONTAINER = eINSTANCE.getTransition_TargetContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION__OPERATIONS = eINSTANCE.getTransition_Operations();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.RefinedStatemachineImpl <em>Refined Statemachine</em>}' class.
@@ -2143,6 +2209,14 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_STATE__CONSTRAINTS = eINSTANCE.getAbstractState_Constraints();
+
+		/**
+		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_STATE__ACTIVE = eINSTANCE.getAbstractState_Active();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.DiagramRootImpl <em>Diagram Root</em>}' class.

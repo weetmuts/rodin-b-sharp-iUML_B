@@ -27,6 +27,7 @@ import org.eventb.emf.core.machine.Event;
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,7 +110,7 @@ public interface Transition extends EventBCommentedElement, EventBNamed {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Elaborates</em>' reference list.
 	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Elaborates()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<Event> getElaborates();
@@ -165,5 +166,21 @@ public interface Transition extends EventBCommentedElement, EventBNamed {
 	 * @generated
 	 */
 	void setTargetContainer(EventBElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Operations</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Object}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operations</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operations</em>' attribute list.
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Operations()
+	 * @model transient="true"
+	 * @generated
+	 */
+	EList<Object> getOperations();
 
 } // Transition
