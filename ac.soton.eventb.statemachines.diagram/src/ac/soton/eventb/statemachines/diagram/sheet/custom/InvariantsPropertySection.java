@@ -17,8 +17,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IInputValidator;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -27,15 +25,12 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.machine.Invariant;
-import org.eventb.emf.core.machine.MachineFactory;
 
 import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -48,64 +43,7 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
  *
  */
 public class InvariantsPropertySection extends AbstractTablePropertySection {
-
-	/**
-	 * New Invariant creation dialog.
-	 * 
-	 * @author vitaly
-	 *
-	 */
-	private final class NewInvariantDialog extends InputDialog {
-		private Button theoremButton;
-		protected boolean isTheorem = false;
-
-		/**
-		 * @param parentShell
-		 * @param dialogTitle
-		 * @param dialogMessage
-		 * @param initialValue
-		 * @param validator
-		 */
-		private NewInvariantDialog(Shell parentShell, String dialogTitle,
-				String dialogMessage, String initialValue,
-				IInputValidator validator) {
-			super(parentShell, dialogTitle, dialogMessage, initialValue,
-					validator);
-		}
-
-		@Override
-		protected Control createDialogArea(Composite parent) {
-			Composite composite = (Composite) super.createDialogArea(parent);
-			getText().addModifyListener(PropertySectionUtil.eventBListener);
-			getText().setFont(PropertySectionUtil.rodinFont);
-			theoremButton = getWidgetFactory().createButton(composite, "Theorem", SWT.CHECK);
-			GridData data = new GridData(GridData.GRAB_HORIZONTAL
-	                | GridData.HORIZONTAL_ALIGN_FILL);
-			theoremButton.setLayoutData(data);
-			theoremButton.setBackground(null);
-			theoremButton.addSelectionListener(new SelectionAdapter() {
-
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					isTheorem  = theoremButton.getSelection();
-				}});
-			return composite;
-		}
-
-		public boolean isTheorem() {
-			return isTheorem;
-		}
-	}
-
-	static final IInputValidator invariantValidator = new IInputValidator(){
-
-		@Override
-		public String isValid(String name) {
-			if (name.trim().isEmpty())
-				return "";
-			return null;
-		}
-	};
+	
 	protected Button upButton;
 	protected Button downButton;
 
@@ -172,6 +110,15 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 		table.setFont(PropertySectionUtil.rodinFont);
 	}
 
+	/**
+	 * @param name
+	 * @return
+	 */
+	protected static boolean invariantNameExists(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Override
 	public void refresh() {
 		upButton.setEnabled(false);
@@ -192,26 +139,19 @@ public class InvariantsPropertySection extends AbstractTablePropertySection {
 	@Override
 	protected List getValuesForRow(Object object) {
 		Invariant invariant = (Invariant) object;
-		return Arrays.asList(new String[]{Boolean.toString(invariant.isTheorem()), invariant.getPredicate()});
+		return Arrays.asList(new String[]{invariant.getName(), Boolean.toString(invariant.isTheorem()), invariant.getPredicate()});
 	}
 
 	@Override
 	protected List getColumnLabelText() {
-		return Arrays.asList(new String[]{"Theorem", "Predicate"});
+		return Arrays.asList(new String[]{"Name", "Theorem", "Predicate"});
 	}
 
 	@Override
 	protected Object getNewChild() {
-		NewInvariantDialog invariantDialog = new NewInvariantDialog(getPart().getSite().getShell(), 
-				"New Invariant", 
-				"Please enter new invariant predicate:", 
-				null, 
-				invariantValidator);
+		NewInvariantDialog invariantDialog = new NewInvariantDialog(getPart().getSite().getShell());
 		if (Dialog.OK == invariantDialog.open()) {
-			Invariant invariant = MachineFactory.eINSTANCE.createInvariant();
-			invariant.setPredicate(invariantDialog.getValue());
-			invariant.setTheorem(invariantDialog.isTheorem());
-			return invariant;
+			return invariantDialog.getInvariant();
 		}
 		return null;
 	}

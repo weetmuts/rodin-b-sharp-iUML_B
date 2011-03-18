@@ -55,6 +55,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.validation;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
  org.rodinp.keyboard;bundle-version="1.1.0",
- org.eventb.ui;bundle-version="2.0.1"
+ org.eventb.ui;bundle-version="2.0.1",
+ org.eventb.emf.persistence;bundle-version="2.2.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -11,19 +11,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gmf.runtime.common.ui.dialogs.PopupDialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
+import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
 
 /**
  * Elaborates property section for Transition.
@@ -32,6 +46,8 @@ import ac.soton.eventb.statemachines.Transition;
  *
  */
 public class ElaboratesPropertySection extends AbstractTablePropertySection {
+	
+	private Button newButton;
 	
 	private static ILabelProvider eventLabelProvider = new LabelProvider() {
 
@@ -92,6 +108,57 @@ public class ElaboratesPropertySection extends AbstractTablePropertySection {
 	@Override
 	protected ISelection getEditorSelection(Object object) {
 		return null;
+	}
+
+	@Override
+	public void createControls(Composite parent,
+			TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		super.createControls(parent, aTabbedPropertySheetPage);
+		
+		Control[] children = parent.getChildren();
+		FormData data;
+		
+		// overriding "Delete" label
+		removeButton.setText("Remove Event");
+		
+		// a new button to create eventB event and add it to elaborates
+		newButton = getWidgetFactory().createButton((Composite) children[0], "Create && Add", SWT.PUSH);
+		data = new FormData();
+		data.left = new FormAttachment(removeButton, 0);
+		data.bottom = new FormAttachment(100, 0);
+		newButton.setLayoutData(data);
+		newButton.addSelectionListener(new SelectionAdapter() {
+
+			public void widgetSelected(SelectionEvent event) {
+				// remember selection
+				int idx = table.getSelectionIndex();
+				
+				// create and add new event
+				EObject container = EcoreUtil.getRootContainer(eObject);
+				Machine machine = (Machine) container;
+				NewEventDialog dialog = new NewEventDialog(getPart().getSite().getShell(), machine.getEvents(), ((Transition) eObject).getName());
+				if (Dialog.OK == dialog.open()) {
+					EObject newChild = dialog.getEvent();
+					if (newChild == null)
+						return;
+					EditingDomain editingDomain = ((StatemachinesDiagramEditor) getPart())
+						.getEditingDomain();
+					CompoundCommand cc = new CompoundCommand("Add new event for elaborates");
+					// new event
+					cc.append(AddCommand.create(editingDomain, machine, MachinePackage.Literals.MACHINE__EVENTS, newChild));
+					// elaborate
+					cc.append(AddCommand.create(editingDomain, eObject, getFeature(), newChild));
+					editingDomain.getCommandStack().execute(cc);
+					
+					refresh();
+					
+					// restore selection
+					table.select(idx);
+					table.notifyListeners(SWT.Selection, new org.eclipse.swt.widgets.Event());
+				}
+				
+			}
+		});
 	}
 
 
