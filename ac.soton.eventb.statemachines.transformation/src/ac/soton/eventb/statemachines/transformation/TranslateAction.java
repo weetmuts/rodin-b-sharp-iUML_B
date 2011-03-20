@@ -16,6 +16,9 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -32,11 +35,12 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
@@ -45,6 +49,9 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eventb.emf.core.machine.Machine;
+
+import ac.soton.eventb.statemachines.diagram.part.ValidateAction;
+import ac.soton.eventb.statemachines.diagram.providers.StatemachinesMarkerNavigationProvider;
 
 /**
  * Translate action handler.
@@ -58,23 +65,62 @@ public class TranslateAction extends AbstractHandler {
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IEditorPart diagramEditor = HandlerUtil.getActiveEditorChecked(event);
-		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
-		if (selection instanceof IStructuredSelection) {
-			Object obj = ((IStructuredSelection) selection)
-					.getFirstElement();
-			if (obj instanceof GraphicalEditPart) {
-				EObject element = ((GraphicalEditPart) obj).getNotationView().getElement();
-				
-				Command command = new ICommandProxy(new TransformationCommand(element));
+		IEditorPart editor = HandlerUtil.getActiveEditorChecked(event);
+		if (editor instanceof IDiagramWorkbenchPart) {
+			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
+			
+			// first validate, then transformate
+			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), 
+					diagramEditor.getDiagram())) {
+				Command command = new ICommandProxy(new TransformationCommand(diagramEditor.getDiagram().getElement()));
 				if (command.canExecute())
 					command.execute();
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Validates diagram and shows errors found;
+	 * return IStatus constant as validation result.
+	 * 
+	 * @return IStatus constant
+	 */
+	private int validate(DiagramEditPart diagramEditPart, View view) {
+		// first validate the diagram
+		try {
+			ValidateAction.runValidation(diagramEditPart, view);
+		} catch (Exception e) {
+			TransformationPlugin.getDefault().logError("Validation action failed for: " + diagramEditPart.toString(), e);
+			return IStatus.ERROR;
+		}
+		
+		IFile file = WorkspaceSynchronizer.getFile(view.eResource());
+		if (file != null) {
+			try {
+				// find error markers and get errors
+				IMarker[] markers = file.findMarkers(StatemachinesMarkerNavigationProvider.MARKER_TYPE, true, IResource.DEPTH_ZERO);
+				StringBuilder errors = new StringBuilder();
+				for (IMarker marker : markers) {
+					int severity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+					if (severity == IMarker.SEVERITY_ERROR)
+						errors.append("\n" + marker.getAttribute(IMarker.MESSAGE, "unknown error") +
+								" \n\t@ " + marker.getAttribute(IMarker.LOCATION, "unknown location"));
+				}
+				
+				if (errors.length() == 0) {
+					return IStatus.OK;
+				} else {
+					MessageDialog.openError(null, "Translation interrupted", "Validation has found problems in your model:\n" + errors.toString());
+				}
+			} catch (CoreException e) {
+				TransformationPlugin.getDefault().logError("Cannot read markers from file: " + file.getFullPath().toString(), e);
+			}
+		}
+		
+		return IStatus.ERROR;
 	}
 
 	private static class TransformationCommand extends AbstractTransactionalCommand {
