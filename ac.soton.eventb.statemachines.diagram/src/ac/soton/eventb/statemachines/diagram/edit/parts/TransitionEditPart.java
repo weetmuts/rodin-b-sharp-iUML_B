@@ -139,7 +139,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		private void createContents() {
 
 			fFigureTransitionLabelFigure = new WrappingLabel();
-			fFigureTransitionLabelFigure.setText("<...>");
 
 			this.add(fFigureTransitionLabelFigure);
 
