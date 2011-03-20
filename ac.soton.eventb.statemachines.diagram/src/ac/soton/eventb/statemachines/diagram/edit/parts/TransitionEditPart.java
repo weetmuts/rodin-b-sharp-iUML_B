@@ -11,6 +11,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITreeBranchEditPart;
@@ -19,6 +20,8 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
 
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.TransitionItemSemanticEditPolicy;
 
 /**
@@ -158,6 +161,21 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 			return fFigureTransitionLabelFigure;
 		}
 
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void handleNotificationEvent(Notification event) {
+		// update line width if link state changes
+		if (StatemachinesPackage.eINSTANCE.getTransition_Operations().equals(
+				event.getFeature())) {
+			boolean operations = !((Transition) ((View) getModel())
+					.getElement()).getOperations().isEmpty();
+			getPrimaryShape().setLineWidth(1 + (operations ? 1 : 0));
+		}
+
+		super.handleNotificationEvent(event);
 	}
 
 }

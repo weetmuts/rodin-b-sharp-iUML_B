@@ -20,6 +20,7 @@ import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -41,6 +42,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InnerStateItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
@@ -495,6 +497,20 @@ public class InnerStateEditPart extends ShapeNodeEditPart {
 			}
 		}
 		return super.getTargetEditPart(request);
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void handleNotificationEvent(Notification event) {
+		// update line width if state changes
+		if (StatemachinesPackage.eINSTANCE.getAbstractState_Active().equals(
+				event.getFeature())) {
+			boolean value = event.getNewBooleanValue();
+			setLineWidth(1 + (value ? 1 : 0));
+		}
+
+		super.handleNotificationEvent(event);
 	}
 
 	/**

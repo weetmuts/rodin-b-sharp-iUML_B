@@ -19,7 +19,7 @@
 package «editPoliciesPackageName»;
 
 	«EXPAND xpt::Common::generatedClassComment»
-	// superclass changed from CanonicalEditPolicy to CanonicalConnectionEditPolicy to fix problems with disappearing links
+«REM»MY: superclass changed from CanonicalEditPolicy to CanonicalConnectionEditPolicy to fix problems with disappearing links«ENDREM»
 public class «canonicalEditPolicyClassName» extends org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy {
 	«REM»
 		Perhaps, we need to supply implementation of refreshOnActivate() identical to that in CanonicalConnectionEditPolicy,
@@ -74,6 +74,6 @@ protected void refreshSemantic() {
 «ENDDEFINE»
 
 «DEFINE additions FOR gmfgen::GenDiagram»
-// additional methods for CanonicalConnectionEditPolicy
+«REM»MY: additional methods for CanonicalConnectionEditPolicy«ENDREM»
 	«EXPAND impl::diagram::update::CanonicalUpdate::canonicalConnectionEditPolicyOverrideMethods-»
 «ENDDEFINE»

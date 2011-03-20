@@ -399,13 +399,14 @@ myFeaturesToSynchronize.add(«EXPAND MetaModel::MetaFeature»);
 }
 «ENDDEFINE»
 
-// method overrides for CanonicalConnectionEditPolicy
+«REM»MY: method overrides for CanonicalConnectionEditPolicy«ENDREM»
 «DEFINE canonicalConnectionEditPolicyOverrideMethods FOR gmfgen::GenDiagram-»
 	«EXPAND getSemanticConnectionsListMethod-»
 	«EXPAND getSourceElementMethod-»
 	«EXPAND getTargetElementMethod-»
 «ENDDEFINE»
 
+«REM»MY: «ENDREM»
 «DEFINE getSemanticConnectionsListMethod FOR gmfgen::GenDiagram-»
 «EXPAND xpt::Common::generatedMemberComment»
 @Override
@@ -421,6 +422,7 @@ protected «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.emf.ecore.EObject
 }
 «ENDDEFINE»
 
+«REM»MY: «ENDREM»
 «DEFINE getSourceElementMethod FOR gmfgen::GenDiagram-»
 «EXPAND xpt::Common::generatedMemberComment»
 @Override
@@ -431,6 +433,7 @@ protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.E
 }
 «ENDDEFINE»
 
+«REM»MY: «ENDREM»
 «DEFINE getTargetElementMethod FOR gmfgen::GenDiagram-»
 «EXPAND xpt::Common::generatedMemberComment»
 @Override

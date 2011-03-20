@@ -105,7 +105,8 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 					diagram = intializeNewDiagram();
 				}
 				URI uri = EcoreUtil.getURI(diagram);
-				String editorName = StatemachinesEditorUtil.getEditorName(diagram);
+				String editorName = StatemachinesEditorUtil
+						.getEditorName(diagram);
 				IEditorInput editorInput = new URIEditorInput(uri, editorName);
 				IWorkbenchPage page = PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage();
