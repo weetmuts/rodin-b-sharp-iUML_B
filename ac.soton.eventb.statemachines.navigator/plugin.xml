@@ -115,5 +115,49 @@
             type="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem">
       </propertyTester>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:fr.systerel.explorer.navigator.view">
+         <command
+               commandId="ac.soton.eventb.statemachines.navigator.commands.refineWithStatemachines"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="fr.systerel.explorer.navigator.view">
+                     </equals>
+                  </with>
+                  <with
+                        variable="selection">
+                     <iterate
+                           ifEmpty="false">
+                        <instanceof
+                              value="org.eventb.core.IMachineRoot">
+                        </instanceof>
+                     </iterate>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="ac.soton.eventb.statemachines.navigator.commands.RefineCommand"
+            commandId="ac.soton.eventb.statemachines.navigator.commands.refineWithStatemachines">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="ac.soton.eventb.statemachines.navigator.commands.refineWithStatemachines"
+            name="Refine with Extensions">
+      </command>
+   </extension>
 
 </plugin>
