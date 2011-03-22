@@ -21,7 +21,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaboratesIfNotInitial"/>
+      <details key="constraints" value="notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaboratesOnRootIfInitial&#xA;elaboratesOnRootIfFinal&#xA;elaboratesOnNestedIfNotInitialOrFinal"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>

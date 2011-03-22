@@ -315,7 +315,9 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateTransition_notToInitial(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromInitialToFinal(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_elaboratesIfNotInitial(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_elaboratesOnRootIfInitial(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_elaboratesOnRootIfFinal(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_elaboratesOnNestedIfNotInitialOrFinal(transition, diagnostics, context);
 		return result;
 	}
 
@@ -395,22 +397,24 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the elaboratesIfNotInitial constraint of '<em>Transition</em>'.
+	 * Validates the elaboratesOnRootIfInitial constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
-	 * Elaborates property is set if transition is not from initial state.
+	 * Initial transition on root statemachine must elaborate INITIALISATION event.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateTransition_elaboratesIfNotInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transition.getSource() instanceof Initial == false && transition.getElaborates().isEmpty()) {
+	public boolean validateTransition_elaboratesOnRootIfInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transition.getSource() instanceof Initial
+				&& transition.getSource().eContainer().eContainer() instanceof Machine
+				&& transition.getElaborates().isEmpty()) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
-						(Diagnostic.WARNING,
+						(Diagnostic.ERROR,
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Transition should elaborate event(s) when it is not initial", getObjectLabel(transition, context) },
+						 new Object[] { "Transition must elaborate INITIALISATION event", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -418,6 +422,62 @@ public class StatemachinesValidator extends EObjectValidator {
 		}
 		return true;
 	}
+
+	/**
+	 * Validates the elaboratesOnRootIfFinal constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * Final transition on root statemachine should elaborate events.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateTransition_elaboratesOnRootIfFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transition.getTarget() instanceof Final
+				&& transition.getTarget().eContainer().eContainer() instanceof Machine
+				&& transition.getElaborates().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.WARNING,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Transition should elaborate event(s)", getObjectLabel(transition, context) },
+						 new Object[] { transition },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the elaboratesOnNestedIfNotInitialOrFinal constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * Transition on nested statemachine should elaborate events if it's not initial or final.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateTransition_elaboratesOnNestedIfNotInitialOrFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transition.eContainer().eContainer() instanceof AbstractState
+				&& transition.getSource() instanceof Initial == false
+				&& transition.getTarget() instanceof Final == false
+				&& transition.getElaborates().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.WARNING,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Transition should elaborate event(s)", getObjectLabel(transition, context) },
+						 new Object[] { transition },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
 
 	/**
 	 * <!-- begin-user-doc -->

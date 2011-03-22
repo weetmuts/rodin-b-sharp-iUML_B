@@ -775,7 +775,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesIfNotInitial"
+			 "constraints", "notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesOnRootIfInitial\nelaboratesOnRootIfFinal\nelaboratesOnNestedIfNotInitialOrFinal"
 		   });		
 		addAnnotation
 		  (refinedStatemachineEClass, 
