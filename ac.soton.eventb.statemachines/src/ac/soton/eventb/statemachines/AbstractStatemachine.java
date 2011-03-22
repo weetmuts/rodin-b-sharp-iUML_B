@@ -26,7 +26,7 @@ import org.eventb.emf.core.EventBCommentedElement;
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getAbstractStatemachine()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='topLevelHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='rootHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal'"
  * @generated
  */
 public interface AbstractStatemachine extends EventBCommentedElement {

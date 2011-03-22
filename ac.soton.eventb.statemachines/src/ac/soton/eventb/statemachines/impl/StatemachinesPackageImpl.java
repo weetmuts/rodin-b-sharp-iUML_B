@@ -769,13 +769,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (abstractStatemachineEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "topLevelHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal"
+			 "constraints", "rootHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal"
 		   });		
 		addAnnotation
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "isNotToInitial\nisNotFromFinal\nisNotInitialSelf\nisNotInitialToFinal"
+			 "constraints", "notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesIfNotInitial"
 		   });		
 		addAnnotation
 		  (refinedStatemachineEClass, 
@@ -799,7 +799,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (initialEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "hasOutgoingOnTopLevel\nhasOutgoingOnNestedLevelIfExternalIncoming"
+			 "constraints", "hasAtMostOneOutgoing\nhasOutgoingOnRoot\nhasOutgoingOnNestedIfExternalIncoming"
 		   });
 	}
 

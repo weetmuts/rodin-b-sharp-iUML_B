@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractStatemachine" abstract="true"
       eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="topLevelHasInitial&#xA;hasAtMostOneInitial&#xA;hasInitialIfIncomingExternal&#xA;hasInitialIfOutgoingLocal"/>
+      <details key="constraints" value="rootHasInitial&#xA;hasAtMostOneInitial&#xA;hasInitialIfIncomingExternal&#xA;hasInitialIfOutgoingLocal"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//AbstractNode" containment="true"/>
@@ -21,7 +21,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="isNotToInitial&#xA;isNotFromFinal&#xA;isNotInitialSelf&#xA;isNotInitialToFinal"/>
+      <details key="constraints" value="notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaboratesIfNotInitial"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>
@@ -66,7 +66,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasOutgoingOnTopLevel&#xA;hasOutgoingOnNestedLevelIfExternalIncoming"/>
+      <details key="constraints" value="hasAtMostOneOutgoing&#xA;hasOutgoingOnRoot&#xA;hasOutgoingOnNestedIfExternalIncoming"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//AbstractNode"/>

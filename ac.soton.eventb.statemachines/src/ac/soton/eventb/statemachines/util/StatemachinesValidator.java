@@ -10,21 +10,23 @@
  */
 package ac.soton.eventb.statemachines.util;
 
-import ac.soton.eventb.statemachines.*;
 import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.statemachines.ANY;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
+import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.EventBLabeled;
 import ac.soton.eventb.statemachines.Final;
 import ac.soton.eventb.statemachines.Initial;
@@ -169,7 +171,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractStatemachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractStatemachine_topLevelHasInitial(abstractStatemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(abstractStatemachine, diagnostics, context);
@@ -177,15 +179,14 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the topLevelHasInitial constraint of '<em>Abstract Statemachine</em>'.
+	 * Validates the rootHasInitial constraint of '<em>Abstract Statemachine</em>'.
 	 * <!-- begin-user-doc -->
-	 * Top level statemachine has an initial state.
+	 * Root statemachine has an initial state.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateAbstractStatemachine_topLevelHasInitial(AbstractStatemachine abstractStatemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		AbstractState parentState = (AbstractState) abstractStatemachine.getContaining(StatemachinesPackage.eINSTANCE.getAbstractState());
-		if (parentState == null 
+	public boolean validateAbstractStatemachine_rootHasInitial(AbstractStatemachine abstractStatemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (abstractStatemachine.eContainer() instanceof Machine
 				&& EcoreUtil.getObjectByType(abstractStatemachine.getNodes(), StatemachinesPackage.eINSTANCE.getInitial()) == null) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -194,7 +195,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "topLevelHasInitial", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { "Root statemachine must have one initial state", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -206,7 +207,7 @@ public class StatemachinesValidator extends EObjectValidator {
 	/**
 	 * Validates the hasAtMostOneInitial constraint of '<em>Abstract Statemachine</em>'.
 	 * <!-- begin-user-doc -->
-	 * Contains no more than one initial state.
+	 * Abstract statemachine has at most one initial state.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -219,7 +220,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasOneInitial", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { "Statemachine cannot have more than one initial state", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -229,16 +230,17 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the hasInitialIfExternal constraint of '<em>Abstract Statemachine</em>'.
+	 * Validates the hasInitialIfIncomingExternal constraint of '<em>Abstract Statemachine</em>'.
 	 * <!-- begin-user-doc -->
 	 * Has an initial state if incoming external transitions exist.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean validateAbstractStatemachine_hasInitialIfIncomingExternal(AbstractStatemachine abstractStatemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		AbstractState parentState = (AbstractState) abstractStatemachine.getContaining(StatemachinesPackage.eINSTANCE.getAbstractState());
-		if (parentState != null 
-				&& parentState.getIncoming().size() > 0 
+		EObject container = abstractStatemachine.eContainer();
+		if (container != null 
+				&& container instanceof AbstractState
+				&& ((AbstractState) container).getIncoming().size() > 0 
 				&& EcoreUtil.getObjectByType(abstractStatemachine.getNodes(), StatemachinesPackage.eINSTANCE.getInitial()) == null) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -247,7 +249,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasInitialIfExternal", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { "Statemachine must have initial state if parent state has incoming transition(s)", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -264,7 +266,6 @@ public class StatemachinesValidator extends EObjectValidator {
 	 * @generated NOT
 	 */
 	public boolean validateAbstractStatemachine_hasInitialIfOutgoingLocal(AbstractStatemachine abstractStatemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// give error if no initial states and some ANY states have incoming transitions
 		if (EcoreUtil.getObjectByType(abstractStatemachine.getNodes(), StatemachinesPackage.eINSTANCE.getInitial()) == null) {
 			Collection<ANY> anyStates = EcoreUtil.getObjectsByType(abstractStatemachine.getNodes(), StatemachinesPackage.eINSTANCE.getANY());
 			for (ANY anyState : anyStates) {
@@ -276,7 +277,7 @@ public class StatemachinesValidator extends EObjectValidator {
 								 DIAGNOSTIC_SOURCE,
 								 0,
 								 "_UI_GenericConstraint_diagnostic",
-								 new Object[] { "hasInitialIfOutgoingLocal", getObjectLabel(abstractStatemachine, context) },
+								 new Object[] { "Statemachine must have initial state if parent state has incoming local transition(s)", getObjectLabel(abstractStatemachine, context) },
 								 new Object[] { abstractStatemachine },
 								 context));
 					}
@@ -311,21 +312,21 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_isNotToInitial(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_isNotFromFinal(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_isNotInitialSelf(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_isNotInitialToFinal(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_notToInitial(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_notFromFinal(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_notFromInitialToFinal(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_elaboratesIfNotInitial(transition, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the isNotToInitial constraint of '<em>Transition</em>'.
+	 * Validates the notToInitial constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * Not an incoming transition to initial state.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateTransition_isNotToInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateTransition_notToInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (transition.getTarget() instanceof Initial) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -334,7 +335,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "isNotToInitial", getObjectLabel(transition, context) },
+						 new Object[] { "Transition cannot go to initial state", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -344,13 +345,13 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the isNotFromFinal constraint of '<em>Transition</em>'.
+	 * Validates the notFromFinal constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * Not an outgoing transition from final state.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateTransition_isNotFromFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateTransition_notFromFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (transition.getSource() instanceof Final) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -359,7 +360,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "isNotFromFinal", getObjectLabel(transition, context) },
+						 new Object[] { "Transition cannot go from final state", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -369,38 +370,13 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the isNotInitialSelf constraint of '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * Not a self-loop on initial state.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateTransition_isNotInitialSelf(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transition.getSource() instanceof Initial && transition.getSource() == transition.getTarget()) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "isNotInitialSelf", getObjectLabel(transition, context) },
-						 new Object[] { transition },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the isNotInitialToFinal constraint of '<em>Transition</em>'.
+	 * Validates the notFromInitialToFinal constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
 	 * Not from initial to final state.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateTransition_isNotInitialToFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateTransition_notFromInitialToFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (transition.getSource() instanceof Initial && transition.getTarget() instanceof Final) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -409,7 +385,32 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "isNotInitialToFinal", getObjectLabel(transition, context) },
+						 new Object[] { "Transition cannot go directly from initial to final state", getObjectLabel(transition, context) },
+						 new Object[] { transition },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the elaboratesIfNotInitial constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * Elaborates property is set if transition is not from initial state.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateTransition_elaboratesIfNotInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (transition.getSource() instanceof Initial == false && transition.getElaborates().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.WARNING,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Transition should elaborate event(s) when it is not initial", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -433,7 +434,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(refinedStatemachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractStatemachine_topLevelHasInitial(refinedStatemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(refinedStatemachine, diagnostics, context);
@@ -444,7 +445,7 @@ public class StatemachinesValidator extends EObjectValidator {
 	/**
 	 * Validates the hasNoStates constraint of '<em>Refined Statemachine</em>'.
 	 * <!-- begin-user-doc -->
-	 * Contains no States.
+	 * Refined statemachine has no States.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -457,7 +458,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasNoStates", getObjectLabel(refinedStatemachine, context) },
+						 new Object[] { "Refined statemachine cannot contain concrete states", getObjectLabel(refinedStatemachine, context) },
 						 new Object[] { refinedStatemachine },
 						 context));
 			}
@@ -481,7 +482,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(statemachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractStatemachine_topLevelHasInitial(statemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(statemachine, diagnostics, context);
@@ -492,7 +493,7 @@ public class StatemachinesValidator extends EObjectValidator {
 	/**
 	 * Validates the hasNoRefinedStates constraint of '<em>Statemachine</em>'.
 	 * <!-- begin-user-doc -->
-	 * Contains no refined states.
+	 * Statemachine has no refined states.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -505,7 +506,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasNoRefinedStates", getObjectLabel(statemachine, context) },
+						 new Object[] { "Concrete statemachine cannot have refined states", getObjectLabel(statemachine, context) },
 						 new Object[] { statemachine },
 						 context));
 			}
@@ -545,7 +546,7 @@ public class StatemachinesValidator extends EObjectValidator {
 	/**
 	 * Validates the hasNoRefinedStatemachines constraint of '<em>State</em>'.
 	 * <!-- begin-user-doc -->
-	 * Contains no refined statemachines.
+	 * State has no refined statemachines.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -558,7 +559,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasNoRefinedStatemachines", getObjectLabel(state, context) },
+						 new Object[] { "Concrete state cannot have refined statemachines", getObjectLabel(state, context) },
 						 new Object[] { state },
 						 context));
 			}
@@ -582,21 +583,21 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(initial, diagnostics, context);
-		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnTopLevel(initial, diagnostics, context);
-		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnNestedLevelIfExternalIncoming(initial, diagnostics, context);
+		if (result || diagnostics != null) result &= validateInitial_hasAtMostOneOutgoing(initial, diagnostics, context);
+		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnRoot(initial, diagnostics, context);
+		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnNestedIfExternalIncoming(initial, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the hasOutgoingOnTopLevel constraint of '<em>Initial</em>'.
+	 * Validates the hasAtMostOneOutgoing constraint of '<em>Initial</em>'.
 	 * <!-- begin-user-doc -->
-	 * Initial state of top level statemachine has an outgoing transition.
+	 * Initial state has at most one outgoing transition.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateInitial_hasOutgoingOnTopLevel(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		AbstractState parentState = (AbstractState) ((AbstractStatemachine) initial.eContainer()).getContaining(StatemachinesPackage.eINSTANCE.getAbstractState());
-		if (parentState == null && initial.getOutgoing().isEmpty()) {
+	public boolean validateInitial_hasAtMostOneOutgoing(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (initial.getOutgoing().size() > 1) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -604,7 +605,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasOutgoing", getObjectLabel(initial, context) },
+						 new Object[] { "Initial state cannot have more than one outgoing transition", getObjectLabel(initial, context) },
 						 new Object[] { initial },
 						 context));
 			}
@@ -614,16 +615,41 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the hasOutgoingOnNestedLevelIfExternalIncoming constraint of '<em>Initial</em>'.
+	 * Validates the hasOutgoingOnRoot constraint of '<em>Initial</em>'.
+	 * <!-- begin-user-doc -->
+	 * Initial state of root statemachine has an outgoing transition.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateInitial_hasOutgoingOnRoot(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (initial.eContainer().eContainer() instanceof Machine && initial.getOutgoing().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Initial state of root statemachine must have one outgoing transition", getObjectLabel(initial, context) },
+						 new Object[] { initial },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the hasOutgoingOnNestedIfExternalIncoming constraint of '<em>Initial</em>'.
 	 * <!-- begin-user-doc -->
 	 * Initial state of nested level statemachine has an outgoing transition if external incoming transitions to parent state exist.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateInitial_hasOutgoingOnNestedLevelIfExternalIncoming(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		AbstractState parentState = (AbstractState) ((AbstractStatemachine) initial.eContainer()).getContaining(StatemachinesPackage.eINSTANCE.getAbstractState());
-		if (parentState != null 
-				&& parentState.getIncoming().size() > 0 
+	public boolean validateInitial_hasOutgoingOnNestedIfExternalIncoming(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		EObject container = initial.eContainer().eContainer();
+		if (container instanceof AbstractState 
+				&& ((AbstractState) container).getIncoming().size() > 0 
 				&& initial.getOutgoing().isEmpty()) {
 			if (diagnostics != null) {
 				diagnostics.add
@@ -632,7 +658,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasOutgoingIfExternalIncoming", getObjectLabel(initial, context) },
+						 new Object[] { "Initial state must have one outgoing transition if parent state has incoming transition(s)", getObjectLabel(initial, context) },
 						 new Object[] { initial },
 						 context));
 			}
@@ -710,7 +736,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(diagramRoot, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAbstractStatemachine_topLevelHasInitial(diagramRoot, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(diagramRoot, diagnostics, context);

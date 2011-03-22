@@ -32,7 +32,7 @@ import org.eventb.emf.core.machine.Event;
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isNotToInitial\nisNotFromFinal\nisNotInitialSelf\nisNotInitialToFinal'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesIfNotInitial'"
  * @generated
  */
 public interface Transition extends EventBCommentedElement, EventBNamed {
