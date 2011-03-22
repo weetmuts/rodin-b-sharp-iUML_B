@@ -158,7 +158,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		if (name.equals(NAME_EDEFAULT)) {
 			EList<Event> events = getElaborates();
 			if (events.isEmpty())
-				return "<no name - fix elaborates>";
+				return "";//"<no name - fix elaborates>";
 			ArrayList<String> result = new ArrayList<String>(getElaborates().size());
 			for (Event event : getElaborates())
 				result.add(event.getName());

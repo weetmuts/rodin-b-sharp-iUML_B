@@ -10,23 +10,20 @@ package ac.soton.eventb.statemachines.diagram.part;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
- * Validate action handler.
- * Delegates to generated ValidateAction.
- * 
- * @author vitaly
- *
+ * @generated
  */
 public class ValidateDiagramAction extends AbstractHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	/**
+	 * @generated NOT
 	 */
 	@SuppressWarnings("static-access")
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchPart part = HandlerUtil.getActivePart(event);
 		ValidateAction action = new ValidateAction(part.getSite().getPage());

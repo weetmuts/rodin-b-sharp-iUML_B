@@ -801,25 +801,15 @@ http://www.eclipse.org/legal/epl-v10.html
                </and>
             </visibleWhen>
          </command>
-         <command
-               commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramCommand">
+      </menuContribution>
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction">
             <visibleWhen>
                <and>
-                  <with
-                        variable="activePartId">
-                     <equals
-                           value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID">
-                     </equals>
-                  </with>
-                  <with
-                        variable="selection">
-                     <iterate
-                           ifEmpty="false">
-                        <instanceof
-                              value="ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart">
-                        </instanceof>
-                     </iterate>
-                  </with>
+                  <with variable="activePartId"><equals value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart"/>
+                  </iterate></with>
                </and>
             </visibleWhen>
          </command>
@@ -840,12 +830,9 @@ http://www.eclipse.org/legal/epl-v10.html
       <command id="ac.soton.eventb.statemachines.diagram.OpenDiagramAction"
          name="Open Diagram"
          categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/>
-      <command
-            categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"
-            defaultHandler="ac.soton.eventb.statemachines.diagram.part.ValidateDiagramAction"
-            id="ac.soton.eventb.statemachines.diagram.ValidateDiagramCommand"
-            name="Validate">
-      </command>
+      <command id="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction"
+         name="Validate"
+         categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/>
    </extension>
 
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
@@ -853,6 +840,13 @@ http://www.eclipse.org/legal/epl-v10.html
       <handler
          commandId="ac.soton.eventb.statemachines.diagram.OpenDiagramAction"
          class="ac.soton.eventb.statemachines.diagram.part.OpenDiagramAction">
+         <enabledWhen>
+           <with variable="activePartId"><equals value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/></with>
+         </enabledWhen>
+      </handler>
+      <handler
+         commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction"
+         class="ac.soton.eventb.statemachines.diagram.part.ValidateDiagramAction">
          <enabledWhen>
            <with variable="activePartId"><equals value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/></with>
          </enabledWhen>
