@@ -803,6 +803,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </command>
       </menuContribution>
       <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <separator name="iumlb" visible="true"/>
          <command commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction">
             <visibleWhen>
                <and>

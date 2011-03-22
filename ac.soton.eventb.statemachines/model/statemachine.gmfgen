@@ -1909,6 +1909,9 @@
   <contextMenus
       context="//@diagram">
     <items
+        xsi:type="gmfgen:GenSeparator"
+        groupName="iumlb"/>
+    <items
         xsi:type="gmfgen:GenCustomAction"
         qualifiedClassName="ac.soton.eventb.statemachines.diagram.part.ValidateDiagramAction"
         generateBoilerplate="true"
