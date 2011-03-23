@@ -568,10 +568,11 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 
 «REM»MY: code to update line width for active state (currently added to all state, even stateless, so needs to be improved)«ENDREM»
 «DEFINE handleStateChange FOR gmfgen::GenNode-»
-	// update line width if state changes
+	// update line width and color if state changes
 	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getAbstractState_Active().equals(event.getFeature())) {
-		boolean value = event.getNewBooleanValue();
-		setLineWidth(1 + (value ? 1 : 0));
+		boolean active = event.getNewBooleanValue();
+		setLineWidth(1 + (active ? 1 : 0));
+		setForegroundColor(active ? org.eclipse.draw2d.ColorConstants.black : org.eclipse.draw2d.ColorConstants.gray);
 	}
 «ENDDEFINE»
 

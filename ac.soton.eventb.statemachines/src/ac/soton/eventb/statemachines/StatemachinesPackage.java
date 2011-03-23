@@ -390,7 +390,7 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__TARGET_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Operations</b></em>' attribute list.
+	 * The feature id for the '<em><b>Operations</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1703,10 +1703,10 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getTransition_TargetContainer();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}'.
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Operations</em>'.
+	 * @return the meta object for the attribute '<em>Operations</em>'.
 	 * @see ac.soton.eventb.statemachines.Transition#getOperations()
 	 * @see #getTransition()
 	 * @generated
@@ -2045,7 +2045,7 @@ public interface StatemachinesPackage extends EPackage {
 		EReference TRANSITION__TARGET_CONTAINER = eINSTANCE.getTransition_TargetContainer();
 
 		/**
-		 * The meta object literal for the '<em><b>Operations</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Operations</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

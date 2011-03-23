@@ -7,6 +7,7 @@
  */
 package ac.soton.eventb.statemachines.diagram.edit.parts;
 
+import java.util.Collection;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.PolylineDecoration;
@@ -168,12 +169,15 @@ public class TransitionGhostEditPart extends ConnectionNodeEditPart implements
 	 * @generated
 	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width if link state changes
+		// update line width and color if link state changes
 		if (StatemachinesPackage.eINSTANCE.getTransition_Operations().equals(
 				event.getFeature())) {
-			boolean operations = !((Transition) ((View) getModel())
-					.getElement()).getOperations().isEmpty();
-			getPrimaryShape().setLineWidth(1 + (operations ? 1 : 0));
+			Collection<?> operations = ((Transition) ((View) getModel())
+					.getElement()).getOperations();
+			boolean enabled = operations != null && !operations.isEmpty();
+			getPrimaryShape().setLineWidth(1 + (enabled ? 1 : 0));
+			getPrimaryShape().setForegroundColor(
+					enabled ? ColorConstants.darkGreen : ColorConstants.gray);
 		}
 
 		super.handleNotificationEvent(event);

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
@@ -117,14 +116,14 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	protected EventBElement targetContainer;
 
 	/**
-	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' attribute list.
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOperations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Object> operations;
+	protected EList<?> operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -396,11 +395,20 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Object> getOperations() {
-		if (operations == null) {
-			operations = new EDataTypeUniqueEList<Object>(Object.class, this, StatemachinesPackage.TRANSITION__OPERATIONS);
-		}
+	public EList<?> getOperations() {
 		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOperations(EList<?> newOperations) {
+		EList<?> oldOperations = operations;
+		operations = newOperations;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__OPERATIONS, oldOperations, operations));
 	}
 
 	/**
@@ -520,8 +528,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				setTargetContainer((EventBElement)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
-				getOperations().clear();
-				getOperations().addAll((Collection<? extends Object>)newValue);
+				setOperations((EList<?>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -554,7 +561,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				setTargetContainer((EventBElement)null);
 				return;
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
-				getOperations().clear();
+				setOperations((EList<?>)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -581,7 +588,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
 				return targetContainer != null;
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
-				return operations != null && !operations.isEmpty();
+				return operations != null;
 		}
 		return super.eIsSet(featureID);
 	}

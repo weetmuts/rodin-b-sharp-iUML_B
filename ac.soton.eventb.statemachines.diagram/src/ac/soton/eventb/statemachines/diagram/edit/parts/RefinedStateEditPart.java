@@ -510,11 +510,13 @@ public class RefinedStateEditPart extends ShapeNodeEditPart {
 	 */
 	protected void handleNotificationEvent(Notification event) {
 
-		// update line width if state changes
+		// update line width and color if state changes
 		if (StatemachinesPackage.eINSTANCE.getAbstractState_Active().equals(
 				event.getFeature())) {
-			boolean value = event.getNewBooleanValue();
-			setLineWidth(1 + (value ? 1 : 0));
+			boolean active = event.getNewBooleanValue();
+			setLineWidth(1 + (active ? 1 : 0));
+			setForegroundColor(active ? ColorConstants.black
+					: ColorConstants.gray);
 		}
 
 		if (event.getNotifier() == getModel()

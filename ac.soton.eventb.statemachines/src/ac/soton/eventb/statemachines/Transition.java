@@ -168,19 +168,29 @@ public interface Transition extends EventBCommentedElement, EventBNamed {
 	void setTargetContainer(EventBElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Operations</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Object}.
+	 * Returns the value of the '<em><b>Operations</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operations</em>' attribute list.
+	 * @return the value of the '<em>Operations</em>' attribute.
+	 * @see #setOperations(EList)
 	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Operations()
-	 * @model transient="true"
+	 * @model many="false" transient="true"
 	 * @generated
 	 */
-	EList<Object> getOperations();
+	EList<?> getOperations();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Operations</em>' attribute.
+	 * @see #getOperations()
+	 * @generated
+	 */
+	void setOperations(EList<?> value);
 
 } // Transition
