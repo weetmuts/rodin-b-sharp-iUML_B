@@ -641,4 +641,21 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		return result.toString();
 	}
 
+	/* 
+	 * Customised to fix problem with notification of name change on EReference 'elaborates' change.
+	 */
+	@Override
+	public void eNotify(Notification notification) {
+		super.eNotify(notification);
+		
+		int type = notification.getEventType();
+		Object feature = notification.getFeature();
+		if (StatemachinesPackage.Literals.TRANSITION__ELABORATES.equals(feature)
+				&& (type == Notification.ADD || type == Notification.ADD_MANY
+						|| type == Notification.REMOVE || type == Notification.REMOVE_MANY))
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, notification.getOldValue(), notification.getNewValue()));
+			
+	}
+
 } //TransitionImpl
