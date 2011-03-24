@@ -147,7 +147,7 @@ public class RefineCommand extends AbstractHandler {
 			for (AbstractExtension extension : machine.getExtensions()) {
 				if (STATEMACHINES_EXTENSION_ID.equals(extension.getExtensionId())) {
 					if (extension instanceof AbstractStatemachine)
-						newMachine.getExtensions().add(refineAbstractStatemachine((AbstractStatemachine) extension, refinementMap));
+						newMachine.getExtensions().add(refineStatemachinesExtension((AbstractStatemachine) extension, refinementMap));
 				} else {
 					newMachine.getExtensions().add(EcoreUtil.copy(extension));
 				}
@@ -155,12 +155,32 @@ public class RefineCommand extends AbstractHandler {
 			
 			return newMachine;
 		}
+		
+		/**
+		 * Returns refined statemachine from abstract statemachine, which is a root extension.
+		 * 
+		 * @param rootAbstractStatemachine root abstract statemachine
+		 * @param refinementMap map of refinements so far
+		 * @return refined statemachine
+		 */
+		private RefinedStatemachine refineStatemachinesExtension(AbstractStatemachine rootAbstractStatemachine, Map<String, EObject> refinementMap) {
+			// refine statemachines, states and substates
+			RefinedStatemachine refinedStatemachine = refineAbstractStatemachine(rootAbstractStatemachine, refinementMap);
+			
+			// remember refined statemachine as it is used by transition refinement
+			refinementMap.put(EcoreUtil.getIdentification(rootAbstractStatemachine), refinedStatemachine);
+			
+			// refine transitions
+			refineTransitions(rootAbstractStatemachine, refinementMap);
+			
+			return refinedStatemachine;
+		}
 
 		/**
 		 * Returns refined statemachine from abstract statemachine.
 		 * 
 		 * @param abstractStatemachine
-		 * @param refinementMap container machine for new refined statemachine
+		 * @param refinementMap map of refinements so far
 		 * @return refined statemachine
 		 */
 		private RefinedStatemachine refineAbstractStatemachine(AbstractStatemachine abstractStatemachine, Map<String, EObject> refinementMap) {
@@ -182,22 +202,6 @@ public class RefineCommand extends AbstractHandler {
 				refinementMap.put(EcoreUtil.getIdentification(node), newNode);
 			}
 			
-			// create transitions
-			for (Transition transition : abstractStatemachine.getTransitions()) {
-				Transition newTransition = StatemachinesFactory.eINSTANCE.createTransition();
-				newTransition.setName(transition.getName());
-				
-				// set source and target
-				newTransition.setSource((AbstractNode) refinementMap.get(EcoreUtil.getIdentification(transition.getSource())));
-				newTransition.setTarget((AbstractNode) refinementMap.get(EcoreUtil.getIdentification(transition.getTarget())));
-				
-				// set elaborates
-				for (Event event : transition.getElaborates()) {
-					newTransition.getElaborates().add((Event) refinementMap.get(EcoreUtil.getIdentification(event)));
-				}
-				refinedStatemachine.getTransitions().add(newTransition);
-			}
-			
 			return refinedStatemachine;
 		}
 
@@ -205,7 +209,7 @@ public class RefineCommand extends AbstractHandler {
 		 * Returns refined state from abstract state.
 		 * 
 		 * @param abstractState
-		 * @param refinementMap 
+		 * @param refinementMap map of refinements so far
 		 * @return refined state
 		 */
 		private RefinedState refineAbstractState(AbstractState abstractState, Map<String, EObject> refinementMap) {
@@ -218,11 +222,50 @@ public class RefineCommand extends AbstractHandler {
 				RefinedStatemachine refinedStatemachine = refineAbstractStatemachine(abstractStatemachine, refinementMap);
 				refinedState.getStatemachines().add(refinedStatemachine);
 				
-				// remember mapping
+				// remember refined statemachine mapping
 				refinementMap.put(EcoreUtil.getIdentification(abstractStatemachine), refinedStatemachine);
 			}
 			
 			return refinedState;
+		}
+		
+		/**
+		 * Refines transitions in abstract statemachine.
+		 * 
+		 * @param abstractStatemachine
+		 * @param refinementMap map of refinements so far
+		 */
+		private void refineTransitions(AbstractStatemachine abstractStatemachine, Map<String, EObject> refinementMap) {
+			// find owner in map
+			AbstractStatemachine owner = (AbstractStatemachine) refinementMap.get(EcoreUtil.getIdentification(abstractStatemachine));
+			
+			// process transitions of current abstract statemachine
+			for (Transition transition : abstractStatemachine.getTransitions()) {
+				Transition newTransition = StatemachinesFactory.eINSTANCE.createTransition();
+				newTransition.setName(transition.getName());
+				
+				// set source and target
+				newTransition.setSource((AbstractNode) refinementMap.get(EcoreUtil.getIdentification(transition.getSource())));
+				newTransition.setTarget((AbstractNode) refinementMap.get(EcoreUtil.getIdentification(transition.getTarget())));
+				
+				// set elaborates
+				for (Event event : transition.getElaborates()) {
+					newTransition.getElaborates().add((Event) refinementMap.get(EcoreUtil.getIdentification(event)));
+				}
+				
+				// set owner
+				if (owner != null) owner.getTransitions().add(newTransition);
+				
+				// remember transition mapping
+				refinementMap.put(EcoreUtil.getIdentification(transition), newTransition);
+			}
+			
+			
+			// process abstract statemachines in nodes
+			for (AbstractNode node : abstractStatemachine.getNodes())
+				if (node instanceof AbstractState)
+					for (AbstractStatemachine nodeAbstractStatemachine : ((AbstractState) node).getStatemachines())
+						refineTransitions(nodeAbstractStatemachine, refinementMap);
 		}
 
 		/**
