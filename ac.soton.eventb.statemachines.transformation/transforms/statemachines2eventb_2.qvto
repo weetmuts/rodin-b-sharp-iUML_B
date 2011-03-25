@@ -41,7 +41,7 @@ mapping inout eventb::machine::Machine::iumlb2eventb() {
 	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->
 		union(variables->asSequence());
 	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->
-		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2partitionInvariants())->
+		union(extensions[statemachines::AbstractStatemachine].map rootAbstractStatemachine2partitionInvariants())->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants())->
 		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants())->
 		union(invariants->asSequence());
@@ -125,20 +125,19 @@ mapping statemachines::State::state2typeInvariant() : eventb::machine::Invariant
 }
 
 /*
- * Transforms abstract statemachine to partiotion invariants.
+ * Transforms root abstract statemachine to partition invariants.
  */
-mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants() : Sequence(eventb::machine::Invariant) {
+mapping statemachines::AbstractStatemachine::rootAbstractStatemachine2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::Statemachine].map statemachine2partitionInvariant()->asSequence()->
+		result := self![statemachines::Statemachine].map rootStatemachine2partitionInvariant()->asSequence()->
 			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants()->flatten());
 	}
 }
 
 /*
- * Transforms statemachine to partition invariant.
- * Only constructs an invariant if there is more than one state in a statemachine.
+ * Transforms root statemachine to partition invariant.
  */
-mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb::machine::Invariant
+mapping statemachines::Statemachine::rootStatemachine2partitionInvariant() : eventb::machine::Invariant
 	when { self.nodes[statemachines::State]->size() > 1 }
 {
 	name := self.name + ".partitionedStates";
@@ -148,11 +147,34 @@ mapping statemachines::Statemachine::statemachine2partitionInvariant() : eventb:
 }
 
 /*
+ * Transforms abstract statemachine to partiotion invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants(in parentState : statemachines::AbstractState) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self![statemachines::Statemachine].map statemachine2partitionInvariant(parentState)->asSequence()->
+			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants()->flatten());
+	}
+}
+
+/*
+ * Transforms statemachine to partition invariant.
+ * Only constructs an invariant if there is more than one state in a statemachine.
+ */
+mapping statemachines::Statemachine::statemachine2partitionInvariant(in parentState : statemachines::AbstractState) : eventb::machine::Invariant
+	when { self.nodes[statemachines::State]->size() > 1 }
+{
+	name := self.name + ".partitionedStates";
+	predicate := (parentState.getName() + B_EQ + B_TRUE).parenthesize() + B_IMPL + "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartiotions()->toString(B_COM)).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr();
+}
+
+/*
  * Transforms abstract state to partition invariants.
  */
 mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.statemachines.map abstractStatemachine2partitionInvariants();
+		result := self.statemachines.map abstractStatemachine2partitionInvariants(self);
 	}
 }
 
