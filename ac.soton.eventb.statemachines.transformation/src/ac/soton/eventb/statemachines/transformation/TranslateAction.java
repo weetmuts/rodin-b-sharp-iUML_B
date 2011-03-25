@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -145,9 +146,10 @@ public class TranslateAction extends AbstractHandler {
 				IAdaptable info) throws ExecutionException {
 			monitor.beginTask("Translating statemachine", IProgressMonitor.UNKNOWN);
 			
-//			// find topmost container statemachine
-//			EObject root = element;
-//			for (; false == root.eContainer() instanceof Machine; root = root.eContainer());
+			// find topmost container statemachine
+			EObject root = element;
+			for (; false == root.eContainer() instanceof Machine; root = root.eContainer());
+			
 			EObject container = EcoreUtil.getRootContainer(element);
 			Machine machine = (Machine) container;
 			IFile file = WorkspaceSynchronizer.getFile(machine.eResource());
@@ -165,14 +167,15 @@ public class TranslateAction extends AbstractHandler {
 				// create executor for the given transformation
 				final TransformationExecutor executor = new TransformationExecutor(transformationURI);
 	
-				// define the transformation input
-				// Remark: we take the objects from a resource, however
-				// a list of arbitrary in-memory EObjects may be passed
+				// define the transformation machine input
 				final Resource inResource = resource;
-				EList<EObject> inObjects = inResource.getContents();
-	
-				// create the input extent with its initial contents
-				final ModelExtent input = new BasicModelExtent(inObjects);
+				EList<EObject> inMachine = inResource.getContents();
+				final ModelExtent input1 = new BasicModelExtent(inMachine);
+				
+				// define transformation statemachines extension input
+				EList<EObject> inExtension = new BasicEList<EObject>();
+				inExtension.add(resource.getEObject(root.eResource().getURIFragment(root)));
+				final ModelExtent input2 = new BasicModelExtent(inExtension);
 	
 				// setup the execution environment details -> 
 				// configuration properties, logger, monitor object etc.
@@ -182,7 +185,7 @@ public class TranslateAction extends AbstractHandler {
 				// run the transformation assigned to the executor with the given 
 				// input and output and execution context -> ChangeTheWorld(in, out)
 				// Remark: variable arguments count is supported
-				ExecutionDiagnostic result = executor.execute(context, input);
+				ExecutionDiagnostic result = executor.execute(context, input1, input2);
 				
 				// check the result for success
 				if(result.getSeverity() == Diagnostic.OK) {

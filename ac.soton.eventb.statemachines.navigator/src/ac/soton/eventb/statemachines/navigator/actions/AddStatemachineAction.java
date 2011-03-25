@@ -15,6 +15,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
@@ -35,6 +36,7 @@ import org.eventb.ui.EventBUIPlugin;
 
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorItem;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
@@ -119,6 +121,7 @@ public class AddStatemachineAction extends Action implements ISelectionChangedLi
 			// new statemachine
 			final Statemachine statemachine = StatemachinesFactory.eINSTANCE.createStatemachine();
 			statemachine.setName(name);
+			statemachine.setExtensionId(StatemachinesPackage.STATEMACHINES_EXTENSION_ID + "." + EcoreUtil.generateUUID());
 			
 			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(resource);
 			if (editingDomain == null)

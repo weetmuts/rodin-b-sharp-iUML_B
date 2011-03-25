@@ -33,6 +33,12 @@ import org.eventb.emf.core.CorePackage;
  */
 public interface StatemachinesPackage extends EPackage {
 	/**
+	 * Statemachines extension ID, assigned to statemachines extensions to Event-B,
+	 * as well as used by transformation to Event-B.
+	 */
+	String STATEMACHINES_EXTENSION_ID = "ac.soton.eventb.statemachines";
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

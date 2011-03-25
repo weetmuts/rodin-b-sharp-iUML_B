@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -52,6 +53,7 @@ import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
 import ac.soton.eventb.statemachines.RefinedState;
 import ac.soton.eventb.statemachines.RefinedStatemachine;
+import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
@@ -145,7 +147,7 @@ public class RefineCommand extends AbstractHandler {
 			
 			// create extensions
 			for (AbstractExtension extension : machine.getExtensions()) {
-				if (STATEMACHINES_EXTENSION_ID.equals(extension.getExtensionId())) {
+				if (Pattern.matches(STATEMACHINES_EXTENSION_ID + ".*", extension.getExtensionId())) {
 					if (extension instanceof AbstractStatemachine)
 						newMachine.getExtensions().add(refineStatemachinesExtension((AbstractStatemachine) extension, refinementMap));
 				} else {
@@ -187,6 +189,12 @@ public class RefineCommand extends AbstractHandler {
 			// create refined statemachine
 			RefinedStatemachine refinedStatemachine = StatemachinesFactory.eINSTANCE.createRefinedStatemachine();
 			refinedStatemachine.setRefines(abstractStatemachine);
+			
+			// keep same extension id
+			String extensionID = abstractStatemachine instanceof Statemachine ? ((Statemachine) abstractStatemachine).getExtensionId() :
+				abstractStatemachine instanceof RefinedStatemachine ? ((RefinedStatemachine) abstractStatemachine).getExtensionId() : null;
+			if (extensionID != null)
+				refinedStatemachine.setExtensionId(extensionID);
 			
 			// create nodes
 			for (AbstractNode node : abstractStatemachine.getNodes()) {

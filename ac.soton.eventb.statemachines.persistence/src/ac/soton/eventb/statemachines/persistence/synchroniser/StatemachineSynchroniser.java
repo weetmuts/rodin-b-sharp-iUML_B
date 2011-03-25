@@ -104,6 +104,7 @@ public class StatemachineSynchroniser extends AbstractSynchroniser {
 					eventBElement.getNodes().addAll(sm.getNodes());
 					eventBElement.getTransitions().addAll(sm.getTransitions());
 					eventBElement.setTranslation(sm.getTranslation());
+					eventBElement.setExtensionId(sm.getExtensionId());
 				}
 			}
 			catch (IOException e) {

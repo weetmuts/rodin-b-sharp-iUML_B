@@ -104,6 +104,7 @@ public class RefinedStatemachineSynchroniser extends AbstractSynchroniser {
 					eventBElement.getNodes().addAll(rsm.getNodes());
 					eventBElement.getTransitions().addAll(rsm.getTransitions());
 					eventBElement.setRefines(rsm.getRefines());
+					eventBElement.setExtensionId(rsm.getExtensionId());
 				}
 			}
 			catch (IOException e) {

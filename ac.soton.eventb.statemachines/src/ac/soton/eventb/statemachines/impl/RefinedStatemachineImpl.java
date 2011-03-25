@@ -68,7 +68,7 @@ public class RefinedStatemachineImpl extends DiagramRootImpl implements RefinedS
 	 * @generated NOT
 	 * @ordered
 	 */
-	protected static final String EXTENSION_ID_EDEFAULT = "ac.soton.eventb.statemachines";
+	protected static final String EXTENSION_ID_EDEFAULT = StatemachinesPackage.STATEMACHINES_EXTENSION_ID;
 
 	/**
 	 * The cached value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.

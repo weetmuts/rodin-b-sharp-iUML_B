@@ -1,12 +1,12 @@
 modeltype eventb uses core('http://emf.eventb.org/models/core');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
 
-transformation statemachines2eventb(inout inoutModel:eventb);
+transformation statemachines2eventb(inout inoutModel:eventb, in inStatemachine:statemachines);
 
 // generator id key
 property generatorID : String = "org.eventb.emf.persistence.generator_ID";
 // current generator id
-property id : String = "ac.soton.eventb.statemachines";
+property extensionID : String = "ac.soton.eventb.statemachines";
 
 property INIT : String = "INITIALISATION";
 
@@ -29,25 +29,26 @@ property B_UNION : String = " ∩ ";
 
 
 main() {
-	inoutModel.rootObjects()[eventb::machine::Machine]->map iumlb2eventb();
+	inoutModel.rootObjects()[eventb::machine::Machine]->map iumlb2eventb(inStatemachine.rootObjects()![statemachines::AbstractStatemachine]);
 }
 
 /*
  * Transforms iumlb to eventb.
  */
-mapping inout eventb::machine::Machine::iumlb2eventb() {
+mapping inout eventb::machine::Machine::iumlb2eventb(in rootAbstractStatemachine : statemachines::AbstractStatemachine) {
+	this.extensionID := rootAbstractStatemachine.getExtensionID();
 	self.map machine2nonGeneratedMachine();
 	
-	variables := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2variables()->
+	variables := rootAbstractStatemachine.map abstractStatemachine2variables()->
 		union(variables->asSequence());
-	invariants := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2typeInvariants()->
-		union(extensions[statemachines::AbstractStatemachine].map rootAbstractStatemachine2partitionInvariants())->
-		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2substateInvariants())->
-		union(extensions[statemachines::AbstractStatemachine].map abstractStatemachine2constraintInvariants())->
+	invariants := rootAbstractStatemachine.map abstractStatemachine2typeInvariants()->
+		union(rootAbstractStatemachine.map rootAbstractStatemachine2partitionInvariants())->
+		union(rootAbstractStatemachine.map abstractStatemachine2substateInvariants())->
+		union(rootAbstractStatemachine.map abstractStatemachine2constraintInvariants())->
 		union(invariants->asSequence());
-	events![name = INIT].actions := extensions[statemachines::AbstractStatemachine].map abstractStatemachine2initActions()->
+	events![name = INIT].actions := rootAbstractStatemachine.map abstractStatemachine2initActions()->
 		union(events![name = INIT].actions->asSequence());
-	extensions[statemachines::AbstractStatemachine].map abstractStatemachine2events();
+	rootAbstractStatemachine.map abstractStatemachine2events();
 }
 
 /*
@@ -466,7 +467,7 @@ mapping statemachines::AbstractState::abstractState2enterAction(in transition : 
  * Returns if eventB element is generated or not.
  */
 query eventb::EventBElement::isGenerated() : Boolean {
-	return self.generated = true and self.attributes![key = generatorID].value.value = id;
+	return self.generated = true and self.attributes![key = generatorID].value.value = extensionID;
 }
 
 /*
@@ -477,7 +478,7 @@ helper getGeneratedAttr() : StringToAttributeMapEntry {
 		key := generatorID;
 		value := object Attribute {
 			type := AttributeType::String;
-			value := id;
+			value := extensionID;
 		}
 	}
 }
@@ -584,4 +585,14 @@ query statemachines::AbstractStatemachine::contains(in node : statemachines::Abs
  */
 helper statemachines::AbstractStatemachine::getInitialState() : statemachines::AbstractState {
 	return self.nodes![statemachines::Initial].outgoing->first().target.oclAsType(statemachines::AbstractState);
+}
+
+/*
+ * Returns extension id of abstract statemachine if it's an abstract extension.
+ */
+helper statemachines::AbstractStatemachine::getExtensionID() : String {
+	return if self.oclIsKindOf(eventb::AbstractExtension)
+		then self.oclAsType(eventb::AbstractExtension).extensionId
+		else null
+		endif;
 }
