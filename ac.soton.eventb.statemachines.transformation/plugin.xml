@@ -24,9 +24,9 @@ http://www.eclipse.org/legal/epl-v10.html
 <extension
      point="org.eclipse.ui.commands">
   <command
-        description="Translate iUML-B to Event-B"
+        description="%command.description.translate"
         id="ac.soton.eventb.statemachines.transformation.translateToEventB"
-        name="&amp;Translate to Event-B">
+        name="%command.name.translate">
   </command>
 </extension>
 <extension

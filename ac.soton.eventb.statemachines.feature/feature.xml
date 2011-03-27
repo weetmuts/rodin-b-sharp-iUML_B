@@ -22,7 +22,11 @@
    </url>
 
    <requires>
-      <import feature="org.eventb.emf.feature" version="3.2.1" match="compatible"/>
+      <import feature="org.eventb.emf.feature" version="3.3.0" match="compatible"/>
+      <import feature="org.eclipse.gmf" version="1.4.1.v20100909-1300-7d9A78FYnmMD7VBZOqOghp2tsgXc"/>
+      <import feature="org.eclipse.emf.validation" version="1.4.0.v20100428-2315-479-9oB56N5BBR6LCA6"/>
+      <import feature="org.eclipse.ocl" version="3.0.0.v201005061704-79-7G9oB5855J7O8P9D"/>
+      <import plugin="org.eclipse.m2m.qvt.oml"/>
    </requires>
 
    <plugin
@@ -48,6 +52,20 @@
 
    <plugin
          id="ac.soton.eventb.statemachines.persistence"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ac.soton.eventb.statemachines.navigator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ac.soton.eventb.statemachines.transformation"
          download-size="0"
          install-size="0"
          version="0.0.0"

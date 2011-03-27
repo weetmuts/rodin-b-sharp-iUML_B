@@ -16,8 +16,6 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -52,7 +50,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.statemachines.diagram.part.ValidateAction;
-import ac.soton.eventb.statemachines.diagram.providers.StatemachinesMarkerNavigationProvider;
 
 /**
  * Translate action handler.
@@ -75,9 +72,22 @@ public class TranslateAction extends AbstractHandler {
 			// first validate, then transformate
 			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), 
 					diagramEditor.getDiagram())) {
-				Command command = new ICommandProxy(new TransformationCommand(diagramEditor.getDiagram().getElement()));
-				if (command.canExecute())
+				TransformationCommand transfCommand = new TransformationCommand(diagramEditor.getDiagram().getElement());
+				Command command = new ICommandProxy(transfCommand);
+				if (command.canExecute()) {
 					command.execute();
+					
+					// result feedback
+					if (transfCommand.getCommandResult().getStatus().isOK())
+						MessageDialog.openInformation(editor.getSite()
+								.getShell(), "Translation Information",
+								"Translation completed successfully");
+					else
+						MessageDialog
+								.openError(editor.getSite().getShell(),
+										"Translation Information",
+										"Translation encountered problems.\n\nSee log for details.");
+				}
 			}
 		}
 		return null;
@@ -101,20 +111,13 @@ public class TranslateAction extends AbstractHandler {
 		IFile file = WorkspaceSynchronizer.getFile(view.eResource());
 		if (file != null) {
 			try {
-				// find error markers and get errors
-				IMarker[] markers = file.findMarkers(StatemachinesMarkerNavigationProvider.MARKER_TYPE, true, IResource.DEPTH_ZERO);
-				StringBuilder errors = new StringBuilder();
-				for (IMarker marker : markers) {
-					int severity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
-					if (severity == IMarker.SEVERITY_ERROR)
-						errors.append("\n" + marker.getAttribute(IMarker.MESSAGE, "unknown error") +
-								" \n\t@ " + marker.getAttribute(IMarker.LOCATION, "unknown location"));
-				}
+				// get errors
+				String errors = ValidateAction.getValidationErrors(file);
 				
-				if (errors.length() == 0) {
+				if (errors.isEmpty()) {
 					return IStatus.OK;
 				} else {
-					MessageDialog.openError(null, "Translation interrupted", "Validation has found problems in your model:\n" + errors.toString());
+					MessageDialog.openError(null, "Translation interrupted", "Validation has found problems in your model:\n" + errors);
 				}
 			} catch (CoreException e) {
 				TransformationPlugin.getDefault().logError("Cannot read markers from file: " + file.getFullPath().toString(), e);

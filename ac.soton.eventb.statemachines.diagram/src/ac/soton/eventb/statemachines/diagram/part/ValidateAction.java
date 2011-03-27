@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -301,5 +304,25 @@ public class ValidateAction extends Action {
 			}
 		}
 		return targetElementCollector;
+	}
+	
+	/**
+	 * Returns a string of errors from validation markers for file.
+	 * 
+	 * @param file diagram file
+	 * @return string of errors
+	 * @throws CoreException if file markers cannot be read
+	 */
+	public static String getValidationErrors(IFile file) throws CoreException {
+		IMarker[] markers = file.findMarkers(StatemachinesMarkerNavigationProvider.MARKER_TYPE, true, IResource.DEPTH_ZERO);
+		StringBuilder errors = new StringBuilder();
+		for (IMarker marker : markers) {
+			int severity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+			if (severity == IMarker.SEVERITY_ERROR)
+				errors.append("\n" + marker.getAttribute(IMarker.MESSAGE, "unknown error") +
+						" \n\t@ " + marker.getAttribute(IMarker.LOCATION, "unknown location"));
+		}
+		
+		return errors.toString();
 	}
 }

@@ -10,9 +10,12 @@ package ac.soton.eventb.statemachines.diagram.part;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
@@ -23,12 +26,29 @@ public class ValidateDiagramAction extends AbstractHandler {
 	/**
 	 * @generated NOT
 	 */
-	@SuppressWarnings("static-access")
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchPart part = HandlerUtil.getActivePart(event);
-		ValidateAction action = new ValidateAction(part.getSite().getPage());
-		action.run();
-		return action.RESULT;
+		IEditorPart editor = HandlerUtil.getActiveEditorChecked(event);
+		if (editor instanceof IDiagramWorkbenchPart) {
+			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
+			
+			// run validation
+			ValidateAction action = new ValidateAction(editor.getSite().getPage());
+			action.run();
+		
+			// show feedback
+			try {
+				IFile file = WorkspaceSynchronizer.getFile(diagramEditor.getDiagram().eResource());
+				String errors = ValidateAction.getValidationErrors(file);
+				if (errors.isEmpty())
+					MessageDialog.openInformation(editor.getSite().getShell(), "Validation Information", "Validation completed successfully");
+				else
+					MessageDialog.openError(editor.getSite().getShell(), "Validation Information", "Validation has found problems in your model:\n" + errors);
+			} catch (CoreException e) {
+				throw new ExecutionException("Validation result retrieval failed", e);
+			}
+		}
+		
+		return null;
 	}
 
 }
