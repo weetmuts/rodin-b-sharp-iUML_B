@@ -650,7 +650,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		abstractStatemachineEClass.getESuperTypes().add(theCorePackage.getEventBCommentedElement());
 		abstractNodeEClass.getESuperTypes().add(theCorePackage.getEventBElement());
 		transitionEClass.getESuperTypes().add(theCorePackage.getEventBCommentedElement());
-		transitionEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
+		transitionEClass.getESuperTypes().add(this.getEventBLabeled());
 		refinedStatemachineEClass.getESuperTypes().add(this.getDiagramRoot());
 		refinedStatemachineEClass.getESuperTypes().add(this.getEventBLabeled());
 		refinedStatemachineEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());

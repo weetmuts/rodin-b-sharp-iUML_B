@@ -136,7 +136,7 @@ public class ElaboratesPropertySection extends AbstractTablePropertySection {
 				// create and add new event
 				EObject container = EcoreUtil.getRootContainer(eObject);
 				Machine machine = (Machine) container;
-				NewEventDialog dialog = new NewEventDialog(getPart().getSite().getShell(), machine.getEvents(), ((Transition) eObject).getName());
+				NewEventDialog dialog = new NewEventDialog(getPart().getSite().getShell(), machine.getEvents(), null);
 				if (Dialog.OK == dialog.open()) {
 					EObject newChild = dialog.getEvent();
 					if (newChild == null)

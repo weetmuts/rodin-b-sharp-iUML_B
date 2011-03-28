@@ -139,7 +139,7 @@ public class StatemachinesSwitch<T> {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = caseEventBCommentedElement(transition);
-				if (result == null) result = caseEventBNamed(transition);
+				if (result == null) result = caseEventBLabeled(transition);
 				if (result == null) result = caseEventBElement(transition);
 				if (result == null) result = caseEventBCommented(transition);
 				if (result == null) result = caseEventBObject(transition);

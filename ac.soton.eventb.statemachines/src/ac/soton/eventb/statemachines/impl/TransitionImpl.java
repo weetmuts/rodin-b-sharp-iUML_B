@@ -18,13 +18,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.impl.EventBCommentedElementImpl;
 import org.eventb.emf.core.machine.Event;
 
 import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.EventBLabeled;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 
@@ -35,7 +34,7 @@ import ac.soton.eventb.statemachines.Transition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getElaborates <em>Elaborates</em>}</li>
@@ -56,14 +55,14 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getLabel()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "";
+	protected static final String LABEL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -147,23 +146,28 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * Returns either a name or if not set a list of elaborated transitions.
-	 * If neither name, nor elaboration is set returns a warning name.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getName() {
-		String name = doGetName();
-		if (name.equals(NAME_EDEFAULT)) {
-			EList<Event> events = getElaborates();
-			if (events.isEmpty())
-				return "";//"<no name - fix elaborates>";
-			ArrayList<String> result = new ArrayList<String>(getElaborates().size());
-			for (Event event : getElaborates())
-				result.add(event.getName());
-			return result.toString().replaceAll("(^.)|(.$)", "");
-		}
-		return name;
+	public String getLabel() {
+		EList<Event> events = getElaborates();
+		if (events.isEmpty())
+			return "";//"<no name - fix elaborates>";
+		ArrayList<String> result = new ArrayList<String>(getElaborates().size());
+		for (Event event : getElaborates())
+			result.add(event.getName());
+		return result.toString().replaceAll("(^.)|(.$)", "");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		// TODO: implement this method to set the 'Label' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -303,18 +307,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void setName(String newName) {
-		String oldName = getName();
-		doSetName(newName);
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, oldName, newName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
 	public EventBElement getSourceContainer() {
 		if (sourceContainer != null && sourceContainer.eIsProxy()) {
 			InternalEObject oldSourceContainer = (InternalEObject)sourceContainer;
@@ -416,28 +408,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String doGetName() {
-		assert (this instanceof EventBElement);
-		String reference = ((EventBElement)this).getReferenceWithoutResolving();
-		return reference.length() > this.eStaticClass().getInstanceClassName().length() ?
-			reference.substring(this.eStaticClass().getInstanceClassName().length()+1)
-			: "";
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void doSetName(String newName) {
-		((EventBElement)this).setReference(this.eStaticClass().getInstanceClassName()+"."+newName);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -477,8 +447,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__NAME:
-				return getName();
+			case StatemachinesPackage.TRANSITION__LABEL:
+				return getLabel();
 			case StatemachinesPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -508,8 +478,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__NAME:
-				setName((String)newValue);
+			case StatemachinesPackage.TRANSITION__LABEL:
+				setLabel((String)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)newValue);
@@ -542,8 +512,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__NAME:
-				setName(NAME_EDEFAULT);
+			case StatemachinesPackage.TRANSITION__LABEL:
+				setLabel(LABEL_EDEFAULT);
 				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)null);
@@ -575,8 +545,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.TRANSITION__NAME:
-				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+			case StatemachinesPackage.TRANSITION__LABEL:
+				return LABEL_EDEFAULT == null ? getLabel() != null : !LABEL_EDEFAULT.equals(getLabel());
 			case StatemachinesPackage.TRANSITION__TARGET:
 				return target != null;
 			case StatemachinesPackage.TRANSITION__SOURCE:
@@ -600,9 +570,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBLabeled.class) {
 			switch (derivedFeatureID) {
-				case StatemachinesPackage.TRANSITION__NAME: return CorePackage.EVENT_BNAMED__NAME;
+				case StatemachinesPackage.TRANSITION__LABEL: return StatemachinesPackage.EVENT_BLABELED__LABEL;
 				default: return -1;
 			}
 		}
@@ -616,9 +586,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBLabeled.class) {
 			switch (baseFeatureID) {
-				case CorePackage.EVENT_BNAMED__NAME: return StatemachinesPackage.TRANSITION__NAME;
+				case StatemachinesPackage.EVENT_BLABELED__LABEL: return StatemachinesPackage.TRANSITION__LABEL;
 				default: return -1;
 			}
 		}
@@ -642,7 +612,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	}
 
 	/* 
-	 * Customised to fix problem with notification of name change on EReference 'elaborates' change.
+	 * Customised to fix problem with notification of label change on EReference 'elaborates' change.
 	 */
 	@Override
 	public void eNotify(Notification notification) {
@@ -654,7 +624,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				&& (type == Notification.ADD || type == Notification.ADD_MANY
 						|| type == Notification.REMOVE || type == Notification.REMOVE_MANY))
 			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__NAME, notification.getOldValue(), notification.getNewValue()));
+				eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__LABEL, notification.getOldValue(), notification.getNewValue()));
 			
 	}
 

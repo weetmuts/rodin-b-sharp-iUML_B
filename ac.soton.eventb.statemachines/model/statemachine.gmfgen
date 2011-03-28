@@ -751,7 +751,8 @@
           visualID="6001"
           editPartClassName="TransitionNameEditPart"
           itemSemanticEditPolicyClassName="TransitionNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="TransitionNameViewFactory">
+          notationViewFactoryClassName="TransitionNameViewFactory"
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -768,9 +769,7 @@
             parser="//@labelParsers/@implementations.0"
             viewPattern="">
           <metaFeatures
-              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
-          <editableMetaFeatures
-              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
+              href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
         </modelFacet>
       </labels>
     </links>
@@ -812,7 +811,8 @@
           visualID="6002"
           editPartClassName="TransitionGhostNameEditPart"
           itemSemanticEditPolicyClassName="TransitionGhostNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="TransitionNameViewFactory">
+          notationViewFactoryClassName="TransitionNameViewFactory"
+          readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -829,9 +829,7 @@
             parser="//@labelParsers/@implementations.0"
             viewPattern="">
           <metaFeatures
-              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
-          <editableMetaFeatures
-              href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
+              href="statemachines.genmodel#//statemachines/EventBLabeled/label"/>
         </modelFacet>
       </labels>
     </links>

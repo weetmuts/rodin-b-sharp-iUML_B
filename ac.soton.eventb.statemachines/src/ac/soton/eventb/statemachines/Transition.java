@@ -11,7 +11,6 @@ package ac.soton.eventb.statemachines;
 import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.machine.Event;
 
 /**
@@ -35,7 +34,7 @@ import org.eventb.emf.core.machine.Event;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesOnRootIfInitial\nelaboratesOnRootIfFinal\nelaboratesOnNestedIfNotInitialOrFinal'"
  * @generated
  */
-public interface Transition extends EventBCommentedElement, EventBNamed {
+public interface Transition extends EventBCommentedElement, EventBLabeled {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

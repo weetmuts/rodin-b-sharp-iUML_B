@@ -250,7 +250,6 @@ public class RefineCommand extends AbstractHandler {
 			// process transitions of current abstract statemachine
 			for (Transition transition : abstractStatemachine.getTransitions()) {
 				Transition newTransition = StatemachinesFactory.eINSTANCE.createTransition();
-				newTransition.setName(transition.getName());
 				
 				// set source and target
 				newTransition.setSource((AbstractNode) refinementMap.get(EcoreUtil.getIdentification(transition.getSource())));

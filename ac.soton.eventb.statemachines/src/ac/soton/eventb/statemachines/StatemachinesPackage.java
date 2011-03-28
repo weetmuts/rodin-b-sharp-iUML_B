@@ -342,13 +342,13 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__COMMENT = CorePackage.EVENT_BCOMMENTED_ELEMENT__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__NAME = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 0;
+	int TRANSITION__LABEL = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.

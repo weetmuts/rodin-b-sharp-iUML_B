@@ -19,7 +19,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/source"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement #//EventBLabeled">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaboratesOnRootIfInitial&#xA;elaboratesOnRootIfFinal&#xA;elaboratesOnNestedIfNotInitialOrFinal"/>
     </eAnnotations>

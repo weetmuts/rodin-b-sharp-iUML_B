@@ -176,12 +176,12 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createEventBCommentedElementAdapter();
 			}
 			@Override
-			public Adapter caseEventBNamed(EventBNamed object) {
-				return createEventBNamedAdapter();
-			}
-			@Override
 			public Adapter caseAbstractExtension(AbstractExtension object) {
 				return createAbstractExtensionAdapter();
+			}
+			@Override
+			public Adapter caseEventBNamed(EventBNamed object) {
+				return createEventBNamedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

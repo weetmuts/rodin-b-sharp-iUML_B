@@ -242,43 +242,37 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser transitionName_6001Parser;
+	private IParser transitionLabel_6001Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getTransitionName_6001Parser() {
-		if (transitionName_6001Parser == null) {
-			EAttribute[] features = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			EAttribute[] editableFeatures = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			MessageFormatParser parser = new MessageFormatParser(features,
-					editableFeatures);
-			transitionName_6001Parser = parser;
+	private IParser getTransitionLabel_6001Parser() {
+		if (transitionLabel_6001Parser == null) {
+			EAttribute[] features = new EAttribute[] { StatemachinesPackage.eINSTANCE
+					.getEventBLabeled_Label() };
+			MessageFormatParser parser = new MessageFormatParser(features);
+			transitionLabel_6001Parser = parser;
 		}
-		return transitionName_6001Parser;
+		return transitionLabel_6001Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	private IParser transitionName_6002Parser;
+	private IParser transitionLabel_6002Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getTransitionName_6002Parser() {
-		if (transitionName_6002Parser == null) {
-			EAttribute[] features = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			EAttribute[] editableFeatures = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			MessageFormatParser parser = new MessageFormatParser(features,
-					editableFeatures);
-			transitionName_6002Parser = parser;
+	private IParser getTransitionLabel_6002Parser() {
+		if (transitionLabel_6002Parser == null) {
+			EAttribute[] features = new EAttribute[] { StatemachinesPackage.eINSTANCE
+					.getEventBLabeled_Label() };
+			MessageFormatParser parser = new MessageFormatParser(features);
+			transitionLabel_6002Parser = parser;
 		}
-		return transitionName_6002Parser;
+		return transitionLabel_6002Parser;
 	}
 
 	/**
@@ -305,9 +299,9 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 		case RefinedStateInvariantEditPart.VISUAL_ID:
 			return getInvariant_3010Parser();
 		case TransitionNameEditPart.VISUAL_ID:
-			return getTransitionName_6001Parser();
+			return getTransitionLabel_6001Parser();
 		case TransitionGhostNameEditPart.VISUAL_ID:
-			return getTransitionName_6002Parser();
+			return getTransitionLabel_6002Parser();
 		}
 		return null;
 	}

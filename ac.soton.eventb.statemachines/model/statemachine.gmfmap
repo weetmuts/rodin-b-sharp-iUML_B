@@ -333,13 +333,12 @@
         body="self.source = self.sourceContainer and self.target = self.targetContainer"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
+        readOnly="true"
         viewPattern="">
       <diagramLabel
           href="statemachine.gmfgraph#TransitionLabel"/>
       <features
-          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-      <editableFeatures
-          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+          href="statemachines.ecore#//EventBLabeled/label"/>
     </labelMappings>
     <containmentFeature
         href="statemachines.ecore#//AbstractStatemachine/transitions"/>
@@ -362,13 +361,12 @@
         body="self.source &lt;> self.sourceContainer or self.target &lt;> self.targetContainer"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
+        readOnly="true"
         viewPattern="">
       <diagramLabel
           href="statemachine.gmfgraph#TransitionLabel"/>
       <features
-          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-      <editableFeatures
-          href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+          href="statemachines.ecore#//EventBLabeled/label"/>
     </labelMappings>
     <containmentFeature
         href="statemachines.ecore#//AbstractStatemachine/transitions"/>

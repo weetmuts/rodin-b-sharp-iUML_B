@@ -72,7 +72,7 @@ public class TransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addLabelPropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addSourcePropertyDescriptor(object);
 			addElaboratesPropertyDescriptor(object);
@@ -84,19 +84,19 @@ public class TransitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Label feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addLabelPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventBNamed_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventBNamed_name_feature", "_UI_EventBNamed_type"),
-				 CorePackage.Literals.EVENT_BNAMED__NAME,
+				 getString("_UI_EventBLabeled_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBLabeled_label_feature", "_UI_EventBLabeled_type"),
+				 StatemachinesPackage.Literals.EVENT_BLABELED__LABEL,
 				 true,
 				 false,
 				 false,
@@ -256,7 +256,7 @@ public class TransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Transition)object).getName();
+		String label = ((Transition)object).getReference();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Transition_type") :
 			getString("_UI_Transition_type") + " " + label;
@@ -274,7 +274,7 @@ public class TransitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Transition.class)) {
-			case StatemachinesPackage.TRANSITION__NAME:
+			case StatemachinesPackage.TRANSITION__LABEL:
 			case StatemachinesPackage.TRANSITION__TARGET:
 			case StatemachinesPackage.TRANSITION__SOURCE:
 			case StatemachinesPackage.TRANSITION__ELABORATES:
