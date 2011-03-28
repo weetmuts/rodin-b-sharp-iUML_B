@@ -110,7 +110,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2typeInvariants
  */
 mapping statemachines::AbstractState::abstractState2typeInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::State].map state2typeInvariant()->asSequence()->
+		result := self[statemachines::State].map state2typeInvariant()->asSequence()->
 			union(self.statemachines.map abstractStatemachine2typeInvariants()->flatten());
 	}
 }
@@ -130,7 +130,7 @@ mapping statemachines::State::state2typeInvariant() : eventb::machine::Invariant
  */
 mapping statemachines::AbstractStatemachine::rootAbstractStatemachine2partitionInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::Statemachine].map rootStatemachine2partitionInvariant()->asSequence()->
+		result := self[statemachines::Statemachine].map rootStatemachine2partitionInvariant()->asSequence()->
 			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants()->flatten());
 	}
 }
@@ -152,7 +152,7 @@ mapping statemachines::Statemachine::rootStatemachine2partitionInvariant() : eve
  */
 mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants(in parentState : statemachines::AbstractState) : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::Statemachine].map statemachine2partitionInvariant(parentState)->asSequence()->
+		result := self[statemachines::Statemachine].map statemachine2partitionInvariant(parentState)->asSequence()->
 			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants()->flatten());
 	}
 }
@@ -222,7 +222,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2constraintInva
  */
 mapping statemachines::AbstractState::abstractState2constraintInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self![statemachines::State].map state2constraintInvariants()->
+		result := self[statemachines::State].map state2constraintInvariants()->asSequence()->
 			union(self.statemachines.map abstractStatemachine2constraintInvariants()->flatten());
 	}
 }
@@ -256,19 +256,19 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2initActions() 
  */
 mapping statemachines::AbstractState::abstractState2initActions() : Sequence(eventb::machine::Action) {
 	init {
-		result := self.map abstractState2initAction()->asSequence()->
+		result := self[statemachines::State].map state2initAction()->asSequence()->
 			union(self.statemachines.map abstractStatemachine2initActions());
 	}
 }
 
 /*
- * Transforms abstract state to its variable initialisation action.
+ * Transforms state to its variable initialisation action.
  * Initialises variable with TRUE if there is an incoming transition
  * that elaborates INITIALISATION event, or with FALSE otherwise.
  */
-mapping statemachines::AbstractState::abstractState2initAction() : eventb::machine::Action {
-	name := self.getName() + ".init";
-	action := self.getName() + B_BEQ + if self.incoming.elaborates.name->includes(INIT) then B_TRUE else B_FALSE endif;
+mapping statemachines::State::state2initAction() : eventb::machine::Action {
+	name := self.name + ".init";
+	action := self.name + B_BEQ + if self.incoming.elaborates.name->includes(INIT) then B_TRUE else B_FALSE endif;
 	generated := true;
 	attributes += getGeneratedAttr();
 }
@@ -467,7 +467,9 @@ mapping statemachines::AbstractState::abstractState2enterAction(in transition : 
  * Returns if eventB element is generated or not.
  */
 query eventb::EventBElement::isGenerated() : Boolean {
-	return self.generated = true and self.attributes![key = generatorID].value.value = extensionID;
+	return self.generated = true
+		and self.attributes->exists(key = generatorID)
+		and self.attributes![key = generatorID].value.value = extensionID;
 }
 
 /*
@@ -548,7 +550,10 @@ helper statemachines::AbstractNode::externalise() : statemachines::AbstractState
 		then if self.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
 			then self.eContainer().eContainer().oclAsType(statemachines::AbstractState)
 			endif
-		else self![statemachines::AbstractState]
+		else if self.oclIsKindOf(statemachines::AbstractState)
+			then self.oclAsType(statemachines::AbstractState)
+			else null
+			endif
 		endif;
 }
 
@@ -584,7 +589,10 @@ query statemachines::AbstractStatemachine::contains(in node : statemachines::Abs
  * Returns first initial state found in statemachine i.e. abstract state that is linked by incoming transition from 'Initial' state.
  */
 helper statemachines::AbstractStatemachine::getInitialState() : statemachines::AbstractState {
-	return self.nodes![statemachines::Initial].outgoing->first().target.oclAsType(statemachines::AbstractState);
+	return if not self.nodes[statemachines::Initial]->isEmpty()
+		then self.nodes![statemachines::Initial].outgoing->first().target.oclAsType(statemachines::AbstractState)
+		else null
+		endif;
 }
 
 /*
