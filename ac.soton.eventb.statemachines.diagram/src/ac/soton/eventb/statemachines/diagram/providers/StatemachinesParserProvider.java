@@ -97,6 +97,9 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 					.getEventBNamed_Name() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
+			parser.setViewPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditorPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditPattern(" {0}"); //$NON-NLS-1$
 			statemachineName_5002Parser = parser;
 		}
 		return statemachineName_5002Parser;
@@ -161,6 +164,9 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 			EAttribute[] features = new EAttribute[] { StatemachinesPackage.eINSTANCE
 					.getEventBLabeled_Label() };
 			MessageFormatParser parser = new MessageFormatParser(features);
+			parser.setViewPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditorPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditPattern(" {0}"); //$NON-NLS-1$
 			refinedStatemachineLabel_5006Parser = parser;
 		}
 		return refinedStatemachineLabel_5006Parser;
@@ -200,6 +206,9 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 					.getEventBNamed_Name() };
 			MessageFormatParser parser = new MessageFormatParser(features,
 					editableFeatures);
+			parser.setViewPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditorPattern(" {0}"); //$NON-NLS-1$
+			parser.setEditPattern(" {0}"); //$NON-NLS-1$
 			statemachineName_5004Parser = parser;
 		}
 		return statemachineName_5004Parser;

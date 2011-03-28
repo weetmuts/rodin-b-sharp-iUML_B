@@ -453,10 +453,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 			fFigureRefinedStatemachineLabelFigure = new WrappingLabel();
 			fFigureRefinedStatemachineLabelFigure.setText("<...>");
 
-			fFigureRefinedStatemachineLabelFigure.setBorder(new MarginBorder(
-					getMapMode().DPtoLP(0), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(0), getMapMode().DPtoLP(5)));
-
 			this.add(fFigureRefinedStatemachineLabelFigure, BorderLayout.TOP);
 
 			fFigureRefinedStatemachineCompartmentFigure = new RectangleFigure();

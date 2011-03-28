@@ -305,7 +305,7 @@ public class ValidateAction extends Action {
 		}
 		return targetElementCollector;
 	}
-	
+
 	/**
 	 * Returns a string of errors from validation markers for file.
 	 * 
@@ -314,15 +314,21 @@ public class ValidateAction extends Action {
 	 * @throws CoreException if file markers cannot be read
 	 */
 	public static String getValidationErrors(IFile file) throws CoreException {
-		IMarker[] markers = file.findMarkers(StatemachinesMarkerNavigationProvider.MARKER_TYPE, true, IResource.DEPTH_ZERO);
+		IMarker[] markers = file.findMarkers(
+				StatemachinesMarkerNavigationProvider.MARKER_TYPE, true,
+				IResource.DEPTH_ZERO);
 		StringBuilder errors = new StringBuilder();
 		for (IMarker marker : markers) {
-			int severity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+			int severity = marker.getAttribute(IMarker.SEVERITY,
+					IMarker.SEVERITY_INFO);
 			if (severity == IMarker.SEVERITY_ERROR)
-				errors.append("\n" + marker.getAttribute(IMarker.MESSAGE, "unknown error") +
-						" \n\t@ " + marker.getAttribute(IMarker.LOCATION, "unknown location"));
+				errors.append("\n"
+						+ marker.getAttribute(IMarker.MESSAGE, "unknown error")
+						+ " \n\t@ "
+						+ marker.getAttribute(IMarker.LOCATION,
+								"unknown location"));
 		}
-		
+
 		return errors.toString();
 	}
 }
