@@ -58,6 +58,12 @@ import ac.soton.eventb.statemachines.StatemachinesFactory;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.navigator.StatemachinesNavigatorPlugin;
 
+/**
+ * Refines machine with statemachines.
+ * 
+ * @author vitaly
+ *
+ */
 public class RefineCommand extends AbstractHandler {
 
 	/**
@@ -91,6 +97,7 @@ public class RefineCommand extends AbstractHandler {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 				IAdaptable info) throws ExecutionException {
+			monitor.beginTask("Creating refined machine", IProgressMonitor.UNKNOWN);
 			TransactionalEditingDomain editingDomain = getEditingDomain();
 			
 			try {
@@ -105,6 +112,8 @@ public class RefineCommand extends AbstractHandler {
 				}
 			} catch (Exception e) {
 				return CommandResult.newErrorCommandResult(e);
+			} finally {
+				monitor.done();
 			}
 			
 			return CommandResult.newOKCommandResult();
