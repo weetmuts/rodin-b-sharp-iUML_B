@@ -39,4 +39,9 @@ public class LabelPropertySection extends AbstractTextPropertySection {
 		return "cnahge nothing";
 	}
 
+	@Override
+	protected boolean isReadOnly() {
+		return true;
+	}
+
 }
