@@ -81,7 +81,9 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
-            viewPattern=" {0}">
+            viewPattern=" {0}"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
           <editableMetaFeatures
@@ -455,7 +457,9 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
-            viewPattern=" {0}">
+            viewPattern=" {0}"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBNamed/name"/>
           <editableMetaFeatures
