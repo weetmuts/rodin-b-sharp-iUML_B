@@ -51,6 +51,10 @@ mapping inout eventb::machine::Machine::iumlb2eventb(in rootAbstractStatemachine
 	rootAbstractStatemachine.map abstractStatemachine2events();
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Cleanup mappings
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /*
  * Transforms machine to machine free from generated elements.
  */
@@ -68,6 +72,10 @@ mapping inout eventb::machine::Event::event2nonGeneratedEvent() {
 	actions := actions->reject(isGenerated());
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /*
  * Transforms abstract statemachine to variables.
  */
@@ -82,19 +90,23 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2variables() : 
  */
 mapping statemachines::AbstractState::abstractState2variables() : Sequence(eventb::machine::Variable) {
 	init {
-		result := self.map abstractState2variable()->asSequence()->
+		result := self[statemachines::State].map state2variable()->asSequence()->
 			union(self.statemachines.map abstractStatemachine2variables()->flatten());
 	}
 }
 
 /*
- * Transforms abstract state to variable.
+ * Transforms state to variable.
  */
-mapping statemachines::AbstractState::abstractState2variable() : eventb::machine::Variable {
-	name := self.getName();
+mapping statemachines::State::state2variable() : eventb::machine::Variable {
+	name := self.name;
 	generated := true;
 	attributes += getGeneratedAttr();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Type invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Transforms abstract statemachine to type invariants.
@@ -124,6 +136,10 @@ mapping statemachines::State::state2typeInvariant() : eventb::machine::Invariant
 	generated := true;
 	attributes += getGeneratedAttr();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Partition invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Transforms root abstract statemachine to partition invariants.
@@ -179,6 +195,10 @@ mapping statemachines::AbstractState::abstractState2partitionInvariants() : Sequ
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Substate invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /*
  * Transforms abstract statemachine to substate invariants.
  */
@@ -193,20 +213,24 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2substateInvari
  */
 mapping statemachines::AbstractState::abstractState2substateInvariants() : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.statemachines.nodes[statemachines::AbstractState].map abstractState2substateInvariant(self)->
+		result := self.statemachines.nodes[statemachines::State].map state2substateInvariant(self)->
 			union(self.statemachines.map abstractStatemachine2substateInvariants()->flatten());
 	}
 }
 
 /*
- * Transforms abstract state to substate invariant on parent state.
+ * Transforms state to substate invariant on parent abstract state.
  */
-mapping statemachines::AbstractState::abstractState2substateInvariant(in parentState : statemachines::AbstractState) : eventb::machine::Invariant {
-	name := "substates " + self.getName() + B_COM + parentState.getName();
-	predicate := (self.getName() + B_EQ + B_TRUE).parenthesize() + B_IMPL + (parentState.getName() + B_EQ + B_TRUE).parenthesize();
+mapping statemachines::State::state2substateInvariant(in parentState : statemachines::AbstractState) : eventb::machine::Invariant {
+	name := "substates " + self.name + B_COM + parentState.getName();
+	predicate := (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + (parentState.getName() + B_EQ + B_TRUE).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Constraint invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Transforms abstract statemachine to constraint invariants.
@@ -241,6 +265,10 @@ mapping statemachines::State::state2constraintInvariants() : Sequence(eventb::ma
 		});
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Initialisation actions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Transforms abstract statemachine to state variable initialisation actions.
