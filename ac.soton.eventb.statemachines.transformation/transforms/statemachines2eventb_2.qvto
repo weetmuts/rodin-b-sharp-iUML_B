@@ -4,9 +4,9 @@ modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/sta
 transformation statemachines2eventb(inout inoutModel:eventb, in inStatemachine:statemachines);
 
 // generator id key
-property generatorID : String = "org.eventb.emf.persistence.generator_ID";
+property GENERATOR_ID_KEY : String = "org.eventb.emf.persistence.generator_ID";
 // current generator id
-property extensionID : String = "ac.soton.eventb.statemachines";
+property generatorID : String = "ac.soton.eventb.statemachines";
 
 property INIT : String = "INITIALISATION";
 
@@ -36,7 +36,7 @@ main() {
  * Transforms iumlb to eventb.
  */
 mapping inout eventb::machine::Machine::iumlb2eventb(in rootAbstractStatemachine : statemachines::AbstractStatemachine) {
-	this.extensionID := rootAbstractStatemachine.getExtensionID();
+	this.generatorID := rootAbstractStatemachine.getExtensionID();
 	self.map machine2nonGeneratedMachine();
 	
 	variables := rootAbstractStatemachine.map abstractStatemachine2variables()->
@@ -496,8 +496,8 @@ mapping statemachines::AbstractState::abstractState2enterAction(in transition : 
  */
 query eventb::EventBElement::isGenerated() : Boolean {
 	return self.generated = true
-		and self.attributes->exists(key = generatorID)
-		and self.attributes![key = generatorID].value.value = extensionID;
+		and self.attributes->exists(key = GENERATOR_ID_KEY)
+		and self.attributes![key = GENERATOR_ID_KEY].value.value = generatorID;
 }
 
 /*
@@ -505,10 +505,10 @@ query eventb::EventBElement::isGenerated() : Boolean {
  */
 helper getGeneratedAttr() : StringToAttributeMapEntry {
 	return object StringToAttributeMapEntry {
-		key := generatorID;
+		key := GENERATOR_ID_KEY;
 		value := object Attribute {
 			type := AttributeType::String;
-			value := extensionID;
+			value := generatorID;
 		}
 	}
 }
