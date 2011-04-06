@@ -174,7 +174,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 			Collection<?> operations = ((Transition) ((View) getModel())
 					.getElement()).getOperations();
 			boolean enabled = operations != null && !operations.isEmpty();
-			getPrimaryShape().setLineWidth(1 + (enabled ? 1 : 0));
+			//getPrimaryShape().setLineWidth(1 + (enabled ? 1 : 0));
 			getPrimaryShape().setForegroundColor(
 					enabled ? ColorConstants.darkGreen : ColorConstants.gray);
 		}

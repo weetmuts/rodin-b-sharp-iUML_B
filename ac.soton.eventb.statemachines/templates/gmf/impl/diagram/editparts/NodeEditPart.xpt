@@ -571,7 +571,7 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	// update line width and color if state changes
 	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getAbstractState_Active().equals(event.getFeature())) {
 		boolean active = event.getNewBooleanValue();
-		setLineWidth(1 + (active ? 1 : 0));
+		//setLineWidth(1 + (active ? 1 : 0));
 		setForegroundColor(active ? org.eclipse.draw2d.ColorConstants.black : org.eclipse.draw2d.ColorConstants.gray);
 	}
 «ENDDEFINE»

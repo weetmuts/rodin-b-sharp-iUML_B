@@ -514,7 +514,7 @@ public class RefinedStateEditPart extends ShapeNodeEditPart {
 		if (StatemachinesPackage.eINSTANCE.getAbstractState_Active().equals(
 				event.getFeature())) {
 			boolean active = event.getNewBooleanValue();
-			setLineWidth(1 + (active ? 1 : 0));
+			//setLineWidth(1 + (active ? 1 : 0));
 			setForegroundColor(active ? ColorConstants.black
 					: ColorConstants.gray);
 		}

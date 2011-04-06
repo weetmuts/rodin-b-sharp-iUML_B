@@ -68,8 +68,8 @@ public class InnerRefinedStateStatemachinesCompartmentEditPart extends
 		Insets insets = result.getContentPane().getInsets();
 		insets.top = -1;
 		insets.bottom = 1;
-		insets.left = 2;
-		insets.right = 2;
+		insets.left = 1;
+		insets.right = 1;
 		// use all space
 		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
 				.getContentPane().getLayoutManager();
