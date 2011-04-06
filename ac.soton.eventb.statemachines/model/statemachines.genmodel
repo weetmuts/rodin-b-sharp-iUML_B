@@ -30,6 +30,7 @@
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/sourceContainer"/>
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/targetContainer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//Transition/operations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Transition/refines"/>
     </genClasses>
     <genClasses ecoreClass="statemachines.ecore#//RefinedStatemachine" labelFeature="#//statemachines/EventBLabeled/label">
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//RefinedStatemachine/refines"/>

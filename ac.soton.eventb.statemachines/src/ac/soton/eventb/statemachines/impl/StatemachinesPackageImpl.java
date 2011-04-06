@@ -360,6 +360,15 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTransition_Refines() {
+		return (EReference)transitionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRefinedStatemachine() {
 		return refinedStatemachineEClass;
 	}
@@ -578,6 +587,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(transitionEClass, TRANSITION__SOURCE_CONTAINER);
 		createEReference(transitionEClass, TRANSITION__TARGET_CONTAINER);
 		createEAttribute(transitionEClass, TRANSITION__OPERATIONS);
+		createEReference(transitionEClass, TRANSITION__REFINES);
 
 		refinedStatemachineEClass = createEClass(REFINED_STATEMACHINE);
 		createEReference(refinedStatemachineEClass, REFINED_STATEMACHINE__REFINES);
@@ -688,6 +698,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		EGenericType g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getTransition_Operations(), g1, "operations", null, 0, 1, Transition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransition_Refines(), this.getTransition(), null, "refines", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(refinedStatemachineEClass, RefinedStatemachine.class, "RefinedStatemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRefinedStatemachine_Refines(), this.getAbstractStatemachine(), null, "refines", null, 1, 1, RefinedStatemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -773,7 +784,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (abstractStatemachineEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "rootHasInitial\nhasAtMostOneInitial\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal"
+			 "constraints", "rootHasInitial\nhasAtMostOneInitial\nhasAtMostOneFinal\nhasInitialIfIncomingExternal\nhasInitialIfOutgoingLocal"
 		   });		
 		addAnnotation
 		  (transitionEClass, 
@@ -803,7 +814,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (initialEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "hasAtMostOneOutgoing\nhasOutgoingOnRoot\nhasOutgoingOnNestedIfExternalIncoming"
+			 "constraints", "hasOutgoingOnRoot\nhasOutgoingOnNestedIfExternalIncoming"
 		   });
 	}
 

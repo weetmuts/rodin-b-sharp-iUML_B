@@ -27,6 +27,7 @@ import org.eventb.emf.core.machine.Event;
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Transition#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
@@ -191,5 +192,31 @@ public interface Transition extends EventBCommentedElement, EventBLabeled {
 	 * @generated
 	 */
 	void setOperations(EList<?> value);
+
+	/**
+	 * Returns the value of the '<em><b>Refines</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Refines</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Refines</em>' reference.
+	 * @see #setRefines(Transition)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Refines()
+	 * @model
+	 * @generated
+	 */
+	Transition getRefines();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Transition#getRefines <em>Refines</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Refines</em>' reference.
+	 * @see #getRefines()
+	 * @generated
+	 */
+	void setRefines(Transition value);
 
 } // Transition

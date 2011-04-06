@@ -173,6 +173,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(abstractStatemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneFinal(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(abstractStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(abstractStatemachine, diagnostics, context);
 		return result;
@@ -221,6 +222,31 @@ public class StatemachinesValidator extends EObjectValidator {
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
 						 new Object[] { "Statemachine cannot have more than one initial state", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { abstractStatemachine },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the hasAtMostOneFinal constraint of '<em>Abstract Statemachine</em>'.
+	 * <!-- begin-user-doc -->
+	 * Abstract statemachine has at most one final state.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateAbstractStatemachine_hasAtMostOneFinal(AbstractStatemachine abstractStatemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (EcoreUtil.getObjectsByType(abstractStatemachine.getNodes(), StatemachinesPackage.eINSTANCE.getFinal()).size() > 1) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "hasAtMostOneFinal", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -496,6 +522,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(refinedStatemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneFinal(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(refinedStatemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRefinedStatemachine_hasNoStates(refinedStatemachine, diagnostics, context);
@@ -544,6 +571,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(statemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneFinal(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateStatemachine_hasNoRefinedStates(statemachine, diagnostics, context);
@@ -643,35 +671,9 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(initial, diagnostics, context);
-		if (result || diagnostics != null) result &= validateInitial_hasAtMostOneOutgoing(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnRoot(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnNestedIfExternalIncoming(initial, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the hasAtMostOneOutgoing constraint of '<em>Initial</em>'.
-	 * <!-- begin-user-doc -->
-	 * Initial state has at most one outgoing transition.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateInitial_hasAtMostOneOutgoing(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (initial.getOutgoing().size() > 1) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Initial state cannot have more than one outgoing transition", getObjectLabel(initial, context) },
-						 new Object[] { initial },
-						 context));
-			}
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -798,6 +800,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_rootHasInitial(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneInitial(diagramRoot, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasAtMostOneFinal(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfIncomingExternal(diagramRoot, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAbstractStatemachine_hasInitialIfOutgoingLocal(diagramRoot, diagnostics, context);
 		return result;
