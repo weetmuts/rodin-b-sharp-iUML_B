@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
@@ -31,6 +34,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.OneLineBorder;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
@@ -129,12 +133,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof RefinedStatemachineLabelEditPart) {
-			((RefinedStatemachineLabelEditPart) childEditPart)
-					.setLabel(getPrimaryShape()
-							.getFigureRefinedStatemachineLabelFigure());
-			return true;
-		}
 		if (childEditPart instanceof RefinedStatemachineStatesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureRefinedStatemachineCompartmentFigure();
@@ -150,9 +148,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof RefinedStatemachineLabelEditPart) {
-			return true;
-		}
 		if (childEditPart instanceof RefinedStatemachineStatesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureRefinedStatemachineCompartmentFigure();
@@ -279,14 +274,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 		if (primaryShape instanceof Shape) {
 			((Shape) primaryShape).setLineStyle(style);
 		}
-	}
-
-	/**
-	 * @generated
-	 */
-	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(StatemachinesVisualIDRegistry
-				.getType(RefinedStatemachineLabelEditPart.VISUAL_ID));
 	}
 
 	/**
@@ -425,10 +412,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		private WrappingLabel fFigureRefinedStatemachineLabelFigure;
-		/**
-		 * @generated
-		 */
 		private RectangleFigure fFigureRefinedStatemachineCompartmentFigure;
 
 		/**
@@ -439,9 +422,11 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 			BorderLayout layoutThis = new BorderLayout();
 			this.setLayoutManager(layoutThis);
 
+			this.setOutline(false);
 			this.setForegroundColor(ColorConstants.gray);
 			this.setMaximumSize(new Dimension(getMapMode().DPtoLP(100),
 					getMapMode().DPtoLP(80)));
+			this.setBorder(createBorder0());
 			createContents();
 		}
 
@@ -449,11 +434,6 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private void createContents() {
-
-			fFigureRefinedStatemachineLabelFigure = new WrappingLabel();
-			fFigureRefinedStatemachineLabelFigure.setText("<...>");
-
-			this.add(fFigureRefinedStatemachineLabelFigure, BorderLayout.TOP);
 
 			fFigureRefinedStatemachineCompartmentFigure = new RectangleFigure();
 			fFigureRefinedStatemachineCompartmentFigure.setFill(false);
@@ -467,8 +447,14 @@ public class RefinedStatemachineEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		public WrappingLabel getFigureRefinedStatemachineLabelFigure() {
-			return fFigureRefinedStatemachineLabelFigure;
+		private Border createBorder0() {
+			OneLineBorder result = new OneLineBorder();
+
+			result.setPosition(PositionConstants.TOP);
+
+			result.setStyle(Graphics.LINE_DASH);
+
+			return result;
 		}
 
 		/**

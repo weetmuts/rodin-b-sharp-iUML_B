@@ -63,9 +63,6 @@ public class StatemachinesEditPartFactory implements EditPartFactory {
 			case StatemachineEditPart.VISUAL_ID:
 				return new StatemachineEditPart(view);
 
-			case StatemachineNameEditPart.VISUAL_ID:
-				return new StatemachineNameEditPart(view);
-
 			case InnerInitialEditPart.VISUAL_ID:
 				return new InnerInitialEditPart(view);
 
@@ -87,9 +84,6 @@ public class StatemachinesEditPartFactory implements EditPartFactory {
 			case RefinedStatemachineEditPart.VISUAL_ID:
 				return new RefinedStatemachineEditPart(view);
 
-			case RefinedStatemachineLabelEditPart.VISUAL_ID:
-				return new RefinedStatemachineLabelEditPart(view);
-
 			case InnerRefinedStateEditPart.VISUAL_ID:
 				return new InnerRefinedStateEditPart(view);
 
@@ -98,9 +92,6 @@ public class StatemachinesEditPartFactory implements EditPartFactory {
 
 			case RefinedStateStatemachineEditPart.VISUAL_ID:
 				return new RefinedStateStatemachineEditPart(view);
-
-			case RefinedStateStatemachineNameEditPart.VISUAL_ID:
-				return new RefinedStateStatemachineNameEditPart(view);
 
 			case RefinedStateInvariantEditPart.VISUAL_ID:
 				return new RefinedStateInvariantEditPart(view);

@@ -353,7 +353,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <method name="getType()" value="4001,4002"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5003,5007,5002,5001,5006,5005,5004"/>
+            <method name="getType()" value="5003,5007,5001,5005"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value="7001,7002,7003,7004,7005,7006,7007,7008,7009,7010,7011"/>

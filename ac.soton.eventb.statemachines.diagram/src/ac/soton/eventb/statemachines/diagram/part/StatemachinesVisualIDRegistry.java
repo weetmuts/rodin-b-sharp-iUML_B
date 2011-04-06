@@ -363,9 +363,6 @@ public class StatemachinesVisualIDRegistry {
 			}
 			break;
 		case StatemachineEditPart.VISUAL_ID:
-			if (StatemachineNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
 			if (StatemachineStatesCompartmentEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
@@ -382,9 +379,6 @@ public class StatemachinesVisualIDRegistry {
 			}
 			break;
 		case RefinedStatemachineEditPart.VISUAL_ID:
-			if (RefinedStatemachineLabelEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
 			if (RefinedStatemachineStatesCompartmentEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
@@ -401,9 +395,6 @@ public class StatemachinesVisualIDRegistry {
 			}
 			break;
 		case RefinedStateStatemachineEditPart.VISUAL_ID:
-			if (RefinedStateStatemachineNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
 			if (StatemachineStatesCompartment2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}

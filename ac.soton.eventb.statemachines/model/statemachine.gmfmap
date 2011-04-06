@@ -75,18 +75,6 @@
             relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//Statemachine"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern=" {0}"
-              editorPattern="{0}"
-              editPattern="{0}">
-            <diagramLabel
-                href="statemachine.gmfgraph#StatemachineName"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-            <editableFeatures
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>
@@ -191,15 +179,6 @@
             relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//RefinedStatemachine"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true"
-              viewPattern=" {0}">
-            <diagramLabel
-                href="statemachine.gmfgraph#RefinedStatemachineLabel"/>
-            <features
-                href="statemachines.ecore#//EventBLabeled/label"/>
-          </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
@@ -244,18 +223,6 @@
             relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//Statemachine"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern=" {0}"
-              editorPattern="{0}"
-              editPattern="{0}">
-            <diagramLabel
-                href="statemachine.gmfgraph#StatemachineName"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-            <editableFeatures
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="statemachine.gmftool#//@palette/@tools.1/@tools.0"/>

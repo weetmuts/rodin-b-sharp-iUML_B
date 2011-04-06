@@ -66,17 +66,17 @@ public class RefinedStateStatemachinesCompartmentEditPart extends
 		result.setTitleVisibility(false);
 		// add margins
 		Insets insets = result.getContentPane().getInsets();
-		insets.top = 5;
-		insets.bottom = 5;
-		insets.left = 5;
-		insets.right = 5;
+		insets.top = -1;
+		insets.bottom = 1;
+		insets.left = 2;
+		insets.right = 2;
 		// use all space
 		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
 				.getContentPane().getLayoutManager();
 		layoutMgr.setVertical(true);
 		layoutMgr.setStretchMajorAxis(true);
 		layoutMgr.setStretchMinorAxis(true);
-		layoutMgr.setSpacing(5);
+		layoutMgr.setSpacing(0);
 
 		return result;
 	}

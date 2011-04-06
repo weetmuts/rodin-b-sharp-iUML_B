@@ -612,9 +612,6 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		Node label5002 = createLabel(node,
-				StatemachinesVisualIDRegistry
-						.getType(StatemachineNameEditPart.VISUAL_ID));
 		createCompartment(
 				node,
 				StatemachinesVisualIDRegistry
@@ -846,9 +843,6 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 		ViewUtil.setStructuralFeatureValue(node,
 				NotationPackage.eINSTANCE.getFillStyle_FillColor(),
 				FigureUtilities.RGBToInteger(fillRGB));
-		Node label5006 = createLabel(node,
-				StatemachinesVisualIDRegistry
-						.getType(RefinedStatemachineLabelEditPart.VISUAL_ID));
 		createCompartment(
 				node,
 				StatemachinesVisualIDRegistry
@@ -945,10 +939,6 @@ public class StatemachinesViewProvider extends AbstractProvider implements
 			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		Node label5004 = createLabel(
-				node,
-				StatemachinesVisualIDRegistry
-						.getType(RefinedStateStatemachineNameEditPart.VISUAL_ID));
 		createCompartment(
 				node,
 				StatemachinesVisualIDRegistry

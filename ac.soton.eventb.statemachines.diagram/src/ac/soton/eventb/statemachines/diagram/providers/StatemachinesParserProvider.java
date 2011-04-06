@@ -84,30 +84,6 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser statemachineName_5002Parser;
-
-	/**
-	 * @generated
-	 */
-	private IParser getStatemachineName_5002Parser() {
-		if (statemachineName_5002Parser == null) {
-			EAttribute[] features = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			EAttribute[] editableFeatures = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			MessageFormatParser parser = new MessageFormatParser(features,
-					editableFeatures);
-			parser.setViewPattern(" {0}"); //$NON-NLS-1$
-			parser.setEditorPattern("{0}"); //$NON-NLS-1$
-			parser.setEditPattern("{0}"); //$NON-NLS-1$
-			statemachineName_5002Parser = parser;
-		}
-		return statemachineName_5002Parser;
-	}
-
-	/**
-	 * @generated
-	 */
 	private IParser stateName_5001Parser;
 
 	/**
@@ -154,27 +130,6 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser refinedStatemachineLabel_5006Parser;
-
-	/**
-	 * @generated
-	 */
-	private IParser getRefinedStatemachineLabel_5006Parser() {
-		if (refinedStatemachineLabel_5006Parser == null) {
-			EAttribute[] features = new EAttribute[] { StatemachinesPackage.eINSTANCE
-					.getEventBLabeled_Label() };
-			MessageFormatParser parser = new MessageFormatParser(features);
-			parser.setViewPattern(" {0}"); //$NON-NLS-1$
-			parser.setEditorPattern(" {0}"); //$NON-NLS-1$
-			parser.setEditPattern(" {0}"); //$NON-NLS-1$
-			refinedStatemachineLabel_5006Parser = parser;
-		}
-		return refinedStatemachineLabel_5006Parser;
-	}
-
-	/**
-	 * @generated
-	 */
 	private IParser refinedStateLabel_5005Parser;
 
 	/**
@@ -188,30 +143,6 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 			refinedStateLabel_5005Parser = parser;
 		}
 		return refinedStateLabel_5005Parser;
-	}
-
-	/**
-	 * @generated
-	 */
-	private IParser statemachineName_5004Parser;
-
-	/**
-	 * @generated
-	 */
-	private IParser getStatemachineName_5004Parser() {
-		if (statemachineName_5004Parser == null) {
-			EAttribute[] features = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			EAttribute[] editableFeatures = new EAttribute[] { CorePackage.eINSTANCE
-					.getEventBNamed_Name() };
-			MessageFormatParser parser = new MessageFormatParser(features,
-					editableFeatures);
-			parser.setViewPattern(" {0}"); //$NON-NLS-1$
-			parser.setEditorPattern("{0}"); //$NON-NLS-1$
-			parser.setEditPattern("{0}"); //$NON-NLS-1$
-			statemachineName_5004Parser = parser;
-		}
-		return statemachineName_5004Parser;
 	}
 
 	/**
@@ -284,18 +215,12 @@ public class StatemachinesParserProvider extends AbstractProvider implements
 			return getStateName_5003Parser();
 		case RefinedStateLabelEditPart.VISUAL_ID:
 			return getRefinedStateLabel_5007Parser();
-		case StatemachineNameEditPart.VISUAL_ID:
-			return getStatemachineName_5002Parser();
 		case InnerStateNameEditPart.VISUAL_ID:
 			return getStateName_5001Parser();
 		case StateInvariantEditPart.VISUAL_ID:
 			return getInvariant_3006Parser();
-		case RefinedStatemachineLabelEditPart.VISUAL_ID:
-			return getRefinedStatemachineLabel_5006Parser();
 		case InnerRefinedStateLabelEditPart.VISUAL_ID:
 			return getRefinedStateLabel_5005Parser();
-		case RefinedStateStatemachineNameEditPart.VISUAL_ID:
-			return getStatemachineName_5004Parser();
 		case RefinedStateInvariantEditPart.VISUAL_ID:
 			return getInvariant_3010Parser();
 		case TransitionNameEditPart.VISUAL_ID:
