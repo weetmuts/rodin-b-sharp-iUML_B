@@ -1,0 +1,86 @@
+import util;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+library statemachines2events_enter;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Enter action
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract state to enter action.
+ * Generates enter action for targeted abstract state and particular event.
+ * Skips transformation if event is extended and contains enter action on the same state already.
+ */
+mapping statemachines::AbstractState::abstractState2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
+when { not event.extended or not event.containsAction("enter_" + self.getName()) } {
+	name := "enter_" + self.getName();
+	action := self.getName() + B_BEQ + B_TRUE;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Target actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms target abstract state to enter actions.
+ * Generates enter actions for all the superstates of target state, which are not common to source state's superstates,
+ * as well as enter actions for target state's statemachines,
+ * excluding parallel statemachines that don't contain source state if transition is local and is directed from nested state towards its parent state.
+ */
+mapping statemachines::AbstractState::targetAbstractState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := (self.getSuperstates()-(transition.source.externalise().getSuperstates())).map superAbstractState2enterActions(event, generatorID)->
+			union(self.statemachines->reject(transition.isLocalToTarget() and not contains(transition.source)).map abstractStatemachine2enterActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Superstate actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms superstate to enter actions.
+ * Generates enter action for abstract state itself and enter actions for its statemachines,
+ * excluding those which contain a target state of a transition of the same event (so enter actions will be generated for those from their own transition).
+ */
+mapping statemachines::AbstractState::superAbstractState2enterActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2enterAction(event, generatorID)->asBag()->
+			union(self.statemachines->reject(containsEventTarget(event)).map abstractStatemachine2enterActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Nested state actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract state to enter actions.
+ * Generates enter action for abstract state
+ * as well as enter actions for its statemachines, excluding one that contains target state directly linked by transition, so that intermediate statemachines don't need to be initialised.
+ */
+mapping statemachines::AbstractState::abstractState2enterActions(in event : eventb::machine::Event, in target : statemachines::AbstractState, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2enterAction(event, generatorID)->asBag()->
+			union(self.statemachines[not contains(target)].map abstractStatemachine2enterActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+/*
+ * Transforms abstract statemachine to enter actions.
+ * Finds initial state in statemachine (state, linked by transition with Initial state)
+ * and generates enter actions for all superstates of found initial state up to current statemachine,
+ * as well as enter actions for initial state and its statemachines.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2enterActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		var target : statemachines::AbstractState := self.getInitialState();
+		result := target.getSuperstatesTo(self).map abstractState2enterActions(event, target, generatorID)->flatten()->asBag()->
+			union(target.map abstractState2enterActions(event, target, generatorID));
+	}
+}

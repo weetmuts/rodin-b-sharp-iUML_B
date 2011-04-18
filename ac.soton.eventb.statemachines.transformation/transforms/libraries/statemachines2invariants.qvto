@@ -1,0 +1,172 @@
+import util;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+library statemachines2invariants;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Type invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract statemachine to type invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2typeInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2typeInvariants(generatorID);
+	}
+}
+
+/*
+ * Transforms abstract state to type invariants.
+ */
+mapping statemachines::AbstractState::abstractState2typeInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self[statemachines::State].map state2typeInvariant(generatorID)->asSequence()->
+			union(self.statemachines.map abstractStatemachine2typeInvariants(generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms state to type invariant.
+ */
+mapping statemachines::State::state2typeInvariant(in generatorID : String) : eventb::machine::Invariant {
+	name := self.name + ".type";
+	predicate := self.name + B_IN + B_BOOL;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Partition invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms root abstract statemachine to partition invariants.
+ */
+mapping statemachines::AbstractStatemachine::rootAbstractStatemachine2partitionInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		String.startStrCounter(index);
+		result := self[statemachines::Statemachine].map rootStatemachine2partitionInvariant(generatorID)->asSequence()->
+			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants(self.getName(), generatorID)->flatten());
+	}
+	end {
+		index.restartAllStrCounter();
+	}
+}
+
+/*
+ * Transforms root statemachine to partition invariant.
+ */
+mapping statemachines::Statemachine::rootStatemachine2partitionInvariant(in generatorID : String) : eventb::machine::Invariant
+	when { self.nodes[statemachines::State]->size() > 1 }
+{
+	name := self.name + ".partitionedStates." + String.incrStrCounter(index).toString();
+	predicate := "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms abstract state to partition invariants.
+ */
+mapping statemachines::AbstractState::abstractState2partitionInvariants(in prefix : String, in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.statemachines.map abstractStatemachine2partitionInvariants(self, prefix, generatorID);
+	}
+}
+
+/*
+ * Transforms abstract statemachine to partiotion invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2partitionInvariants(in parentState : statemachines::AbstractState, in prefix : String, in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self[statemachines::Statemachine].map statemachine2partitionInvariant(parentState, prefix, generatorID)->asSequence()->
+			union(self.nodes[statemachines::AbstractState].map abstractState2partitionInvariants(prefix, generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms statemachine to partition invariant.
+ * Only constructs an invariant if there is more than one state in a statemachine.
+ */
+mapping statemachines::Statemachine::statemachine2partitionInvariant(in parentState : statemachines::AbstractState, in prefix : String, in generatorID : String) : eventb::machine::Invariant
+	when { self.nodes[statemachines::State]->size() > 1 }
+{
+	name := prefix + ".partitionedStates." + String.incrStrCounter(index).toString();
+	predicate := (parentState.getName() + B_EQ + B_TRUE).parenthesize() + B_IMPL + "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Substate invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract statemachine to substate invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2substateInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2substateInvariants(generatorID);
+	}
+}
+
+/*
+ * Transforms abstract state to its substates invaraints.
+ */
+mapping statemachines::AbstractState::abstractState2substateInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.statemachines.nodes[statemachines::State].map state2substateInvariant(self, generatorID)->
+			union(self.statemachines.map abstractStatemachine2substateInvariants(generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms state to substate invariant on parent abstract state.
+ */
+mapping statemachines::State::state2substateInvariant(in parentState : statemachines::AbstractState, in generatorID : String) : eventb::machine::Invariant {
+	name := "substates " + self.name + B_COM + parentState.getName();
+	predicate := (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + (parentState.getName() + B_EQ + B_TRUE).parenthesize();
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Constraint invariants
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract statemachine to constraint invariants.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2constraintInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2constraintInvariants(generatorID);
+	}
+}
+
+/*
+ * Transforms abstract state to constraint invariants.
+ */
+mapping statemachines::AbstractState::abstractState2constraintInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self[statemachines::State].map state2constraintInvariants(generatorID)->asSequence()->
+			union(self.statemachines.map abstractStatemachine2constraintInvariants(generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms state to constraint invariants.
+ */
+mapping statemachines::State::state2constraintInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := self.constraints->collect(c | object eventb::machine::Invariant {
+			name := c.name;
+			theorem := c.theorem;
+			predicate := (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + c.predicate.parenthesize();
+			generated := true;
+			attributes += getGeneratedAttr(generatorID);
+		});
+	}
+}

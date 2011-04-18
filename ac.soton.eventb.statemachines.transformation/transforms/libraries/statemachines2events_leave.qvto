@@ -1,0 +1,115 @@
+import util;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+library statemachines2events_leave;
+
+/*
+ * Transforms abstract statemachine to event with leave actions.
+ * Generates leave actions on transition source states and substates,
+ * as well as required superstates.
+ * Separated from event rules (which generate guards and enter actions) to be able to track enter actions already generated
+ * and avoid generation of leave action if enter action on the same state exists.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2eventsLeave(in generatorID : String) {
+	self.transitions.map transition2eventsLeave(generatorID);
+	self.nodes[statemachines::AbstractState].statemachines.map abstractStatemachine2eventsLeave(generatorID);
+}
+
+/*
+ * Transforms transition to event with leave actions.
+ * Generates leave actions for events elaborated by transition.
+ * Skips initialisation event.
+ */
+mapping statemachines::Transition::transition2eventsLeave(in generatorID : String) {
+	self.elaborates[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
+}
+
+/*
+ * Transforms event to same event augmented with leave actions.
+ * Generates leave actions from transition and adds to event.
+ */
+mapping inout eventb::machine::Event::event2statemachinesEventLeave(in transition : statemachines::Transition, in generatorID : String) {
+	self.actions := transition.source.externalise().map sourceAbstractState2leaveActions(self, transition, generatorID)->
+		union(self.actions);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Leave action
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract state to leave action.
+ * Generates leave action for source abstract state and particular event.
+ * Skips transformation if enter action on the same state exists
+ * or if event is extended and contains leave action on the same state already.
+ */
+mapping statemachines::AbstractState::abstractState2leaveAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
+when { not event.containsAction("enter_" + self.getName()) 
+		and (not event.extended or not event.containsAction("leave_" + self.getName())) } {
+	name := "leave_" + self.getName();
+	action := self.getName() + B_BEQ + B_FALSE;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Source actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms source abstract state to leave actions.
+ * Generates leave actions for all the superstates of source state, which are not common to target state's superstates,
+ * as well as leave actions for source state's statemachines,
+ * excluding parallel statemachines that don't contain target state if transition is local and is directed from parent state towards its nested state.
+ */
+mapping statemachines::AbstractState::sourceAbstractState2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := (self.getSuperstates()-(transition.target.externalise().getSuperstates())).map superAbstractState2leaveActions(event, generatorID)->
+			union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map abstractStatemachine2leaveActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Superstate actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms superstate to leave actions.
+ * Generates leave action for abstract state itself and leave actions for its statemachines,
+ * excluding those which contain a source state of a transition of the same event (so leave actions will be generated for those from their own transition).
+ */
+mapping statemachines::AbstractState::superAbstractState2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2leaveAction(event, generatorID)->asBag()->
+			union(self.statemachines->reject(containsEventSource(event)).map abstractStatemachine2leaveActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Nested state actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract state to leave actions.
+ * Generates leave action for abstract state
+ * as well as leave actions for its statemachines.
+ */
+mapping statemachines::AbstractState::abstractState2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.map abstractState2leaveAction(event, generatorID)->asBag()->
+			union(self.statemachines.map abstractStatemachine2leaveActions(event, generatorID)->flatten()->asBag());
+	}
+}
+
+/*
+ * Transforms abstract statemachine to leave actions.
+ * Generates leave actions for all abstract states of statemachine.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2leaveActions(event, generatorID)->asBag();
+	}
+}
+

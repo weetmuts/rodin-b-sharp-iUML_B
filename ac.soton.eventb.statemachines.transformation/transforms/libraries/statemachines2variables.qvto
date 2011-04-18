@@ -1,0 +1,38 @@
+import util;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+	
+library statemachines2variables;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms abstract statemachine to variables.
+ */
+mapping statemachines::AbstractStatemachine::abstractStatemachine2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := self.nodes[statemachines::AbstractState].map abstractState2variables(generatorID);
+	}
+}
+
+/*
+ * Transforms abstract state to variables.
+ */
+mapping statemachines::AbstractState::abstractState2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := self[statemachines::AbstractState].map state2variable(generatorID)->asSequence()->
+			union(self.statemachines.map abstractStatemachine2variables(generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms abstract state to variable.
+ */
+mapping statemachines::AbstractState::state2variable(in generatorID : String) : eventb::machine::Variable {
+	name := self.getName();
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
