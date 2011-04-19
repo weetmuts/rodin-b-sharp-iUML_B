@@ -9,6 +9,7 @@
 package ac.soton.eventb.statemachines.transformation;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Collections;
 
@@ -40,6 +41,8 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
@@ -69,20 +72,32 @@ public class TranslateAction extends AbstractHandler {
 		if (editor instanceof IDiagramWorkbenchPart) {
 			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
 			
-			// first validate, then transformate
-			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), 
-					diagramEditor.getDiagram())) {
+			// first validate, then transform
+			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), diagramEditor.getDiagram())) {
 				TransformationCommand transfCommand = new TransformationCommand(diagramEditor.getDiagram().getElement());
-				Command command = new ICommandProxy(transfCommand);
+				final Command command = new ICommandProxy(transfCommand);
 				if (command.canExecute()) {
-					command.execute();
 					
-					// result feedback
-					if (transfCommand.getCommandResult().getStatus().isOK())
-						MessageDialog.openInformation(editor.getSite()
-								.getShell(), "Translation Information",
-								"Translation completed successfully");
-					else
+					// run with progress
+					ProgressMonitorDialog dialog = new ProgressMonitorDialog(diagramEditor.getSite().getShell());    
+					try {
+						dialog.run(true, true, new IRunnableWithProgress(){
+						     public void run(IProgressMonitor monitor) {
+						         monitor.beginTask("Translating to Event-B ...", IProgressMonitor.UNKNOWN);
+						         command.execute();
+						         monitor.done();
+						     }
+						 });
+					} catch (InvocationTargetException e) {
+						TransformationPlugin.getDefault().logError("Transformation failed", e);
+						return null;
+					} catch (InterruptedException e) {
+						TransformationPlugin.getDefault().logError("Transformation interrupted", e);
+						return null;
+					} 
+
+					// error feedback
+					if (false == transfCommand.getCommandResult().getStatus().isOK())
 						MessageDialog
 								.openError(editor.getSite().getShell(),
 										"Translation Information",
