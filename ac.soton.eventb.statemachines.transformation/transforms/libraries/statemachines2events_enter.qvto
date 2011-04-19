@@ -15,7 +15,7 @@ library statemachines2events_enter;
  * Skips transformation if event is extended and contains enter action on the same state already.
  */
 mapping statemachines::AbstractState::abstractState2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
-when { not event.extended or not event.containsAction("enter_" + self.getName()) } {
+when { not event.containsAction("enter_" + self.getName()) } {
 	name := "enter_" + self.getName();
 	action := self.getName() + B_BEQ + B_TRUE;
 	generated := true;

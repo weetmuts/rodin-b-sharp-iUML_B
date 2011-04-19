@@ -54,7 +54,7 @@ mapping statemachines::AbstractState::targetAbstractState2initActionsActive(in e
  * Skips transformation if event is extended and contains same action already.
  */
 mapping statemachines::AbstractState::abstractState2initAction(in event : eventb::machine::Event, in value : String, in generatorID : String) : eventb::machine::Action
-when { not event.extended or not event.containsAction(self.getName() + ".init") } {
+when { not event.containsAction(self.getName() + ".init") } {
 	name := self.getName() + ".init";
 	action := self.getName() + B_BEQ + value;
 	generated := true;
@@ -131,12 +131,11 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2initActionsIna
 
 /*
  * Transforms abstract state to initialisation actions on inactive states.
- * Generates action for abstract state only if no mapping found for the same state, that generated active state initialisation event.
+ * Generates action for abstract state and all its statemachines.
  */
 mapping statemachines::AbstractState::abstractState2initActionsInactive(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		var action := self.resolveoneIn(statemachines::AbstractState::abstractState2initAction, eventb::machine::Action);
-		result := self[action = null].map abstractState2initAction(event, B_FALSE, generatorID)->
+		result := self.map abstractState2initAction(event, B_FALSE, generatorID)->
 			union(self.statemachines.map abstractStatemachine2initActionsInactive(event, generatorID)->flatten()->asBag());
 	}
 }
