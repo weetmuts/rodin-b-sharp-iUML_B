@@ -32,7 +32,7 @@ mapping statemachines::Transition::transition2initActions(in generatorID : Strin
  * Generates initialisation actions from transition and adds to event.
  */
 mapping inout eventb::machine::Event::initEvent2initEventActiveStates(in transition : statemachines::Transition, in generatorID : String) {
-	self.actions := transition.target.externalise().map targetAbstractState2initActionsActive(self, generatorID)->
+	self.actions := transition.target.externalise()[statemachines::AbstractState].map targetAbstractState2initActionsActive(self, generatorID)->
 		union(self.actions);
 }
 
@@ -43,7 +43,7 @@ mapping inout eventb::machine::Event::initEvent2initEventActiveStates(in transit
  */
 mapping statemachines::AbstractState::targetAbstractState2initActionsActive(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := self.getSuperstates().map superAbstractState2initActionsActive(event, generatorID)->
+		result := self.getSuperstates()[statemachines::AbstractState].map superAbstractState2initActionsActive(event, generatorID)->
 			union(self.map abstractState2initActionsActive(event, self, generatorID)->asBag());
 	}
 }

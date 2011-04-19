@@ -34,7 +34,7 @@ when { not event.containsAction("enter_" + self.getName()) } {
  */
 mapping statemachines::AbstractState::targetAbstractState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := (self.getSuperstates()-(transition.source.externalise().getSuperstates())).map superAbstractState2enterActions(event, generatorID)->
+		result := (self.getSuperstates()-(transition.source.externalise().getSuperstates()))[statemachines::AbstractState].map superAbstractState2enterActions(event, generatorID)->
 			union(self.statemachines->reject(transition.isLocalToTarget() and not contains(transition.source)).map abstractStatemachine2enterActions(event, generatorID)->flatten()->asBag());
 	}
 }

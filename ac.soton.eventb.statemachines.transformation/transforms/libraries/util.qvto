@@ -109,30 +109,24 @@ helper Sequence(String)::toString(in separator : String) : String {
 }
 
 /*
- * Externalises abstract node to abstract state.
- * Returns 
- * - itself, if already an abstract state
- * - superstate, which is abstract state, if ANY state
- * - otherwise null.
+ * Externalises abstract node to its container state if present.
+ * Returns superstate, if input is ANY state, otherwise itself.
  * This helper is required for local transitions (that use ANY state as source/target) to convert them to external for subsequent transformation.
  */
-helper statemachines::AbstractNode::externalise() : statemachines::AbstractState {
+helper statemachines::AbstractNode::externalise() : statemachines::AbstractNode {
 	return if self.oclIsTypeOf(statemachines::ANY)
 		then if self.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
 			then self.eContainer().eContainer().oclAsType(statemachines::AbstractState)
 			endif
-		else if self.oclIsKindOf(statemachines::AbstractState)
-			then self.oclAsType(statemachines::AbstractState)
-			else null
-			endif
+		else self
 		endif;
 }
 
 /*
- * Returns all abstract states that are superstates of input state.
- * Result includes input state itself.
+ * Returns all abstract nodes that are superstates of input node.
+ * Result includes input node itself.
  */
-helper statemachines::AbstractState::getSuperstates() : Set(statemachines::AbstractState) {
+helper statemachines::AbstractNode::getSuperstates() : Set(statemachines::AbstractNode) {
 	return if self.eContainer().eContainer().oclIsKindOf(statemachines::AbstractState)
 		then self.eContainer().eContainer().oclAsType(statemachines::AbstractState).getSuperstates()->union(self->asSet())
 		else self->asSet()
