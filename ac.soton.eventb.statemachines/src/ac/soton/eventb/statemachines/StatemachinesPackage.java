@@ -405,22 +405,13 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__OPERATIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Refines</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__REFINES = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 8;
+	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.DiagramRootImpl <em>Diagram Root</em>}' class.
@@ -1729,17 +1720,6 @@ public interface StatemachinesPackage extends EPackage {
 	EAttribute getTransition_Operations();
 
 	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Transition#getRefines <em>Refines</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Refines</em>'.
-	 * @see ac.soton.eventb.statemachines.Transition#getRefines()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EReference getTransition_Refines();
-
-	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.RefinedStatemachine <em>Refined Statemachine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2077,14 +2057,6 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRANSITION__OPERATIONS = eINSTANCE.getTransition_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRANSITION__REFINES = eINSTANCE.getTransition_Refines();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.RefinedStatemachineImpl <em>Refined Statemachine</em>}' class.
