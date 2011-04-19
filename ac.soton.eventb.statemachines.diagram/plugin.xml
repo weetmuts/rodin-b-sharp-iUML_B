@@ -278,7 +278,7 @@ http://www.eclipse.org/legal/epl-v10.html
                afterSection="property.section.label"
                class="ac.soton.eventb.statemachines.diagram.sheet.custom.ElaboratesPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionFilter"
                id="property.section.elaborates"
                tab="property.tab.overview">
          </propertySection>

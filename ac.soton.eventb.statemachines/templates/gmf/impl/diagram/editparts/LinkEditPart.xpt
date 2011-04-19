@@ -153,7 +153,7 @@
 	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getTransition_Operations().equals(event.getFeature())) {
 		java.util.Collection<?> operations = ((ac.soton.eventb.statemachines.Transition) ((org.eclipse.gmf.runtime.notation.View) getModel()).getElement()).getOperations();
 		boolean enabled = operations != null && !operations.isEmpty();
-		//getPrimaryShape().setLineWidth(1 + (enabled ? 1 : 0));
+		getPrimaryShape().setLineWidth(1 + (enabled ? 1 : 0));
 		getPrimaryShape().setForegroundColor(enabled ? org.eclipse.draw2d.ColorConstants.darkGreen : org.eclipse.draw2d.ColorConstants.gray);
 	}
 «ENDDEFINE»

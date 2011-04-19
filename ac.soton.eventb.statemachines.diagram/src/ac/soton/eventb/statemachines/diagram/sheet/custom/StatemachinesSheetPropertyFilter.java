@@ -87,9 +87,9 @@ public class StatemachinesSheetPropertyFilter {
 	}
 	
 	/**
-	 * Filter for properies of transition element.
+	 * Filter for properties of transition element.
 	 */
-	public static final class TransitionElaboratesFilter implements IFilter {
+	public static final class TransitionFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
 			return unwrap(toTest) instanceof Transition;
