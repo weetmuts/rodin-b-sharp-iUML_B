@@ -41,7 +41,6 @@ import ac.soton.eventb.statemachines.Transition;
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTargetContainer <em>Target Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,16 +123,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * @ordered
 	 */
 	protected EList<?> operations;
-
-	/**
-	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRefines()
-	 * @generated
-	 * @ordered
-	 */
-	protected Transition refines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -419,44 +408,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Transition getRefines() {
-		if (refines != null && refines.eIsProxy()) {
-			InternalEObject oldRefines = (InternalEObject)refines;
-			refines = (Transition)eResolveProxy(oldRefines);
-			if (refines != oldRefines) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__REFINES, oldRefines, refines));
-			}
-		}
-		return refines;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Transition basicGetRefines() {
-		return refines;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRefines(Transition newRefines) {
-		Transition oldRefines = refines;
-		refines = newRefines;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__REFINES, oldRefines, refines));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -514,9 +465,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				return basicGetTargetContainer();
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
 				return getOperations();
-			case StatemachinesPackage.TRANSITION__REFINES:
-				if (resolve) return getRefines();
-				return basicGetRefines();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -552,9 +500,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
 				setOperations((EList<?>)newValue);
 				return;
-			case StatemachinesPackage.TRANSITION__REFINES:
-				setRefines((Transition)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -588,9 +533,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
 				setOperations((EList<?>)null);
 				return;
-			case StatemachinesPackage.TRANSITION__REFINES:
-				setRefines((Transition)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -617,8 +559,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				return targetContainer != null;
 			case StatemachinesPackage.TRANSITION__OPERATIONS:
 				return operations != null;
-			case StatemachinesPackage.TRANSITION__REFINES:
-				return refines != null;
 		}
 		return super.eIsSet(featureID);
 	}
