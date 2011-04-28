@@ -23,16 +23,16 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2variables(in g
  */
 mapping statemachines::AbstractState::abstractState2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
 	init {
-		result := self[statemachines::AbstractState].map state2variable(generatorID)->asSequence()->
+		result := self[statemachines::State].map state2variable(generatorID)->asSequence()->
 			union(self.statemachines.map abstractStatemachine2variables(generatorID)->flatten());
 	}
 }
 
 /*
- * Transforms abstract state to variable.
+ * Transforms state to variable.
  */
-mapping statemachines::AbstractState::state2variable(in generatorID : String) : eventb::machine::Variable {
-	name := self.getName();
+mapping statemachines::State::state2variable(in generatorID : String) : eventb::machine::Variable {
+	name := self.name;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

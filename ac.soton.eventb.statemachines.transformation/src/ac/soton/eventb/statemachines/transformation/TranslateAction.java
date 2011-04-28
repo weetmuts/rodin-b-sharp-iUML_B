@@ -74,7 +74,7 @@ public class TranslateAction extends AbstractHandler {
 		if (editor instanceof IDiagramWorkbenchPart) {
 			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
 			
-			// save before translation
+			// save before transformation
 			((DiagramEditor) diagramEditor).doSave(new NullProgressMonitor());
 			
 			// first validate, then transform

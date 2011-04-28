@@ -16,7 +16,7 @@ library statemachines2init;
  */
 mapping statemachines::AbstractStatemachine::rootAbstractStatemachine2initActions(in generatorID : String) {
 	self.nodes[statemachines::Initial].outgoing.map transition2initActions(generatorID);
-	self.eContainer().oclAsType(eventb::machine::Machine).events[name = INIT].map initEvent2nitEventInactiveStates(self, generatorID);
+	self.eContainer().oclAsType(eventb::machine::Machine).events[name = INIT].map initEvent2initEventInactiveStates(self, generatorID);
 }
 
 /*
@@ -115,7 +115,7 @@ mapping statemachines::AbstractStatemachine::abstractStatemachine2initActionsAct
  * Transforms event to same event augmented with initialisation actions on inactive states.
  * Generates initialisation actions on inactive states and adds to initialisation event.
  */
-mapping inout eventb::machine::Event::initEvent2nitEventInactiveStates(in statemachine : statemachines::AbstractStatemachine, in generatorID : String) {
+mapping inout eventb::machine::Event::initEvent2initEventInactiveStates(in statemachine : statemachines::AbstractStatemachine, in generatorID : String) {
 	self.actions := statemachine.map abstractStatemachine2initActionsInactive(self, generatorID)->
 		union(self.actions);
 }
