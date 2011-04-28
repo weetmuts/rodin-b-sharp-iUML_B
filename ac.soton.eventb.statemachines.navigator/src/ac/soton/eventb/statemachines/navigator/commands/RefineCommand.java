@@ -40,6 +40,7 @@ import org.eventb.core.EventBPlugin;
 import org.eventb.core.IEventBProject;
 import org.eventb.core.IMachineRoot;
 import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.machine.Convergence;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
@@ -135,7 +136,10 @@ public class RefineCommand extends AbstractHandler {
 			
 			// create variables
 			for (Variable variable : machine.getVariables()) {
-				newMachine.getVariables().add(EcoreUtil.copy(variable));
+				// set generated to false (according to standard Rodin refinement procedure)
+				Variable newVariable = EcoreUtil.copy(variable);
+				newVariable.eUnset(CorePackage.eINSTANCE.getEventBElement_Generated());
+				newMachine.getVariables().add(newVariable);
 			}
 			
 			// create events
@@ -146,7 +150,7 @@ public class RefineCommand extends AbstractHandler {
 				newEvent.getRefines().add(event);
 				
 				//TODO: check that this convergence calculation is correct (taken from org.eventb.internal.ui.projectexplorer.actions.Refines.CreateRefinement.computeRefinementConvergence(Convergence absCvg))
-				Convergence convergence = Convergence.CONVERGENT == event.getConvergence() ? Convergence.ORDINARY : event.getConvergence();
+				Convergence convergence = event.getConvergence() == Convergence.CONVERGENT ? Convergence.ORDINARY : event.getConvergence();
 				newEvent.setConvergence(convergence);
 				newMachine.getEvents().add(newEvent);
 				

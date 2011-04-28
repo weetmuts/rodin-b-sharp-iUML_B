@@ -186,12 +186,20 @@
          point="org.eclipse.ui.commands">
       <command
             id="ac.soton.eventb.statemachines.navigator.commands.refineWithStatemachines"
-            name="Refine with Extensions">
+            name="Refine with Statemachines">
       </command>
       <command
             id="ac.soton.eventb.statemachines.navigator.commands.deleteGeneratedByStatemachines"
             name="Statemachines">
       </command>
-   </extension>
+   </extension><!--
+   <extension
+         point="org.rodinp.core.refinements">
+      <Participant
+            class="ac.soton.eventb.statemachines.navigator.refiner.StatemachineRefiner"
+            id="statemachineRefiner"
+            refinement-id="org.eventb.core.machineRefinement">
+      </Participant>
+   </extension>-->
 
 </plugin>
