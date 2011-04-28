@@ -16,7 +16,7 @@ package ac.soton.eventb.statemachines;
  *
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getFinal()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasIncoming'"
  * @generated
  */
 public interface Final extends AbstractNode {

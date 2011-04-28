@@ -68,12 +68,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasOutgoingOnRoot&#xA;hasOutgoingOnNestedIfExternalIncoming"/>
+      <details key="constraints" value="hasOutgoing"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//AbstractNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ANY" eSuperTypes="#//AbstractNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//AbstractNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//AbstractNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="hasIncoming"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatemachineOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"
         eType="#//AbstractStatemachine" containment="true" resolveProxies="false"/>

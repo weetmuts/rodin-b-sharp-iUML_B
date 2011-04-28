@@ -192,11 +192,11 @@ public class StatemachinesValidator extends EObjectValidator {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
-						(Diagnostic.ERROR,
+						(Diagnostic.WARNING,
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Root statemachine must have one initial state", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { "Root statemachine should have an initial state", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -246,7 +246,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasAtMostOneFinal", getObjectLabel(abstractStatemachine, context) },
+						 new Object[] { "Statemachine cannot have more than one final state", getObjectLabel(abstractStatemachine, context) },
 						 new Object[] { abstractStatemachine },
 						 context));
 			}
@@ -436,11 +436,11 @@ public class StatemachinesValidator extends EObjectValidator {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
-						(Diagnostic.ERROR,
+						(Diagnostic.WARNING,
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Transition must elaborate INITIALISATION event", getObjectLabel(transition, context) },
+						 new Object[] { "Transition should elaborate INITIALISATION event", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -594,7 +594,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Concrete statemachine cannot have refined states", getObjectLabel(statemachine, context) },
+						 new Object[] { "Concrete statemachine cannot contain refined states", getObjectLabel(statemachine, context) },
 						 new Object[] { statemachine },
 						 context));
 			}
@@ -647,7 +647,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Concrete state cannot have refined statemachines", getObjectLabel(state, context) },
+						 new Object[] { "Concrete state cannot contain refined statemachines", getObjectLabel(state, context) },
 						 new Object[] { state },
 						 context));
 			}
@@ -671,56 +671,27 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(initial, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(initial, diagnostics, context);
-		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnRoot(initial, diagnostics, context);
-		if (result || diagnostics != null) result &= validateInitial_hasOutgoingOnNestedIfExternalIncoming(initial, diagnostics, context);
+		if (result || diagnostics != null) result &= validateInitial_hasOutgoing(initial, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the hasOutgoingOnRoot constraint of '<em>Initial</em>'.
+	 * Validates the hasOutgoing constraint of '<em>Initial</em>'.
 	 * <!-- begin-user-doc -->
-	 * Initial state of root statemachine has an outgoing transition.
+	 * Initial state has outgoing transitions.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateInitial_hasOutgoingOnRoot(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (initial.eContainer().eContainer() instanceof Machine && initial.getOutgoing().isEmpty()) {
+	public boolean validateInitial_hasOutgoing(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (initial.getOutgoing().isEmpty()) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
-						(Diagnostic.ERROR,
+						(Diagnostic.WARNING,
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Initial state of root statemachine must have one outgoing transition", getObjectLabel(initial, context) },
-						 new Object[] { initial },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the hasOutgoingOnNestedIfExternalIncoming constraint of '<em>Initial</em>'.
-	 * <!-- begin-user-doc -->
-	 * Initial state of nested level statemachine has an outgoing transition if external incoming transitions to parent state exist.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateInitial_hasOutgoingOnNestedIfExternalIncoming(Initial initial, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		EObject container = initial.eContainer().eContainer();
-		if (container instanceof AbstractState 
-				&& ((AbstractState) container).getIncoming().size() > 0 
-				&& initial.getOutgoing().isEmpty()) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Initial state must have one outgoing transition if parent state has incoming transition(s)", getObjectLabel(initial, context) },
+						 new Object[] { "Initial state should have an outgoing transition", getObjectLabel(initial, context) },
 						 new Object[] { initial },
 						 context));
 			}
@@ -753,7 +724,42 @@ public class StatemachinesValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateFinal(Final final_, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(final_, diagnostics, context);
+		boolean result = validate_NoCircularContainment(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(final_, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFinal_hasIncoming(final_, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the hasIncoming constraint of '<em>Final</em>'.
+	 * <!-- begin-user-doc -->
+	 * Final state has incoming transitions.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateFinal_hasIncoming(Final final_, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (final_.getIncoming().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.WARNING,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Final state should have an incoming transition", getObjectLabel(final_, context) },
+						 new Object[] { final_ },
+						 context));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
