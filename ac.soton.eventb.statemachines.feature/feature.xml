@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="0.1.1.qualifier"
+      version="0.1.2.qualifier"
       provider-name="%providerName">
 
    <description url="http://www.example.com/description">
@@ -30,13 +30,6 @@
    </requires>
 
    <plugin
-         id="ac.soton.eventb.statemachines"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="ac.soton.eventb.statemachines.edit"
          download-size="0"
          install-size="0"
@@ -59,6 +52,13 @@
 
    <plugin
          id="ac.soton.eventb.statemachines.navigator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ac.soton.eventb.statemachines"
          download-size="0"
          install-size="0"
          version="0.0.0"
