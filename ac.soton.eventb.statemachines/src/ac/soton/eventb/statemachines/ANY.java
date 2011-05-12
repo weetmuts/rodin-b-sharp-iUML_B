@@ -16,7 +16,7 @@ package ac.soton.eventb.statemachines;
  *
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getANY()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notOnRoot'"
  * @generated
  */
 public interface ANY extends AbstractNode {

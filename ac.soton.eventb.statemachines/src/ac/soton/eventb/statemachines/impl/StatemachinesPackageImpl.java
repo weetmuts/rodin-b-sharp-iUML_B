@@ -758,7 +758,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		   },
 		   new URI[] {
 			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
-		   });			
+		   });				
 	}
 
 	/**
@@ -779,7 +779,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaboratesOnRootIfInitial\nelaboratesOnRootIfFinal\nelaboratesOnNestedIfNotInitialOrFinal"
+			 "constraints", "notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates"
 		   });		
 		addAnnotation
 		  (refinedStatemachineEClass, 
@@ -804,6 +804,12 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		   source, 
 		   new String[] {
 			 "constraints", "hasOutgoing"
+		   });		
+		addAnnotation
+		  (anyEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "notOnRoot"
 		   });		
 		addAnnotation
 		  (finalEClass, 

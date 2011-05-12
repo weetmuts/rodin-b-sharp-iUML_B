@@ -341,9 +341,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateTransition_notToInitial(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromInitialToFinal(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_elaboratesOnRootIfInitial(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_elaboratesOnRootIfFinal(transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTransition_elaboratesOnNestedIfNotInitialOrFinal(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_elaborates(transition, diagnostics, context);
 		return result;
 	}
 
@@ -423,16 +421,20 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the elaboratesOnRootIfInitial constraint of '<em>Transition</em>'.
+	 * Validates the elaborates constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
-	 * Initial transition on root statemachine must elaborate INITIALISATION event.
+	 * Transition elaborates events.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean validateTransition_elaboratesOnRootIfInitial(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transition.getSource() instanceof Initial
-				&& transition.getSource().eContainer().eContainer() instanceof Machine
-				&& transition.getElaborates().isEmpty()) {
+	public boolean validateTransition_elaborates(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// if transitions does not elaborate an event AND
+		// it is either on root OR
+		// in nested statemachine, in which it is NOT initial or final transition
+		if (transition.getElaborates().isEmpty()
+				&& (transition.getTarget().eContainer().eContainer() instanceof Machine
+						|| (transition.getSource() instanceof Initial == false
+								&& transition.getTarget() instanceof Final == false))) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -440,62 +442,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Transition should elaborate INITIALISATION event", getObjectLabel(transition, context) },
-						 new Object[] { transition },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the elaboratesOnRootIfFinal constraint of '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * Final transition on root statemachine should elaborate events.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateTransition_elaboratesOnRootIfFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transition.getTarget() instanceof Final
-				&& transition.getTarget().eContainer().eContainer() instanceof Machine
-				&& transition.getElaborates().isEmpty()) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.WARNING,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Transition should elaborate event(s)", getObjectLabel(transition, context) },
-						 new Object[] { transition },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the elaboratesOnNestedIfNotInitialOrFinal constraint of '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * Transition on nested statemachine should elaborate events if it's not initial or final.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateTransition_elaboratesOnNestedIfNotInitialOrFinal(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (transition.eContainer().eContainer() instanceof AbstractState
-				&& transition.getSource() instanceof Initial == false
-				&& transition.getTarget() instanceof Final == false
-				&& transition.getElaborates().isEmpty()) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.WARNING,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Transition should elaborate event(s)", getObjectLabel(transition, context) },
+						 new Object[] { "Transition should elaborate an event", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -715,7 +662,42 @@ public class StatemachinesValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateANY(ANY any, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(any, diagnostics, context);
+		boolean result = validate_NoCircularContainment(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(any, diagnostics, context);
+		if (result || diagnostics != null) result &= validateANY_notOnRoot(any, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the notOnRoot constraint of '<em>ANY</em>'.
+	 * <!-- begin-user-doc -->
+	 * ANY state is not on a root statemachine.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateANY_notOnRoot(ANY any, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (any.eContainer().eContainer() instanceof Machine) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "ANY state cannot be on a root statemachine", getObjectLabel(any, context) },
+						 new Object[] { any },
+						 context));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
