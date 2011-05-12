@@ -8,8 +8,7 @@ Bundle-Vendor:
 Require-Bundle: org.eclipse.core.runtime,
  ac.soton.eventb.statemachines.diagram,
  org.eclipse.m2m.qvt.oml,
- org.eclipse.gmf.runtime.diagram.ui,
- org.eclipse.gmf.common
+ org.eclipse.gmf.runtime.diagram.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: ac.soton.eventb.statemachines.transformation.TransformationPlugin
 Bundle-ActivationPolicy: lazy
