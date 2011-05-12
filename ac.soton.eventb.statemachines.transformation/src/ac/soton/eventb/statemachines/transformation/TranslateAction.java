@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -183,7 +184,7 @@ public class TranslateAction extends AbstractHandler {
 				Resource resource = editingDomain.getResourceSet().getResource(fileURI, true);
 				
 				// find transformation script
-				URL scriptUrl = TransformationPlugin.getDefault().getBundle().getEntry("/transforms/statemachines2eventb_2.qvto");
+				URL scriptUrl = Platform.getBundle(TransformationPlugin.PLUGIN_ID).getEntry("/transforms/statemachines2eventb_2.qvto");
 				
 				// Refer to an existing transformation via URI
 				URI transformationURI = URI.createURI(scriptUrl.toString());
