@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.custom.DiagramBehaviourPreferencePage;
 
 /**
  * @generated
@@ -27,6 +28,7 @@ public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer 
 		DiagramConnectionsPreferencePage.initDefaults(store);
 		DiagramPrintingPreferencePage.initDefaults(store);
 		DiagramRulersAndGridPreferencePage.initDefaults(store);
+		DiagramBehaviourPreferencePage.initDefaults(store);
 
 	}
 

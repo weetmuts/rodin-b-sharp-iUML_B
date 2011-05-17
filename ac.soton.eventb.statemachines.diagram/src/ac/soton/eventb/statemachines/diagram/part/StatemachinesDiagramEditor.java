@@ -57,6 +57,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IGotoMarker;
@@ -66,12 +68,13 @@ import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesNavigatorItem;
+import ac.soton.eventb.statemachines.diagram.preferences.custom.IStatemachinesPreferenceConstants;
 
 /**
- * @generated
+ * @generated NOT
  */
 public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
-		IGotoMarker {
+		IGotoMarker, IPartListener {
 
 	/**
 	 * @generated
@@ -393,5 +396,36 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 		protected abstract Object getJavaObject(TransferData data);
 
 	}
+
+	@Override
+	public void setInput(IEditorInput input) {
+		super.setInput(input);
+		getSite().getPage().addPartListener(this);
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		getSite().getPage().removePartListener(this);
+	}
+
+	/**
+	 * Saves editor if it is deactivated and autosave preference is on.
+	 * 
+	 * @param part
+	 */
+	@Override
+	public void partDeactivated(IWorkbenchPart part) {
+		if (isDirty() && StatemachinesDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE))
+			doSave(new NullProgressMonitor());
+	}
+	@Override
+	public void partActivated(IWorkbenchPart part) {}
+	@Override
+	public void partBroughtToTop(IWorkbenchPart part) {}
+	@Override
+	public void partClosed(IWorkbenchPart part) {}
+	@Override
+	public void partOpened(IWorkbenchPart part) {}
 
 }

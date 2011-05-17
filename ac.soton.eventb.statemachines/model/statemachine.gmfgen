@@ -1089,6 +1089,12 @@
           iD="ac.soton.eventb.statemachines.diagram.rulersAndGrid"
           name="Rulers And Grid"
           kind="RulersAndGrid"/>
+      <children
+          xsi:type="gmfgen:GenCustomPreferencePage"
+          iD="ac.soton.eventb.statemachines.diagram.behaviour"
+          name="Behaviour"
+          qualifiedClassName="ac.soton.eventb.statemachines.diagram.preferences.custom.DiagramBehaviourPreferencePage"
+          generateBoilerplate="true"/>
     </preferencePages>
   </diagram>
   <plugin

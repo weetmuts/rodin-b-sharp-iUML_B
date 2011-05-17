@@ -184,6 +184,12 @@ http://www.eclipse.org/legal/epl-v10.html
             category="ac.soton.eventb.statemachines.diagram.general"
             class="ac.soton.eventb.statemachines.diagram.preferences.DiagramRulersAndGridPreferencePage">
       </page>
+      <page
+            id="ac.soton.eventb.statemachines.diagram.behaviour"
+            name="%prefpage.ac.soton.eventb.statemachines.diagram.behaviour"
+            category="ac.soton.eventb.statemachines.diagram.general"
+            class="ac.soton.eventb.statemachines.diagram.preferences.custom.DiagramBehaviourPreferencePage">
+      </page>
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
