@@ -28,7 +28,7 @@ property B_LBRC : String = "{";
 property B_RBRC : String = "}";
 property B_COM : String = ", ";
 property B_IMPL : String = " ⇒ ";
-property B_UNION : String = " ∩ ";
+property B_INTER : String = " ∩ ";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Query and helper rules
@@ -76,7 +76,7 @@ helper statemachines::Statemachine::getStatePartitions() : Sequence(String) {
  * Returns partiotion string for a state variable.
  */
 helper statemachines::State::getPartition() : String {
-	return self.name.asSet() + B_UNION + B_TRUE.asSet();
+	return self.name.asSet() + B_INTER + B_TRUE.asSet();
 }
 
 /*
