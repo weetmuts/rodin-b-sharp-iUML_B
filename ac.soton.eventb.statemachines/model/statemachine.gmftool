@@ -15,16 +15,7 @@
           description="Create new State">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/State.png"
-            bundle="ac.soton.eventb.statemachines"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Refined State"
-          description="Create new Refined State">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="/icons/RefinedState.png"
+            path="/icons/png/State.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
       <tools
@@ -33,7 +24,7 @@
           description="Create new Initial State">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Initial.png"
+            path="/icons/png/Initial.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
       <tools
@@ -42,7 +33,7 @@
           description="Create new Final State">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Final.png"
+            path="/icons/png/Final.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
       <tools
@@ -51,13 +42,13 @@
           description="Create new ANY State">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Any.png"
+            path="/icons/png/ANY.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="State Features"
+        title="Features"
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
@@ -65,16 +56,7 @@
           description="Create new Statemachine">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Statemachine.png"
-            bundle="ac.soton.eventb.statemachines"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Refined Statemachine"
-          description="Create new Refined Statemachine">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="/icons/RefinedStatemachine.png"
+            path="/icons/png/Statemachine.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
       <tools
@@ -83,13 +65,13 @@
           description="Create new Invariant">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Invariant.png"
+            path="/icons/png/Invariant.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="State Links"
+        title="Connections"
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
@@ -97,7 +79,7 @@
           description="Create new Transition">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/Transition.png"
+            path="/icons/png/Transition.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
     </tools>

@@ -27,7 +27,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <editor
          id="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"
          name="%editorName"
-         icon="/icons/StatemachinesDiagramFile.png"
+         icon="/icons/StatemachinesDiagramFile.gif"
          extensions="smd"
          default="true"
          class="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor"
@@ -660,7 +660,7 @@ http://www.eclipse.org/legal/epl-v10.html
             priority="normal" 
             contentProvider="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesNavigatorContentProvider" 
             labelProvider="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesNavigatorLabelProvider"
-            icon="/icons/StatemachinesDiagramFile.png"
+            icon="/icons/StatemachinesDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
             <or>
@@ -702,7 +702,7 @@ http://www.eclipse.org/legal/epl-v10.html
             priority="normal" 
             contentProvider="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorContentProvider" 
             labelProvider="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNavigatorLabelProvider"
-            icon="/icons/StatemachinesDiagramFile.png"
+            icon="/icons/StatemachinesDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
             <or>

@@ -604,6 +604,6 @@ public class InnerStateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 255, 204, 255);
+	static final Color THIS_BACK = new Color(null, 196, 204, 255);
 
 }

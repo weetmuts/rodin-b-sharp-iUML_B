@@ -17,7 +17,7 @@
             value="gray"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
+            red="196"
             green="204"
             blue="255"/>
         <children
@@ -244,9 +244,9 @@
             value="gray"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="224"
-            green="255"
-            blue="204"/>
+            red="197"
+            green="241"
+            blue="255"/>
         <minimumSize
             dx="100"
             dy="80"/>

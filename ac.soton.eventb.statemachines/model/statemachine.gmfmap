@@ -13,7 +13,7 @@
           href="statemachines.ecore#//Initial"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="statemachine.gmfgraph#Initial"/>
     </ownedChild>
@@ -26,7 +26,7 @@
           href="statemachines.ecore#//Final"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="statemachine.gmfgraph#Final"/>
     </ownedChild>
@@ -39,7 +39,7 @@
           href="statemachines.ecore#//ANY"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="statemachine.gmfgraph#ANY"/>
     </ownedChild>
@@ -132,7 +132,7 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.2"/>
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
           <diagramNode
               href="statemachine.gmfgraph#InvariantLabel"/>
         </ownedChild>
@@ -166,9 +166,6 @@
         <features
             href="statemachines.ecore#//EventBLabeled/label"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="statemachine.gmfgraph#RefinedState"/>
       <children
@@ -179,9 +176,6 @@
             relatedDiagrams="//@diagram">
           <domainMetaElement
               href="statemachines.ecore#//RefinedStatemachine"/>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
           <diagramNode
               href="statemachine.gmfgraph#RefinedStatemachine"/>
           <children
@@ -280,7 +274,7 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="statemachine.gmftool#//@palette/@tools.1/@tools.2"/>
+              href="statemachine.gmftool#//@palette/@tools.1/@tools.1"/>
           <diagramNode
               href="statemachine.gmfgraph#InvariantLabel"/>
         </ownedChild>

@@ -38,7 +38,6 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
@@ -76,7 +75,8 @@ public class TranslateAction extends AbstractHandler {
 			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
 			
 			// save before transformation
-			((DiagramEditor) diagramEditor).doSave(new NullProgressMonitor());
+			if (editor.isDirty())
+				editor.doSave(new NullProgressMonitor());
 			
 			// first validate, then transform
 			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), diagramEditor.getDiagram())) {

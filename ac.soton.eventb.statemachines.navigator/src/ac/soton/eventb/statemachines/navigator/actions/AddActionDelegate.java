@@ -52,7 +52,7 @@ public class AddActionDelegate implements IViewActionDelegate, IMenuCreator {
 		if (action != this.action) {
 			action.setMenuCreator(this);
 			action.setToolTipText("Create new statemachine");
-			action.setImageDescriptor(ImageDescriptor.createFromURL((URL) childCreationExtender.getImage("full/ctool16/CreateStatemachineOwner_statemachines_Statemachine")));
+			action.setImageDescriptor(ImageDescriptor.createFromURL((URL) childCreationExtender.getImage("full/obj16/CreateStatemachine")));
 			this.action = action;
 		}
 	}

@@ -90,7 +90,7 @@
                enablesFor="1"
                id="statemachine"
                label="%action.add.name"
-               style="pulldown"
+               style="push"
                toolbarPath="new">
             <enablement>
                <or>

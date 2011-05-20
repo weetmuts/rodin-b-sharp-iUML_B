@@ -416,16 +416,29 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	 */
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
-		if (isDirty() && StatemachinesDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE))
+		if (isDirty()
+				&& StatemachinesDiagramEditorPlugin
+						.getInstance()
+						.getPreferenceStore()
+						.getBoolean(
+								IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE))
 			doSave(new NullProgressMonitor());
 	}
+
 	@Override
-	public void partActivated(IWorkbenchPart part) {}
+	public void partActivated(IWorkbenchPart part) {
+	}
+
 	@Override
-	public void partBroughtToTop(IWorkbenchPart part) {}
+	public void partBroughtToTop(IWorkbenchPart part) {
+	}
+
 	@Override
-	public void partClosed(IWorkbenchPart part) {}
+	public void partClosed(IWorkbenchPart part) {
+	}
+
 	@Override
-	public void partOpened(IWorkbenchPart part) {}
+	public void partOpened(IWorkbenchPart part) {
+	}
 
 }

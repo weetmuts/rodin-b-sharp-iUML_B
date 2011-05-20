@@ -11,13 +11,11 @@ http://www.eclipse.org/legal/epl-v10.html
 <extension
      point="org.eclipse.ui.menus">
   <menuContribution
-        locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=ac.soton.eventb.statemachines.diagram.ValidateDiagramAction">
+        locationURI="toolbar:ac.soton.eventb.statemachines.diagram.toolbar">
      <command
            commandId="ac.soton.eventb.statemachines.transformation.translateToEventB"
-           icon="icons/UtoB.png">
-        <visibleWhen
-              checkEnabled="true">
-        </visibleWhen>
+           icon="icons/UtoB.png"
+           style="push">
      </command>
   </menuContribution>
 </extension>
@@ -41,15 +39,6 @@ http://www.eclipse.org/legal/epl-v10.html
               <equals
                     value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID">
               </equals>
-           </with>
-           <with
-                 variable="selection">
-              <iterate
-                    ifEmpty="false">
-                 <instanceof
-                       value="ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart">
-                 </instanceof>
-              </iterate>
            </with>
         </and>
      </enabledWhen>

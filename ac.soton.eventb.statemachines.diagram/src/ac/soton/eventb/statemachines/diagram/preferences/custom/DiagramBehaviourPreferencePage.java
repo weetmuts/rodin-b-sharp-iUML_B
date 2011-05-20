@@ -24,9 +24,9 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlug
 public class DiagramBehaviourPreferencePage extends AbstractPreferencePage {
 
 	private static final String AUTOSAVE_SETTINGS_GROUP_LABEL = "Autosaving";
-	
+
 	private static final String AUTOSAVE_ON_DEACTIVATE_LABEL = "Autosave when editor is deactiveated";
-	
+
 	private BooleanFieldEditor autosaveOnEditorDeactivation;
 
 	/**
@@ -51,21 +51,21 @@ public class DiagramBehaviourPreferencePage extends AbstractPreferencePage {
 	 */
 	private void addAutosaveFields(Composite parent) {
 		// Create a Group to hold the autosave fields
-    	Group group = new Group(parent, SWT.NONE);
-    	group.setText(AUTOSAVE_SETTINGS_GROUP_LABEL);
- 
+		Group group = new Group(parent, SWT.NONE);
+		group.setText(AUTOSAVE_SETTINGS_GROUP_LABEL);
+
 		GridLayout gridLayout = new GridLayout(2, false);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalSpan = 2;
-        
-        // Add the fields to the group		
+
+		// Add the fields to the group		
 
 		autosaveOnEditorDeactivation = new BooleanFieldEditor(
-			IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE,
-			AUTOSAVE_ON_DEACTIVATE_LABEL, group);
+				IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE,
+				AUTOSAVE_ON_DEACTIVATE_LABEL, group);
 		addField(autosaveOnEditorDeactivation);
-		
+
 		group.setLayoutData(gridData);
 		group.setLayout(gridLayout);
 	}
@@ -81,7 +81,9 @@ public class DiagramBehaviourPreferencePage extends AbstractPreferencePage {
 	 * @generated NOT
 	 */
 	public static void initDefaults(IPreferenceStore store) {
-		store.setDefault(IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE, false);
+		store.setDefault(
+				IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE,
+				false);
 	}
 
 }

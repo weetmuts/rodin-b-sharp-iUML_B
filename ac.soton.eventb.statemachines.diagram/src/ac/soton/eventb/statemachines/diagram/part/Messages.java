@@ -255,12 +255,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String StateFeatures2Group_title;
+	public static String Features2Group_title;
 
 	/**
 	 * @generated
 	 */
-	public static String StateLinks3Group_title;
+	public static String Connections3Group_title;
 
 	/**
 	 * @generated
@@ -275,42 +275,32 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String RefinedState2CreationTool_title;
+	public static String Initial2CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedState2CreationTool_desc;
+	public static String Initial2CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Initial3CreationTool_title;
+	public static String Final3CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Initial3CreationTool_desc;
+	public static String Final3CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Final4CreationTool_title;
+	public static String ANY4CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Final4CreationTool_desc;
-
-	/**
-	 * @generated
-	 */
-	public static String ANY5CreationTool_title;
-
-	/**
-	 * @generated
-	 */
-	public static String ANY5CreationTool_desc;
+	public static String ANY4CreationTool_desc;
 
 	/**
 	 * @generated
@@ -325,22 +315,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String RefinedStatemachine2CreationTool_title;
+	public static String Invariant2CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String RefinedStatemachine2CreationTool_desc;
-
-	/**
-	 * @generated
-	 */
-	public static String Invariant3CreationTool_title;
-
-	/**
-	 * @generated
-	 */
-	public static String Invariant3CreationTool_desc;
+	public static String Invariant2CreationTool_desc;
 
 	/**
 	 * @generated
