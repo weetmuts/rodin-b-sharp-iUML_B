@@ -797,7 +797,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (stateEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "hasNoRefinedStatemachines"
+			 "constraints", "hasNoRefinedStatemachines\nhasName"
 		   });		
 		addAnnotation
 		  (initialEClass, 

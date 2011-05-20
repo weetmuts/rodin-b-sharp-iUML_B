@@ -575,6 +575,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(state, diagnostics, context);
 		if (result || diagnostics != null) result &= validateState_hasNoRefinedStatemachines(state, diagnostics, context);
+		if (result || diagnostics != null) result &= validateState_hasName(state, diagnostics, context);
 		return result;
 	}
 
@@ -595,6 +596,31 @@ public class StatemachinesValidator extends EObjectValidator {
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
 						 new Object[] { "Concrete state cannot contain refined statemachines", getObjectLabel(state, context) },
+						 new Object[] { state },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the hasName constraint of '<em>State</em>'.
+	 * <!-- begin-user-doc -->
+	 * State has non-empty name.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateState_hasName(State state, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (state.getName() == null || state.getName().isEmpty()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "State must have a name", getObjectLabel(state, context) },
 						 new Object[] { state },
 						 context));
 			}

@@ -63,7 +63,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasNoRefinedStatemachines"/>
+      <details key="constraints" value="hasNoRefinedStatemachines&#xA;hasName"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode">
