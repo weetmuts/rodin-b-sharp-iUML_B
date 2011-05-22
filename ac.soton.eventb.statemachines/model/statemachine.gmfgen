@@ -1842,17 +1842,6 @@
         xsi:type="gmfgen:GenCustomAction"
         qualifiedClassName="ac.soton.eventb.statemachines.diagram.part.OpenDiagramAction"
         generateBoilerplate="true"
-        name="Open Diagram"/>
-  </contextMenus>
-  <contextMenus
-      context="//@diagram">
-    <items
-        xsi:type="gmfgen:GenSeparator"
-        groupName="iumlb"/>
-    <items
-        xsi:type="gmfgen:GenCustomAction"
-        qualifiedClassName="ac.soton.eventb.statemachines.diagram.part.ValidateDiagramAction"
-        generateBoilerplate="true"
-        name="Validate"/>
+        name="Open As Separate Diagram"/>
   </contextMenus>
 </gmfgen:GenEditorGenerator>

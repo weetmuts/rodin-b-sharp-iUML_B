@@ -267,162 +267,77 @@ public class StatemachinesNavigatorContentProvider implements
 	private Object[] getViewChildren(View view, Object parentElement) {
 		switch (StatemachinesVisualIDRegistry.getVisualID(view)) {
 
-		case TransitionGhostEditPart.VISUAL_ID: {
+		case InitialEditPart.VISUAL_ID: {
 			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Edge sv = (Edge) view;
-			StatemachinesNavigatorGroup target = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Transition_4002_target,
-					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Node sv = (Node) view;
 			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Transition_4002_incominglinks,
+					Messages.NavigatorGroupName_Initial_2001_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup source = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Transition_4002_source,
-					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Transition_4002_outgoinglinks,
+					Messages.NavigatorGroupName_Initial_2001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(InitialEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(FinalEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(ANYEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(StateEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(StatemachineEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerInitialEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerFinalEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerANYEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerStateEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStatemachineEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerRefinedStateEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InitialEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(FinalEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(ANYEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(StateEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(StatemachineEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerInitialEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerFinalEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerANYEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerStateEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStatemachineEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerRefinedStateEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			if (!target.isEmpty()) {
-				result.add(target);
-			}
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
 			if (!incominglinks.isEmpty()) {
 				result.add(incominglinks);
 			}
-			if (!source.isEmpty()) {
-				result.add(source);
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case InnerANYEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_ANY_3004_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_ANY_3004_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
 			}
 			if (!outgoinglinks.isEmpty()) {
 				result.add(outgoinglinks);
@@ -469,14 +384,61 @@ public class StatemachinesNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case FinalEditPart.VISUAL_ID: {
+		case DiagramRootEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			result.addAll(getForeignShortcuts((Diagram) view, parentElement));
+			Diagram sv = (Diagram) view;
+			StatemachinesNavigatorGroup links = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_DiagramRoot_1000_links,
+					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InitialEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(FinalEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(ANYEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(StateEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			links.addChildren(createNavigatorItems(connectedViews, links, false));
+			if (!links.isEmpty()) {
+				result.add(links);
+			}
+			return result.toArray();
+		}
+
+		case InnerInitialEditPart.VISUAL_ID: {
 			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
 			Node sv = (Node) view;
 			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Final_2002_incominglinks,
+					Messages.NavigatorGroupName_Initial_3002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Final_2002_outgoinglinks,
+					Messages.NavigatorGroupName_Initial_3002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
 			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
@@ -508,16 +470,197 @@ public class StatemachinesNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case InnerANYEditPart.VISUAL_ID: {
+		case StateEditPart.VISUAL_ID: {
 			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
 			Node sv = (Node) view;
 			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_ANY_3004_incominglinks,
+					Messages.NavigatorGroupName_State_2004_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_ANY_3004_outgoinglinks,
+					Messages.NavigatorGroupName_State_2004_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(StateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(StatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(StateInvariantsCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(StateInvariantEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case InnerStateEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_State_3005_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_State_3005_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerStateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(StatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerStateInvariantsCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(StateInvariantEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case InnerFinalEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_Final_3003_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_Final_3003_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case RefinedStateEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_RefinedState_2005_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_RefinedState_2005_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(
+					connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateInvariantsCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateInvariantEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
 			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
 							.getType(TransitionEditPart.VISUAL_ID));
@@ -593,6 +736,73 @@ public class StatemachinesNavigatorContentProvider implements
 							.getType(InnerStateEditPart.VISUAL_ID));
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionGhostEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
+			if (!incominglinks.isEmpty()) {
+				result.add(incominglinks);
+			}
+			if (!outgoinglinks.isEmpty()) {
+				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case InnerRefinedStateEditPart.VISUAL_ID: {
+			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
+			Node sv = (Node) view;
+			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_RefinedState_3008_incominglinks,
+					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_RefinedState_3008_outgoinglinks,
+					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerRefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerRefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(
+					connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(
+					Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerRefinedStateInvariantsCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStateInvariantEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			incominglinks.addChildren(createNavigatorItems(connectedViews,
+					incominglinks, true));
+			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(TransitionEditPart.VISUAL_ID));
+			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
+					outgoinglinks, true));
 			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
 							.getType(TransitionGhostEditPart.VISUAL_ID));
@@ -808,61 +1018,14 @@ public class StatemachinesNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case DiagramRootEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			result.addAll(getForeignShortcuts((Diagram) view, parentElement));
-			Diagram sv = (Diagram) view;
-			StatemachinesNavigatorGroup links = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_DiagramRoot_1000_links,
-					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InitialEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(FinalEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(ANYEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(StateEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			if (!links.isEmpty()) {
-				result.add(links);
-			}
-			return result.toArray();
-		}
-
-		case InnerInitialEditPart.VISUAL_ID: {
+		case FinalEditPart.VISUAL_ID: {
 			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
 			Node sv = (Node) view;
 			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_3002_incominglinks,
+					Messages.NavigatorGroupName_Final_2002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_3002_outgoinglinks,
+					Messages.NavigatorGroupName_Final_2002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
 			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
@@ -959,325 +1122,162 @@ public class StatemachinesNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case RefinedStateEditPart.VISUAL_ID: {
+		case TransitionGhostEditPart.VISUAL_ID: {
 			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
+			Edge sv = (Edge) view;
+			StatemachinesNavigatorGroup target = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_Transition_4002_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_RefinedState_2005_incominglinks,
+					Messages.NavigatorGroupName_Transition_4002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			StatemachinesNavigatorGroup source = new StatemachinesNavigatorGroup(
+					Messages.NavigatorGroupName_Transition_4002_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_RefinedState_2005_outgoinglinks,
+					Messages.NavigatorGroupName_Transition_4002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
+							.getType(InitialEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(RefinedStatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
+							.getType(FinalEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(
-					connectedViews,
+							.getType(ANYEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
+							.getType(StateEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(RefinedStateInvariantsCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateInvariantEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
-		case InnerFinalEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
-			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Final_3003_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Final_3003_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
-		case InnerRefinedStateEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
-			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_RefinedState_3008_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_RefinedState_3008_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerRefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerRefinedStateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(
-					connectedViews,
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerRefinedStateInvariantsCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
-					StatemachinesVisualIDRegistry
-							.getType(RefinedStateInvariantEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
-		case InnerStateEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
-			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_State_3005_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_State_3005_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(InnerStateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
+							.getType(RefinedStateEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
 							.getType(StatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerInitialEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerFinalEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerANYEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerStateEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStatemachineEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerRefinedStateEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksTargetByType(
 					Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(InnerStateInvariantsCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
+							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(StateInvariantEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+							.getType(InitialEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+							.getType(FinalEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
+							.getType(ANYEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
+							.getType(StateEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
-		case StateEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
-			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_State_2004_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_State_2004_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getChildrenByType(
-					Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(StateStatemachinesCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
+							.getType(RefinedStateEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
 							.getType(StatemachineEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerInitialEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerFinalEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerANYEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerStateEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(RefinedStatemachineEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					StatemachinesVisualIDRegistry
+							.getType(InnerRefinedStateEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			connectedViews = getLinksSourceByType(
 					Collections.singleton(sv),
 					StatemachinesVisualIDRegistry
-							.getType(StateInvariantsCompartmentEditPart.VISUAL_ID));
-			connectedViews = getChildrenByType(connectedViews,
-					StatemachinesVisualIDRegistry
-							.getType(StateInvariantEditPart.VISUAL_ID));
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
+							.getType(RefinedStateStatemachineEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
+			}
 			if (!incominglinks.isEmpty()) {
 				result.add(incominglinks);
 			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
-			return result.toArray();
-		}
-
-		case InitialEditPart.VISUAL_ID: {
-			LinkedList<StatemachinesAbstractNavigatorItem> result = new LinkedList<StatemachinesAbstractNavigatorItem>();
-			Node sv = (Node) view;
-			StatemachinesNavigatorGroup incominglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_2001_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			StatemachinesNavigatorGroup outgoinglinks = new StatemachinesNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_2001_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(sv),
-					StatemachinesVisualIDRegistry
-							.getType(TransitionGhostEditPart.VISUAL_ID));
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
+			if (!source.isEmpty()) {
+				result.add(source);
 			}
 			if (!outgoinglinks.isEmpty()) {
 				result.add(outgoinglinks);
