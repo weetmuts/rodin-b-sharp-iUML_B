@@ -468,6 +468,6 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 197, 241, 255);
+	static final Color THIS_BACK = new Color(null, 240, 240, 255);
 
 }

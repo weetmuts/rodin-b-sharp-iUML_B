@@ -244,8 +244,8 @@
             value="gray"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="197"
-            green="241"
+            red="240"
+            green="240"
             blue="255"/>
         <minimumSize
             dx="100"

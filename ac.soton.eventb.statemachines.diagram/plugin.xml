@@ -822,7 +822,7 @@ http://www.eclipse.org/legal/epl-v10.html
          categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"
          defaultHandler="ac.soton.eventb.statemachines.diagram.part.CreateShortcutAction"/>
       <command id="ac.soton.eventb.statemachines.diagram.OpenDiagramAction"
-         name="Open As Separate Diagram"
+         name="&amp;Open As Separate Diagram"
          categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/>
    </extension>
 
