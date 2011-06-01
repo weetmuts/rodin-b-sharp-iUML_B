@@ -34,7 +34,7 @@ public class StatemachinesContentProvider extends StatemachinesDomainNavigatorCo
 			IMachineRoot root = (IMachineRoot) parentElement;
 			URI fileURI = URI.createPlatformResourceURI(root.getResource().getFullPath().toString(), true);
 			Resource resource = myEditingDomain.getResourceSet().getResource(fileURI, true);
-			if (resource.isLoaded()) {
+			if (resource.isLoaded() && resource.getContents().isEmpty() == false) {
 				Machine machine = (Machine) resource.getContents().get(0);
 				return wrapEObjects(
 						machine.getExtensions().toArray(),

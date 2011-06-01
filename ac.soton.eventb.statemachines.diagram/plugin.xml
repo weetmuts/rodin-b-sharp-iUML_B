@@ -27,7 +27,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <editor
          id="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"
          name="%editorName"
-         icon="/icons/StatemachinesDiagramFile.gif"
+         icon="/icons/obj16/StatemachinesDiagramFile.gif"
          extensions="smd"
          default="true"
          class="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor"

@@ -1094,7 +1094,7 @@
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>
   <editor
-      iconPath="/icons/StatemachinesDiagramFile.gif"/>
+      iconPath="/icons/obj16/StatemachinesDiagramFile.gif"/>
   <navigator>
     <childReferences
         child="//@diagram"/>
