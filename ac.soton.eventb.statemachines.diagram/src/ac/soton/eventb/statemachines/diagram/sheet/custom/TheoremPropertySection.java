@@ -38,7 +38,7 @@ public class TheoremPropertySection extends AbstractEnumerationPropertySection {
 
 	@Override
 	protected Object getFeatureValue(int index) {
-		return Boolean.getBoolean(theoremValues[index]);
+		return Boolean.valueOf(theoremValues[index]);
 	}
 
 	@Override
