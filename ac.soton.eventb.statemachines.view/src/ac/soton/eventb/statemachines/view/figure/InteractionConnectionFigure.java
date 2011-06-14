@@ -7,6 +7,7 @@
  */
 package ac.soton.eventb.statemachines.view.figure;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.MidpointLocator;
@@ -28,6 +29,9 @@ public class InteractionConnectionFigure extends PolylineConnection {
 	 */
 	public InteractionConnectionFigure(String name) {
 		super();
+		setAntialias(SWT.ON);
+		setLineStyle(SWT.LINE_DASH);
+		setLineWidth(2);
 		
 		// standard midpoint locator for connection label,
 		// but overridden to return first point from the middle of a list of bend points if there are more than two points in connection
@@ -44,7 +48,7 @@ public class InteractionConnectionFigure extends PolylineConnection {
 		};
 		relationshipLocator.setRelativePosition(PositionConstants.NORTH_EAST);
 		relationshipLocator.setGap(2);
-		label = new Label(name);
+		label = new TagLabel(name);
 		add(label, relationshipLocator);
 	}
 

@@ -38,6 +38,7 @@ import ac.soton.eventb.statemachines.view.figure.InteractionConnectionFigure;
  */
 public class InteractionGraphLayout extends FreeformLayout {
 	
+	private static final Insets PADDING = new Insets(30);
 	private InteractionDiagramEditPart diagram;
 
 	/**
@@ -60,6 +61,7 @@ public class InteractionGraphLayout extends FreeformLayout {
 		contributeEdgesToGraph(graph, partsToGraph);
 		
 		// run graph layout algorithm
+		graph.setDefaultPadding(PADDING);
 		new DirectedGraphLayout().visit(graph);
 		
 		// apply results on view layout

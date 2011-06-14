@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Display;
 public class InteractionNodeFigure extends Figure {
 
 	private static final Color NODE_BACK = new Color(null, 240, 240, 255);
+	private static final Color NODE_BACK2 = new Color(null, 196, 204, 255);
 	private static final int STANDARD_LABEL_WIDTH = 85;
 	
 	private RectangleFigure rectangleFigure;
@@ -37,7 +38,7 @@ public class InteractionNodeFigure extends Figure {
 		int width = getLabelWidth(name);
 		setLayoutManager(new XYLayout());
 		rectangleFigure = new RectangleFigure();
-		rectangleFigure.setBackgroundColor(NODE_BACK);
+		rectangleFigure.setBackgroundColor(NODE_BACK2);
 		rectangleFigure.setSize(new Dimension(width, 30));
 		add(rectangleFigure);
 		label = new Label();
