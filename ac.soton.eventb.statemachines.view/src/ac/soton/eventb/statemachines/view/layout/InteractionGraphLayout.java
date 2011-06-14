@@ -7,13 +7,15 @@
  */
 package ac.soton.eventb.statemachines.view.layout;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.draw2d.AbsoluteBendpoint;
 import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
@@ -22,19 +24,20 @@ import org.eclipse.draw2d.graph.DirectedGraph;
 import org.eclipse.draw2d.graph.DirectedGraphLayout;
 import org.eclipse.draw2d.graph.Edge;
 import org.eclipse.draw2d.graph.Node;
+import org.eclipse.draw2d.graph.NodeList;
+import org.eclipse.gef.EditPart;
 
 import ac.soton.eventb.statemachines.view.editpart.InteractionDiagramEditPart;
+import ac.soton.eventb.statemachines.view.editpart.InteractionEdgeEditPart;
 import ac.soton.eventb.statemachines.view.editpart.InteractionNodeEditPart;
-import ac.soton.eventb.statemachines.view.model.InteractionDiagram;
-import ac.soton.eventb.statemachines.view.model.InteractionEdge;
-import ac.soton.eventb.statemachines.view.model.InteractionNode;
+import ac.soton.eventb.statemachines.view.figure.InteractionConnectionFigure;
 
 /**
  * @author vitaly
  *
  */
 public class InteractionGraphLayout extends FreeformLayout {
-
+	
 	private InteractionDiagramEditPart diagram;
 
 	/**
@@ -47,68 +50,119 @@ public class InteractionGraphLayout extends FreeformLayout {
 	/* (non-Javadoc)
 	 * @see org.eclipse.draw2d.LayoutManager#layout(org.eclipse.draw2d.IFigure)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void layout(IFigure parent) {
-		Map<InteractionNode, Node> map = new HashMap<InteractionNode, Node>();
-		InteractionDiagram diagramModel = (InteractionDiagram) diagram.getModel();
 		
-		// graph
+		// build graph
 		DirectedGraph graph = new DirectedGraph();
-		graph.setMargin(new Insets(20));
+		Map<EditPart, Object> partsToGraph = new HashMap<EditPart, Object>();
+		contributeNodesToGraph(graph, partsToGraph);
+		contributeEdgesToGraph(graph, partsToGraph);
 		
-		// nodes
-		for (InteractionNode inode : diagramModel.getNodes()) {
-			Node node = new Node(inode);
-			graph.nodes.add(node);
-			map.put(inode, node);
-		}
-		int i = 0;
-		// edges
-		for (InteractionEdge iedge : diagramModel.getEdges()) {
-			Edge edge = new Edge(iedge, map.get(iedge.getSource()), map.get(iedge.getTarget()));
-			edge.weight = i++;
-			graph.edges.add(edge);
-		}
-		
-		// run layout algorithm
+		// run graph layout algorithm
 		new DirectedGraphLayout().visit(graph);
 		
-		// lay out figures according to results
-		for (Object child : diagram.getChildren())
+		// apply results on view layout
+		applyGraphResults(parent, graph, partsToGraph);
+	}
+
+	/**
+	 * @param graph
+	 * @param partsToGraph
+	 */
+	@SuppressWarnings("unchecked")
+	private void contributeNodesToGraph(DirectedGraph graph, Map<EditPart, Object> partsToGraph) {
+		for (Object child : diagram.getChildren()) {
 			if (child instanceof InteractionNodeEditPart) {
 				InteractionNodeEditPart part = (InteractionNodeEditPart) child;
-				InteractionNode inode = (InteractionNode) part.getModel();
-				Node node = map.get(inode);
-				part.getFigure().setLocation(new Point(node.x, node.y));
-//				part.getFigure().validate();
+				Node node = new Node(part);
+				node.width = part.getFigure().getClientArea().width;
+				node.height = part.getFigure().getClientArea().height;
+				partsToGraph.put(part, node);
+				graph.nodes.add(node);
 			}
-		
+		}
+	}
 
-		Iterator children = parent.getChildren().iterator();
+	/**
+	 * @param graph
+	 * @param partsToGraph
+	 */
+	@SuppressWarnings("unchecked")
+	private void contributeEdgesToGraph(DirectedGraph graph, Map<EditPart, Object> partsToGraph) {
+		for (Object child : diagram.getChildren()) {
+			if (child instanceof InteractionNodeEditPart) {
+				for (Object connection : ((InteractionNodeEditPart) child).getSourceConnections()) {
+					if (connection instanceof InteractionEdgeEditPart) {
+						InteractionEdgeEditPart part = (InteractionEdgeEditPart) connection;
+						Node source = (Node) partsToGraph.get(part.getSource());
+						Node target = (Node) partsToGraph.get(part.getTarget());
+						Edge edge = new Edge(part, source, target);
+						edge.weight = 2;
+						graph.edges.add(edge);
+						partsToGraph.put(part, edge);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param parent 
+	 * @param graph
+	 * @param partsToGraph
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void applyGraphResults(IFigure parent, DirectedGraph graph, Map<EditPart, Object> partsToGraph) {
 		Point offset = getOrigin(parent);
-		IFigure f;
-		while (children.hasNext()) {
-			f = (IFigure) children.next();
-			Rectangle bounds = (Rectangle) getConstraint(f);
-			if (bounds == null)
-				continue;
-
-			if (bounds.width == -1 || bounds.height == -1) {
-				Dimension preferredSize = f.getPreferredSize(bounds.width,
-						bounds.height);
-				bounds = bounds.getCopy();
-				if (bounds.width == -1)
-					bounds.width = preferredSize.width;
-				if (bounds.height == -1)
-					bounds.height = preferredSize.height;
+		for (Object obj : diagram.getChildren()) {
+			if (obj instanceof InteractionNodeEditPart) {
+				InteractionNodeEditPart part = (InteractionNodeEditPart) obj;
+				Rectangle bounds = (Rectangle) getConstraint(part.getFigure());
+				if (bounds == null)
+					continue;
+	
+				if (bounds.width == -1 || bounds.height == -1) {
+					Dimension preferredSize = part.getFigure().getPreferredSize(bounds.width,
+							bounds.height);
+					bounds = bounds.getCopy();
+					if (bounds.width == -1)
+						bounds.width = preferredSize.width;
+					if (bounds.height == -1)
+						bounds.height = preferredSize.height;
+				} else if (partsToGraph.containsKey(part)) {
+					Node node = (Node) partsToGraph.get(part);
+					bounds.x = node.x;
+					bounds.y = node.y;
+					
+//					for (Object connection : part.getSourceConnections()) {
+//						Edge e = (Edge) partsToGraph.get(connection);
+//						NodeList nodes = e.vNodes;
+//						InteractionConnectionFigure conn = (InteractionConnectionFigure) ((InteractionEdgeEditPart) connection).getFigure();
+//						if (nodes != null) {
+//							List bends = new ArrayList();
+//							for (int i = 0; i < nodes.size(); i++) {
+//								Node vn = nodes.getNode(i);
+//								int x = vn.x;
+//								int y = vn.y;
+//								if (e.isFeedback()) {
+//									bends.add(new AbsoluteBendpoint(x, y + vn.height));
+//									bends.add(new AbsoluteBendpoint(x, y));
+//								} else {
+//									bends.add(new AbsoluteBendpoint(x, y));
+//									bends.add(new AbsoluteBendpoint(x, y + vn.height));
+//								}
+//							}
+//							conn.setRoutingConstraint(bends);
+//						} else {
+//							conn.setRoutingConstraint(Collections.EMPTY_LIST);
+//						}
+//					}
+				}
+				
+				bounds = bounds.getTranslated(offset);
+				part.getFigure().setBounds(bounds);
 			}
-			
-			bounds.x = 5;
-			bounds.y = 10;
-			
-			bounds = bounds.getTranslated(offset);
-			f.setBounds(bounds);
 		}
 	}
 

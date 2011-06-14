@@ -7,12 +7,20 @@
  */
 package ac.soton.eventb.statemachines.view.model;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.eventb.emf.core.machine.Event;
+
 /**
  * @author vitaly
  *
  */
 public class InteractionEdge {
 
+	private static final String DEFAULT_NAME = "";
+	private static final Object NAME_SEPARATOR = ", ";
+	
 	private InteractionNode source;
 	private InteractionNode target;
 	private String name;
@@ -20,11 +28,12 @@ public class InteractionEdge {
 	/**
 	 * @param source
 	 * @param target
+	 * @param events
 	 */
-	public InteractionEdge(String name, InteractionNode source, InteractionNode target) {
-		setName(name);
+	public InteractionEdge(InteractionNode source, InteractionNode target, List<Event> events) {
 		setSource(source);
 		setTarget(target);
+		setName(events);
 	}
 
 	/**
@@ -70,6 +79,22 @@ public class InteractionEdge {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @param events
+	 */
+	private void setName(List<Event> events) {
+		StringBuilder result = new StringBuilder(DEFAULT_NAME);
+		if (events.isEmpty() == false) {
+			Iterator<Event> it = events.iterator();
+			result.append(it.next().getName());
+			while (it.hasNext()) {
+				result.append(NAME_SEPARATOR);
+				result.append(it.next().getName());
+			}
+		}
+		name = result.toString();
 	}
 
 	/**

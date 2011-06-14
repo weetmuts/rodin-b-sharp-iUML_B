@@ -9,15 +9,14 @@ package ac.soton.eventb.statemachines.view.editpart;
 
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.ConnectionLayer;
-import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
-import ac.soton.eventb.statemachines.view.layout.InteractionFreeformLayout;
 import ac.soton.eventb.statemachines.view.layout.InteractionGraphLayout;
 import ac.soton.eventb.statemachines.view.model.InteractionDiagram;
 import ac.soton.eventb.statemachines.view.model.InteractionNode;
@@ -56,6 +55,6 @@ public class InteractionDiagramEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected void registerVisuals() {
 		ConnectionLayer connectionLayer = (ConnectionLayer) getLayer(LayerConstants.CONNECTION_LAYER);
-		connectionLayer.setConnectionRouter(ConnectionRouter.NULL);
+		connectionLayer.setConnectionRouter(new BendpointConnectionRouter());
 	}
 }

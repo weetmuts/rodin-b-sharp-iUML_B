@@ -9,6 +9,7 @@ package ac.soton.eventb.statemachines.view.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
@@ -30,6 +31,8 @@ import ac.soton.eventb.statemachines.Transition;
  */
 public class InteractionDiagram {
 
+	private static final Object INIT_EVENT_NAME = "INITIALISATION";
+	
 	private ArrayList<InteractionNode> nodes = new ArrayList<InteractionNode>();
 	private ArrayList<InteractionEdge> edges = new ArrayList<InteractionEdge>();
 
@@ -86,9 +89,9 @@ public class InteractionDiagram {
 		while (remainingNodes.size() > 1) {
 			InteractionNode node1 = remainingNodes.pop();
 			for (InteractionNode node2 : remainingNodes) {
-				List<String> commons = checkForInteraction(node1, node2);
+				List<Event> commons = checkForInteraction(node1, node2);
 				if (commons.isEmpty() == false)
-					edges.add(new InteractionEdge(commons.toString(), node1, node2));
+					edges.add(new InteractionEdge(node1, node2, commons));
 			}
 		}
 	}
@@ -105,7 +108,7 @@ public class InteractionDiagram {
 	 * @param node2
 	 * @return
 	 */
-	private List<String> checkForInteraction(InteractionNode node1, InteractionNode node2) {
+	private List<Event> checkForInteraction(InteractionNode node1, InteractionNode node2) {
 		EList<EObject> transitions1 = node1.getElement().getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
 		EList<EObject> transitions2 = node2.getElement().getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
 		
@@ -124,11 +127,12 @@ public class InteractionDiagram {
 		// intersection of both
 		first.retainAll(second);
 		
-		List<String> names = new ArrayList<String>();
-		for (Event event : first)
-//			if ("INITIALISATION".equals(event.getName()) == false)
-				names.add(event.getName());
-		return names;
+		// remove INITIALISATION event from result
+		for (Iterator<Event> it = first.iterator(); it.hasNext(); )
+			if (INIT_EVENT_NAME.equals(it.next().getName()))
+				it.remove();
+		
+		return new ArrayList<Event>(first);
 	}
 
 }

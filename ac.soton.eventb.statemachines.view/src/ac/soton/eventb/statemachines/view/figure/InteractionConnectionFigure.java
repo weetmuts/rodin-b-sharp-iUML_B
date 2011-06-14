@@ -12,6 +12,7 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.MidpointLocator;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.swt.SWT;
 
 /**
@@ -28,8 +29,21 @@ public class InteractionConnectionFigure extends PolylineConnection {
 	public InteractionConnectionFigure(String name) {
 		super();
 		
-		MidpointLocator relationshipLocator = new MidpointLocator(this, 0);
+		// standard midpoint locator for connection label,
+		// but overridden to return first point from the middle of a list of bend points if there are more than two points in connection
+		MidpointLocator relationshipLocator = new MidpointLocator(this, 0) {
+
+			@Override
+			protected int getIndex() {
+				PointList points = getConnection().getPoints();
+				if (points != null) {
+					return points.size() / 2 - 1;
+				}
+				return super.getIndex();
+			}
+		};
 		relationshipLocator.setRelativePosition(PositionConstants.NORTH_EAST);
+		relationshipLocator.setGap(2);
 		label = new Label(name);
 		add(label, relationshipLocator);
 	}
