@@ -7,8 +7,12 @@
  */
 package ac.soton.eventb.statemachines.view;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.editparts.FreeformGraphicalRootEditPart;
@@ -19,6 +23,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
+import org.eventb.core.IMachineRoot;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.statemachines.AbstractState;
@@ -88,10 +93,23 @@ public class InteractionView extends ViewPart implements ISelectionListener {
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
 			Object first = ((IStructuredSelection) selection).getFirstElement();
+			
+			// navigator elements
+			if (first instanceof IMachineRoot) {
+				IFile file = ((IMachineRoot) first).getResource();
+				URI uri = URI.createPlatformResourceURI(file.getFullPath().toOSString(), true);
+				ResourceSet rs = new ResourceSetImpl();
+				Resource res = rs.getResource(uri, true);
+				if (res.isLoaded() && res.getContents().isEmpty() == false)
+					first = res.getContents().get(0);
+			} else if (first instanceof StatemachinesDomainNavigatorItem) {
+				first = ((StatemachinesDomainNavigatorItem) first).getEObject();
+			}
+			
+			// model elements
 			if (first instanceof Machine) {
 				getGraphicalViewer().setContents(new InteractionDiagram((Machine) first));
-			}
-			if (first instanceof AbstractState) {
+			} else if (first instanceof AbstractState) {
 				getGraphicalViewer().setContents(new InteractionDiagram((AbstractState) first));
 			}
 		}
