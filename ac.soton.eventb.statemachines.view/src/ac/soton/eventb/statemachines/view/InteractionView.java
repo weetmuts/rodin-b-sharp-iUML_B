@@ -31,6 +31,15 @@ import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesDomainNaviga
 import ac.soton.eventb.statemachines.view.factory.InteractionViewEditPartFactory;
 import ac.soton.eventb.statemachines.view.model.InteractionDiagram;
 
+/**
+ * Interaction view.
+ * Listens for selection in a workbench page and displays
+ * interaction graph in a viewer for acceptable selection
+ * input (either Machine or AbstractState).
+ * 
+ * @author vitaly
+ *
+ */
 public class InteractionView extends ViewPart implements ISelectionListener {
 
 	private GraphicalViewer graphicalViewer;
@@ -47,7 +56,6 @@ public class InteractionView extends ViewPart implements ISelectionListener {
 		getGraphicalViewer().createControl(parent);
 		getGraphicalViewer().setRootEditPart(new FreeformGraphicalRootEditPart());
 		getGraphicalViewer().setEditPartFactory(new InteractionViewEditPartFactory());
-//		getGraphicalViewer().setContents(new Digraph1Graph());
 		getGraphicalViewer().getControl().setBackground(ColorConstants.listBackground);
 		getViewSite().getPage().addSelectionListener(this);
 	}

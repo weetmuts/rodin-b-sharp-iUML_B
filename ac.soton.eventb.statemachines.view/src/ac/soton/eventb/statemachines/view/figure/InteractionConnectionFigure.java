@@ -16,6 +16,9 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.swt.SWT;
 
 /**
+ * Interaction view connection figure.
+ * Draws polyline connection with a tag label attached to a midpoint.
+ * 
  * @author vitaly
  *
  */
@@ -24,7 +27,9 @@ public class InteractionConnectionFigure extends PolylineConnection {
 	private Label label;
 
 	/**
+	 * Constructs interaction connection figure.
 	 * 
+	 * @param name connection label
 	 */
 	public InteractionConnectionFigure(String name) {
 		super();
@@ -55,6 +60,18 @@ public class InteractionConnectionFigure extends PolylineConnection {
 	protected void outlineShape(Graphics g) {
 		g.setAntialias(SWT.ON);
 		super.outlineShape(g);
+	}
+
+	/* NOTE:
+	 * Overridden to prevent revalidation of connection and consequently the whole layout as constraints are set.
+	 * Only sets constraints if they are different from current constraints.
+	 */
+	@Override
+	public void setRoutingConstraint(Object cons) {
+		Object current = getRoutingConstraint();
+		boolean modified = cons != null && cons.equals(current) == false;
+		if (modified)
+			super.setRoutingConstraint(cons);
 	}
 
 }

@@ -13,6 +13,8 @@ import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 
 /**
+ * XYlayout  edit policy for interaction view.
+ * 
  * @author vitaly
  *
  */

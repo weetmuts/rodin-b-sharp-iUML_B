@@ -26,6 +26,8 @@ import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 
 /**
+ * Interaction view domain model class representing diagram root.
+ * Contains edges and nodes, and 
  * @author vitaly
  *
  */
@@ -53,6 +55,8 @@ public class InteractionDiagram {
 	}
 
 	/**
+	 * Creates nodes from machine.
+	 * 
 	 * @param machine
 	 */
 	private void createNodes(Machine machine) {
@@ -64,6 +68,7 @@ public class InteractionDiagram {
 	}
 
 	/**
+	 * Creates nodes from abstract state machine.
 	 * @param state
 	 */
 	private void createNodes(AbstractState state) {
@@ -73,6 +78,8 @@ public class InteractionDiagram {
 	}
 
 	/**
+	 * Returns a list of nodes.
+	 * 
 	 * @return
 	 */
 	public ArrayList<InteractionNode> getNodes() {
@@ -80,7 +87,7 @@ public class InteractionDiagram {
 	}
 
 	/**
-	 * 
+	 * Creates edges for existing nodes.
 	 */
 	private void createEdges() {
 		edges.clear();
@@ -89,7 +96,7 @@ public class InteractionDiagram {
 		while (remainingNodes.size() > 1) {
 			InteractionNode node1 = remainingNodes.pop();
 			for (InteractionNode node2 : remainingNodes) {
-				List<Event> commons = checkForInteraction(node1, node2);
+				List<Event> commons = getCommonEvents(node1, node2);
 				if (commons.isEmpty() == false)
 					edges.add(new InteractionEdge(node1, node2, commons));
 			}
@@ -97,6 +104,8 @@ public class InteractionDiagram {
 	}
 
 	/**
+	 * Returns a list of edges.
+	 * 
 	 * @return
 	 */
 	public ArrayList<InteractionEdge> getEdges() {
@@ -104,11 +113,16 @@ public class InteractionDiagram {
 	}
 
 	/**
+	 * Returns a list of synchronised events that are common for two nodes.
+	 * A common (synchronised) event is an event, elaborated by transitions
+	 * that belong to parallel state machines.
+	 * The result set of events does not include INITIALISATION event.
+	 * 
 	 * @param node1
 	 * @param node2
 	 * @return
 	 */
-	private List<Event> checkForInteraction(InteractionNode node1, InteractionNode node2) {
+	private List<Event> getCommonEvents(InteractionNode node1, InteractionNode node2) {
 		EList<EObject> transitions1 = node1.getElement().getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
 		EList<EObject> transitions2 = node2.getElement().getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
 		

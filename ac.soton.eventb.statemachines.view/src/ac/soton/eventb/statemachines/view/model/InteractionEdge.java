@@ -13,6 +13,8 @@ import java.util.List;
 import org.eventb.emf.core.machine.Event;
 
 /**
+ * Interaction view domain model class for an edge.
+ * 
  * @author vitaly
  *
  */
@@ -82,6 +84,8 @@ public class InteractionEdge {
 	}
 
 	/**
+	 * Sets the name of edge from a list of synchronised events.
+	 * 
 	 * @param events
 	 */
 	private void setName(List<Event> events) {

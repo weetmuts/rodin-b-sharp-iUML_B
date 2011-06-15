@@ -29,6 +29,8 @@ import ac.soton.eventb.statemachines.view.model.InteractionEdge;
 import ac.soton.eventb.statemachines.view.model.InteractionNode;
 
 /**
+ * Interaction view node edit part.
+ * 
  * @author vitaly
  *
  */
@@ -42,9 +44,6 @@ public class InteractionNodeEditPart extends AbstractGraphicalEditPart implement
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 */
 	@Override
 	protected IFigure createFigure() {
 		InteractionNode model = (InteractionNode) getModel();
@@ -56,9 +55,6 @@ public class InteractionNodeEditPart extends AbstractGraphicalEditPart implement
 		return nodeFigure;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-	 */
 	@Override
 	protected void createEditPolicies() {
 		/* not implemented */
@@ -74,35 +70,23 @@ public class InteractionNodeEditPart extends AbstractGraphicalEditPart implement
 		diagram.setLayoutConstraint(this, nodeFigure, constraint);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef.ConnectionEditPart)
-	 */
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
 		return sourceAnchor;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef.Request)
-	 */
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
 		return sourceAnchor;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef.ConnectionEditPart)
-	 */
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(
 			ConnectionEditPart connection) {
 		return targetAnchor;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef.Request)
-	 */
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
 		return targetAnchor;

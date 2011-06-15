@@ -7,7 +7,7 @@
             class="ac.soton.eventb.statemachines.view.InteractionView"
             icon="icons/Interaction.gif"
             id="ac.soton.eventb.statemachines.view.interaction"
-            name="Statemachines Interaction View"
+            name="%view.name"
             restorable="true">
       </view>
    </extension>

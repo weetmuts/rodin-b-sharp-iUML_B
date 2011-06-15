@@ -12,6 +12,8 @@ import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.requests.GroupRequest;
 
 /**
+ * Connection edit policy for interaction view.
+ * 
  * @author vitaly
  *
  */

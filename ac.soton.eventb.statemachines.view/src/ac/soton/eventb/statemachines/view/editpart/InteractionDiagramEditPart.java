@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 University of Southampton.
+ * Copyright (c) 2011 University of Southampton.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,6 +23,8 @@ import ac.soton.eventb.statemachines.view.model.InteractionNode;
 import ac.soton.eventb.statemachines.view.policy.InteractionViewXYLayoutEditPolicy;
 
 /**
+ * Interaction view diagram edit part.
+ * 
  * @author vitaly
  *
  */
@@ -34,7 +36,7 @@ public class InteractionDiagramEditPart extends AbstractGraphicalEditPart {
 	@Override
 	protected IFigure createFigure() {
 		FreeformLayer freeformLayer = new FreeformLayer();
-		freeformLayer.setLayoutManager(new InteractionGraphLayout(this));//new InteractionFreeformLayout());
+		freeformLayer.setLayoutManager(new InteractionGraphLayout(this));
 		return freeformLayer;
 	}
 

@@ -19,11 +19,15 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Display;
 
 /**
+ * Interaction node figure.
+ * Draws rectangular interaction node with centered name label.
+ * 
  * @author vitaly
  *
  */
 public class InteractionNodeFigure extends Figure {
 
+	@SuppressWarnings("unused")
 	private static final Color NODE_BACK = new Color(null, 240, 240, 255);
 	private static final Color NODE_BACK2 = new Color(null, 196, 204, 255);
 	private static final int STANDARD_LABEL_WIDTH = 85;
@@ -32,7 +36,9 @@ public class InteractionNodeFigure extends Figure {
 	private Label label;
 
 	/**
+	 * Constructs interaction node figure.
 	 * 
+	 * @param name node name
 	 */
 	public InteractionNodeFigure(String name) {
 		int width = getLabelWidth(name);
@@ -48,7 +54,7 @@ public class InteractionNodeFigure extends Figure {
 
 	/**
 	 * @param text
-	 * @return
+	 * @return width of provided label with a current font
 	 */
 	private int getLabelWidth(String text) {
 		int standardLabelWidth = STANDARD_LABEL_WIDTH;
@@ -62,14 +68,14 @@ public class InteractionNodeFigure extends Figure {
 	}
 
 	/**
-	 * @return
+	 * @return node rectangle figure
 	 */
 	public RectangleFigure getRectangleFigure() {
 		return rectangleFigure;
 	}
 
 	/**
-	 * @return
+	 * @return node label
 	 */
 	public Label getLabel() {
 		return label;

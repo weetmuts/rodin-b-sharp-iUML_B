@@ -13,6 +13,8 @@ import java.util.List;
 import ac.soton.eventb.statemachines.AbstractStatemachine;
 
 /**
+ * Interaction view domain model class for a node.
+ * 
  * @author vitaly
  *
  */

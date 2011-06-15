@@ -18,6 +18,8 @@ import ac.soton.eventb.statemachines.view.model.InteractionEdge;
 import ac.soton.eventb.statemachines.view.model.InteractionNode;
 
 /**
+ * Edit part factory for interaction view parts.
+ * 
  * @author vitaly
  *
  */

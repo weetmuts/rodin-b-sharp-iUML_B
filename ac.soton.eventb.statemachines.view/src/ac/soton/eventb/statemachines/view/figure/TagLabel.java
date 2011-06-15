@@ -15,15 +15,18 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.SWT;
 
 /**
+ * Tag label figure.
+ * Draws label inside an opaque tag pentagon.
+ * 
  * @author vitaly
  *
  */
 public class TagLabel extends Label {
 	
-	static final Border BORDER = new MarginBorder(2, 8, 2, 2);
+	static final Border BORDER = new MarginBorder(2, 8, 2, 3);
 
 	/**
-	 * @param name
+	 * @param name label name
 	 */
 	public TagLabel(String name) {
 		setText(name);

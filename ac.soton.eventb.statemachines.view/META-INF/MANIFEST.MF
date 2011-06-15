@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Statemachines Interaction View Plug-in
+Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: ac.soton.eventb.statemachines.view;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: ac.soton.eventb.statemachines.view.InteractionViewPlugin
-Bundle-Vendor: University of Southampton
+Bundle-Vendor: %Bundle-Vendor
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gef;bundle-version="3.6.1",

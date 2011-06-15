@@ -33,6 +33,10 @@ import ac.soton.eventb.statemachines.view.editpart.InteractionNodeEditPart;
 import ac.soton.eventb.statemachines.view.figure.InteractionConnectionFigure;
 
 /**
+ * Custom interaction graph layout.
+ * Uses DirectedGraphLayout and DirectedGraph instance to lay out the diagram elements
+ * of a freeform layout.
+ * 
  * @author vitaly
  *
  */
@@ -69,6 +73,8 @@ public class InteractionGraphLayout extends FreeformLayout {
 	}
 
 	/**
+	 * Adds nodes from diagram to graph.
+	 * 
 	 * @param graph
 	 * @param partsToGraph
 	 */
@@ -87,6 +93,8 @@ public class InteractionGraphLayout extends FreeformLayout {
 	}
 
 	/**
+	 * Adds edges from diagram to graph.
+	 * 
 	 * @param graph
 	 * @param partsToGraph
 	 */
@@ -110,7 +118,9 @@ public class InteractionGraphLayout extends FreeformLayout {
 	}
 
 	/**
-	 * @param parent 
+	 * Applies graph results to diagram children figures.
+	 * 
+	 * @param parent parent figure
 	 * @param graph
 	 * @param partsToGraph
 	 */
@@ -133,33 +143,35 @@ public class InteractionGraphLayout extends FreeformLayout {
 					if (bounds.height == -1)
 						bounds.height = preferredSize.height;
 				} else if (partsToGraph.containsKey(part)) {
+					// set bounds for node
 					Node node = (Node) partsToGraph.get(part);
 					bounds.x = node.x;
 					bounds.y = node.y;
 					
-//					for (Object connection : part.getSourceConnections()) {
-//						Edge e = (Edge) partsToGraph.get(connection);
-//						NodeList nodes = e.vNodes;
-//						InteractionConnectionFigure conn = (InteractionConnectionFigure) ((InteractionEdgeEditPart) connection).getFigure();
-//						if (nodes != null) {
-//							List bends = new ArrayList();
-//							for (int i = 0; i < nodes.size(); i++) {
-//								Node vn = nodes.getNode(i);
-//								int x = vn.x;
-//								int y = vn.y;
-//								if (e.isFeedback()) {
-//									bends.add(new AbsoluteBendpoint(x, y + vn.height));
-//									bends.add(new AbsoluteBendpoint(x, y));
-//								} else {
-//									bends.add(new AbsoluteBendpoint(x, y));
-//									bends.add(new AbsoluteBendpoint(x, y + vn.height));
-//								}
-//							}
-//							conn.setRoutingConstraint(bends);
-//						} else {
-//							conn.setRoutingConstraint(Collections.EMPTY_LIST);
-//						}
-//					}
+					// set constraints for connections
+					for (Object connection : part.getSourceConnections()) {
+						Edge e = (Edge) partsToGraph.get(connection);
+						NodeList nodes = e.vNodes;
+						InteractionConnectionFigure conn = (InteractionConnectionFigure) ((InteractionEdgeEditPart) connection).getFigure();
+						if (nodes != null) {
+							List bends = new ArrayList();
+							for (int i = 0; i < nodes.size(); i++) {
+								Node vn = nodes.getNode(i);
+								int x = vn.x;
+								int y = vn.y;
+								if (e.isFeedback()) {
+									bends.add(new AbsoluteBendpoint(x, y + vn.height));
+									bends.add(new AbsoluteBendpoint(x, y));
+								} else {
+									bends.add(new AbsoluteBendpoint(x, y));
+									bends.add(new AbsoluteBendpoint(x, y + vn.height));
+								}
+							}
+							conn.setRoutingConstraint(bends);
+						} else {
+							conn.setRoutingConstraint(Collections.EMPTY_LIST);
+						}
+					}
 				}
 				
 				bounds = bounds.getTranslated(offset);

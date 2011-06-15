@@ -17,6 +17,8 @@ import ac.soton.eventb.statemachines.view.model.InteractionEdge;
 import ac.soton.eventb.statemachines.view.policy.InteractionConnectionEditPolicy;
 
 /**
+ * Interaction view edge edit part.
+ * 
  * @author vitaly
  *
  */
