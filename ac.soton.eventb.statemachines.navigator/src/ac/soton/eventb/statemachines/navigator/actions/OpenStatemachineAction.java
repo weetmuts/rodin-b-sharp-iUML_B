@@ -42,8 +42,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.navigator.ICommonActionExtensionSite;
-import org.eventb.emf.core.machine.Machine;
 
+import ac.soton.eventb.statemachines.AbstractState;
 import ac.soton.eventb.statemachines.DiagramRoot;
 import ac.soton.eventb.statemachines.diagram.StatemachinesEditorUtil;
 import ac.soton.eventb.statemachines.diagram.edit.parts.DiagramRootEditPart;
@@ -122,10 +122,12 @@ public class OpenStatemachineAction extends Action implements
 			monitor.beginTask("Opening statemachine diagram", IProgressMonitor.UNKNOWN);
 			
 			// find topmost container statemachine
-			EObject root = statemachine;
-			for (; false == root.eContainer() instanceof Machine; root = root.eContainer());
-			IFile file = WorkspaceSynchronizer.getFile(root.eResource());
-			String diagramName = StatemachinesEditorUtil.getDiagramFileName(file.getFullPath(),(DiagramRoot) root);
+			EObject rootStatemachine = statemachine;
+			while (rootStatemachine.eContainer() instanceof AbstractState
+					&& rootStatemachine.eContainer().eContainer() instanceof DiagramRoot)
+				rootStatemachine = rootStatemachine.eContainer().eContainer();
+			IFile file = WorkspaceSynchronizer.getFile(rootStatemachine.eResource());
+			String diagramName = StatemachinesEditorUtil.getDiagramFileName(file.getFullPath(),(DiagramRoot) rootStatemachine);
 			IFile diagramFile = file.getProject().getFile(new Path(diagramName));
 			
 			try {
@@ -136,7 +138,7 @@ public class OpenStatemachineAction extends Action implements
 				if (diagramFile.exists() == false) {
 					Resource res = editingDomain.getResourceSet().createResource(fileURI);
 					// add top-level diagram first to let it be the default diagram of a diagram file
-					intializeNewDiagram(res, root);
+					intializeNewDiagram(res, rootStatemachine);
 					res.save(StatemachinesDiagramEditorUtil.getSaveOptions());
 					StatemachinesDiagramEditorUtil.setCharset(diagramFile);
 				}
