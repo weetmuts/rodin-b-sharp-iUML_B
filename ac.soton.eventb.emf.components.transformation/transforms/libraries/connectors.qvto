@@ -1,0 +1,55 @@
+import util;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype components uses components('http://soton.ac.uk/models/eventb/components');
+	
+library connectors;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Connectors
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*
+ * Transforms an abstract connector to a variable.
+ */
+mapping components::AbstractConnector::abstractConnector2variable(in generatorID : String) : eventb::machine::Variable
+	when {self.oclIsTypeOf(components::Connector)} {
+	name := self.getName();
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms a connector to a type invariant.
+ */
+mapping components::Connector::connector2typeInvariant(in generatorID : String) : eventb::machine::Invariant {
+	name := self.name + ".type";
+	predicate := self.name+" "+ B_IN+" "+ B_NAT + B_PFUN + self.type;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms a connector to a zero invariant.
+ * (This invariant 0 : dom(connector) is needed by the prover)
+ */
+mapping components::Connector::connector2zeroInvariant(in generatorID : String) : eventb::machine::Invariant {
+	name := self.name + ".zero";
+	predicate := "0 "+ B_IN+" dom"+B_LPAR+self.name+B_RPAR;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms a connector to its initialisation action.
+ * Skips transformation if event is extended and contains the action already.
+ */
+mapping components::Connector::connector2initAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+when { not event.containsAction(self.getName() + ".init") } {
+	name := self.getName() + ".init";
+	action := self.getName() +" "+ B_BEQ +" "+ self.initialValue;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}

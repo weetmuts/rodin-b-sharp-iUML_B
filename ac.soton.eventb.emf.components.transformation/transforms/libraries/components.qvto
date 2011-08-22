@@ -1,0 +1,81 @@
+import connectors;
+import operations;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype components uses components('http://soton.ac.uk/models/eventb/components');
+
+library components;
+
+/*
+ * Transforms an abstract component to variables.
+ */
+mapping components::AbstractComponent::abstractComponent2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := (
+			self.connectors[components::AbstractConnector].map abstractConnector2variable(generatorID)->asSequence() )->union(
+			self.operations[components::AbstractComponentOperation].map abstractComponentOperation2variables(generatorID) )->union(			
+			//deal with variables from nested components by recursion
+			self.components.map abstractComponent2variables(generatorID)->flatten() 
+			);
+	}
+}
+
+/*
+ * Transforms an abstract component to type invariants.
+ */
+mapping components::AbstractComponent::abstractComponent2typeInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := (
+			self.connectors[components::Connector].map connector2typeInvariant(generatorID)->asSequence() )->union(
+			self.connectors[components::Connector].map connector2zeroInvariant(generatorID)->asSequence() )->union(
+			self.operations[components::AbstractComponentOperation].map abstractComponentOperation2typeInvariants(generatorID) )->union(
+			//deal with connectors in nested components by recursion
+			self.components.map abstractComponent2typeInvariants(generatorID)->flatten() 
+			);
+	}
+}
+
+
+/*
+ * Transforms an abstract component to an Initialisation Event augmented as required with Actions.
+ *
+ */
+mapping components::AbstractComponent::abstractComponent2initActions(in initEvent : eventb::machine::Event, in generatorID : String) : Sequence(eventb::machine::Action) {
+	init {
+		result := (
+			self.connectors[components::Connector].map connector2initAction(initEvent, generatorID)->asSequence()	)->union(
+			self.operations[components::AbstractComponentOperation].map abstractComponentOperation2initActions(initEvent, generatorID)	)->union(
+			//deal with connectors in nested components by recursion
+			self.components.map abstractComponent2initActions(initEvent, generatorID)->flatten() 
+			);
+	}
+}
+
+/*
+ * Transforms an abstract component to an Initialisation Event augmented as required with Actions.
+ *
+ */
+mapping components::AbstractComponent::abstractComponent2timerGuards(in channelUnion : String, in event : eventb::machine::Event, in generatorID : String) : Sequence(eventb::machine::Guard) {
+	init {
+		result := (
+			self.operations[components::AbstractComponentOperation].map abstractComponentOperation2timerGuard(channelUnion, event, generatorID)	)->union(
+			//deal with connectors in nested components by recursion
+			self.components.map abstractComponent2timerGuards(channelUnion, event, generatorID)->flatten() 
+			);
+	}
+}
+
+/*
+ * Transforms an abstract component to an Initialisation Event augmented as required with Actions.
+ *
+ */
+mapping components::AbstractComponent::abstractComponent2timerActions(in event : eventb::machine::Event, in generatorID : String) : Sequence(eventb::machine::Action) {
+	init {
+		result := (
+			self.operations[components::AbstractComponentOperation].map abstractComponentOperation2timerAction(event, generatorID)	)->union(
+			//deal with connectors in nested components by recursion
+			self.components.map abstractComponent2timerActions(event, generatorID)->flatten() 
+			);
+	}
+}
+/**/

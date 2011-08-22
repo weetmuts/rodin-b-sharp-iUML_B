@@ -1,0 +1,65 @@
+import eventBSymbols;
+
+library strings;
+
+
+/**
+placeholders that will be substituted for element names etc.
+**/
+property PH_OPN : String = "<%operation%>";
+
+property PH_CON : String = "<%connector%>";
+property PH_CON_UNION : String = "<%connector_union%>";	// union of all connectors
+
+/**
+properties for creating operation synchronisation variable
+**/
+property OS_NAME : String = PH_OPN+"_synch";
+property OS_TYPE_PRED : String = OS_NAME+" "+B_IN+" "+B_BOOL;
+property OS_FALSE_PRED : String = OS_NAME+" "+B_EQ+" "+B_FALSE;
+property OS_TRUE_PRED : String = OS_NAME+" "+B_EQ+" "+B_FALSE;
+property OS_FALSE_EXPR : String = OS_NAME+" "+B_BEQ+" "+B_FALSE;
+property OS_TRUE_EXPR : String = OS_NAME+" "+B_BEQ+" "+B_TRUE;
+
+/**
+properties for creating operation wakeup variable
+**/
+property OW_NAME : String = PH_OPN+"_wakeup";
+property OW_TYPE_PRED : String = OW_NAME+" "+B_IN+" "+B_NAT;
+property OW_INIT_EXPR : String = OW_NAME+" "+B_BEQ+" 0";
+
+/**
+properties for creating the current time variable
+**/
+property CT_NAME : String = "current_time";
+property CT_TYPE_PRED : String = CT_NAME+" "+B_IN+" "+B_NAT;
+property CT_INIT_EXPR : String = CT_NAME+" "+B_BEQ+" 0";
+
+/**
+properties for creating the synch times queue variable
+**/
+property ST_NAME : String = "synch_times";
+property ST_TYPE_PRED : String = ST_NAME+" "+B_SUB+" "+B_NAT;
+property ST_INIT_EXPR : String = ST_NAME+" "+B_BEQ+" "+B_EMPTY;
+
+/**
+properties for creating the Timer clock event
+**/
+property TE_NAME : String = "Timer";
+property TE_PARAM_NAME : String = "pnextsynch";
+property TE_GD1_NAME : String = "grd1";
+property TE_GD1_PRED : String = ST_NAME+" "+B_NEQ+" "+B_EMPTY;									//synch_times ­ {}
+property TE_GD2_NAME : String = "grd2";
+property TE_GD2_PRED : String = TE_PARAM_NAME+" "+B_EQ+" min"+B_LPAR+ST_NAME+B_RPAR;			//pnextsynch = min(synch_times)
+property TE_GD3_NAME : String = "grd3_"+PH_OPN;		//for each operation (subs operation name and union of all connectors)
+property TE_GD3A_PRED : String = OS_TRUE_PRED;	//<%operation%>_synch = TRUE 
+property TE_GD3B_PRED : String = " "+B_LOR+" "+					//or
+								B_LPAR+CT_NAME+" "+B_NEQ+" "+OW_NAME+" "+B_LAND+" "+		//(current_time ­ <%operation%>_wakeup &
+								CT_NAME+" "+B_NIN+" dom"+B_LPAR+PH_CON_UNION+B_RPAR+B_RPAR; //current_time /: dom(<%connector_union%>)
+
+property TE_AC1_NAME : String = "act1";
+property TE_AC1_EXPR : String = CT_NAME+" "+B_BEQ+" "+TE_PARAM_NAME;
+property TE_AC2_NAME : String = "act2";
+property TE_AC2_EXPR : String = ST_NAME+" "+B_BEQ+" "+ST_NAME+B_SSTN+B_LBRC+TE_PARAM_NAME+B_RBRC;
+property TE_AC3_NAME : String = "act3."+OS_NAME;		//for each method operation (subs operation name)
+property TE_AC3_EXPR : String = OS_FALSE_EXPR;

@@ -1,0 +1,149 @@
+import util;
+import strings;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype components uses components('http://soton.ac.uk/models/eventb/components');
+	
+library operations;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Operations
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms an abstract component operation to a sequence of variables.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := (
+			self[components::AbstractComponentOperation].map abstractComponentOperation2synchVariable(generatorID)->asSequence() )->union(
+			self[components::AbstractComponentOperation].map abstractComponentOperation2wakeupVariable(generatorID)->asSequence() //)->union(
+			);
+	}
+}
+
+/*
+ * Transforms an abstract component operation to a sequence of type invariants.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2typeInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+	init {
+		result := (
+			self[components::AbstractComponentOperation].map abstractComponentOperation2synchTypeInvariant(generatorID)->asSequence() )->union(
+			self[components::AbstractComponentOperation].map abstractComponentOperation2wakeupTypeInvariant(generatorID)->asSequence() //)->union(
+			);
+	}
+}
+
+/*
+ * Transforms an abstract component operation to a sequence of initialisation actions.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2initActions(in event : eventb::machine::Event, in generatorID : String) : Sequence(eventb::machine::Action) {
+	init {
+		result := (
+			self[components::AbstractComponentOperation].map abstractComponentOperation2synchInitAction(event, generatorID)->asSequence() )->union(
+			self[components::AbstractComponentOperation].map abstractComponentOperation2wakeupInitAction(event, generatorID)->asSequence() //)->union(
+			);
+	}
+}
+
+
+//////////////////// Operation Synch Variable //////////////////////
+
+/*
+ * Transforms an abstract operation to a synch variable.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2synchVariable(in generatorID : String) : eventb::machine::Variable
+	{
+	name := OS_NAME.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to a type invariant.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2synchTypeInvariant(in generatorID : String) : eventb::machine::Invariant
+	{
+	name := OS_NAME.replace(PH_OPN,self.label)+".type";
+	predicate := OS_TYPE_PRED.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to its initialisation action.
+ * Skips transformation if event is extended and contains the action already.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2synchInitAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+when { not event.containsAction(OS_NAME.replace(PH_OPN,self.label) + ".init") } {
+	name := OS_NAME.replace(PH_OPN,self.label) + ".init";
+	action := OS_FALSE_EXPR.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+//////////////////// Self Wakeup Variable //////////////////////
+/*
+ * Transforms an abstract operation to a wakeup variable.
+ * skips transformation if operation is not a self wake
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2wakeupVariable(in generatorID : String) : eventb::machine::Variable
+	when {self.oclIsKindOf(components::SelfWake)}{
+	name := OW_NAME.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to a wakeup type invariant.
+ * skips transformation if operation is not a self wake
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2wakeupTypeInvariant(in generatorID : String) : eventb::machine::Invariant
+	when {self.oclIsKindOf(components::SelfWake)}{
+	name := OW_NAME.replace(PH_OPN,self.label)+".type";
+	predicate := OW_TYPE_PRED.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to its wakeup initialisation action.
+ * skips transformation if operation is not a self wake
+ * Skips transformation if event is extended and contains the action already.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2wakeupInitAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+when {self.oclIsKindOf(components::SelfWake) and not event.containsAction(OS_NAME.replace(PH_OPN,self.label) + ".init") } {
+	name := OW_NAME.replace(PH_OPN,self.label) + ".init";
+	action := OW_INIT_EXPR.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+//////////////////// Timer Guards and Actions //////////////////////
+
+/*
+ * Transforms an abstract operation to its timer guard.
+ * Skips transformation if event is extended and contains the guard already.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2timerGuard(in channelUnion : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+when {not event.containsAction(TE_GD3_NAME.replace(PH_OPN,self.label)) } {
+	name := TE_GD3_NAME.replace(PH_OPN,self.label);
+	predicate := TE_GD3A_PRED.replace(PH_OPN,self.label);
+	if not self.oclIsKindOf(components::Method) then 
+		predicate := predicate+ TE_GD3B_PRED.replace(PH_OPN,self.label).replace(PH_CON_UNION,channelUnion)
+	endif;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to its timer action.
+ * Skips transformation if event is extended and contains the action already.
+ */
+mapping components::AbstractComponentOperation::abstractComponentOperation2timerAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+when {not event.containsAction(TE_AC3_NAME.replace(PH_OPN,self.label)) } {
+	name := TE_AC3_NAME.replace(PH_OPN,self.label);
+	action := TE_AC3_EXPR.replace(PH_OPN,self.label);
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
