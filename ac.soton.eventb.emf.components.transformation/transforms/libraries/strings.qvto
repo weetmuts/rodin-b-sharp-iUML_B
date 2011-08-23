@@ -61,5 +61,5 @@ property TE_AC1_NAME : String = "act1";
 property TE_AC1_EXPR : String = CT_NAME+" "+B_BEQ+" "+TE_PARAM_NAME;
 property TE_AC2_NAME : String = "act2";
 property TE_AC2_EXPR : String = ST_NAME+" "+B_BEQ+" "+ST_NAME+B_SSTN+B_LBRC+TE_PARAM_NAME+B_RBRC;
-property TE_AC3_NAME : String = "act3."+OS_NAME;		//for each method operation (subs operation name)
+property TE_AC3_NAME : String = "act3."+PH_OPN;		//for each method operation (subs operation name)
 property TE_AC3_EXPR : String = OS_FALSE_EXPR;
