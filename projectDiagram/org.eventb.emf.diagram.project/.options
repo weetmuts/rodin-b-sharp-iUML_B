@@ -1,0 +1,7 @@
+# Tracing options for the org.eventb.emf.diagram.project plug-in
+
+# Common issues
+org.eventb.emf.diagram.project/debug=false
+
+# Visual IDs
+org.eventb.emf.diagram.project/debug/visualID=false

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="prj_diag"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="prj_diag"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="org.eventb.emf.diagram.project.part.EventbcoreDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/ProjectDiagramFile.gif"
+         extensions="prj_diag"
+         default="true"
+         class="org.eventb.emf.diagram.project.part.EventbcoreDiagramEditor"
+         matchingStrategy="org.eventb.emf.diagram.project.part.EventbcoreMatchingStrategy"
+         contributorClass="org.eventb.emf.diagram.project.part.EventbcoreDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="org.eventb.emf.diagram.project.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ProjectDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="org.eventb.emf.diagram.project.part.EventbcoreCreationWizard"
+  	     id="org.eventb.emf.diagram.project.part.EventbcoreCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.eventb.emf.diagram.project.InitDiagram"
+            nameFilter="*.prj"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eventb.emf.diagram.project.part.EventbcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eventb.emf.diagram.project.InitDiagramAction">
+         </action>
+      </objectContribution>
+      <viewerContribution
+            id="org.eventb.emf.diagram.project.viewerContribution1"
+            targetID="org.eventb.emf.diagram.project.part.EventbcoreDiagramEditorID">
+         <menu
+               id="org.eventb.emf.diagram.project.menu1"
+               label="label">
+         </menu>
+         <action
+               class="org.eventb.emf.diagram.project.Action1"
+               id="org.eventb.emf.diagram.project.action1"
+               label="label">
+         </action>
+      </viewerContribution>
+   </extension>
+	
+
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="org.eventb.emf.diagram.project.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="org.eventb.emf.core.diagram.general"
+            name="%prefpage.org.eventb.emf.core.diagram.general"
+            class="org.eventb.emf.diagram.project.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="org.eventb.emf.core.diagram.appearance"
+            name="%prefpage.org.eventb.emf.core.diagram.appearance"
+            category="org.eventb.emf.core.diagram.general"
+            class="org.eventb.emf.diagram.project.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="org.eventb.emf.core.diagram.connections"
+            name="%prefpage.org.eventb.emf.core.diagram.connections"
+            category="org.eventb.emf.core.diagram.general"
+            class="org.eventb.emf.diagram.project.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="org.eventb.emf.core.diagram.printing"
+            name="%prefpage.org.eventb.emf.core.diagram.printing"
+            category="org.eventb.emf.core.diagram.general"
+            class="org.eventb.emf.diagram.project.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="org.eventb.emf.core.diagram.rulersAndGrid"
+            name="%prefpage.org.eventb.emf.core.diagram.rulersAndGrid"
+            category="org.eventb.emf.core.diagram.general"
+            class="org.eventb.emf.diagram.project.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="org.eventb.emf.diagram.project.providers.EventbcoreViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Eventbcore"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="org.eventb.emf.diagram.project.providers.EventbcoreEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="Eventbcore"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4002,4003"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5002"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value=""/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="org.eventb.emf.diagram.project.providers.EventbcoreIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="org.eventb.emf.diagram.project.providers.EventbcoreParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://emf.eventb.org/models/core">
+         <metamodelType
+               id="org.eventb.emf.diagram.project.Project_1000"
+               name="%metatype.name.Project_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Project"
+               edithelper="org.eventb.emf.diagram.project.edit.helpers.ProjectEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+         <metamodelType
+               id="org.eventb.emf.diagram.project.Machine_2001"
+               name="%metatype.name.Machine_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Machine"
+               edithelper="org.eventb.emf.diagram.project.edit.helpers.MachineEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://emf.eventb.org/models/core/context">
+         <metamodelType
+               id="org.eventb.emf.diagram.project.Context_2002"
+               name="%metatype.name.Context_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Context"
+               edithelper="org.eventb.emf.diagram.project.edit.helpers.ContextEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://emf.eventb.org/models/core/context">
+         <specializationType
+               id="org.eventb.emf.diagram.project.ContextExtends_4001"
+               name="%metatype.name.ContextExtends_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+         <specializationType
+               id="org.eventb.emf.diagram.project.MachineSees_4002"
+               name="%metatype.name.MachineSees_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+         <specializationType
+               id="org.eventb.emf.diagram.project.MachineRefines_4003"
+               name="%metatype.name.MachineRefines_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4003"/>
+         </specializationType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="org.eventb.emf.diagram.project.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="org.eventb.emf.diagram.project.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="org.eventb.emf.diagram.project.TypeContext">
+         <elementType ref="org.eventb.emf.diagram.project.Project_1000"/>
+         <elementType ref="org.eventb.emf.diagram.project.Machine_2001"/>
+         <elementType ref="org.eventb.emf.diagram.project.Context_2002"/>
+         <elementType ref="org.eventb.emf.diagram.project.ContextExtends_4001"/>
+         <elementType ref="org.eventb.emf.diagram.project.MachineSees_4002"/>
+         <elementType ref="org.eventb.emf.diagram.project.MachineRefines_4003"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.eventb.emf.diagram.project.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="org.eventb.emf.diagram.project"
+           properties="isURIEditorInput"
+           class="org.eventb.emf.diagram.project.part.EventbcoreUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="org.eventb.emf.diagram.project.resourceContent"/>
+			<contentExtension pattern="org.eventb.emf.diagram.project.domainResourceContent"/>
+            <contentExtension pattern="org.eventb.emf.diagram.project.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="org.eventb.emf.diagram.project.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="org.eventb.emf.diagram.project.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="org.eventb.emf.diagram.project.navigator.EventbcoreNavigatorContentProvider" 
+            labelProvider="org.eventb.emf.diagram.project.navigator.EventbcoreNavigatorLabelProvider"
+            icon="icons/obj16/ProjectDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="prj_diag"/>
+               </and>
+               <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="org.eventb.emf.diagram.project.navigatorSorter" 
+               class="org.eventb.emf.diagram.project.navigator.EventbcoreNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="prj_diag"/>
+                  </and>
+                  <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="org.eventb.emf.diagram.project.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.eventb.emf.diagram.project.navigator.EventbcoreDomainNavigatorContentProvider" 
+            labelProvider="org.eventb.emf.diagram.project.navigator.EventbcoreDomainNavigatorLabelProvider"
+            icon="icons/obj16/ProjectDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="prj"/>
+               </and>
+               <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="org.eventb.emf.diagram.project.navigatorActionProvider"
+            class="org.eventb.emf.diagram.project.navigator.EventbcoreNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="org.eventb.emf.diagram.project.navigatorLinkHelper"
+            class="org.eventb.emf.diagram.project.navigator.EventbcoreNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="org.eventb.emf.diagram.project.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="org.eventb.emf.diagram.project.navigator.EventbcoreAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="org.eventb.emf.diagram.project.part.EventbcoreDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="org.eventb.emf.diagram.project.updateDiagram"
+         name="%update.diagram.name"/>
+      <command
+            description="Show a project diagram"
+            id="org.eventb.emf.diagram.project.command.showDiagram"
+            name="Show Project Diagram">
+      </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="org.eventb.emf.diagram.project.updateDiagram"
+         contextId="org.eventb.emf.diagram.project.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:fr.systerel.explorer.navigator.view">
+         <command
+               commandId="org.eventb.emf.diagram.project.command.showDiagram"
+               icon="icons/obj16/ProjectDiagramFile.gif"
+               label="Show Diagram"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eventb.emf.diagram.project.commands.ShowDiagramHandler"
+            commandId="org.eventb.emf.diagram.project.command.showDiagram">
+            <activeWhen>
+		        <with variable="selection">
+		            <iterate
+                    ifEmpty="false"
+                    operator="and">
+                  <and>
+                     <instanceof
+                           value="org.eclipse.core.resources.IProject">
+                     </instanceof>
+                     <test
+                           property="org.eclipse.core.resources.projectNature"
+                           value="org.rodinp.core.rodinnature">
+                     </test>
+                  </and>
+		            </iterate>
+              <count
+                    value="1">
+              </count>
+		        </with>
+		    </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <contributionItemProvider
+            checkPluginLoaded="false"
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider">
+         <Priority
+               name="Low">
+         </Priority>
+         <popupContribution
+               class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupPredefinedItem
+                  id="addGroup"
+                  remove="true">
+            </popupPredefinedItem>
+            <popupPredefinedItem
+                  id="navigateGroup"
+                  remove="true">
+            </popupPredefinedItem>
+            <popupPredefinedItem
+                  id="filtersMenu"
+                  remove="true">
+            </popupPredefinedItem>
+            <popupPredefinedItem
+                  id="properties"
+                  remove="true">
+            </popupPredefinedItem>
+            <popupPredefinedItem
+                  id="showPropertiesViewAction"
+                  remove="true">
+            </popupPredefinedItem>
+         </popupContribution>
+      </contributionItemProvider>
+   </extension>
+
+
+
+   <!-- optionally, specify keybindings -->
+</plugin>
