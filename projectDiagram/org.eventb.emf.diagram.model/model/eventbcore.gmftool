@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="corePalette">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Node"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Machine"
+          description="Create new Machine">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/obj16/mch_obj.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/obj16/mch_obj.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Context"
+          description="Create new Context">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/obj16/ctx_obj.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/obj16/ctx_obj.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Link"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="MachineRefines"
+          description="Create new MachineRefines">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/ctool16/refines.gif"
+            bundle="fr.systerel.explorer"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/ctool16/refines.gif"
+            bundle="fr.systerel.explorer"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="MachineSees"
+          description="Create new MachineSees">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UMLBSees.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UMLBSees.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ContextExtends"
+          description="Create new ContextExtends">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UMLBExtends.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UMLBExtends.gif"
+            bundle="ac.soton.umlb.umlbMetamodel.edit"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>
