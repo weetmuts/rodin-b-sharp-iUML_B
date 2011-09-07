@@ -147,3 +147,54 @@ when {not event.containsAction(TE_AC3_NAME.replace(PH_OPN,self.label)) } {
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
+
+//////////////////// Elaboration of Events /////////////////////////
+
+/*
+ * Transforms an operation by elaborating events with guards and actions.
+ */
+mapping components::AbstractComponentOperation::operation2elaboratedEvents(in generatorID : String) {
+	self.elaborates[name <> INIT].map event2elaboratedEvent(self, generatorID);
+}
+
+/*
+ * Transforms event to same event augmented with guard and enter actions.
+ * Generates guard and enter actions from transition and adds to event.
+ */
+mapping inout eventb::machine::Event::event2elaboratedEvent(in operation : components::AbstractComponentOperation, in generatorID : String) {
+	self.guards := (
+				operation.map operation2specificGuard(OS_GUARD_NAME.replace(PH_OPN,self.name), OS_FALSE_PRED.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
+				//transition.source.externalise()[statemachines::AbstractState].map sourceAbstractState2sourceGuard(self, generatorID) )->union(
+				self.guards->asSequence()
+				);
+	self.actions := (
+				operation.map operation2specificAction(OS_ACTION_NAME.replace(PH_OPN,self.name), OS_TRUE_EXPR.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
+				//transition.target.externalise()[statemachines::AbstractState].map targetAbstractState2enterActions(self, transition, generatorID)->
+				self.actions->asSequence()
+				);
+}
+
+/*
+ * Transforms an abstract operation to a specific, guard.
+ */
+mapping components::AbstractComponentOperation::operation2specificGuard(in gname : String, in pred : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+	when {not event.containsGuard(gname)} {
+	name := gname;
+	predicate := pred;	
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+/*
+ * Transforms an abstract operation to a specific, action.
+ */
+mapping components::AbstractComponentOperation::operation2specificAction(in aname : String, in expr : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+	when {not event.containsAction(aname)} {
+	name := aname;
+	action := expr;	
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+
+

@@ -46,6 +46,8 @@ mapping inout eventb::machine::Machine::rootAbstractComponent2eventb(in rootAbst
 				initEvent.actions -> asSequence()
 				);
 	
+	rootAbstractComponent.map abstractComponent2elaboratedEvents(generatorID);
+		
 	events := (
 				events->asSequence()	)->union(
 				rootAbstractComponent.map rootAbstractComponent2timerEvent(channelUnion, generatorID)->asSequence()
@@ -81,7 +83,7 @@ mapping components::AbstractComponent::rootAbstractComponent2specificInvariant(i
 
 
 /*
- * Transforms the root abstract connector to a specific, initialisation action.
+ * Transforms the root abstract connector to a specific action in the given event.
  */
 mapping components::AbstractComponent::rootAbstractComponent2specificInitAction(in vname : String, in expr : String, in initEvent : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
 	when {self.eContainer().oclIsTypeOf(eventb::machine::Machine) and not initEvent.containsAction(vname + ".init")} {

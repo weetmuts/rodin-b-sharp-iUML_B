@@ -16,8 +16,10 @@ properties for creating operation synchronisation variable
 **/
 property OS_NAME : String = PH_OPN+"_synch";
 property OS_TYPE_PRED : String = OS_NAME+" "+B_IN+" "+B_BOOL;
+property OS_GUARD_NAME : String = OS_NAME+".guard";
 property OS_FALSE_PRED : String = OS_NAME+" "+B_EQ+" "+B_FALSE;
 property OS_TRUE_PRED : String = OS_NAME+" "+B_EQ+" "+B_FALSE;
+property OS_ACTION_NAME : String = OS_NAME+".action";
 property OS_FALSE_EXPR : String = OS_NAME+" "+B_BEQ+" "+B_FALSE;
 property OS_TRUE_EXPR : String = OS_NAME+" "+B_BEQ+" "+B_TRUE;
 
