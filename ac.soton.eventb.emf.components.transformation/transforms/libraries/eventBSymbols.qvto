@@ -69,7 +69,9 @@ property B_<| : String = "\u25c1";            //symbol 113, Category.Relations;
 property B_% : String = "\u03bb";            //symbol 116, Category.Other; 
 property B_.. : String = "\u2025";            //symbol 119, Category.Other;
 property B_. : String = "\u00b7";            //symbol 122, Category.Other; 
-property B_+ : String = "\u002b";            //symbol 125, Category.Other; 
+*/
+property B_PLUS : String = "\u002b";            // + addition - symbol 125, Category.Other; 
+/*
 property B_- : String = "\u2212";            //symbol 128, Category.Other; 
 property B_^ : String = "\u005e";            //symbol 131, Category.Other;
 property B_* : String = "\u2217";            //symbol 134, Category.Other;
