@@ -162,22 +162,30 @@ mapping components::AbstractComponentOperation::operation2elaboratedEvents(in ge
  * Generates guard and enter actions from transition and adds to event.
  */
 mapping inout eventb::machine::Event::event2elaboratedEvent(in operation : components::AbstractComponentOperation, in generatorID : String) {
+	/*self.parameters := (
+				operation[components::PortWake].receives.map dataPacket2connectorReceiveParameter(self, generatorID)->asSequence() )->union(
+				self.parameters->asSequence()
+				);*/
 	self.guards := (
-				operation.map operation2specificGuard(OS_GUARD_NAME.replace(PH_OPN,self.name), OS_FALSE_PRED.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
-				//transition.source.externalise()[statemachines::AbstractState].map sourceAbstractState2sourceGuard(self, generatorID) )->union(
+				operation.map element2specifiedGuard(OS_GUARD_NAME.replace(PH_OPN,self.name), OS_FALSE_PRED.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
+				operation[components::PortWake].receives.map dataPacket2connectorReceiveGuard(self, generatorID)->asSequence() )->union(
+				operation[components::PortWake].map operation2newValueGuard(self, generatorID)->asSequence() )->union(
 				self.guards->asSequence()
 				);
 	self.actions := (
-				operation.map operation2specificAction(OS_ACTION_NAME.replace(PH_OPN,self.name), OS_TRUE_EXPR.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
-				//transition.target.externalise()[statemachines::AbstractState].map targetAbstractState2enterActions(self, transition, generatorID)->
+				operation.map element2specifiedAction(OS_ACTION_NAME.replace(PH_OPN,self.name), OS_TRUE_EXPR.replace(PH_OPN,self.name), self, generatorID)->asSequence() )->union(
+				operation.call.map method2methodCallAction(self, generatorID)->asSequence() )->union(
+				operation.sends.map delayedDataPacket2connectorSendAction(self, generatorID)->asSequence() )->union(
+				operation[components::SelfWake].map selfWake2selfWakeAction(self, generatorID)->asSequence() )->union(				//transition.target.externalise()[statemachines::AbstractState].map targetAbstractState2enterActions(self, transition, generatorID)->
+				operation.map operation2synchTimesAction(self, generatorID)->asSequence() )->union(
 				self.actions->asSequence()
 				);
 }
 
 /*
- * Transforms an abstract operation to a specific, guard.
+ * Transforms an element to a specified, guard.
  */
-mapping components::AbstractComponentOperation::operation2specificGuard(in gname : String, in pred : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+mapping eventb::EventBElement::element2specifiedGuard(in gname : String, in pred : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
 	when {not event.containsGuard(gname)} {
 	name := gname;
 	predicate := pred;	
@@ -186,9 +194,9 @@ mapping components::AbstractComponentOperation::operation2specificGuard(in gname
 }
 
 /*
- * Transforms an abstract operation to a specific, action.
+ * Transforms an element to a specified, action.
  */
-mapping components::AbstractComponentOperation::operation2specificAction(in aname : String, in expr : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+mapping eventb::EventBElement::element2specifiedAction(in aname : String, in expr : String, in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
 	when {not event.containsAction(aname)} {
 	name := aname;
 	action := expr;	
@@ -196,5 +204,106 @@ mapping components::AbstractComponentOperation::operation2specificAction(in anam
 	attributes += getGeneratedAttr(generatorID);
 }
 
+/*
+ * Transforms a data packet to a guard to trigger when the value is received on the connector.
+ */
+mapping components::DataPacket::dataPacket2connectorReceiveGuard(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+	{init{
+		result :=  self.map element2specifiedGuard(
+			CONNECTORRECV_GUARD_NAME.replace(PH_CON,self.connector.getName()), 
+			CONNECTORRECV_GUARD.replace(PH_CON,self.connector.getName()).replace(PH_VAL,self.value), 
+			event, generatorID);
+	}
+	}
 
+
+/*
+ * Transforms a called method operation to an action to call that method.
+ */
+mapping components::Method::method2methodCallAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+	{init{
+		result :=  self.map element2specifiedAction(METHODCALL_ACTION_NAME.replace(PH_OPN,self.label), OS_FALSE_EXPR.replace(PH_OPN,self.label), event, generatorID);
+		//would prefer not use self.label ... it should use event.name but on the events elaborated by self
+	}
+}
+
+/*
+ * Transforms a delayed data packet to an action to send that data on a connector with the specified delay.
+ */
+mapping components::DelayedDataPacket::delayedDataPacket2connectorSendAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+	{init{
+		result :=  self.map element2specifiedAction(
+			CONNECTORSEND_ACTION_NAME.replace(PH_CON,self.connector.getName()), 
+			CONNECTORSEND_ACTION.replace(PH_CON,self.connector.getName()).replace(PH_DLY,self.delay.toString()).replace(PH_VAL,self.value), 
+			event, generatorID);
+	}
+}
+
+/*
+ * Transforms a delayed data packet to an action to send that data on a connector with the specified delay.
+ */
+mapping components::SelfWake::selfWake2selfWakeAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+	{init{
+		result :=  self.map element2specifiedAction(
+			SELFWAKE_ACTION_NAME, 
+			SELFWAKE_ACTION.replace(PH_OPN,event.name).replace(PH_DLY,self.selfDelay.toString()), 
+			event, generatorID);
+	}
+}
+
+/*
+ * Transforms an abstract operation to an action to update the synch_times variable.
+ */
+mapping components::AbstractComponentOperation::operation2synchTimesAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
+	when {self.oclIsKindOf(components::SelfWake) or self.sends->size()>0}
+	{init{
+	result :=  self.map element2specifiedAction(
+			ST_UPDATE_ACTION_NAME, 
+			ST_UPDATE_ACTION.replace(PH_SYNCHS, self.getSynchs()), 
+			event, generatorID); 
+	}
+}
+
+helper components::AbstractComponentOperation::getSynchs() : String {
+	var separator : String := ",";
+	var string : String := "";
+	var n : Integer := 1;
+	var size : Integer := self.sends->size();
+	while (n <= size) {
+		string := string + (CT_NAME+B_PLUS+self.sends->at(n).delay.toString());
+		n := n + 1;
+		if n <= size then string := string + separator endif;
+	};
+	if (self.oclIsKindOf(components::SelfWake)) then {
+		if string.size()>0 then string := string+separator endif;
+		string := string + (CT_NAME+B_PLUS+self[components::SelfWake].selfDelay->asSequence()->at(1).toString());} 
+	endif;	
+	return string;
+}
+
+/*
+ * Transforms an abstract operation to an action to update the synch_times variable.
+ */
+mapping components::PortWake::operation2newValueGuard(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+	when {self.receives->size()>0}
+	{init{
+	result :=  self.map element2specifiedGuard(
+			NEWVAL_GUARD_NAME, 
+			NEWVAL_GUARD.replace(PH_CON_UNION, self.getConnectorUnion()), 
+			event, generatorID); 
+	}
+}
+
+helper components::PortWake::getConnectorUnion() : String {
+	var separator : String := " "+B_UNION+" ";
+	var string : String := "";
+	var n : Integer := 1;
+	var size : Integer := self.receives->size();
+	while (n <= size) {
+		string := string + (self.receives->at(n).connector.getName());
+		n := n + 1;
+		if n <= size then string := string + separator endif;
+	};
+	return string;
+}
 
