@@ -49,7 +49,7 @@ mapping components::Connector::connector2zeroInvariant(in generatorID : String) 
 mapping components::Connector::connector2initAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action
 when { not event.containsAction(self.getName() + ".init") } {
 	name := self.getName() + ".init";
-	action := self.getName() +" "+ B_BEQ +" "+ self.initialValue;
+	action := self.getName() +" "+ B_BEQ +" "+B_LBRC+"0" +B_MAPLET+" "+self.initialValue+B_RBRC;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
