@@ -132,6 +132,11 @@ when {not event.containsAction(TE_GD3_NAME.replace(PH_OPN,self.label)) } {
 	if not self.oclIsKindOf(components::Method) then 
 		predicate := predicate+ TE_GD3B_PRED.replace(PH_OPN,self.label).replace(PH_CON_UNION,channelUnion)
 	endif;
+	if self.oclIsKindOf(components::SelfWake) then
+		predicate := predicate.replace(PH_TE_GD3C_PRED,TE_GD3C_PRED.replace(PH_OPN,self.label))
+	else
+		predicate := predicate.replace(PH_TE_GD3C_PRED,"")
+	endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

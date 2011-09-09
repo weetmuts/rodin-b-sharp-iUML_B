@@ -60,9 +60,10 @@ property TE_GD2_NAME : String = "grd2";
 property TE_GD2_PRED : String = TE_PARAM_NAME+" "+B_EQ+" min"+B_LPAR+ST_NAME+B_RPAR;			//pnextsynch = min(synch_times)
 property TE_GD3_NAME : String = "grd3_"+PH_OPN;		//for each operation (subs operation name and union of all connectors)
 property TE_GD3A_PRED : String = OS_TRUE_PRED;	//<%operation%>_synch = TRUE 
+property PH_TE_GD3C_PRED : String = "<%PH_TE_GD3C_PRED%>";
 property TE_GD3B_PRED : String = " "+B_LOR+" "+					//or
-								B_LPAR+CT_NAME+" "+B_NEQ+" "+OW_NAME+" "+B_LAND+" "+		//(current_time ­ <%operation%>_wakeup &
-								CT_NAME+" "+B_NIN+" dom"+B_LPAR+PH_CON_UNION+B_RPAR+B_RPAR; //current_time /: dom(<%connector_union%>)
+								B_LPAR+CT_NAME+" "+B_NIN+" dom"+B_LPAR+PH_CON_UNION+B_RPAR+PH_TE_GD3C_PRED+B_RPAR; //(current_time /: dom(<%connector_union%>)
+property TE_GD3C_PRED : String = " "+B_LAND+" "+CT_NAME+" "+B_NEQ+" "+OW_NAME;		// and current_time ­ <%operation%>_wakeup
 
 property TE_AC1_NAME : String = "act1";
 property TE_AC1_EXPR : String = CT_NAME+" "+B_BEQ+" "+TE_PARAM_NAME;
