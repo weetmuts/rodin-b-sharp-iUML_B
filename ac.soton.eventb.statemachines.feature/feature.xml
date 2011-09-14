@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="ac.soton.eventb.components.feature"
+      id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="0.1.1"
+      version="0.1.4.qualifier"
       provider-name="%providerName">
 
-   <description>
+   <description url="http://www.example.com/description">
       %description
    </description>
 
@@ -17,6 +17,10 @@
       %license
    </license>
 
+   <url>
+      <update label="%updateSiteName" url="http://rodin-b-sharp.sourceforge.net/updates/site.xml"/>
+   </url>
+
    <requires>
       <import feature="org.eventb.emf.feature" version="3.3.0" match="compatible"/>
       <import feature="org.eclipse.gmf" version="1.4.1" match="compatible"/>
@@ -24,47 +28,45 @@
       <import feature="org.eclipse.ocl" version="3.0.0" match="compatible"/>
       <import plugin="org.eclipse.m2m.qvt.oml"/>
       <import feature="org.eclipse.gmf.tooling" version="2.3.0.v20100421-2359-7c7MFO2FLWUl0im8BjQMa9f"/>
-      <import feature="ac.soton.eventb.statemachines.feature" version="0.1.4.201105221556"/>
-      <import feature="ac.soton.eventb.emf.core.extension.feature" version="1.0.0"/>
    </requires>
 
    <plugin
-         id="ac.soton.eventb.emf.components"
+         id="ac.soton.eventb.statemachines.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.emf.components.diagram"
+         id="ac.soton.eventb.statemachines.diagram"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.emf.components.edit"
+         id="ac.soton.eventb.statemachines.persistence"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.emf.components.navigator"
+         id="ac.soton.eventb.statemachines.navigator"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.emf.components.persistence"
+         id="ac.soton.eventb.statemachines"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="ac.soton.eventb.emf.components.transformation"
+         id="ac.soton.eventb.statemachines.transformation"
          download-size="0"
          install-size="0"
          version="0.0.0"
