@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="Statemachine Palette">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="States"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="State"
+          description="Create new State">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/State.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Initial"
+          description="Create new Initial State">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Initial.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Final"
+          description="Create new Final State">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Final.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Features"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Statemachine"
+          description="Create new Statemachine">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Statemachine.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Invariant"
+          description="Create new Invariant">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Invariant.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Connections"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Transition"
+          description="Create new Transition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Transition.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>
