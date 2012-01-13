@@ -1,0 +1,69 @@
+import util;
+import libraries.set_statemachines2events_enter;
+import libraries.set_statemachines2events_leave;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+library set_statemachines2events;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event guards and actions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms root statemachine to events.
+ * Augments events with guards and actions.
+ * First generates guards and enter actions, then leave actions (to be able to track down enter actions and avoid multiple action generation on same variable).
+ */
+mapping statemachines::Statemachine::rootStatemachine2events(in generatorID : String) {
+	self.map statemachine2events(generatorID);
+	self.map statemachine2eventsLeave(generatorID);
+}
+
+/*
+ * Transforms statemachine to events.
+ * Augments events with guards and enter actions generated from transitions.
+ */
+mapping statemachines::Statemachine::statemachine2events(in generatorID : String) {
+	self.transitions.map transition2events(generatorID);
+	self.nodes[statemachines::State].statemachines.map statemachine2events(generatorID);
+}
+
+/*
+ * Transforms transition to event with guards and enter actions.
+ * Generates guards and enter actions for events elaborated by transition.
+ * Skips initialisation event.
+ */
+mapping statemachines::Transition::transition2events(in generatorID : String) {
+	self.elaborates[name <> INIT].map event2statemachinesEvent(self, generatorID);
+}
+
+/*
+ * Transforms event to same event augmented with guard and enter actions.
+ * Generates guard and enter actions from transition and adds to event.
+ */
+mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : statemachines::Transition, in generatorID : String) {
+	self.guards := transition.source[statemachines::State].map sourceState2sourceGuard(self, generatorID)->
+		union(self.guards);
+	self.actions := transition.target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
+		union(self.actions);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Source guard
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms source state to source guard.
+ * Generates guard for source state and particular event.
+ * Skips transformation if event contains source guard on the same state already.
+ */
+mapping statemachines::State::sourceState2sourceGuard(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+	when { not event.containsGuard(ISIN_ + self.name) }
+{
+	name := ISIN_ + self.name;
+	predicate := self.getStatemachine().name + B_EQ + self.name;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}

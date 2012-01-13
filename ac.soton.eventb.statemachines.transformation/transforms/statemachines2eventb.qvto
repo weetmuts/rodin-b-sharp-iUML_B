@@ -1,0 +1,45 @@
+import libraries.cleanup;
+import libraries.statemachines2variables;
+import libraries.statemachines2invariants;
+import libraries.statemachines2init;
+import libraries.statemachines2events;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+transformation statemachines2eventb(inout inoutModel:eventb, in inStatemachine:statemachines);
+
+main() {
+	inoutModel.rootObjects()[eventb::machine::Machine]->map iumlb2eventb(inStatemachine.rootObjects()![statemachines::Statemachine]);
+}
+
+/*
+ * Transforms iumlb to eventb.
+ */
+mapping inout eventb::machine::Machine::iumlb2eventb(in rootStatemachine : statemachines::Statemachine) {
+	var generatorID : String := rootStatemachine.extensionId;
+	self.map machine2nonGeneratedMachine(generatorID);
+	
+	setupMachineContext(self);
+	
+	variables := rootStatemachine.map statemachine2variables(generatorID)->
+		union(variables->asSequence());
+	invariants := rootStatemachine.map statemachine2typeInvariants(generatorID)->
+		union(rootStatemachine.map rootStatemachine2partitionInvariants(generatorID))->
+		union(rootStatemachine.map statemachine2substateInvariants(generatorID))->
+		union(rootStatemachine.map statemachine2constraintInvariants(generatorID))->
+		union(invariants->asSequence());
+	rootStatemachine.map rootStatemachine2initActions(generatorID);
+	// inactive state actions generated after active to not conflict with latter
+	events[name = INIT].map initEvent2initEventInactiveStates(rootStatemachine, generatorID);
+	rootStatemachine.map rootStatemachine2events(generatorID);
+}
+
+/*
+ * Clears sees property of a machine from implicit context. 
+ */
+helper setupMachineContext(inout machine : eventb::machine::Machine) {
+	if machine.seesNames->includes(getImplicitContextName(machine.name))
+	then machine.seesNames := machine.seesNames->excluding(getImplicitContextName(machine.name))
+	endif;
+}

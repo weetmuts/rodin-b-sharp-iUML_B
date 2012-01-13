@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+Copyright (c) 2010 University of Southampton.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+-->
+<plugin>
+<extension
+     point="org.eclipse.ui.menus">
+  <menuContribution
+        locationURI="toolbar:ac.soton.eventb.statemachines.diagram.toolbar">
+     <command
+           commandId="ac.soton.eventb.statemachines.transformation.translateToEventB"
+           icon="icons/UtoB.png"
+           style="push">
+     </command>
+  </menuContribution>
+</extension>
+<extension
+     point="org.eclipse.ui.commands">
+  <command
+        description="%command.description.translate"
+        id="ac.soton.eventb.statemachines.transformation.translateToEventB"
+        name="%command.name.translate">
+  </command>
+</extension>
+<extension
+     point="org.eclipse.ui.handlers">
+  <handler
+        class="ac.soton.eventb.statemachines.transformation.TranslateAction"
+        commandId="ac.soton.eventb.statemachines.transformation.translateToEventB">
+     <enabledWhen>
+        <and>
+           <with
+                 variable="activePartId">
+              <equals
+                    value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID">
+              </equals>
+           </with>
+        </and>
+     </enabledWhen>
+  </handler>
+</extension>
+</plugin>
+   
