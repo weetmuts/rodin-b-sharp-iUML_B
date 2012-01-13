@@ -1,0 +1,7 @@
+# Tracing options for the ac.soton.eventb.statemachines.diagram plug-in
+
+# Common issues
+ac.soton.eventb.statemachines.diagram/debug=false
+
+# Visual IDs
+ac.soton.eventb.statemachines.diagram/debug/visualID=false
