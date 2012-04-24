@@ -3,14 +3,11 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classdiagrams"
     nsURI="http://soton.ac.uk/models/eventb/classdiagrams" nsPrefix="classdiagrams">
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDiagramOwner" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDiagrams" upperBound="-1"
-        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagrams" upperBound="-1"
-        eType="#//ClassDiagram" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassdiagramOwner" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classdiagrams" upperBound="-1"
+        eType="#//Classdiagram" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDiagram" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Classdiagram" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//Diagram">
     <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
         eType="#//Class" containment="true"/>
@@ -18,43 +15,66 @@
         eType="#//Association" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Class"
-        eOpposite="#//Class/source"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="isAsociationTypeRight"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Class" eOpposite="#//Class/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Class" eOpposite="#//Class/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassAxiom" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedDerivedPredicateElement">
-    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//context/Context"/>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="parentIsConstant&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassInvariant" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedDerivedPredicateElement">
-    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="parentIsNotConstant"/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassEvent" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement">
-    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="parentIsNotConstant"/>
+    </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBLabeled">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
         eType="#//Class"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
-        eType="#//Association" eOpposite="#//Association/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAttributes" upperBound="-1"
         eType="#//ClassAttribute" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classEvents" upperBound="-1"
-        eType="#//ClassEvent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classInvariants" upperBound="-1"
         eType="#//ClassInvariant" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAxioms" upperBound="-1"
         eType="#//ClassAxiom" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Class"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ClassFeature">
-    <eLiterals name="Axiom"/>
-    <eLiterals name="Invariant" value="1"/>
-    <eLiterals name="Events" value="2"/>
-    <eLiterals name="Attributes" value="3"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Class">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="parentIsConstant&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Association" eOpposite="#//Association/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Association" eOpposite="#//Association/source"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetFile" transient="true"
+        defaultValueLiteral="none">
+      <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EEList">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" upperBound="-1"
+        eType="#//Class">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="parentIsNotConstant"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classEvents" upperBound="-1"
+        eType="#//ClassEvent" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
