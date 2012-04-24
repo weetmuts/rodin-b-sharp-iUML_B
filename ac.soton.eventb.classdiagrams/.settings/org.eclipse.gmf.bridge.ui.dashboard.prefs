@@ -1,8 +1,8 @@
-#Thu Mar 22 12:01:07 GMT 2012
+#Wed Mar 28 17:51:30 BST 2012
 eclipse.preferences.version=1
 gmf_dashboard/domainGenerationModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.genmodel
 gmf_dashboard/domainModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.ecore
-gmf_dashboard/generationModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classtypediagrams.gmfgen
+gmf_dashboard/generationModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.gmfgen
 gmf_dashboard/graphicalDefinitionModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.gmfgraph
 gmf_dashboard/mappingModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.gmfmap
 gmf_dashboard/toolingDefinitionModel=platform\:/resource/ac.soton.eventb.classdiagrams/model/classdiagrams.gmftool
