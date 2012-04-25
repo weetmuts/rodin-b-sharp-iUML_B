@@ -1,0 +1,7 @@
+# Tracing options for the ac.soton.eventb.classdiagrams.diagram plug-in
+
+# Common issues
+ac.soton.eventb.classdiagrams.diagram/debug=false
+
+# Visual IDs
+ac.soton.eventb.classdiagrams.diagram/debug/visualID=false

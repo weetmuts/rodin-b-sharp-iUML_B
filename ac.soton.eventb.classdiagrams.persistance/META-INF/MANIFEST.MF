@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: ac.soton.eventb.classdiagrams.persistance;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: ac.soton.eventb.classdiagrams.persistance.ClassdiagramsPersistancePlugin
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework
+Require-Bundle: ac.soton.eventb.classdiagrams;bundle-version="1.0.0",
+ org.eventb.emf.persistence;bundle-version="2.3.2",
+ ac.soton.eventb.emf.core.extension.persistence;bundle-version="1.0.2",
+ org.eclipse.emf.transaction;bundle-version="1.4.0"
+Export-Package: ac.soton.eventb.classdiagrams.persistance

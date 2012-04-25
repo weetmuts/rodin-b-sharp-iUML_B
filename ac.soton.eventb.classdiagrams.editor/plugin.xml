@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="ac.soton.eventb.classdiagrams.presentation.ClassdiagramsModelWizardID"
+            name="%_UI_ClassdiagramsModelWizard_label"
+            class="ac.soton.eventb.classdiagrams.presentation.ClassdiagramsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ClassdiagramsModelFile.gif">
+         <description>%_UI_ClassdiagramsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="ac.soton.eventb.classdiagrams.presentation.ClassdiagramsEditorID"
+            name="%_UI_ClassdiagramsEditor_label"
+            icon="icons/full/obj16/ClassdiagramsModelFile.gif"
+            extensions="classdiagrams"
+            class="ac.soton.eventb.classdiagrams.presentation.ClassdiagramsEditor"
+            contributorClass="ac.soton.eventb.classdiagrams.presentation.ClassdiagramsActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
