@@ -36,7 +36,20 @@
             xsi:type="gmfgraph:Label"
             name="AssociationLabelFigure"
             text=""/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AssociationLabelSource"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AssociationLabelTarget"
+            text=""/>
       </actualFigure>
+      <accessors
+          accessor="getFigureAssociationSource"
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
+      <accessors
+          accessor="getFigureAssociationLabelTarget"
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.3"/>
       <accessors
           accessor="getFigureAssociationLabelFigure"
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
@@ -170,7 +183,7 @@
       name="AssociationLabel"
       figure="AssociationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.0">
+      accessor="//@figures.0/@descriptors.1/@accessors.2">
     <facets
         xsi:type="gmfgraph:LabelOffsetFacet"
         x="-8"
@@ -193,6 +206,16 @@
       figure="AttributeFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels
+      name="AssociationLabelTarget"
+      figure="AssociationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+  <labels
+      name="AssociationLabelSource"
+      figure="AssociationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="ClassLabel"
       figure="ClassFigure"

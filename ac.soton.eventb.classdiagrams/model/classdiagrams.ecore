@@ -24,6 +24,14 @@
         eType="#//Class" eOpposite="#//Class/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="surjective" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="injective" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functional" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassAxiom" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedDerivedPredicateElement">
@@ -50,7 +58,6 @@
         eType="#//ClassInvariant" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAxioms" upperBound="-1"
         eType="#//ClassAxiom" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
         <details key="constraints" value="parentIsConstant&#xA;"/>
@@ -76,5 +83,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classEvents" upperBound="-1"
         eType="#//ClassEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -146,6 +146,26 @@
       <editableFeatures
           href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern="{0}..{1}">
+      <diagramLabel
+          href="classdiagrams.gmfgraph#AssociationLabelSource"/>
+      <features
+          href="classdiagrams.ecore#//Association/surjective"/>
+      <features
+          href="classdiagrams.ecore#//Association/injective"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern="{0}..{1}">
+      <diagramLabel
+          href="classdiagrams.gmfgraph#AssociationLabelTarget"/>
+      <features
+          href="classdiagrams.ecore#//Association/functional"/>
+      <features
+          href="classdiagrams.ecore#//Association/total"/>
+    </labelMappings>
     <containmentFeature
         href="classdiagrams.ecore#//Classdiagram/classAssociations"/>
     <tool

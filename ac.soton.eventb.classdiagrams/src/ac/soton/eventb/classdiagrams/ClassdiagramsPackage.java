@@ -324,13 +324,49 @@ public interface ClassdiagramsPackage extends EPackage {
 	int ASSOCIATION__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Surjective</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Injective</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Total</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Functional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Association</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int ASSOCIATION_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
@@ -851,22 +887,13 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS__CLASS_AXIOMS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__INSTANCES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__EXTENDS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int CLASS__EXTENDS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -875,7 +902,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -884,7 +911,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
+	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -893,7 +920,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
+	int CLASS__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Target File</b></em>' attribute.
@@ -902,7 +929,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__TARGET_FILE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 9;
+	int CLASS__TARGET_FILE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
@@ -911,7 +938,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 10;
+	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Class Events</b></em>' containment reference list.
@@ -920,7 +947,16 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CLASS_EVENTS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 11;
+	int CLASS__CLASS_EVENTS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__INSTANCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -1029,6 +1065,50 @@ public interface ClassdiagramsPackage extends EPackage {
 	EAttribute getAssociation_Constant();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isSurjective <em>Surjective</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Surjective</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Association#isSurjective()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EAttribute getAssociation_Surjective();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isInjective <em>Injective</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Injective</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Association#isInjective()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EAttribute getAssociation_Injective();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isTotal <em>Total</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Total</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Association#isTotal()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EAttribute getAssociation_Total();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isFunctional <em>Functional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Functional</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Association#isFunctional()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EAttribute getAssociation_Functional();
+
+	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.ClassAttribute <em>Class Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1123,17 +1203,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	EReference getClass_ClassAxioms();
 
 	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.Class#getInstances <em>Instances</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instances</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Class#getInstances()
-	 * @see #getClass_()
-	 * @generated
-	 */
-	EReference getClass_Instances();
-
-	/**
 	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,6 +1278,17 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClass_ClassEvents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Class#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instance</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Class#getInstance()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EAttribute getClass_Instance();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1311,6 +1391,38 @@ public interface ClassdiagramsPackage extends EPackage {
 		EAttribute ASSOCIATION__CONSTANT = eINSTANCE.getAssociation_Constant();
 
 		/**
+		 * The meta object literal for the '<em><b>Surjective</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION__SURJECTIVE = eINSTANCE.getAssociation_Surjective();
+
+		/**
+		 * The meta object literal for the '<em><b>Injective</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION__INJECTIVE = eINSTANCE.getAssociation_Injective();
+
+		/**
+		 * The meta object literal for the '<em><b>Total</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION__TOTAL = eINSTANCE.getAssociation_Total();
+
+		/**
+		 * The meta object literal for the '<em><b>Functional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSOCIATION__FUNCTIONAL = eINSTANCE.getAssociation_Functional();
+
+		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1393,14 +1505,6 @@ public interface ClassdiagramsPackage extends EPackage {
 		EReference CLASS__CLASS_AXIOMS = eINSTANCE.getClass_ClassAxioms();
 
 		/**
-		 * The meta object literal for the '<em><b>Instances</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS__INSTANCES = eINSTANCE.getClass_Instances();
-
-		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1455,6 +1559,14 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS__CLASS_EVENTS = eINSTANCE.getClass_ClassEvents();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__INSTANCE = eINSTANCE.getClass_Instance();
 
 	}
 

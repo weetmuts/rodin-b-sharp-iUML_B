@@ -51,7 +51,6 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAttributes <em>Class Attributes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassInvariants <em>Class Invariants</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAxioms <em>Class Axioms</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
@@ -59,6 +58,7 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getTargetFile <em>Target File</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassEvents <em>Class Events</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getInstance <em>Instance</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,16 +104,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<ClassAxiom> classAxioms;
-
-	/**
-	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventBNamedCommentedElement instances;
 
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
@@ -196,6 +186,26 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	protected EList<ClassEvent> classEvents;
 
 	/**
+	 * The default value of the '{@link #getInstance() <em>Instance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstance()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INSTANCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstance()
+	 * @generated
+	 * @ordered
+	 */
+	protected String instance = INSTANCE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -231,6 +241,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	public void setName(String newName) {
 		String oldName = getName();
 		doSetName(newName);
+		
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__NAME, oldName, newName));
 	}
@@ -281,44 +292,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			classAxioms = new EObjectContainmentEList.Resolving<ClassAxiom>(ClassAxiom.class, this, ClassdiagramsPackage.CLASS__CLASS_AXIOMS);
 		}
 		return classAxioms;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamedCommentedElement getInstances() {
-		if (instances != null && instances.eIsProxy()) {
-			InternalEObject oldInstances = (InternalEObject)instances;
-			instances = (EventBNamedCommentedElement)eResolveProxy(oldInstances);
-			if (instances != oldInstances) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASS__INSTANCES, oldInstances, instances));
-			}
-		}
-		return instances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamedCommentedElement basicGetInstances() {
-		return instances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInstances(EventBNamedCommentedElement newInstances) {
-		EventBNamedCommentedElement oldInstances = instances;
-		instances = newInstances;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__INSTANCES, oldInstances, instances));
 	}
 
 	/**
@@ -454,6 +427,27 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getInstance() {
+		return instance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstance(String newInstance) {
+		String oldInstance = instance;
+		instance = newInstance;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__INSTANCE, oldInstance, instance));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -506,9 +500,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return getClassInvariants();
 			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
 				return getClassAxioms();
-			case ClassdiagramsPackage.CLASS__INSTANCES:
-				if (resolve) return getInstances();
-				return basicGetInstances();
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				if (resolve) return getExtends();
 				return basicGetExtends();
@@ -524,6 +515,8 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return getRefines();
 			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
 				return getClassEvents();
+			case ClassdiagramsPackage.CLASS__INSTANCE:
+				return getInstance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -553,9 +546,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				getClassAxioms().clear();
 				getClassAxioms().addAll((Collection<? extends ClassAxiom>)newValue);
 				return;
-			case ClassdiagramsPackage.CLASS__INSTANCES:
-				setInstances((EventBNamedCommentedElement)newValue);
-				return;
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				setExtends((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
@@ -581,6 +571,9 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				getClassEvents().clear();
 				getClassEvents().addAll((Collection<? extends ClassEvent>)newValue);
 				return;
+			case ClassdiagramsPackage.CLASS__INSTANCE:
+				setInstance((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -605,9 +598,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
 				getClassAxioms().clear();
 				return;
-			case ClassdiagramsPackage.CLASS__INSTANCES:
-				setInstances((EventBNamedCommentedElement)null);
-				return;
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				setExtends((ac.soton.eventb.classdiagrams.Class)null);
 				return;
@@ -629,6 +619,9 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
 				getClassEvents().clear();
 				return;
+			case ClassdiagramsPackage.CLASS__INSTANCE:
+				setInstance(INSTANCE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -649,8 +642,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return classInvariants != null && !classInvariants.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
 				return classAxioms != null && !classAxioms.isEmpty();
-			case ClassdiagramsPackage.CLASS__INSTANCES:
-				return instances != null;
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				return extends_ != null;
 			case ClassdiagramsPackage.CLASS__INCOMING:
@@ -665,6 +656,8 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return refines != null && !refines.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
 				return classEvents != null && !classEvents.isEmpty();
+			case ClassdiagramsPackage.CLASS__INSTANCE:
+				return INSTANCE_EDEFAULT == null ? instance != null : !INSTANCE_EDEFAULT.equals(instance);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -683,6 +676,8 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		result.append(constant);
 		result.append(", targetFile: ");
 		result.append(targetFile);
+		result.append(", instance: ");
+		result.append(instance);
 		result.append(')');
 		return result.toString();
 	}

@@ -34,6 +34,10 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isConstant <em>Constant</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isFunctional <em>Functional</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +83,86 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * @ordered
 	 */
 	protected boolean constant = CONSTANT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSurjective()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SURJECTIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSurjective()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean surjective = SURJECTIVE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isInjective() <em>Injective</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInjective()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INJECTIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInjective() <em>Injective</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInjective()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean injective = INJECTIVE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTotal() <em>Total</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTotal()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TOTAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTotal() <em>Total</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTotal()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean total = TOTAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFunctional()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FUNCTIONAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFunctional()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean functional = FUNCTIONAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -266,6 +350,90 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isSurjective() {
+		return surjective;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSurjective(boolean newSurjective) {
+		boolean oldSurjective = surjective;
+		surjective = newSurjective;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__SURJECTIVE, oldSurjective, surjective));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInjective() {
+		return injective;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInjective(boolean newInjective) {
+		boolean oldInjective = injective;
+		injective = newInjective;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__INJECTIVE, oldInjective, injective));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTotal() {
+		return total;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTotal(boolean newTotal) {
+		boolean oldTotal = total;
+		total = newTotal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__TOTAL, oldTotal, total));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isFunctional() {
+		return functional;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFunctional(boolean newFunctional) {
+		boolean oldFunctional = functional;
+		functional = newFunctional;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL, oldFunctional, functional));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -313,6 +481,14 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return basicGetSource();
 			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
 				return isConstant();
+			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
+				return isSurjective();
+			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
+				return isInjective();
+			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
+				return isTotal();
+			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
+				return isFunctional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -333,6 +509,18 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
 				setConstant((Boolean)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
+				setSurjective((Boolean)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
+				setInjective((Boolean)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
+				setTotal((Boolean)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
+				setFunctional((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -355,6 +543,18 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
 				setConstant(CONSTANT_EDEFAULT);
 				return;
+			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
+				setSurjective(SURJECTIVE_EDEFAULT);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
+				setInjective(INJECTIVE_EDEFAULT);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
+				setTotal(TOTAL_EDEFAULT);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
+				setFunctional(FUNCTIONAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -373,6 +573,14 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return source != null;
 			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
 				return constant != CONSTANT_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
+				return surjective != SURJECTIVE_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
+				return injective != INJECTIVE_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
+				return total != TOTAL_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
+				return functional != FUNCTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -389,6 +597,14 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (constant: ");
 		result.append(constant);
+		result.append(", surjective: ");
+		result.append(surjective);
+		result.append(", injective: ");
+		result.append(injective);
+		result.append(", total: ");
+		result.append(total);
+		result.append(", functional: ");
+		result.append(functional);
 		result.append(')');
 		return result.toString();
 	}

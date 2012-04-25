@@ -23,7 +23,6 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassAttributes <em>Class Attributes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassInvariants <em>Class Invariants</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassAxioms <em>Class Axioms</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Class#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getOutgoing <em>Outgoing</em>}</li>
@@ -31,6 +30,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getTargetFile <em>Target File</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassEvents <em>Class Events</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Class#getInstance <em>Instance</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,32 +102,6 @@ public interface Class extends EventBNamedCommentedElement {
 	 * @generated
 	 */
 	EList<ClassAxiom> getClassAxioms();
-
-	/**
-	 * Returns the value of the '<em><b>Instances</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instances</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instances</em>' reference.
-	 * @see #setInstances(EventBNamedCommentedElement)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Instances()
-	 * @model
-	 * @generated
-	 */
-	EventBNamedCommentedElement getInstances();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getInstances <em>Instances</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instances</em>' reference.
-	 * @see #getInstances()
-	 * @generated
-	 */
-	void setInstances(EventBNamedCommentedElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' reference.
@@ -276,5 +250,31 @@ public interface Class extends EventBNamedCommentedElement {
 	 * @generated
 	 */
 	EList<ClassEvent> getClassEvents();
+
+	/**
+	 * Returns the value of the '<em><b>Instance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instance</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instance</em>' attribute.
+	 * @see #setInstance(String)
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Instance()
+	 * @model
+	 * @generated
+	 */
+	String getInstance();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getInstance <em>Instance</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Instance</em>' attribute.
+	 * @see #getInstance()
+	 * @generated
+	 */
+	void setInstance(String value);
 
 } // Class
