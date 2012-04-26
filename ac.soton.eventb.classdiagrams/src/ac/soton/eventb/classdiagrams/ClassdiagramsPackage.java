@@ -215,6 +215,115 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASSDIAGRAM_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.AbstractClassiagramElementImpl <em>Abstract Classiagram Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.classdiagrams.impl.AbstractClassiagramElementImpl
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAbstractClassiagramElement()
+	 * @generated
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__ANNOTATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__EXTENSIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__REFERENCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__LOCAL_GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__COMMENT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__NAME = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Classiagram Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl <em>Association</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,7 +340,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ANNOTATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ANNOTATIONS;
+	int ASSOCIATION__ANNOTATIONS = ABSTRACT_CLASSIAGRAM_ELEMENT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -240,7 +349,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__EXTENSIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__EXTENSIONS;
+	int ASSOCIATION__EXTENSIONS = ABSTRACT_CLASSIAGRAM_ELEMENT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -249,7 +358,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ATTRIBUTES;
+	int ASSOCIATION__ATTRIBUTES = ABSTRACT_CLASSIAGRAM_ELEMENT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -258,7 +367,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__REFERENCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__REFERENCE;
+	int ASSOCIATION__REFERENCE = ABSTRACT_CLASSIAGRAM_ELEMENT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -267,7 +376,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__GENERATED;
+	int ASSOCIATION__GENERATED = ABSTRACT_CLASSIAGRAM_ELEMENT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -276,7 +385,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__LOCAL_GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__LOCAL_GENERATED;
+	int ASSOCIATION__LOCAL_GENERATED = ABSTRACT_CLASSIAGRAM_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -285,7 +394,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__COMMENT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__COMMENT;
+	int ASSOCIATION__COMMENT = ABSTRACT_CLASSIAGRAM_ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -294,25 +403,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__NAME = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__TARGET = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__SOURCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+	int ASSOCIATION__NAME = ABSTRACT_CLASSIAGRAM_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -321,7 +412,34 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int ASSOCIATION__CONSTANT = ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT;
+
+	/**
+	 * The feature id for the '<em><b>Target Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__TARGET_CONTEXT = ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__TARGET = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__SOURCE = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Surjective</b></em>' attribute.
@@ -330,7 +448,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int ASSOCIATION__SURJECTIVE = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Injective</b></em>' attribute.
@@ -339,7 +457,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
+	int ASSOCIATION__INJECTIVE = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Total</b></em>' attribute.
@@ -348,7 +466,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int ASSOCIATION__TOTAL = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Functional</b></em>' attribute.
@@ -357,7 +475,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int ASSOCIATION__FUNCTIONAL = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Association</em>' class.
@@ -366,7 +484,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
+	int ASSOCIATION_FEATURE_COUNT = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
@@ -785,7 +903,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__ANNOTATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ANNOTATIONS;
+	int CLASS__ANNOTATIONS = ABSTRACT_CLASSIAGRAM_ELEMENT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -794,7 +912,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__EXTENSIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__EXTENSIONS;
+	int CLASS__EXTENSIONS = ABSTRACT_CLASSIAGRAM_ELEMENT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -803,7 +921,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ATTRIBUTES;
+	int CLASS__ATTRIBUTES = ABSTRACT_CLASSIAGRAM_ELEMENT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -812,7 +930,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__REFERENCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__REFERENCE;
+	int CLASS__REFERENCE = ABSTRACT_CLASSIAGRAM_ELEMENT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -821,7 +939,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__GENERATED;
+	int CLASS__GENERATED = ABSTRACT_CLASSIAGRAM_ELEMENT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -830,7 +948,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__LOCAL_GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__LOCAL_GENERATED;
+	int CLASS__LOCAL_GENERATED = ABSTRACT_CLASSIAGRAM_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -839,7 +957,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__COMMENT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__COMMENT;
+	int CLASS__COMMENT = ABSTRACT_CLASSIAGRAM_ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -848,70 +966,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__NAME = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Supertypes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__SUPERTYPES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Class Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__CLASS_ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Class Invariants</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__CLASS_INVARIANTS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Class Axioms</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__CLASS_AXIOMS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Extends</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__EXTENDS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int CLASS__NAME = ABSTRACT_CLASSIAGRAM_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -920,16 +975,79 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CONSTANT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
+	int CLASS__CONSTANT = ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT;
 
 	/**
-	 * The feature id for the '<em><b>Target File</b></em>' attribute.
+	 * The feature id for the '<em><b>Target Context</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__TARGET_FILE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
+	int CLASS__TARGET_CONTEXT = ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Supertypes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__SUPERTYPES = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Class Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASS_ATTRIBUTES = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Class Invariants</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASS_INVARIANTS = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Class Axioms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASS_AXIOMS = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Extends</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__EXTENDS = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__INCOMING = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__OUTGOING = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
@@ -938,7 +1056,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 9;
+	int CLASS__REFINES = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Class Events</b></em>' containment reference list.
@@ -947,7 +1065,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CLASS_EVENTS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 10;
+	int CLASS__CLASS_EVENTS = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Instance</b></em>' attribute.
@@ -956,7 +1074,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__INSTANCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 11;
+	int CLASS__INSTANCE = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -965,7 +1083,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 12;
+	int CLASS_FEATURE_COUNT = ABSTRACT_CLASSIAGRAM_ELEMENT_FEATURE_COUNT + 10;
 
 
 	/**
@@ -1052,17 +1170,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAssociation_Source();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isConstant <em>Constant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Association#isConstant()
-	 * @see #getAssociation()
-	 * @generated
-	 */
-	EAttribute getAssociation_Constant();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Association#isSurjective <em>Surjective</em>}'.
@@ -1236,28 +1343,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	EReference getClass_Outgoing();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Class#isConstant <em>Constant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Class#isConstant()
-	 * @see #getClass_()
-	 * @generated
-	 */
-	EAttribute getClass_Constant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Class#getTargetFile <em>Target File</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Target File</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Class#getTargetFile()
-	 * @see #getClass_()
-	 * @generated
-	 */
-	EAttribute getClass_TargetFile();
-
-	/**
 	 * Returns the meta object for the reference list '{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1289,6 +1374,38 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getClass_Instance();
+
+	/**
+	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement <em>Abstract Classiagram Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Classiagram Element</em>'.
+	 * @see ac.soton.eventb.classdiagrams.AbstractClassiagramElement
+	 * @generated
+	 */
+	EClass getAbstractClassiagramElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement#isConstant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Constant</em>'.
+	 * @see ac.soton.eventb.classdiagrams.AbstractClassiagramElement#isConstant()
+	 * @see #getAbstractClassiagramElement()
+	 * @generated
+	 */
+	EAttribute getAbstractClassiagramElement_Constant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement#getTargetContext <em>Target Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Target Context</em>'.
+	 * @see ac.soton.eventb.classdiagrams.AbstractClassiagramElement#getTargetContext()
+	 * @see #getAbstractClassiagramElement()
+	 * @generated
+	 */
+	EAttribute getAbstractClassiagramElement_TargetContext();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1381,14 +1498,6 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ASSOCIATION__SOURCE = eINSTANCE.getAssociation_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATION__CONSTANT = eINSTANCE.getAssociation_Constant();
 
 		/**
 		 * The meta object literal for the '<em><b>Surjective</b></em>' attribute feature.
@@ -1529,22 +1638,6 @@ public interface ClassdiagramsPackage extends EPackage {
 		EReference CLASS__OUTGOING = eINSTANCE.getClass_Outgoing();
 
 		/**
-		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CLASS__CONSTANT = eINSTANCE.getClass_Constant();
-
-		/**
-		 * The meta object literal for the '<em><b>Target File</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CLASS__TARGET_FILE = eINSTANCE.getClass_TargetFile();
-
-		/**
 		 * The meta object literal for the '<em><b>Refines</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1567,6 +1660,32 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CLASS__INSTANCE = eINSTANCE.getClass_Instance();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.AbstractClassiagramElementImpl <em>Abstract Classiagram Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.classdiagrams.impl.AbstractClassiagramElementImpl
+		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAbstractClassiagramElement()
+		 * @generated
+		 */
+		EClass ABSTRACT_CLASSIAGRAM_ELEMENT = eINSTANCE.getAbstractClassiagramElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT = eINSTANCE.getAbstractClassiagramElement_Constant();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Context</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT = eINSTANCE.getAbstractClassiagramElement_TargetContext();
 
 	}
 

@@ -311,7 +311,8 @@
       <labels
           visualID="6002"
           editPartClassName="AssociationSurjectiveInjectiveEditPart"
-          itemSemanticEditPolicyClassName="AssociationSurjectiveInjectiveItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="AssociationSurjectiveInjectiveItemSemanticEditPolicy"
+          notationViewFactoryClassName="AssociationSurjectiveInjectiveViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -335,7 +336,8 @@
       <labels
           visualID="6003"
           editPartClassName="AssociationFunctionalTotalEditPart"
-          itemSemanticEditPolicyClassName="AssociationFunctionalTotalItemSemanticEditPolicy">
+          itemSemanticEditPolicyClassName="AssociationFunctionalTotalItemSemanticEditPolicy"
+          notationViewFactoryClassName="AssociationFunctionalTotalViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap

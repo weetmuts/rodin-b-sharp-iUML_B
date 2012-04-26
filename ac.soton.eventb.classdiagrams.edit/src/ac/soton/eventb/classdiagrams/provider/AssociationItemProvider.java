@@ -38,7 +38,7 @@ import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
  * @generated
  */
 public class AssociationItemProvider
-	extends EventBNamedCommentedElementItemProvider
+	extends AbstractClassiagramElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -68,7 +68,6 @@ public class AssociationItemProvider
 
 			addTargetPropertyDescriptor(object);
 			addSourcePropertyDescriptor(object);
-			addConstantPropertyDescriptor(object);
 			addSurjectivePropertyDescriptor(object);
 			addInjectivePropertyDescriptor(object);
 			addTotalPropertyDescriptor(object);
@@ -117,28 +116,6 @@ public class AssociationItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Constant feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addConstantPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_constant_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_constant_feature", "_UI_Association_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATION__CONSTANT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -268,7 +245,6 @@ public class AssociationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Association.class)) {
-			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
 			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
@@ -289,11 +265,6 @@ public class AssociationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
-				 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
 	}
 
 }

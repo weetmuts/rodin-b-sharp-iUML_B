@@ -33,7 +33,6 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
@@ -43,7 +42,7 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *
  * @generated
  */
-public class AssociationImpl extends EventBNamedCommentedElementImpl implements Association {
+public class AssociationImpl extends AbstractClassiagramElementImpl implements Association {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -63,26 +62,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * @ordered
 	 */
 	protected ac.soton.eventb.classdiagrams.Class source;
-
-	/**
-	 * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConstant()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CONSTANT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConstant()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean constant = CONSTANT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
@@ -329,27 +308,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isConstant() {
-		return constant;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setConstant(boolean newConstant) {
-		boolean oldConstant = constant;
-		constant = newConstant;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__CONSTANT, oldConstant, constant));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isSurjective() {
 		return surjective;
 	}
@@ -479,8 +437,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
-				return isConstant();
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return isSurjective();
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -506,9 +462,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
 				setSource((ac.soton.eventb.classdiagrams.Class)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
-				setConstant((Boolean)newValue);
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective((Boolean)newValue);
@@ -540,9 +493,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
 				setSource((ac.soton.eventb.classdiagrams.Class)null);
 				return;
-			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
-				setConstant(CONSTANT_EDEFAULT);
-				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective(SURJECTIVE_EDEFAULT);
 				return;
@@ -571,8 +521,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return target != null;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
 				return source != null;
-			case ClassdiagramsPackage.ASSOCIATION__CONSTANT:
-				return constant != CONSTANT_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return surjective != SURJECTIVE_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -595,9 +543,7 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (constant: ");
-		result.append(constant);
-		result.append(", surjective: ");
+		result.append(" (surjective: ");
 		result.append(surjective);
 		result.append(", injective: ");
 		result.append(injective);

@@ -39,7 +39,7 @@ import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
  * @generated
  */
 public class ClassItemProvider
-	extends EventBNamedCommentedElementItemProvider
+	extends AbstractClassiagramElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -71,8 +71,6 @@ public class ClassItemProvider
 			addExtendsPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
-			addConstantPropertyDescriptor(object);
-			addTargetFilePropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
 			addInstancePropertyDescriptor(object);
 		}
@@ -163,50 +161,6 @@ public class ClassItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Constant feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addConstantPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_constant_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_constant_feature", "_UI_Class_type"),
-				 ClassdiagramsPackage.Literals.CLASS__CONSTANT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Target File feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetFilePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_targetFile_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_targetFile_feature", "_UI_Class_type"),
-				 ClassdiagramsPackage.Literals.CLASS__TARGET_FILE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -325,8 +279,6 @@ public class ClassItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ac.soton.eventb.classdiagrams.Class.class)) {
-			case ClassdiagramsPackage.CLASS__CONSTANT:
-			case ClassdiagramsPackage.CLASS__TARGET_FILE:
 			case ClassdiagramsPackage.CLASS__INSTANCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -350,11 +302,6 @@ public class ClassItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
-				 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
 
 		newChildDescriptors.add
 			(createChildParameter

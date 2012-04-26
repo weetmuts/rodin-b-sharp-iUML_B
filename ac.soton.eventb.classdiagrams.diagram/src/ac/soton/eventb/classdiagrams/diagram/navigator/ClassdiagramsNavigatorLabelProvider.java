@@ -95,30 +95,30 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 	 */
 	public Image getImage(View view) {
 		switch (ClassdiagramsVisualIDRegistry.getVisualID(view)) {
-		case ClassdiagramEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Diagram?http://soton.ac.uk/models/eventb/classdiagrams?Classdiagram", ClassdiagramsElementTypes.Classdiagram_1000); //$NON-NLS-1$
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassAttribute", ClassdiagramsElementTypes.ClassAttribute_3004); //$NON-NLS-1$
-		case AssociationEditPart.VISUAL_ID:
+		case ClassdiagramEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
-		case ClassAxiomEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassAxiom", ClassdiagramsElementTypes.ClassAxiom_3006); //$NON-NLS-1$
-		case ClassEventEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassEvent", ClassdiagramsElementTypes.ClassEvent_3003); //$NON-NLS-1$
-		case ClassInvariantEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassInvariant", ClassdiagramsElementTypes.ClassInvariant_3005); //$NON-NLS-1$
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4002); //$NON-NLS-1$
+					"Navigator?Diagram?http://soton.ac.uk/models/eventb/classdiagrams?Classdiagram", ClassdiagramsElementTypes.Classdiagram_1000); //$NON-NLS-1$
 		case ClassEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/classdiagrams?Class", ClassdiagramsElementTypes.Class_2002); //$NON-NLS-1$
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4002); //$NON-NLS-1$
+		case ClassInvariantEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassInvariant", ClassdiagramsElementTypes.ClassInvariant_3005); //$NON-NLS-1$
+		case ClassEventEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassEvent", ClassdiagramsElementTypes.ClassEvent_3003); //$NON-NLS-1$
+		case ClassAxiomEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassAxiom", ClassdiagramsElementTypes.ClassAxiom_3006); //$NON-NLS-1$
+		case AssociationEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -171,22 +171,22 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (ClassdiagramsVisualIDRegistry.getVisualID(view)) {
-		case ClassdiagramEditPart.VISUAL_ID:
-			return getClassdiagram_1000Text(view);
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getClassAttribute_3004Text(view);
-		case AssociationEditPart.VISUAL_ID:
-			return getAssociation_4001Text(view);
-		case ClassAxiomEditPart.VISUAL_ID:
-			return getClassAxiom_3006Text(view);
-		case ClassEventEditPart.VISUAL_ID:
-			return getClassEvent_3003Text(view);
-		case ClassInvariantEditPart.VISUAL_ID:
-			return getClassInvariant_3005Text(view);
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getClassSupertypes_4002Text(view);
+		case ClassdiagramEditPart.VISUAL_ID:
+			return getClassdiagram_1000Text(view);
 		case ClassEditPart.VISUAL_ID:
 			return getClass_2002Text(view);
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getClassSupertypes_4002Text(view);
+		case ClassInvariantEditPart.VISUAL_ID:
+			return getClassInvariant_3005Text(view);
+		case ClassEventEditPart.VISUAL_ID:
+			return getClassEvent_3003Text(view);
+		case ClassAxiomEditPart.VISUAL_ID:
+			return getClassAxiom_3006Text(view);
+		case AssociationEditPart.VISUAL_ID:
+			return getAssociation_4001Text(view);
 		}
 		return getUnknownElementText(view);
 	}

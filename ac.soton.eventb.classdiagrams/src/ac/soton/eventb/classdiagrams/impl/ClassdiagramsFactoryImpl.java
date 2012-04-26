@@ -6,6 +6,7 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
+import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassAxiom;
@@ -74,6 +75,7 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 			case ClassdiagramsPackage.CLASS_INVARIANT: return createClassInvariant();
 			case ClassdiagramsPackage.CLASS_EVENT: return createClassEvent();
 			case ClassdiagramsPackage.CLASS: return createClass();
+			case ClassdiagramsPackage.ABSTRACT_CLASSIAGRAM_ELEMENT: return createAbstractClassiagramElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -147,6 +149,16 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	public ac.soton.eventb.classdiagrams.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractClassiagramElement createAbstractClassiagramElement() {
+		AbstractClassiagramElementImpl abstractClassiagramElement = new AbstractClassiagramElementImpl();
+		return abstractClassiagramElement;
 	}
 
 	/**

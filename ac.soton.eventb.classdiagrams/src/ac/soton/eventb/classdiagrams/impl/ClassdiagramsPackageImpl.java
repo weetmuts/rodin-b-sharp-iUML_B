@@ -8,6 +8,7 @@ package ac.soton.eventb.classdiagrams.impl;
 
 
 
+import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassAxiom;
@@ -96,6 +97,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	private EClass classEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractClassiagramElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -248,7 +256,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Constant() {
+	public EAttribute getAssociation_Surjective() {
 		return (EAttribute)associationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -257,7 +265,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Surjective() {
+	public EAttribute getAssociation_Injective() {
 		return (EAttribute)associationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -266,7 +274,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Injective() {
+	public EAttribute getAssociation_Total() {
 		return (EAttribute)associationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -275,17 +283,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Total() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAssociation_Functional() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)associationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -401,26 +400,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClass_Constant() {
-		return (EAttribute)classEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getClass_TargetFile() {
-		return (EAttribute)classEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getClass_Refines() {
-		return (EReference)classEClass.getEStructuralFeatures().get(9);
+		return (EReference)classEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -429,7 +410,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	public EReference getClass_ClassEvents() {
-		return (EReference)classEClass.getEStructuralFeatures().get(10);
+		return (EReference)classEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -438,7 +419,34 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	public EAttribute getClass_Instance() {
-		return (EAttribute)classEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)classEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractClassiagramElement() {
+		return abstractClassiagramElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractClassiagramElement_Constant() {
+		return (EAttribute)abstractClassiagramElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractClassiagramElement_TargetContext() {
+		return (EAttribute)abstractClassiagramElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -479,7 +487,6 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		associationEClass = createEClass(ASSOCIATION);
 		createEReference(associationEClass, ASSOCIATION__TARGET);
 		createEReference(associationEClass, ASSOCIATION__SOURCE);
-		createEAttribute(associationEClass, ASSOCIATION__CONSTANT);
 		createEAttribute(associationEClass, ASSOCIATION__SURJECTIVE);
 		createEAttribute(associationEClass, ASSOCIATION__INJECTIVE);
 		createEAttribute(associationEClass, ASSOCIATION__TOTAL);
@@ -501,11 +508,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		createEReference(classEClass, CLASS__EXTENDS);
 		createEReference(classEClass, CLASS__INCOMING);
 		createEReference(classEClass, CLASS__OUTGOING);
-		createEAttribute(classEClass, CLASS__CONSTANT);
-		createEAttribute(classEClass, CLASS__TARGET_FILE);
 		createEReference(classEClass, CLASS__REFINES);
 		createEReference(classEClass, CLASS__CLASS_EVENTS);
 		createEAttribute(classEClass, CLASS__INSTANCE);
+
+		abstractClassiagramElementEClass = createEClass(ABSTRACT_CLASSIAGRAM_ELEMENT);
+		createEAttribute(abstractClassiagramElementEClass, ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT);
+		createEAttribute(abstractClassiagramElementEClass, ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT);
 	}
 
 	/**
@@ -534,7 +543,6 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		// Obtain other dependent packages
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 		DiagramsPackage theDiagramsPackage = (DiagramsPackage)EPackage.Registry.INSTANCE.getEPackage(DiagramsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -544,12 +552,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		classdiagramEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
-		associationEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		associationEClass.getESuperTypes().add(this.getAbstractClassiagramElement());
 		classAttributeEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		classAxiomEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedDerivedPredicateElement());
 		classInvariantEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedDerivedPredicateElement());
 		classEventEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		classEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		classEClass.getESuperTypes().add(this.getAbstractClassiagramElement());
+		abstractClassiagramElementEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classdiagramOwnerEClass, ClassdiagramOwner.class, "ClassdiagramOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -562,7 +571,6 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociation_Target(), this.getClass_(), this.getClass_Incoming(), "target", null, 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_Source(), this.getClass_(), this.getClass_Outgoing(), "source", null, 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Constant(), ecorePackage.getEBoolean(), "constant", "false", 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_Surjective(), ecorePackage.getEBoolean(), "surjective", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_Injective(), ecorePackage.getEBoolean(), "injective", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_Total(), ecorePackage.getEBoolean(), "total", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -584,14 +592,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEReference(getClass_Extends(), this.getClass_(), null, "extends", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Incoming(), this.getAssociation(), this.getAssociation_Target(), "incoming", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Outgoing(), this.getAssociation(), this.getAssociation_Source(), "outgoing", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass_Constant(), ecorePackage.getEBoolean(), "constant", "false", 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(theEcorePackage.getEEList());
-		EGenericType g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getClass_TargetFile(), g1, "targetFile", "none", 0, 1, ac.soton.eventb.classdiagrams.Class.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Refines(), this.getClass_(), null, "refines", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_ClassEvents(), this.getClassEvent(), null, "classEvents", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Instance(), ecorePackage.getEString(), "instance", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractClassiagramElementEClass, AbstractClassiagramElement.class, "AbstractClassiagramElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractClassiagramElement_Constant(), ecorePackage.getEBoolean(), "constant", "false", 0, 1, AbstractClassiagramElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractClassiagramElement_TargetContext(), ecorePackage.getEString(), "targetContext", null, 0, 1, AbstractClassiagramElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

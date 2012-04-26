@@ -26,8 +26,6 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getOutgoing <em>Outgoing</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Class#isConstant <em>Constant</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Class#getTargetFile <em>Target File</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassEvents <em>Class Events</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getInstance <em>Instance</em>}</li>
@@ -38,7 +36,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * @model
  * @generated
  */
-public interface Class extends EventBNamedCommentedElement {
+public interface Class extends AbstractClassiagramElement {
 	/**
 	 * Returns the value of the '<em><b>Supertypes</b></em>' reference list.
 	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.Class}.
@@ -164,60 +162,6 @@ public interface Class extends EventBNamedCommentedElement {
 	 * @generated
 	 */
 	EList<Association> getOutgoing();
-
-	/**
-	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant</em>' attribute.
-	 * @see #setConstant(boolean)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Constant()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isConstant();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#isConstant <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Constant</em>' attribute.
-	 * @see #isConstant()
-	 * @generated
-	 */
-	void setConstant(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Target File</b></em>' attribute.
-	 * The default value is <code>"none"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Target File</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target File</em>' attribute.
-	 * @see #setTargetFile(EList)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_TargetFile()
-	 * @model default="none" many="false" transient="true"
-	 * @generated
-	 */
-	EList<?> getTargetFile();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getTargetFile <em>Target File</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target File</em>' attribute.
-	 * @see #getTargetFile()
-	 * @generated
-	 */
-	void setTargetFile(EList<?> value);
 
 	/**
 	 * Returns the value of the '<em><b>Refines</b></em>' reference list.

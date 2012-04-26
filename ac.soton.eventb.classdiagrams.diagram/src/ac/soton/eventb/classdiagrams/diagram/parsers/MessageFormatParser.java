@@ -163,9 +163,6 @@ public class MessageFormatParser extends AbstractParser {
 	 */
 	public String getEditString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		
-		System.out.println(this.getClass().toString() + ": getEditString");
-		
 		return getEditorProcessor().format(getEditableValues(element),
 				new StringBuffer(), new FieldPosition(0)).toString();
 	}
@@ -201,9 +198,6 @@ public class MessageFormatParser extends AbstractParser {
 	 */
 	public String getPrintString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		
-//		System.out.println(this.getClass().toString() + ": print string: " + getViewProcessor().format(getValues(element)));
-		
 		return getViewProcessor().format(getValues(element),
 				new StringBuffer(), new FieldPosition(0)).toString();
 	}

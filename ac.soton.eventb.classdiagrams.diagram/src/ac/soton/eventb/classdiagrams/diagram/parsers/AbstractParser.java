@@ -179,22 +179,21 @@ public abstract class AbstractParser implements IParser {
 	 */
 	protected Object getValue(EObject element, EAttribute feature) {
 		Object value;
-		
-		if (feature.getName().equals("surjective")){
-			value = ((Boolean)element.eGet(feature)) ? "1" : "0";
+
+		if (feature.getName().equals("surjective")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
 			System.out.println("printed");
-		} else if (feature.getName().equals("injective")){
-			value = ((Boolean)element.eGet(feature)) ? "1" : "n";
-		} else if (feature.getName().equals("functional")){
-			value = ((Boolean)element.eGet(feature)) ? "1" : "0";
-		} else if (feature.getName().equals("total")){
-			value = ((Boolean)element.eGet(feature)) ? "1" : "n";
+		} else if (feature.getName().equals("injective")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
+		} else if (feature.getName().equals("functional")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
+		} else if (feature.getName().equals("total")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
 		} else {
 			value = element.eGet(feature);
 		}
-//		value = element.eGet(feature);
+		//		value = element.eGet(feature);
 
-		
 		Class iClass = feature.getEAttributeType().getInstanceClass();
 		if (String.class.equals(iClass)) {
 			if (value == null) {

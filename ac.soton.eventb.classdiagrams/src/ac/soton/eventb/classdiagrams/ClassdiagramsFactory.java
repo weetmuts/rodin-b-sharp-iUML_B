@@ -89,6 +89,15 @@ public interface ClassdiagramsFactory extends EFactory {
 	Class createClass();
 
 	/**
+	 * Returns a new object of class '<em>Abstract Classiagram Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Classiagram Element</em>'.
+	 * @generated
+	 */
+	AbstractClassiagramElement createAbstractClassiagramElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -42,6 +42,7 @@ public class ClassdiagramsTests extends TestSuite {
 		suite.addTestSuite(ClassInvariantTest.class);
 		suite.addTestSuite(ClassEventTest.class);
 		suite.addTestSuite(ClassTest.class);
+		suite.addTestSuite(AbstractClassiagramElementTest.class);
 		return suite;
 	}
 

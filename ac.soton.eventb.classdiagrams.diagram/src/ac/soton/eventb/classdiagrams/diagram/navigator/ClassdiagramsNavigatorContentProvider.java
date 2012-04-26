@@ -252,64 +252,6 @@ public class ClassdiagramsNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case AssociationEditPart.VISUAL_ID: {
-			LinkedList<ClassdiagramsAbstractNavigatorItem> result = new LinkedList<ClassdiagramsAbstractNavigatorItem>();
-			Edge sv = (Edge) view;
-			ClassdiagramsNavigatorGroup target = new ClassdiagramsNavigatorGroup(
-					Messages.NavigatorGroupName_Association_4001_target,
-					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			ClassdiagramsNavigatorGroup source = new ClassdiagramsNavigatorGroup(
-					Messages.NavigatorGroupName_Association_4001_source,
-					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					ClassdiagramsVisualIDRegistry
-							.getType(ClassEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					ClassdiagramsVisualIDRegistry
-							.getType(ClassEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			if (!target.isEmpty()) {
-				result.add(target);
-			}
-			if (!source.isEmpty()) {
-				result.add(source);
-			}
-			return result.toArray();
-		}
-
-		case ClassSupertypesEditPart.VISUAL_ID: {
-			LinkedList<ClassdiagramsAbstractNavigatorItem> result = new LinkedList<ClassdiagramsAbstractNavigatorItem>();
-			Edge sv = (Edge) view;
-			ClassdiagramsNavigatorGroup target = new ClassdiagramsNavigatorGroup(
-					Messages.NavigatorGroupName_ClassSupertypes_4002_target,
-					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			ClassdiagramsNavigatorGroup source = new ClassdiagramsNavigatorGroup(
-					Messages.NavigatorGroupName_ClassSupertypes_4002_source,
-					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection<View> connectedViews;
-			connectedViews = getLinksTargetByType(Collections.singleton(sv),
-					ClassdiagramsVisualIDRegistry
-							.getType(ClassEditPart.VISUAL_ID));
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(sv),
-					ClassdiagramsVisualIDRegistry
-							.getType(ClassEditPart.VISUAL_ID));
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			if (!target.isEmpty()) {
-				result.add(target);
-			}
-			if (!source.isEmpty()) {
-				result.add(source);
-			}
-			return result.toArray();
-		}
-
 		case ClassEditPart.VISUAL_ID: {
 			LinkedList<ClassdiagramsAbstractNavigatorItem> result = new LinkedList<ClassdiagramsAbstractNavigatorItem>();
 			Node sv = (Node) view;
@@ -377,6 +319,64 @@ public class ClassdiagramsNavigatorContentProvider implements
 			}
 			if (!outgoinglinks.isEmpty()) {
 				result.add(outgoinglinks);
+			}
+			return result.toArray();
+		}
+
+		case ClassSupertypesEditPart.VISUAL_ID: {
+			LinkedList<ClassdiagramsAbstractNavigatorItem> result = new LinkedList<ClassdiagramsAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			ClassdiagramsNavigatorGroup target = new ClassdiagramsNavigatorGroup(
+					Messages.NavigatorGroupName_ClassSupertypes_4002_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			ClassdiagramsNavigatorGroup source = new ClassdiagramsNavigatorGroup(
+					Messages.NavigatorGroupName_ClassSupertypes_4002_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					ClassdiagramsVisualIDRegistry
+							.getType(ClassEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					ClassdiagramsVisualIDRegistry
+							.getType(ClassEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
+			}
+			if (!source.isEmpty()) {
+				result.add(source);
+			}
+			return result.toArray();
+		}
+
+		case AssociationEditPart.VISUAL_ID: {
+			LinkedList<ClassdiagramsAbstractNavigatorItem> result = new LinkedList<ClassdiagramsAbstractNavigatorItem>();
+			Edge sv = (Edge) view;
+			ClassdiagramsNavigatorGroup target = new ClassdiagramsNavigatorGroup(
+					Messages.NavigatorGroupName_Association_4001_target,
+					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			ClassdiagramsNavigatorGroup source = new ClassdiagramsNavigatorGroup(
+					Messages.NavigatorGroupName_Association_4001_source,
+					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
+			Collection<View> connectedViews;
+			connectedViews = getLinksTargetByType(Collections.singleton(sv),
+					ClassdiagramsVisualIDRegistry
+							.getType(ClassEditPart.VISUAL_ID));
+			target.addChildren(createNavigatorItems(connectedViews, target,
+					true));
+			connectedViews = getLinksSourceByType(Collections.singleton(sv),
+					ClassdiagramsVisualIDRegistry
+							.getType(ClassEditPart.VISUAL_ID));
+			source.addChildren(createNavigatorItems(connectedViews, source,
+					true));
+			if (!target.isEmpty()) {
+				result.add(target);
+			}
+			if (!source.isEmpty()) {
+				result.add(source);
 			}
 			return result.toArray();
 		}

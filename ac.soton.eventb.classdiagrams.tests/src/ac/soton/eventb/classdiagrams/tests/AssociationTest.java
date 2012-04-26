@@ -19,15 +19,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class AssociationTest extends TestCase {
-
-	/**
-	 * The fixture for this Association test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Association fixture = null;
+public class AssociationTest extends AbstractClassiagramElementTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -49,23 +41,14 @@ public class AssociationTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Association test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(Association fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Association test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected Association getFixture() {
-		return fixture;
+		return (Association)fixture;
 	}
 
 	/**

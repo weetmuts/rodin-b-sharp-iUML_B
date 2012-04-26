@@ -19,7 +19,6 @@
     <genClasses ecoreClass="classdiagrams.ecore#//Association">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Association/target"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Association/source"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/constant"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/surjective"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/injective"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/total"/>
@@ -37,11 +36,13 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/extends"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/incoming"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/outgoing"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/constant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/targetFile"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/refines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classEvents"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/instance"/>
+    </genClasses>
+    <genClasses ecoreClass="classdiagrams.ecore#//AbstractClassiagramElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AbstractClassiagramElement/constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AbstractClassiagramElement/targetContext"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -271,6 +271,29 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbstractClassiagramElementItemProvider abstractClassiagramElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAbstractClassiagramElementAdapter() {
+		if (abstractClassiagramElementItemProvider == null) {
+			abstractClassiagramElementItemProvider = new AbstractClassiagramElementItemProvider(this);
+		}
+
+		return abstractClassiagramElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,6 +426,7 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		if (classInvariantItemProvider != null) classInvariantItemProvider.dispose();
 		if (classEventItemProvider != null) classEventItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
+		if (abstractClassiagramElementItemProvider != null) abstractClassiagramElementItemProvider.dispose();
 	}
 
 	/**
@@ -573,6 +597,14 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
 							 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
+
+				
+				annotation = ClassdiagramsPackage.Literals.ABSTRACT_CLASSIAGRAM_ELEMENT.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 ClassdiagramsFactory.eINSTANCE.createAbstractClassiagramElement()));
 
 				
 				annotation = ClassdiagramsPackage.Literals.ASSOCIATION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");

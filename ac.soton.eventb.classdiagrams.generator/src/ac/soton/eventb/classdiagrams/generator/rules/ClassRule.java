@@ -14,6 +14,7 @@ import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.core.machine.impl.InvariantImpl;
 
 
 import ac.soton.eventb.classdiagrams.Class;
@@ -43,9 +44,40 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		return true;
 	}
 	
-
+	@Override
+	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
+		
+//		Class c = (Class)sourceElement;
+//		
+//		if (c.getSupertypes().size() > 0){
+//			for (Class superClass : c.getSupertypes()){
+//				if (!supertypeDependenciesSatisfied(superClass, generatedElements)){
+//					return false;
+//				}
+//			}
+//		}
+		
+		return true; //cia
+	}
+	
+	private boolean supertypeDependenciesSatisfied(Class c, List<GenerationDescriptor> generatedElements){
+		for (GenerationDescriptor gd : generatedElements){
+			if (gd.value instanceof InvariantImpl){
+				InvariantImpl i = (InvariantImpl)gd.value;
+				if (c.getName().concat(".inst") .equals(i.getName())){
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
+		
+		System.out.println("generatedElements: " + generatedElements.size());
+		
 		assert(enabled(sourceElement));
 		Class cp = (Class) sourceElement;
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
@@ -54,6 +86,32 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		Event initialisation = (Event) Find.named(machine.getEvents(), "INITIALISATION");
 		
 		if (cp.isConstant()){
+			Context context = null;
+			
+			//look for an already existing context
+			for (GenerationDescriptor gd :  generatedElements){
+				if (gd.value instanceof Context){
+					if (((Context)gd.value).getName().equals(cp.getTargetContext())){
+						context = (Context)gd.value;
+					}
+				}
+			}
+			
+			//if nor found - create one
+			if (context == null){
+				context = (Context)Make.context(cp.getTargetContext(), "");
+				ret.add(Make.descriptor(null, components, context,10));
+				ret.add(Make.descriptor(machine, sees, context,10));
+			}
+			
+			
+			
+			if (cp.getInstance() == null || cp.getInstance().isEmpty()){
+				ret.add(Make.descriptor(context, sets, Make.set(cp.getName(), "wake up kinds"),10));
+			} else {
+				ret.add(Make.descriptor(context, constants, Make.constant(cp.getName(), "wake up kind: addEvent"),10));
+				ret.add(Make.descriptor(context, axioms, Make.axiom(cp.getName(), cp.getInstance(), ""),10));			
+			}
 			
 		} else {
 			//add class variable
@@ -79,6 +137,23 @@ public class ClassRule  extends AbstractRule  implements IRule {
 //		}
 		
 		return ret;
+	}
+
+	private Context getContext(Class cp,
+			List<GenerationDescriptor> generatedElements,
+			Machine machine) {
+		
+		for (GenerationDescriptor gd :  generatedElements){
+			if (gd.value instanceof Context){
+				if (((Context)gd.value).getName().equals(cp.getTargetContext())){
+					return (Context)gd.value;
+				}
+			}
+		}
+		
+		Context context = (Context)Make.context(cp.getTargetContext(), "");
+		
+		return context;
 	}	
 	
 }

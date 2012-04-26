@@ -20,7 +20,6 @@ import org.eventb.emf.core.EventBNamed;
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#getSource <em>Source</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Association#isConstant <em>Constant</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isTotal <em>Total</em>}</li>
@@ -32,7 +31,7 @@ import org.eventb.emf.core.EventBNamed;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isAsociationTypeRight'"
  * @generated
  */
-public interface Association extends EventBNamedCommentedElement {
+public interface Association extends AbstractClassiagramElement {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}'.
@@ -88,33 +87,6 @@ public interface Association extends EventBNamedCommentedElement {
 	 * @generated
 	 */
 	void setSource(ac.soton.eventb.classdiagrams.Class value);
-
-	/**
-	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant</em>' attribute.
-	 * @see #setConstant(boolean)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getAssociation_Constant()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isConstant();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Association#isConstant <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Constant</em>' attribute.
-	 * @see #isConstant()
-	 * @generated
-	 */
-	void setConstant(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Surjective</b></em>' attribute.

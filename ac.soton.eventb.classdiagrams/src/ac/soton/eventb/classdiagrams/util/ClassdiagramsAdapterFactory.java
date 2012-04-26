@@ -7,6 +7,7 @@
 package ac.soton.eventb.classdiagrams.util;
 
 
+import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassAxiom;
@@ -123,6 +124,10 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseClass(ac.soton.eventb.classdiagrams.Class object) {
 				return createClassAdapter();
+			}
+			@Override
+			public Adapter caseAbstractClassiagramElement(AbstractClassiagramElement object) {
+				return createAbstractClassiagramElementAdapter();
 			}
 			@Override
 			public Adapter caseEventBObject(EventBObject object) {
@@ -301,6 +306,20 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement <em>Abstract Classiagram Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.classdiagrams.AbstractClassiagramElement
+	 * @generated
+	 */
+	public Adapter createAbstractClassiagramElementAdapter() {
 		return null;
 	}
 

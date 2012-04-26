@@ -7,6 +7,7 @@
 package ac.soton.eventb.classdiagrams.util;
 
 
+import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassAxiom;
@@ -131,6 +132,7 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.ASSOCIATION: {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
+				if (result == null) result = caseAbstractClassiagramElement(association);
 				if (result == null) result = caseEventBNamedCommentedElement(association);
 				if (result == null) result = caseEventBCommentedElement(association);
 				if (result == null) result = caseEventBNamed(association);
@@ -199,12 +201,25 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.CLASS: {
 				ac.soton.eventb.classdiagrams.Class class_ = (ac.soton.eventb.classdiagrams.Class)theEObject;
 				T result = caseClass(class_);
+				if (result == null) result = caseAbstractClassiagramElement(class_);
 				if (result == null) result = caseEventBNamedCommentedElement(class_);
 				if (result == null) result = caseEventBCommentedElement(class_);
 				if (result == null) result = caseEventBNamed(class_);
 				if (result == null) result = caseEventBElement(class_);
 				if (result == null) result = caseEventBCommented(class_);
 				if (result == null) result = caseEventBObject(class_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassdiagramsPackage.ABSTRACT_CLASSIAGRAM_ELEMENT: {
+				AbstractClassiagramElement abstractClassiagramElement = (AbstractClassiagramElement)theEObject;
+				T result = caseAbstractClassiagramElement(abstractClassiagramElement);
+				if (result == null) result = caseEventBNamedCommentedElement(abstractClassiagramElement);
+				if (result == null) result = caseEventBCommentedElement(abstractClassiagramElement);
+				if (result == null) result = caseEventBNamed(abstractClassiagramElement);
+				if (result == null) result = caseEventBElement(abstractClassiagramElement);
+				if (result == null) result = caseEventBCommented(abstractClassiagramElement);
+				if (result == null) result = caseEventBObject(abstractClassiagramElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -329,6 +344,21 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseClass(ac.soton.eventb.classdiagrams.Class object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Classiagram Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Classiagram Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractClassiagramElement(AbstractClassiagramElement object) {
 		return null;
 	}
 

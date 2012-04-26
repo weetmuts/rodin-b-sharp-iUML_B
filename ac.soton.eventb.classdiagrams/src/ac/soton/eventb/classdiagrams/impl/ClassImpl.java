@@ -54,8 +54,6 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#isConstant <em>Constant</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getTargetFile <em>Target File</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassEvents <em>Class Events</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getInstance <em>Instance</em>}</li>
@@ -64,7 +62,7 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *
  * @generated
  */
-public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.soton.eventb.classdiagrams.Class {
+public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soton.eventb.classdiagrams.Class {
 	/**
 	 * The cached value of the '{@link #getSupertypes() <em>Supertypes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -134,36 +132,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<Association> outgoing;
-
-	/**
-	 * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConstant()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CONSTANT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConstant()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean constant = CONSTANT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getTargetFile() <em>Target File</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTargetFile()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<?> targetFile;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference list.
@@ -361,48 +329,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isConstant() {
-		return constant;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setConstant(boolean newConstant) {
-		boolean oldConstant = constant;
-		constant = newConstant;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__CONSTANT, oldConstant, constant));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<?> getTargetFile() {
-		return targetFile;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTargetFile(EList<?> newTargetFile) {
-		EList<?> oldTargetFile = targetFile;
-		targetFile = newTargetFile;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__TARGET_FILE, oldTargetFile, targetFile));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ac.soton.eventb.classdiagrams.Class> getRefines() {
 		if (refines == null) {
 			refines = new EObjectResolvingEList<ac.soton.eventb.classdiagrams.Class>(ac.soton.eventb.classdiagrams.Class.class, this, ClassdiagramsPackage.CLASS__REFINES);
@@ -507,10 +433,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return getIncoming();
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return getOutgoing();
-			case ClassdiagramsPackage.CLASS__CONSTANT:
-				return isConstant();
-			case ClassdiagramsPackage.CLASS__TARGET_FILE:
-				return getTargetFile();
 			case ClassdiagramsPackage.CLASS__REFINES:
 				return getRefines();
 			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
@@ -557,12 +479,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				getOutgoing().clear();
 				getOutgoing().addAll((Collection<? extends Association>)newValue);
 				return;
-			case ClassdiagramsPackage.CLASS__CONSTANT:
-				setConstant((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__TARGET_FILE:
-				setTargetFile((EList<?>)newValue);
-				return;
 			case ClassdiagramsPackage.CLASS__REFINES:
 				getRefines().clear();
 				getRefines().addAll((Collection<? extends ac.soton.eventb.classdiagrams.Class>)newValue);
@@ -607,12 +523,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				getOutgoing().clear();
 				return;
-			case ClassdiagramsPackage.CLASS__CONSTANT:
-				setConstant(CONSTANT_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.CLASS__TARGET_FILE:
-				setTargetFile((EList<?>)null);
-				return;
 			case ClassdiagramsPackage.CLASS__REFINES:
 				getRefines().clear();
 				return;
@@ -648,10 +558,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return incoming != null && !incoming.isEmpty();
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return outgoing != null && !outgoing.isEmpty();
-			case ClassdiagramsPackage.CLASS__CONSTANT:
-				return constant != CONSTANT_EDEFAULT;
-			case ClassdiagramsPackage.CLASS__TARGET_FILE:
-				return targetFile != null;
 			case ClassdiagramsPackage.CLASS__REFINES:
 				return refines != null && !refines.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
@@ -672,11 +578,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (constant: ");
-		result.append(constant);
-		result.append(", targetFile: ");
-		result.append(targetFile);
-		result.append(", instance: ");
+		result.append(" (instance: ");
 		result.append(instance);
 		result.append(')');
 		return result.toString();

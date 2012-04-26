@@ -6,6 +6,7 @@
  */
 package ac.soton.eventb.classdiagrams.util;
 
+import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassAxiom;
@@ -113,6 +114,8 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateClassEvent((ClassEvent)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS:
 				return validateClass((ac.soton.eventb.classdiagrams.Class)value, diagnostics, context);
+			case ClassdiagramsPackage.ABSTRACT_CLASSIAGRAM_ELEMENT:
+				return validateAbstractClassiagramElement((AbstractClassiagramElement)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -340,6 +343,15 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 */
 	public boolean validateClass(ac.soton.eventb.classdiagrams.Class class_, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(class_, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractClassiagramElement(AbstractClassiagramElement abstractClassiagramElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(abstractClassiagramElement, diagnostics, context);
 	}
 
 	/**
