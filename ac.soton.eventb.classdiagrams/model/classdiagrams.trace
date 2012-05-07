@@ -11,42 +11,12 @@
     <compartmentTraces
         visualID="7005"
         queryText="true"/>
-    <compartmentTraces
-        visualID="7006"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7007"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7008"
-        queryText="true"/>
   </nodeTraces>
   <childNodeTraces
-      visualID="3003"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'ClassEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'Class') and _containmentMF_.name = 'classEvents')">
-    <nodeLabelTraces
-        visualID="5002"
-        queryText="true"/>
-  </childNodeTraces>
-  <childNodeTraces
-      visualID="3004"
+      visualID="3021"
       queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'ClassAttribute') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'Class') and _containmentMF_.name = 'classAttributes')">
     <nodeLabelTraces
-        visualID="5003"
-        queryText="true"/>
-  </childNodeTraces>
-  <childNodeTraces
-      visualID="3005"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'ClassInvariant') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'Class') and _containmentMF_.name = 'classInvariants')">
-    <nodeLabelTraces
-        visualID="5004"
-        queryText="true"/>
-  </childNodeTraces>
-  <childNodeTraces
-      visualID="3006"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'ClassAxiom') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'Class') and _containmentMF_.name = 'classAxioms')">
-    <nodeLabelTraces
-        visualID="5005"
+        visualID="5022"
         queryText="true"/>
   </childNodeTraces>
   <linkTraces
@@ -63,6 +33,6 @@
         queryText="true"/>
   </linkTraces>
   <linkTraces
-      visualID="4002"
+      visualID="4004"
       queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/classdiagrams' and _eClass_.name = 'Class') and _feature_.name = 'supertypes')"/>
 </trace:TraceModel>

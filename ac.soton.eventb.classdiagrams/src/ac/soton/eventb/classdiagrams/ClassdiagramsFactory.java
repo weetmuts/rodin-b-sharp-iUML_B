@@ -53,33 +53,6 @@ public interface ClassdiagramsFactory extends EFactory {
 	ClassAttribute createClassAttribute();
 
 	/**
-	 * Returns a new object of class '<em>Class Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Axiom</em>'.
-	 * @generated
-	 */
-	ClassAxiom createClassAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Class Invariant</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Invariant</em>'.
-	 * @generated
-	 */
-	ClassInvariant createClassInvariant();
-
-	/**
-	 * Returns a new object of class '<em>Class Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Event</em>'.
-	 * @generated
-	 */
-	ClassEvent createClassEvent();
-
-	/**
 	 * Returns a new object of class '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,13 +62,13 @@ public interface ClassdiagramsFactory extends EFactory {
 	Class createClass();
 
 	/**
-	 * Returns a new object of class '<em>Abstract Classiagram Element</em>'.
+	 * Returns a new object of class '<em>Elaborative Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Classiagram Element</em>'.
+	 * @return a new object of class '<em>Elaborative Element</em>'.
 	 * @generated
 	 */
-	AbstractClassiagramElement createAbstractClassiagramElement();
+	ElaborativeElement createElaborativeElement();
 
 	/**
 	 * Returns the package supported by this factory.

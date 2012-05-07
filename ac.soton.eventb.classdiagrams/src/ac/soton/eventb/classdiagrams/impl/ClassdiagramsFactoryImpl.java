@@ -6,17 +6,17 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassAxiom;
-import ac.soton.eventb.classdiagrams.ClassEvent;
-import ac.soton.eventb.classdiagrams.ClassInvariant;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -71,13 +71,44 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 			case ClassdiagramsPackage.CLASSDIAGRAM: return createClassdiagram();
 			case ClassdiagramsPackage.ASSOCIATION: return createAssociation();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE: return createClassAttribute();
-			case ClassdiagramsPackage.CLASS_AXIOM: return createClassAxiom();
-			case ClassdiagramsPackage.CLASS_INVARIANT: return createClassInvariant();
-			case ClassdiagramsPackage.CLASS_EVENT: return createClassEvent();
 			case ClassdiagramsPackage.CLASS: return createClass();
-			case ClassdiagramsPackage.ABSTRACT_CLASSIAGRAM_ELEMENT: return createAbstractClassiagramElement();
+			case ClassdiagramsPackage.ELABORATIVE_ELEMENT: return createElaborativeElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ClassdiagramsPackage.CLASS_TYPE:
+				return createClassTypeFromString(eDataType, initialValue);
+			case ClassdiagramsPackage.ASSOCIATION_TYPE:
+				return createAssociationTypeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ClassdiagramsPackage.CLASS_TYPE:
+				return convertClassTypeToString(eDataType, instanceValue);
+			case ClassdiagramsPackage.ASSOCIATION_TYPE:
+				return convertAssociationTypeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -116,36 +147,6 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassAxiom createClassAxiom() {
-		ClassAxiomImpl classAxiom = new ClassAxiomImpl();
-		return classAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ClassInvariant createClassInvariant() {
-		ClassInvariantImpl classInvariant = new ClassInvariantImpl();
-		return classInvariant;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ClassEvent createClassEvent() {
-		ClassEventImpl classEvent = new ClassEventImpl();
-		return classEvent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ac.soton.eventb.classdiagrams.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -156,9 +157,49 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractClassiagramElement createAbstractClassiagramElement() {
-		AbstractClassiagramElementImpl abstractClassiagramElement = new AbstractClassiagramElementImpl();
-		return abstractClassiagramElement;
+	public ElaborativeElement createElaborativeElement() {
+		ElaborativeElementImpl elaborativeElement = new ElaborativeElementImpl();
+		return elaborativeElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassType createClassTypeFromString(EDataType eDataType, String initialValue) {
+		ClassType result = ClassType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertClassTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssociationType createAssociationTypeFromString(EDataType eDataType, String initialValue) {
+		AssociationType result = AssociationType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAssociationTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

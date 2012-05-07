@@ -6,16 +6,13 @@
  */
 package ac.soton.eventb.classdiagrams.util;
 
-
-import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassAxiom;
-import ac.soton.eventb.classdiagrams.ClassEvent;
-import ac.soton.eventb.classdiagrams.ClassInvariant;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.emf.diagrams.Diagram;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -28,14 +25,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
-import org.eventb.emf.core.EventBDerived;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.EventBNamedCommentedPredicateElement;
 import org.eventb.emf.core.EventBObject;
-import org.eventb.emf.core.EventBPredicate;
 
 /**
  * <!-- begin-user-doc -->
@@ -110,24 +103,12 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 				return createClassAttributeAdapter();
 			}
 			@Override
-			public Adapter caseClassAxiom(ClassAxiom object) {
-				return createClassAxiomAdapter();
-			}
-			@Override
-			public Adapter caseClassInvariant(ClassInvariant object) {
-				return createClassInvariantAdapter();
-			}
-			@Override
-			public Adapter caseClassEvent(ClassEvent object) {
-				return createClassEventAdapter();
-			}
-			@Override
 			public Adapter caseClass(ac.soton.eventb.classdiagrams.Class object) {
 				return createClassAdapter();
 			}
 			@Override
-			public Adapter caseAbstractClassiagramElement(AbstractClassiagramElement object) {
-				return createAbstractClassiagramElementAdapter();
+			public Adapter caseElaborativeElement(ElaborativeElement object) {
+				return createElaborativeElementAdapter();
 			}
 			@Override
 			public Adapter caseEventBObject(EventBObject object) {
@@ -160,22 +141,6 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDiagram(Diagram object) {
 				return createDiagramAdapter();
-			}
-			@Override
-			public Adapter caseEventBPredicate(EventBPredicate object) {
-				return createEventBPredicateAdapter();
-			}
-			@Override
-			public Adapter caseEventBNamedCommentedPredicateElement(EventBNamedCommentedPredicateElement object) {
-				return createEventBNamedCommentedPredicateElementAdapter();
-			}
-			@Override
-			public Adapter caseEventBDerived(EventBDerived object) {
-				return createEventBDerivedAdapter();
-			}
-			@Override
-			public Adapter caseEventBNamedCommentedDerivedPredicateElement(EventBNamedCommentedDerivedPredicateElement object) {
-				return createEventBNamedCommentedDerivedPredicateElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -254,48 +219,6 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.ClassAxiom <em>Class Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.ClassAxiom
-	 * @generated
-	 */
-	public Adapter createClassAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.ClassInvariant <em>Class Invariant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.ClassInvariant
-	 * @generated
-	 */
-	public Adapter createClassInvariantAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.ClassEvent <em>Class Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.ClassEvent
-	 * @generated
-	 */
-	public Adapter createClassEventAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.Class <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -310,16 +233,16 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.AbstractClassiagramElement <em>Abstract Classiagram Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.ElaborativeElement <em>Elaborative Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.AbstractClassiagramElement
+	 * @see ac.soton.eventb.classdiagrams.ElaborativeElement
 	 * @generated
 	 */
-	public Adapter createAbstractClassiagramElementAdapter() {
+	public Adapter createElaborativeElementAdapter() {
 		return null;
 	}
 
@@ -432,62 +355,6 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDiagramAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBPredicate <em>Event BPredicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.EventBPredicate
-	 * @generated
-	 */
-	public Adapter createEventBPredicateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBNamedCommentedPredicateElement <em>Event BNamed Commented Predicate Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.EventBNamedCommentedPredicateElement
-	 * @generated
-	 */
-	public Adapter createEventBNamedCommentedPredicateElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBDerived <em>Event BDerived</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.EventBDerived
-	 * @generated
-	 */
-	public Adapter createEventBDerivedAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement <em>Event BNamed Commented Derived Predicate Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement
-	 * @generated
-	 */
-	public Adapter createEventBNamedCommentedDerivedPredicateElementAdapter() {
 		return null;
 	}
 

@@ -9,6 +9,15 @@
   <foreignModel>classdiagrams.ecore</foreignModel>
   <genPackages prefix="Classdiagrams" basePackage="ac.soton.eventb" disposableProviderFactory="true"
       extensibleProviderFactory="true" childCreationExtenders="true" ecorePackage="classdiagrams.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="classdiagrams.ecore#//ClassType">
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//ClassType/SET"/>
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//ClassType/CONSTANT"/>
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//ClassType/VARIABLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="classdiagrams.ecore#//AssociationType">
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//AssociationType/CONSTANT"/>
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//AssociationType/VARIABLE"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="classdiagrams.ecore#//ClassdiagramOwner">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//ClassdiagramOwner/classdiagrams"/>
     </genClasses>
@@ -23,26 +32,20 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/injective"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/total"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/functional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/AssociationType"/>
     </genClasses>
     <genClasses ecoreClass="classdiagrams.ecore#//ClassAttribute"/>
-    <genClasses ecoreClass="classdiagrams.ecore#//ClassAxiom"/>
-    <genClasses ecoreClass="classdiagrams.ecore#//ClassInvariant"/>
-    <genClasses ecoreClass="classdiagrams.ecore#//ClassEvent"/>
     <genClasses ecoreClass="classdiagrams.ecore#//Class">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/supertypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classAttributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classInvariants"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classAxioms"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/extends"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/incoming"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/outgoing"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/refines"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classEvents"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/instance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/classType"/>
     </genClasses>
-    <genClasses ecoreClass="classdiagrams.ecore#//AbstractClassiagramElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AbstractClassiagramElement/constant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AbstractClassiagramElement/targetContext"/>
+    <genClasses ecoreClass="classdiagrams.ecore#//ElaborativeElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//ElaborativeElement/elaborates"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

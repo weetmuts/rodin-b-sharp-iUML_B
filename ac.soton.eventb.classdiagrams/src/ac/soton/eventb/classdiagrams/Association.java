@@ -7,8 +7,6 @@
 package ac.soton.eventb.classdiagrams;
 
 import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.EventBNamed;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +22,7 @@ import org.eventb.emf.core.EventBNamed;
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isTotal <em>Total</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Association#isFunctional <em>Functional</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Association#getAssociationType <em>Association Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +30,7 @@ import org.eventb.emf.core.EventBNamed;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isAsociationTypeRight'"
  * @generated
  */
-public interface Association extends AbstractClassiagramElement {
+public interface Association extends EventBNamedCommentedElement, ElaborativeElement {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}'.
@@ -195,5 +194,35 @@ public interface Association extends AbstractClassiagramElement {
 	 * @generated
 	 */
 	void setFunctional(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Association Type</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * The literals are from the enumeration {@link ac.soton.eventb.classdiagrams.AssociationType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Association Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Association Type</em>' attribute.
+	 * @see ac.soton.eventb.classdiagrams.AssociationType
+	 * @see #setAssociationType(AssociationType)
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getAssociation_AssociationType()
+	 * @model default=""
+	 * @generated
+	 */
+	AssociationType getAssociationType();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Association#getAssociationType <em>Association Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Association Type</em>' attribute.
+	 * @see ac.soton.eventb.classdiagrams.AssociationType
+	 * @see #getAssociationType()
+	 * @generated
+	 */
+	void setAssociationType(AssociationType value);
 
 } // Association

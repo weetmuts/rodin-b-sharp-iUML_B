@@ -32,17 +32,8 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Event"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="Attribute"
           description=""/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Axiom"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Invariant"/>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

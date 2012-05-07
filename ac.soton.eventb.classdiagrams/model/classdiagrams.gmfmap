@@ -41,96 +41,15 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="classdiagrams.gmftool#//@palette/@tools.2/@tools.1"/>
-          <diagramNode
-              href="classdiagrams.gmfgraph#AttributeNode"/>
-        </ownedChild>
-      </children>
-      <children
-          compartment="//@nodes.0/@ownedChild/@compartments.1">
-        <containmentFeature
-            href="classdiagrams.ecore#//Class/classEvents"/>
-        <ownedChild>
-          <domainMetaElement
-              href="classdiagrams.ecore#//ClassEvent"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true">
-            <diagramLabel
-                href="classdiagrams.gmfgraph#EventLabel"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
               href="classdiagrams.gmftool#//@palette/@tools.2/@tools.0"/>
           <diagramNode
-              href="classdiagrams.gmfgraph#EventNode"/>
-        </ownedChild>
-      </children>
-      <children
-          compartment="//@nodes.0/@ownedChild/@compartments.2">
-        <containmentFeature
-            href="classdiagrams.ecore#//Class/classInvariants"/>
-        <ownedChild>
-          <domainMetaElement
-              href="classdiagrams.ecore#//ClassInvariant"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true">
-            <diagramLabel
-                href="classdiagrams.gmfgraph#InvariantLabel"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="classdiagrams.gmftool#//@palette/@tools.2/@tools.3"/>
-          <diagramNode
-              href="classdiagrams.gmfgraph#InvariantNode"/>
-        </ownedChild>
-      </children>
-      <children
-          compartment="//@nodes.0/@ownedChild/@compartments.3">
-        <containmentFeature
-            href="classdiagrams.ecore#//Class/classAxioms"/>
-        <ownedChild>
-          <domainMetaElement
-              href="classdiagrams.ecore#//ClassAxiom"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              readOnly="true">
-            <diagramLabel
-                href="classdiagrams.gmfgraph#AxiomLabel"/>
-            <features
-                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="classdiagrams.gmftool#//@palette/@tools.2/@tools.2"/>
-          <diagramNode
-              href="classdiagrams.gmfgraph#AxiomNode"/>
+              href="classdiagrams.gmfgraph#AttributeNode"/>
         </ownedChild>
       </children>
       <compartments
           children="//@nodes.0/@ownedChild/@children.0">
         <compartment
             href="classdiagrams.gmfgraph#Attributes"/>
-      </compartments>
-      <compartments
-          children="//@nodes.0/@ownedChild/@children.1">
-        <compartment
-            href="classdiagrams.gmfgraph#Events"/>
-      </compartments>
-      <compartments
-          children="//@nodes.0/@ownedChild/@children.2">
-        <compartment
-            href="classdiagrams.gmfgraph#Invariants"/>
-      </compartments>
-      <compartments
-          children="//@nodes.0/@ownedChild/@children.3">
-        <compartment
-            href="classdiagrams.gmfgraph#Axioms"/>
       </compartments>
     </ownedChild>
   </nodes>

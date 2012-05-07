@@ -7,22 +7,43 @@
 package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.Annotation;
+import org.eventb.emf.core.Attribute;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBCommented;
+import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedElement;
+import org.eventb.emf.core.EventBObject;
 
-import org.eventb.emf.core.impl.EventBElementImpl;
+import org.eventb.emf.core.impl.StringToAttributeMapEntryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,18 +52,30 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isFunctional <em>Functional</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getAssociationType <em>Association Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AssociationImpl extends AbstractClassiagramElementImpl implements Association {
+public class AssociationImpl extends EventBNamedCommentedElementImpl implements Association {
+	/**
+	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElaborates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventBNamed elaborates;
+
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -144,6 +177,26 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	protected boolean functional = FUNCTIONAL_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssociationType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final AssociationType ASSOCIATION_TYPE_EDEFAULT = AssociationType.CONSTANT;
+
+	/**
+	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAssociationType()
+	 * @generated
+	 * @ordered
+	 */
+	protected AssociationType associationType = ASSOCIATION_TYPE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -160,6 +213,44 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	@Override
 	protected EClass eStaticClass() {
 		return ClassdiagramsPackage.Literals.ASSOCIATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBNamed getElaborates() {
+		if (elaborates != null && elaborates.eIsProxy()) {
+			InternalEObject oldElaborates = (InternalEObject)elaborates;
+			elaborates = (EventBNamed)eResolveProxy(oldElaborates);
+			if (elaborates != oldElaborates) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.ASSOCIATION__ELABORATES, oldElaborates, elaborates));
+			}
+		}
+		return elaborates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBNamed basicGetElaborates() {
+		return elaborates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElaborates(EventBNamed newElaborates) {
+		EventBNamed oldElaborates = elaborates;
+		elaborates = newElaborates;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__ELABORATES, oldElaborates, elaborates));
 	}
 
 	/**
@@ -392,6 +483,28 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public AssociationType getAssociationType() {
+		return associationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAssociationType(AssociationType newAssociationType) {
+		AssociationType oldAssociationType = associationType;
+		associationType = newAssociationType == null ? ASSOCIATION_TYPE_EDEFAULT : newAssociationType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE, oldAssociationType, associationType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -431,6 +544,9 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
+				if (resolve) return getElaborates();
+				return basicGetElaborates();
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -445,6 +561,8 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 				return isTotal();
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				return isFunctional();
+			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
+				return getAssociationType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -454,9 +572,13 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
+				setElaborates((EventBNamed)newValue);
+				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
@@ -475,6 +597,9 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
+			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
+				setAssociationType((AssociationType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -487,6 +612,9 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
+				setElaborates((EventBNamed)null);
+				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)null);
 				return;
@@ -505,6 +633,9 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
+			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
+				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -517,6 +648,8 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
+				return elaborates != null;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				return target != null;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
@@ -529,8 +662,42 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 				return total != TOTAL_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
+				return associationType != ASSOCIATION_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ElaborativeElement.class) {
+			switch (derivedFeatureID) {
+				case ClassdiagramsPackage.ASSOCIATION__ELABORATES: return ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ElaborativeElement.class) {
+			switch (baseFeatureID) {
+				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.ASSOCIATION__ELABORATES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -551,6 +718,8 @@ public class AssociationImpl extends AbstractClassiagramElementImpl implements A
 		result.append(total);
 		result.append(", functional: ");
 		result.append(functional);
+		result.append(", AssociationType: ");
+		result.append(associationType);
 		result.append(')');
 		return result.toString();
 	}

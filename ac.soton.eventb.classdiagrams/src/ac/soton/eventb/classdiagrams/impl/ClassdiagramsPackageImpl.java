@@ -6,34 +6,34 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-
-
-import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassAxiom;
-import ac.soton.eventb.classdiagrams.ClassEvent;
-import ac.soton.eventb.classdiagrams.ClassInvariant;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.classdiagrams.util.ClassdiagramsValidator;
+
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eventb.emf.core.CorePackage;
+
+import org.eventb.emf.core.machine.MachinePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,27 +75,6 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass classAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass classInvariantEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass classEventEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass classEClass = null;
 
 	/**
@@ -103,7 +82,21 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractClassiagramElementEClass = null;
+	private EClass elaborativeElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum classTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum associationTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -292,35 +285,17 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAssociation_AssociationType() {
+		return (EAttribute)associationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClassAttribute() {
 		return classAttributeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getClassAxiom() {
-		return classAxiomEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getClassInvariant() {
-		return classInvariantEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getClassEvent() {
-		return classEventEClass;
 	}
 
 	/**
@@ -355,7 +330,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_ClassInvariants() {
+	public EReference getClass_Extends() {
 		return (EReference)classEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -364,7 +339,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_ClassAxioms() {
+	public EReference getClass_Incoming() {
 		return (EReference)classEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -373,7 +348,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Extends() {
+	public EReference getClass_Outgoing() {
 		return (EReference)classEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -382,7 +357,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Incoming() {
+	public EReference getClass_Refines() {
 		return (EReference)classEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -391,8 +366,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Outgoing() {
-		return (EReference)classEClass.getEStructuralFeatures().get(6);
+	public EAttribute getClass_ClassType() {
+		return (EAttribute)classEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -400,8 +375,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Refines() {
-		return (EReference)classEClass.getEStructuralFeatures().get(7);
+	public EClass getElaborativeElement() {
+		return elaborativeElementEClass;
 	}
 
 	/**
@@ -409,8 +384,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_ClassEvents() {
-		return (EReference)classEClass.getEStructuralFeatures().get(8);
+	public EReference getElaborativeElement_Elaborates() {
+		return (EReference)elaborativeElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -418,8 +393,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClass_Instance() {
-		return (EAttribute)classEClass.getEStructuralFeatures().get(9);
+	public EEnum getClassType() {
+		return classTypeEEnum;
 	}
 
 	/**
@@ -427,26 +402,8 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractClassiagramElement() {
-		return abstractClassiagramElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractClassiagramElement_Constant() {
-		return (EAttribute)abstractClassiagramElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractClassiagramElement_TargetContext() {
-		return (EAttribute)abstractClassiagramElementEClass.getEStructuralFeatures().get(1);
+	public EEnum getAssociationType() {
+		return associationTypeEEnum;
 	}
 
 	/**
@@ -491,30 +448,25 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		createEAttribute(associationEClass, ASSOCIATION__INJECTIVE);
 		createEAttribute(associationEClass, ASSOCIATION__TOTAL);
 		createEAttribute(associationEClass, ASSOCIATION__FUNCTIONAL);
+		createEAttribute(associationEClass, ASSOCIATION__ASSOCIATION_TYPE);
 
 		classAttributeEClass = createEClass(CLASS_ATTRIBUTE);
-
-		classAxiomEClass = createEClass(CLASS_AXIOM);
-
-		classInvariantEClass = createEClass(CLASS_INVARIANT);
-
-		classEventEClass = createEClass(CLASS_EVENT);
 
 		classEClass = createEClass(CLASS);
 		createEReference(classEClass, CLASS__SUPERTYPES);
 		createEReference(classEClass, CLASS__CLASS_ATTRIBUTES);
-		createEReference(classEClass, CLASS__CLASS_INVARIANTS);
-		createEReference(classEClass, CLASS__CLASS_AXIOMS);
 		createEReference(classEClass, CLASS__EXTENDS);
 		createEReference(classEClass, CLASS__INCOMING);
 		createEReference(classEClass, CLASS__OUTGOING);
 		createEReference(classEClass, CLASS__REFINES);
-		createEReference(classEClass, CLASS__CLASS_EVENTS);
-		createEAttribute(classEClass, CLASS__INSTANCE);
+		createEAttribute(classEClass, CLASS__CLASS_TYPE);
 
-		abstractClassiagramElementEClass = createEClass(ABSTRACT_CLASSIAGRAM_ELEMENT);
-		createEAttribute(abstractClassiagramElementEClass, ABSTRACT_CLASSIAGRAM_ELEMENT__CONSTANT);
-		createEAttribute(abstractClassiagramElementEClass, ABSTRACT_CLASSIAGRAM_ELEMENT__TARGET_CONTEXT);
+		elaborativeElementEClass = createEClass(ELABORATIVE_ELEMENT);
+		createEReference(elaborativeElementEClass, ELABORATIVE_ELEMENT__ELABORATES);
+
+		// Create enums
+		classTypeEEnum = createEEnum(CLASS_TYPE);
+		associationTypeEEnum = createEEnum(ASSOCIATION_TYPE);
 	}
 
 	/**
@@ -552,13 +504,11 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		classdiagramEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
-		associationEClass.getESuperTypes().add(this.getAbstractClassiagramElement());
+		associationEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		associationEClass.getESuperTypes().add(this.getElaborativeElement());
 		classAttributeEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		classAxiomEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedDerivedPredicateElement());
-		classInvariantEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedDerivedPredicateElement());
-		classEventEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		classEClass.getESuperTypes().add(this.getAbstractClassiagramElement());
-		abstractClassiagramElementEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		classEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		classEClass.getESuperTypes().add(this.getElaborativeElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classdiagramOwnerEClass, ClassdiagramOwner.class, "ClassdiagramOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -575,30 +525,31 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEAttribute(getAssociation_Injective(), ecorePackage.getEBoolean(), "injective", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_Total(), ecorePackage.getEBoolean(), "total", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssociation_Functional(), ecorePackage.getEBoolean(), "functional", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "AssociationType", "", 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classAttributeEClass, ClassAttribute.class, "ClassAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(classAxiomEClass, ClassAxiom.class, "ClassAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(classInvariantEClass, ClassInvariant.class, "ClassInvariant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(classEventEClass, ClassEvent.class, "ClassEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(classEClass, ac.soton.eventb.classdiagrams.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClass_Supertypes(), this.getClass_(), null, "supertypes", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_ClassAttributes(), this.getClassAttribute(), null, "classAttributes", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_ClassInvariants(), this.getClassInvariant(), null, "classInvariants", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_ClassAxioms(), this.getClassAxiom(), null, "classAxioms", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Extends(), this.getClass_(), null, "extends", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Incoming(), this.getAssociation(), this.getAssociation_Target(), "incoming", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Outgoing(), this.getAssociation(), this.getAssociation_Source(), "outgoing", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_Refines(), this.getClass_(), null, "refines", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_ClassEvents(), this.getClassEvent(), null, "classEvents", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass_Instance(), ecorePackage.getEString(), "instance", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Refines(), this.getClass_(), null, "refines", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass_ClassType(), this.getClassType(), "classType", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(abstractClassiagramElementEClass, AbstractClassiagramElement.class, "AbstractClassiagramElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractClassiagramElement_Constant(), ecorePackage.getEBoolean(), "constant", "false", 0, 1, AbstractClassiagramElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractClassiagramElement_TargetContext(), ecorePackage.getEString(), "targetContext", null, 0, 1, AbstractClassiagramElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(elaborativeElementEClass, ElaborativeElement.class, "ElaborativeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getElaborativeElement_Elaborates(), theCorePackage.getEventBNamed(), null, "elaborates", null, 0, 1, ElaborativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(classTypeEEnum, ClassType.class, "ClassType");
+		addEEnumLiteral(classTypeEEnum, ClassType.SET);
+		addEEnumLiteral(classTypeEEnum, ClassType.CONSTANT);
+		addEEnumLiteral(classTypeEEnum, ClassType.VARIABLE);
+
+		initEEnum(associationTypeEEnum, AssociationType.class, "AssociationType");
+		addEEnumLiteral(associationTypeEEnum, AssociationType.CONSTANT);
+		addEEnumLiteral(associationTypeEEnum, AssociationType.VARIABLE);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -625,7 +576,17 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		   },
 		   new URI[] {
 			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
-		   });						
+		   });			
+		addAnnotation
+		  (classEClass, 
+		   source, 
+		   new String[] {
+		   },
+		   new URI[] {
+			 URI.createURI(CorePackage.eNS_URI).appendFragment("//context/Constant"),
+			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Variable"),
+			 URI.createURI(CorePackage.eNS_URI).appendFragment("//context/CarrierSet")
+		   });		
 	}
 
 	/**
@@ -641,25 +602,7 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		   source, 
 		   new String[] {
 			 "constraints", "isAsociationTypeRight"
-		   });		
-		addAnnotation
-		  (classAxiomEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "parentIsConstant\n"
-		   });		
-		addAnnotation
-		  (classInvariantEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "parentIsNotConstant"
-		   });		
-		addAnnotation
-		  (classEventEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "parentIsNotConstant"
-		   });		
+		   });			
 		addAnnotation
 		  (getClass_Extends(), 
 		   source, 

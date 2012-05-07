@@ -9,8 +9,13 @@ package ac.soton.eventb.classdiagrams.impl;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eventb.emf.core.Attribute;
+import org.eventb.emf.core.AttributeType;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 /**

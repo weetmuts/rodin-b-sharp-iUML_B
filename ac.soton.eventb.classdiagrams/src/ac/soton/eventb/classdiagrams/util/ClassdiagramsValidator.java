@@ -6,16 +6,15 @@
  */
 package ac.soton.eventb.classdiagrams.util;
 
-import ac.soton.eventb.classdiagrams.AbstractClassiagramElement;
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassAxiom;
-import ac.soton.eventb.classdiagrams.ClassEvent;
-import ac.soton.eventb.classdiagrams.ClassInvariant;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -106,16 +105,14 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateAssociation((Association)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE:
 				return validateClassAttribute((ClassAttribute)value, diagnostics, context);
-			case ClassdiagramsPackage.CLASS_AXIOM:
-				return validateClassAxiom((ClassAxiom)value, diagnostics, context);
-			case ClassdiagramsPackage.CLASS_INVARIANT:
-				return validateClassInvariant((ClassInvariant)value, diagnostics, context);
-			case ClassdiagramsPackage.CLASS_EVENT:
-				return validateClassEvent((ClassEvent)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS:
 				return validateClass((ac.soton.eventb.classdiagrams.Class)value, diagnostics, context);
-			case ClassdiagramsPackage.ABSTRACT_CLASSIAGRAM_ELEMENT:
-				return validateAbstractClassiagramElement((AbstractClassiagramElement)value, diagnostics, context);
+			case ClassdiagramsPackage.ELABORATIVE_ELEMENT:
+				return validateElaborativeElement((ElaborativeElement)value, diagnostics, context);
+			case ClassdiagramsPackage.CLASS_TYPE:
+				return validateClassType((ClassType)value, diagnostics, context);
+			case ClassdiagramsPackage.ASSOCIATION_TYPE:
+				return validateAssociationType((AssociationType)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -200,147 +197,6 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClassAxiom(ClassAxiom classAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_NoCircularContainment(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClassAxiom_parentIsConstant(classAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the parentIsConstant constraint of '<em>Class Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassAxiom_parentIsConstant(ClassAxiom classAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "parentIsConstant", getObjectLabel(classAxiom, context) },
-						 new Object[] { classAxiom },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassInvariant(ClassInvariant classInvariant, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_NoCircularContainment(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classInvariant, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClassInvariant_parentIsNotConstant(classInvariant, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the parentIsNotConstant constraint of '<em>Class Invariant</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassInvariant_parentIsNotConstant(ClassInvariant classInvariant, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "parentIsNotConstant", getObjectLabel(classInvariant, context) },
-						 new Object[] { classInvariant },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassEvent(ClassEvent classEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_NoCircularContainment(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classEvent, diagnostics, context);
-		if (result || diagnostics != null) result &= validateClassEvent_parentIsNotConstant(classEvent, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the parentIsNotConstant constraint of '<em>Class Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassEvent_parentIsNotConstant(ClassEvent classEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "parentIsNotConstant", getObjectLabel(classEvent, context) },
-						 new Object[] { classEvent },
-						 context));
-			}
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateClass(ac.soton.eventb.classdiagrams.Class class_, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(class_, diagnostics, context);
 	}
@@ -350,8 +206,26 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAbstractClassiagramElement(AbstractClassiagramElement abstractClassiagramElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(abstractClassiagramElement, diagnostics, context);
+	public boolean validateElaborativeElement(ElaborativeElement elaborativeElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(elaborativeElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassType(ClassType classType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociationType(AssociationType associationType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
 	}
 
 	/**

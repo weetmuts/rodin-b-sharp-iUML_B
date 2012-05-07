@@ -55,19 +55,6 @@
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
-        name="EventFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="EventFigure">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="EventLabel"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureEventLabel"
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
         name="AttributeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
@@ -78,40 +65,14 @@
       </actualFigure>
       <accessors
           accessor="getFigureAttributeLabel"
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="InvariantFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvariantFigure">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="InvariantLabel"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureInvariantLabel"
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="AxiomFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="AxiomFigure">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="AxiomLabel"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureAxiomLabel"
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="SupertypeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SupertypeFigure"
-          targetDecoration="//@figures.0/@descriptors.6/@actualFigure/@children.1">
+          targetDecoration="//@figures.0/@descriptors.3/@actualFigure/@children.1">
         <children
             xsi:type="gmfgraph:Label"
             name="SupertypeLabelFigure"
@@ -132,27 +93,18 @@
       </actualFigure>
       <accessors
           accessor="getFigureSupertypeLabelFigure"
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
       name="Class"
       figure="ClassFigure"/>
   <nodes
-      name="EventNode"
-      figure="EventFigure"/>
-  <nodes
       name="AttributeNode"
       figure="AttributeFigure"/>
   <nodes
       name="SupertypeNode"
       figure="SupertypeFigure"/>
-  <nodes
-      name="InvariantNode"
-      figure="InvariantFigure"/>
-  <nodes
-      name="AxiomNode"
-      figure="AxiomFigure"/>
   <connections
       name="Supertype"
       figure="SupertypeFigure"/>
@@ -160,23 +112,8 @@
       name="Association"
       figure="AssociationFigure"/>
   <compartments
-      name="Events"
-      figure="EventFigure"
-      collapsible="true"
-      needsTitle="true"/>
-  <compartments
       name="Attributes"
       figure="AttributeFigure"
-      collapsible="true"
-      needsTitle="true"/>
-  <compartments
-      name="Invariants"
-      figure="InvariantFigure"
-      collapsible="true"
-      needsTitle="true"/>
-  <compartments
-      name="Axioms"
-      figure="AxiomFigure"
       collapsible="true"
       needsTitle="true"/>
   <labels
@@ -195,17 +132,12 @@
   <labels
       name="SupertypeLabel"
       figure="SupertypeFigure"
-      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
-  <labels
-      name="EventLabel"
-      figure="EventFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="AttributeLabel"
       figure="AttributeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
       name="AssociationLabelTarget"
       figure="AssociationFigure"
@@ -221,14 +153,4 @@
       figure="ClassFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
-  <labels
-      name="InvariantLabel"
-      figure="InvariantFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
-  <labels
-      name="AxiomLabel"
-      figure="AxiomFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
 </gmfgraph:Canvas>

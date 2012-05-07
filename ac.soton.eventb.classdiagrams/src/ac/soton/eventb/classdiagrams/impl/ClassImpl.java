@@ -8,11 +8,10 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassAxiom;
-import ac.soton.eventb.classdiagrams.ClassEvent;
-import ac.soton.eventb.classdiagrams.ClassInvariant;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -38,6 +37,7 @@ import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
+import org.eventb.emf.core.machine.Variable;
 import org.eventb.emf.core.impl.EventBElementImpl;
 
 /**
@@ -47,22 +47,29 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getSupertypes <em>Supertypes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAttributes <em>Class Attributes</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassInvariants <em>Class Invariants</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAxioms <em>Class Axioms</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassEvents <em>Class Events</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getInstance <em>Instance</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassType <em>Class Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soton.eventb.classdiagrams.Class {
+public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.soton.eventb.classdiagrams.Class {
+	/**
+	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElaborates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventBNamed elaborates;
 	/**
 	 * The cached value of the '{@link #getSupertypes() <em>Supertypes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -72,7 +79,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * @ordered
 	 */
 	protected EList<ac.soton.eventb.classdiagrams.Class> supertypes;
-
 	/**
 	 * The cached value of the '{@link #getClassAttributes() <em>Class Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -82,27 +88,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * @ordered
 	 */
 	protected EList<ClassAttribute> classAttributes;
-
-	/**
-	 * The cached value of the '{@link #getClassInvariants() <em>Class Invariants</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassInvariants()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ClassInvariant> classInvariants;
-
-	/**
-	 * The cached value of the '{@link #getClassAxioms() <em>Class Axioms</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassAxioms()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ClassAxiom> classAxioms;
-
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -112,7 +97,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * @ordered
 	 */
 	protected ac.soton.eventb.classdiagrams.Class extends_;
-
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -122,7 +106,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * @ordered
 	 */
 	protected EList<Association> incoming;
-
 	/**
 	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -132,46 +115,34 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * @ordered
 	 */
 	protected EList<Association> outgoing;
-
 	/**
-	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference list.
+	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRefines()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ac.soton.eventb.classdiagrams.Class> refines;
+	protected ac.soton.eventb.classdiagrams.Class refines;
 
 	/**
-	 * The cached value of the '{@link #getClassEvents() <em>Class Events</em>}' containment reference list.
+	 * The default value of the '{@link #getClassType() <em>Class Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClassEvents()
+	 * @see #getClassType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ClassEvent> classEvents;
-
+	protected static final ClassType CLASS_TYPE_EDEFAULT = ClassType.SET;
 	/**
-	 * The default value of the '{@link #getInstance() <em>Instance</em>}' attribute.
+	 * The cached value of the '{@link #getClassType() <em>Class Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInstance()
+	 * @see #getClassType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INSTANCE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstance()
-	 * @generated
-	 * @ordered
-	 */
-	protected String instance = INSTANCE_EDEFAULT;
+	protected ClassType classType = CLASS_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,23 +166,39 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public String getName() {
-		return doGetName();
+	public EventBNamed getElaborates() {
+		if (elaborates != null && elaborates.eIsProxy()) {
+			InternalEObject oldElaborates = (InternalEObject)elaborates;
+			elaborates = (EventBNamed)eResolveProxy(oldElaborates);
+			if (elaborates != oldElaborates) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASS__ELABORATES, oldElaborates, elaborates));
+			}
+		}
+		return elaborates;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = getName();
-		doSetName(newName);
-		
+	public EventBNamed basicGetElaborates() {
+		return elaborates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElaborates(EventBNamed newElaborates) {
+		EventBNamed oldElaborates = elaborates;
+		elaborates = newElaborates;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__NAME, oldName, newName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__ELABORATES, oldElaborates, elaborates));
 	}
 
 	/**
@@ -236,30 +223,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 			classAttributes = new EObjectContainmentEList.Resolving<ClassAttribute>(ClassAttribute.class, this, ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES);
 		}
 		return classAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ClassInvariant> getClassInvariants() {
-		if (classInvariants == null) {
-			classInvariants = new EObjectContainmentEList.Resolving<ClassInvariant>(ClassInvariant.class, this, ClassdiagramsPackage.CLASS__CLASS_INVARIANTS);
-		}
-		return classInvariants;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ClassAxiom> getClassAxioms() {
-		if (classAxioms == null) {
-			classAxioms = new EObjectContainmentEList.Resolving<ClassAxiom>(ClassAxiom.class, this, ClassdiagramsPackage.CLASS__CLASS_AXIOMS);
-		}
-		return classAxioms;
 	}
 
 	/**
@@ -329,9 +292,14 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ac.soton.eventb.classdiagrams.Class> getRefines() {
-		if (refines == null) {
-			refines = new EObjectResolvingEList<ac.soton.eventb.classdiagrams.Class>(ac.soton.eventb.classdiagrams.Class.class, this, ClassdiagramsPackage.CLASS__REFINES);
+	public ac.soton.eventb.classdiagrams.Class getRefines() {
+		if (refines != null && refines.eIsProxy()) {
+			InternalEObject oldRefines = (InternalEObject)refines;
+			refines = (ac.soton.eventb.classdiagrams.Class)eResolveProxy(oldRefines);
+			if (refines != oldRefines) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASS__REFINES, oldRefines, refines));
+			}
 		}
 		return refines;
 	}
@@ -341,11 +309,8 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ClassEvent> getClassEvents() {
-		if (classEvents == null) {
-			classEvents = new EObjectContainmentEList.Resolving<ClassEvent>(ClassEvent.class, this, ClassdiagramsPackage.CLASS__CLASS_EVENTS);
-		}
-		return classEvents;
+	public ac.soton.eventb.classdiagrams.Class basicGetRefines() {
+		return refines;
 	}
 
 	/**
@@ -353,20 +318,32 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInstance() {
-		return instance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInstance(String newInstance) {
-		String oldInstance = instance;
-		instance = newInstance;
+	public void setRefines(ac.soton.eventb.classdiagrams.Class newRefines) {
+		ac.soton.eventb.classdiagrams.Class oldRefines = refines;
+		refines = newRefines;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__INSTANCE, oldInstance, instance));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__REFINES, oldRefines, refines));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassType getClassType() {
+		return classType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClassType(ClassType newClassType) {
+		ClassType oldClassType = classType;
+		classType = newClassType == null ? CLASS_TYPE_EDEFAULT : newClassType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__CLASS_TYPE, oldClassType, classType));
 	}
 
 	/**
@@ -396,16 +373,10 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return ((InternalEList<?>)getClassAttributes()).basicRemove(otherEnd, msgs);
-			case ClassdiagramsPackage.CLASS__CLASS_INVARIANTS:
-				return ((InternalEList<?>)getClassInvariants()).basicRemove(otherEnd, msgs);
-			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
-				return ((InternalEList<?>)getClassAxioms()).basicRemove(otherEnd, msgs);
 			case ClassdiagramsPackage.CLASS__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
-			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
-				return ((InternalEList<?>)getClassEvents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -418,14 +389,13 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClassdiagramsPackage.CLASS__ELABORATES:
+				if (resolve) return getElaborates();
+				return basicGetElaborates();
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				return getSupertypes();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return getClassAttributes();
-			case ClassdiagramsPackage.CLASS__CLASS_INVARIANTS:
-				return getClassInvariants();
-			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
-				return getClassAxioms();
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				if (resolve) return getExtends();
 				return basicGetExtends();
@@ -434,11 +404,10 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return getOutgoing();
 			case ClassdiagramsPackage.CLASS__REFINES:
-				return getRefines();
-			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
-				return getClassEvents();
-			case ClassdiagramsPackage.CLASS__INSTANCE:
-				return getInstance();
+				if (resolve) return getRefines();
+				return basicGetRefines();
+			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
+				return getClassType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -452,6 +421,9 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClassdiagramsPackage.CLASS__ELABORATES:
+				setElaborates((EventBNamed)newValue);
+				return;
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				getSupertypes().clear();
 				getSupertypes().addAll((Collection<? extends ac.soton.eventb.classdiagrams.Class>)newValue);
@@ -459,14 +431,6 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				getClassAttributes().clear();
 				getClassAttributes().addAll((Collection<? extends ClassAttribute>)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__CLASS_INVARIANTS:
-				getClassInvariants().clear();
-				getClassInvariants().addAll((Collection<? extends ClassInvariant>)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
-				getClassAxioms().clear();
-				getClassAxioms().addAll((Collection<? extends ClassAxiom>)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				setExtends((ac.soton.eventb.classdiagrams.Class)newValue);
@@ -480,15 +444,10 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 				getOutgoing().addAll((Collection<? extends Association>)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS__REFINES:
-				getRefines().clear();
-				getRefines().addAll((Collection<? extends ac.soton.eventb.classdiagrams.Class>)newValue);
+				setRefines((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
-			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
-				getClassEvents().clear();
-				getClassEvents().addAll((Collection<? extends ClassEvent>)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__INSTANCE:
-				setInstance((String)newValue);
+			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
+				setClassType((ClassType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -502,17 +461,14 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.CLASS__ELABORATES:
+				setElaborates((EventBNamed)null);
+				return;
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				getSupertypes().clear();
 				return;
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				getClassAttributes().clear();
-				return;
-			case ClassdiagramsPackage.CLASS__CLASS_INVARIANTS:
-				getClassInvariants().clear();
-				return;
-			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
-				getClassAxioms().clear();
 				return;
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				setExtends((ac.soton.eventb.classdiagrams.Class)null);
@@ -524,13 +480,10 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 				getOutgoing().clear();
 				return;
 			case ClassdiagramsPackage.CLASS__REFINES:
-				getRefines().clear();
+				setRefines((ac.soton.eventb.classdiagrams.Class)null);
 				return;
-			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
-				getClassEvents().clear();
-				return;
-			case ClassdiagramsPackage.CLASS__INSTANCE:
-				setInstance(INSTANCE_EDEFAULT);
+			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
+				setClassType(CLASS_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -544,14 +497,12 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.CLASS__ELABORATES:
+				return elaborates != null;
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				return supertypes != null && !supertypes.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return classAttributes != null && !classAttributes.isEmpty();
-			case ClassdiagramsPackage.CLASS__CLASS_INVARIANTS:
-				return classInvariants != null && !classInvariants.isEmpty();
-			case ClassdiagramsPackage.CLASS__CLASS_AXIOMS:
-				return classAxioms != null && !classAxioms.isEmpty();
 			case ClassdiagramsPackage.CLASS__EXTENDS:
 				return extends_ != null;
 			case ClassdiagramsPackage.CLASS__INCOMING:
@@ -559,13 +510,43 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return outgoing != null && !outgoing.isEmpty();
 			case ClassdiagramsPackage.CLASS__REFINES:
-				return refines != null && !refines.isEmpty();
-			case ClassdiagramsPackage.CLASS__CLASS_EVENTS:
-				return classEvents != null && !classEvents.isEmpty();
-			case ClassdiagramsPackage.CLASS__INSTANCE:
-				return INSTANCE_EDEFAULT == null ? instance != null : !INSTANCE_EDEFAULT.equals(instance);
+				return refines != null;
+			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
+				return classType != CLASS_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ElaborativeElement.class) {
+			switch (derivedFeatureID) {
+				case ClassdiagramsPackage.CLASS__ELABORATES: return ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ElaborativeElement.class) {
+			switch (baseFeatureID) {
+				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.CLASS__ELABORATES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -578,10 +559,32 @@ public class ClassImpl extends AbstractClassiagramElementImpl implements ac.soto
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (instance: ");
-		result.append(instance);
+		result.append(" (classType: ");
+		result.append(classType);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getName() {
+		return doGetName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setName(String newName) {
+		String oldName = getName();
+		doSetName(newName);
+		
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__NAME, oldName, newName));
 	}
 
 } //ClassImpl

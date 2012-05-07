@@ -15,6 +15,7 @@ Export-Package: ac.soton.eventb.classdiagrams;uses:="org.eclipse.emf.ecore,org.e
    org.eclipse.emf.common.notify,
    org.eclipse.emf.ecore.impl,
    ac.soton.eventb.classdiagrams",
+ ac.soton.eventb.classdiagrams.parser,
  ac.soton.eventb.classdiagrams.util;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl,
