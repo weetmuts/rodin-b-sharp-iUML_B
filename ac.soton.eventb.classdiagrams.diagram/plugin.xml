@@ -161,7 +161,7 @@
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
-      <?gmfgen generated="true"?>   
+      <?gmfgen generated="false"?>   
       <propertyTabs contributorId="ac.soton.eventb.classdiagrams.diagram">
          <propertyTab
              category="visual"
@@ -175,11 +175,16 @@
              category="domain"
              id="property.tab.domain"
              label="%tab.domain"/>
+          <propertyTab
+                category="domain"
+                id="property.tab.overview"
+                label="Overview">
+          </propertyTab>
       </propertyTabs>
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
-      <?gmfgen generated="true"?>   
+      <?gmfgen generated="false"?>   
       <propertySections contributorId="ac.soton.eventb.classdiagrams.diagram">
          <propertySection id="property.section.ConnectorAppearancePropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
@@ -209,6 +214,60 @@
             <input type="org.eclipse.gef.EditPart"/>
             <input type="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
          </propertySection>
+         <propertySection
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$CommentedElementFilter"
+               id="property.section.comment"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.NamePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$NamedElementFilter"
+               id="property.section.name"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.LabelPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$LabeledElementFilter"
+               id="property.section.label"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassFilter"
+               id="property.section.eclassElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassFilter"
+               id="property.section.classType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.label"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationType"
+               tab="property.tab.overview">
+         </propertySection>
       </propertySections>
    </extension>
 
@@ -217,8 +276,8 @@
       <viewProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsViewProvider">
          <Priority name="Lowest"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Classdiagrams"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2002,3004,3003,3005,3006"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2002,3021"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4004"/>
       </viewProvider>
    </extension>
 
@@ -230,16 +289,16 @@
             <method name="getType()" value="Classdiagrams"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2002,3004,3003,3005,3006"/>
+            <method name="getType()" value="2002,3021"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002"/>
+            <method name="getType()" value="4001,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5006,5003,5002,5004,5005"/>
+            <method name="getType()" value="5006,5022"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
-            <method name="getType()" value="7005,7006,7007,7008"/>
+            <method name="getType()" value="7005"/>
          </object>
          <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
       </editpartProvider>
@@ -293,42 +352,12 @@
       </metamodel>
       <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
          <metamodelType
-               id="ac.soton.eventb.classdiagrams.diagram.ClassAttribute_3004"
-               name="%metatype.name.ClassAttribute_3004"
+               id="ac.soton.eventb.classdiagrams.diagram.ClassAttribute_3021"
+               name="%metatype.name.ClassAttribute_3021"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ClassAttribute"
                edithelper="ac.soton.eventb.classdiagrams.diagram.edit.helpers.ClassAttributeEditHelper">
-            <param name="semanticHint" value="3004"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
-         <metamodelType
-               id="ac.soton.eventb.classdiagrams.diagram.ClassEvent_3003"
-               name="%metatype.name.ClassEvent_3003"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ClassEvent"
-               edithelper="ac.soton.eventb.classdiagrams.diagram.edit.helpers.ClassEventEditHelper">
-            <param name="semanticHint" value="3003"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
-         <metamodelType
-               id="ac.soton.eventb.classdiagrams.diagram.ClassInvariant_3005"
-               name="%metatype.name.ClassInvariant_3005"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ClassInvariant"
-               edithelper="ac.soton.eventb.classdiagrams.diagram.edit.helpers.ClassInvariantEditHelper">
-            <param name="semanticHint" value="3005"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
-         <metamodelType
-               id="ac.soton.eventb.classdiagrams.diagram.ClassAxiom_3006"
-               name="%metatype.name.ClassAxiom_3006"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ClassAxiom"
-               edithelper="ac.soton.eventb.classdiagrams.diagram.edit.helpers.ClassAxiomEditHelper">
-            <param name="semanticHint" value="3006"/>
+            <param name="semanticHint" value="3021"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
@@ -343,11 +372,11 @@
       </metamodel>
       <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams">
          <specializationType
-               id="ac.soton.eventb.classdiagrams.diagram.ClassSupertypes_4002"
-               name="%metatype.name.ClassSupertypes_4002"
+               id="ac.soton.eventb.classdiagrams.diagram.ClassSupertypes_4004"
+               name="%metatype.name.ClassSupertypes_4004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
             <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
-            <param name="semanticHint" value="4002"/>
+            <param name="semanticHint" value="4004"/>
          </specializationType>
       </metamodel>
    </extension>
@@ -364,12 +393,9 @@
       <binding context="ac.soton.eventb.classdiagrams.diagram.TypeContext">
          <elementType ref="ac.soton.eventb.classdiagrams.diagram.Classdiagram_1000"/>
          <elementType ref="ac.soton.eventb.classdiagrams.diagram.Class_2002"/>
-         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassAttribute_3004"/>
-         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassEvent_3003"/>
-         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassInvariant_3005"/>
-         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassAxiom_3006"/>
+         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassAttribute_3021"/>
          <elementType ref="ac.soton.eventb.classdiagrams.diagram.Association_4001"/>
-         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassSupertypes_4002"/>
+         <elementType ref="ac.soton.eventb.classdiagrams.diagram.ClassSupertypes_4004"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>
@@ -536,6 +562,568 @@
 
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID"
+            labelProvider="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.properties.ElementLabelProvider"
+            typeMapper="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.properties.ElementTypeMapper">
+         <propertyCategory
+               category="default">
+         </propertyCategory>
+         <propertyCategory
+               category="domain">
+         </propertyCategory>
+         <propertyCategory
+               category="visual">
+         </propertyCategory>
+      </propertyContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID">
+         <propertyTab
+               category="default"
+               id="classDiag.nameTab"
+               label="Overview">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.nameTab"
+               category="default"
+               id="classDiag.variablesTab"
+               label="Variables">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.nameTab"
+               category="default"
+               id="classDiag.attributesTab"
+               label="Attributes">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.attributesTab,classDiag.variablesTab"
+               category="default"
+               id="classDiag.eventsTab"
+               label="Events">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.eventsTab"
+               category="default"
+               id="classDiag.classdiagramsTab"
+               label="Classdiagrams">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.classdiagramsTab"
+               category="default"
+               id="classDiag.classesTab"
+               label="Classes">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.classesTab"
+               category="default"
+               id="classDiag.invariantsTab"
+               label="Invariants">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.invariantsTab"
+               category="default"
+               id="classDiag.theoremsTab"
+               label="Theorems">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.nameTab"
+               category="default"
+               id="classDiag.refinesTab"
+               label="Refines">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.refinesTab"
+               category="default"
+               id="classDiag.eventParametersTab"
+               label="Parameters">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.eventParametersTab"
+               category="default"
+               id="classDiag.witnessTab"
+               label="Witness">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.witnessTab"
+               category="default"
+               id="classDiag.guardsTab"
+               label="Guards">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.guardsTab"
+               category="default"
+               id="classDiag.actionsTab"
+               label="Actions">
+         </propertyTab>
+         <propertyTab
+               afterTab="classDiag.theoremsTab,classDiag.actionsTab"
+               category="default"
+               id="property.tab.errors"
+               label="Errors">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.errors"
+               category="domain"
+               id="property.tab.domain"
+               label="%tab.domain">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.domain"
+               category="visual"
+               id="property.tab.AppearancePropertySection"
+               label="%tab.appearance">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.appearance"
+               category="visual"
+               id="property.tab.DiagramPropertySection"
+               label="%tab.diagram">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID">
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.NamePropertySection"
+               filter="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.NamePropertySection"
+               id="classDiag.section.Name"
+               tab="classDiag.nameTab">
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Name"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.SelfNamePropertySection"
+               id="classDiag.section.SelfName"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.SelfName"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.VariantPropertySection"
+               id="classDiag.section.Variant"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Variant"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.TypePropertySection"
+               filter="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.TypePropertySection"
+               id="classDiag.section.Type"
+               tab="classDiag.nameTab">
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Type"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.ClassFixedPropertySection"
+               id="classDiag.section.Fixed"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Fixed"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.ClassifierSupertypePropertySection"
+               id="classDiag.section.Supertype"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Supertype"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.InstancesPropertySection"
+               id="classDiag.section.Instances"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Instances"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.InitialValuePropertySection"
+               id="classDiag.section.Initial"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBvariableElement">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAttribute">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBVariable">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Initial"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.AttributeSurjectivePropertySection"
+               id="classDiag.section.Surjective"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAttribute">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Surjective"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.AttributeInjectivePropertySection"
+               id="classDiag.section.Injective"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAttribute">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Injective"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.AttributeTotalPropertySection"
+               id="classDiag.section.Total"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAttribute">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Total"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.AttributeFunctionalPropertySection"
+               id="classDiag.section.Functional"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAttribute">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Functional"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.EventVariableLocalPropertySection"
+               id="classDiag.section.Local"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBEventVariable">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Local"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.ActionValuePropertySection"
+               id="classDiag.section.Action"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Action"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.PredicateValuePropertySection"
+               id="classDiag.section.PredValue"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBPredicate">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.PredValue"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.IsTheoremPropertySection"
+               filter="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.IsTheoremPropertySection"
+               id="classDiag.section.IsTheorem"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBPredicate">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.PredValue"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.RefinedClassdiagramRefinesPropertySection"
+               id="classDiag.section.RefinesClassdiagram"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClassdiagram">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.RefinesClassdiagram"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.ClassdiagramTranslationPropertySection"
+               id="classDiag.section.ClassdiagramTranslation"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBabstractClassdiagram">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.ClassdiagramTranslation"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.buttons.SetClassdiagramTranslationButtonsPropertySection"
+               id="classDiag.section.SetClassdiagramTranslationButtons"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBabstractClassdiagram">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.SetClassdiagramTranslationButtons"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.EventKindPropertySection"
+               id="classDiag.section.EventKind"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBEvent">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.EventKind"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.ConvergenceKindPropertySection"
+               filter="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.ConvergenceKindPropertySection"
+               id="classDiag.section.ConvergenceKind"
+               tab="classDiag.nameTab">
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.ConvergenceKind"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.EventParametersSummaryTablePropertySection"
+               id="classDiag.section.EventParametersSummaryTable"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.EventParametersSummaryTable"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.Witnesses2PropertySection"
+               id="classDiag.section.Witness2"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Witness2"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.Guards2PropertySection"
+               id="classDiag.section.Guards2"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Guards2"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.Actions2PropertySection"
+               id="classDiag.section.Actions2"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Actions2"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.RefinedClassRefinesPropertySection"
+               id="classDiag.section.RefinesClass"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.RefinesClass"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.enumerations.InheritedAttributeInheritsPropertySection"
+               id="classDiag.section.InheritsAttribute"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBInheritedAttribute">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.InheritsAttribute"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.textFields.CommentPropertySection"
+               id="classDiag.section.Comment"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBelement">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Comment"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.buttons.OpenStateDiagramPropertySection"
+               id="classDiag.section.OpenStateDiag"
+               tab="classDiag.nameTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClassdiagram">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClassdiagram">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventParametersPropertySection"
+               id="classDiag.section.EventParameters"
+               tab="classDiag.eventParametersTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventWitnessesPropertySection"
+               id="classDiag.section.Witness"
+               tab="classDiag.witnessTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventGuardsPropertySection"
+               id="classDiag.section.Guards"
+               tab="classDiag.guardsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventActionsPropertySection"
+               id="classDiag.section.Actions"
+               tab="classDiag.actionsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventRefinesPropertySection"
+               id="classDiag.section.Refines"
+               tab="classDiag.refinesTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBguardedAction">
+            </input>
+         </propertySection>
+         <propertySection
+               afterSection="classDiag.section.Name"
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.VariablesPropertySection"
+               id="classDiag.section.Variables"
+               tab="classDiag.variablesTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.InvariantsPropertySection"
+               id="classDiag.section.Invariants"
+               tab="classDiag.invariantsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.TheoremsPropertySection"
+               id="classDiag.section.Theorems"
+               tab="classDiag.theoremsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.ClassdiagramsPropertySection"
+               id="classDiag.section.Classdiagrams"
+               tab="classDiag.classdiagramsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.ClassesPropertySection"
+               id="classDiag.section.Classes"
+               tab="classDiag.classesTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.EventsPropertySection"
+               id="classDiag.section.Events"
+               tab="classDiag.eventsTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBMachine">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.editTables.AttributesPropertySection"
+               id="classDiag.section.Attributes"
+               tab="classDiag.attributesTab">
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBClass">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBRefinedClass">
+            </input>
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.ErrorsPropertySection"
+               filter="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.propertySections.readOnlyTables.ErrorsPropertySection"
+               id="classDiag.section.Errors"
+               tab="property.tab.errors">
+         </propertySection>
+         <propertySection
+               class="ac.soton.umlb.umlbMetamodel.commonDiagramUtilities.properties.ModelAdvancedPropertySection"
+               id="property.section.domain"
+               tab="property.tab.domain">
+            <input
+                  type="org.eclipse.gmf.runtime.notation.View">
+            </input>
+            <input
+                  type="org.eclipse.gef.EditPart">
+            </input>
+            <input
+                  type="ac.soton.umlb.umlbMetamodel.UMLBelement">
+            </input>
+         </propertySection>
+         <propertySection
+               class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection"
+               filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter"
+               id="property.section.ConnectorAppearancePropertySection"
+               tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection"
+               filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter"
+               id="property.section.ShapeColorAndFontPropertySection"
+               tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection"
+               filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter"
+               id="property.section.DiagramColorsAndFontsPropertySection"
+               tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection"
+               filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter"
+               id="property.section.RulerGridPropertySection"
+               tab="property.tab.DiagramPropertySection">
+         </propertySection>
+      </propertySections>
    </extension>
 
    <!-- optionally, specify keybindings -->
