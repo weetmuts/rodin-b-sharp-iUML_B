@@ -110,9 +110,9 @@ public class Strings {
 	
 	public static String CLASS_INSTANCE;
 
-	public static String CLASS_INSTANCE(Class cp) {
-		return bind(CLASS_INSTANCE, rootComponentPrefix(cp), cp.getInstance());
-	}
+//	public static String CLASS_INSTANCE(Class cp) {
+//		return bind(CLASS_INSTANCE, rootComponentPrefix(cp), cp.getInstance());
+//	}
 	
 	public static String CLASS_INITIALIZATION_NAME;
 
@@ -128,8 +128,8 @@ public class Strings {
 
 	public static String CLASS_INITIALIZATION_EXPR;
 	
-	public static String CLASS_INITIALIZATION_EXPR(Class cp) {
-		return bind(CLASS_INITIALIZATION_EXPR, cp.getName(), cp.getInstance());
-	}
+//	public static String CLASS_INITIALIZATION_EXPR(Class cp) {
+//		return bind(CLASS_INITIALIZATION_EXPR, cp.getName(), cp.getInstance());
+//	}
 	
 }

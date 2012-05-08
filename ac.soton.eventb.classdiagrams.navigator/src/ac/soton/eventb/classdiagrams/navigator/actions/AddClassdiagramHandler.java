@@ -21,7 +21,10 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eventb.core.IEventBRoot;
 import org.eventb.core.IMachineRoot;
+import org.eventb.core.basis.EventBRoot;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Classdiagram;
@@ -50,12 +53,12 @@ public class AddClassdiagramHandler extends AbstractHandler {
 	 */
 	public class AddClassdiagramCommand extends AbstractEMFOperation {
 
-		private URI machineURI;
+		private URI eventBRootURI;
 		private Classdiagram classdiagram;
 
-		public AddClassdiagramCommand(URI machineURI, Classdiagram classdiagram) {
+		public AddClassdiagramCommand(URI pEventBRootURI, Classdiagram classdiagram) {
 			super(TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(), "Add Classdiagram");
-			this.machineURI = machineURI;
+			this.eventBRootURI = pEventBRootURI;
 			this.classdiagram = classdiagram;
 		}
 
@@ -67,11 +70,11 @@ public class AddClassdiagramHandler extends AbstractHandler {
 			TransactionalEditingDomain editingDomain = getEditingDomain();
 			
 			try {
-				Resource resource = editingDomain.getResourceSet().getResource(machineURI, true);
+				Resource resource = editingDomain.getResourceSet().getResource(eventBRootURI, true);
 				
 				if (resource != null && resource.isLoaded()) {
-					Machine machine = (Machine) resource.getContents().get(0);
-					machine.getExtensions().add(classdiagram);
+					EventBElement eventBElement = (EventBElement) resource.getContents().get(0);
+					eventBElement.getExtensions().add(classdiagram);
 					resource.save(Collections.emptyMap());
 				}
 			} catch (Exception e) {
@@ -89,8 +92,8 @@ public class AddClassdiagramHandler extends AbstractHandler {
 		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
 		if (selection instanceof IStructuredSelection) {
 			Object element = ((IStructuredSelection) selection).getFirstElement();
-			if (element instanceof IMachineRoot) {
-				IMachineRoot machineRoot = (IMachineRoot) element;
+			if (element instanceof IEventBRoot) {
+				IEventBRoot machineRoot = (IEventBRoot) element; 
 				IFile file = machineRoot.getResource();
 					
 				if (file != null && file.exists()) {
@@ -102,11 +105,11 @@ public class AddClassdiagramHandler extends AbstractHandler {
 						return null;
 					String name = dialog.getValue().trim();
 					
-					URI machineURI = URI.createPlatformResourceURI(file.getFullPath().toOSString(), true);
+					URI eventBElementURI = URI.createPlatformResourceURI(file.getFullPath().toOSString(), true);
 					Classdiagram classdiargam = ClassdiagramsFactory.eINSTANCE.createClassdiagram();
 					classdiargam.setName(name);
 					try {
-						AddClassdiagramCommand command = new AddClassdiagramCommand(machineURI, classdiargam);
+						AddClassdiagramCommand command = new AddClassdiagramCommand(eventBElementURI, classdiargam);
 						if (command.canExecute())
 							command.execute(new NullProgressMonitor(), null);
 					} catch (Exception e) {

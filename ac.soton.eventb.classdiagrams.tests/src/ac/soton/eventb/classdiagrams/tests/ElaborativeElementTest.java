@@ -6,8 +6,8 @@
  */
 package ac.soton.eventb.classdiagrams.tests;
 
-import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 
 import junit.framework.TestCase;
 
@@ -15,19 +15,19 @@ import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Association</b></em>'.
+ * A test case for the model object '<em><b>Elaborative Element</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class AssociationTest extends TestCase {
+public class ElaborativeElementTest extends TestCase {
 
 	/**
-	 * The fixture for this Association test case.
+	 * The fixture for this Elaborative Element test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Association fixture = null;
+	protected ElaborativeElement fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -35,36 +35,36 @@ public class AssociationTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(AssociationTest.class);
+		TestRunner.run(ElaborativeElementTest.class);
 	}
 
 	/**
-	 * Constructs a new Association test case with the given name.
+	 * Constructs a new Elaborative Element test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationTest(String name) {
+	public ElaborativeElementTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this Association test case.
+	 * Sets the fixture for this Elaborative Element test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(Association fixture) {
+	protected void setFixture(ElaborativeElement fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this Association test case.
+	 * Returns the fixture for this Elaborative Element test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Association getFixture() {
+	protected ElaborativeElement getFixture() {
 		return fixture;
 	}
 
@@ -76,7 +76,7 @@ public class AssociationTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(ClassdiagramsFactory.eINSTANCE.createAssociation());
+		setFixture(ClassdiagramsFactory.eINSTANCE.createElaborativeElement());
 	}
 
 	/**
@@ -90,4 +90,4 @@ public class AssociationTest extends TestCase {
 		setFixture(null);
 	}
 
-} //AssociationTest
+} //ElaborativeElementTest

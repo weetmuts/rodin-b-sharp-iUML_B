@@ -38,11 +38,7 @@ public class ClassdiagramsTests extends TestSuite {
 		suite.addTestSuite(ClassdiagramTest.class);
 		suite.addTestSuite(AssociationTest.class);
 		suite.addTestSuite(ClassAttributeTest.class);
-		suite.addTestSuite(ClassAxiomTest.class);
-		suite.addTestSuite(ClassInvariantTest.class);
-		suite.addTestSuite(ClassEventTest.class);
 		suite.addTestSuite(ClassTest.class);
-		suite.addTestSuite(AbstractClassiagramElementTest.class);
 		return suite;
 	}
 

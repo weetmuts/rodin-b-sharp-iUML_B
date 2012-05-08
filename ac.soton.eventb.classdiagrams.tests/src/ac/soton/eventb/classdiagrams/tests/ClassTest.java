@@ -18,7 +18,15 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassTest extends AbstractClassiagramElementTest {
+public class ClassTest extends TestCase {
+
+	/**
+	 * The fixture for this Class test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ac.soton.eventb.classdiagrams.Class fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -40,14 +48,23 @@ public class ClassTest extends AbstractClassiagramElementTest {
 	}
 
 	/**
+	 * Sets the fixture for this Class test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(ac.soton.eventb.classdiagrams.Class fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
 	 * Returns the fixture for this Class test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	protected ac.soton.eventb.classdiagrams.Class getFixture() {
-		return (ac.soton.eventb.classdiagrams.Class)fixture;
+		return fixture;
 	}
 
 	/**
