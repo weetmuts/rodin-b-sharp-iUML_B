@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
@@ -17,13 +16,12 @@ import org.eventb.emf.core.machine.MachinePackage;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassType;
-import ac.soton.eventb.classdiagrams.generator.strings.Strings;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
-public class ClassRule  extends AbstractRule  implements IRule {
+public class AttributeRule  extends AbstractRule  implements IRule {
 
 	protected static final EReference components = CorePackage.Literals.PROJECT__COMPONENTS;
 	protected static final EReference sees = MachinePackage.Literals.MACHINE__SEES;
@@ -33,13 +31,14 @@ public class ClassRule  extends AbstractRule  implements IRule {
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
-		assert(sourceElement instanceof Class);
-
-		if (sourceElement instanceof Class){
+		assert(sourceElement instanceof ClassAttribute);
+		if (sourceElement instanceof ClassAttribute){
 			return true;
 		} else {
 			return false;
 		}//TODO change to true
+		
+		//TODO what is attribute's role? should it be a relation like in UMLB?
 	}
 	
 	@Override
@@ -55,7 +54,7 @@ public class ClassRule  extends AbstractRule  implements IRule {
 //			}
 //		}
 		
-		return true; //TODO fix dependency check
+		return true; //cia
 	}
 	
 //	private boolean supertypeDependenciesSatisfied(Class c, List<GenerationDescriptor> generatedElements){
@@ -97,16 +96,8 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		}
 		
 		//TODO process attributes? or is it possible to do it separately in the other class?
-		//-----------------
 		
 		//TODO process supertype invariants
-		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
-			ret.add(Make.descriptor(container,getPredicate(container),Make.invariant(
-					Strings.CLASS_SUPERTYPE_NAME(element), 
-					Strings.CLASS_SUPERTYPE_PRED(
-							element, element.getSupertypes()), 
-					element.getComment()),10));
-		}
 		
 //		System.out.println("generatedElements: " + generatedElements.size());
 //		
@@ -171,17 +162,6 @@ public class ClassRule  extends AbstractRule  implements IRule {
 //		return ret;
 		
 		return ret;
-	}
-
-	private EStructuralFeature getPredicate(
-			EventBNamedCommentedComponentElement pContainer) {
-		if (pContainer instanceof Context){
-			return axioms;
-		} else if (pContainer instanceof Machine){
-			return invariants;
-		} else {
-			return null;			
-		}
 	}
 
 	private Context getContext(Class cp,

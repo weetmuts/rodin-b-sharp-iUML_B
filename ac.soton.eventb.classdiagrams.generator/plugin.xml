@@ -45,6 +45,11 @@
                rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassRule"
                source_class="Class">
          </rule>
+         <rule
+               name="AssociationRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.AssociationRule"
+               source_class="Association">
+         </rule>
       </generator>
    </extension>
    <extension

@@ -109,10 +109,6 @@ public class Strings {
 	}
 	
 	public static String CLASS_INSTANCE;
-
-//	public static String CLASS_INSTANCE(Class cp) {
-//		return bind(CLASS_INSTANCE, rootComponentPrefix(cp), cp.getInstance());
-//	}
 	
 	public static String CLASS_INITIALIZATION_NAME;
 
@@ -128,8 +124,91 @@ public class Strings {
 
 	public static String CLASS_INITIALIZATION_EXPR;
 	
-//	public static String CLASS_INITIALIZATION_EXPR(Class cp) {
-//		return bind(CLASS_INITIALIZATION_EXPR, cp.getName(), cp.getInstance());
-//	}
+	public static String ASSOCIATION_PRED;
+
+	public static String ASSOCIATION_PRED(Association element) {
+		return bind(ASSOCIATION_PRED, 
+				element.getName(), 
+				element.getSource().getName(), 
+				getRelationType(element), 
+				element.getTarget().getName());
+	}
+
+	public static String REL_TOTAL_BIJECTION;				
+	public static String REL_TOTAL_SURJECTION;									
+	public static String REL_TOTAL_INJECTION;
+	public static String REL_TOTAL_FUNCTION;
+	public static String REL_PARTIAL_SURJECTION;
+	public static String REL_PARTIAL_INJECTION;
+	public static String REL_PARTIAL_FUNCTION;
+	public static String REL_TOTAL_SURJECTIVE_REL;
+	public static String REL_TOTAL_RELATION;
+	public static String REL_PARTIAL_SURJECTIVE_RELATION;
+	public static String REL_PARTIAL_RELATION;
+	
+	private static String getRelationType(Association element) {
+		if (element.isFunctional()){
+			if (element.isTotal()) {
+				if (element.isSurjective()){
+					if (element.isInjective()){
+						return REL_TOTAL_BIJECTION;				//total bijection
+					}else{
+						return REL_TOTAL_SURJECTION;				//total surjection						
+					}
+				}else{
+					if (element.isInjective()){
+						return REL_TOTAL_INJECTION;				//total injection
+					}else{
+						return REL_TOTAL_FUNCTION;				//total function
+					}				
+				}
+			}else{
+				if (element.isSurjective()){
+					return REL_PARTIAL_SURJECTION;				//partial surjection
+				}else{
+					if (element.isInjective()){
+						return REL_PARTIAL_INJECTION;				//partial injection	
+					}else{
+						return REL_PARTIAL_FUNCTION;				//partial function		
+					}					
+				}				
+			}
+		}else{
+			if (element.isTotal()) {
+				if (element.isSurjective()){
+					return REL_TOTAL_SURJECTIVE_REL;			//total surjective relation
+				}else{
+					return REL_TOTAL_RELATION;				//total relation		
+				}					
+			}else{
+				if (element.isSurjective()){
+					return REL_PARTIAL_SURJECTIVE_RELATION;				//partial surjective relation
+				}else{
+					return REL_PARTIAL_RELATION;				//partial relation		
+				}					
+			}
+		}
+	}
+	
+	public static String ASSOCIATION_INJECTIVE_PRED;
+
+	public static String ASSOCIATION_PRED_INJECTIVE(Association element) {
+		return bind(ASSOCIATION_INJECTIVE_PRED, 
+				element.getName(), 
+				element.getTarget().getName(),
+				element.getSource().getName());
+	}
+	
+	public static String ASSOCIATION_PRED_NAME;
+
+	public static String ASSOCIATION_PRED_NAME(String name) {
+		return bind(ASSOCIATION_INJECTIVE_PRED, name);
+	}
+
+	public static String ASSOCIATION_PRED_INJECTIVE;
+	
+	public static String ASSOCIATION_PRED_INJECTIVE_NAME(String name) {
+		return bind(ASSOCIATION_PRED_INJECTIVE, name);
+	}
 	
 }
