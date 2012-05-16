@@ -11,8 +11,8 @@ import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
+
 import ac.soton.eventb.emf.diagrams.Diagram;
 
 import org.eclipse.emf.common.notify.Adapter;

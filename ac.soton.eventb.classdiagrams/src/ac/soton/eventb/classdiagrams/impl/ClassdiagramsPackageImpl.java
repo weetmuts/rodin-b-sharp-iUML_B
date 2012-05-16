@@ -14,8 +14,8 @@ import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
+
 import ac.soton.eventb.classdiagrams.util.ClassdiagramsValidator;
 
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
@@ -32,8 +32,6 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eventb.emf.core.CorePackage;
-
-import org.eventb.emf.core.machine.MachinePackage;
 
 /**
  * <!-- begin-user-doc -->
