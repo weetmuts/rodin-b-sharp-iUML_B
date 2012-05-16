@@ -43,6 +43,7 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getExtensionId <em>Extension Id</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getClasses <em>Classes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getClassAssociations <em>Class Associations</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +90,16 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Association> classAssociations;
+
+	/**
+	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefines()
+	 * @generated
+	 * @ordered
+	 */
+	protected Classdiagram refines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,6 +170,44 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Classdiagram getRefines() {
+		if (refines != null && refines.eIsProxy()) {
+			InternalEObject oldRefines = (InternalEObject)refines;
+			refines = (Classdiagram)eResolveProxy(oldRefines);
+			if (refines != oldRefines) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASSDIAGRAM__REFINES, oldRefines, refines));
+			}
+		}
+		return refines;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Classdiagram basicGetRefines() {
+		return refines;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRefines(Classdiagram newRefines) {
+		Classdiagram oldRefines = refines;
+		refines = newRefines;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASSDIAGRAM__REFINES, oldRefines, refines));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -184,6 +233,9 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				return getClasses();
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
 				return getClassAssociations();
+			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
+				if (resolve) return getRefines();
+				return basicGetRefines();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,6 +260,9 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				getClassAssociations().clear();
 				getClassAssociations().addAll((Collection<? extends Association>)newValue);
 				return;
+			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
+				setRefines((Classdiagram)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -229,6 +284,9 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
 				getClassAssociations().clear();
 				return;
+			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
+				setRefines((Classdiagram)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -247,6 +305,8 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				return classes != null && !classes.isEmpty();
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
 				return classAssociations != null && !classAssociations.isEmpty();
+			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
+				return refines != null;
 		}
 		return super.eIsSet(featureID);
 	}

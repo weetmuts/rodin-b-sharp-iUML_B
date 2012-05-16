@@ -23,6 +23,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getClasses <em>Classes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getClassAssociations <em>Class Associations</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,5 +63,31 @@ public interface Classdiagram extends EventBNamedCommentedElement, AbstractExten
 	 * @generated
 	 */
 	EList<Association> getClassAssociations();
+
+	/**
+	 * Returns the value of the '<em><b>Refines</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Refines</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Refines</em>' reference.
+	 * @see #setRefines(Classdiagram)
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClassdiagram_Refines()
+	 * @model
+	 * @generated
+	 */
+	Classdiagram getRefines();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Classdiagram#getRefines <em>Refines</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Refines</em>' reference.
+	 * @see #getRefines()
+	 * @generated
+	 */
+	void setRefines(Classdiagram value);
 
 } // Classdiagram

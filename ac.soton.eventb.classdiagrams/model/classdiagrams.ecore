@@ -13,6 +13,7 @@
         eType="#//Class" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAssociations" upperBound="-1"
         eType="#//Association" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//Classdiagram"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement #//ElaborativeElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -40,11 +41,6 @@
         eType="#//Class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAttributes" upperBound="-1"
         eType="#//ClassAttribute" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Class">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-        <details key="constraints" value="parentIsConstant&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//Association" eOpposite="#//Association/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"

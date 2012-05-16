@@ -50,7 +50,6 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getSupertypes <em>Supertypes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAttributes <em>Class Attributes</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
@@ -88,15 +87,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<ClassAttribute> classAttributes;
-	/**
-	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExtends()
-	 * @generated
-	 * @ordered
-	 */
-	protected ac.soton.eventb.classdiagrams.Class extends_;
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -223,44 +213,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			classAttributes = new EObjectContainmentEList.Resolving<ClassAttribute>(ClassAttribute.class, this, ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES);
 		}
 		return classAttributes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ac.soton.eventb.classdiagrams.Class getExtends() {
-		if (extends_ != null && extends_.eIsProxy()) {
-			InternalEObject oldExtends = (InternalEObject)extends_;
-			extends_ = (ac.soton.eventb.classdiagrams.Class)eResolveProxy(oldExtends);
-			if (extends_ != oldExtends) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASS__EXTENDS, oldExtends, extends_));
-			}
-		}
-		return extends_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ac.soton.eventb.classdiagrams.Class basicGetExtends() {
-		return extends_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExtends(ac.soton.eventb.classdiagrams.Class newExtends) {
-		ac.soton.eventb.classdiagrams.Class oldExtends = extends_;
-		extends_ = newExtends;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__EXTENDS, oldExtends, extends_));
 	}
 
 	/**
@@ -396,9 +348,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return getSupertypes();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return getClassAttributes();
-			case ClassdiagramsPackage.CLASS__EXTENDS:
-				if (resolve) return getExtends();
-				return basicGetExtends();
 			case ClassdiagramsPackage.CLASS__INCOMING:
 				return getIncoming();
 			case ClassdiagramsPackage.CLASS__OUTGOING:
@@ -431,9 +380,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				getClassAttributes().clear();
 				getClassAttributes().addAll((Collection<? extends ClassAttribute>)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__EXTENDS:
-				setExtends((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS__INCOMING:
 				getIncoming().clear();
@@ -470,9 +416,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				getClassAttributes().clear();
 				return;
-			case ClassdiagramsPackage.CLASS__EXTENDS:
-				setExtends((ac.soton.eventb.classdiagrams.Class)null);
-				return;
 			case ClassdiagramsPackage.CLASS__INCOMING:
 				getIncoming().clear();
 				return;
@@ -503,8 +446,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return supertypes != null && !supertypes.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return classAttributes != null && !classAttributes.isEmpty();
-			case ClassdiagramsPackage.CLASS__EXTENDS:
-				return extends_ != null;
 			case ClassdiagramsPackage.CLASS__INCOMING:
 				return incoming != null && !incoming.isEmpty();
 			case ClassdiagramsPackage.CLASS__OUTGOING:

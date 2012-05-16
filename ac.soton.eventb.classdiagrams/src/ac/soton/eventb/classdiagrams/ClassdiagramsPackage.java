@@ -209,13 +209,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASSDIAGRAM__CLASS_ASSOCIATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Refines</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSDIAGRAM__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Classdiagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSDIAGRAM_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int CLASSDIAGRAM_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl <em>Association</em>}' class.
@@ -581,22 +590,13 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS__CLASS_ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Extends</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__EXTENDS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
+	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -605,7 +605,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -614,7 +614,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Class Type</b></em>' attribute.
@@ -623,7 +623,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CLASS_TYPE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
+	int CLASS__CLASS_TYPE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -632,7 +632,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
+	int CLASS_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 
 	/**
@@ -738,6 +738,17 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassdiagram_ClassAssociations();
+
+	/**
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.Classdiagram#getRefines <em>Refines</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Refines</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Classdiagram#getRefines()
+	 * @see #getClassdiagram()
+	 * @generated
+	 */
+	EReference getClassdiagram_Refines();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.Association <em>Association</em>}'.
@@ -867,17 +878,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClass_ClassAttributes();
-
-	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Extends</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Class#getExtends()
-	 * @see #getClass_()
-	 * @generated
-	 */
-	EReference getClass_Extends();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}'.
@@ -1031,6 +1031,14 @@ public interface ClassdiagramsPackage extends EPackage {
 		EReference CLASSDIAGRAM__CLASS_ASSOCIATIONS = eINSTANCE.getClassdiagram_ClassAssociations();
 
 		/**
+		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSDIAGRAM__REFINES = eINSTANCE.getClassdiagram_Refines();
+
+		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl <em>Association</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1131,14 +1139,6 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS__CLASS_ATTRIBUTES = eINSTANCE.getClass_ClassAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Extends</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASS__EXTENDS = eINSTANCE.getClass_Extends();
 
 		/**
 		 * The meta object literal for the '<em><b>Incoming</b></em>' reference list feature.

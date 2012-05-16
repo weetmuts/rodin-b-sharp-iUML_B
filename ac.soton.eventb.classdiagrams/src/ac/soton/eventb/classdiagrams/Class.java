@@ -8,11 +8,7 @@ package ac.soton.eventb.classdiagrams;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
-
-import org.eventb.emf.core.machine.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +20,6 @@ import org.eventb.emf.core.machine.Variable;
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getSupertypes <em>Supertypes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassAttributes <em>Class Attributes</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
@@ -68,32 +63,6 @@ public interface Class extends EventBNamedCommentedElement, ElaborativeElement {
 	 * @generated
 	 */
 	EList<ClassAttribute> getClassAttributes();
-
-	/**
-	 * Returns the value of the '<em><b>Extends</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Extends</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Extends</em>' reference.
-	 * @see #setExtends(Class)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Extends()
-	 * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='parentIsConstant\n'"
-	 * @generated
-	 */
-	Class getExtends();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getExtends <em>Extends</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Extends</em>' reference.
-	 * @see #getExtends()
-	 * @generated
-	 */
-	void setExtends(Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Incoming</b></em>' reference list.
