@@ -79,6 +79,8 @@ public class ClassRule  extends AbstractRule  implements IRule {
 				(EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
 		Class element = (Class)sourceElement;
 		
+		boolean isContext = container instanceof Context; 
+		
 		//create element if it's a new one
 		if (element.getElaborates() == null){
 			int ct = element.getClassType().getValue();
@@ -101,11 +103,19 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		
 		//TODO process supertype invariants
 		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
-			ret.add(Make.descriptor(container,getPredicate(container),Make.invariant(
-					Strings.CLASS_SUPERTYPE_NAME(element), 
-					Strings.CLASS_SUPERTYPE_PRED(
-							element, element.getSupertypes()), 
-					element.getComment()),10));
+			if (isContext){
+				ret.add(Make.descriptor(container,getPredicate(container), Make.axiom(
+						Strings.CLASS_SUPERTYPE_NAME(element), 
+						Strings.CLASS_SUPERTYPE_PRED(
+								element, element.getSupertypes()), 
+						element.getComment()),10));
+			} else {
+				ret.add(Make.descriptor(container,getPredicate(container), Make.invariant(
+						Strings.CLASS_SUPERTYPE_NAME(element), 
+						Strings.CLASS_SUPERTYPE_PRED(
+								element, element.getSupertypes()), 
+						element.getComment()),10));
+			}
 		}
 		
 //		System.out.println("generatedElements: " + generatedElements.size());

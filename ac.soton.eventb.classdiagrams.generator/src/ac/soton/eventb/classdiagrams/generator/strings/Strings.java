@@ -80,7 +80,7 @@ public class Strings {
 		superTypeUnion = (i.hasNext()) ? i.next().getName() : "";
 		
 		while (i.hasNext()){
-			superTypeUnion = superTypeUnion + CLASS_SUPERTYPE_UNION(superTypeUnion, i.next().getName());
+			superTypeUnion = CLASS_SUPERTYPE_UNION(superTypeUnion, i.next().getName());
 		}
 		
 		return bind(CLASS_SUPERTYPE_PRED, rootComponentPrefix(cp), superTypeUnion);
