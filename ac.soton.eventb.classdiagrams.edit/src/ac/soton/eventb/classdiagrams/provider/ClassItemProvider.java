@@ -69,7 +69,6 @@ public class ClassItemProvider
 
 			addElaboratesPropertyDescriptor(object);
 			addSupertypesPropertyDescriptor(object);
-			addExtendsPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
@@ -92,28 +91,6 @@ public class ClassItemProvider
 				 getString("_UI_Class_supertypes_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_supertypes_feature", "_UI_Class_type"),
 				 ClassdiagramsPackage.Literals.CLASS__SUPERTYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Extends feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExtendsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_extends_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_extends_feature", "_UI_Class_type"),
-				 ClassdiagramsPackage.Literals.CLASS__EXTENDS,
 				 true,
 				 false,
 				 true,
