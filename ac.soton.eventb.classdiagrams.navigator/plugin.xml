@@ -49,5 +49,18 @@
             type="Classdiagram">
       </provider>
    </extension>
+   <extension
+         point="org.rodinp.core.refinements">
+      <Participant
+            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramMachineRefiner"
+            id="classdiagramMachineRefiner"
+            refinement-id="org.eventb.core.machineRefinement">
+      </Participant>
+      <Participant
+            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramContextExtender"
+            id="classdiagramContextRefiner"
+            refinement-id="org.eventb.core.contextRefinement">
+      </Participant>
+   </extension>
 
 </plugin>
