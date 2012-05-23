@@ -110,7 +110,8 @@ public class AssociationTypePropertySection extends AbstractEnumerationPropertyS
 				return AssociationType.VARIABLE;
 			}
 		} else {
-			return ((Association) eObject).getAssociationType();
+//			return ((Association) eObject).getAssociationType();
+			return (AssociationType)getFeatureByValue(getFeatureValue(combo.getItem(0)));
 		}
 	}
 	

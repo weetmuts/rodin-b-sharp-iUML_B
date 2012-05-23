@@ -7,7 +7,6 @@
  */
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,13 +28,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
 
 /**
  * Elaborates property section for Classdiagrams.
@@ -65,32 +65,31 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	protected Object getNewChild() {
 		EObject container = EcoreUtil.getRootContainer(eObject);
 		String popupTitle = "no name";
-		List<? super EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
+		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
 		
 		
 		if (container instanceof Machine){
-			Machine machine = (Machine) container;
+			popupTitle = ((Machine)container).getName();
 			
-			popupTitle = machine.getName();
-			valuesList.addAll(machine.getVariables());
+			List<Machine> machines = getAllMachines((Machine)container, new LinkedList<Machine>());
 			
-			
-			for (Context context : machine.getSees()){
-				valuesList.addAll(context.getConstants());
-				valuesList.addAll(context.getSets());
+			for (Machine m : machines){
+				valuesList.addAll(m.getVariables());
+				
+				for (Context context : m.getSees()){
+					valuesList.addAll(fillValuesListWithContextContents(context));
+				}		
+				
 			}
-			
 		} else if (container instanceof Context){
-			Context context = (Context)container;
-			
-			popupTitle = context.getName();
-			
-			valuesList.addAll(context.getConstants());
-			valuesList.addAll(context.getSets());
+
+			popupTitle = ((Context)container).getName();
+	
+			valuesList.addAll(fillValuesListWithContextContents((Context)container));
 		}
 		
+		filterList((EventBNamedCommentedComponentElement)container, valuesList);
 		
-		//TODO limit only to a single selection
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
 				.getShell(), valuesList, variableLabelProvider);
 		variablesDialog.setTitle(popupTitle + " elements");
@@ -102,6 +101,59 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 			}
 		}
 		return null;
+	}
+	
+	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
+		List<EventBNamed> filteredList = new LinkedList<EventBNamed>();
+		
+		
+		//for every list element, check whether it is elaborated
+		for (EventBNamed eb : pValuesList){
+			
+			if (!ClassdiagramUtil.isElaborated(eb)){	
+				filteredList.add((EventBNamed)eb);
+			}
+		}
+		
+		pValuesList.clear();
+		pValuesList.addAll(filteredList);
+	}
+
+	private List<EventBNamed> fillValuesListWithContextContents(Context context) {
+		List<EventBNamed> valuesList = new LinkedList<EventBNamed>();
+		
+		List<Context> contexts = getAllContexts(context, new LinkedList<Context>());
+		
+		for (Context c : contexts){
+			valuesList.addAll(c.getConstants());
+			valuesList.addAll(c.getSets());	
+		}
+		
+		return valuesList;
+	}
+
+	private List<Machine> getAllMachines(Machine container, List<Machine> pMachines) {
+		pMachines.add(container);		
+
+		List<Machine> machines = container.getRefines();
+		
+		for (Machine m : machines){
+			getAllMachines(m, pMachines);
+		}
+		
+		return pMachines;
+	}
+	
+	private List<Context> getAllContexts(Context container, List<Context> pContexts) {
+		pContexts.add(container);
+		
+		List<Context> machines = container.getExtends();
+		
+		for (Context c : machines){
+			getAllContexts(c, pContexts);
+		}
+		
+		return pContexts;
 	}
 
 	@Override
@@ -119,6 +171,14 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 				} else {
 					addButton.setEnabled(true);
 					clearButton.setEnabled(false);
+				}
+				
+				if (eObject != null && 
+						(((Class)eObject).getRefines() != null || 
+						((Class)eObject).getElaborates() != null)){
+						lovText.setEnabled(false);
+				} else {
+						lovText.setEnabled(true);
 				}
 			}
 			
@@ -172,5 +232,56 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	protected String getLabelText() {
 		return "Elaborates:";
 	}
+	
+	/**
+	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
+	 */
+	public void refresh() {
+		super.refresh();
+		EventBNamed generated;
 
+		if (eObject != null && (((Class)eObject).getElaborates() == null) && 
+			((generated = getGenerated((EventBNamed)eObject)) != null)){
+			
+			setElaborates(generated);
+		}
+	}
+	
+	public EventBNamed getGenerated(EventBNamed pEventBNamed) {
+		EObject container = EcoreUtil.getRootContainer(pEventBNamed);
+		List<EventBElement> objectsToCompare = new LinkedList<EventBElement>();
+		
+		if (container instanceof Machine){
+			objectsToCompare.addAll( ((Machine)container).getVariables());
+		} else if (container instanceof Context){
+			objectsToCompare.addAll( ((Context)container).getConstants());
+		}
+		
+		for (EventBElement e : objectsToCompare){
+			if (e.isGenerated() && 
+				e.isLocalGenerated() && 
+				e instanceof EventBNamed &&
+				((EventBNamed)e).getName() != null &&
+				((EventBNamed)e).getName().equals(pEventBNamed.getName())){
+				return (EventBNamed)e;
+			}
+		}
+		
+		return null;
+	}
+
+	private void setElaborates(EventBNamed pEventBnamed){
+		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
+		
+		AbstractOverrideableCommand command;
+		
+		command = (SetCommand) SetCommand.create(
+				editingDomain,
+				eObject, 
+				getFeature(),
+				pEventBnamed);
+		
+		editingDomain.getCommandStack().execute(command);
+	}
+	
 }

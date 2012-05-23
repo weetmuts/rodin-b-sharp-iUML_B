@@ -6,7 +6,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gmf.runtime.common.ui.dialogs.PopupDialog;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -14,11 +19,15 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
 
 public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 	
@@ -43,7 +52,7 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 	protected Object getNewChild() {
 		EObject container = EcoreUtil.getRootContainer(eObject);
 		String popupTitle = "no name";
-		List<? super EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
+		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
 		
 		
 		if (container instanceof Machine){
@@ -64,6 +73,8 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 			
 		}
 		
+		filterList((EventBNamedCommentedComponentElement)container, valuesList);
+		
 		
 		//TODO limit only to a single selection
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
@@ -77,6 +88,49 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 			}
 		}
 		return null;
+	}
+	
+	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
+		List<EventBNamed> filteredList = new LinkedList<EventBNamed>();
+		
+		
+		//for every list element, check whether it is elaborated
+		for (EventBNamed eb : pValuesList){
+			
+			if (!ClassdiagramUtil.isRefined(pContainer, eb)){	
+				filteredList.add((EventBNamed)eb);
+			}
+		}
+		
+		pValuesList.clear();
+		pValuesList.addAll(filteredList);
+	}
+	
+	protected void modifyElement(Object pNewChild){
+		super.modifyElement(pNewChild);
+		
+		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
+		
+		AbstractOverrideableCommand command;
+		
+		//set class name value
+		Object eref = ClassdiagramsPackage.Literals.CLASS.getEStructuralFeature(ClassdiagramsPackage.CLASS__NAME);
+		
+		if (getFeature().isMany() == true){
+				command = (AddCommand) AddCommand.create(
+						editingDomain,
+						eObject, 
+						ClassdiagramsPackage.eINSTANCE.getName(), 
+						((EventBNamed)pNewChild).getName());
+		} else {
+			command = (SetCommand) SetCommand.create(
+					editingDomain,
+					eObject, 
+					eref,
+					((EventBNamed)pNewChild).getName());
+		}
+		
+		editingDomain.getCommandStack().execute(command);
 	}
 
 	@Override
@@ -95,11 +149,56 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 					addButton.setEnabled(true);
 					clearButton.setEnabled(false);
 				}
+				
+				if (eObject != null && 
+					(((Class)eObject).getRefines() != null || 
+					((Class)eObject).getElaborates() != null)){
+					lovText.setEnabled(false);
+				} else {
+					lovText.setEnabled(true);
+				}
 			}
 			
 		});
 		
 		refresh();
+	}
+	
+	/**
+	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
+	 */
+	public void refresh() {
+		super.refresh();
+		EventBNamed generated;
+
+		if (eObject != null && (((Class)eObject).getElaborates() == null) && 
+			((generated = getGenerated((EventBNamed)eObject)) != null)){
+			
+			setRefines(generated);
+		}
+	}
+	
+	public EventBNamed getGenerated(EventBNamed pEventBNamed) {
+		EObject container = EcoreUtil.getRootContainer(pEventBNamed);
+		List<EventBElement> objectsToCompare = new LinkedList<EventBElement>();
+		
+		if (container instanceof Machine){
+			objectsToCompare.addAll( ((Machine)container).getVariables());
+		} else if (container instanceof Context){
+			objectsToCompare.addAll( ((Context)container).getConstants());
+		}
+		
+		for (EventBElement e : objectsToCompare){
+			if (e.isGenerated() && 
+				e.isLocalGenerated() && 
+				e instanceof EventBNamed &&
+				((EventBNamed)e).getName() != null &&
+				((EventBNamed)e).getName().equals(pEventBNamed.getName())){
+				return (EventBNamed)e;
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override
@@ -131,6 +230,20 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 
 	protected String getLOVLabel() {
 		return "Refines:";
+	}
+	
+	private void setRefines(EventBNamed pEventBnamed){
+		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
+		
+		AbstractOverrideableCommand command;
+		
+		command = (SetCommand) SetCommand.create(
+				editingDomain,
+				eObject, 
+				getFeature(),
+				pEventBnamed);
+		
+		editingDomain.getCommandStack().execute(command);
 	}
 	
 }

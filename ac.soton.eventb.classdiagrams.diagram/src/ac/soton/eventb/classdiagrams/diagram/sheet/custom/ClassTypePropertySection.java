@@ -36,7 +36,7 @@ import ac.soton.eventb.classdiagrams.Class;
  * Translation property section for Classdiagrams.
  * 
  * @author vitaly
- *
+ *getFeatureByValue
  */
 public class ClassTypePropertySection extends AbstractEnumerationPropertySection {
 	
@@ -102,17 +102,18 @@ public class ClassTypePropertySection extends AbstractEnumerationPropertySection
 	
 	private ClassType getCurrentClassType(){
 		if (((Class)(eObject)).getElaborates() != null){
-			EventBNamed ebe = ((Class)(eObject)).getElaborates();
+			EventBNamed ebn = ((Class)(eObject)).getElaborates();
 			
-			if (ebe.eContainingFeature().getName().equals("sets")){
+			if (ebn.eContainingFeature().getName().equals("sets")){
 				return ClassType.SET;
-			} else if (ebe.eContainingFeature().getName().equals("constants")){
+			} else if (ebn.eContainingFeature().getName().equals("constants")){
 				return ClassType.CONSTANT;			
 			} else {
 				return ClassType.VARIABLE;
 			}
 		} else {
-			return ((Class) eObject).getClassType();
+//			return ((Class) eObject).getClassType();
+			return (ClassType)getFeatureByValue(getFeatureValue(combo.getItem(0)));
 		}
 	}
 

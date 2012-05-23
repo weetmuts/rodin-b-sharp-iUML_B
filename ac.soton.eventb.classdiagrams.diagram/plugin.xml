@@ -1174,6 +1174,12 @@
          </propertySection>
       </propertySections>
    </extension>
+   <extension
+         point="org.eclipse.emf.transaction.listeners">
+      <listener
+            class="ac.soton.eventb.classdiagrams.diagram.listener.ClassModificationListener">
+      </listener>
+   </extension>
 
    <!-- optionally, specify keybindings -->
 </plugin>

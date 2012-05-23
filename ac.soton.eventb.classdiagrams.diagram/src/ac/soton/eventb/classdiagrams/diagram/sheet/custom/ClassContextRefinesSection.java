@@ -15,11 +15,13 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
 
 public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	
@@ -44,7 +46,7 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	protected Object getNewChild() {
 		EObject container = EcoreUtil.getRootContainer(eObject);
 		String popupTitle = "no name";
-		List<? super EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
+		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
 		
 		
 		if (container instanceof Context){
@@ -64,6 +66,7 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 			}
 		}
 		
+		filterList((EventBNamedCommentedComponentElement)container, valuesList);
 		
 		//TODO limit only to a single selection
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
@@ -77,6 +80,22 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 			}
 		}
 		return null;
+	}
+	
+	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
+		List<EventBNamed> filteredList = new LinkedList<EventBNamed>();
+		
+		
+		//for every list element, check whether it is elaborated
+		for (EventBNamed eb : pValuesList){
+			
+			if (!ClassdiagramUtil.isRefined(pContainer, eb)){	
+				filteredList.add((EventBNamed)eb);
+			}
+		}
+		
+		pValuesList.clear();
+		pValuesList.addAll(filteredList);
 	}
 
 	@Override
@@ -94,6 +113,14 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 				} else {
 					addButton.setEnabled(true);
 					clearButton.setEnabled(false);
+				}
+				
+				if (eObject != null && 
+						(((Class)eObject).getRefines() != null || 
+						((Class)eObject).getElaborates() != null)){
+						lovText.setEnabled(false);
+				} else {
+						lovText.setEnabled(true);
 				}
 			}
 			
