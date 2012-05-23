@@ -202,13 +202,13 @@ public class Strings {
 	public static String ASSOCIATION_PRED_NAME;
 
 	public static String ASSOCIATION_PRED_NAME(String name) {
-		return bind(ASSOCIATION_INJECTIVE_PRED, name);
+		return bind(ASSOCIATION_PRED_NAME, name);
 	}
 
-	public static String ASSOCIATION_PRED_INJECTIVE;
+	public static String ASSOCIATION_PRED_INJECTIVE_NAME;
 	
 	public static String ASSOCIATION_PRED_INJECTIVE_NAME(String name) {
-		return bind(ASSOCIATION_PRED_INJECTIVE, name);
+		return bind(ASSOCIATION_PRED_INJECTIVE_NAME, name);
 	}
 	
 }
