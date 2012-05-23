@@ -10,6 +10,9 @@
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
           name="ClassFigure">
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="yellow"/>
         <children
             xsi:type="gmfgraph:Label"
             name="ClassNameFIgure"
