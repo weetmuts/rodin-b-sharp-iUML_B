@@ -9,10 +9,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.core.machine.Variable;
+import org.eventb.emf.core.machine.impl.InvariantImpl;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
@@ -45,31 +48,31 @@ public class ClassRule  extends AbstractRule  implements IRule {
 	@Override
 	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
 		
-//		Class c = (Class)sourceElement;
-//		
-//		if (c.getSupertypes().size() > 0){
-//			for (Class superClass : c.getSupertypes()){
-//				if (!supertypeDependenciesSatisfied(superClass, generatedElements)){
-//					return false;
-//				}
-//			}
-//		}
+		Class c = (Class)sourceElement;
 		
-		return true; //TODO fix dependency check
+		if (c.getSupertypes().size() > 0){
+			for (Class superClass : c.getSupertypes()){
+				if (!isGenerated(superClass, generatedElements)){
+					return false;
+				}
+			}
+		}
+		
+		return true; 
 	}
 	
-//	private boolean supertypeDependenciesSatisfied(Class c, List<GenerationDescriptor> generatedElements){
-//		for (GenerationDescriptor gd : generatedElements){
-//			if (gd.value instanceof InvariantImpl){
-//				InvariantImpl i = (InvariantImpl)gd.value;
-//				if (c.getName().concat(".inst") .equals(i.getName())){
-//					return true;
-//				}
-//			}
-//		}
-//		
-//		return false;
-//	}
+	private boolean isGenerated(EventBNamedCommentedElement source, final List<GenerationDescriptor> generatedElements) {
+		for (GenerationDescriptor gd : generatedElements){
+			if (gd.value instanceof EventBNamedCommentedElement){
+
+				if (source.getName().equals(((EventBNamedCommentedElement)gd.value).getName())){
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 	
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {

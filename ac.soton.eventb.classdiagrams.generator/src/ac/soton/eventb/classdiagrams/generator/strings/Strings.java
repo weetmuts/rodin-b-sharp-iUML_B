@@ -8,7 +8,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 
 public class Strings {
 
@@ -146,7 +148,7 @@ public class Strings {
 	public static String REL_PARTIAL_SURJECTIVE_RELATION;
 	public static String REL_PARTIAL_RELATION;
 	
-	private static String getRelationType(Association element) {
+	private static String getRelationType(AssociativeElement element) {
 		if (element.isFunctional()){
 			if (element.isTotal()) {
 				if (element.isSurjective()){
@@ -209,6 +211,39 @@ public class Strings {
 	
 	public static String ASSOCIATION_PRED_INJECTIVE_NAME(String name) {
 		return bind(ASSOCIATION_PRED_INJECTIVE_NAME, name);
+	}
+	
+	
+	//CLASS ATTRIBUTE
+	public static String CLASS_ATTRIBUTE_PRED;
+
+	public static String CLASS_ATTRIBUTE_PRED(ClassAttribute element) {
+		return bind(CLASS_ATTRIBUTE_PRED, 
+				element.getName(), 
+				((Class)element.eContainer()).getName(), 
+				getRelationType(element), 
+				element.getTarget());
+	}
+	
+	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED;
+
+	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE(ClassAttribute element) {
+		return bind(CLASS_ATTRIBUTE_INJECTIVE_PRED, 
+				element.getName(), 
+				element.getTarget(),
+				((Class)element.eContainer()).getName());
+	}
+	
+	public static String CLASS_ATTRIBUTE_PRED_NAME;
+
+	public static String CLASS_ATTRIBUTE_PRED_NAME(String name) {
+		return bind(CLASS_ATTRIBUTE_PRED_NAME, name);
+	}
+
+	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME;
+	
+	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(String name) {
+		return bind(CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME, name);
 	}
 	
 }

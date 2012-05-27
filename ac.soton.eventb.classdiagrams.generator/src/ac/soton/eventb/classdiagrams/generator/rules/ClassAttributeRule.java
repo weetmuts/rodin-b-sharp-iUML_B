@@ -17,8 +17,8 @@ import org.eventb.emf.core.machine.MachinePackage;
 import org.eventb.emf.core.machine.Variable;
 import org.eventb.emf.core.machine.impl.InvariantImpl;
 
-import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
@@ -27,7 +27,7 @@ import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
-public class AssociationRule   extends AbstractRule  implements IRule {
+public class ClassAttributeRule  extends AbstractRule  implements IRule {
 
 	protected static final EReference components = CorePackage.Literals.PROJECT__COMPONENTS;
 	protected static final EReference sees = MachinePackage.Literals.MACHINE__SEES;
@@ -37,42 +37,34 @@ public class AssociationRule   extends AbstractRule  implements IRule {
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
-		assert(sourceElement instanceof Association);
+		assert(sourceElement instanceof ClassAttribute);
 		return true;
 	}
 	
 	@Override
 	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
 		
-		Association c = (Association)sourceElement;
+		ClassAttribute c = (ClassAttribute)sourceElement;
 		
-		if (isGenerated(c.getSource(), generatedElements) && isGenerated(c.getTarget(), generatedElements)){
-			return true;
-		}
-		
-		return false; 
-	}
-	
-	private boolean isGenerated(EventBNamedCommentedElement source, final List<GenerationDescriptor> generatedElements) {
 		for (GenerationDescriptor gd : generatedElements){
 			if (gd.value instanceof EventBNamedCommentedElement){
 
-				if (source.getName().equals(((EventBNamedCommentedElement)gd.value).getName())){
+				if (c.getName().equals(((EventBNamedCommentedElement)gd.value).getName())){
 					return true;
 				}
 			}
 		}
 		
-		return false;
+		return false; 
 	}
-
+	
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 		
 		EventBNamedCommentedComponentElement container = 
 				(EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
-		Association element = (Association)sourceElement;
+		ClassAttribute element = (ClassAttribute)sourceElement;
 		
 		//if it's not elaborating the invariant - create one
 		if (element.getElaborates() == null){
@@ -88,15 +80,15 @@ public class AssociationRule   extends AbstractRule  implements IRule {
 							10));
 					ret.add(Make.descriptor(container, 
 							axioms, 
-							Make.axiom(Strings.ASSOCIATION_PRED_NAME(element.getName()), 
-							Strings.ASSOCIATION_PRED(element), 
+							Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_NAME(element.getName()), 
+							Strings.CLASS_ATTRIBUTE_PRED(element), 
 							element.getComment()),
 							10));
 					if (element.isInjective()){
 						ret.add(Make.descriptor(container, 
 							axioms, 
-							Make.axiom(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), 
-							Strings.ASSOCIATION_PRED_INJECTIVE(element), 
+							Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), 
+							Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), 
 							element.getComment()),
 							10));						
 					}
@@ -108,15 +100,15 @@ public class AssociationRule   extends AbstractRule  implements IRule {
 							10));
 					ret.add(Make.descriptor(container, 
 							invariants, 
-							Make.invariant(Strings.ASSOCIATION_PRED_NAME(element.getName()), 
-							Strings.ASSOCIATION_PRED(element), 
+							Make.invariant(Strings.CLASS_ATTRIBUTE_PRED_NAME(element.getName()), 
+							Strings.CLASS_ATTRIBUTE_PRED(element), 
 							element.getComment()),
 							10));
 					if (element.isInjective()){
 						ret.add(Make.descriptor(container, 
 							invariants, 
-							Make.invariant(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), 
-							Strings.ASSOCIATION_PRED_INJECTIVE(element), 
+							Make.invariant(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), 
+							Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), 
 							element.getComment()),
 							10));						
 					}
@@ -137,4 +129,5 @@ public class AssociationRule   extends AbstractRule  implements IRule {
 			return null;			
 		}
 	}
+	
 }
