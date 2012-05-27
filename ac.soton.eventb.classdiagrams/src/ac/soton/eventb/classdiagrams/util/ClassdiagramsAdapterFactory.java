@@ -7,6 +7,7 @@
 package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
@@ -109,6 +110,10 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseElaborativeElement(ElaborativeElement object) {
 				return createElaborativeElementAdapter();
+			}
+			@Override
+			public Adapter caseAssociativeElement(AssociativeElement object) {
+				return createAssociativeElementAdapter();
 			}
 			@Override
 			public Adapter caseEventBObject(EventBObject object) {
@@ -243,6 +248,20 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createElaborativeElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.AssociativeElement <em>Associative Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.classdiagrams.AssociativeElement
+	 * @generated
+	 */
+	public Adapter createAssociativeElementAdapter() {
 		return null;
 	}
 

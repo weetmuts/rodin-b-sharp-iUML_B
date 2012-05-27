@@ -33,23 +33,29 @@
           <domainMetaElement
               href="classdiagrams.ecore#//ClassAttribute"/>
           <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
+              xsi:type="gmfmap:FeatureLabelMapping"
+              readOnly="true"
+              viewPattern="{0}: {1}">
             <diagramLabel
                 href="classdiagrams.gmfgraph#AttributeLabel"/>
             <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+            <features
+                href="classdiagrams.ecore#//ClassAttribute/target"/>
+            <editableFeatures
                 href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="classdiagrams.gmftool#//@palette/@tools.2/@tools.0"/>
           <diagramNode
-              href="classdiagrams.gmfgraph#AttributeNode"/>
+              href="classdiagrams.gmfgraph#AttributeLabel"/>
         </ownedChild>
       </children>
       <compartments
           children="//@nodes.0/@ownedChild/@children.0">
         <compartment
-            href="classdiagrams.gmfgraph#Attributes"/>
+            href="classdiagrams.gmfgraph#AttributesCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>
@@ -71,9 +77,9 @@
       <diagramLabel
           href="classdiagrams.gmfgraph#AssociationLabelSource"/>
       <features
-          href="classdiagrams.ecore#//Association/surjective"/>
+          href="classdiagrams.ecore#//AssociativeElement/surjective"/>
       <features
-          href="classdiagrams.ecore#//Association/injective"/>
+          href="classdiagrams.ecore#//AssociativeElement/injective"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
@@ -81,9 +87,9 @@
       <diagramLabel
           href="classdiagrams.gmfgraph#AssociationLabelTarget"/>
       <features
-          href="classdiagrams.ecore#//Association/functional"/>
+          href="classdiagrams.ecore#//AssociativeElement/functional"/>
       <features
-          href="classdiagrams.ecore#//Association/total"/>
+          href="classdiagrams.ecore#//AssociativeElement/total"/>
     </labelMappings>
     <containmentFeature
         href="classdiagrams.ecore#//Classdiagram/classAssociations"/>

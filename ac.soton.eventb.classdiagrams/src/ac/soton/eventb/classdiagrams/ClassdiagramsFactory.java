@@ -71,6 +71,15 @@ public interface ClassdiagramsFactory extends EFactory {
 	ElaborativeElement createElaborativeElement();
 
 	/**
+	 * Returns a new object of class '<em>Associative Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Associative Element</em>'.
+	 * @generated
+	 */
+	AssociativeElement createAssociativeElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

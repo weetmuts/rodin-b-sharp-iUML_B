@@ -8,6 +8,7 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
@@ -53,13 +54,13 @@ import org.eventb.emf.core.impl.StringToAttributeMapEntryImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getElaborates <em>Elaborates</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getAssociationType <em>Association Type</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,26 +76,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * @ordered
 	 */
 	protected EventBNamed elaborates;
-
-	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
-	protected ac.soton.eventb.classdiagrams.Class target;
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected ac.soton.eventb.classdiagrams.Class source;
 
 	/**
 	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
@@ -195,6 +176,26 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * @ordered
 	 */
 	protected AssociationType associationType = ASSOCIATION_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
+	protected ac.soton.eventb.classdiagrams.Class target;
+
+	/**
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected ac.soton.eventb.classdiagrams.Class source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -547,12 +548,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				if (resolve) return getElaborates();
 				return basicGetElaborates();
-			case ClassdiagramsPackage.ASSOCIATION__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return isSurjective();
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -563,6 +558,12 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return isFunctional();
 			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				return getAssociationType();
+			case ClassdiagramsPackage.ASSOCIATION__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
+			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
+				if (resolve) return getSource();
+				return basicGetSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -579,12 +580,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				setElaborates((EventBNamed)newValue);
 				return;
-			case ClassdiagramsPackage.ASSOCIATION__TARGET:
-				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
-				setSource((ac.soton.eventb.classdiagrams.Class)newValue);
-				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective((Boolean)newValue);
 				return;
@@ -599,6 +594,12 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				setAssociationType((AssociationType)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__TARGET:
+				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
+				setSource((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -615,12 +616,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				setElaborates((EventBNamed)null);
 				return;
-			case ClassdiagramsPackage.ASSOCIATION__TARGET:
-				setTarget((ac.soton.eventb.classdiagrams.Class)null);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
-				setSource((ac.soton.eventb.classdiagrams.Class)null);
-				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective(SURJECTIVE_EDEFAULT);
 				return;
@@ -636,6 +631,12 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
 				return;
+			case ClassdiagramsPackage.ASSOCIATION__TARGET:
+				setTarget((ac.soton.eventb.classdiagrams.Class)null);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
+				setSource((ac.soton.eventb.classdiagrams.Class)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -650,10 +651,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		switch (featureID) {
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				return elaborates != null;
-			case ClassdiagramsPackage.ASSOCIATION__TARGET:
-				return target != null;
-			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
-				return source != null;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return surjective != SURJECTIVE_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -664,6 +661,10 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return functional != FUNCTIONAL_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				return associationType != ASSOCIATION_TYPE_EDEFAULT;
+			case ClassdiagramsPackage.ASSOCIATION__TARGET:
+				return target != null;
+			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
+				return source != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -681,6 +682,16 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == AssociativeElement.class) {
+			switch (derivedFeatureID) {
+				case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATION__INJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATION__TOTAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL;
+				case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
+				case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -694,6 +705,16 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		if (baseClass == ElaborativeElement.class) {
 			switch (baseFeatureID) {
 				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.ASSOCIATION__ELABORATES;
+				default: return -1;
+			}
+		}
+		if (baseClass == AssociativeElement.class) {
+			switch (baseFeatureID) {
+				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATION__SURJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE: return ClassdiagramsPackage.ASSOCIATION__INJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL: return ClassdiagramsPackage.ASSOCIATION__TOTAL;
+				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL;
+				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE: return ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE;
 				default: return -1;
 			}
 		}

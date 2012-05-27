@@ -7,6 +7,7 @@
 package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
@@ -127,6 +128,7 @@ public class ClassdiagramsSwitch<T> {
 				T result = caseAssociation(association);
 				if (result == null) result = caseEventBNamedCommentedElement(association);
 				if (result == null) result = caseElaborativeElement(association);
+				if (result == null) result = caseAssociativeElement(association);
 				if (result == null) result = caseEventBCommentedElement(association);
 				if (result == null) result = caseEventBNamed(association);
 				if (result == null) result = caseEventBElement(association);
@@ -139,6 +141,8 @@ public class ClassdiagramsSwitch<T> {
 				ClassAttribute classAttribute = (ClassAttribute)theEObject;
 				T result = caseClassAttribute(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedElement(classAttribute);
+				if (result == null) result = caseElaborativeElement(classAttribute);
+				if (result == null) result = caseAssociativeElement(classAttribute);
 				if (result == null) result = caseEventBCommentedElement(classAttribute);
 				if (result == null) result = caseEventBNamed(classAttribute);
 				if (result == null) result = caseEventBElement(classAttribute);
@@ -163,6 +167,12 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.ELABORATIVE_ELEMENT: {
 				ElaborativeElement elaborativeElement = (ElaborativeElement)theEObject;
 				T result = caseElaborativeElement(elaborativeElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT: {
+				AssociativeElement associativeElement = (AssociativeElement)theEObject;
+				T result = caseAssociativeElement(associativeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -257,6 +267,21 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseElaborativeElement(ElaborativeElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Associative Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Associative Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssociativeElement(AssociativeElement object) {
 		return null;
 	}
 

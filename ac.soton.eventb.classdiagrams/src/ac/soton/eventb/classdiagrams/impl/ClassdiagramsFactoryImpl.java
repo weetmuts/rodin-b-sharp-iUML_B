@@ -8,6 +8,7 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
@@ -73,6 +74,7 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE: return createClassAttribute();
 			case ClassdiagramsPackage.CLASS: return createClass();
 			case ClassdiagramsPackage.ELABORATIVE_ELEMENT: return createElaborativeElement();
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT: return createAssociativeElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -160,6 +162,16 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	public ElaborativeElement createElaborativeElement() {
 		ElaborativeElementImpl elaborativeElement = new ElaborativeElementImpl();
 		return elaborativeElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssociativeElement createAssociativeElement() {
+		AssociativeElementImpl associativeElement = new AssociativeElementImpl();
+		return associativeElement;
 	}
 
 	/**

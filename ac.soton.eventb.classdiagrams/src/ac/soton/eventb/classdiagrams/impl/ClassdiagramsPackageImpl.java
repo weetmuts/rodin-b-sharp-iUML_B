@@ -8,6 +8,7 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
@@ -81,6 +82,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	private EClass elaborativeElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass associativeElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -256,53 +264,17 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssociation_Surjective() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAssociation_Injective() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAssociation_Total() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAssociation_Functional() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAssociation_AssociationType() {
-		return (EAttribute)associationEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getClassAttribute() {
 		return classAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassAttribute_Target() {
+		return (EAttribute)classAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -391,6 +363,60 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAssociativeElement() {
+		return associativeElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssociativeElement_Surjective() {
+		return (EAttribute)associativeElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssociativeElement_Injective() {
+		return (EAttribute)associativeElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssociativeElement_Total() {
+		return (EAttribute)associativeElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssociativeElement_Functional() {
+		return (EAttribute)associativeElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssociativeElement_AssociationType() {
+		return (EAttribute)associativeElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getClassType() {
 		return classTypeEEnum;
 	}
@@ -443,13 +469,9 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		associationEClass = createEClass(ASSOCIATION);
 		createEReference(associationEClass, ASSOCIATION__TARGET);
 		createEReference(associationEClass, ASSOCIATION__SOURCE);
-		createEAttribute(associationEClass, ASSOCIATION__SURJECTIVE);
-		createEAttribute(associationEClass, ASSOCIATION__INJECTIVE);
-		createEAttribute(associationEClass, ASSOCIATION__TOTAL);
-		createEAttribute(associationEClass, ASSOCIATION__FUNCTIONAL);
-		createEAttribute(associationEClass, ASSOCIATION__ASSOCIATION_TYPE);
 
 		classAttributeEClass = createEClass(CLASS_ATTRIBUTE);
+		createEAttribute(classAttributeEClass, CLASS_ATTRIBUTE__TARGET);
 
 		classEClass = createEClass(CLASS);
 		createEReference(classEClass, CLASS__SUPERTYPES);
@@ -461,6 +483,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 
 		elaborativeElementEClass = createEClass(ELABORATIVE_ELEMENT);
 		createEReference(elaborativeElementEClass, ELABORATIVE_ELEMENT__ELABORATES);
+
+		associativeElementEClass = createEClass(ASSOCIATIVE_ELEMENT);
+		createEAttribute(associativeElementEClass, ASSOCIATIVE_ELEMENT__SURJECTIVE);
+		createEAttribute(associativeElementEClass, ASSOCIATIVE_ELEMENT__INJECTIVE);
+		createEAttribute(associativeElementEClass, ASSOCIATIVE_ELEMENT__TOTAL);
+		createEAttribute(associativeElementEClass, ASSOCIATIVE_ELEMENT__FUNCTIONAL);
+		createEAttribute(associativeElementEClass, ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE);
 
 		// Create enums
 		classTypeEEnum = createEEnum(CLASS_TYPE);
@@ -504,7 +533,10 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		classdiagramEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
 		associationEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		associationEClass.getESuperTypes().add(this.getElaborativeElement());
+		associationEClass.getESuperTypes().add(this.getAssociativeElement());
 		classAttributeEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
+		classAttributeEClass.getESuperTypes().add(this.getElaborativeElement());
+		classAttributeEClass.getESuperTypes().add(this.getAssociativeElement());
 		classEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		classEClass.getESuperTypes().add(this.getElaborativeElement());
 
@@ -520,13 +552,9 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEClass(associationEClass, Association.class, "Association", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssociation_Target(), this.getClass_(), this.getClass_Incoming(), "target", null, 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociation_Source(), this.getClass_(), this.getClass_Outgoing(), "source", null, 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Surjective(), ecorePackage.getEBoolean(), "surjective", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Injective(), ecorePackage.getEBoolean(), "injective", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Total(), ecorePackage.getEBoolean(), "total", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_Functional(), ecorePackage.getEBoolean(), "functional", "false", 1, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssociation_AssociationType(), this.getAssociationType(), "AssociationType", "", 0, 1, Association.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classAttributeEClass, ClassAttribute.class, "ClassAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClassAttribute_Target(), ecorePackage.getEString(), "target", null, 1, 1, ClassAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, ac.soton.eventb.classdiagrams.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClass_Supertypes(), this.getClass_(), null, "supertypes", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -538,6 +566,13 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 
 		initEClass(elaborativeElementEClass, ElaborativeElement.class, "ElaborativeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElaborativeElement_Elaborates(), theCorePackage.getEventBNamed(), null, "elaborates", null, 0, 1, ElaborativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(associativeElementEClass, AssociativeElement.class, "AssociativeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAssociativeElement_Surjective(), ecorePackage.getEBoolean(), "surjective", "false", 1, 1, AssociativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociativeElement_Injective(), ecorePackage.getEBoolean(), "injective", "false", 1, 1, AssociativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociativeElement_Total(), ecorePackage.getEBoolean(), "total", "false", 1, 1, AssociativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociativeElement_Functional(), ecorePackage.getEBoolean(), "functional", "false", 1, 1, AssociativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssociativeElement_AssociationType(), this.getAssociationType(), "AssociationType", "", 0, 1, AssociativeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(classTypeEEnum, ClassType.class, "ClassType");

@@ -29,13 +29,10 @@
     <genClasses ecoreClass="classdiagrams.ecore#//Association">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Association/target"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Association/source"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/surjective"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/injective"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/total"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/functional"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Association/AssociationType"/>
     </genClasses>
-    <genClasses ecoreClass="classdiagrams.ecore#//ClassAttribute"/>
+    <genClasses ecoreClass="classdiagrams.ecore#//ClassAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//ClassAttribute/target"/>
+    </genClasses>
     <genClasses ecoreClass="classdiagrams.ecore#//Class">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/supertypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/classAttributes"/>
@@ -46,6 +43,13 @@
     </genClasses>
     <genClasses ecoreClass="classdiagrams.ecore#//ElaborativeElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//ElaborativeElement/elaborates"/>
+    </genClasses>
+    <genClasses ecoreClass="classdiagrams.ecore#//AssociativeElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AssociativeElement/surjective"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AssociativeElement/injective"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AssociativeElement/total"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AssociativeElement/functional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//AssociativeElement/AssociationType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

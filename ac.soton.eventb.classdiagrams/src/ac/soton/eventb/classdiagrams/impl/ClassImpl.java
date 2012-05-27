@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eventb.emf.core.CorePackage;
@@ -36,6 +37,7 @@ import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 
+import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 import org.eventb.emf.core.machine.Variable;
 import org.eventb.emf.core.impl.EventBElementImpl;
@@ -124,6 +126,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected static final ClassType CLASS_TYPE_EDEFAULT = ClassType.SET;
+
 	/**
 	 * The cached value of the '{@link #getClassType() <em>Class Type</em>}' attribute.
 	 * <!-- begin-user-doc -->

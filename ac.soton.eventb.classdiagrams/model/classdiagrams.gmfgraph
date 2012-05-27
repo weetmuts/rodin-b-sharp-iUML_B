@@ -12,12 +12,25 @@
           name="ClassFigure">
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="yellow"/>
+            value="lightGreen"/>
         <children
             xsi:type="gmfgraph:Label"
             name="ClassNameFIgure"
             text="ClassName"/>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="ClassAttributesCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              alignment="END"
+              vertical="true"/>
+        </children>
       </actualFigure>
+      <accessors
+          accessor="getFigureClassAttributesCompartmentFigure"
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
       <accessors
           accessor="getFigureClassLabelFigure"
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
@@ -60,15 +73,9 @@
     <descriptors
         name="AttributeFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="AttributeFigure">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="AttributeLabel"/>
-      </actualFigure>
-      <accessors
-          accessor="getFigureAttributeLabel"
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+          xsi:type="gmfgraph:Label"
+          name="ClassAttribute"
+          text=""/>
     </descriptors>
     <descriptors
         name="SupertypeFigure">
@@ -115,10 +122,10 @@
       name="Association"
       figure="AssociationFigure"/>
   <compartments
-      name="Attributes"
-      figure="AttributeFigure"
+      name="AttributesCompartment"
+      figure="ClassFigure"
       collapsible="true"
-      needsTitle="true"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="AssociationLabel"
       figure="AssociationFigure"
@@ -138,9 +145,7 @@
       accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="AttributeLabel"
-      figure="AttributeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      figure="AttributeFigure"/>
   <labels
       name="AssociationLabelTarget"
       figure="AssociationFigure"
@@ -155,5 +160,5 @@
       name="ClassLabel"
       figure="ClassFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
 </gmfgraph:Canvas>

@@ -8,6 +8,7 @@ package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
@@ -109,6 +110,8 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateClass((ac.soton.eventb.classdiagrams.Class)value, diagnostics, context);
 			case ClassdiagramsPackage.ELABORATIVE_ELEMENT:
 				return validateElaborativeElement((ElaborativeElement)value, diagnostics, context);
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT:
+				return validateAssociativeElement((AssociativeElement)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS_TYPE:
 				return validateClassType((ClassType)value, diagnostics, context);
 			case ClassdiagramsPackage.ASSOCIATION_TYPE:
@@ -208,6 +211,15 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 */
 	public boolean validateElaborativeElement(ElaborativeElement elaborativeElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(elaborativeElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAssociativeElement(AssociativeElement associativeElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(associativeElement, diagnostics, context);
 	}
 
 	/**

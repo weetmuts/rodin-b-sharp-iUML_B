@@ -15,7 +15,7 @@
         eType="#//Association" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//Classdiagram"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement #//ElaborativeElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement #//ElaborativeElement #//AssociativeElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="isAsociationTypeRight"/>
     </eAnnotations>
@@ -23,18 +23,11 @@
         eType="#//Class" eOpposite="#//Class/incoming"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Class" eOpposite="#//Class/outgoing"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="surjective" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="injective" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functional" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="AssociationType" eType="#//AssociationType"
-        defaultValueLiteral=""/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement #//ElaborativeElement #//AssociativeElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement #//ElaborativeElement">
     <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//context/Constant ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Variable ../../org.eventb.emf.core/model/eventbcore.ecore#//context/CarrierSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
@@ -63,5 +56,17 @@
   <eClassifiers xsi:type="ecore:EEnum" name="AssociationType">
     <eLiterals name="CONSTANT" literal="Constant"/>
     <eLiterals name="VARIABLE" value="1" literal="Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociativeElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="surjective" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="injective" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functional" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="AssociationType" eType="#//AssociationType"
+        defaultValueLiteral=""/>
   </eClassifiers>
 </ecore:EPackage>
