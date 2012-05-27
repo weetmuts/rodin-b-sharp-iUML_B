@@ -7,14 +7,17 @@
  */
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
+import javax.swing.text.StyleConstants.ColorConstants;
 import javax.xml.soap.Text;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedElement;
 
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
 
@@ -73,4 +76,25 @@ public class NamePropertySection extends AbstractTextPropertySection {
 		return "change name";
 	}
 
+	
+	@Override
+	public void handleElementModifiedEvent(Notification notification,
+			EObject element) {
+		// TODO Auto-generated method stub
+		super.handleElementModifiedEvent(notification, element);
+	}
+	
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		super.refresh();
+		
+		if (eObject instanceof ElaborativeElement && ((ElaborativeElement) eObject).getElaborates() != null){
+			getTextWidget().setForeground(org.eclipse.draw2d.ColorConstants.gray);
+			getTextWidget().setEnabled(false);
+		} else {
+			getTextWidget().setForeground(org.eclipse.draw2d.ColorConstants.black);
+			getTextWidget().setEnabled(true);
+		}
+	}
 }

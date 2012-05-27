@@ -4,6 +4,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -11,7 +12,9 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eventb.emf.core.context.Context;
 
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
@@ -50,7 +53,7 @@ public class ClassAttributeCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -58,6 +61,13 @@ public class ClassAttributeCreateCommand extends EditElementCommand {
 				.createClassAttribute();
 
 		Class owner = (Class) getElementToEdit();
+
+		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
+			newElement.setAssociationType(AssociationType.CONSTANT);
+		} else {
+			newElement.setAssociationType(AssociationType.VARIABLE);
+		}
+
 		owner.getClassAttributes().add(newElement);
 
 		doConfigure(newElement, monitor, info);

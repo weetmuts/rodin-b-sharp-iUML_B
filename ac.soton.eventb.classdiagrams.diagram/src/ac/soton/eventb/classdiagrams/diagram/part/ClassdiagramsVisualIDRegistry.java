@@ -176,11 +176,6 @@ public class ClassdiagramsVisualIDRegistry {
 				return true;
 			}
 			break;
-		case ClassAttributeEditPart.VISUAL_ID:
-			if (ClassAttributeNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
 		case ClassAttributesEditPart.VISUAL_ID:
 			if (ClassAttributeEditPart.VISUAL_ID == nodeVisualID) {
 				return true;

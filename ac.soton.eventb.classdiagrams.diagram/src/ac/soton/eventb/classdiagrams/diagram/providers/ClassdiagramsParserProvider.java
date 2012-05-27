@@ -18,6 +18,7 @@ import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationFunctionalTotalEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationSurjectiveInjectiveEditPart;
+import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.parsers.MessageFormatParser;
@@ -53,19 +54,26 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser classAttributeName_5022Parser;
+	private IParser classAttribute_3021Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getClassAttributeName_5022Parser() {
-		if (classAttributeName_5022Parser == null) {
-			EAttribute[] features = new EAttribute[] { CorePackage.eINSTANCE
+	private IParser getClassAttribute_3021Parser() {
+		if (classAttribute_3021Parser == null) {
+			EAttribute[] features = new EAttribute[] {
+					CorePackage.eINSTANCE.getEventBNamed_Name(),
+					ClassdiagramsPackage.eINSTANCE.getClassAttribute_Target() };
+			EAttribute[] editableFeatures = new EAttribute[] { CorePackage.eINSTANCE
 					.getEventBNamed_Name() };
-			MessageFormatParser parser = new MessageFormatParser(features);
-			classAttributeName_5022Parser = parser;
+			MessageFormatParser parser = new MessageFormatParser(features,
+					editableFeatures);
+			parser.setViewPattern("{0}: {1}"); //$NON-NLS-1$
+			parser.setEditorPattern("{0}: {1}"); //$NON-NLS-1$
+			parser.setEditPattern("{0}: {1}"); //$NON-NLS-1$
+			classAttribute_3021Parser = parser;
 		}
-		return classAttributeName_5022Parser;
+		return classAttribute_3021Parser;
 	}
 
 	/**
@@ -100,8 +108,10 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 	private IParser getAssociationSurjectiveInjective_6002Parser() {
 		if (associationSurjectiveInjective_6002Parser == null) {
 			EAttribute[] features = new EAttribute[] {
-					ClassdiagramsPackage.eINSTANCE.getAssociation_Surjective(),
-					ClassdiagramsPackage.eINSTANCE.getAssociation_Injective() };
+					ClassdiagramsPackage.eINSTANCE
+							.getAssociativeElement_Surjective(),
+					ClassdiagramsPackage.eINSTANCE
+							.getAssociativeElement_Injective() };
 			MessageFormatParser parser = new MessageFormatParser(features);
 			parser.setViewPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditorPattern("{0}..{1}"); //$NON-NLS-1$
@@ -122,8 +132,10 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 	private IParser getAssociationFunctionalTotal_6003Parser() {
 		if (associationFunctionalTotal_6003Parser == null) {
 			EAttribute[] features = new EAttribute[] {
-					ClassdiagramsPackage.eINSTANCE.getAssociation_Functional(),
-					ClassdiagramsPackage.eINSTANCE.getAssociation_Total() };
+					ClassdiagramsPackage.eINSTANCE
+							.getAssociativeElement_Functional(),
+					ClassdiagramsPackage.eINSTANCE
+							.getAssociativeElement_Total() };
 			MessageFormatParser parser = new MessageFormatParser(features);
 			parser.setViewPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditorPattern("{0}..{1}"); //$NON-NLS-1$
@@ -140,8 +152,8 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 		switch (visualID) {
 		case ClassNameEditPart.VISUAL_ID:
 			return getClassName_5006Parser();
-		case ClassAttributeNameEditPart.VISUAL_ID:
-			return getClassAttributeName_5022Parser();
+		case ClassAttributeEditPart.VISUAL_ID:
+			return getClassAttribute_3021Parser();
 		case AssociationNameEditPart.VISUAL_ID:
 			return getAssociationName_6001Parser();
 		case AssociationSurjectiveInjectiveEditPart.VISUAL_ID:

@@ -1,14 +1,26 @@
 package ac.soton.eventb.classdiagrams.diagram.edit.parts;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.UpdateListener;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -30,6 +42,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
@@ -102,12 +115,57 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IFigure createNodeShape() {
-		return primaryShape = new ClassFigure();
+		primaryShape = new ClassFigure();
+
+		// set background color to white if domain element refines something
+//		EObject element = resolveSemanticElement();
+//		if (element != null) {
+//			EStructuralFeature feature = element.eClass()
+//					.getEStructuralFeature("refines");
+//
+//			if (feature != null && element.eIsSet(feature))
+//				primaryShape.setBackgroundColor(ColorConstants.white);
+//		}
+		
+		return primaryShape;
+		
+	}
+	
+	static final Color NOT_GENERATED = ColorConstants.lightBlue;
+	static final Color REFINED = ColorConstants.white;
+	static final Color ELABORATED = ColorConstants.green;
+	
+	protected void handleNotificationEvent(Notification event) {
+		// update background color when refines property changed
+		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())
+				|| ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(REFINED);
+		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())
+				|| ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(ELABORATED);
+		} else {
+				setBackgroundColor(NOT_GENERATED);
+		}
+		
+		if (event.getNotifier() == getModel()
+				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
+						.equals(event.getFeature())) {
+			handleMajorSemanticChange();
+		} else {
+			super.handleNotificationEvent(event);
+		}
 	}
 
+	
 	/**
 	 * @generated
 	 */
@@ -124,6 +182,13 @@ public class ClassEditPart extends ShapeNodeEditPart {
 					.getFigureClassLabelFigure());
 			return true;
 		}
+		if (childEditPart instanceof ClassAttributesEditPart) {
+			IFigure pane = getPrimaryShape()
+					.getFigureClassAttributesCompartmentFigure();
+			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			pane.add(((ClassAttributesEditPart) childEditPart).getFigure());
+			return true;
+		}
 		return false;
 	}
 
@@ -132,6 +197,13 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof ClassNameEditPart) {
+			return true;
+		}
+		if (childEditPart instanceof ClassAttributesEditPart) {
+			IFigure pane = getPrimaryShape()
+					.getFigureClassAttributesCompartmentFigure();
+			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			pane.remove(((ClassAttributesEditPart) childEditPart).getFigure());
 			return true;
 		}
 		return false;
@@ -161,6 +233,10 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
+		if (editPart instanceof ClassAttributesEditPart) {
+			return getPrimaryShape()
+					.getFigureClassAttributesCompartmentFigure();
+		}
 		return getContentPane();
 	}
 
@@ -345,6 +421,10 @@ public class ClassEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
+		private RectangleFigure fFigureClassAttributesCompartmentFigure;
+		/**
+		 * @generated
+		 */
 		private WrappingLabel fFigureClassLabelFigure;
 
 		/**
@@ -353,6 +433,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 		public ClassFigure() {
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
+			this.setBackgroundColor(ColorConstants.lightGreen);
 			createContents();
 		}
 
@@ -366,6 +447,19 @@ public class ClassEditPart extends ShapeNodeEditPart {
 
 			this.add(fFigureClassLabelFigure);
 
+			fFigureClassAttributesCompartmentFigure = new RectangleFigure();
+			fFigureClassAttributesCompartmentFigure.setFill(false);
+			fFigureClassAttributesCompartmentFigure.setOutline(false);
+
+			this.add(fFigureClassAttributesCompartmentFigure);
+
+		}
+
+		/**
+		 * @generated
+		 */
+		public RectangleFigure getFigureClassAttributesCompartmentFigure() {
+			return fFigureClassAttributesCompartmentFigure;
 		}
 
 		/**

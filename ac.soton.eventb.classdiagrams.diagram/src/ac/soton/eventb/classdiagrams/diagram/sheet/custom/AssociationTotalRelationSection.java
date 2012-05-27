@@ -40,6 +40,6 @@ public class AssociationTotalRelationSection extends AbstractEnumerationProperty
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATION__TOTAL;
+		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__TOTAL;
 	}
 }

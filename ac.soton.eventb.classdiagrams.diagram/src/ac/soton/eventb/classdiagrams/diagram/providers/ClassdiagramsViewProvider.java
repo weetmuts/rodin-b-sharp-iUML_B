@@ -258,7 +258,11 @@ public class ClassdiagramsViewProvider extends AbstractProvider implements
 	 */
 	public Node createClass_2002(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
-		Shape node = NotationFactory.eINSTANCE.createShape();
+		Node node = NotationFactory.eINSTANCE.createNode();
+		node.getStyles()
+				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createLineStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
 		node.setType(ClassdiagramsVisualIDRegistry
 				.getType(ClassEditPart.VISUAL_ID));
@@ -288,18 +292,13 @@ public class ClassdiagramsViewProvider extends AbstractProvider implements
 			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
 					.intValue());
 		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node,
-				NotationPackage.eINSTANCE.getFillStyle_FillColor(),
-				FigureUtilities.RGBToInteger(fillRGB));
 		Node label5006 = createLabel(node,
 				ClassdiagramsVisualIDRegistry
 						.getType(ClassNameEditPart.VISUAL_ID));
 		createCompartment(node,
 				ClassdiagramsVisualIDRegistry
 						.getType(ClassAttributesEditPart.VISUAL_ID), true,
-				true, true, true);
+				false, true, true);
 		return node;
 	}
 
@@ -309,43 +308,12 @@ public class ClassdiagramsViewProvider extends AbstractProvider implements
 	public Node createClassAttribute_3021(EObject domainElement,
 			View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
-		Shape node = NotationFactory.eINSTANCE.createShape();
-		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
+		Node node = NotationFactory.eINSTANCE.createNode();
+		node.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
 		node.setType(ClassdiagramsVisualIDRegistry
 				.getType(ClassAttributeEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-
-		org.eclipse.swt.graphics.RGB lineRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_LINE_COLOR);
-		ViewUtil.setStructuralFeatureValue(node,
-				NotationPackage.eINSTANCE.getLineStyle_LineColor(),
-				FigureUtilities.RGBToInteger(lineRGB));
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
-		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node,
-				NotationPackage.eINSTANCE.getFillStyle_FillColor(),
-				FigureUtilities.RGBToInteger(fillRGB));
-		Node label5022 = createLabel(node,
-				ClassdiagramsVisualIDRegistry
-						.getType(ClassAttributeNameEditPart.VISUAL_ID));
 		return node;
 	}
 

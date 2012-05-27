@@ -7,17 +7,18 @@
 package ac.soton.eventb.classdiagrams.provider;
 
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -25,20 +26,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eventb.emf.core.CorePackage;
-
-import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
-
 /**
- * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.Association} object.
+ * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.AssociativeElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AssociationItemProvider
-	extends EventBNamedCommentedElementItemProvider
+public class AssociativeElementItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -51,7 +49,7 @@ public class AssociationItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationItemProvider(AdapterFactory adapterFactory) {
+	public AssociativeElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,82 +64,13 @@ public class AssociationItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addElaboratesPropertyDescriptor(object);
 			addSurjectivePropertyDescriptor(object);
 			addInjectivePropertyDescriptor(object);
 			addTotalPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
 			addAssociationTypePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
-			addSourcePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Elaborates feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addElaboratesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ElaborativeElement_elaborates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElaborativeElement_elaborates_feature", "_UI_ElaborativeElement_type"),
-				 ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Target feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_target_feature", "_UI_Association_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATION__TARGET,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Source feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Association_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Association_source_feature", "_UI_Association_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -255,14 +184,14 @@ public class AssociationItemProvider
 	}
 
 	/**
-	 * This returns Association.gif.
+	 * This returns AssociativeElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Association"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AssociativeElement"));
 	}
 
 	/**
@@ -273,10 +202,8 @@ public class AssociationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Association)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Association_type") :
-			getString("_UI_Association_type") + " " + label;
+		AssociativeElement associativeElement = (AssociativeElement)object;
+		return getString("_UI_AssociativeElement_type") + " " + associativeElement.isSurjective();
 	}
 
 	/**
@@ -290,12 +217,12 @@ public class AssociationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Association.class)) {
-			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
-			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
-			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
-			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
+		switch (notification.getFeatureID(AssociativeElement.class)) {
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE:
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE:
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL:
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL:
+			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -312,11 +239,17 @@ public class AssociationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
-				 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ((IChildCreationExtender)adapterFactory).getResourceLocator();
 	}
 
 }

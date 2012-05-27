@@ -1,11 +1,12 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 
-import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-public class AssociationFunctionalRelationSection extends AbstractEnumerationPropertySection {
+public class ClassAttributeSurjectiveRelationSection extends AbstractEnumerationPropertySection {
 
 	
 	@Override
@@ -15,7 +16,7 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected boolean isEqual(String selection) {
-		return Boolean.toString(((Association)(eObject)).isFunctional()).equals(selection);
+		return Boolean.toString(((ClassAttribute)(eObject)).isSurjective()).equals(selection);
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((Association)(eObject)).isFunctional());
+		return Boolean.toString(((ClassAttribute)(eObject)).isSurjective());
 	}
 	
 	@Override
@@ -35,11 +36,12 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected String getLabelText() {
-		return "Functional:";
+		return "Surjective:";
 	}
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
+		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__SURJECTIVE;
 	}
+
 }

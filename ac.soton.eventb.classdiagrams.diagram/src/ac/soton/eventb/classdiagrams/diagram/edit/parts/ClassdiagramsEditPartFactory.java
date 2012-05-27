@@ -41,9 +41,6 @@ public class ClassdiagramsEditPartFactory implements EditPartFactory {
 			case ClassAttributeEditPart.VISUAL_ID:
 				return new ClassAttributeEditPart(view);
 
-			case ClassAttributeNameEditPart.VISUAL_ID:
-				return new ClassAttributeNameEditPart(view);
-
 			case ClassAttributesEditPart.VISUAL_ID:
 				return new ClassAttributesEditPart(view);
 

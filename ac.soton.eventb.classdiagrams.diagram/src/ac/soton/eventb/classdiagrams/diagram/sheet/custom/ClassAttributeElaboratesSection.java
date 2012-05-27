@@ -1,19 +1,10 @@
-/*
- * Copyright (c) 2010 University of Southampton.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- */
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
@@ -27,11 +18,9 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
@@ -39,29 +28,17 @@ import org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement;
 import org.eventb.emf.core.EventBNamedCommentedPredicateElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.Variable;
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.Classdiagram;
+import ac.soton.eventb.classdiagrams.Class;	
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.impl.AssociationImpl;
+import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.classdiagrams.parser.Scanner;
 import ac.soton.eventb.classdiagrams.parser.SymbolUtil;
 import ac.soton.eventb.classdiagrams.parser.Token;
 import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
-import org.eclipse.swt.widgets.Text;
 
-import org.eventb.emf.core.machine.Invariant;
-
-/**
- * Elaborates property section for Classdiagrams.
- * 
- * @author vitaly
- * 
- */
-public class AssociationElaboratesPropertySection extends AbstractLOVPropertySection {
+public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection {
 
 	private static ILabelProvider variableLabelProvider = new LabelProvider() {
 
@@ -120,7 +97,7 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 		filterList((EventBNamedCommentedComponentElement)container, parsedValuesList);
 		
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
-				.getShell(), valuesList, variableLabelProvider);
+				.getShell(), parsedValuesList, variableLabelProvider);
 		variablesDialog.setTitle(popupTitle + " elements");
 		variablesDialog.setMessage("Please select an element to elaborate");
 		
@@ -199,26 +176,46 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 	
 	protected void modifyElement(Object pNewChild){
 		//TODO pass predicate's assigned variable, NOT the whole invariant!
-		super.modifyElement(pNewChild);
+		super.modifyElement(((List<Token>)pNewChild).get(0).eventBElement);
 		
 		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
 		
 		AbstractOverrideableCommand command;
 		
-		Object eref = ClassdiagramsPackage.Literals.ASSOCIATION.getEStructuralFeature(ClassdiagramsPackage.ASSOCIATION__NAME);
+		Object eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__NAME);
 		
 		if (getFeature().isMany() == true){
 				command = (AddCommand) AddCommand.create(
 						editingDomain,
 						eObject, 
 						ClassdiagramsPackage.eINSTANCE.getName(), 
-						((EventBNamed)pNewChild).getName());
+						((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
 		} else {
 			command = (SetCommand) SetCommand.create(
 					editingDomain,
 					eObject, 
 					eref,
-					((EventBNamed)pNewChild).getName());
+					((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
+		}
+		
+		editingDomain.getCommandStack().execute(command);
+		
+		
+		//set target
+		eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET);
+		
+		if (getFeature().isMany() == true){
+				command = (AddCommand) AddCommand.create(
+						editingDomain,
+						eObject, 
+						ClassdiagramsPackage.eINSTANCE.getName(), 
+						((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
+		} else {
+			command = (SetCommand) SetCommand.create(
+					editingDomain,
+					eObject, 
+					eref,
+					((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
 		}
 		
 		editingDomain.getCommandStack().execute(command);
@@ -237,11 +234,10 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 				//variable 'association' must not be already elaborated
 				!ClassdiagramUtil.isElaborated(li.get(0).eventBElement) &&	
 				//variable1 must be equal to the source element feature of the class element in the classdiagrams
-				li.get(2).eventBElement != null && li.get(2).eventBElement.getName().equals( ((AssociationImpl)eObject).getSource().getName()) &&
+				li.get(2).eventBElement != null && li.get(2).eventBElement.getName().equals(   ((Class)((ClassAttribute)eObject).eContainer()  ).getName()   ) &&
 				//li.get(3) == one of the relation arrows - check whether it is a relation.
-				SymbolUtil.isRelation(li.get(3).stringValue)  && 
+				SymbolUtil.isRelation(li.get(3).stringValue) 
 				//variable2 must be equal to the target element feature of the class element in the classdiagrams
-				li.get(4).eventBElement != null && li.get(4).eventBElement.getName().equals( ((AssociationImpl)eObject).getTarget().getName())
 				){
 				
 				filteredList.add(li);
@@ -270,10 +266,12 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 				}
 				
 				if (eObject != null && 
-						((Association)eObject).getElaborates() != null){
+						((ClassAttribute)eObject).getElaborates() != null){
 						lovText.setEnabled(false);
+						lovText.setForeground(ColorConstants.gray);
 				} else {
 						lovText.setEnabled(true);
+						lovText.setForeground(ColorConstants.black);
 				}
 			}
 			
@@ -289,7 +287,7 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 		super.refresh();
 		EventBNamed generated;
 
-		if (eObject != null && (((Association)eObject).getElaborates() == null) && 
+		if (eObject != null && (((ClassAttribute)eObject).getElaborates() == null) && 
 			((generated = getGenerated((EventBNamed)eObject)) != null)){
 			
 			setElaborates(generated);
@@ -335,8 +333,8 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 
 	@Override
 	public String getLOVValue() {
-		if (eObject != null && ((Association) eObject).getElaborates() != null) { 
-			return ((Association) eObject).getElaborates().getName();
+		if (eObject != null && ((ClassAttribute) eObject).getElaborates() != null) { 
+			return ((ClassAttribute) eObject).getElaborates().getName();
 		} else {
 			return "no name";
 		}

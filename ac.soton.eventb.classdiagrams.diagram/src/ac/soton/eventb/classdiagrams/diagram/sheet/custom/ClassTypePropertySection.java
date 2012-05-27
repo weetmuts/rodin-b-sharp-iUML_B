@@ -101,20 +101,30 @@ public class ClassTypePropertySection extends AbstractEnumerationPropertySection
 	}
 	
 	private ClassType getCurrentClassType(){
-		if (((Class)(eObject)).getElaborates() != null){
-			EventBNamed ebn = ((Class)(eObject)).getElaborates();
+//		if (((Class)(eObject)).getElaborates() != null){
+//			EventBNamed ebn = ((Class)(eObject)).getElaborates();
+//			
+//			if (ebn.eContainingFeature().getName().equals("sets")){
+//				return ClassType.SET;
+//			} else if (ebn.eContainingFeature().getName().equals("constants")){
+//				return ClassType.CONSTANT;			
+//			} else {
+//				return ClassType.VARIABLE;
+//			}
+//		} else {
+//			
+//			switch (((Class)(eObject)).getClassType()) :{
+//				ClassType.NULL_VALUE : 
+//			}
+//			( != null){
+//		}
+////			return ((Class) eObject).getClassType();
+//			
 			
-			if (ebn.eContainingFeature().getName().equals("sets")){
-				return ClassType.SET;
-			} else if (ebn.eContainingFeature().getName().equals("constants")){
-				return ClassType.CONSTANT;			
-			} else {
-				return ClassType.VARIABLE;
-			}
-		} else {
-//			return ((Class) eObject).getClassType();
-			return (ClassType)getFeatureByValue(getFeatureValue(combo.getItem(0)));
-		}
+//			return (ClassType)getFeatureByValue(getFeatureValue(combo.getItem(1)));
+			
+			return ((Class)eObject).getClassType();
+//		}
 	}
 
 	@Override

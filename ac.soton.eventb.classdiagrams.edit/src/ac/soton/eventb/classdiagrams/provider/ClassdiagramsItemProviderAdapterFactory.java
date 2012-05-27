@@ -225,6 +225,29 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.AssociativeElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AssociativeElementItemProvider associativeElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.AssociativeElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAssociativeElementAdapter() {
+		if (associativeElementItemProvider == null) {
+			associativeElementItemProvider = new AssociativeElementItemProvider(this);
+		}
+
+		return associativeElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -355,6 +378,7 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		if (classAttributeItemProvider != null) classAttributeItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
 		if (elaborativeElementItemProvider != null) elaborativeElementItemProvider.dispose();
+		if (associativeElementItemProvider != null) associativeElementItemProvider.dispose();
 	}
 
 	/**

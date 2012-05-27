@@ -40,7 +40,7 @@ public class AssociationInjectiveRelationSection extends AbstractEnumerationProp
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATION__INJECTIVE;
+		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__INJECTIVE;
 	}
 
 }

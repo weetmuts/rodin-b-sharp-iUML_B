@@ -4,6 +4,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -11,8 +12,10 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 
@@ -50,13 +53,20 @@ public class ClassCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
 		Class newElement = ClassdiagramsFactory.eINSTANCE.createClass();
 
 		Classdiagram owner = (Classdiagram) getElementToEdit();
+
+		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
+			newElement.setClassType(ClassType.SET);
+		} else {
+			newElement.setClassType(ClassType.VARIABLE);
+		}
+
 		owner.getClasses().add(newElement);
 
 		doConfigure(newElement, monitor, info);

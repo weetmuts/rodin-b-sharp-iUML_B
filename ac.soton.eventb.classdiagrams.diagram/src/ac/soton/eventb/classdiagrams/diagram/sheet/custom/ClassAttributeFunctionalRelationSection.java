@@ -2,10 +2,10 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-public class AssociationFunctionalRelationSection extends AbstractEnumerationPropertySection {
+public class ClassAttributeFunctionalRelationSection extends AbstractEnumerationPropertySection {
 
 	
 	@Override
@@ -15,7 +15,7 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected boolean isEqual(String selection) {
-		return Boolean.toString(((Association)(eObject)).isFunctional()).equals(selection);
+		return Boolean.toString(((ClassAttribute)(eObject)).isFunctional()).equals(selection);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((Association)(eObject)).isFunctional());
+		return Boolean.toString(((ClassAttribute)(eObject)).isFunctional());
 	}
 	
 	@Override
@@ -42,4 +42,6 @@ public class AssociationFunctionalRelationSection extends AbstractEnumerationPro
 	protected EStructuralFeature getFeature() {
 		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
 	}
+
+
 }

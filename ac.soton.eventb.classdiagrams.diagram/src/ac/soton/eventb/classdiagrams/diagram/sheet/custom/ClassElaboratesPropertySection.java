@@ -10,6 +10,7 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -24,6 +25,9 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBElement;
@@ -173,12 +177,15 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 					clearButton.setEnabled(false);
 				}
 				
+				//if refined or elaborated, disale text editing
 				if (eObject != null && 
 						(((Class)eObject).getRefines() != null || 
 						((Class)eObject).getElaborates() != null)){
 						lovText.setEnabled(false);
+//						lovText.setForeground(ColorConstants.gray);
 				} else {
 						lovText.setEnabled(true);
+//						lovText.setForeground(ColorConstants.black);
 				}
 			}
 			
@@ -195,7 +202,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		AbstractOverrideableCommand command;
 		
 		//set class name value
-		Object eref = ClassdiagramsPackage.Literals.ASSOCIATION.getEStructuralFeature(ClassdiagramsPackage.ASSOCIATION__NAME);
+		Object eref = ClassdiagramsPackage.Literals.CLASS.getEStructuralFeature(ClassdiagramsPackage.CLASS__NAME);
 		
 		if (getFeature().isMany() == true){
 				command = (AddCommand) AddCommand.create(

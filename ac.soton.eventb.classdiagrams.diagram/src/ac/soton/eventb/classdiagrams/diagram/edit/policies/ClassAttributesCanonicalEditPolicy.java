@@ -59,7 +59,7 @@ public class ClassAttributesCanonicalEditPolicy extends CanonicalEditPolicy {
 		View viewObject = (View) getHost().getModel();
 		LinkedList<EObject> result = new LinkedList<EObject>();
 		List<ClassdiagramsNodeDescriptor> childDescriptors = ClassdiagramsDiagramUpdater
-				.getClassAttributes_7005SemanticChildren(viewObject);
+				.getClassAttributesCompartment_7005SemanticChildren(viewObject);
 		for (ClassdiagramsNodeDescriptor d : childDescriptors) {
 			result.add(d.getModelElement());
 		}
@@ -92,7 +92,7 @@ public class ClassAttributesCanonicalEditPolicy extends CanonicalEditPolicy {
 		}
 		LinkedList<IAdaptable> createdViews = new LinkedList<IAdaptable>();
 		List<ClassdiagramsNodeDescriptor> childDescriptors = ClassdiagramsDiagramUpdater
-				.getClassAttributes_7005SemanticChildren((View) getHost()
+				.getClassAttributesCompartment_7005SemanticChildren((View) getHost()
 						.getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
 		// we care to check only views we recognize as ours

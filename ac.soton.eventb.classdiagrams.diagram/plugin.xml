@@ -215,10 +215,10 @@
             <input type="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
          </propertySection>
          <propertySection
-               afterSection="property.section.label"
+               afterSection="property.section.attributeType"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$CommentedElementFilter"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.comment"
                tab="property.tab.overview">
          </propertySection>
@@ -317,6 +317,62 @@
                id="property.section.classContextRefinesSection"
                tab="property.tab.overview">
          </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeElaboratesSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.comment"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeSurjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeInjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeInjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeInjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTotalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeTotalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeTotalRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeFunctionalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeFunctionalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeElaborates"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeSurjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeSurjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeTarget"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTargetSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeTarget"
+               tab="property.tab.overview">
+         </propertySection>
       </propertySections>
    </extension>
 
@@ -344,7 +400,7 @@
             <method name="getType()" value="4001,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5006,5022"/>
+            <method name="getType()" value="5006"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value="7005"/>

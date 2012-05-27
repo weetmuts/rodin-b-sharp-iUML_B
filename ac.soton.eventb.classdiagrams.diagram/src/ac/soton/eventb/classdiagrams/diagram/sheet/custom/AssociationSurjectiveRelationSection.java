@@ -41,7 +41,7 @@ public class AssociationSurjectiveRelationSection extends AbstractEnumerationPro
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATION__SURJECTIVE;
+		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__SURJECTIVE;
 	}
 
 }

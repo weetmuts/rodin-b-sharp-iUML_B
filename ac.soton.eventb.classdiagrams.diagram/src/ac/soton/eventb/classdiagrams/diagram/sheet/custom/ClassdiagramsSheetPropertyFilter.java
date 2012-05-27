@@ -14,6 +14,7 @@ import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
 
@@ -97,6 +98,16 @@ public class ClassdiagramsSheetPropertyFilter {
 		@Override
 		public boolean select(Object toTest) {
 			return unwrap(toTest) instanceof Association;
+		}
+	}
+	
+	/**
+	 * Filter for properties of association element.
+	 */
+	public static final class ClassAttributeFilter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return unwrap(toTest) instanceof ClassAttribute;
 		}
 	}
 	

@@ -4,6 +4,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -11,12 +12,16 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
+import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsBaseItemSemanticEditPolicy;
+import ac.soton.eventb.classdiagrams.parser.SymbolUtil.Relation;
 
 /**
  * @generated
@@ -75,7 +80,7 @@ public class AssociationCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -86,6 +91,13 @@ public class AssociationCreateCommand extends EditElementCommand {
 
 		Association newElement = ClassdiagramsFactory.eINSTANCE
 				.createAssociation();
+
+		if (EcoreUtil.getRootContainer(getContainer()) instanceof Context) {
+			newElement.setAssociationType(AssociationType.CONSTANT);
+		} else {
+			newElement.setAssociationType(AssociationType.VARIABLE);
+		}
+
 		getContainer().getClassAssociations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());

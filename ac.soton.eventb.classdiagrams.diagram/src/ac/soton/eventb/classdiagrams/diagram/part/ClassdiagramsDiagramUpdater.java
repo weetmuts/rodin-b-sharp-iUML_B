@@ -39,7 +39,7 @@ public class ClassdiagramsDiagramUpdater {
 		case ClassdiagramEditPart.VISUAL_ID:
 			return getClassdiagram_1000SemanticChildren(view);
 		case ClassAttributesEditPart.VISUAL_ID:
-			return getClassAttributes_7005SemanticChildren(view);
+			return getClassAttributesCompartment_7005SemanticChildren(view);
 		}
 		return Collections.emptyList();
 	}
@@ -71,7 +71,7 @@ public class ClassdiagramsDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List<ClassdiagramsNodeDescriptor> getClassAttributes_7005SemanticChildren(
+	public static List<ClassdiagramsNodeDescriptor> getClassAttributesCompartment_7005SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.emptyList();
