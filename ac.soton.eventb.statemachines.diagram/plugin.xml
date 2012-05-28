@@ -766,47 +766,8 @@ http://www.eclipse.org/legal/epl-v10.html
          </enabledWhen>
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            allPopups="false"
-            locationURI="toolbar:org.eclipse.ui.main.toolbar">
-         <toolbar
-               id="ac.soton.eventb.statemachines.diagram.toolbar">
-            <command
-                  commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction"
-                  icon="icons/Validate.png"
-                  style="push">
-            </command>
-            <separator
-                  name="additions">
-            </separator>
-         </toolbar>
-      </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            description="Validate diagram model"
-            id="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction"
-            name="Validate">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="ac.soton.eventb.statemachines.diagram.part.ValidateDiagramAction"
-            commandId="ac.soton.eventb.statemachines.diagram.ValidateDiagramAction">
-         <enabledWhen>
-            <with
-                  variable="activePartId">
-               <equals
-                     value="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID">
-               </equals>
-            </with>
-         </enabledWhen>
-      </handler>
-   </extension>
+   
+
 
    <!-- optionally, specify keybindings -->
 </plugin>
