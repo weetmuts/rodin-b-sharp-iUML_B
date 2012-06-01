@@ -62,8 +62,7 @@ import org.rodinp.core.RodinCore;
 import org.rodinp.core.RodinDBException;
 
 import ac.soton.eventb.emf.diagrams.generator.Activator;
-import ac.soton.eventb.emf.diagrams.generator.impl.Messages;
-import ac.soton.eventb.emf.diagrams.generator.impl.ValidatorRegistry;
+import ac.soton.eventb.emf.diagrams.generator.actions.ValidateAction;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.TranslationKind;
@@ -97,7 +96,7 @@ public class TranslateAction extends AbstractHandler {
 					editor.doSave(new NullProgressMonitor());
 				
 				// first validate, then transform
-				if (ValidatorRegistry.validate(diagramDocumentEditor)){
+				if (ValidateAction.validate(diagramDocumentEditor)){
 					
 					final StatemachineTransformationCommand generateCommand = new StatemachineTransformationCommand(
 							diagramDocumentEditor.getDiagramEditPart().getEditingDomain(), 
@@ -113,7 +112,7 @@ public class TranslateAction extends AbstractHandler {
 							         try {
 							        	 generateCommand.execute(monitor, diagramDocumentEditor);
 							         } catch (ExecutionException e) {
-										Activator.logError(Messages.GENERATOR_MSG_06, e);
+										Activator.logError("Statemachine transformation failed", e);
 							         }
 							         monitor.done();
 							     }
@@ -132,14 +131,6 @@ public class TranslateAction extends AbstractHandler {
 									.openError(editor.getSite().getShell(),
 											"Translation Information",
 											"Translation encountered problems.\n\nSee log for details.");
-					}
-				}else{
-					//validation failed - get errors
-					String errors = ValidatorRegistry.getValidationErrors(diagramDocumentEditor);
-					if (errors.isEmpty()) {
-						MessageDialog.openError(null, "Generator interrupted", "Validation failed but no errors were reported");
-					} else {
-						MessageDialog.openError(null, "Generator interrupted", "Validation failed with the following errors:\n" + errors);
 					}
 				}
 			}
@@ -209,8 +200,8 @@ public class TranslateAction extends AbstractHandler {
 					public void run(final IProgressMonitor monitor) throws CoreException{	
 						TransactionalEditingDomain editingDomain = getEditingDomain();
 						
-						monitor.beginTask(Messages.GENERATOR_MSG_12,10);		
-						monitor.setTaskName(Messages.GENERATOR_MSG_13(statemachine)); 
+						monitor.beginTask("Running Event-B Transformation for statemachine : "+statemachine.getName(),10);	
+						monitor.setTaskName("Running Event-B Transformation for statemachine : "+statemachine.getName()); 
 						
 						// flush the command stack as this is unprotected and has no undo/redo
 						editingDomain.getCommandStack().flush();
@@ -254,12 +245,12 @@ public class TranslateAction extends AbstractHandler {
 						// configuration properties, logger, monitor object etc.
 						final ExecutionContextImpl context = new ExecutionContextImpl();
 						//context.setConfigProperty("keepModeling", true);
-			
+						monitor.worked(4);
 						// run the transformation assigned to the executor with the given 
 						// input and output and execution context -> ChangeTheWorld(in, out)
 						// Remark: variable arguments count is supported
 						ExecutionDiagnostic result = executor.execute(context, input.toArray(new ModelExtent[]{}));
-						
+						monitor.worked(4);
 						// check the result for success
 						if(result.getSeverity() == Diagnostic.OK) {
 							// let's persist using a resource 
