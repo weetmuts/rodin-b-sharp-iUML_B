@@ -21,12 +21,14 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -36,17 +38,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.transaction.Transaction;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -60,11 +58,15 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachinePackage;
+import org.rodinp.core.RodinCore;
+import org.rodinp.core.RodinDBException;
 
+import ac.soton.eventb.emf.diagrams.generator.Activator;
+import ac.soton.eventb.emf.diagrams.generator.impl.Messages;
+import ac.soton.eventb.emf.diagrams.generator.impl.ValidatorRegistry;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.TranslationKind;
-import ac.soton.eventb.statemachines.diagram.part.ValidateAction;
 
 /**
  * Translate action handler.
@@ -82,85 +84,67 @@ public class TranslateAction extends AbstractHandler {
 	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
 		IEditorPart editor = HandlerUtil.getActiveEditorChecked(event);
-		if (editor instanceof IDiagramWorkbenchPart) {
-			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
-			if (diagramEditor.getDiagram() == null || false == diagramEditor.getDiagram().getElement() instanceof Statemachine)
-				throw new ExecutionException("Failed statemachine transformation: cannot read model element from diagram editor.");
+		if (editor instanceof DiagramDocumentEditor) {
+			final DiagramDocumentEditor diagramDocumentEditor = (DiagramDocumentEditor)editor;
 			
-			// save before transformation
-			if (editor.isDirty())
-				editor.doSave(new NullProgressMonitor());
-			
-			// first validate, then transform
-			if (IStatus.OK == validate(diagramEditor.getDiagramEditPart(), diagramEditor.getDiagram())) {
-				TransactionalEditingDomain modelEditingDomain = diagramEditor.getDiagramEditPart().getEditingDomain(); //this is the EMF.edit editing domain for the model
-				StatemachineTransformationCommand transfCommand = new StatemachineTransformationCommand(modelEditingDomain, (Statemachine) diagramEditor.getDiagram().getElement());
-				final Command command = new ICommandProxy(transfCommand);
-				if (command.canExecute()) {
+			if (diagramDocumentEditor.getDiagram().getElement() instanceof Statemachine){
+				final Statemachine statemachine = (Statemachine) diagramDocumentEditor.getDiagram().getElement();
+				
+				// save before transformation
+				if (editor.isDirty())
+					editor.doSave(new NullProgressMonitor());
+				
+				// first validate, then transform
+				if (ValidatorRegistry.validate(diagramDocumentEditor)){
 					
-					// run with progress
-					ProgressMonitorDialog dialog = new ProgressMonitorDialog(diagramEditor.getSite().getShell());    
-					try {
-						dialog.run(true, true, new IRunnableWithProgress(){
-						     public void run(IProgressMonitor monitor) {
-						         monitor.beginTask("Translating to Event-B ...", IProgressMonitor.UNKNOWN);
-						         command.execute();
-						         monitor.done();
-						     }
-						 });
-					} catch (InvocationTargetException e) {
-						TransformationPlugin.getDefault().logError("Transformation failed", e);
-						return null;
-					} catch (InterruptedException e) {
-						TransformationPlugin.getDefault().logError("Transformation interrupted", e);
-						return null;
-					} 
+					final StatemachineTransformationCommand generateCommand = new StatemachineTransformationCommand(
+							diagramDocumentEditor.getDiagramEditPart().getEditingDomain(), 
+							statemachine);
 
-					// error feedback
-					if (false == transfCommand.getCommandResult().getStatus().isOK())
-						MessageDialog
-								.openError(editor.getSite().getShell(),
-										"Translation Information",
-										"Translation encountered problems.\n\nSee log for details.");
+					if (generateCommand.canExecute()) {
+						// run with progress
+						ProgressMonitorDialog dialog = new ProgressMonitorDialog(diagramDocumentEditor.getSite().getShell());    
+						try {
+							dialog.run(true, true, new IRunnableWithProgress(){
+							     public void run(IProgressMonitor monitor) {
+							         monitor.beginTask("Translating to Event-B ...", IProgressMonitor.UNKNOWN);
+							         try {
+							        	 generateCommand.execute(monitor, diagramDocumentEditor);
+							         } catch (ExecutionException e) {
+										Activator.logError(Messages.GENERATOR_MSG_06, e);
+							         }
+							         monitor.done();
+							     }
+							 });
+						} catch (InvocationTargetException e) {
+							TransformationPlugin.getDefault().logError("Transformation failed", e);
+							return null;
+						} catch (InterruptedException e) {
+							TransformationPlugin.getDefault().logError("Transformation interrupted", e);
+							return null;
+						} 
+	
+						// error feedback
+						if (false == generateCommand.getCommandResult().getStatus().isOK())
+							MessageDialog
+									.openError(editor.getSite().getShell(),
+											"Translation Information",
+											"Translation encountered problems.\n\nSee log for details.");
+					}
+				}else{
+					//validation failed - get errors
+					String errors = ValidatorRegistry.getValidationErrors(diagramDocumentEditor);
+					if (errors.isEmpty()) {
+						MessageDialog.openError(null, "Generator interrupted", "Validation failed but no errors were reported");
+					} else {
+						MessageDialog.openError(null, "Generator interrupted", "Validation failed with the following errors:\n" + errors);
+					}
 				}
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Validates diagram and shows errors found;
-	 * return IStatus constant as validation result.
-	 * 
-	 * @return IStatus constant
-	 */
-	private int validate(DiagramEditPart diagramEditPart, View view) {
-		// first validate the diagram
-		try {
-			ValidateAction.runValidation(diagramEditPart, view);
-		} catch (Exception e) {
-			TransformationPlugin.getDefault().logError("Validation action failed for: " + diagramEditPart.toString(), e);
-			return IStatus.ERROR;
-		}
-		
-		IFile file = WorkspaceSynchronizer.getFile(view.eResource());
-		if (file != null) {
-			try {
-				// get errors
-				String errors = ValidateAction.getValidationErrors(file);
-				
-				if (errors.isEmpty()) {
-					return IStatus.OK;
-				} else {
-					MessageDialog.openError(null, "Translation interrupted", "Validation has found problems in your model:\n" + errors);
-				}
-			} catch (CoreException e) {
-				TransformationPlugin.getDefault().logError("Cannot read markers from file: " + file.getFullPath().toString(), e);
-			}
-		}
-		
-		return IStatus.ERROR;
 	}
 
 	/**
@@ -178,19 +162,16 @@ public class TranslateAction extends AbstractHandler {
 		 *
 		 */
 		public class NoEClassException extends Exception {
-
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = -6910179434320404735L;
-
 			/**
 			 * @param string
 			 */
 			public NoEClassException(String string) {
 				super(string);
 			}
-
 		}
 
 		private Statemachine statemachine;
@@ -201,92 +182,120 @@ public class TranslateAction extends AbstractHandler {
 		 */
 		public StatemachineTransformationCommand(TransactionalEditingDomain modelEditingDomain, Statemachine statemachine) {
 			super(modelEditingDomain, "Transformation Command", null);
+			setOptions(Collections.singletonMap(Transaction.OPTION_UNPROTECTED, Boolean.TRUE));
 			this.statemachine = statemachine;
 		}
 
+		@Override
+		public boolean canRedo(){
+			return false;
+		}
+
+		@Override
+		public boolean canUndo(){
+			return false;
+		}
+		
 		/* (non-Javadoc)
 		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
 		 */
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 				IAdaptable info) throws ExecutionException {
-			monitor.beginTask("Translating statemachine", IProgressMonitor.UNKNOWN);
-			
-			// find topmost container statemachine
-			Statemachine rootSM = statemachine;
-			for (; 
-				rootSM.eContainer() instanceof State && rootSM.eContainer().eContainer() instanceof Statemachine; 
-				rootSM = (Statemachine) rootSM.eContainer().eContainer());
-			
-			// translation kind
-			TranslationKind kind = rootSM.getTranslation();
-			
-			EObject container = EcoreUtil.getRootContainer(statemachine);
-			Machine machine = (Machine) container;
-			
-			// URIs of input resources
-			List<URI> inResourceURIs = new ArrayList<URI>(2);
-			inResourceURIs.add(machine.getURI());
-			if (TranslationKind.SINGLEVAR.equals(kind))
-				inResourceURIs.add(getImplicitCtxURIForMachine(machine));
 			
 			try {
-				TransactionalEditingDomain editingDomain = getEditingDomain();
-				List<Resource> inResources = loadResources(inResourceURIs, editingDomain);
-				List<ModelExtent> input = new ArrayList<ModelExtent>(inResources.size() + 1);
 				
-				// Refer to an existing transformation via URI
-				URI transformationURI = getScriptURI(kind);
-				
-				// create executor for the given transformation
-				final TransformationExecutor executor = new TransformationExecutor(transformationURI);
-	
-				// define transformation resource inputs
-				for (Resource inRes : inResources)
-					input.add(new BasicModelExtent(inRes.getContents()));
-				
-				// define transformation statemachine extension input
-				//FIXME: assumption on first resource as a statemachine container presumably is weak or error prone
-				Resource mchResource = inResources.get(0);
-				input.add(new BasicModelExtent(Collections.singletonList(mchResource.getEObject(rootSM.eResource().getURIFragment(rootSM)))));
-	
-				// setup the execution environment details -> 
-				// configuration properties, logger, monitor object etc.
-				final ExecutionContextImpl context = new ExecutionContextImpl();
-				context.setConfigProperty("keepModeling", true);
-	
-				// run the transformation assigned to the executor with the given 
-				// input and output and execution context -> ChangeTheWorld(in, out)
-				// Remark: variable arguments count is supported
-				ExecutionDiagnostic result = executor.execute(context, input.toArray(new ModelExtent[]{}));
-				
-				// check the result for success
-				if(result.getSeverity() == Diagnostic.OK) {
-					// let's persist using a resource 
-					try {
-						for (Resource res : inResources) {
-							res.save(Collections.emptyMap());
-							res.unload();
+				RodinCore.run(new IWorkspaceRunnable() {
+					public void run(final IProgressMonitor monitor) throws CoreException{	
+						TransactionalEditingDomain editingDomain = getEditingDomain();
+						
+						monitor.beginTask(Messages.GENERATOR_MSG_12,10);		
+						monitor.setTaskName(Messages.GENERATOR_MSG_13(statemachine)); 
+						
+						// flush the command stack as this is unprotected and has no undo/redo
+						editingDomain.getCommandStack().flush();
+
+						////
+						// find topmost container statemachine
+						Statemachine rootSM = statemachine;
+						for (; 
+							rootSM.eContainer() instanceof State && rootSM.eContainer().eContainer() instanceof Statemachine; 
+							rootSM = (Statemachine) rootSM.eContainer().eContainer());
+						
+						EObject container = EcoreUtil.getRootContainer(statemachine);
+						final Machine machine = (Machine) container;
+			
+
+						// URIs of input resources
+						final List<URI> inResourceURIs = new ArrayList<URI>(2);
+						inResourceURIs.add(machine.getURI());
+						if (TranslationKind.SINGLEVAR.equals(rootSM.getTranslation()))
+							inResourceURIs.add(getImplicitCtxURIForMachine(machine));
+						
+						List<Resource> inResources = loadResources(inResourceURIs, editingDomain);
+						List<ModelExtent> input = new ArrayList<ModelExtent>(inResources.size() + 1);
+						
+						// Refer to an existing transformation via URI
+						URI transformationURI = getScriptURI(rootSM.getTranslation());
+						
+						// create executor for the given transformation
+						final TransformationExecutor executor = new TransformationExecutor(transformationURI);
+			
+						// define transformation resource inputs
+						for (Resource inRes : inResources)
+							input.add(new BasicModelExtent(inRes.getContents()));
+						
+						// define transformation statemachine extension input
+						//FIXME: assumption on first resource as a statemachine container presumably is weak or error prone
+						Resource mchResource = inResources.get(0);
+						input.add(new BasicModelExtent(Collections.singletonList(mchResource.getEObject(rootSM.eResource().getURIFragment(rootSM)))));
+			
+						// setup the execution environment details -> 
+						// configuration properties, logger, monitor object etc.
+						final ExecutionContextImpl context = new ExecutionContextImpl();
+						//context.setConfigProperty("keepModeling", true);
+			
+						// run the transformation assigned to the executor with the given 
+						// input and output and execution context -> ChangeTheWorld(in, out)
+						// Remark: variable arguments count is supported
+						ExecutionDiagnostic result = executor.execute(context, input.toArray(new ModelExtent[]{}));
+						
+						// check the result for success
+						if(result.getSeverity() == Diagnostic.OK) {
+							// let's persist using a resource 
+								for (Resource res : inResources) {
+									try {
+										res.save(Collections.emptyMap());
+									} catch (IOException e) {
+										//throw this as a CoreException
+										throw new CoreException(
+												new Status(Status.ERROR, TransformationPlugin.PLUGIN_ID, "IO exception while saving "+res.getURI(), e));
+									}
+								}
+						} else {
+							// turn the result diagnostic into status and send it to error log			
+							IStatus status = BasicDiagnostic.toIStatus(result);
+							TransformationPlugin.getDefault().getLog().log(status);
+							throw new CoreException(
+									new Status(Status.ERROR, TransformationPlugin.PLUGIN_ID, "Error while executing transformation: "+status.getMessage(), null));
+
 						}
-						return CommandResult.newOKCommandResult();
-					} catch (IOException e) {
-						TransformationPlugin.getDefault().logError("Save operation failed after transformation", e);
-						return CommandResult.newErrorCommandResult(e);
+						monitor.done();
 					}
-				} else {
-					// turn the result diagnostic into status and send it to error log			
-					IStatus status = BasicDiagnostic.toIStatus(result);
-					TransformationPlugin.getDefault().getLog().log(status);
-					return CommandResult.newErrorCommandResult(status.getMessage());
-				}
-			} catch (WrappedException e) {
-				TransformationPlugin.getDefault().logError("Unable to load resource for transformation", e);
+				},monitor);
+				return CommandResult.newOKCommandResult();
+//			} catch (WrappedException e) {
+//				TransformationPlugin.getDefault().logError("Unable to load resource for transformation", e);
+//				return CommandResult.newErrorCommandResult(e);
+			} catch (RodinDBException e) {
+				TransformationPlugin.getDefault().logError("Rodin DB exception", e);
 				return CommandResult.newErrorCommandResult(e);
 			} finally {
 				monitor.done();
 			}
 		}
 
+		
 		/**
 		 * Load resources from URIs.
 		 * 
@@ -298,17 +307,18 @@ public class TranslateAction extends AbstractHandler {
 			List<Resource> resources = new ArrayList<Resource>(inResourceURIs.size());
 			try {
 				for (URI uri : inResourceURIs) {
-					Resource resource = editingDomain.getResourceSet().createResource(uri);
+					Resource resource = editingDomain.getResourceSet().getResource(uri,true);
+					//Resource resource = editingDomain.getResourceSet().createResource(uri);
 					IFile file = WorkspaceSynchronizer.getFile(resource);
 					if (!file.exists()) {
 						createResourceContent(resource);
-						resource.save(getSaveOptions());
+						//resource.save(getSaveOptions());
 					}
-					resource.load(getLoadOptions());
+					//resource.load(getLoadOptions());
 					resources.add(resource);
 				}
-			} catch (IOException e) {
-				throw new WrappedException("Loading a resource failed: " + e.getMessage(), e);
+//			} catch (IOException e) {
+//				throw new WrappedException("Loading a resource failed: " + e.getMessage(), e);
 			} catch (NoEClassException e) {
 				throw new WrappedException("Creating a resource failed: " + e.getMessage(), e);
 			}
