@@ -299,17 +299,12 @@ public class TranslateAction extends AbstractHandler {
 			try {
 				for (URI uri : inResourceURIs) {
 					Resource resource = editingDomain.getResourceSet().getResource(uri,true);
-					//Resource resource = editingDomain.getResourceSet().createResource(uri);
 					IFile file = WorkspaceSynchronizer.getFile(resource);
 					if (!file.exists()) {
 						createResourceContent(resource);
-						//resource.save(getSaveOptions());
 					}
-					//resource.load(getLoadOptions());
 					resources.add(resource);
 				}
-//			} catch (IOException e) {
-//				throw new WrappedException("Loading a resource failed: " + e.getMessage(), e);
 			} catch (NoEClassException e) {
 				throw new WrappedException("Creating a resource failed: " + e.getMessage(), e);
 			}
