@@ -10,11 +10,11 @@ library util;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
- * Returns if eventB element is generated or not.
+ * Returns if eventB element has a generator attribute with the given ID.
+ * (This used to also check that the elements generated attribute was set but this can sometimes be lost e.g. it is not preserved by the machine refiner)
  */
 query eventb::EventBElement::isGenerated(in generatorID : String) : Boolean {
-	return self.generated = true
-		and self.attributes->exists(key = GENERATOR_ID_KEY)
+	return self.attributes->exists(key = GENERATOR_ID_KEY)
 		and self.attributes![key = GENERATOR_ID_KEY].value.value = generatorID;
 }
 
