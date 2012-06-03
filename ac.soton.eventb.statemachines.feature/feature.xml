@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="1.1.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="%providerName">
 
    <description url="http://www.example.com/description">
@@ -58,7 +58,6 @@
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eventb.emf.core" version="2.2.4" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.core.extension" version="1.1.2" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
       <import plugin="org.eclipse.gef"/>
       <import plugin="ac.soton.eventb.emf.core.extension.persistence" version="1.0.1" match="compatible"/>
       <import plugin="org.eclipse.emf.transaction" version="1.4.0" match="compatible"/>
@@ -70,20 +69,16 @@
       <import plugin="org.eclipse.m2m.qvt.oml.common" version="3.1.0" match="compatible"/>
       <import plugin="org.eclipse.m2m.qvt.oml.runtime" version="3.1.0" match="compatible"/>
       <import plugin="org.eclipse.m2m.qvt.oml.project" version="3.1.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.generator" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor" version="1.4.1" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
       <import feature="org.eventb.emf.feature" version="3.3.0" match="compatible"/>
       <import feature="org.eclipse.gmf" version="1.4.1" match="compatible"/>
-      <import feature="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
       <import feature="org.eclipse.ocl" version="3.0.0" match="compatible"/>
       <import feature="ac.soton.eventb.emf.core.extension.feature" version="1.0.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.eclipse.emf.validation" version="1.4.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.diagrams.generator" version="2.1.0" match="compatible"/>
+      <import plugin="org.rodinp.core" version="1.5.0" match="compatible"/>
+      <import feature="ac.soton.eventb.emf.diagrams.feature" version="2.1.0" match="compatible"/>
    </requires>
 
    <plugin
