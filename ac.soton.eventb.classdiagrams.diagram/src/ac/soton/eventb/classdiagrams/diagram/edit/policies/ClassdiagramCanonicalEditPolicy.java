@@ -31,7 +31,6 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationEditPart;
-import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassdiagramEditPart;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramUpdater;
