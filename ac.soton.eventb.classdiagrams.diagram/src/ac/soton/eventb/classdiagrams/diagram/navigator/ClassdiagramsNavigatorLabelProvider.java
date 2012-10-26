@@ -20,7 +20,6 @@ import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
-import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassSupertypesEditPart;
@@ -89,21 +88,21 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 	 */
 	public Image getImage(View view) {
 		switch (ClassdiagramsVisualIDRegistry.getVisualID(view)) {
-		case AssociationEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
-		case ClassEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/classdiagrams?Class", ClassdiagramsElementTypes.Class_2002); //$NON-NLS-1$
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4004); //$NON-NLS-1$
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassAttribute", ClassdiagramsElementTypes.ClassAttribute_3021); //$NON-NLS-1$
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4004); //$NON-NLS-1$
+		case AssociationEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
 		case ClassdiagramEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Diagram?http://soton.ac.uk/models/eventb/classdiagrams?Classdiagram", ClassdiagramsElementTypes.Classdiagram_1000); //$NON-NLS-1$
+		case ClassEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/classdiagrams?Class", ClassdiagramsElementTypes.Class_2002); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -156,52 +155,18 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 			return getUnresolvedDomainElementProxyText(view);
 		}
 		switch (ClassdiagramsVisualIDRegistry.getVisualID(view)) {
-		case AssociationEditPart.VISUAL_ID:
-			return getAssociation_4001Text(view);
-		case ClassEditPart.VISUAL_ID:
-			return getClass_2002Text(view);
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getClassSupertypes_4004Text(view);
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getClassAttribute_3021Text(view);
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getClassSupertypes_4004Text(view);
+		case AssociationEditPart.VISUAL_ID:
+			return getAssociation_4001Text(view);
 		case ClassdiagramEditPart.VISUAL_ID:
 			return getClassdiagram_1000Text(view);
+		case ClassEditPart.VISUAL_ID:
+			return getClass_2002Text(view);
 		}
 		return getUnknownElementText(view);
-	}
-
-	/**
-	 * @generated
-	 */
-	private String getClass_2002Text(View view) {
-		IParser parser = ClassdiagramsParserProvider.getParser(
-				ClassdiagramsElementTypes.Class_2002,
-				view.getElement() != null ? view.getElement() : view,
-				ClassdiagramsVisualIDRegistry
-						.getType(ClassNameEditPart.VISUAL_ID));
-		if (parser != null) {
-			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view),
-					ParserOptions.NONE.intValue());
-		} else {
-			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5006); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	private String getClassdiagram_1000Text(View view) {
-		Classdiagram domainModelElement = (Classdiagram) view.getElement();
-		if (domainModelElement != null) {
-			return domainModelElement.getName();
-		} else {
-			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
 	}
 
 	/**
@@ -220,6 +185,26 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 		} else {
 			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
 					"Parser was not found for label " + 3021); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private String getClass_2002Text(View view) {
+		IParser parser = ClassdiagramsParserProvider.getParser(
+				ClassdiagramsElementTypes.Class_2002,
+				view.getElement() != null ? view.getElement() : view,
+				ClassdiagramsVisualIDRegistry
+						.getType(ClassNameEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
+		} else {
+			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
+					"Parser was not found for label " + 5006); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -247,6 +232,20 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 		} else {
 			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
 					"Parser was not found for label " + 6001); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private String getClassdiagram_1000Text(View view) {
+		Classdiagram domainModelElement = (Classdiagram) view.getElement();
+		if (domainModelElement != null) {
+			return domainModelElement.getName();
+		} else {
+			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
+					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
