@@ -439,7 +439,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 			else
 				setBackgroundColor(ELABORATED);
 		} else {
-				setBackgroundColor(NOT_GENERATED);
+			//	setBackgroundColor(NOT_GENERATED);
 		}
 		
 		if (event.getNotifier() == getModel()
