@@ -24,8 +24,8 @@ public class ClassdiagramsPaletteFactory {
 	 */
 	public void fillPalette(PaletteRoot paletteRoot) {
 		paletteRoot.add(createClasses1Group());
-		paletteRoot.add(createConnections2Group());
-		paletteRoot.add(createElementfeatures3Group());
+		paletteRoot.add(createFeatures2Group());
+		paletteRoot.add(createConnections3Group());
 	}
 
 	/**
@@ -41,27 +41,27 @@ public class ClassdiagramsPaletteFactory {
 	}
 
 	/**
-	 * Creates "Connections" palette tool group
+	 * Creates "Features" palette tool group
 	 * @generated
 	 */
-	private PaletteContainer createConnections2Group() {
+	private PaletteContainer createFeatures2Group() {
 		PaletteDrawer paletteContainer = new PaletteDrawer(
-				Messages.Connections2Group_title);
-		paletteContainer.setId("createConnections2Group"); //$NON-NLS-1$
-		paletteContainer.add(createAssociation1CreationTool());
-		paletteContainer.add(createSupertype2CreationTool());
+				Messages.Features2Group_title);
+		paletteContainer.setId("createFeatures2Group"); //$NON-NLS-1$
+		paletteContainer.add(createAttribute1CreationTool());
 		return paletteContainer;
 	}
 
 	/**
-	 * Creates "Element features" palette tool group
+	 * Creates "Connections" palette tool group
 	 * @generated
 	 */
-	private PaletteContainer createElementfeatures3Group() {
+	private PaletteContainer createConnections3Group() {
 		PaletteDrawer paletteContainer = new PaletteDrawer(
-				Messages.Elementfeatures3Group_title);
-		paletteContainer.setId("createElementfeatures3Group"); //$NON-NLS-1$
-		paletteContainer.add(createAttribute1CreationTool());
+				Messages.Connections3Group_title);
+		paletteContainer.setId("createConnections3Group"); //$NON-NLS-1$
+		paletteContainer.add(createAssociation1CreationTool());
+		paletteContainer.add(createSupertype2CreationTool());
 		return paletteContainer;
 	}
 
@@ -76,6 +76,22 @@ public class ClassdiagramsPaletteFactory {
 		entry.setId("createClass1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(ClassdiagramsElementTypes
 				.getImageDescriptor(ClassdiagramsElementTypes.Class_2002));
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createAttribute1CreationTool() {
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.Attribute1CreationTool_title,
+				Messages.Attribute1CreationTool_desc,
+				Collections
+						.singletonList(ClassdiagramsElementTypes.ClassAttribute_3021));
+		entry.setId("createAttribute1CreationTool"); //$NON-NLS-1$
+		entry.setSmallIcon(ClassdiagramsElementTypes
+				.getImageDescriptor(ClassdiagramsElementTypes.ClassAttribute_3021));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -106,25 +122,10 @@ public class ClassdiagramsPaletteFactory {
 				Collections
 						.singletonList(ClassdiagramsElementTypes.ClassSupertypes_4004));
 		entry.setId("createSupertype2CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(ClassdiagramsElementTypes
-				.getImageDescriptor(ClassdiagramsElementTypes.ClassSupertypes_4004));
-		entry.setLargeIcon(entry.getSmallIcon());
-		return entry;
-	}
-
-	/**
-	 * @generated
-	 */
-	private ToolEntry createAttribute1CreationTool() {
-		NodeToolEntry entry = new NodeToolEntry(
-				Messages.Attribute1CreationTool_title,
-				Messages.Attribute1CreationTool_desc,
-				Collections
-						.singletonList(ClassdiagramsElementTypes.ClassAttribute_3021));
-		entry.setId("createAttribute1CreationTool"); //$NON-NLS-1$
-		entry.setSmallIcon(ClassdiagramsElementTypes
-				.getImageDescriptor(ClassdiagramsElementTypes.ClassAttribute_3021));
-		entry.setLargeIcon(entry.getSmallIcon());
+		entry.setSmallIcon(ClassdiagramsDiagramEditorPlugin
+				.findImageDescriptor("/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif")); //$NON-NLS-1$
+		entry.setLargeIcon(ClassdiagramsDiagramEditorPlugin
+				.findImageDescriptor("/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif")); //$NON-NLS-1$
 		return entry;
 	}
 
