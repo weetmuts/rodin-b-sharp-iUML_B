@@ -17,11 +17,9 @@ import org.eventb.emf.core.context.Context;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsBaseItemSemanticEditPolicy;
-import ac.soton.eventb.classdiagrams.parser.SymbolUtil.Relation;
 
 /**
  * @generated
