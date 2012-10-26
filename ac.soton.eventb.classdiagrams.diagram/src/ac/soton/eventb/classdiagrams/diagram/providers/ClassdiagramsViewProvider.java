@@ -34,7 +34,6 @@ import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.eclipse.gmf.runtime.notation.Routing;
-import org.eclipse.gmf.runtime.notation.Shape;
 import org.eclipse.gmf.runtime.notation.TitleStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
@@ -48,7 +47,6 @@ import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationFunctionalTot
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationSurjectiveInjectiveEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
-import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributesEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassNameEditPart;
