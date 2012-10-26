@@ -1,25 +1,17 @@
 package ac.soton.eventb.classdiagrams.diagram.edit.parts;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
-import org.eclipse.draw2d.UpdateListener;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
@@ -115,57 +107,12 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-		primaryShape = new ClassFigure();
-
-		// set background color to white if domain element refines something
-//		EObject element = resolveSemanticElement();
-//		if (element != null) {
-//			EStructuralFeature feature = element.eClass()
-//					.getEStructuralFeature("refines");
-//
-//			if (feature != null && element.eIsSet(feature))
-//				primaryShape.setBackgroundColor(ColorConstants.white);
-//		}
-		
-		return primaryShape;
-		
-	}
-	
-	static final Color NOT_GENERATED = ColorConstants.lightBlue;
-	static final Color REFINED = ColorConstants.white;
-	static final Color ELABORATED = ColorConstants.green;
-	
-	protected void handleNotificationEvent(Notification event) {
-		// update background color when refines property changed
-		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())
-				|| ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(REFINED);
-		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())
-				|| ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(ELABORATED);
-		} else {
-				setBackgroundColor(NOT_GENERATED);
-		}
-		
-		if (event.getNotifier() == getModel()
-				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
-						.equals(event.getFeature())) {
-			handleMajorSemanticChange();
-		} else {
-			super.handleNotificationEvent(event);
-		}
+		return primaryShape = new ClassFigure();
 	}
 
-	
 	/**
 	 * @generated
 	 */
@@ -471,4 +418,36 @@ public class ClassEditPart extends ShapeNodeEditPart {
 
 	}
 
+	/**
+	 * CUSTOM SECTION
+	 * Override notification to update colour depending on refines
+	 */
+	static final Color NOT_GENERATED = ColorConstants.lightBlue;
+	static final Color REFINED = ColorConstants.white;
+	static final Color ELABORATED = ColorConstants.green;
+	
+	protected void handleNotificationEvent(Notification event) {
+		// update background colour when refines property changed
+		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(REFINED);
+		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(ELABORATED);
+		} else {
+				setBackgroundColor(NOT_GENERATED);
+		}
+		
+		if (event.getNotifier() == getModel()
+				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
+						.equals(event.getFeature())) {
+			handleMajorSemanticChange();
+		} else {
+			super.handleNotificationEvent(event);
+		}
+	}
 }
