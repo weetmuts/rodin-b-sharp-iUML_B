@@ -272,6 +272,15 @@
             genNodes="//@diagram/@topLevelNodes.0"/>
       </groups>
       <groups
+          title="Features"
+          collapse="true">
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Attribute"
+            description=""
+            genNodes="//@diagram/@childNodes.0"/>
+      </groups>
+      <groups
           title="Connections"
           collapse="true">
         <entries
@@ -282,16 +291,9 @@
             xsi:type="gmfgen:ToolEntry"
             title="Supertype"
             description=""
+            largeIconPath="/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif"
+            smallIconPath="/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif"
             genLinks="//@diagram/@links.1"/>
-      </groups>
-      <groups
-          title="Element features"
-          collapse="true">
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="Attribute"
-            description=""
-            genNodes="//@diagram/@childNodes.0"/>
       </groups>
     </palette>
     <preferencePages

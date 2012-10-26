@@ -47,7 +47,7 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="classdiagrams.gmftool#//@palette/@tools.2/@tools.0"/>
+              href="classdiagrams.gmftool#//@palette/@tools.1/@tools.0"/>
           <diagramNode
               href="classdiagrams.gmfgraph#AttributeLabel"/>
         </ownedChild>
@@ -95,7 +95,7 @@
         href="classdiagrams.ecore#//Classdiagram/classAssociations"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="classdiagrams.gmftool#//@palette/@tools.1/@tools.0"/>
+        href="classdiagrams.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="classdiagrams.gmfgraph#Association"/>
     <sourceMetaFeature
@@ -108,7 +108,7 @@
   <links>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="classdiagrams.gmftool#//@palette/@tools.1/@tools.1"/>
+        href="classdiagrams.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="classdiagrams.gmfgraph#Supertype"/>
     <linkMetaFeature
