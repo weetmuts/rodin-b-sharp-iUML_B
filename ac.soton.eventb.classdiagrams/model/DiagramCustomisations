@@ -1,0 +1,161 @@
+icons/full/obj/ClassDiagramFile			changed icon from default
+
+plugin.xml							added custom properties sheets
+
+Package=ac.soton.eventb.classdiagrams.diagram.edit.commands/
+
+The following creation commands are modified to dynamically decide the default association type depending on the 
+Root container type.
+
+Class=AssociationCreateCommand
+
+	/**
+	 * @generated NOT
+	 */
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		if (!canExecute()) {
+			throw new ExecutionException(
+					"Invalid arguments in create link command"); //$NON-NLS-1$
+		}
+
+		Association newElement = ClassdiagramsFactory.eINSTANCE
+				.createAssociation();
+++++
+		if (EcoreUtil.getRootContainer(getContainer()) instanceof Context) {
+			newElement.setAssociationType(AssociationType.CONSTANT);
+		} else {
+			newElement.setAssociationType(AssociationType.VARIABLE);
+		}
+----
+		getContainer().getClassAssociations().add(newElement);
+		newElement.setSource(getSource());
+		newElement.setTarget(getTarget());
+		doConfigure(newElement, monitor, info);
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
+
+	}
+
+
+Class=ClassAttributeCreateCommand
+
+
+	/**
+	 * @generated NOT
+	 */
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		ClassAttribute newElement = ClassdiagramsFactory.eINSTANCE
+				.createClassAttribute();
+
+		Class owner = (Class) getElementToEdit();
+
+		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
+			newElement.setAssociationType(AssociationType.CONSTANT);
+		} else {
+			newElement.setAssociationType(AssociationType.VARIABLE);
+		}
+
+		owner.getClassAttributes().add(newElement);
+
+		doConfigure(newElement, monitor, info);
+
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
+	}
+
+Class=ClassCreateCommand
+
+	/**
+	 * @generated NOT
+	 */
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		Class newElement = ClassdiagramsFactory.eINSTANCE.createClass();
+
+		Classdiagram owner = (Classdiagram) getElementToEdit();
+
+		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
+			newElement.setClassType(ClassType.SET);
+		} else {
+			newElement.setClassType(ClassType.VARIABLE);
+		}
+
+		owner.getClasses().add(newElement);
+
+		doConfigure(newElement, monitor, info);
+
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
+	}
+
+Package=ac.soton.eventb.classdiagrams.diagram.edit.parts
+Class=ClassEditPart
+
+Added override of notification handler
+	
+	static final Color NOT_GENERATED = ColorConstants.lightBlue;
+	static final Color REFINED = ColorConstants.white;
+	static final Color ELABORATED = ColorConstants.green;
+	
+	protected void handleNotificationEvent(Notification event) {
+		// update background color when refines property changed
+		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())
+				|| ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(REFINED);
+		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())
+				|| ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
+			if (event.getNewValue() == null)
+				setBackgroundColor(NOT_GENERATED);
+			else
+				setBackgroundColor(ELABORATED);
+		} else {
+				setBackgroundColor(NOT_GENERATED);
+		}
+		
+		if (event.getNotifier() == getModel()
+				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
+						.equals(event.getFeature())) {
+			handleMajorSemanticChange();
+		} else {
+			super.handleNotificationEvent(event);
+		}
+	}
+
+
+
+package=ac.soton.eventb.classdiagrams.diagram.parsers
+class=AbstractParser
+
+translates association multiplicity into surjective/injective/functional/total
+
+	/**
+	 * @generated NOT
+	 */
+	protected Object getValue(EObject element, EAttribute feature) {
+		Object value;
+
+		if (feature.getName().equals("surjective")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
+		} else if (feature.getName().equals("injective")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
+		} else if (feature.getName().equals("functional")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
+		} else if (feature.getName().equals("total")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
+		} else {
+			value = element.eGet(feature);
+		}
+
+		Class iClass = feature.getEAttributeType().getInstanceClass();
+		if (String.class.equals(iClass)) {
+			if (value == null) {
+				value = ""; //$NON-NLS-1$
+			}
+		}
+		return value;
+	}
