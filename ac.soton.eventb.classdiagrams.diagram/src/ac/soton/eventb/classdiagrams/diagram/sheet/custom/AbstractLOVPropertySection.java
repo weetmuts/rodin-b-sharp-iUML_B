@@ -1,8 +1,5 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
 import org.eclipse.emf.edit.command.AddCommand;
@@ -20,10 +17,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.machine.Variable;
-
-import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
 
 /**
@@ -138,7 +131,7 @@ public abstract class AbstractLOVPropertySection extends
 		if (getFeature().isMany() == true){
 			command = (AddCommand) AddCommand.create(editingDomain, eObject, getFeature(), null);
 		} else {
-			command = (SetCommand) SetCommand.create(editingDomain, eObject, getFeature(), null);
+			command = (SetCommand) SetCommand.create(editingDomain, eObject, getFeature(), SetCommand.UNSET_VALUE);
 		}
 		
 		editingDomain.getCommandStack().execute(command);
