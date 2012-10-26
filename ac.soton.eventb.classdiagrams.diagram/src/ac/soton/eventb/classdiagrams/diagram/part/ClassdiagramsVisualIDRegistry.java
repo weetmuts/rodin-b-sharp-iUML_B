@@ -13,7 +13,6 @@ import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationFunctionalTot
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationSurjectiveInjectiveEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
-import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributesEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassNameEditPart;
