@@ -3,24 +3,12 @@ package ac.soton.eventb.classdiagrams.generator.rules;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
-import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.context.ContextPackage;
-import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.MachinePackage;
-import org.eventb.emf.core.machine.Variable;
-import org.eventb.emf.core.machine.impl.InvariantImpl;
 
 import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
@@ -28,12 +16,6 @@ import ac.soton.eventb.emf.diagrams.generator.IRule;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
 public class ClassAttributeRule  extends AbstractRule  implements IRule {
-
-	protected static final EReference components = CorePackage.Literals.PROJECT__COMPONENTS;
-	protected static final EReference sees = MachinePackage.Literals.MACHINE__SEES;
-	protected static final EReference sets = ContextPackage.Literals.CONTEXT__SETS;
-	protected static final EReference constants = ContextPackage.Literals.CONTEXT__CONSTANTS;
-	protected static final EReference axioms = ContextPackage.Literals.CONTEXT__AXIOMS;
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
@@ -97,20 +79,7 @@ public class ClassAttributeRule  extends AbstractRule  implements IRule {
 					}
 					break;
 			}
-		}
-		
+		}	
 		return ret;
-	}
-	
-	private EStructuralFeature getPredicate(
-			EventBNamedCommentedComponentElement pContainer) {
-		if (pContainer instanceof Context){
-			return axioms;
-		} else if (pContainer instanceof Machine){
-			return invariants;
-		} else {
-			return null;			
-		}
-	}
-	
+	}	
 }
