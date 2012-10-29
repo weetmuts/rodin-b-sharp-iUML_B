@@ -42,23 +42,6 @@ public class ClassAttributeRule  extends AbstractRule  implements IRule {
 	}
 	
 	@Override
-	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
-		
-		ClassAttribute c = (ClassAttribute)sourceElement;
-		
-		for (GenerationDescriptor gd : generatedElements){
-			if (gd.value instanceof EventBNamedCommentedElement){
-
-				if (c.getName().equals(((EventBNamedCommentedElement)gd.value).getName())){
-					return true;
-				}
-			}
-		}
-		
-		return false; 
-	}
-	
-	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 		
