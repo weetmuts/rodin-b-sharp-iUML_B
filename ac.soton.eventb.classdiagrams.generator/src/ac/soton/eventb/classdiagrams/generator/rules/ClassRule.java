@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.context.Context;
@@ -37,12 +38,7 @@ public class ClassRule  extends AbstractRule  implements IRule {
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
 		assert(sourceElement instanceof Class);
-
-		if (sourceElement instanceof Class){
-			return true;
-		} else {
-			return false;
-		}//TODO change to true
+		return true;
 	}
 	
 	@Override
@@ -52,7 +48,8 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		
 		if (c.getSupertypes().size() > 0){
 			for (Class superClass : c.getSupertypes()){
-				if (!isGenerated(superClass, generatedElements)){
+				if (!(superClass.getElaborates() instanceof EventBNamed) &&
+					!(isGenerated(superClass,generatedElements))){
 					return false;
 				}
 			}
