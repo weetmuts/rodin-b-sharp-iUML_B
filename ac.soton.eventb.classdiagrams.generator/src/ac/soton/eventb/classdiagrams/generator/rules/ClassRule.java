@@ -3,28 +3,18 @@ package ac.soton.eventb.classdiagrams.generator.rules;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
-import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.context.ContextPackage;
-import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.MachinePackage;
-import org.eventb.emf.core.machine.Variable;
-import org.eventb.emf.core.machine.impl.InvariantImpl;
 
 import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
+import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
 public class ClassRule  extends AbstractRule  implements IRule {
@@ -41,23 +31,12 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		if (c.getSupertypes().size() > 0){
 			for (Class superClass : c.getSupertypes()){
 				if (!(superClass.getElaborates() instanceof EventBNamed) &&
-					!(isGenerated(superClass,generatedElements))){
+					!(Is.generated(generatedElements, null, null, superClass.getName()))){
 					return false;
 				}
 			}
 		}
 		return true; 
-	}
-	
-	private boolean isGenerated(EventBNamedCommentedElement source, final List<GenerationDescriptor> generatedElements) {
-		for (GenerationDescriptor gd : generatedElements){
-			if (gd.value instanceof EventBNamedCommentedElement){
-				if (source.getName().equals(((EventBNamedCommentedElement)gd.value).getName())){
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 	
 	@Override

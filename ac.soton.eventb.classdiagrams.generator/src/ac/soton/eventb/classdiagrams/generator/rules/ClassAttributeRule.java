@@ -8,33 +8,46 @@ import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 
 import ac.soton.eventb.classdiagrams.AssociationType;
+import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
+import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
-public class ClassAttributeRule  extends AbstractRule  implements IRule {
+public class ClassAttributeRule extends AbstractRule  implements IRule {
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
 		assert(sourceElement instanceof ClassAttribute);
+		if (!(((ClassAttribute)sourceElement).eContainer() instanceof Class)) return false;
 		return true;
+	}
+	
+	@Override
+	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
+		ClassAttribute at = (ClassAttribute)sourceElement;
+		Class cl = (Class)at.eContainer();
+		
+		if (cl.getElaborates() != null || Is.generated(generatedElements,null,null,cl.getName())) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 		
-		EventBNamedCommentedComponentElement container = 
-				(EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
+		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
 		ClassAttribute element = (ClassAttribute)sourceElement;
+		int elementType = element.getAssociationType().getValue();
 		
-		//if it's not elaborating the invariant - create one
+		//if it's not elaborating an existing element, create one
 		if (element.getElaborates() == null){
-			int elementType = element.getAssociationType().getValue();
-			
 			//if does not elaborate, then create a variable/constant and the appropriate predicate (invariant/axiom)
 			switch (elementType) {
 				case AssociationType.CONSTANT_VALUE :
