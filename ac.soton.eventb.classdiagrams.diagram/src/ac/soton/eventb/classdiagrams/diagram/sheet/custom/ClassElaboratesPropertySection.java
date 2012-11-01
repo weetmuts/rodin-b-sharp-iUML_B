@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gmf.runtime.common.ui.dialogs.PopupDialog;
@@ -33,12 +34,14 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
 import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
 
 /**
@@ -177,7 +180,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 					clearButton.setEnabled(false);
 				}
 				
-				//if refined or elaborated, disale text editing
+				//if refined or elaborated, disable text editing
 				if (eObject != null && 
 						(((Class)eObject).getRefines() != null || 
 						((Class)eObject).getElaborates() != null)){
@@ -192,6 +195,18 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		});
 		
 		refresh();
+	}
+
+	@Override
+	protected void clearElement() {
+		super.clearElement();
+		EditingDomain editingDomain = ((ClassdiagramsDiagramEditor) getPart()).getEditingDomain();
+		AbstractOverrideableCommand command;
+		EventBNamed generated = getGenerated((EventBNamed)eObject);
+		if (generated instanceof EObject){
+			command = (RemoveCommand) RemoveCommand.create(editingDomain, ((EObject)generated).eContainer(), ((EObject)generated).eContainingFeature(), generated);
+			editingDomain.getCommandStack().execute(command);
+		}
 	}
 	
 	protected void modifyElement(Object pNewChild){
