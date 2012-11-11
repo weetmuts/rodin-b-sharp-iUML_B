@@ -31,13 +31,18 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.eventb.emf.core.EventBElement;
 
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
+
+import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 
 /**
  * @generated
@@ -422,24 +427,24 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	 * CUSTOM SECTION
 	 * Override notification to update colour depending on refines
 	 */
-	static final Color NOT_GENERATED = ColorConstants.lightBlue;
 	static final Color REFINED = ColorConstants.white;
-	static final Color ELABORATED = ColorConstants.green;
+	static final Color VISUALIZES = ColorConstants.lightBlue;
+	static final Color DEFINES = ColorConstants.green;
+	static final Color NOT_ELABORATED = ColorConstants.yellow;
 	
 	protected void handleNotificationEvent(Notification event) {
 		// update background colour when refines property changed
 		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(REFINED);
+			if (event.getNewValue() == null){
+				setBackground(getElaborates(), false );
+			}else{
+				setBackground(getElaborates(), true );
+			}
+		// update background colour when elaborates property changed
 		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(ELABORATED);
+			setBackground(event.getNewValue(), isRefines());
 		} else {
-			//	setBackgroundColor(NOT_GENERATED);
+			//do nothing
 		}
 		
 		if (event.getNotifier() == getModel()
@@ -449,5 +454,56 @@ public class ClassEditPart extends ShapeNodeEditPart {
 		} else {
 			super.handleNotificationEvent(event);
 		}
+	}
+	
+	private void setBackground(){
+		setBackground(getElaborates(), isRefines());
+	}
+	
+	private void setBackground(Object elabs, boolean refines){
+		if (refines){
+			setBackgroundColor(REFINED);			
+		}else{
+			if (elabs instanceof EventBElement){
+				if (Is.generatedBy(elabs,getModelElement())){
+						//((EventBElement) elabs).isLocalGenerated()){
+					setBackgroundColor(DEFINES);
+				}else{
+					setBackgroundColor(VISUALIZES);
+				}
+			}else{
+				setBackgroundColor(NOT_ELABORATED);
+			}
+		}
+	}
+	
+	private Object getElaborates(){
+		Object element = getModelElement();
+		if (element instanceof Class){
+			return ((Class)element).getElaborates();	
+		}
+		return null;
+	}
+	
+	private boolean isRefines(){
+		Object element = getModelElement();
+		if (element instanceof Class){
+			return ((Class)element).getRefines()!=null;	
+		}
+		return false;
+	}
+	
+	private Object getModelElement(){
+		Object model = getModel();
+		if (model instanceof Node){
+			return ((Node)model).getElement();
+		}
+		return null;
+	}
+	
+	@Override
+	public void refresh(){
+		super.refresh();
+		setBackground();
 	}
 }
