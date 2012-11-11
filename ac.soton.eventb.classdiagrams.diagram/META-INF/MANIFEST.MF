@@ -44,6 +44,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gef;visibility:=reexport,
  ac.soton.eventb.emf.core.extension;bundle-version="1.1.2",
  org.eventb.emf.persistence;bundle-version="2.3.2",
- org.rodinp.keyboard;bundle-version="1.1.2"
+ org.rodinp.keyboard;bundle-version="1.1.2",
+ ac.soton.eventb.emf.diagrams.generator;bundle-version="2.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
