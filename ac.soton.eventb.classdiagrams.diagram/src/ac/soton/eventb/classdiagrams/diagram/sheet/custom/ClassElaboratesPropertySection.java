@@ -31,14 +31,20 @@ import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.EventBObject;
+import org.eventb.emf.core.context.CarrierSet;
+import org.eventb.emf.core.context.Constant;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
+import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.classdiagrams.ClassType;
+import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
@@ -111,19 +117,17 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	}
 	
 	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
-		List<EventBNamed> filteredList = new LinkedList<EventBNamed>();
-		
-		
-		//for every list element, check whether it is elaborated
-		for (EventBNamed eb : pValuesList){
-			
-			if (!ClassdiagramUtil.isElaborated(eb)){	
-				filteredList.add((EventBNamed)eb);
+		List<EventBNamed> filters = new LinkedList<EventBNamed>();
+		EObject diagram = ((Class)eObject).getContaining(ClassdiagramsPackage.Literals.CLASSDIAGRAM);
+		if (diagram instanceof Classdiagram){
+			for (EObject diagramElement : ((Classdiagram)diagram).getAllContained(CorePackage.Literals.EVENT_BELEMENT, true) ){
+				if (diagramElement instanceof ElaborativeElement &&
+						((ElaborativeElement)diagramElement).getElaborates()!= null ){
+					filters.add(((ElaborativeElement)diagramElement).getElaborates());
+				}
 			}
 		}
-		
-		pValuesList.clear();
-		pValuesList.addAll(filteredList);
+		pValuesList.removeAll(filters);
 	}
 
 	private List<EventBNamed> fillValuesListWithContextContents(Context context) {
@@ -234,6 +238,22 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		}
 		
 		editingDomain.getCommandStack().execute(command);
+		
+		//AbstractOverrideableCommand command2;
+		
+		//set type to match new elaborated element
+		ClassType type = null;
+		EventBElement elaboratedElement = ((EventBElement)pNewChild);
+		if (elaboratedElement instanceof CarrierSet) type = ClassType.SET;
+		else if (elaboratedElement instanceof Constant) type = ClassType.CONSTANT;
+		else if (elaboratedElement instanceof Variable) type = ClassType.VARIABLE;
+		command = (SetCommand) SetCommand.create(
+				editingDomain,
+				eObject, 
+				ClassdiagramsPackage.Literals.CLASS__CLASS_TYPE,
+				type);;
+		editingDomain.getCommandStack().execute(command);
+		
 	}
 
 	@Override
