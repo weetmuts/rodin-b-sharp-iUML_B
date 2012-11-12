@@ -52,12 +52,12 @@
    <extension
          point="org.rodinp.core.refinements">
       <Participant
-            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramMachineRefiner"
+            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramRefiner"
             id="classdiagramMachineRefiner"
             refinement-id="org.eventb.core.machineRefinement">
       </Participant>
       <Participant
-            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramContextExtender"
+            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramRefiner"
             id="classdiagramContextRefiner"
             refinement-id="org.eventb.core.contextRefinement">
       </Participant>
