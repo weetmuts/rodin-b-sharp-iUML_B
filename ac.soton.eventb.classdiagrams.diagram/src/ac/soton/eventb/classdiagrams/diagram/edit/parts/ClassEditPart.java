@@ -42,6 +42,7 @@ import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 
 /**
@@ -425,8 +426,9 @@ public class ClassEditPart extends ShapeNodeEditPart {
 
 	/**
 	 * CUSTOM SECTION
-	 * Override notification to update colour depending on refines
+	 * Override notification and refresh to update background colour depending on elaborates and refines
 	 */
+	
 	static final Color REFINED = ColorConstants.white;
 	static final Color VISUALIZES = ColorConstants.lightBlue;
 	static final Color DEFINES = ColorConstants.green;
@@ -434,14 +436,14 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	
 	protected void handleNotificationEvent(Notification event) {
 		// update background colour when refines property changed
-		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
+		if (ClassdiagramsPackage.Literals.CLASS__REFINES.equals(event.getFeature())) {
 			if (event.getNewValue() == null){
 				setBackground(getElaborates(), false );
 			}else{
 				setBackground(getElaborates(), true );
 			}
 		// update background colour when elaborates property changed
-		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
+		} else if (CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES.equals(event.getFeature())) {
 			setBackground(event.getNewValue(), isRefines());
 		} else {
 			//do nothing
