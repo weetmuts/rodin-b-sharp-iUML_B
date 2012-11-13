@@ -67,7 +67,8 @@ public class AssociationElaboratesPropertySection extends AbstractLOVPropertySec
 
 		@Override
 		public String getText(Object element) {
-			return ((List<Token>)element).get(0).stringValue;
+			return "This needs fixing";
+			//return ((List<Token>)element).get(0).stringValue;
 		}
 	};
 
