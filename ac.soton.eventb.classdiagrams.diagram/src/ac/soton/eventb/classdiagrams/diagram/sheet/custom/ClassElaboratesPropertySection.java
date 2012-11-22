@@ -10,7 +10,6 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -26,16 +25,12 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
-import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.CarrierSet;
 import org.eventb.emf.core.context.Constant;
 import org.eventb.emf.core.context.Context;
@@ -43,12 +38,12 @@ import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
-import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 /**
  * Elaborates property section for Classdiagrams.
@@ -118,12 +113,12 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	
 	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
 		List<EventBNamed> filters = new LinkedList<EventBNamed>();
-		EObject diagram = ((Class)eObject).getContaining(ClassdiagramsPackage.Literals.CLASSDIAGRAM);
+		EObject diagram = ((EventBElement)eObject).getContaining(ClassdiagramsPackage.Literals.CLASSDIAGRAM);
 		if (diagram instanceof Classdiagram){
 			for (EObject diagramElement : ((Classdiagram)diagram).getAllContained(CorePackage.Literals.EVENT_BELEMENT, true) ){
-				if (diagramElement instanceof ElaborativeElement &&
-						((ElaborativeElement)diagramElement).getElaborates()!= null ){
-					filters.add(((ElaborativeElement)diagramElement).getElaborates());
+				if (diagramElement instanceof EventBDataElaboration &&
+						((EventBDataElaboration)diagramElement).getElaborates()!= null ){
+					filters.add(((EventBDataElaboration)diagramElement).getElaborates());
 				}
 			}
 		}
@@ -176,7 +171,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (eObject != null && ((ElaborativeElement)eObject).getElaborates() != null){
+				if (eObject != null && ((EventBDataElaboration)eObject).getElaborates() != null){
 					addButton.setEnabled(false);
 					clearButton.setEnabled(true);
 				} else {
@@ -187,7 +182,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 				//if refined or elaborated, disable text editing
 				if (eObject != null && 
 						(((Class)eObject).getRefines() != null || 
-						((Class)eObject).getElaborates() != null)){
+						((EventBDataElaboration)eObject).getElaborates() != null)){
 						lovText.setEnabled(false);
 //						lovText.setForeground(ColorConstants.gray);
 				} else {
@@ -203,14 +198,14 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 
 	@Override
 	protected void clearElement() {
-		super.clearElement();
 		EditingDomain editingDomain = ((ClassdiagramsDiagramEditor) getPart()).getEditingDomain();
 		AbstractOverrideableCommand command;
-		EventBNamed generated = getGenerated((EventBNamed)eObject);
+		EventBNamed generated = ((EventBDataElaboration)eObject).getElaborates(); //getGenerated((EventBNamed)eObject);
 		if (generated instanceof EObject){
 			command = (RemoveCommand) RemoveCommand.create(editingDomain, ((EObject)generated).eContainer(), ((EObject)generated).eContainingFeature(), generated);
 			editingDomain.getCommandStack().execute(command);
 		}
+		super.clearElement();
 	}
 	
 	protected void modifyElement(Object pNewChild){
@@ -242,24 +237,24 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		//AbstractOverrideableCommand command2;
 		
 		//set type to match new elaborated element
-		ClassType type = null;
+		DataKind dataKind = null;
 		EventBElement elaboratedElement = ((EventBElement)pNewChild);
-		if (elaboratedElement instanceof CarrierSet) type = ClassType.SET;
-		else if (elaboratedElement instanceof Constant) type = ClassType.CONSTANT;
-		else if (elaboratedElement instanceof Variable) type = ClassType.VARIABLE;
+		if (elaboratedElement instanceof CarrierSet) dataKind = DataKind.SET;
+		else if (elaboratedElement instanceof Constant) dataKind = DataKind.CONSTANT;
+		else if (elaboratedElement instanceof Variable) dataKind = DataKind.VARIABLE;
 		command = (SetCommand) SetCommand.create(
 				editingDomain,
 				eObject, 
-				ClassdiagramsPackage.Literals.CLASS__CLASS_TYPE,
-				type);;
+				CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
+				dataKind);;
 		editingDomain.getCommandStack().execute(command);
 		
 	}
 
 	@Override
 	public String getLOVValue() {
-		if (eObject != null && ((Class) eObject).getElaborates() != null) { 
-			return ((Class) eObject).getElaborates().getName();
+		if (eObject != null && ((EventBDataElaboration) eObject).getElaborates() != null) { 
+			return ((EventBDataElaboration) eObject).getElaborates().getName();
 		} else {
 			return "no name";
 		}
@@ -267,7 +262,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES;
+		return CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES;
 	}
 
 	@Override
@@ -282,14 +277,14 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		super.refresh();
 		EventBNamed generated;
 
-		if (eObject != null && (((Class)eObject).getElaborates() == null) && 
-			((generated = getGenerated((EventBNamed)eObject)) != null)){
-			
-			setElaborates(generated);
-		}
+//		if (eObject != null && (((EventBDataElaboration)eObject).getElaborates() == null) && 
+//			((generated = getGenerated((EventBNamed)eObject)) != null)){
+//			
+//			setElaborates(generated);
+//		}
 	}
 	
-	public EventBNamed getGenerated(EventBNamed pEventBNamed) {
+	public EventBNamed getxGenerated(EventBNamed pEventBNamed) {
 		EObject container = EcoreUtil.getRootContainer(pEventBNamed);
 		List<EventBElement> objectsToCompare = new LinkedList<EventBElement>();
 		

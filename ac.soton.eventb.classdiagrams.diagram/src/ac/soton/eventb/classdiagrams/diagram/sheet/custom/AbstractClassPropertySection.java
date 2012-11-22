@@ -5,14 +5,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
 import org.eclipse.swt.widgets.Composite;
 
-import ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
 
 public abstract class AbstractClassPropertySection extends
 		AbstractModelerPropertySection {
 
 	@Override
 	protected EObject unwrap(Object object) {
-		return ClassdiagramsSheetPropertyFilter.unwrap(object);
+		return DiagramsUtil.unwrap(object);
 	}
 
 	/**

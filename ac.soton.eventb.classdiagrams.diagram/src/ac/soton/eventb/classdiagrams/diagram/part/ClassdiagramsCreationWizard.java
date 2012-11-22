@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import java.lang.reflect.InvocationTargetException;
@@ -102,7 +109,7 @@ public class ClassdiagramsCreationWizard extends Wizard implements INewWizard {
 	 */
 	public void addPages() {
 		diagramModelFilePage = new ClassdiagramsCreationWizardPage(
-				"DiagramModelFile", getSelection(), "classdiagrams_diagram"); //$NON-NLS-1$ //$NON-NLS-2$
+				"DiagramModelFile", getSelection(), "cld"); //$NON-NLS-1$ //$NON-NLS-2$
 		diagramModelFilePage
 				.setTitle(Messages.ClassdiagramsCreationWizard_DiagramModelFilePageTitle);
 		diagramModelFilePage
@@ -110,16 +117,16 @@ public class ClassdiagramsCreationWizard extends Wizard implements INewWizard {
 		addPage(diagramModelFilePage);
 
 		domainModelFilePage = new ClassdiagramsCreationWizardPage(
-				"DomainModelFile", getSelection(), "classdiagrams") { //$NON-NLS-1$ //$NON-NLS-2$
+				"DomainModelFile", getSelection(), "bum") { //$NON-NLS-1$ //$NON-NLS-2$
 
 			public void setVisible(boolean visible) {
 				if (visible) {
 					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length()
-							- ".classdiagrams_diagram".length()); //$NON-NLS-1$
+					fileName = fileName.substring(0,
+							fileName.length() - ".cld".length()); //$NON-NLS-1$
 					setFileName(ClassdiagramsDiagramEditorUtil
 							.getUniqueFileName(getContainerFullPath(),
-									fileName, "classdiagrams")); //$NON-NLS-1$
+									fileName, "bum")); //$NON-NLS-1$
 				}
 				super.setVisible(visible);
 			}

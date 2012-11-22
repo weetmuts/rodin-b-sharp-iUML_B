@@ -1,6 +1,14 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.navigator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -96,6 +104,9 @@ public class ClassdiagramsNavigatorLinkHelper implements ILinkHelper {
 			if (navigatorGroup.getParent() instanceof ClassdiagramsNavigatorItem) {
 				navigatorView = ((ClassdiagramsNavigatorItem) navigatorGroup
 						.getParent()).getView();
+			} else if (navigatorGroup.getParent() instanceof IAdaptable) {
+				navigatorView = (View) ((IAdaptable) navigatorGroup.getParent())
+						.getAdapter(View.class);
 			}
 		}
 		if (navigatorView == null) {

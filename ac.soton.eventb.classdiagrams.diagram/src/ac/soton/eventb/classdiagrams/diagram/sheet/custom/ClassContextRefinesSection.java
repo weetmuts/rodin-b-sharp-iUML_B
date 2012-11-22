@@ -1,5 +1,6 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,11 +18,9 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
 
 public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	
@@ -42,7 +41,7 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	 * 
 	 * @return a new child instance.
 	 */
-	@SuppressWarnings("unchecked")
+
 	protected Object getNewChild() {
 		EObject container = EcoreUtil.getRootContainer(eObject);
 		String popupTitle = "no name";
@@ -86,17 +85,41 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 		List<EventBNamed> filteredList = new LinkedList<EventBNamed>();
 		
 		
-		//for every list element, check whether it is elaborated
+		//for every list element, check whether it is refined
 		for (EventBNamed eb : pValuesList){
 			
-			if (!ClassdiagramUtil.isRefined(pContainer, eb)){	
+			if (!isRefined(pContainer, eb)){	
 				filteredList.add((EventBNamed)eb);
 			}
 		}
-		
 		pValuesList.clear();
 		pValuesList.addAll(filteredList);
 	}
+	
+	public static boolean isRefined(EventBNamedCommentedComponentElement pContainer, EventBNamed pEventBNamed){
+		
+		Iterator<EObject> iter = pContainer.eAllContents(); 
+		EObject o;
+		Class ebn;
+		
+		while (iter.hasNext()){
+			o = iter.next();
+			
+			if (o instanceof Class && ((Class)o).getRefines() != null){
+				ebn = ((Class)o).getRefines();
+				
+				if ((ebn.getClass() == pEventBNamed.getClass()) &&
+					(ebn.getName() != null) &&	
+					(ebn.getName().equals(pEventBNamed.getName()))){
+					
+					return true;
+				}
+			}
+		}
+	
+	return false;
+}
+	
 
 	@Override
 	public void createControls(Composite parent,

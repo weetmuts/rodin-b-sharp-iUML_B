@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
+<!--
+Copyright (c) 2012 University of Southampton.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+-->
 <plugin>
 
    <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
       <?gmfgen generated="true"?>
-      <fileTypes type="text" extension="classdiagrams_diagram"/>
+      <fileTypes type="text" extension="cld"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
       <?gmfgen generated="true"?>
       <parser
-         type="classdiagrams_diagram"
+         type="cld"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -21,7 +28,7 @@
          id="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ClassdiagramsDiagramFile.gif"
-         extensions="classdiagrams_diagram"
+         extensions="cld"
          default="true"
          class="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor"
          matchingStrategy="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsMatchingStrategy"
@@ -55,7 +62,7 @@
       <?gmfgen generated="true"?>
       <objectContribution
             id="ac.soton.eventb.classdiagrams.diagram.InitDiagram"
-            nameFilter="*.classdiagrams"
+            nameFilter="*.bum"
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
@@ -87,6 +94,16 @@
          </ViewId>
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="ClassdiagramsPresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
          id="ClassdiagramsPresentationIDE">
          <Priority name="Lowest"/>
@@ -110,6 +127,30 @@
       </GlobalActionHandlerProvider>
    </extension>
 
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsMarkerNavigationProvider">
+         <MarkerType name="ac.soton.eventb.classdiagrams.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Classdiagrams Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
 
    <extension point="org.eclipse.core.runtime.preferences" id="prefs">
       <?gmfgen generated="true"?>
@@ -216,6 +257,10 @@
       <?gmfgen generated="true"?>
       <viewProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsViewProvider">
          <Priority name="Lowest"/>
+         <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
+            <method name="getType()" value="classdiagrams"/>
+         </object>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Classdiagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2002,3021"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4004"/>
@@ -267,6 +312,17 @@
       <ParserProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-top-nodes">
+            <method name="getType()" value="2002"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
@@ -351,6 +407,17 @@
        </propertyTester>
    </extension>
 
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isShortcut">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="ac.soton.eventb.classdiagrams.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="ac.soton.eventb.classdiagrams.diagram"
+           properties="isShortcut"
+           class="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
 	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
       <?gmfgen generated="true"?>
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
@@ -381,14 +448,20 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="classdiagrams_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="cld"/>
                </and>
                <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="ac.soton.eventb.classdiagrams.diagram.isShortcut"/>
+           	   </adapt>
             </or>
          </triggerPoints>
          <possibleChildren>
             <or>
          	   <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="ac.soton.eventb.classdiagrams.diagram.isShortcut"/>
+           	   </adapt>
             </or>
          </possibleChildren>
          <commonSorter 
@@ -398,7 +471,7 @@
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="classdiagrams_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="cld"/>
                   </and>
                   <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
                </or>
@@ -417,7 +490,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="classdiagrams"/>
+        	      <test property="org.eclipse.core.resources.extension" value="bum"/>
                </and>
                <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsDomainNavigatorItem"/>
             </or>
@@ -432,6 +505,9 @@
          <enablement>
             <or>
                <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="ac.soton.eventb.classdiagrams.diagram.isShortcut"/>
+           	   </adapt>
             </or>
          </enablement>
       </actionProvider>
@@ -566,7 +642,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.comment"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassTypePropertySection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.FilteredDataKindPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassFilter"
                id="property.section.classType"
@@ -574,7 +650,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.comment"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationTypePropertySection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.FilteredDataKindPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
                id="property.section.associationType"
@@ -582,7 +658,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.associationElaborates"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationSurjectiveRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
                id="property.section.associationSurjectiveRelationType"
@@ -590,7 +666,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.associationSurjectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationInjectiveRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindInjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
                id="property.section.associationInjectiveRelationType"
@@ -598,7 +674,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.associationInjectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationTotalRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindTotalSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
                id="property.section.associationTotalRelationType"
@@ -606,7 +682,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.associationTotalRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationFunctionalRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindFunctionalSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
                id="property.section.associationFunctionalRelationType"
@@ -638,7 +714,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.comment"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTypePropertySection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.FilteredDataKindPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeType"
@@ -646,7 +722,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.classAttributeSurjectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeInjectiveRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindInjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeInjectiveRelationType"
@@ -654,7 +730,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.classAttributeInjectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTotalRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindTotalSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeTotalRelationType"
@@ -662,7 +738,7 @@
          </propertySection>
          <propertySection
                afterSection="property.section.classAttributeTotalRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeFunctionalRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindFunctionalSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeFunctionalRelationType"
@@ -670,14 +746,14 @@
          </propertySection>
          <propertySection
                afterSection="property.section.classAttributeElaborates"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeSurjectiveRelationSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeSurjectiveRelationType"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
-               afterSection="property.section.classAttributeTarget"
+               afterSection="property.section.classAttributeSurjectiveRelationType"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTargetSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"

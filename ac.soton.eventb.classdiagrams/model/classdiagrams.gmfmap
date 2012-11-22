@@ -73,26 +73,38 @@
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern="{0}..{1}">
+        viewPattern="{0}..{1}"
+        editorPattern="{0}..{1}"
+        editPattern="{0}..{1}">
       <diagramLabel
           href="classdiagrams.gmfgraph#AssociationLabelSource"/>
       <features
-          href="classdiagrams.ecore#//AssociativeElement/surjective"/>
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/surjective"/>
       <features
-          href="classdiagrams.ecore#//AssociativeElement/injective"/>
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/injective"/>
+      <editableFeatures
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/surjective"/>
+      <editableFeatures
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/injective"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern="{0}..{1}">
+        viewPattern="{0}..{1}"
+        editorPattern="{0}..{1}"
+        editPattern="{0}..{1}">
       <diagramLabel
           href="classdiagrams.gmfgraph#AssociationLabelTarget"/>
       <features
-          href="classdiagrams.ecore#//AssociativeElement/functional"/>
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/total"/>
       <features
-          href="classdiagrams.ecore#//AssociativeElement/total"/>
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/functional"/>
+      <editableFeatures
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/total"/>
+      <editableFeatures
+          href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind/functional"/>
     </labelMappings>
     <containmentFeature
-        href="classdiagrams.ecore#//Classdiagram/classAssociations"/>
+        href="classdiagrams.ecore#//Classdiagram/associations"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="classdiagrams.gmftool#//@palette/@tools.2/@tools.0"/>

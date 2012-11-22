@@ -2,10 +2,10 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
-public class ClassAttributeFunctionalRelationSection extends AbstractEnumerationPropertySection {
+public class EventBRelationKindTotalSection extends AbstractEnumerationPropertySection {
 
 	
 	@Override
@@ -15,7 +15,7 @@ public class ClassAttributeFunctionalRelationSection extends AbstractEnumeration
 
 	@Override
 	protected boolean isEqual(String selection) {
-		return Boolean.toString(((ClassAttribute)(eObject)).isFunctional()).equals(selection);
+		return Boolean.toString(((EventBRelationKind)(eObject)).isTotal()).equals(selection);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class ClassAttributeFunctionalRelationSection extends AbstractEnumeration
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((ClassAttribute)(eObject)).isFunctional());
+		return Boolean.toString(((EventBRelationKind)(eObject)).isTotal());
 	}
 	
 	@Override
@@ -35,13 +35,11 @@ public class ClassAttributeFunctionalRelationSection extends AbstractEnumeration
 
 	@Override
 	protected String getLabelText() {
-		return "Functional:";
+		return "Total:";
 	}
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
+		return CoreextensionPackage.Literals.EVENT_BRELATION_KIND__TOTAL;
 	}
-
-
 }

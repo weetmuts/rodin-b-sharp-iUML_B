@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import org.eclipse.core.runtime.Platform;
@@ -110,7 +117,8 @@ public class ClassdiagramsVisualIDRegistry {
 		}
 		String containerModelID = ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry
 				.getModelID(containerView);
-		if (!ClassdiagramEditPart.MODEL_ID.equals(containerModelID)) {
+		if (!ClassdiagramEditPart.MODEL_ID.equals(containerModelID)
+				&& !"classdiagrams".equals(containerModelID)) { //$NON-NLS-1$
 			return -1;
 		}
 		int containerVisualID;
@@ -147,7 +155,8 @@ public class ClassdiagramsVisualIDRegistry {
 	public static boolean canCreateNode(View containerView, int nodeVisualID) {
 		String containerModelID = ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry
 				.getModelID(containerView);
-		if (!ClassdiagramEditPart.MODEL_ID.equals(containerModelID)) {
+		if (!ClassdiagramEditPart.MODEL_ID.equals(containerModelID)
+				&& !"classdiagrams".equals(containerModelID)) { //$NON-NLS-1$
 			return false;
 		}
 		int containerVisualID;

@@ -8,23 +8,21 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eventb.emf.core.EventBCommented;
 
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl;
 
 /**
- * Comment property section for EventBCommented.
+ * Type property section for Class Attributes.
  * 
- * @author vitaly
+ * @author gintautas
  *
  */
 public class ClassAttributeTargetSection extends AbstractTextPropertySection {
 
 	@Override
 	protected String getPropertyNameLabel() {
-		return "Target:";
+		return "Type:";
 	}
 
 	@Override
@@ -41,7 +39,7 @@ public class ClassAttributeTargetSection extends AbstractTextPropertySection {
 
 	@Override
 	protected String getPropertyChangeCommandName() {
-		return "change target";
+		return "change type";
 	}
 
 	

@@ -1,8 +1,16 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.edit.parts;
 
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
@@ -616,6 +624,7 @@ public class ClassAttributeEditPart extends CompartmentEditPart implements
 		 */
 		public AttributeFigure() {
 			this.setText("");
+			this.setBackgroundColor(ColorConstants.lightGray);
 		}
 
 	}

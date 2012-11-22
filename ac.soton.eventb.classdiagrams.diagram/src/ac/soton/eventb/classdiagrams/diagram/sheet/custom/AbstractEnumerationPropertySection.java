@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
 
 /**

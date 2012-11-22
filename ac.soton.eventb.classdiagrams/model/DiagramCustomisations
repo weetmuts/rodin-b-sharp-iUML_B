@@ -1,13 +1,216 @@
-icons/full/obj/ClassDiagramFile			changed icon from default
+**********************************************************************************************
+* changed diagram icon from default
+**********************************************************************************************
+icons/full/obj/ClassDiagramFile			
 
-plugin.xml							added custom properties sheets
+**********************************************************************************************
+* In, manifest.mf added dependencies 
+**********************************************************************************************
+ ac.soton.eventb.emf.core.extension;bundle-version="1.1.2",
+ org.eventb.emf.persistence;bundle-version="2.3.2",
+ org.rodinp.keyboard;bundle-version="1.1.2",
+ ac.soton.eventb.emf.diagrams.generator;bundle-version="2.1.0"
+ 
+**********************************************************************************************
+* In, plugin.xml added custom properties sheets 
+**********************************************************************************************
+<!--**************************************************-->
+<!-- END OF GENERATED - REMAINDER IS CUSTOM ADDITIONS -->
+<!--**************************************************-->
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="false"?>   
+      <propertyTabs contributorId="ac.soton.eventb.classdiagrams.diagram">
+          <propertyTab
+                category="domain"
+                id="property.tab.overview"
+                label="Overview">
+          </propertyTab>
+      </propertyTabs>
+   </extension>
+   
+      <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="false"?>   
+      <propertySections contributorId="ac.soton.eventb.classdiagrams.diagram">
+         <propertySection
+               afterSection="property.section.attributeType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.comment"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.NamePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$NamedElementFilter"
+               id="property.section.name"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.LabelPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$LabeledElementFilter"
+               id="property.section.label"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassFilter"
+               id="property.section.eclassElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.comment"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassFilter"
+               id="property.section.classType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.comment"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationElaborates"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationSurjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationSurjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationSurjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationInjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationInjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationInjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationTotalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationTotalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationTotalRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationFunctionalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$AssociationFilter"
+               id="property.section.associationFunctionalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationTotalRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassMachineRefinesSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$MachineClassFilter"
+               id="property.section.classMachineRefinesSection"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.associationTotalRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassContextRefinesSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ContextClassFilter"
+               id="property.section.classContextRefinesSection"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeElaboratesSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeElaborates"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.comment"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTypePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeSurjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeInjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeInjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeInjectiveRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTotalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeTotalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeTotalRelationType"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeFunctionalRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeFunctionalRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeElaborates"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeSurjectiveRelationSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeSurjectiveRelationType"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classAttributeTarget"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTargetSection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
+               id="property.section.classAttributeTarget"
+               tab="property.tab.overview">
+         </propertySection>
+      </propertySections>
+   </extension>
 
-Package=ac.soton.eventb.classdiagrams.diagram.edit.commands/
+**********************************************************************************************
+* Package=ac.soton.eventb.classdiagrams.diagram.sheet.custom 
+**********************************************************************************************
+This is a completely new package containing the property sheet code.
+Do not delete this section when regenerating.
 
-The following creation commands are modified to dynamically decide the default association type depending on the 
-Root container type.
+
+**********************************************************************************************
+* Package=ac.soton.eventb.classdiagrams.diagram.edit.commands/ 
+**********************************************************************************************
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ The following creation commands are modified to dynamically decide the default association +
++ type depending on the Root container type.                                                 +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Class=AssociationCreateCommand
+------------------------------
 
 	/**
 	 * @generated NOT
@@ -21,14 +224,14 @@ Class=AssociationCreateCommand
 
 		Association newElement = ClassdiagramsFactory.eINSTANCE
 				.createAssociation();
-++++
+//+++
 		if (EcoreUtil.getRootContainer(getContainer()) instanceof Context) {
-			newElement.setAssociationType(AssociationType.CONSTANT);
+			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
-			newElement.setAssociationType(AssociationType.VARIABLE);
+			newElement.setDataKind(DataKind.VARIABLE);
 		}
-----
-		getContainer().getClassAssociations().add(newElement);
+//+++
+		getContainer().getAssociations().add(newElement);
 		newElement.setSource(getSource());
 		newElement.setTarget(getTarget());
 		doConfigure(newElement, monitor, info);
@@ -37,9 +240,8 @@ Class=AssociationCreateCommand
 
 	}
 
-
 Class=ClassAttributeCreateCommand
-
+------------------------------
 
 	/**
 	 * @generated NOT
@@ -50,13 +252,15 @@ Class=ClassAttributeCreateCommand
 				.createClassAttribute();
 
 		Class owner = (Class) getElementToEdit();
-
+	
+//+++
 		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
-			newElement.setAssociationType(AssociationType.CONSTANT);
+			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
-			newElement.setAssociationType(AssociationType.VARIABLE);
+			newElement.setDataKind(DataKind.VARIABLE);
 		}
-
+//+++
+	
 		owner.getClassAttributes().add(newElement);
 
 		doConfigure(newElement, monitor, info);
@@ -65,7 +269,9 @@ Class=ClassAttributeCreateCommand
 		return CommandResult.newOKCommandResult(newElement);
 	}
 
+
 Class=ClassCreateCommand
+------------------------------
 
 	/**
 	 * @generated NOT
@@ -75,13 +281,15 @@ Class=ClassCreateCommand
 		Class newElement = ClassdiagramsFactory.eINSTANCE.createClass();
 
 		Classdiagram owner = (Classdiagram) getElementToEdit();
-
+	
+//+++
 		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
-			newElement.setClassType(ClassType.SET);
+			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
-			newElement.setClassType(ClassType.VARIABLE);
+			newElement.setDataKind(DataKind.VARIABLE);
 		}
-
+//+++
+	
 		owner.getClasses().add(newElement);
 
 		doConfigure(newElement, monitor, info);
@@ -89,32 +297,43 @@ Class=ClassCreateCommand
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
 		return CommandResult.newOKCommandResult(newElement);
 	}
-
-Package=ac.soton.eventb.classdiagrams.diagram.edit.parts
-Class=ClassEditPart
-
-Added override of notification handler
 	
-	static final Color NOT_GENERATED = ColorConstants.lightBlue;
+	
+**********************************************************************************************
+* Package=ac.soton.eventb.classdiagrams.diagram.edit.parts
+**********************************************************************************************
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ In Class=ClassEditPart,
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Added override of notification handler and refresh to update colour depending on           +
++ elaborates and refines
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+
+
+	/**
+	 * CUSTOM SECTION
+	 * Override notification and refresh to update background colour depending on elaborates and refines
+	 */
+	
 	static final Color REFINED = ColorConstants.white;
-	static final Color ELABORATED = ColorConstants.green;
+	static final Color VISUALIZES = ColorConstants.lightBlue;
+	static final Color DEFINES = ColorConstants.green;
+	static final Color NOT_ELABORATED = ColorConstants.yellow;
 	
 	protected void handleNotificationEvent(Notification event) {
-		// update background color when refines property changed
-		if (ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())
-				|| ClassdiagramsPackage.eINSTANCE.getClass_Refines().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(REFINED);
-		} else if (ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())
-				|| ClassdiagramsPackage.eINSTANCE.getElaborativeElement_Elaborates().equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(NOT_GENERATED);
-			else
-				setBackgroundColor(ELABORATED);
+		// update background colour when refines property changed
+		if (ClassdiagramsPackage.Literals.CLASS__REFINES.equals(event.getFeature())) {
+			if (event.getNewValue() == null){
+				setBackground(getElaborates(), false );
+			}else{
+				setBackground(getElaborates(), true );
+			}
+		// update background colour when elaborates property changed
+		} else if (CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES.equals(event.getFeature())) {
+			setBackground(event.getNewValue(), isRefines());
 		} else {
-				setBackgroundColor(NOT_GENERATED);
+			//do nothing
 		}
 		
 		if (event.getNotifier() == getModel()
@@ -125,13 +344,66 @@ Added override of notification handler
 			super.handleNotificationEvent(event);
 		}
 	}
-
-
-
-package=ac.soton.eventb.classdiagrams.diagram.parsers
-class=AbstractParser
-
-translates association multiplicity into surjective/injective/functional/total
+	
+	private void setBackground(){
+		setBackground(getElaborates(), isRefines());
+	}
+	
+	private void setBackground(Object elabs, boolean refines){
+		if (refines){
+			setBackgroundColor(REFINED);			
+		}else{
+			if (elabs instanceof EventBElement){
+				if (Is.generatedBy(elabs,getModelElement())){
+						//((EventBElement) elabs).isLocalGenerated()){
+					setBackgroundColor(DEFINES);
+				}else{
+					setBackgroundColor(VISUALIZES);
+				}
+			}else{
+				setBackgroundColor(NOT_ELABORATED);
+			}
+		}
+	}
+	
+	private Object getElaborates(){
+		Object element = getModelElement();
+		if (element instanceof Class){
+			return ((Class)element).getElaborates();	
+		}
+		return null;
+	}
+	
+	private boolean isRefines(){
+		Object element = getModelElement();
+		if (element instanceof Class){
+			return ((Class)element).getRefines()!=null;	
+		}
+		return false;
+	}
+	
+	private Object getModelElement(){
+		Object model = getModel();
+		if (model instanceof Node){
+			return ((Node)model).getElement();
+		}
+		return null;
+	}
+	
+	@Override
+	public void refresh(){
+		super.refresh();
+		setBackground();
+	}
+	
+**********************************************************************************************
+* package=ac.soton.eventb.classdiagrams.diagram.parsers
+**********************************************************************************************
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ class=AbstractParser
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ translates association multiplicity into surjective/injective/functional/total
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	/**
 	 * @generated NOT
@@ -143,9 +415,9 @@ translates association multiplicity into surjective/injective/functional/total
 			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
 		} else if (feature.getName().equals("injective")) {
 			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
-		} else if (feature.getName().equals("functional")) {
-			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
 		} else if (feature.getName().equals("total")) {
+			value = ((Boolean) element.eGet(feature)) ? "1" : "0";
+		} else if (feature.getName().equals("functional")) {
 			value = ((Boolean) element.eGet(feature)) ? "1" : "n";
 		} else {
 			value = element.eGet(feature);

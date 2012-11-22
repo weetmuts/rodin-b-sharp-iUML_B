@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import java.util.Collection;
@@ -29,6 +36,14 @@ import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes
  * @generated
  */
 public class ClassdiagramsDiagramUpdater {
+
+	/**
+	 * @generated
+	 */
+	public static boolean isShortcutOrphaned(View view) {
+		return !view.isSetElement() || view.getElement() == null
+				|| view.getElement().eIsProxy();
+	}
 
 	/**
 	 * @generated
@@ -247,7 +262,7 @@ public class ClassdiagramsDiagramUpdater {
 	private static Collection<ClassdiagramsLinkDescriptor> getContainedTypeModelFacetLinks_Association_4001(
 			Classdiagram container) {
 		LinkedList<ClassdiagramsLinkDescriptor> result = new LinkedList<ClassdiagramsLinkDescriptor>();
-		for (Iterator<?> links = container.getClassAssociations().iterator(); links
+		for (Iterator<?> links = container.getAssociations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof Association) {
@@ -335,7 +350,7 @@ public class ClassdiagramsDiagramUpdater {
 			return Collections.emptyList();
 		}
 		LinkedList<ClassdiagramsLinkDescriptor> result = new LinkedList<ClassdiagramsLinkDescriptor>();
-		for (Iterator<?> links = container.getClassAssociations().iterator(); links
+		for (Iterator<?> links = container.getAssociations().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof Association) {

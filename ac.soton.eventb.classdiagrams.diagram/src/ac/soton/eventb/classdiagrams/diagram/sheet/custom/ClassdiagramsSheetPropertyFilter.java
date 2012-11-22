@@ -1,22 +1,17 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.IFilter;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
 
 public class ClassdiagramsSheetPropertyFilter {
 	/*
@@ -27,37 +22,12 @@ public class ClassdiagramsSheetPropertyFilter {
 	 */
 
 	/**
-	 * Unwraps eobject from passed diagram object.
-	 * 
-	 * @param object
-	 * @return
-	 */
-	public static EObject unwrap(Object object) {
-		if (object instanceof EObject)
-			return (EObject) object;
-		if (object instanceof EditPart) {
-			Object model = ((EditPart) object).getModel();
-			return model instanceof View ? ((View) model).getElement() : null;
-		}
-		if (object instanceof View) {
-			return ((View) object).getElement();
-		}
-		if (object instanceof IAdaptable) {
-			View view = (View) ((IAdaptable) object).getAdapter(View.class);
-			if (view != null) {
-				return view.getElement();
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Filter for properties of named element.
 	 */
 	public static final class NamedElementFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBNamed;
+			return DiagramsUtil.unwrap(toTest) instanceof EventBNamed;
 		}
 	}
 
@@ -67,7 +37,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class LabeledElementFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBLabeled;
+			return DiagramsUtil.unwrap(toTest) instanceof EventBLabeled;
 		}
 	}
 
@@ -77,7 +47,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class CommentedElementFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBCommented;
+			return DiagramsUtil.unwrap(toTest) instanceof EventBCommented;
 		}
 	}
 
@@ -87,7 +57,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class ClassFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof Class;
+			return DiagramsUtil.unwrap(toTest) instanceof Class;
 		}
 	}
 
@@ -97,7 +67,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class AssociationFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof Association;
+			return DiagramsUtil.unwrap(toTest) instanceof Association;
 		}
 	}
 	
@@ -107,7 +77,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class ClassAttributeFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof ClassAttribute;
+			return DiagramsUtil.unwrap(toTest) instanceof ClassAttribute;
 		}
 	}
 	
@@ -117,7 +87,7 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class ElaborativeElement implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof Class;
+			return DiagramsUtil.unwrap(toTest) instanceof Class;
 		}
 	}
 	
@@ -127,8 +97,8 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class ContextClassFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			if ((unwrap(toTest) instanceof Class) &&
-					(EcoreUtil.getRootContainer(unwrap(toTest)) instanceof Context ) ) {
+			if (( DiagramsUtil.unwrap(toTest) instanceof Class) &&
+					(EcoreUtil.getRootContainer( DiagramsUtil.unwrap(toTest)) instanceof Context ) ) {
 				return true;
 			} else {
 				return false;
@@ -142,8 +112,8 @@ public class ClassdiagramsSheetPropertyFilter {
 	public static final class MachineClassFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
-			if ((unwrap(toTest) instanceof Class) &&
-					(EcoreUtil.getRootContainer(unwrap(toTest)) instanceof Machine ) ) {
+			if (( DiagramsUtil.unwrap(toTest) instanceof Class) &&
+					(EcoreUtil.getRootContainer( DiagramsUtil.unwrap(toTest)) instanceof Machine ) ) {
 				return true;
 			} else {
 				return false;

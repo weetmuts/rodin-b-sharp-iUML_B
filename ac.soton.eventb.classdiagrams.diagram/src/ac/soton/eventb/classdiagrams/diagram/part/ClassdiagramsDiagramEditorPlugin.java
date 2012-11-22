@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import java.util.ArrayList;
@@ -28,6 +35,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsBaseItem
 import ac.soton.eventb.classdiagrams.diagram.expressions.ClassdiagramsOCLFactory;
 import ac.soton.eventb.classdiagrams.diagram.providers.ElementInitializers;
 import ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory;
+import ac.soton.eventb.emf.core.extension.coreextension.provider.CoreextensionItemProviderAdapterFactory;
 import ac.soton.eventb.emf.diagrams.provider.DiagramsItemProviderAdapterFactory;
 
 /**
@@ -132,6 +140,7 @@ public class ClassdiagramsDiagramEditorPlugin extends AbstractUIPlugin {
 		factories.add(new CoreItemProviderAdapterFactory());
 		factories.add(new MachineItemProviderAdapterFactory());
 		factories.add(new ContextItemProviderAdapterFactory());
+		factories.add(new CoreextensionItemProviderAdapterFactory());
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
 	}

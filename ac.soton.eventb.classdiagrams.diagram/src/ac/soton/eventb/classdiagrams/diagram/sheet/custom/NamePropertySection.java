@@ -7,9 +7,6 @@
  */
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import javax.swing.text.StyleConstants.ColorConstants;
-import javax.xml.soap.Text;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.events.ModifyEvent;
@@ -17,14 +14,13 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBNamedCommentedElement;
 
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 /**
  * Name property section for EventBNamed.
  * 
- * @author vitaly
+ * @author gintautas
  *
  */
 public class NamePropertySection extends AbstractTextPropertySection {
@@ -45,8 +41,8 @@ public class NamePropertySection extends AbstractTextPropertySection {
 				
 				EventBNamed ebn = (EventBNamed) eObject;
 				
-				if (ebn instanceof ElaborativeElement){
-					ElaborativeElement ee = (ElaborativeElement)ebn;
+				if (ebn instanceof EventBDataElaboration){
+					EventBDataElaboration ee = (EventBDataElaboration)ebn;
 					if (ee.getElaborates() != null){
 //						ebn.setName(ee.getElaborates().getName());
 						getTextWidget().setEditable(false);
@@ -89,7 +85,7 @@ public class NamePropertySection extends AbstractTextPropertySection {
 		// TODO Auto-generated method stub
 		super.refresh();
 		
-		if (eObject instanceof ElaborativeElement && ((ElaborativeElement) eObject).getElaborates() != null){
+		if (eObject instanceof EventBDataElaboration && ((EventBDataElaboration) eObject).getElaborates() != null){
 			getTextWidget().setForeground(org.eclipse.draw2d.ColorConstants.gray);
 			getTextWidget().setEnabled(false);
 		} else {

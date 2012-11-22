@@ -2,22 +2,30 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel">
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" diagramFileExtension="cld"
+    domainFileExtension="bum"
+    templateDirectory=""
+    copyrightText="Copyright (c) 2012 University of Southampton.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html">
   <diagram
       visualID="1000"
       editPartClassName="ClassdiagramEditPart"
       itemSemanticEditPolicyClassName="ClassdiagramItemSemanticEditPolicy"
       canonicalEditPolicyClassName="ClassdiagramCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low">
+      validationProviderPriority="Low"
+      validationEnabled="true"
+      validationDecorators="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
         xsi:type="gmfgen:MetamodelType"
+        displayName="Classdiagram"
         editHelperClassName="ClassdiagramEditHelper"/>
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
+    <containsShortcutsTo>bum</containsShortcutsTo>
+    <shortcutsProvidedFor>classdiagrams</shortcutsProvidedFor>
     <domainDiagramElement
         href="classdiagrams.genmodel#//classdiagrams/Classdiagram"/>
     <childNodes
@@ -40,7 +48,11 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="AttributeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class AttributeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public AttributeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;&quot;);&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class AttributeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public AttributeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;&quot;);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="classdiagrams.genmodel#//classdiagrams/ClassAttribute"/>
@@ -78,7 +90,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="ClassFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ClassFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureClassAttributesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureClassLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ClassFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGreen);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureClassLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureClassLabelFigure.setText(&quot;ClassName&quot;);&#xA;&#xA;this.add(fFigureClassLabelFigure);&#xA;&#xA;&#xA;&#xA;fFigureClassAttributesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureClassAttributesCompartmentFigure.setFill(false);&#xA;fFigureClassAttributesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureClassAttributesCompartmentFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureClassAttributesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureClassAttributesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureClassLabelFigure() {&#xA;&#x9;&#x9;return fFigureClassLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ClassFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureClassAttributesCompartmentFigure; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureClassLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ClassFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureClassLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureClassLabelFigure.setText(&quot;ClassName&quot;);&#xA;&#xA;this.add(fFigureClassLabelFigure);&#xA;&#xA;&#xA;&#xA;fFigureClassAttributesCompartmentFigure = new org.eclipse.draw2d.RectangleFigure();&#xA;fFigureClassAttributesCompartmentFigure.setFill(false);&#xA;fFigureClassAttributesCompartmentFigure.setOutline(false);&#xA;&#xA;this.add(fFigureClassAttributesCompartmentFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureClassAttributesCompartmentFigure() {&#xA;&#x9;&#x9;return fFigureClassAttributesCompartmentFigure;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureClassLabelFigure() {&#xA;&#x9;&#x9;return fFigureClassLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedBackground="true"/>
@@ -95,7 +107,8 @@
           visualID="5006"
           editPartClassName="ClassNameEditPart"
           itemSemanticEditPolicyClassName="ClassNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="ClassNameViewFactory">
+          notationViewFactoryClassName="ClassNameViewFactory"
+          elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -127,7 +140,7 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="AssociationFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class AssociationFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationSource; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationLabelTarget; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public AssociationFigure() {&#xA;&#x9;&#x9;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureAssociationLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureAssociationLabelFigure);&#xA;&#xA;&#xA;&#xA;fFigureAssociationSource = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationSource.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureAssociationSource);&#xA;&#xA;&#xA;&#xA;fFigureAssociationLabelTarget = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationLabelTarget.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureAssociationLabelTarget);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setFill(false);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationSource() {&#xA;&#x9;&#x9;return fFigureAssociationSource;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationLabelTarget() {&#xA;&#x9;&#x9;return fFigureAssociationLabelTarget;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationLabelFigure() {&#xA;&#x9;&#x9;return fFigureAssociationLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class AssociationFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationSource; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationLabelTarget; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureAssociationLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public AssociationFigure() {&#xA;&#x9;&#x9;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureAssociationLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationLabelFigure.setText(&quot;&quot;);&#xA;&#x9;fFigureAssociationLabelFigure.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);&#xA;&#xA;this.add(fFigureAssociationLabelFigure);&#xA;&#xA;&#xA;&#xA;fFigureAssociationSource = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationSource.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureAssociationSource);&#xA;&#xA;&#xA;&#xA;fFigureAssociationLabelTarget = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureAssociationLabelTarget.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureAssociationLabelTarget);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;df.setFill(false);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationSource() {&#xA;&#x9;&#x9;return fFigureAssociationSource;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationLabelTarget() {&#xA;&#x9;&#x9;return fFigureAssociationLabelTarget;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureAssociationLabelFigure() {&#xA;&#x9;&#x9;return fFigureAssociationLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"/>
@@ -137,9 +150,9 @@
         <metaClass
             href="classdiagrams.genmodel#//classdiagrams/Association"/>
         <containmentMetaFeature
-            href="classdiagrams.genmodel#//classdiagrams/Classdiagram/classAssociations"/>
+            href="classdiagrams.genmodel#//classdiagrams/Classdiagram/associations"/>
         <childMetaFeature
-            href="classdiagrams.genmodel#//classdiagrams/Classdiagram/classAssociations"/>
+            href="classdiagrams.genmodel#//classdiagrams/Classdiagram/associations"/>
         <sourceMetaFeature
             href="classdiagrams.genmodel#//classdiagrams/Association/source"/>
         <targetMetaFeature
@@ -149,7 +162,8 @@
           visualID="6001"
           editPartClassName="AssociationNameEditPart"
           itemSemanticEditPolicyClassName="AssociationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="AssociationNameViewFactory">
+          notationViewFactoryClassName="AssociationNameViewFactory"
+          elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -157,9 +171,12 @@
             getterName="getFigureAssociationLabelFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedBackground="true"/>
+          <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              x="-8"
-              y="-8"/>
+              x="-5"
+              y="-5"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
@@ -174,7 +191,8 @@
           visualID="6002"
           editPartClassName="AssociationSurjectiveInjectiveEditPart"
           itemSemanticEditPolicyClassName="AssociationSurjectiveInjectiveItemSemanticEditPolicy"
-          notationViewFactoryClassName="AssociationSurjectiveInjectiveViewFactory">
+          notationViewFactoryClassName="AssociationSurjectiveInjectiveViewFactory"
+          alignment="SOURCE">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -183,23 +201,31 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              y="60"/>
+              x="8"
+              y="5"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
-            viewPattern="{0}..{1}">
+            viewPattern="{0}..{1}"
+            editorPattern="{0}..{1}"
+            editPattern="{0}..{1}">
           <metaFeatures
-              href="classdiagrams.genmodel#//classdiagrams/AssociativeElement/surjective"/>
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/surjective"/>
           <metaFeatures
-              href="classdiagrams.genmodel#//classdiagrams/AssociativeElement/injective"/>
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/injective"/>
+          <editableMetaFeatures
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/surjective"/>
+          <editableMetaFeatures
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/injective"/>
         </modelFacet>
       </labels>
       <labels
           visualID="6003"
           editPartClassName="AssociationFunctionalTotalEditPart"
           itemSemanticEditPolicyClassName="AssociationFunctionalTotalItemSemanticEditPolicy"
-          notationViewFactoryClassName="AssociationFunctionalTotalViewFactory">
+          notationViewFactoryClassName="AssociationFunctionalTotalViewFactory"
+          alignment="TARGET">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -208,16 +234,23 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              y="80"/>
+              x="8"
+              y="-5"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             parser="//@labelParsers/@implementations.0"
-            viewPattern="{0}..{1}">
+            viewPattern="{0}..{1}"
+            editorPattern="{0}..{1}"
+            editPattern="{0}..{1}">
           <metaFeatures
-              href="classdiagrams.genmodel#//classdiagrams/AssociativeElement/functional"/>
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/total"/>
           <metaFeatures
-              href="classdiagrams.genmodel#//classdiagrams/AssociativeElement/total"/>
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/functional"/>
+          <editableMetaFeatures
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/total"/>
+          <editableMetaFeatures
+              href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.genmodel#//coreextension/EventBRelationKind/functional"/>
         </modelFacet>
       </labels>
     </links>
@@ -268,7 +301,7 @@
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Class"
-            description=""
+            description="Create a new class"
             genNodes="//@diagram/@topLevelNodes.0"/>
       </groups>
       <groups
@@ -277,7 +310,7 @@
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Attribute"
-            description=""
+            description="Add an new attribute to a class"
             genNodes="//@diagram/@childNodes.0"/>
       </groups>
       <groups
@@ -286,11 +319,12 @@
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Association"
+            description="Add a new association from one class to another"
             genLinks="//@diagram/@links.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Supertype"
-            description=""
+            description="Add a new supertype relation from one class to another"
             largeIconPath="/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif"
             smallIconPath="/ac.soton.eventb.classdiagrams.edit/icons/full/obj16/Supertype.gif"
             genLinks="//@diagram/@links.1"/>
@@ -322,7 +356,9 @@
           kind="RulersAndGrid"/>
     </preferencePages>
   </diagram>
-  <plugin>
+  <plugin
+      provider="University of Southampton"
+      printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>

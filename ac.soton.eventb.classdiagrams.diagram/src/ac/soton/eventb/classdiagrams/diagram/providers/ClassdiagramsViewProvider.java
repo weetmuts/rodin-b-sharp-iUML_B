@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.providers;
 
 import java.util.ArrayList;
@@ -366,8 +373,8 @@ public class ClassdiagramsViewProvider extends AbstractProvider implements
 		label6001.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
 		Location location6001 = (Location) label6001.getLayoutConstraint();
-		location6001.setX(-8);
-		location6001.setY(-8);
+		location6001.setX(-5);
+		location6001.setY(-5);
 		Node label6002 = createLabel(
 				edge,
 				ClassdiagramsVisualIDRegistry
@@ -375,16 +382,16 @@ public class ClassdiagramsViewProvider extends AbstractProvider implements
 		label6002.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
 		Location location6002 = (Location) label6002.getLayoutConstraint();
-		location6002.setX(0);
-		location6002.setY(60);
+		location6002.setX(8);
+		location6002.setY(5);
 		Node label6003 = createLabel(edge,
 				ClassdiagramsVisualIDRegistry
 						.getType(AssociationFunctionalTotalEditPart.VISUAL_ID));
 		label6003.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
 		Location location6003 = (Location) label6003.getLayoutConstraint();
-		location6003.setX(0);
-		location6003.setY(80);
+		location6003.setX(8);
+		location6003.setY(-5);
 		return edge;
 	}
 

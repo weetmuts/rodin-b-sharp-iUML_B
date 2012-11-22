@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.providers;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -22,6 +29,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassNameEditPart;
 import ac.soton.eventb.classdiagrams.diagram.parsers.MessageFormatParser;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 /**
  * @generated
@@ -107,11 +115,17 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 	private IParser getAssociationSurjectiveInjective_6002Parser() {
 		if (associationSurjectiveInjective_6002Parser == null) {
 			EAttribute[] features = new EAttribute[] {
-					ClassdiagramsPackage.eINSTANCE
-							.getAssociativeElement_Surjective(),
-					ClassdiagramsPackage.eINSTANCE
-							.getAssociativeElement_Injective() };
-			MessageFormatParser parser = new MessageFormatParser(features);
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Surjective(),
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Injective() };
+			EAttribute[] editableFeatures = new EAttribute[] {
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Surjective(),
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Injective() };
+			MessageFormatParser parser = new MessageFormatParser(features,
+					editableFeatures);
 			parser.setViewPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditorPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditPattern("{0}..{1}"); //$NON-NLS-1$
@@ -123,25 +137,31 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser associationFunctionalTotal_6003Parser;
+	private IParser associationTotalFunctional_6003Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getAssociationFunctionalTotal_6003Parser() {
-		if (associationFunctionalTotal_6003Parser == null) {
+	private IParser getAssociationTotalFunctional_6003Parser() {
+		if (associationTotalFunctional_6003Parser == null) {
 			EAttribute[] features = new EAttribute[] {
-					ClassdiagramsPackage.eINSTANCE
-							.getAssociativeElement_Functional(),
-					ClassdiagramsPackage.eINSTANCE
-							.getAssociativeElement_Total() };
-			MessageFormatParser parser = new MessageFormatParser(features);
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Total(),
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Functional() };
+			EAttribute[] editableFeatures = new EAttribute[] {
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Total(),
+					CoreextensionPackage.eINSTANCE
+							.getEventBRelationKind_Functional() };
+			MessageFormatParser parser = new MessageFormatParser(features,
+					editableFeatures);
 			parser.setViewPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditorPattern("{0}..{1}"); //$NON-NLS-1$
 			parser.setEditPattern("{0}..{1}"); //$NON-NLS-1$
-			associationFunctionalTotal_6003Parser = parser;
+			associationTotalFunctional_6003Parser = parser;
 		}
-		return associationFunctionalTotal_6003Parser;
+		return associationTotalFunctional_6003Parser;
 	}
 
 	/**
@@ -158,7 +178,7 @@ public class ClassdiagramsParserProvider extends AbstractProvider implements
 		case AssociationSurjectiveInjectiveEditPart.VISUAL_ID:
 			return getAssociationSurjectiveInjective_6002Parser();
 		case AssociationFunctionalTotalEditPart.VISUAL_ID:
-			return getAssociationFunctionalTotal_6003Parser();
+			return getAssociationTotalFunctional_6003Parser();
 		}
 		return null;
 	}

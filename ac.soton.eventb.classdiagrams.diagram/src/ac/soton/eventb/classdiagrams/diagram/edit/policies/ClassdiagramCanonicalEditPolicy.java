@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.edit.policies;
 
 import java.util.ArrayList;
@@ -82,6 +89,9 @@ public class ClassdiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 	 */
 	protected boolean isOrphaned(Collection<EObject> semanticChildren,
 			final View view) {
+		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
+			return ClassdiagramsDiagramUpdater.isShortcutOrphaned(view);
+		}
 		return isMyDiagramElement(view)
 				&& !semanticChildren.contains(view.getElement());
 	}
@@ -111,6 +121,9 @@ public class ClassdiagramCanonicalEditPolicy extends CanonicalEditPolicy {
 		for (View v : getViewChildren()) {
 			if (isMyDiagramElement(v)) {
 				knownViewChildren.add(v);
+			}
+			if (v.getEAnnotation("Shortcut") != null && ClassdiagramsDiagramUpdater.isShortcutOrphaned(v)) { //$NON-NLS-1$
+				orphaned.add(v);
 			}
 		}
 		// alternative to #cleanCanonicalSemanticChildren(getViewChildren(), semanticChildren)

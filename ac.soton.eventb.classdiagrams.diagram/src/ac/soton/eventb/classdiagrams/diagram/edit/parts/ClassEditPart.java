@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.edit.parts;
 
 import java.util.ArrayList;
@@ -36,14 +43,15 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.eventb.emf.core.EventBElement;
 
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.diagrams.generator.utils.Is;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
 
 /**
  * @generated
@@ -367,6 +375,22 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
+	 * @generated NOT
+	 */
+	protected void handleNotificationEvent(Notification event) {
+//+++
+		setBackground(event);		//additions handled here
+//+++
+		if (event.getNotifier() == getModel()
+				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
+						.equals(event.getFeature())) {
+			handleMajorSemanticChange();
+		} else {
+			super.handleNotificationEvent(event);
+		}
+	}
+
+	/**
 	 * @generated
 	 */
 	public class ClassFigure extends RoundedRectangle {
@@ -386,7 +410,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 		public ClassFigure() {
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
-			this.setBackgroundColor(ColorConstants.lightGreen);
+			this.setBackgroundColor(ColorConstants.lightGray);
 			createContents();
 		}
 
@@ -426,35 +450,29 @@ public class ClassEditPart extends ShapeNodeEditPart {
 
 	/**
 	 * CUSTOM SECTION
-	 * Override notification and refresh to update background colour depending on elaborates and refines
+	 * Override refresh to update background colour depending on elaborates and refines
 	 */
 	
-	static final Color REFINED = ColorConstants.white;
-	static final Color VISUALIZES = ColorConstants.lightBlue;
-	static final Color DEFINES = ColorConstants.green;
-	static final Color NOT_ELABORATED = ColorConstants.yellow;
+	@Override
+	public void refresh(){
+		super.refresh();
+		setBackground();
+	}
 	
-	protected void handleNotificationEvent(Notification event) {
+	static final Color REFINED = ColorConstants.white;
+	static final Color VISUALIZES = new Color(null, 255, 255, 200); //light yellow;
+	static final Color DEFINES = new Color(null, 200, 255, 200); //light green;
+	static final Color NOT_ELABORATED = new Color(null, 245, 255, 245); //very light green;
+	
+	private void setBackground(Notification event) {
 		// update background colour when refines property changed
 		if (ClassdiagramsPackage.Literals.CLASS__REFINES.equals(event.getFeature())) {
-			if (event.getNewValue() == null){
-				setBackground(getElaborates(), false );
-			}else{
-				setBackground(getElaborates(), true );
-			}
+			setBackground(getElaborates(), event.getNewValue()!=null );
 		// update background colour when elaborates property changed
 		} else if (CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES.equals(event.getFeature())) {
 			setBackground(event.getNewValue(), isRefines());
 		} else {
 			//do nothing
-		}
-		
-		if (event.getNotifier() == getModel()
-				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
-						.equals(event.getFeature())) {
-			handleMajorSemanticChange();
-		} else {
-			super.handleNotificationEvent(event);
 		}
 	}
 	
@@ -467,8 +485,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 			setBackgroundColor(REFINED);			
 		}else{
 			if (elabs instanceof EventBElement){
-				if (Is.generatedBy(elabs,getModelElement())){
-						//((EventBElement) elabs).isLocalGenerated()){
+				if (Is.generatedBy(elabs,DiagramsUtil.unwrap(getModel()))){
 					setBackgroundColor(DEFINES);
 				}else{
 					setBackgroundColor(VISUALIZES);
@@ -480,7 +497,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	}
 	
 	private Object getElaborates(){
-		Object element = getModelElement();
+		Object element = DiagramsUtil.unwrap(getModel());
 		if (element instanceof Class){
 			return ((Class)element).getElaborates();	
 		}
@@ -488,24 +505,12 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	}
 	
 	private boolean isRefines(){
-		Object element = getModelElement();
+		Object element =  DiagramsUtil.unwrap(getModel());
 		if (element instanceof Class){
 			return ((Class)element).getRefines()!=null;	
 		}
 		return false;
 	}
 	
-	private Object getModelElement(){
-		Object model = getModel();
-		if (model instanceof Node){
-			return ((Node)model).getElement();
-		}
-		return null;
-	}
-	
-	@Override
-	public void refresh(){
-		super.refresh();
-		setBackground();
-	}
+
 }

@@ -1,12 +1,11 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 
-import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
-public class ClassAttributeInjectiveRelationSection  extends AbstractEnumerationPropertySection {
+public class EventBRelationKindFunctionalSection extends AbstractEnumerationPropertySection {
 
 	
 	@Override
@@ -16,7 +15,7 @@ public class ClassAttributeInjectiveRelationSection  extends AbstractEnumeration
 
 	@Override
 	protected boolean isEqual(String selection) {
-		return Boolean.toString(((ClassAttribute)(eObject)).isInjective()).equals(selection);
+		return Boolean.toString(((EventBRelationKind)(eObject)).isFunctional()).equals(selection);
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class ClassAttributeInjectiveRelationSection  extends AbstractEnumeration
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((ClassAttribute)(eObject)).isInjective());
+		return Boolean.toString(((EventBRelationKind)(eObject)).isFunctional());
 	}
 	
 	@Override
@@ -36,11 +35,11 @@ public class ClassAttributeInjectiveRelationSection  extends AbstractEnumeration
 
 	@Override
 	protected String getLabelText() {
-		return "Injective:";
+		return "Functional:";
 	}
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__INJECTIVE;
+		return CoreextensionPackage.Literals.EVENT_BRELATION_KIND__FUNCTIONAL;
 	}
 }

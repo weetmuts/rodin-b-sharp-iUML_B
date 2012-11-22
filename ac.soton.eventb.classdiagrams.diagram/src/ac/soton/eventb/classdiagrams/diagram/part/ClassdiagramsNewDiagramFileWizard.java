@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import java.io.IOException;
@@ -82,9 +89,8 @@ public class ClassdiagramsNewDiagramFileWizard extends Wizard {
 					"Unsupported URI: " + domainModelURI); //$NON-NLS-1$
 		}
 		myFileCreationPage.setContainerFullPath(filePath);
-		myFileCreationPage
-				.setFileName(ClassdiagramsDiagramEditorUtil.getUniqueFileName(
-						filePath, fileName, "classdiagrams_diagram")); //$NON-NLS-1$
+		myFileCreationPage.setFileName(ClassdiagramsDiagramEditorUtil
+				.getUniqueFileName(filePath, fileName, "cld")); //$NON-NLS-1$
 
 		diagramRootElementSelectionPage = new DiagramRootElementSelectionPage(
 				Messages.ClassdiagramsNewDiagramFileWizard_RootSelectionPageName);

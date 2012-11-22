@@ -12,7 +12,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Class"
-          description=""/>
+          description="Create a new class"/>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
@@ -21,7 +21,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Attribute"
-          description=""/>
+          description="Add an new attribute to a class"/>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
@@ -29,11 +29,12 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Association"/>
+          title="Association"
+          description="Add a new association from one class to another"/>
       <tools
           xsi:type="gmftool:CreationTool"
           title="Supertype"
-          description="">
+          description="Add a new supertype relation from one class to another">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/full/obj16/Supertype.gif"

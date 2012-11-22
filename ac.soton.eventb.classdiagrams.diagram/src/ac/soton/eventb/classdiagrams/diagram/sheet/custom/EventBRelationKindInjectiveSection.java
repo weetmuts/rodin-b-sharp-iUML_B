@@ -2,10 +2,10 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
-public class AssociationInjectiveRelationSection extends AbstractEnumerationPropertySection {
+public class EventBRelationKindInjectiveSection extends AbstractEnumerationPropertySection {
 
 	
 	@Override
@@ -15,7 +15,7 @@ public class AssociationInjectiveRelationSection extends AbstractEnumerationProp
 
 	@Override
 	protected boolean isEqual(String selection) {
-		return Boolean.toString(((Association)(eObject)).isInjective()).equals(selection);
+		return Boolean.toString(((EventBRelationKind)(eObject)).isInjective()).equals(selection);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class AssociationInjectiveRelationSection extends AbstractEnumerationProp
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((Association)(eObject)).isInjective());
+		return Boolean.toString(((EventBRelationKind)(eObject)).isInjective());
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class AssociationInjectiveRelationSection extends AbstractEnumerationProp
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__INJECTIVE;
+		return CoreextensionPackage.Literals.EVENT_BRELATION_KIND__INJECTIVE;
 	}
 
 }

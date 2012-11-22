@@ -1,5 +1,13 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.navigator;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
@@ -80,6 +88,14 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 			return getImage(navigatorItem.getView());
 		}
 
+		// Due to plugin.xml content will be called only for "own" views
+		if (element instanceof IAdaptable) {
+			View view = (View) ((IAdaptable) element).getAdapter(View.class);
+			if (view != null && isOwnView(view)) {
+				return getImage(view);
+			}
+		}
+
 		return super.getImage(element);
 	}
 
@@ -91,15 +107,15 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://soton.ac.uk/models/eventb/classdiagrams?ClassAttribute", ClassdiagramsElementTypes.ClassAttribute_3021); //$NON-NLS-1$
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4004); //$NON-NLS-1$
-		case AssociationEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
 		case ClassdiagramEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Diagram?http://soton.ac.uk/models/eventb/classdiagrams?Classdiagram", ClassdiagramsElementTypes.Classdiagram_1000); //$NON-NLS-1$
+		case AssociationEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Association", ClassdiagramsElementTypes.Association_4001); //$NON-NLS-1$
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getImage(
+					"Navigator?Link?http://soton.ac.uk/models/eventb/classdiagrams?Class?supertypes", ClassdiagramsElementTypes.ClassSupertypes_4004); //$NON-NLS-1$
 		case ClassEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/classdiagrams?Class", ClassdiagramsElementTypes.Class_2002); //$NON-NLS-1$
@@ -144,6 +160,14 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 			return getText(navigatorItem.getView());
 		}
 
+		// Due to plugin.xml content will be called only for "own" views
+		if (element instanceof IAdaptable) {
+			View view = (View) ((IAdaptable) element).getAdapter(View.class);
+			if (view != null && isOwnView(view)) {
+				return getText(view);
+			}
+		}
+
 		return super.getText(element);
 	}
 
@@ -157,12 +181,12 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 		switch (ClassdiagramsVisualIDRegistry.getVisualID(view)) {
 		case ClassAttributeEditPart.VISUAL_ID:
 			return getClassAttribute_3021Text(view);
-		case ClassSupertypesEditPart.VISUAL_ID:
-			return getClassSupertypes_4004Text(view);
-		case AssociationEditPart.VISUAL_ID:
-			return getAssociation_4001Text(view);
 		case ClassdiagramEditPart.VISUAL_ID:
 			return getClassdiagram_1000Text(view);
+		case AssociationEditPart.VISUAL_ID:
+			return getAssociation_4001Text(view);
+		case ClassSupertypesEditPart.VISUAL_ID:
+			return getClassSupertypes_4004Text(view);
 		case ClassEditPart.VISUAL_ID:
 			return getClass_2002Text(view);
 		}
@@ -192,28 +216,15 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 	/**
 	 * @generated
 	 */
-	private String getClass_2002Text(View view) {
-		IParser parser = ClassdiagramsParserProvider.getParser(
-				ClassdiagramsElementTypes.Class_2002,
-				view.getElement() != null ? view.getElement() : view,
-				ClassdiagramsVisualIDRegistry
-						.getType(ClassNameEditPart.VISUAL_ID));
-		if (parser != null) {
-			return parser.getPrintString(new EObjectAdapter(
-					view.getElement() != null ? view.getElement() : view),
-					ParserOptions.NONE.intValue());
+	private String getClassdiagram_1000Text(View view) {
+		Classdiagram domainModelElement = (Classdiagram) view.getElement();
+		if (domainModelElement != null) {
+			return domainModelElement.getName();
 		} else {
 			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5006); //$NON-NLS-1$
+					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-	}
-
-	/**
-	 * @generated
-	 */
-	private String getClassSupertypes_4004Text(View view) {
-		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -239,13 +250,26 @@ public class ClassdiagramsNavigatorLabelProvider extends LabelProvider
 	/**
 	 * @generated
 	 */
-	private String getClassdiagram_1000Text(View view) {
-		Classdiagram domainModelElement = (Classdiagram) view.getElement();
-		if (domainModelElement != null) {
-			return domainModelElement.getName();
+	private String getClassSupertypes_4004Text(View view) {
+		return ""; //$NON-NLS-1$
+	}
+
+	/**
+	 * @generated
+	 */
+	private String getClass_2002Text(View view) {
+		IParser parser = ClassdiagramsParserProvider.getParser(
+				ClassdiagramsElementTypes.Class_2002,
+				view.getElement() != null ? view.getElement() : view,
+				ClassdiagramsVisualIDRegistry
+						.getType(ClassNameEditPart.VISUAL_ID));
+		if (parser != null) {
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ClassdiagramsDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
+					"Parser was not found for label " + 5006); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}

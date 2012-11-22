@@ -53,7 +53,7 @@ public abstract class AbstractLOVPropertySection extends
 		Composite composite = getWidgetFactory()
 				.createFlatFormComposite(parent);
 		FormData data;
-		int labelWidth = getPropertyLabelWidth(composite);
+		//int labelWidth = getPropertyLabelWidth(composite);
 
 		// TODO substitute with the textfield!
 

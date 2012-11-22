@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.edit.parts;
 
 import java.util.Collections;
@@ -83,7 +90,7 @@ public class AssociationNameEditPart extends LabelEditPart implements
 		registerSnapBackPosition(
 				ClassdiagramsVisualIDRegistry
 						.getType(ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationNameEditPart.VISUAL_ID),
-				new Point(-8, -8));
+				new Point(-5, -5));
 	}
 
 	/**
@@ -194,7 +201,11 @@ public class AssociationNameEditPart extends LabelEditPart implements
 	 * @generated
 	 */
 	protected Image getLabelIcon() {
-		return null;
+		EObject parserElement = getParserElement();
+		if (parserElement == null) {
+			return null;
+		}
+		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 
 	/**

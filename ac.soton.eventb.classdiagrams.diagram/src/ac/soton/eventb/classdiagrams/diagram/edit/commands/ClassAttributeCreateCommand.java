@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.edit.commands;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -14,10 +21,10 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eventb.emf.core.context.Context;
 
-import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 
 /**
  * @generated
@@ -61,13 +68,15 @@ public class ClassAttributeCreateCommand extends EditElementCommand {
 				.createClassAttribute();
 
 		Class owner = (Class) getElementToEdit();
-
+	
+//+++
 		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
-			newElement.setAssociationType(AssociationType.CONSTANT);
+			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
-			newElement.setAssociationType(AssociationType.VARIABLE);
+			newElement.setDataKind(DataKind.VARIABLE);
 		}
-
+//+++
+	
 		owner.getClassAttributes().add(newElement);
 
 		doConfigure(newElement, monitor, info);

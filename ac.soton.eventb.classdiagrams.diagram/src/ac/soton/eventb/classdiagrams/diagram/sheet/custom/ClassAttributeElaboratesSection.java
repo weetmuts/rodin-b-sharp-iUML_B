@@ -32,11 +32,13 @@ import org.eventb.emf.core.machine.Machine;
 import ac.soton.eventb.classdiagrams.Class;	
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
-import ac.soton.eventb.classdiagrams.parser.Scanner;
-import ac.soton.eventb.classdiagrams.parser.SymbolUtil;
-import ac.soton.eventb.classdiagrams.parser.Token;
-import ac.soton.eventb.classdiagrams.util.ClassdiagramUtil;
+
+//import ac.soton.eventb.classdiagrams.parser.Scanner;
+//import ac.soton.eventb.classdiagrams.parser.SymbolUtil;
+//import ac.soton.eventb.classdiagrams.parser.Token;
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection {
 
@@ -44,7 +46,8 @@ public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection
 
 		@Override
 		public String getText(Object element) {
-			return ((List<Token>)element).get(0).stringValue;
+			return "not working";
+			//return ((List<Token>)element).get(0).stringValue;
 		}
 	};
 
@@ -53,60 +56,60 @@ public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection
 	 * 
 	 * @return a new child instance.
 	 */
-	protected Object getNewChild() {
-		EObject container = EcoreUtil.getRootContainer(eObject);
-		String popupTitle = "no name";
-		List<EventBNamed> valuesList = new LinkedList<EventBNamed>();
-		List<List<Token>> parsedValuesList = new LinkedList<List<Token>>();
-		
-		if (container instanceof Machine){
-			popupTitle = ((Machine)container).getName();
-			
-			List<Machine> machines = getAllMachines((Machine)container, new LinkedList<Machine>());
-			
-			for (Machine m : machines){
-				valuesList.addAll(m.getInvariants());
-				
-				for (Context context : m.getSees()){
-					valuesList.addAll(fillValuesListWithContextContents(context));
-				}		
-				
-			}
-		} else if (container instanceof Context){
-
-			popupTitle = ((Context)container).getName();
-	
-			valuesList.addAll(fillValuesListWithContextContents((Context)container));
-		}
-		
-		for (EventBNamed ebn : valuesList){
-			//get the predicate string
-			String predicate = ((EventBNamedCommentedDerivedPredicateElement)ebn).getPredicate();
-		
-			//parse it into Tokens
-			Scanner s = new Scanner((EventBNamedCommentedComponentElement)container, predicate);
-			List<Token> li = new LinkedList<Token>();
-	
-			while (s.hasMoreElements()){
-				li.add(s.nextElement());
-			}
-				
-			parsedValuesList.add(li);
-		}
-		
-		filterList((EventBNamedCommentedComponentElement)container, parsedValuesList);
-		
-		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
-				.getShell(), parsedValuesList, variableLabelProvider);
-		variablesDialog.setTitle(popupTitle + " elements");
-		variablesDialog.setMessage("Please select an element to elaborate");
-		
-		if (Dialog.OK == variablesDialog.open()) {
-			if (variablesDialog.getResult().length > 0){
-				return variablesDialog.getResult()[0]; 
-			}
-		}
-		return null;
+	protected Object getNewChild() { return null;
+//		EObject container = EcoreUtil.getRootContainer(eObject);
+//		String popupTitle = "no name";
+//		List<EventBNamed> valuesList = new LinkedList<EventBNamed>();
+//		List<List<Token>> parsedValuesList = new LinkedList<List<Token>>();
+//		
+//		if (container instanceof Machine){
+//			popupTitle = ((Machine)container).getName();
+//			
+//			List<Machine> machines = getAllMachines((Machine)container, new LinkedList<Machine>());
+//			
+//			for (Machine m : machines){
+//				valuesList.addAll(m.getInvariants());
+//				
+//				for (Context context : m.getSees()){
+//					valuesList.addAll(fillValuesListWithContextContents(context));
+//				}		
+//				
+//			}
+//		} else if (container instanceof Context){
+//
+//			popupTitle = ((Context)container).getName();
+//	
+//			valuesList.addAll(fillValuesListWithContextContents((Context)container));
+//		}
+//		
+//		for (EventBNamed ebn : valuesList){
+//			//get the predicate string
+//			String predicate = ((EventBNamedCommentedDerivedPredicateElement)ebn).getPredicate();
+//		
+//			//parse it into Tokens
+//			Scanner s = new Scanner((EventBNamedCommentedComponentElement)container, predicate);
+//			List<Token> li = new LinkedList<Token>();
+//	
+//			while (s.hasMoreElements()){
+//				li.add(s.nextElement());
+//			}
+//				
+//			parsedValuesList.add(li);
+//		}
+//		
+//		filterList((EventBNamedCommentedComponentElement)container, parsedValuesList);
+//		
+//		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
+//				.getShell(), parsedValuesList, variableLabelProvider);
+//		variablesDialog.setTitle(popupTitle + " elements");
+//		variablesDialog.setMessage("Please select an element to elaborate");
+//		
+//		if (Dialog.OK == variablesDialog.open()) {
+//			if (variablesDialog.getResult().length > 0){
+//				return variablesDialog.getResult()[0]; 
+//			}
+//		}
+//		return null;
 	}
 	
 	private List<EventBNamed> fillValuesListWithContextContents(Context context) {
@@ -174,79 +177,79 @@ public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection
 	}
 
 	
-	protected void modifyElement(Object pNewChild){
-		//TODO pass predicate's assigned variable, NOT the whole invariant!
-		super.modifyElement(((List<Token>)pNewChild).get(0).eventBElement);
-		
-		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
-		
-		AbstractOverrideableCommand command;
-		
-		Object eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__NAME);
-		
-		if (getFeature().isMany() == true){
-				command = (AddCommand) AddCommand.create(
-						editingDomain,
-						eObject, 
-						ClassdiagramsPackage.eINSTANCE.getName(), 
-						((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
-		} else {
-			command = (SetCommand) SetCommand.create(
-					editingDomain,
-					eObject, 
-					eref,
-					((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
-		}
-		
-		editingDomain.getCommandStack().execute(command);
-		
-		
-		//set target
-		eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET);
-		
-		if (getFeature().isMany() == true){
-				command = (AddCommand) AddCommand.create(
-						editingDomain,
-						eObject, 
-						ClassdiagramsPackage.eINSTANCE.getName(), 
-						((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
-		} else {
-			command = (SetCommand) SetCommand.create(
-					editingDomain,
-					eObject, 
-					eref,
-					((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
-		}
-		
-		editingDomain.getCommandStack().execute(command);
-	}
-
-	private void filterList(EventBNamedCommentedComponentElement pContainer, List<List<Token>> pValuesList) {
-		List<List<Token>> filteredList = new LinkedList<List<Token>>();
-		
-		
-		//for every list element
-		for (List<Token> li : pValuesList){
-			
-			//shortlist valid elements for elaboration
-			//standard association definition got 5 elements:  association = variable1 <assoc type> variable2
-			if (li.size() == 5 &&
-				//variable 'association' must not be already elaborated
-				!ClassdiagramUtil.isElaborated(li.get(0).eventBElement) &&	
-				//variable1 must be equal to the source element feature of the class element in the classdiagrams
-				li.get(2).eventBElement != null && li.get(2).eventBElement.getName().equals(   ((Class)((ClassAttribute)eObject).eContainer()  ).getName()   ) &&
-				//li.get(3) == one of the relation arrows - check whether it is a relation.
-				SymbolUtil.isRelation(li.get(3).stringValue) 
-				//variable2 must be equal to the target element feature of the class element in the classdiagrams
-				){
-				
-				filteredList.add(li);
-			}
-		}
-		
-		pValuesList.clear();
-		pValuesList.addAll(filteredList);
-	}
+//	protected void modifyElement(Object pNewChild){
+//		//TODO pass predicate's assigned variable, NOT the whole invariant!
+//		super.modifyElement(((List<Token>)pNewChild).get(0).eventBElement);
+//		
+//		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
+//		
+//		AbstractOverrideableCommand command;
+//		
+//		Object eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__NAME);
+//		
+//		if (getFeature().isMany() == true){
+//				command = (AddCommand) AddCommand.create(
+//						editingDomain,
+//						eObject, 
+//						ClassdiagramsPackage.eINSTANCE.getName(), 
+//						((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
+//		} else {
+//			command = (SetCommand) SetCommand.create(
+//					editingDomain,
+//					eObject, 
+//					eref,
+//					((EventBNamed)((List<Token>)pNewChild).get(0).eventBElement).getName());
+//		}
+//		
+//		editingDomain.getCommandStack().execute(command);
+//		
+//		
+//		//set target
+//		eref = ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE.getEStructuralFeature(ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET);
+//		
+//		if (getFeature().isMany() == true){
+//				command = (AddCommand) AddCommand.create(
+//						editingDomain,
+//						eObject, 
+//						ClassdiagramsPackage.eINSTANCE.getName(), 
+//						((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
+//		} else {
+//			command = (SetCommand) SetCommand.create(
+//					editingDomain,
+//					eObject, 
+//					eref,
+//					((EventBNamed)((List<Token>)pNewChild).get(4).eventBElement).getName());
+//		}
+//		
+//		editingDomain.getCommandStack().execute(command);
+//	}
+//
+//	private void filterList(EventBNamedCommentedComponentElement pContainer, List<List<Token>> pValuesList) {
+//		List<List<Token>> filteredList = new LinkedList<List<Token>>();
+//		
+//		
+//		//for every list element
+//		for (List<Token> li : pValuesList){
+//			
+//			//shortlist valid elements for elaboration
+//			//standard association definition got 5 elements:  association = variable1 <assoc type> variable2
+//			if (li.size() == 5 &&
+//				//variable 'association' must not be already elaborated
+//				!ClassdiagramUtil.isElaborated(li.get(0).eventBElement) &&	
+//				//variable1 must be equal to the source element feature of the class element in the classdiagrams
+//				li.get(2).eventBElement != null && li.get(2).eventBElement.getName().equals(   ((Class)((ClassAttribute)eObject).eContainer()  ).getName()   ) &&
+//				//li.get(3) == one of the relation arrows - check whether it is a relation.
+//				SymbolUtil.isRelation(li.get(3).stringValue) 
+//				//variable2 must be equal to the target element feature of the class element in the classdiagrams
+//				){
+//				
+//				filteredList.add(li);
+//			}
+//		}
+//		
+//		pValuesList.clear();
+//		pValuesList.addAll(filteredList);
+//	}
 
 	@Override
 	public void createControls(Composite parent,
@@ -257,7 +260,7 @@ public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection
 
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if (eObject != null && ((ElaborativeElement)eObject).getElaborates() != null){
+				if (eObject != null && ((EventBDataElaboration)eObject).getElaborates() != null){
 					addButton.setEnabled(false);
 					clearButton.setEnabled(true);
 				} else {
@@ -342,7 +345,7 @@ public class ClassAttributeElaboratesSection  extends AbstractLOVPropertySection
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES;
+		return CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES;
 	}
 
 	@Override

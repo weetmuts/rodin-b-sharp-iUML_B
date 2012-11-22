@@ -15,6 +15,8 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
+
 
 /**
  * General text property section, used for string properties of an object.
@@ -54,7 +56,7 @@ public abstract class AbstractTextPropertySection extends
 
 	@Override
 	protected EObject unwrap(Object object) {
-		return ClassdiagramsSheetPropertyFilter.unwrap(object);
+		return DiagramsUtil.unwrap(object);
 	}
 
 }

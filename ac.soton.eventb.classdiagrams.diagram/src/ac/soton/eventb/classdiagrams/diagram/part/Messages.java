@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package ac.soton.eventb.classdiagrams.diagram.part;
 
 import org.eclipse.osgi.util.NLS;
@@ -283,6 +290,11 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String Association1CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
 	public static String Supertype2CreationTool_title;
 
 	/**
@@ -303,22 +315,7 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Class_2002_incominglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_Class_2002_outgoinglinks;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_ClassSupertypes_4004_target;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_ClassSupertypes_4004_source;
+	public static String NavigatorGroupName_Classdiagram_1000_links;
 
 	/**
 	 * @generated
@@ -333,7 +330,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Classdiagram_1000_links;
+	public static String NavigatorGroupName_ClassSupertypes_4004_target;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_ClassSupertypes_4004_source;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Class_2002_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Class_2002_outgoinglinks;
 
 	/**
 	 * @generated
