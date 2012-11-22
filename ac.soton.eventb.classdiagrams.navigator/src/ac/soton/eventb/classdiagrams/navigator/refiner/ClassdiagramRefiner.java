@@ -42,14 +42,13 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 	 */
 	@Override
 	protected void populateReferenceMap(final Map<EReference,Boolean> referencemap){
+		super.populateReferenceMap(referencemap);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, true);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, true);	
-		referencemap.put(ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES, false);
 		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, false);
 		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, false);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, false);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, false);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__CLASS_ASSOCIATIONS, false);
 	}
 
 /**
