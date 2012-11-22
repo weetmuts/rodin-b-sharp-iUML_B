@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -202,52 +205,6 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.ElaborativeElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ElaborativeElementItemProvider elaborativeElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.ElaborativeElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createElaborativeElementAdapter() {
-		if (elaborativeElementItemProvider == null) {
-			elaborativeElementItemProvider = new ElaborativeElementItemProvider(this);
-		}
-
-		return elaborativeElementItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.AssociativeElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AssociativeElementItemProvider associativeElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.AssociativeElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAssociativeElementAdapter() {
-		if (associativeElementItemProvider == null) {
-			associativeElementItemProvider = new AssociativeElementItemProvider(this);
-		}
-
-		return associativeElementItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -377,8 +334,6 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		if (associationItemProvider != null) associationItemProvider.dispose();
 		if (classAttributeItemProvider != null) classAttributeItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
-		if (elaborativeElementItemProvider != null) elaborativeElementItemProvider.dispose();
-		if (associativeElementItemProvider != null) associativeElementItemProvider.dispose();
 	}
 
 	/**

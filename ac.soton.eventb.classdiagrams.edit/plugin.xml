@@ -2,8 +2,11 @@
 <?eclipse version="3.0"?>
 
 <!--
- <copyright>
- </copyright>
+ Copyright (c) 2012 - University of Southampton.
+ All rights reserved. This program and the accompanying materials  are made
+ available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ 
 
  $Id$
 -->
@@ -27,12 +30,8 @@
             uri="http://soton.ac.uk/models/eventb/diagrams"
             class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$DiagramsChildCreationExtender"/>
       <extender
-            uri="http://emf.eventb.org/models/core/machine"
+            uri="http://emf.eventb.org/models/core"
             class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"/>
-      <extender
-            class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"
-            uri="http://emf.eventb.org/models/core/context">
-      </extender>
    </extension>
 
 </plugin>

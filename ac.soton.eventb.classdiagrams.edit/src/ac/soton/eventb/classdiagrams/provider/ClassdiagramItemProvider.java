@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -131,7 +134,7 @@ public class ClassdiagramItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASSDIAGRAM__CLASSES);
-			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASSDIAGRAM__CLASS_ASSOCIATIONS);
+			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASSDIAGRAM__ASSOCIATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -190,7 +193,7 @@ public class ClassdiagramItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASSES:
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -220,7 +223,7 @@ public class ClassdiagramItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ClassdiagramsPackage.Literals.CLASSDIAGRAM__CLASS_ASSOCIATIONS,
+				(ClassdiagramsPackage.Literals.CLASSDIAGRAM__ASSOCIATIONS,
 				 ClassdiagramsFactory.eINSTANCE.createAssociation()));
 	}
 

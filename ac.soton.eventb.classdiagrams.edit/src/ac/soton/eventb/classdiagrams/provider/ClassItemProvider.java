@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -9,6 +12,10 @@ package ac.soton.eventb.classdiagrams.provider;
 
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -68,11 +75,11 @@ public class ClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addElaboratesPropertyDescriptor(object);
+			addDataKindPropertyDescriptor(object);
 			addSupertypesPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
-			addClassTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -88,13 +95,35 @@ public class ClassItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ElaborativeElement_elaborates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElaborativeElement_elaborates_feature", "_UI_ElaborativeElement_type"),
-				 ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES,
+				 getString("_UI_EventBDataElaboration_elaborates_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_elaborates_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES,
 				 true,
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Data Kind feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDataKindPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBDataElaboration_dataKind_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_dataKind_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -188,28 +217,6 @@ public class ClassItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Class Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addClassTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_classType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_classType_feature", "_UI_Class_type"),
-				 ClassdiagramsPackage.Literals.CLASS__CLASS_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -221,6 +228,7 @@ public class ClassItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(DiagramsPackage.Literals.DIAGRAM_OWNER__DIAGRAMS);
 			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASS__CLASS_ATTRIBUTES);
 		}
 		return childrenFeatures;
@@ -276,9 +284,10 @@ public class ClassItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ac.soton.eventb.classdiagrams.Class.class)) {
-			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
+			case ClassdiagramsPackage.CLASS__DATA_KIND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -304,8 +313,36 @@ public class ClassItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(DiagramsPackage.Literals.DIAGRAM_OWNER__DIAGRAMS,
+				 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ClassdiagramsPackage.Literals.CLASS__CLASS_ATTRIBUTES,
 				 ClassdiagramsFactory.eINSTANCE.createClassAttribute()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS ||
+			childFeature == DiagramsPackage.Literals.DIAGRAM_OWNER__DIAGRAMS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

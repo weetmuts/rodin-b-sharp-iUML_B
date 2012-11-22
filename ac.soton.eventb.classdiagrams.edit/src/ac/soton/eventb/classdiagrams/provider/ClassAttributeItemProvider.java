@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -9,15 +12,16 @@ package ac.soton.eventb.classdiagrams.provider;
 
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
-
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,10 +29,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eventb.emf.core.CoreFactory;
+
 import org.eventb.emf.core.CorePackage;
 
 import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
@@ -69,11 +72,11 @@ public class ClassAttributeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addElaboratesPropertyDescriptor(object);
+			addDataKindPropertyDescriptor(object);
 			addSurjectivePropertyDescriptor(object);
 			addInjectivePropertyDescriptor(object);
 			addTotalPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
-			addAssociationTypePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -90,9 +93,9 @@ public class ClassAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ElaborativeElement_elaborates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElaborativeElement_elaborates_feature", "_UI_ElaborativeElement_type"),
-				 ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES,
+				 getString("_UI_EventBDataElaboration_elaborates_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_elaborates_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES,
 				 true,
 				 false,
 				 true,
@@ -102,22 +105,22 @@ public class ClassAttributeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Data Kind feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addDataKindPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassAttribute_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassAttribute_target_feature", "_UI_ClassAttribute_type"),
-				 ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE__TARGET,
+				 getString("_UI_EventBDataElaboration_dataKind_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_dataKind_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -134,9 +137,9 @@ public class ClassAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_surjective_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_surjective_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__SURJECTIVE,
+				 getString("_UI_EventBRelationKind_surjective_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_surjective_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__SURJECTIVE,
 				 true,
 				 false,
 				 false,
@@ -156,9 +159,9 @@ public class ClassAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_injective_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_injective_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__INJECTIVE,
+				 getString("_UI_EventBRelationKind_injective_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_injective_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__INJECTIVE,
 				 true,
 				 false,
 				 false,
@@ -178,9 +181,9 @@ public class ClassAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_total_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_total_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__TOTAL,
+				 getString("_UI_EventBRelationKind_total_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_total_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__TOTAL,
 				 true,
 				 false,
 				 false,
@@ -200,9 +203,9 @@ public class ClassAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_functional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_functional_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__FUNCTIONAL,
+				 getString("_UI_EventBRelationKind_functional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_functional_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__FUNCTIONAL,
 				 true,
 				 false,
 				 false,
@@ -212,19 +215,19 @@ public class ClassAttributeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Association Type feature.
+	 * This adds a property descriptor for the Target feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAssociationTypePropertyDescriptor(Object object) {
+	protected void addTargetPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_AssociationType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_AssociationType_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE,
+				 getString("_UI_ClassAttribute_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ClassAttribute_target_feature", "_UI_ClassAttribute_type"),
+				 ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE__TARGET,
 				 true,
 				 false,
 				 false,
@@ -270,11 +273,12 @@ public class ClassAttributeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ClassAttribute.class)) {
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND:
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE:
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE:
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TOTAL:
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL:
-			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE:
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

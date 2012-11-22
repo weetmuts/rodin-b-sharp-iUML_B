@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -10,6 +13,8 @@ package ac.soton.eventb.classdiagrams.provider;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -67,11 +72,11 @@ public class AssociationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addElaboratesPropertyDescriptor(object);
+			addDataKindPropertyDescriptor(object);
 			addSurjectivePropertyDescriptor(object);
 			addInjectivePropertyDescriptor(object);
 			addTotalPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
-			addAssociationTypePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addSourcePropertyDescriptor(object);
 		}
@@ -89,13 +94,123 @@ public class AssociationItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ElaborativeElement_elaborates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElaborativeElement_elaborates_feature", "_UI_ElaborativeElement_type"),
-				 ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES,
+				 getString("_UI_EventBDataElaboration_elaborates_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_elaborates_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES,
 				 true,
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Data Kind feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDataKindPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBDataElaboration_dataKind_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_dataKind_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Surjective feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSurjectivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBRelationKind_surjective_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_surjective_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__SURJECTIVE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Injective feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInjectivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBRelationKind_injective_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_injective_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__INJECTIVE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Total feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTotalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBRelationKind_total_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_total_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__TOTAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Functional feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFunctionalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBRelationKind_functional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBRelationKind_functional_feature", "_UI_EventBRelationKind_type"),
+				 CoreextensionPackage.Literals.EVENT_BRELATION_KIND__FUNCTIONAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -145,116 +260,6 @@ public class AssociationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Surjective feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSurjectivePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_surjective_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_surjective_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__SURJECTIVE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Injective feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInjectivePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_injective_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_injective_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__INJECTIVE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Total feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTotalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_total_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_total_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__TOTAL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Functional feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFunctionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_functional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_functional_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__FUNCTIONAL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Association Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAssociationTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AssociativeElement_AssociationType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AssociativeElement_AssociationType_feature", "_UI_AssociativeElement_type"),
-				 ClassdiagramsPackage.Literals.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns Association.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -291,11 +296,11 @@ public class AssociationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Association.class)) {
+			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
 			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
