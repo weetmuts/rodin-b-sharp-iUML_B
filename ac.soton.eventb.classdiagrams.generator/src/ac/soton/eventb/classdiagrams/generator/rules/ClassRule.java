@@ -10,9 +10,9 @@ import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 
 import ac.soton.eventb.classdiagrams.Class;
-import ac.soton.eventb.classdiagrams.ClassType;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
@@ -21,7 +21,7 @@ import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
 public class ClassRule  extends AbstractRule  implements IRule {
 	
-	protected static final EReference elaborates = ClassdiagramsPackage.Literals.ELABORATIVE_ELEMENT__ELABORATES;
+	protected static final EReference elaborates = CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES;
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
@@ -50,24 +50,24 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
 		Class element = (Class)sourceElement;
 
-		int ct = element.getClassType().getValue();
+		int ct = element.getDataKind().getValue();
 		EventBElement elaborated = (EventBElement) element.getElaborates();
 		//create element if it's a new one
 		if (elaborated==null || Is.generatedBy(elaborated, sourceElement)){
 			EventBElement newGeneratedElement = null;
 			EReference newGeneratedElementContainer = null;
 			switch (ct) {
-				case ClassType.SET_VALUE :
+				case DataKind.SET_VALUE :
 					newGeneratedElement = (EventBElement) Make.set(element.getName(), element.getComment());
 					newGeneratedElementContainer = sets;
 					//ret.add(Make.descriptor(container, sets, Make.set(element.getName(), element.getComment()),10));
 					break;
-				case ClassType.CONSTANT_VALUE :
+				case DataKind.CONSTANT_VALUE :
 					newGeneratedElement = (EventBElement) Make.constant(element.getName(), element.getComment());
 					newGeneratedElementContainer = constants;
 					//ret.add(Make.descriptor(container, constants, Make.constant(element.getName(), element.getComment()),10));
 					break;
-				case ClassType.VARIABLE_VALUE :
+				case DataKind.VARIABLE_VALUE :
 					newGeneratedElement = Make.variable(element.getName(), element.getComment());
 					newGeneratedElementContainer = variables;
 					//ret.add(Make.descriptor(container,variables,newGeneratedElement,10));
@@ -93,15 +93,15 @@ public class ClassRule  extends AbstractRule  implements IRule {
 
 		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
 			switch (ct) {
-			case ClassType.SET_VALUE :
+			case DataKind.SET_VALUE :
 				//nothing to do - sets don't have supertypes
 				break;
-			case ClassType.CONSTANT_VALUE :
+			case DataKind.CONSTANT_VALUE :
 				ret.add(Make.descriptor(container, axioms, Make.axiom(
 						Strings.CLASS_SUPERTYPE_NAME(element), 
 						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));
 				break;
-			case ClassType.VARIABLE_VALUE :
+			case DataKind.VARIABLE_VALUE :
 				ret.add(Make.descriptor(container, invariants, Make.invariant(
 						Strings.CLASS_SUPERTYPE_NAME(element), 
 						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));

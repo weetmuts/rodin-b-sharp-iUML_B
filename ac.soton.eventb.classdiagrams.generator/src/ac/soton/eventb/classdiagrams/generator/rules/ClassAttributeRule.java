@@ -7,10 +7,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 
-import ac.soton.eventb.classdiagrams.AssociationType;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
@@ -44,13 +44,13 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 		
 		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
 		ClassAttribute element = (ClassAttribute)sourceElement;
-		int elementType = element.getAssociationType().getValue();
+		int elementType = element.getDataKind().getValue();
 		
 		//if it's not elaborating an existing element, create one
 		if (element.getElaborates() == null){
 			//if does not elaborate, then create a variable/constant and the appropriate predicate (invariant/axiom)
 			switch (elementType) {
-				case AssociationType.CONSTANT_VALUE :
+				case DataKind.CONSTANT_VALUE :
 					ret.add(Make.descriptor(container, 
 							constants, 
 							Make.constant(element.getName(), 
@@ -71,7 +71,7 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 							10));						
 					}
 					break;
-				case AssociationType.VARIABLE_VALUE :
+				case DataKind.VARIABLE_VALUE :
 					ret.add(Make.descriptor(container,
 							variables,
 							Make.variable(element.getName(), element.getComment()),

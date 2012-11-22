@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
 public class Strings {
 
@@ -148,7 +148,7 @@ public class Strings {
 	public static String REL_PARTIAL_SURJECTIVE_RELATION;
 	public static String REL_PARTIAL_RELATION;
 	
-	private static String getRelationType(AssociativeElement element) {
+	private static String getRelationType(EventBRelationKind element) {
 		if (element.isFunctional()){
 			if (element.isTotal()) {
 				if (element.isSurjective()){
