@@ -1,10 +1,16 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams;
+
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
 import org.eventb.emf.core.EventBNamedCommentedElement;
 
@@ -22,10 +28,10 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * </p>
  *
  * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getAssociation()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isAsociationTypeRight'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isAssociationTypeRight'"
  * @generated
  */
-public interface Association extends EventBNamedCommentedElement, ElaborativeElement, AssociativeElement {
+public interface Association extends EventBNamedCommentedElement, EventBDataElaboration, EventBRelationKind {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}'.

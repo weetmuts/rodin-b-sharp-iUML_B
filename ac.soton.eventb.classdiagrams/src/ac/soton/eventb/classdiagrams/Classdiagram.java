@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -22,7 +25,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getClasses <em>Classes</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getClassAssociations <em>Class Associations</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getAssociations <em>Associations</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Classdiagram#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
@@ -49,20 +52,20 @@ public interface Classdiagram extends EventBNamedCommentedElement, AbstractExten
 	EList<ac.soton.eventb.classdiagrams.Class> getClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Class Associations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Associations</b></em>' containment reference list.
 	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.Association}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Class Associations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Associations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Associations</em>' containment reference list.
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClassdiagram_ClassAssociations()
+	 * @return the value of the '<em>Associations</em>' containment reference list.
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClassdiagram_Associations()
 	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList<Association> getClassAssociations();
+	EList<Association> getAssociations();
 
 	/**
 	 * Returns the value of the '<em><b>Refines</b></em>' reference.

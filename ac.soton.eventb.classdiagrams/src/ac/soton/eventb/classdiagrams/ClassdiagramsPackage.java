@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -8,13 +11,10 @@ package ac.soton.eventb.classdiagrams;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.context.ContextPackage;
-import org.eventb.emf.core.machine.MachinePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +36,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	/**
 	 * Classdiagrams extension ID, assigned to classdiagrams extensions to Event-B,
 	 * as well as used by transformation to Event-B.
+	 * @custom
 	 */
 	String CLASSDIAGRAMS_EXTENSION_ID = "ac.soton.eventb.classdiagrams";
 	
@@ -200,13 +201,13 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASSDIAGRAM__CLASSES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Class Associations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Associations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSDIAGRAM__CLASS_ASSOCIATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int CLASSDIAGRAM__ASSOCIATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -235,26 +236,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSOCIATION = 2;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClassAttribute()
-	 * @generated
-	 */
-	int CLASS_ATTRIBUTE = 3;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassImpl <em>Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassImpl
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClass_()
-	 * @generated
-	 */
-	int CLASS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -338,13 +319,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int ASSOCIATION__ELABORATES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Data Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__DATA_KIND = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Surjective</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+	int ASSOCIATION__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Injective</b></em>' attribute.
@@ -353,7 +343,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int ASSOCIATION__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Total</b></em>' attribute.
@@ -362,7 +352,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int ASSOCIATION__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Functional</b></em>' attribute.
@@ -371,16 +361,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Association Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__ASSOCIATION_TYPE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int ASSOCIATION__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -410,14 +391,14 @@ public interface ClassdiagramsPackage extends EPackage {
 	int ASSOCIATION_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ElaborativeElementImpl <em>Elaborative Element</em>}' class.
+	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.impl.ElaborativeElementImpl
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getElaborativeElement()
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClassAttribute()
 	 * @generated
 	 */
-	int ELABORATIVE_ELEMENT = 5;
+	int CLASS_ATTRIBUTE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -501,13 +482,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS_ATTRIBUTE__ELABORATES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Data Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__DATA_KIND = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Surjective</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_ATTRIBUTE__SURJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Injective</b></em>' attribute.
@@ -516,7 +506,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int CLASS_ATTRIBUTE__INJECTIVE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Total</b></em>' attribute.
@@ -525,7 +515,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int CLASS_ATTRIBUTE__TOTAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Functional</b></em>' attribute.
@@ -534,16 +524,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Association Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_ATTRIBUTE__ASSOCIATION_TYPE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int CLASS_ATTRIBUTE__FUNCTIONAL = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' attribute.
@@ -562,6 +543,16 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_ATTRIBUTE_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassImpl <em>Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassImpl
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClass_()
+	 * @generated
+	 */
+	int CLASS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -645,13 +636,31 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS__ELABORATES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Data Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__DATA_KIND = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Diagrams</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__DIAGRAMS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Supertypes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__SUPERTYPES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS__SUPERTYPES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Class Attributes</b></em>' containment reference list.
@@ -660,7 +669,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CLASS_ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int CLASS__CLASS_ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -669,7 +678,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int CLASS__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -678,7 +687,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
+	int CLASS__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -687,16 +696,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Class Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__CLASS_TYPE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int CLASS__REFINES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -705,111 +705,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Elaborates</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELABORATIVE_ELEMENT__ELABORATES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Elaborative Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELABORATIVE_ELEMENT_FEATURE_COUNT = 1;
-
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.AssociativeElementImpl <em>Associative Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.impl.AssociativeElementImpl
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAssociativeElement()
-	 * @generated
-	 */
-	int ASSOCIATIVE_ELEMENT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Surjective</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT__SURJECTIVE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Injective</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT__INJECTIVE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Total</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT__TOTAL = 2;
-
-	/**
-	 * The feature id for the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT__FUNCTIONAL = 3;
-
-	/**
-	 * The feature id for the '<em><b>Association Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE = 4;
-
-	/**
-	 * The number of structural features of the '<em>Associative Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATIVE_ELEMENT_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.ClassType <em>Class Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.ClassType
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClassType()
-	 * @generated
-	 */
-	int CLASS_TYPE = 7;
-
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.AssociationType <em>Association Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.classdiagrams.AssociationType
-	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAssociationType()
-	 * @generated
-	 */
-	int ASSOCIATION_TYPE = 8;
+	int CLASS_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 8;
 
 
 	/**
@@ -855,15 +751,15 @@ public interface ClassdiagramsPackage extends EPackage {
 	EReference getClassdiagram_Classes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.classdiagrams.Classdiagram#getClassAssociations <em>Class Associations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.classdiagrams.Classdiagram#getAssociations <em>Associations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Class Associations</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Classdiagram#getClassAssociations()
+	 * @return the meta object for the containment reference list '<em>Associations</em>'.
+	 * @see ac.soton.eventb.classdiagrams.Classdiagram#getAssociations()
 	 * @see #getClassdiagram()
 	 * @generated
 	 */
-	EReference getClassdiagram_ClassAssociations();
+	EReference getClassdiagram_Associations();
 
 	/**
 	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.Classdiagram#getRefines <em>Refines</em>}'.
@@ -995,123 +891,6 @@ public interface ClassdiagramsPackage extends EPackage {
 	EReference getClass_Refines();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.Class#getClassType <em>Class Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Class Type</em>'.
-	 * @see ac.soton.eventb.classdiagrams.Class#getClassType()
-	 * @see #getClass_()
-	 * @generated
-	 */
-	EAttribute getClass_ClassType();
-
-	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.ElaborativeElement <em>Elaborative Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Elaborative Element</em>'.
-	 * @see ac.soton.eventb.classdiagrams.ElaborativeElement
-	 * @generated
-	 */
-	EClass getElaborativeElement();
-
-	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.classdiagrams.ElaborativeElement#getElaborates <em>Elaborates</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Elaborates</em>'.
-	 * @see ac.soton.eventb.classdiagrams.ElaborativeElement#getElaborates()
-	 * @see #getElaborativeElement()
-	 * @generated
-	 */
-	EReference getElaborativeElement_Elaborates();
-
-	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.AssociativeElement <em>Associative Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Associative Element</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement
-	 * @generated
-	 */
-	EClass getAssociativeElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AssociativeElement#isSurjective <em>Surjective</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Surjective</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement#isSurjective()
-	 * @see #getAssociativeElement()
-	 * @generated
-	 */
-	EAttribute getAssociativeElement_Surjective();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AssociativeElement#isInjective <em>Injective</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Injective</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement#isInjective()
-	 * @see #getAssociativeElement()
-	 * @generated
-	 */
-	EAttribute getAssociativeElement_Injective();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AssociativeElement#isTotal <em>Total</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Total</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement#isTotal()
-	 * @see #getAssociativeElement()
-	 * @generated
-	 */
-	EAttribute getAssociativeElement_Total();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AssociativeElement#isFunctional <em>Functional</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Functional</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement#isFunctional()
-	 * @see #getAssociativeElement()
-	 * @generated
-	 */
-	EAttribute getAssociativeElement_Functional();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.AssociativeElement#getAssociationType <em>Association Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Association Type</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement#getAssociationType()
-	 * @see #getAssociativeElement()
-	 * @generated
-	 */
-	EAttribute getAssociativeElement_AssociationType();
-
-	/**
-	 * Returns the meta object for enum '{@link ac.soton.eventb.classdiagrams.ClassType <em>Class Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Class Type</em>'.
-	 * @see ac.soton.eventb.classdiagrams.ClassType
-	 * @generated
-	 */
-	EEnum getClassType();
-
-	/**
-	 * Returns the meta object for enum '{@link ac.soton.eventb.classdiagrams.AssociationType <em>Association Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Association Type</em>'.
-	 * @see ac.soton.eventb.classdiagrams.AssociationType
-	 * @generated
-	 */
-	EEnum getAssociationType();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,12 +949,12 @@ public interface ClassdiagramsPackage extends EPackage {
 		EReference CLASSDIAGRAM__CLASSES = eINSTANCE.getClassdiagram_Classes();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Associations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Associations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASSDIAGRAM__CLASS_ASSOCIATIONS = eINSTANCE.getClassdiagram_ClassAssociations();
+		EReference CLASSDIAGRAM__ASSOCIATIONS = eINSTANCE.getClassdiagram_Associations();
 
 		/**
 		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
@@ -1278,102 +1057,6 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS__REFINES = eINSTANCE.getClass_Refines();
-
-		/**
-		 * The meta object literal for the '<em><b>Class Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CLASS__CLASS_TYPE = eINSTANCE.getClass_ClassType();
-
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.ElaborativeElementImpl <em>Elaborative Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.classdiagrams.impl.ElaborativeElementImpl
-		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getElaborativeElement()
-		 * @generated
-		 */
-		EClass ELABORATIVE_ELEMENT = eINSTANCE.getElaborativeElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Elaborates</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ELABORATIVE_ELEMENT__ELABORATES = eINSTANCE.getElaborativeElement_Elaborates();
-
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.AssociativeElementImpl <em>Associative Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.classdiagrams.impl.AssociativeElementImpl
-		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAssociativeElement()
-		 * @generated
-		 */
-		EClass ASSOCIATIVE_ELEMENT = eINSTANCE.getAssociativeElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Surjective</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATIVE_ELEMENT__SURJECTIVE = eINSTANCE.getAssociativeElement_Surjective();
-
-		/**
-		 * The meta object literal for the '<em><b>Injective</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATIVE_ELEMENT__INJECTIVE = eINSTANCE.getAssociativeElement_Injective();
-
-		/**
-		 * The meta object literal for the '<em><b>Total</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATIVE_ELEMENT__TOTAL = eINSTANCE.getAssociativeElement_Total();
-
-		/**
-		 * The meta object literal for the '<em><b>Functional</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATIVE_ELEMENT__FUNCTIONAL = eINSTANCE.getAssociativeElement_Functional();
-
-		/**
-		 * The meta object literal for the '<em><b>Association Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE = eINSTANCE.getAssociativeElement_AssociationType();
-
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.ClassType <em>Class Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.classdiagrams.ClassType
-		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getClassType()
-		 * @generated
-		 */
-		EEnum CLASS_TYPE = eINSTANCE.getClassType();
-
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.AssociationType <em>Association Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.classdiagrams.AssociationType
-		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getAssociationType()
-		 * @generated
-		 */
-		EEnum ASSOCIATION_TYPE = eINSTANCE.getAssociationType();
 
 	}
 

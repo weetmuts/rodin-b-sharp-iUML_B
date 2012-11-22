@@ -1,20 +1,25 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
+
 import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
 import java.util.List;
 
@@ -127,8 +132,8 @@ public class ClassdiagramsSwitch<T> {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = caseEventBNamedCommentedElement(association);
-				if (result == null) result = caseElaborativeElement(association);
-				if (result == null) result = caseAssociativeElement(association);
+				if (result == null) result = caseEventBDataElaboration(association);
+				if (result == null) result = caseEventBRelationKind(association);
 				if (result == null) result = caseEventBCommentedElement(association);
 				if (result == null) result = caseEventBNamed(association);
 				if (result == null) result = caseEventBElement(association);
@@ -141,8 +146,8 @@ public class ClassdiagramsSwitch<T> {
 				ClassAttribute classAttribute = (ClassAttribute)theEObject;
 				T result = caseClassAttribute(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedElement(classAttribute);
-				if (result == null) result = caseElaborativeElement(classAttribute);
-				if (result == null) result = caseAssociativeElement(classAttribute);
+				if (result == null) result = caseEventBDataElaboration(classAttribute);
+				if (result == null) result = caseEventBRelationKind(classAttribute);
 				if (result == null) result = caseEventBCommentedElement(classAttribute);
 				if (result == null) result = caseEventBNamed(classAttribute);
 				if (result == null) result = caseEventBElement(classAttribute);
@@ -155,24 +160,13 @@ public class ClassdiagramsSwitch<T> {
 				ac.soton.eventb.classdiagrams.Class class_ = (ac.soton.eventb.classdiagrams.Class)theEObject;
 				T result = caseClass(class_);
 				if (result == null) result = caseEventBNamedCommentedElement(class_);
-				if (result == null) result = caseElaborativeElement(class_);
+				if (result == null) result = caseEventBDataElaboration(class_);
+				if (result == null) result = caseDiagramOwner(class_);
 				if (result == null) result = caseEventBCommentedElement(class_);
 				if (result == null) result = caseEventBNamed(class_);
 				if (result == null) result = caseEventBElement(class_);
 				if (result == null) result = caseEventBCommented(class_);
 				if (result == null) result = caseEventBObject(class_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClassdiagramsPackage.ELABORATIVE_ELEMENT: {
-				ElaborativeElement elaborativeElement = (ElaborativeElement)theEObject;
-				T result = caseElaborativeElement(elaborativeElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT: {
-				AssociativeElement associativeElement = (AssociativeElement)theEObject;
-				T result = caseAssociativeElement(associativeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -252,36 +246,6 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseClass(ac.soton.eventb.classdiagrams.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Elaborative Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Elaborative Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseElaborativeElement(ElaborativeElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Associative Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Associative Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssociativeElement(AssociativeElement object) {
 		return null;
 	}
 
@@ -402,6 +366,51 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseDiagram(Diagram object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BData Elaboration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BData Elaboration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBDataElaboration(EventBDataElaboration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BRelation Kind</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BRelation Kind</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBRelationKind(EventBRelationKind object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Diagram Owner</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Diagram Owner</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDiagramOwner(DiagramOwner object) {
 		return null;
 	}
 

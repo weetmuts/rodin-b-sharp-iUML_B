@@ -1,6 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
@@ -8,10 +11,16 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+
+import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,20 +36,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBCommented;
-import org.eventb.emf.core.EventBCommentedElement;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBNamedCommentedElement;
 
-import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
-import org.eventb.emf.core.machine.Variable;
-import org.eventb.emf.core.impl.EventBElementImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,12 +50,13 @@ import org.eventb.emf.core.impl.EventBElementImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getDataKind <em>Data Kind</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getDiagrams <em>Diagrams</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getSupertypes <em>Supertypes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAttributes <em>Class Attributes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassType <em>Class Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +72,37 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EventBNamed elaborates;
+
+	/**
+	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.SET;
+
+	/**
+	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataKind dataKind = DATA_KIND_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDiagrams() <em>Diagrams</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDiagrams()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Diagram> diagrams;
+
 	/**
 	 * The cached value of the '{@link #getSupertypes() <em>Supertypes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -80,6 +112,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<ac.soton.eventb.classdiagrams.Class> supertypes;
+
 	/**
 	 * The cached value of the '{@link #getClassAttributes() <em>Class Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -89,6 +122,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<ClassAttribute> classAttributes;
+
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -98,6 +132,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<Association> incoming;
+
 	/**
 	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -107,6 +142,7 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected EList<Association> outgoing;
+
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -116,26 +152,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * @ordered
 	 */
 	protected ac.soton.eventb.classdiagrams.Class refines;
-
-	/**
-	 * The default value of the '{@link #getClassType() <em>Class Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final ClassType CLASS_TYPE_EDEFAULT = ClassType.SET;
-
-	/**
-	 * The cached value of the '{@link #getClassType() <em>Class Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassType()
-	 * @generated
-	 * @ordered
-	 */
-	protected ClassType classType = CLASS_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +208,39 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		elaborates = newElaborates;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__ELABORATES, oldElaborates, elaborates));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataKind getDataKind() {
+		return dataKind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDataKind(DataKind newDataKind) {
+		DataKind oldDataKind = dataKind;
+		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__DATA_KIND, oldDataKind, dataKind));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Diagram> getDiagrams() {
+		if (diagrams == null) {
+			diagrams = new EObjectContainmentEList.Resolving<Diagram>(Diagram.class, this, ClassdiagramsPackage.CLASS__DIAGRAMS);
+		}
+		return diagrams;
 	}
 
 	/**
@@ -285,27 +334,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassType getClassType() {
-		return classType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setClassType(ClassType newClassType) {
-		ClassType oldClassType = classType;
-		classType = newClassType == null ? CLASS_TYPE_EDEFAULT : newClassType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__CLASS_TYPE, oldClassType, classType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -326,6 +354,8 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
+				return ((InternalEList<?>)getDiagrams()).basicRemove(otherEnd, msgs);
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 				return ((InternalEList<?>)getClassAttributes()).basicRemove(otherEnd, msgs);
 			case ClassdiagramsPackage.CLASS__INCOMING:
@@ -347,6 +377,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__ELABORATES:
 				if (resolve) return getElaborates();
 				return basicGetElaborates();
+			case ClassdiagramsPackage.CLASS__DATA_KIND:
+				return getDataKind();
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
+				return getDiagrams();
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				return getSupertypes();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
@@ -358,8 +392,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				if (resolve) return getRefines();
 				return basicGetRefines();
-			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
-				return getClassType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -375,6 +407,13 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS__ELABORATES:
 				setElaborates((EventBNamed)newValue);
+				return;
+			case ClassdiagramsPackage.CLASS__DATA_KIND:
+				setDataKind((DataKind)newValue);
+				return;
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
+				getDiagrams().clear();
+				getDiagrams().addAll((Collection<? extends Diagram>)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				getSupertypes().clear();
@@ -395,9 +434,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				setRefines((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
-			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
-				setClassType((ClassType)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -412,6 +448,12 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS__ELABORATES:
 				setElaborates((EventBNamed)null);
+				return;
+			case ClassdiagramsPackage.CLASS__DATA_KIND:
+				setDataKind(DATA_KIND_EDEFAULT);
+				return;
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
+				getDiagrams().clear();
 				return;
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				getSupertypes().clear();
@@ -428,9 +470,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				setRefines((ac.soton.eventb.classdiagrams.Class)null);
 				return;
-			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
-				setClassType(CLASS_TYPE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -445,6 +484,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS__ELABORATES:
 				return elaborates != null;
+			case ClassdiagramsPackage.CLASS__DATA_KIND:
+				return dataKind != DATA_KIND_EDEFAULT;
+			case ClassdiagramsPackage.CLASS__DIAGRAMS:
+				return diagrams != null && !diagrams.isEmpty();
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
 				return supertypes != null && !supertypes.isEmpty();
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
@@ -455,8 +498,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return outgoing != null && !outgoing.isEmpty();
 			case ClassdiagramsPackage.CLASS__REFINES:
 				return refines != null;
-			case ClassdiagramsPackage.CLASS__CLASS_TYPE:
-				return classType != CLASS_TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -468,9 +509,16 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.CLASS__ELABORATES: return ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES;
+				case ClassdiagramsPackage.CLASS__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
+				case ClassdiagramsPackage.CLASS__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
+				default: return -1;
+			}
+		}
+		if (baseClass == DiagramOwner.class) {
+			switch (derivedFeatureID) {
+				case ClassdiagramsPackage.CLASS__DIAGRAMS: return DiagramsPackage.DIAGRAM_OWNER__DIAGRAMS;
 				default: return -1;
 			}
 		}
@@ -484,9 +532,16 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (baseFeatureID) {
-				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.CLASS__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return ClassdiagramsPackage.CLASS__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return ClassdiagramsPackage.CLASS__DATA_KIND;
+				default: return -1;
+			}
+		}
+		if (baseClass == DiagramOwner.class) {
+			switch (baseFeatureID) {
+				case DiagramsPackage.DIAGRAM_OWNER__DIAGRAMS: return ClassdiagramsPackage.CLASS__DIAGRAMS;
 				default: return -1;
 			}
 		}
@@ -503,32 +558,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (classType: ");
-		result.append(classType);
+		result.append(" (dataKind: ");
+		result.append(dataKind);
 		result.append(')');
 		return result.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getName() {
-		return doGetName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void setName(String newName) {
-		String oldName = getName();
-		doSetName(newName);
-		
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__NAME, oldName, newName));
 	}
 
 } //ClassImpl

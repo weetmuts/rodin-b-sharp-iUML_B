@@ -1,20 +1,25 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
+
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -108,14 +113,6 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 				return createClassAdapter();
 			}
 			@Override
-			public Adapter caseElaborativeElement(ElaborativeElement object) {
-				return createElaborativeElementAdapter();
-			}
-			@Override
-			public Adapter caseAssociativeElement(AssociativeElement object) {
-				return createAssociativeElementAdapter();
-			}
-			@Override
 			public Adapter caseEventBObject(EventBObject object) {
 				return createEventBObjectAdapter();
 			}
@@ -146,6 +143,18 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDiagram(Diagram object) {
 				return createDiagramAdapter();
+			}
+			@Override
+			public Adapter caseEventBDataElaboration(EventBDataElaboration object) {
+				return createEventBDataElaborationAdapter();
+			}
+			@Override
+			public Adapter caseEventBRelationKind(EventBRelationKind object) {
+				return createEventBRelationKindAdapter();
+			}
+			@Override
+			public Adapter caseDiagramOwner(DiagramOwner object) {
+				return createDiagramOwnerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -234,34 +243,6 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.ElaborativeElement <em>Elaborative Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.ElaborativeElement
-	 * @generated
-	 */
-	public Adapter createElaborativeElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.classdiagrams.AssociativeElement <em>Associative Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.classdiagrams.AssociativeElement
-	 * @generated
-	 */
-	public Adapter createAssociativeElementAdapter() {
 		return null;
 	}
 
@@ -374,6 +355,48 @@ public class ClassdiagramsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDiagramAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration <em>Event BData Elaboration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration
+	 * @generated
+	 */
+	public Adapter createEventBDataElaborationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind <em>Event BRelation Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind
+	 * @generated
+	 */
+	public Adapter createEventBRelationKindAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.diagrams.DiagramOwner <em>Diagram Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.diagrams.DiagramOwner
+	 * @generated
+	 */
+	public Adapter createDiagramOwnerAdapter() {
 		return null;
 	}
 

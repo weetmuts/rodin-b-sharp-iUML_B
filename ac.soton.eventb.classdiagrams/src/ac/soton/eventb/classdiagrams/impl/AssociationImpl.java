@@ -1,50 +1,33 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.AssociationType;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
-import java.util.Collection;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eventb.emf.core.AbstractExtension;
-import org.eventb.emf.core.Annotation;
-import org.eventb.emf.core.Attribute;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBCommented;
-import org.eventb.emf.core.EventBCommentedElement;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.EventBObject;
 
-import org.eventb.emf.core.impl.StringToAttributeMapEntryImpl;
+import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,11 +37,11 @@ import org.eventb.emf.core.impl.StringToAttributeMapEntryImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getDataKind <em>Data Kind</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isFunctional <em>Functional</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  * </ul>
@@ -76,6 +59,26 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * @ordered
 	 */
 	protected EventBNamed elaborates;
+
+	/**
+	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.SET;
+
+	/**
+	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataKind dataKind = DATA_KIND_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
@@ -158,26 +161,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	protected boolean functional = FUNCTIONAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final AssociationType ASSOCIATION_TYPE_EDEFAULT = AssociationType.CONSTANT;
-
-	/**
-	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected AssociationType associationType = ASSOCIATION_TYPE_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -257,22 +240,106 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public String getName() {
-		return doGetName();
+	public DataKind getDataKind() {
+		return dataKind;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = getName();
-		doSetName(newName);
+	public void setDataKind(DataKind newDataKind) {
+		DataKind oldDataKind = dataKind;
+		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__NAME, oldName, newName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__DATA_KIND, oldDataKind, dataKind));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSurjective() {
+		return surjective;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSurjective(boolean newSurjective) {
+		boolean oldSurjective = surjective;
+		surjective = newSurjective;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__SURJECTIVE, oldSurjective, surjective));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isInjective() {
+		return injective;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInjective(boolean newInjective) {
+		boolean oldInjective = injective;
+		injective = newInjective;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__INJECTIVE, oldInjective, injective));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTotal() {
+		return total;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTotal(boolean newTotal) {
+		boolean oldTotal = total;
+		total = newTotal;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__TOTAL, oldTotal, total));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isFunctional() {
+		return functional;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFunctional(boolean newFunctional) {
+		boolean oldFunctional = functional;
+		functional = newFunctional;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL, oldFunctional, functional));
 	}
 
 	/**
@@ -400,112 +467,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isSurjective() {
-		return surjective;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSurjective(boolean newSurjective) {
-		boolean oldSurjective = surjective;
-		surjective = newSurjective;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__SURJECTIVE, oldSurjective, surjective));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInjective() {
-		return injective;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInjective(boolean newInjective) {
-		boolean oldInjective = injective;
-		injective = newInjective;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__INJECTIVE, oldInjective, injective));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isTotal() {
-		return total;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTotal(boolean newTotal) {
-		boolean oldTotal = total;
-		total = newTotal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__TOTAL, oldTotal, total));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFunctional() {
-		return functional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFunctional(boolean newFunctional) {
-		boolean oldFunctional = functional;
-		functional = newFunctional;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL, oldFunctional, functional));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssociationType getAssociationType() {
-		return associationType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAssociationType(AssociationType newAssociationType) {
-		AssociationType oldAssociationType = associationType;
-		associationType = newAssociationType == null ? ASSOCIATION_TYPE_EDEFAULT : newAssociationType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE, oldAssociationType, associationType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -548,6 +509,8 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				if (resolve) return getElaborates();
 				return basicGetElaborates();
+			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
+				return getDataKind();
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return isSurjective();
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -556,8 +519,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return isTotal();
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				return isFunctional();
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
-				return getAssociationType();
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -573,12 +534,14 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				setElaborates((EventBNamed)newValue);
+				return;
+			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
+				setDataKind((DataKind)newValue);
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective((Boolean)newValue);
@@ -591,9 +554,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
-				setAssociationType((AssociationType)newValue);
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
@@ -616,6 +576,9 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				setElaborates((EventBNamed)null);
 				return;
+			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
+				setDataKind(DATA_KIND_EDEFAULT);
+				return;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				setSurjective(SURJECTIVE_EDEFAULT);
 				return;
@@ -627,9 +590,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
-				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
 				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)null);
@@ -651,6 +611,8 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		switch (featureID) {
 			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
 				return elaborates != null;
+			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
+				return dataKind != DATA_KIND_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
 				return surjective != SURJECTIVE_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
@@ -659,8 +621,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 				return total != TOTAL_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
-			case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE:
-				return associationType != ASSOCIATION_TYPE_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				return target != null;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
@@ -676,19 +636,19 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATION__ELABORATES: return ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES;
+				case ClassdiagramsPackage.ASSOCIATION__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
+				case ClassdiagramsPackage.ASSOCIATION__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
 				default: return -1;
 			}
 		}
-		if (baseClass == AssociativeElement.class) {
+		if (baseClass == EventBRelationKind.class) {
 			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATION__INJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATION__TOTAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL;
-				case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
-				case ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE;
+				case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATION__INJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE;
+				case ClassdiagramsPackage.ASSOCIATION__TOTAL: return CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL;
+				case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL: return CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL;
 				default: return -1;
 			}
 		}
@@ -702,19 +662,19 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (baseFeatureID) {
-				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.ASSOCIATION__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return ClassdiagramsPackage.ASSOCIATION__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return ClassdiagramsPackage.ASSOCIATION__DATA_KIND;
 				default: return -1;
 			}
 		}
-		if (baseClass == AssociativeElement.class) {
+		if (baseClass == EventBRelationKind.class) {
 			switch (baseFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATION__SURJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE: return ClassdiagramsPackage.ASSOCIATION__INJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL: return ClassdiagramsPackage.ASSOCIATION__TOTAL;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE: return ClassdiagramsPackage.ASSOCIATION__ASSOCIATION_TYPE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATION__SURJECTIVE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE: return ClassdiagramsPackage.ASSOCIATION__INJECTIVE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL: return ClassdiagramsPackage.ASSOCIATION__TOTAL;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL;
 				default: return -1;
 			}
 		}
@@ -731,7 +691,9 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (surjective: ");
+		result.append(" (dataKind: ");
+		result.append(dataKind);
+		result.append(", surjective: ");
 		result.append(surjective);
 		result.append(", injective: ");
 		result.append(injective);
@@ -739,8 +701,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 		result.append(total);
 		result.append(", functional: ");
 		result.append(functional);
-		result.append(", AssociationType: ");
-		result.append(associationType);
 		result.append(')');
 		return result.toString();
 	}

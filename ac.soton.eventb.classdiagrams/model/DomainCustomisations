@@ -1,0 +1,24 @@
+**********************************************************************************************
+* changed default extension id
+**********************************************************************************************
+
+	/**
+	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final String EXTENSION_ID_EDEFAULT = ClassdiagramsPackage.CLASSDIAGRAMS_EXTENSION_ID;
+
+	/**
+	 * The cached value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected String extensionId = EXTENSION_ID_EDEFAULT+"."+EcoreUtil.generateUUID();
+

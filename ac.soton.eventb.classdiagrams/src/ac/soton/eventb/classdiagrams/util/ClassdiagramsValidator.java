@@ -1,21 +1,20 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.AssociationType;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassType;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -108,14 +107,6 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateClassAttribute((ClassAttribute)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS:
 				return validateClass((ac.soton.eventb.classdiagrams.Class)value, diagnostics, context);
-			case ClassdiagramsPackage.ELABORATIVE_ELEMENT:
-				return validateElaborativeElement((ElaborativeElement)value, diagnostics, context);
-			case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT:
-				return validateAssociativeElement((AssociativeElement)value, diagnostics, context);
-			case ClassdiagramsPackage.CLASS_TYPE:
-				return validateClassType((ClassType)value, diagnostics, context);
-			case ClassdiagramsPackage.ASSOCIATION_TYPE:
-				return validateAssociationType((AssociationType)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -154,17 +145,17 @@ public class ClassdiagramsValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(association, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(association, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAssociation_isAsociationTypeRight(association, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAssociation_isAssociationTypeRight(association, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the isAsociationTypeRight constraint of '<em>Association</em>'.
+	 * Validates the isAssociationTypeRight constraint of '<em>Association</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAssociation_isAsociationTypeRight(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateAssociation_isAssociationTypeRight(Association association, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		// TODO implement the constraint
 		// -> specify the condition that violates the constraint
 		// -> verify the diagnostic details, including severity, code, and message
@@ -177,7 +168,7 @@ public class ClassdiagramsValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "isAsociationTypeRight", getObjectLabel(association, context) },
+						 new Object[] { "isAssociationTypeRight", getObjectLabel(association, context) },
 						 new Object[] { association },
 						 context));
 			}
@@ -202,42 +193,6 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 */
 	public boolean validateClass(ac.soton.eventb.classdiagrams.Class class_, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(class_, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateElaborativeElement(ElaborativeElement elaborativeElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(elaborativeElement, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAssociativeElement(AssociativeElement associativeElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(associativeElement, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassType(ClassType classType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAssociationType(AssociationType associationType, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
 	}
 
 	/**

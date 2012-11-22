@@ -1,15 +1,18 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+
 import ac.soton.eventb.emf.diagrams.Diagram;
 
 import java.util.Collection;
@@ -42,7 +45,7 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getExtensionId <em>Extension Id</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getClasses <em>Classes</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getClassAssociations <em>Class Associations</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getAssociations <em>Associations</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassdiagramImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  * </p>
@@ -50,7 +53,6 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  * @generated
  */
 public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements Classdiagram {
-
 	/**
 	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -82,14 +84,14 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 	protected EList<ac.soton.eventb.classdiagrams.Class> classes;
 
 	/**
-	 * The cached value of the '{@link #getClassAssociations() <em>Class Associations</em>}' containment reference list.
+	 * The cached value of the '{@link #getAssociations() <em>Associations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClassAssociations()
+	 * @see #getAssociations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Association> classAssociations;
+	protected EList<Association> associations;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
@@ -158,11 +160,11 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Association> getClassAssociations() {
-		if (classAssociations == null) {
-			classAssociations = new EObjectContainmentEList.Resolving<Association>(Association.class, this, ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS);
+	public EList<Association> getAssociations() {
+		if (associations == null) {
+			associations = new EObjectContainmentEList.Resolving<Association>(Association.class, this, ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS);
 		}
-		return classAssociations;
+		return associations;
 	}
 
 	/**
@@ -213,8 +215,8 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASSES:
 				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
-				return ((InternalEList<?>)getClassAssociations()).basicRemove(otherEnd, msgs);
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
+				return ((InternalEList<?>)getAssociations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -231,8 +233,8 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				return getExtensionId();
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASSES:
 				return getClasses();
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
-				return getClassAssociations();
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
+				return getAssociations();
 			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
 				if (resolve) return getRefines();
 				return basicGetRefines();
@@ -256,9 +258,9 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				getClasses().clear();
 				getClasses().addAll((Collection<? extends ac.soton.eventb.classdiagrams.Class>)newValue);
 				return;
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
-				getClassAssociations().clear();
-				getClassAssociations().addAll((Collection<? extends Association>)newValue);
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
+				getAssociations().clear();
+				getAssociations().addAll((Collection<? extends Association>)newValue);
 				return;
 			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
 				setRefines((Classdiagram)newValue);
@@ -281,8 +283,8 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASSES:
 				getClasses().clear();
 				return;
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
-				getClassAssociations().clear();
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
+				getAssociations().clear();
 				return;
 			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
 				setRefines((Classdiagram)null);
@@ -303,8 +305,8 @@ public class ClassdiagramImpl extends EventBNamedCommentedElementImpl implements
 				return EXTENSION_ID_EDEFAULT == null ? extensionId != null : !EXTENSION_ID_EDEFAULT.equals(extensionId);
 			case ClassdiagramsPackage.CLASSDIAGRAM__CLASSES:
 				return classes != null && !classes.isEmpty();
-			case ClassdiagramsPackage.CLASSDIAGRAM__CLASS_ASSOCIATIONS:
-				return classAssociations != null && !classAssociations.isEmpty();
+			case ClassdiagramsPackage.CLASSDIAGRAM__ASSOCIATIONS:
+				return associations != null && !associations.isEmpty();
 			case ClassdiagramsPackage.CLASSDIAGRAM__REFINES:
 				return refines != null;
 		}

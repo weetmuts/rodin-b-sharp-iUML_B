@@ -1,10 +1,17 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams;
+
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -23,7 +30,6 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.Class#getClassType <em>Class Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +37,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * @model
  * @generated
  */
-public interface Class extends EventBNamedCommentedElement, ElaborativeElement {
+public interface Class extends EventBNamedCommentedElement, EventBDataElaboration, DiagramOwner {
 	/**
 	 * Returns the value of the '<em><b>Supertypes</b></em>' reference list.
 	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.Class}.
@@ -125,34 +131,5 @@ public interface Class extends EventBNamedCommentedElement, ElaborativeElement {
 	 * @generated
 	 */
 	void setRefines(Class value);
-
-	/**
-	 * Returns the value of the '<em><b>Class Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link ac.soton.eventb.classdiagrams.ClassType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Class Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Type</em>' attribute.
-	 * @see ac.soton.eventb.classdiagrams.ClassType
-	 * @see #setClassType(ClassType)
-	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_ClassType()
-	 * @model
-	 * @generated
-	 */
-	ClassType getClassType();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getClassType <em>Class Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Type</em>' attribute.
-	 * @see ac.soton.eventb.classdiagrams.ClassType
-	 * @see #getClassType()
-	 * @generated
-	 */
-	void setClassType(ClassType value);
 
 } // Class

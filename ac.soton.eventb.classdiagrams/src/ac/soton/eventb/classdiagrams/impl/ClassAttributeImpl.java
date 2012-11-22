@@ -1,48 +1,31 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2012 - University of Southampton.
+ * All rights reserved. This program and the accompanying materials  are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this 
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
  *
  * $Id$
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-import ac.soton.eventb.classdiagrams.AssociationType;
-import ac.soton.eventb.classdiagrams.AssociativeElement;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import java.util.Collection;
-import ac.soton.eventb.classdiagrams.ElaborativeElement;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eventb.emf.core.AbstractExtension;
-import org.eventb.emf.core.Annotation;
+
 import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.EventBObject;
-import org.eventb.emf.core.impl.StringToAttributeMapEntryImpl;
-import org.eventb.emf.core.Attribute;
-import org.eventb.emf.core.AttributeType;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBCommented;
-import org.eventb.emf.core.EventBCommentedElement;
-import org.eventb.emf.core.EventBElement;
+
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 /**
@@ -53,18 +36,18 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#getDataKind <em>Data Kind</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#isSurjective <em>Surjective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#isInjective <em>Injective</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#isTotal <em>Total</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#isFunctional <em>Functional</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#getAssociationType <em>Association Type</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implements ClassAttribute{
+public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implements ClassAttribute {
 	/**
 	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -74,6 +57,27 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected EventBNamed elaborates;
+
+	/**
+	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.SET;
+
+	/**
+	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataKind dataKind = DATA_KIND_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -83,6 +87,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected static final boolean SURJECTIVE_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,6 +97,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected boolean surjective = SURJECTIVE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isInjective() <em>Injective</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -101,6 +107,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected static final boolean INJECTIVE_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isInjective() <em>Injective</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -110,6 +117,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected boolean injective = INJECTIVE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isTotal() <em>Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -119,6 +127,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected static final boolean TOTAL_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isTotal() <em>Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -128,6 +137,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected boolean total = TOTAL_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -137,6 +147,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected static final boolean FUNCTIONAL_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -146,24 +157,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected boolean functional = FUNCTIONAL_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final AssociationType ASSOCIATION_TYPE_EDEFAULT = AssociationType.CONSTANT;
-	/**
-	 * The cached value of the '{@link #getAssociationType() <em>Association Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected AssociationType associationType = ASSOCIATION_TYPE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -173,6 +167,7 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * @ordered
 	 */
 	protected static final String TARGET_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -245,8 +240,8 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTarget() {
-		return target;
+	public DataKind getDataKind() {
+		return dataKind;
 	}
 
 	/**
@@ -254,11 +249,11 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(String newTarget) {
-		String oldTarget = target;
-		target = newTarget;
+	public void setDataKind(DataKind newDataKind) {
+		DataKind oldDataKind = dataKind;
+		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND, oldDataKind, dataKind));
 	}
 
 	/**
@@ -350,8 +345,8 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssociationType getAssociationType() {
-		return associationType;
+	public String getTarget() {
+		return target;
 	}
 
 	/**
@@ -359,11 +354,11 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAssociationType(AssociationType newAssociationType) {
-		AssociationType oldAssociationType = associationType;
-		associationType = newAssociationType == null ? ASSOCIATION_TYPE_EDEFAULT : newAssociationType;
+	public void setTarget(String newTarget) {
+		String oldTarget = target;
+		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE, oldAssociationType, associationType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET, oldTarget, target));
 	}
 
 	/**
@@ -377,6 +372,8 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES:
 				if (resolve) return getElaborates();
 				return basicGetElaborates();
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND:
+				return getDataKind();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE:
 				return isSurjective();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE:
@@ -385,8 +382,6 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 				return isTotal();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL:
 				return isFunctional();
-			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE:
-				return getAssociationType();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET:
 				return getTarget();
 		}
@@ -398,12 +393,14 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES:
 				setElaborates((EventBNamed)newValue);
+				return;
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND:
+				setDataKind((DataKind)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE:
 				setSurjective((Boolean)newValue);
@@ -416,9 +413,6 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE:
-				setAssociationType((AssociationType)newValue);
 				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET:
 				setTarget((String)newValue);
@@ -438,6 +432,9 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES:
 				setElaborates((EventBNamed)null);
 				return;
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND:
+				setDataKind(DATA_KIND_EDEFAULT);
+				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE:
 				setSurjective(SURJECTIVE_EDEFAULT);
 				return;
@@ -449,9 +446,6 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE:
-				setAssociationType(ASSOCIATION_TYPE_EDEFAULT);
 				return;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET:
 				setTarget(TARGET_EDEFAULT);
@@ -470,6 +464,8 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 		switch (featureID) {
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES:
 				return elaborates != null;
+			case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND:
+				return dataKind != DATA_KIND_EDEFAULT;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE:
 				return surjective != SURJECTIVE_EDEFAULT;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE:
@@ -478,8 +474,6 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 				return total != TOTAL_EDEFAULT;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
-			case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE:
-				return associationType != ASSOCIATION_TYPE_EDEFAULT;
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE__TARGET:
 				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
 		}
@@ -493,19 +487,19 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES: return ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
 				default: return -1;
 			}
 		}
-		if (baseClass == AssociativeElement.class) {
+		if (baseClass == EventBRelationKind.class) {
 			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE;
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE;
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__TOTAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL;
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL;
-				case ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE: return ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__TOTAL: return CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL;
+				case ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL: return CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL;
 				default: return -1;
 			}
 		}
@@ -519,19 +513,19 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ElaborativeElement.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (baseFeatureID) {
-				case ClassdiagramsPackage.ELABORATIVE_ELEMENT__ELABORATES: return ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return ClassdiagramsPackage.CLASS_ATTRIBUTE__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return ClassdiagramsPackage.CLASS_ATTRIBUTE__DATA_KIND;
 				default: return -1;
 			}
 		}
-		if (baseClass == AssociativeElement.class) {
+		if (baseClass == EventBRelationKind.class) {
 			switch (baseFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__SURJECTIVE: return ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__INJECTIVE: return ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__TOTAL: return ClassdiagramsPackage.CLASS_ATTRIBUTE__TOTAL;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__FUNCTIONAL: return ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL;
-				case ClassdiagramsPackage.ASSOCIATIVE_ELEMENT__ASSOCIATION_TYPE: return ClassdiagramsPackage.CLASS_ATTRIBUTE__ASSOCIATION_TYPE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE: return ClassdiagramsPackage.CLASS_ATTRIBUTE__SURJECTIVE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE: return ClassdiagramsPackage.CLASS_ATTRIBUTE__INJECTIVE;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL: return ClassdiagramsPackage.CLASS_ATTRIBUTE__TOTAL;
+				case CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL: return ClassdiagramsPackage.CLASS_ATTRIBUTE__FUNCTIONAL;
 				default: return -1;
 			}
 		}
@@ -548,7 +542,9 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (surjective: ");
+		result.append(" (dataKind: ");
+		result.append(dataKind);
+		result.append(", surjective: ");
 		result.append(surjective);
 		result.append(", injective: ");
 		result.append(injective);
@@ -556,18 +552,10 @@ public class ClassAttributeImpl extends EventBNamedCommentedElementImpl implemen
 		result.append(total);
 		result.append(", functional: ");
 		result.append(functional);
-		result.append(", AssociationType: ");
-		result.append(associationType);
 		result.append(", target: ");
 		result.append(target);
 		result.append(')');
 		return result.toString();
-	}
-
-	@Override
-	public URI getURI() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 } //ClassAttributeImpl
