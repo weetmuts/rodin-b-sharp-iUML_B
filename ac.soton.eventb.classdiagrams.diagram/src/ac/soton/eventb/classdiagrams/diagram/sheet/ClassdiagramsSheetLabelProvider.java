@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.graphics.Image;
+import org.eventb.emf.core.EventBElement;
 
 import ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsNavigatorGroup;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
@@ -38,11 +39,18 @@ public class ClassdiagramsSheetLabelProvider extends BaseLabelProvider
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Image getImage(Object element) {
-		IElementType etype = getElementType(getView(unwrap(element)));
-		return etype == null ? null : ClassdiagramsElementTypes.getImage(etype);
+		
+		//Original generated version
+//		IElementType etype = getElementType(getView(unwrap(element)));
+//		return etype == null ? null : ClassdiagramsElementTypes.getImage(etype);
+		
+		//Modified version to support dynamic icons
+		Object unwrappedElement = unwrap(element);
+		return unwrappedElement instanceof EventBElement ? ClassdiagramsElementTypes.getImage((EventBElement) unwrappedElement) : null;
+		
 	}
 
 	/**
