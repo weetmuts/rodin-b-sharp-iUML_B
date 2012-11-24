@@ -45,11 +45,13 @@ import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eventb.emf.core.EventBElement;
 
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSelectionEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -179,16 +181,6 @@ public class ClassNameEditPart extends CompartmentEditPart implements
 		return resolveSemanticElement();
 	}
 
-	/**
-	 * @generated
-	 */
-	protected Image getLabelIcon() {
-		EObject parserElement = getParserElement();
-		if (parserElement == null) {
-			return null;
-		}
-		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
-	}
 
 	/**
 	 * @generated
@@ -585,4 +577,33 @@ public class ClassNameEditPart extends CompartmentEditPart implements
 		return null;
 	}
 
+	////////////////CUSTOM SECTION///////////
+	
+	
+	/**
+	 * This has been altered to dynamically find an icon depending on the values
+	 * of the elaborates and refines features.
+	 * 
+	 * @generated NOT
+	 */
+	protected Image getLabelIcon() {
+		Object refines = DiagramUtils.getModelFeatureValue(this, "refines");
+		Object elabs = DiagramUtils.getModelFeatureValue(this, "elaborates");
+		Image image = null;
+		if (refines instanceof EventBElement){
+			image = ClassdiagramsElementTypes.getImage((EventBElement)refines)	;		
+		}else{
+			if (elabs instanceof EventBElement){
+				image = ClassdiagramsElementTypes.getImage(((EventBElement) elabs).eClass());
+			}
+		}
+		//the default is the standard generated code:
+		if (image == null){
+			EObject parserElement = getParserElement();
+			if (parserElement != null) {
+				image = ClassdiagramsElementTypes.getImage(parserElement.eClass());
+			}
+		}
+		return image;
+	}
 }
