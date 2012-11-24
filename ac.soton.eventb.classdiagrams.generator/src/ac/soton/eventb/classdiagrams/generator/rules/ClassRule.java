@@ -49,28 +49,24 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		
 		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(sourceElement);
 		Class element = (Class)sourceElement;
-
-		int ct = element.getDataKind().getValue();
+		int dataKind = element.getDataKind().getValue();
 		EventBElement elaborated = (EventBElement) element.getElaborates();
 		//create element if it's a new one
 		if (elaborated==null || Is.generatedBy(elaborated, sourceElement)){
 			EventBElement newGeneratedElement = null;
 			EReference newGeneratedElementContainer = null;
-			switch (ct) {
+			switch (dataKind) {
 				case DataKind.SET_VALUE :
 					newGeneratedElement = (EventBElement) Make.set(element.getName(), element.getComment());
 					newGeneratedElementContainer = sets;
-					//ret.add(Make.descriptor(container, sets, Make.set(element.getName(), element.getComment()),10));
 					break;
 				case DataKind.CONSTANT_VALUE :
 					newGeneratedElement = (EventBElement) Make.constant(element.getName(), element.getComment());
 					newGeneratedElementContainer = constants;
-					//ret.add(Make.descriptor(container, constants, Make.constant(element.getName(), element.getComment()),10));
 					break;
 				case DataKind.VARIABLE_VALUE :
 					newGeneratedElement = Make.variable(element.getName(), element.getComment());
 					newGeneratedElementContainer = variables;
-					//ret.add(Make.descriptor(container,variables,newGeneratedElement,10));
 					break;
 			}
 			ret.add(Make.descriptor(container,newGeneratedElementContainer,newGeneratedElement,10));
@@ -78,21 +74,9 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		}
 		
 		// generate supertype invariants
-		
-//		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
-//			if (container instanceof Context){
-//				ret.add(Make.descriptor(container, axioms, Make.axiom(
-//						Strings.CLASS_SUPERTYPE_NAME(element), 
-//						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));
-//			} else {
-//				ret.add(Make.descriptor(container, invariants, Make.invariant(
-//						Strings.CLASS_SUPERTYPE_NAME(element), 
-//						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));
-//			}
-//		}
 
 		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
-			switch (ct) {
+			switch (dataKind) {
 			case DataKind.SET_VALUE :
 				//nothing to do - sets don't have supertypes
 				break;
