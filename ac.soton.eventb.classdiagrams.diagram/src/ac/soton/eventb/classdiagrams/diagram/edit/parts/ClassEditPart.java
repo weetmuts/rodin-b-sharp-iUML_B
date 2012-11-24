@@ -38,20 +38,19 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
-import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.EventBElement;
-
-import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassItemSemanticEditPolicy;
-import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
-import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassItemSemanticEditPolicy;
+import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
+import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.diagrams.generator.utils.Is;
-import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -379,7 +378,7 @@ public class ClassEditPart extends ShapeNodeEditPart {
 	 */
 	protected void handleNotificationEvent(Notification event) {
 //+++
-		setBackground(event);		//additions handled here
+		refresh();		//refresh to get background to dynamically change
 //+++
 		if (event.getNotifier() == getModel()
 				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
@@ -458,34 +457,19 @@ public class ClassEditPart extends ShapeNodeEditPart {
 		super.refresh();
 		setBackground();
 	}
-	
+
 	static final Color REFINED = ColorConstants.white;
 	static final Color VISUALIZES = new Color(null, 255, 255, 200); //light yellow;
 	static final Color DEFINES = new Color(null, 200, 255, 200); //light green;
 	static final Color NOT_ELABORATED = new Color(null, 245, 255, 245); //very light green;
-	
-	private void setBackground(Notification event) {
-		// update background colour when refines property changed
-		if (ClassdiagramsPackage.Literals.CLASS__REFINES.equals(event.getFeature())) {
-			setBackground(getElaborates(), event.getNewValue()!=null );
-		// update background colour when elaborates property changed
-		} else if (CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES.equals(event.getFeature())) {
-			setBackground(event.getNewValue(), isRefines());
-		} else {
-			//do nothing
-		}
-	}
-	
-	private void setBackground(){
-		setBackground(getElaborates(), isRefines());
-	}
-	
-	private void setBackground(Object elabs, boolean refines){
-		if (refines){
+	private void setBackground() { //Object elabs, Object refines){
+		Object refines = DiagramUtils.getModelFeatureValue(this, "refines");
+		Object elabs = DiagramUtils.getModelFeatureValue(this, "elaborates");
+		if (refines != null){
 			setBackgroundColor(REFINED);			
 		}else{
 			if (elabs instanceof EventBElement){
-				if (Is.generatedBy(elabs,DiagramsUtil.unwrap(getModel()))){
+				if (Is.generatedBy(elabs,DiagramUtils.unwrap(getModel()))){
 					setBackgroundColor(DEFINES);
 				}else{
 					setBackgroundColor(VISUALIZES);
@@ -495,22 +479,5 @@ public class ClassEditPart extends ShapeNodeEditPart {
 			}
 		}
 	}
-	
-	private Object getElaborates(){
-		Object element = DiagramsUtil.unwrap(getModel());
-		if (element instanceof Class){
-			return ((Class)element).getElaborates();	
-		}
-		return null;
-	}
-	
-	private boolean isRefines(){
-		Object element =  DiagramsUtil.unwrap(getModel());
-		if (element instanceof Class){
-			return ((Class)element).getRefines()!=null;	
-		}
-		return false;
-	}
-	
 
 }
