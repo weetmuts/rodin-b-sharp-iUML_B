@@ -16,12 +16,14 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
+import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationEditPart;
@@ -30,6 +32,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassSupertypesEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassdiagramEditPart;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorPlugin;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 /**
  * @generated
@@ -175,10 +178,30 @@ public class ClassdiagramsElementTypes {
 		ENamedElement element = getElement(hint);
 		if (element == null) {
 			return null;
-		}
-		return getImage(element);
+		}		return getImage(element);
 	}
 
+	/**
+	 * This is added to allow dynamic icons (dependent on model state) to be stored in the registry
+	 * (to avoid creating multiple images).
+	 * Be careful to make sure the key is unique to the icon!
+	 * 
+	 * @custom
+	 * @param key
+	 * @param imageDescriptor
+	 * @return
+	 */
+	public static Image getImage(EObject element){
+		ENamedElement elementType = element.eClass();
+		if (element instanceof EventBDataElaboration){
+			EventBNamed data = ((EventBDataElaboration)element).getElaborates();
+			if (data != null){
+				elementType = data.eClass(); 
+			}
+		}
+		return getImage(elementType);
+	}
+	
 	/**
 	 * Returns 'type' of the ecore object associated with the hint.
 	 * 
