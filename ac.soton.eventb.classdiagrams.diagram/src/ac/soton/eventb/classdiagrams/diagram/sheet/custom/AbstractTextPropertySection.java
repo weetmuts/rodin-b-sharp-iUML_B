@@ -15,7 +15,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import ac.soton.eventb.emf.diagrams.util.custom.DiagramsUtil;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 
 /**
@@ -56,7 +56,7 @@ public abstract class AbstractTextPropertySection extends
 
 	@Override
 	protected EObject unwrap(Object object) {
-		return DiagramsUtil.unwrap(object);
+		return DiagramUtils.unwrap(object);
 	}
 
 }

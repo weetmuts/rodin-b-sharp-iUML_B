@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * property section for Data elaboration, DataKinds.
@@ -26,6 +27,16 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
  *
  */
 public class DataKindPropertySection extends AbstractEnumerationPropertySection {
+	
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBDataElaboration;
+		}
+	}
 	
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {

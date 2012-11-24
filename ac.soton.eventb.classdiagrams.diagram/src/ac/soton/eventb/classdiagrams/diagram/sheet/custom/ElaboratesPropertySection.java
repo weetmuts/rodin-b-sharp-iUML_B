@@ -7,12 +7,13 @@
  */
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AbstractOverrideableCommand;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -21,6 +22,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gmf.runtime.common.ui.dialogs.PopupDialog;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.events.ModifyEvent;
@@ -37,22 +39,34 @@ import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.Variable;
 
-import ac.soton.eventb.classdiagrams.Class;
+//import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.diagrams.generator.utils.Is;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * Elaborates property section for Classdiagrams.
  * 
- * @author vitaly
+ * @author colin/gin
  * 
  */
-public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
+public class ElaboratesPropertySection extends AbstractLOVPropertySection {
 
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBDataElaboration;
+		}
+	}
+	
 	private static ILabelProvider variableLabelProvider = new LabelProvider() {
 
 		@Override
@@ -60,7 +74,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 			if (element instanceof EventBNamed){
 				return ((EventBNamed)element).getName();
 			} else {
-				return "not an EventBNamed element";				
+				return "<unknown>";				
 			}
 		}
 	};
@@ -71,38 +85,17 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	 * @return a new child instance.
 	 */
 	protected Object getNewChild() {
-		EObject container = EcoreUtil.getRootContainer(eObject);
-		String popupTitle = "no name";
-		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
-		
-		
-		if (container instanceof Machine){
-			popupTitle = ((Machine)container).getName();
-			
-			List<Machine> machines = getAllMachines((Machine)container, new LinkedList<Machine>());
-			
-			for (Machine m : machines){
-				valuesList.addAll(m.getVariables());
-				
-				for (Context context : m.getSees()){
-					valuesList.addAll(fillValuesListWithContextContents(context));
-				}		
-				
-			}
-		} else if (container instanceof Context){
-
-			popupTitle = ((Context)container).getName();
-	
-			valuesList.addAll(fillValuesListWithContextContents((Context)container));
-		}
-		
-		filterList((EventBNamedCommentedComponentElement)container, valuesList);
-		
+		//get the container machine or context
+		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)((EventBElement)eObject).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+		// find all data elements in scope
+		List<EventBNamed> valuesList = getAvailableDataElements(container);
+		valuesList.removeAll(getElaboratedElements(container));
+		// ask user to choose
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
 				.getShell(), valuesList, variableLabelProvider);
-		variablesDialog.setTitle(popupTitle + " elements");
+		variablesDialog.setTitle("Avaliable data elements in scope from "+((EventBNamed)container).getName());
 		variablesDialog.setMessage("Please select an element to elaborate");
-		
+		//return the chosen one
 		if (Dialog.OK == variablesDialog.open()) {
 			if (variablesDialog.getResult().length > 0){
 				return variablesDialog.getResult()[0]; 
@@ -111,55 +104,52 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		return null;
 	}
 	
-	private void filterList(EventBNamedCommentedComponentElement pContainer, List<EventBNamed> pValuesList) {
-		List<EventBNamed> filters = new LinkedList<EventBNamed>();
-		EObject diagram = ((EventBElement)eObject).getContaining(ClassdiagramsPackage.Literals.CLASSDIAGRAM);
-		if (diagram instanceof Classdiagram){
-			for (EObject diagramElement : ((Classdiagram)diagram).getAllContained(CorePackage.Literals.EVENT_BELEMENT, true) ){
-				if (diagramElement instanceof EventBDataElaboration &&
-						((EventBDataElaboration)diagramElement).getElaborates()!= null ){
-					filters.add(((EventBDataElaboration)diagramElement).getElaborates());
+private Collection<?> getElaboratedElements(EventBNamedCommentedComponentElement container) {
+		List<EventBNamed> list =  new ArrayList<EventBNamed>();
+		List<EventBNamed> filteredList =  new ArrayList<EventBNamed>();
+		if (container instanceof Machine){
+			Machine m = ((Machine)container);
+			list.addAll(m.getVariables());	
+		}else if (container instanceof Context){
+			Context c = ((Context)container);
+			list.addAll(c.getSets());
+			list.addAll(c.getConstants());
+		}
+		for (EventBNamed ne : list){
+			if (Is.generatedBy(ne, eObject)){
+				filteredList.add(ne);
+			}
+		}
+		Classdiagram diagram = (Classdiagram)((EventBElement)eObject).getContaining(ClassdiagramsPackage.Literals.CLASSDIAGRAM);
+		EList<EObject> elaborators = diagram.getAllContained(CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION, true);
+		for (EObject elaborator : elaborators){
+			if (elaborator instanceof EventBDataElaboration){
+				EventBNamed elaborated = ((EventBDataElaboration)elaborator).getElaborates();
+				if (list.contains(elaborated)){
+					filteredList.add(elaborated);
 				}
 			}
 		}
-		pValuesList.removeAll(filters);
+		return filteredList;
 	}
 
-	private List<EventBNamed> fillValuesListWithContextContents(Context context) {
-		List<EventBNamed> valuesList = new LinkedList<EventBNamed>();
-		
-		List<Context> contexts = getAllContexts(context, new LinkedList<Context>());
-		
-		for (Context c : contexts){
-			valuesList.addAll(c.getConstants());
-			valuesList.addAll(c.getSets());	
+private List<EventBNamed> getAvailableDataElements(EventBNamedCommentedComponentElement container) {
+		List<EventBNamed> list =  new ArrayList<EventBNamed>() ;
+		if (container instanceof Machine){
+			Machine m = ((Machine)container);
+			list.addAll(m.getVariables());
+			for (Context c : m.getSees()){
+				list.addAll(getAvailableDataElements(c));
+			}			
+		}else if (container instanceof Context){
+			Context c = ((Context)container);
+			list.addAll(c.getSets());
+			list.addAll(c.getConstants());
+			for (Context x : c.getExtends()){
+				list.addAll(getAvailableDataElements(x));
+			}
 		}
-		
-		return valuesList;
-	}
-
-	private List<Machine> getAllMachines(Machine container, List<Machine> pMachines) {
-		pMachines.add(container);		
-
-		List<Machine> machines = container.getRefines();
-		
-		for (Machine m : machines){
-			getAllMachines(m, pMachines);
-		}
-		
-		return pMachines;
-	}
-	
-	private List<Context> getAllContexts(Context container, List<Context> pContexts) {
-		pContexts.add(container);
-		
-		List<Context> machines = container.getExtends();
-		
-		for (Context c : machines){
-			getAllContexts(c, pContexts);
-		}
-		
-		return pContexts;
+		return list;
 	}
 
 	@Override
@@ -181,8 +171,9 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 				
 				//if refined or elaborated, disable text editing
 				if (eObject != null && 
-						(((Class)eObject).getRefines() != null || 
-						((EventBDataElaboration)eObject).getElaborates() != null)){
+						
+						//(((Class)eObject).getRefines() != null || 
+						((EventBDataElaboration)eObject).getElaborates() != null){
 						lovText.setEnabled(false);
 //						lovText.setForeground(ColorConstants.gray);
 				} else {
@@ -198,15 +189,19 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 
 	@Override
 	protected void clearElement() {
+		//if the elaborated element has been generated by this element
+		// we need to delete it so that it doesn't become orphaned
 		EditingDomain editingDomain = ((ClassdiagramsDiagramEditor) getPart()).getEditingDomain();
 		AbstractOverrideableCommand command;
-		EventBNamed generated = ((EventBDataElaboration)eObject).getElaborates(); //getGenerated((EventBNamed)eObject);
-		if (generated instanceof EObject){
-			command = (RemoveCommand) RemoveCommand.create(editingDomain, ((EObject)generated).eContainer(), ((EObject)generated).eContainingFeature(), generated);
+		EventBNamed elaborated = ((EventBDataElaboration)eObject).getElaborates();
+		if (elaborated instanceof EObject && Is.generatedBy(elaborated, eObject)){
+			command = (RemoveCommand) RemoveCommand.create(editingDomain, ((EObject)elaborated).eContainer(), ((EObject)elaborated).eContainingFeature(), elaborated);
 			editingDomain.getCommandStack().execute(command);
 		}
+		//super will clear the elaborates field for us
 		super.clearElement();
 	}
+	
 	
 	protected void modifyElement(Object pNewChild){
 		super.modifyElement(pNewChild);
@@ -256,7 +251,7 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 		if (eObject != null && ((EventBDataElaboration) eObject).getElaborates() != null) { 
 			return ((EventBDataElaboration) eObject).getElaborates().getName();
 		} else {
-			return "no name";
+			return "<not set>";
 		}
 	}
 
@@ -269,56 +264,16 @@ public class ClassElaboratesPropertySection extends AbstractLOVPropertySection {
 	protected String getLabelText() {
 		return "Elaborates:";
 	}
-	
-	/**
-	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
-	 */
-	public void refresh() {
-		super.refresh();
-		EventBNamed generated;
 
-//		if (eObject != null && (((EventBDataElaboration)eObject).getElaborates() == null) && 
-//			((generated = getGenerated((EventBNamed)eObject)) != null)){
-//			
-//			setElaborates(generated);
-//		}
-	}
-	
-	public EventBNamed getxGenerated(EventBNamed pEventBNamed) {
-		EObject container = EcoreUtil.getRootContainer(pEventBNamed);
-		List<EventBElement> objectsToCompare = new LinkedList<EventBElement>();
-		
-		if (container instanceof Machine){
-			objectsToCompare.addAll( ((Machine)container).getVariables());
-		} else if (container instanceof Context){
-			objectsToCompare.addAll( ((Context)container).getConstants());
-		}
-		
-		for (EventBElement e : objectsToCompare){
-			if (e.isGenerated() && 
-				e.isLocalGenerated() && 
-				e instanceof EventBNamed &&
-				((EventBNamed)e).getName() != null &&
-				((EventBNamed)e).getName().equals(pEventBNamed.getName())){
-				return (EventBNamed)e;
-			}
-		}
-		
-		return null;
+	@Override
+	protected String getClearButtonLabel() {
+		return "Disconnect / Delete generated element";
 	}
 
-	private void setElaborates(EventBNamed pEventBnamed){
-		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
-		
-		AbstractOverrideableCommand command;
-		
-		command = (SetCommand) SetCommand.create(
-				editingDomain,
-				eObject, 
-				getFeature(),
-				pEventBnamed);
-		
-		editingDomain.getCommandStack().execute(command);
+	@Override
+	protected String getPickValueButtonLabel() {
+		return "Connect to existing data element";
 	}
+
 	
 }

@@ -66,8 +66,8 @@ public abstract class AbstractLOVPropertySection extends
 		lovText.setEditable(false);
 		// labelText.addModifyListener(listener);
 
-		CLabel labelLabel = getWidgetFactory().createCLabel(composite,
-				getLOVLabel()); //$NON-NLS-1$
+		CLabel labelLabel = getWidgetFactory().createCLabel(composite,getLabelText()); //$NON-NLS-1$
+		
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(lovText,
@@ -111,17 +111,6 @@ public abstract class AbstractLOVPropertySection extends
 
 	}
 
-	protected  String getClearButtonLabel() {
-		return "Clear";
-	}
-
-	protected String getPickValueButtonLabel() {
-		return "Elaborate";
-	}
-
-	protected String getLOVLabel() {
-		return "Elaborates:";
-	}
 
 	protected void clearElement() {
 		EditingDomain editingDomain = ((ClassdiagramsDiagramEditor) getPart()).getEditingDomain();
@@ -160,6 +149,10 @@ public abstract class AbstractLOVPropertySection extends
 		editingDomain.getCommandStack().execute(command);
 	}
 
+	public Text getTextWidget(){
+		return lovText;
+	}
+	
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
@@ -167,6 +160,10 @@ public abstract class AbstractLOVPropertySection extends
 		lovText.setText(getLOVValue());
 	}
 
+	abstract protected  String getClearButtonLabel();
+
+	abstract protected String getPickValueButtonLabel();
+	
 	/**
 	 * 
 	 */
@@ -180,7 +177,4 @@ public abstract class AbstractLOVPropertySection extends
 	@Override
 	abstract protected EStructuralFeature getFeature();
 	
-	public Text getTextWidget(){
-		return lovText;
-	}
 }
