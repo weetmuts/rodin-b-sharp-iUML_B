@@ -13,9 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -37,7 +35,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.Transaction;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
@@ -220,7 +217,7 @@ public class TranslateAction extends AbstractHandler {
 						// URIs of input resources
 						final List<URI> inResourceURIs = new ArrayList<URI>(2);
 						inResourceURIs.add(machine.getURI());
-						if (TranslationKind.SINGLEVAR.equals(rootSM.getTranslation()))
+						if (TranslationKind.SINGLEVAR.equals(rootSM.getTranslation()) || TranslationKind.REFINEDVAR.equals(rootSM.getTranslation()))
 							inResourceURIs.add(getImplicitCtxURIForMachine(machine));
 						
 						List<Resource> inResources = loadResources(inResourceURIs, editingDomain);
@@ -348,22 +345,22 @@ public class TranslateAction extends AbstractHandler {
 		 * 
 		 * @return
 		 */
-		private Map<?, ?> getSaveOptions() {
-			HashMap<String, Object> saveOptions = new HashMap<String, Object>();
-			saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-			return saveOptions;
-		}
+//		private Map<?, ?> getSaveOptions() {
+//			HashMap<String, Object> saveOptions = new HashMap<String, Object>();
+//			saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
+//			return saveOptions;
+//		}
 
 		/**
 		 * Returns load options for Resource load operation.
 		 * 
 		 * @return
 		 */
-		private Map<?, ?> getLoadOptions() {
-			HashMap<String, Object> loadOptions = new HashMap<String, Object>();
-			loadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, "org.eclipse.emf.ecore.xmi.XMLParserPool");
-			return loadOptions;
-		}
+//		private Map<?, ?> getLoadOptions() {
+//			HashMap<String, Object> loadOptions = new HashMap<String, Object>();
+//			loadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, "org.eclipse.emf.ecore.xmi.XMLParserPool");
+//			return loadOptions;
+//		}
 
 		/**
 		 * Returns transformation script URI depending on translation kind provided.
@@ -372,7 +369,17 @@ public class TranslateAction extends AbstractHandler {
 		 * @return script URI
 		 */
 		private URI getScriptURI(TranslationKind kind) {
-			String scriptPath = TranslationKind.SINGLEVAR.equals(kind) ? "/transforms/set_statemachines2eventb.qvto" : "/transforms/statemachines2eventb.qvto";
+			String scriptPath = null;
+			
+			if(TranslationKind.SINGLEVAR.equals(kind))
+				scriptPath = "/transforms/set_statemachines2eventb.qvto";
+			else if(TranslationKind.MULTIVAR.equals(kind))
+				scriptPath = "/transforms/statemachines2eventb.qvto";
+			else if (TranslationKind.REFINEDVAR.equals(kind))
+				scriptPath = "/transforms/ref_statemachines2eventb.qvto";
+			else 
+				return null;
+			
 			URL url = Platform.getBundle(TransformationPlugin.PLUGIN_ID).getEntry(scriptPath);
 			return URI.createURI(url.toString());
 		}

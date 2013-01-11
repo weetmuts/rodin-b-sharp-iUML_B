@@ -1,0 +1,96 @@
+import util;
+import libraries.ref_statemachines2events_enter;
+
+modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+
+library set_statemachines2events;
+property refinmentLevel : Integer = 0;
+//property done : Boolean = false;  	
+property RootStatemachine : Statemachine = null;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event guards and actions
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms root statemachine to events.
+ * Augments events with guards and actions.
+ */
+mapping statemachines::Statemachine::rootStatemachine2events(in generatorID : String, in refLevel : Integer) {
+	RootStatemachine := self;
+	refinmentLevel := refLevel;
+	self.map statemachine2events(generatorID);
+}
+
+/*
+ * Transforms statemachine to events.
+ * Augments events with guards and enter actions generated from transitions.
+ */
+mapping statemachines::Statemachine::statemachine2events(in generatorID : String) {
+	self.transitions.map transition2events(generatorID);
+	//self.map statemachine2events(generatorID);
+	self.nodes[statemachines::State].statemachines.map statemachine2events(generatorID);
+}
+
+/*
+ * Transforms transition to event with guards and enter actions.
+ * Generates guards and enter actions for events elaborated by transition.
+ * Skips initialisation event.
+ */
+mapping statemachines::Transition::transition2events(in generatorID : String) {
+	self.elaborates[name <> INIT].map event2statemachinesEvent(self, generatorID);
+}
+
+/*
+ * Transforms event to same event augmented with guard and enter actions.
+ * Generates guard and enter actions from transition and adds to event.
+ */
+mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : statemachines::Transition, in generatorID : String) {
+	
+	self.guards := transition.source[statemachines::State].map sourceState2sourceGuards(self, generatorID)->
+		union(self.guards);
+	self.actions := transition.target[statemachines::State].map targetState2enterActions(self, transition, generatorID,refinmentLevel,RootStatemachine)->
+		union(self.actions);
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Source guard
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms source state to source guard.
+ * Generates guard for source state and particular event.
+ * Skips transformation if event contains source guard on the same state already.
+ * If event occurs in more than one transition, generates a disjunctive guard
+ */
+
+ 
+ mapping statemachines::State::sourceState2sourceGuards(inout event : eventb::machine::Event, in generatorID : String) : Sequence(eventb::machine::Guard){
+	init{
+	  result := self.map sourceState2sourceGuard(event, generatorID)->asSequence();
+	 }
+	}
+
+ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+ when{ not( event.containsGuardWithPrefix(ISIN_ + self.name) or event.containsGuardWithSuffix(ISIN_ + self.name)) }
+ {
+	var done : Boolean = false;
+	event.guards->forEach(i){
+		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_))then{
+			i.predicate := i.predicate + B_OR + RootStatemachine.name + "_" + refinmentLevel.toString() + B_EQ + self.name; 
+			i.name := i.name + "_or_" + ISIN_ + self.name;
+			name := i.name;
+			predicate := i.predicate;
+			attributes += getGeneratedAttr(generatorID);
+			event.guards := event.guards->excluding(i);
+			done := true;
+		}endif
+	};
+	if(done=false)then{
+		name := ISIN_ + self.name;
+		predicate := RootStatemachine.name + "_" + refinmentLevel.toString() + B_EQ + self.name;
+		generated := true;
+		attributes += getGeneratedAttr(generatorID);
+	}endif
+}

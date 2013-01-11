@@ -155,6 +155,19 @@ query eventb::machine::Event::containsAction(in label : String) : Boolean {
 }
 
 /*
+ * Returns true if machine contains an invariant of specified label
+ */
+query eventb::machine::Machine::containsGeneratedInvariant(in label : String, in generatorID : String) : Boolean {
+	return self.invariants->exists(name = label and isGenerated(generatorID))  or
+		(self.extensions!=null and self._refines->first().containsGeneratedInvariant(label,generatorID));
+}
+
+query eventb::machine::Machine::containsGeneratedInvariantWithSuffix(in labelSuffix : String, in generatorID : String) : Boolean {
+	return self.invariants->exists(name.endsWith(labelSuffix) and isGenerated(generatorID)) or
+		(self.extensions!=null and self._refines->first().containsGeneratedInvariantWithSuffix(labelSuffix,generatorID));
+}
+
+/*
  * Returns true if statemachine contains nested state, which is target for event (transition's elaborated).
  */
 helper statemachines::Statemachine::containsEventTarget(in event : eventb::machine::Event) : Boolean {
@@ -178,6 +191,14 @@ helper statemachines::State::getStatemachine() : statemachines::Statemachine {
 }
 
 /*
+ * Returns statemachine's superstate
+ */
+helper statemachines::Statemachine::getSuperState() : statemachines::State{
+	return self.eContainer().oclAsType(statemachines::State);
+}
+
+
+/*
  * Returns true if statemachine has a parent state.
  */
 query statemachines::Statemachine::hasParentState() : Boolean {
@@ -190,12 +211,32 @@ query statemachines::Statemachine::hasParentState() : Boolean {
 helper statemachines::Statemachine::getStatePartitions2() : Sequence(String) {
 	return self.nodes[statemachines::State].name.asSet();
 }
+/*
+ * Returns a sequence of partition strings for state variables of a statemachine (for SET translation kind).
+ */
+
+helper statemachines::Statemachine::getStatePartitions3() : Sequence(String) {
+	return self.nodes[statemachines::State].name;
+}
 
 /*
  * Returns partition string for a state variable (for SET translation kind).
  */
 helper statemachines::State::getPartition2() : String {
 	return self.name.asSet() + B_INTER + B_TRUE.asSet();
+}
+
+/*
+ * Returns the current refinement level
+ */
+helper eventb::machine::Machine::getRefinmentLevel(): Integer{
+    var i : Integer := 0;
+    var SM : eventb::machine::Machine := self;
+	while(SM._refines != null){
+		i := i + 1 ;
+		SM := SM._refines->first();
+	};
+	return i-1;
 }
 
 /*
@@ -211,4 +252,20 @@ helper getImplicitContextName(in machineName : String) : String {
 query eventb::machine::Event::containsActionWithPrefix(in labelPrefix : String) : Boolean {
 	return self.actions->exists(name.startsWith(labelPrefix)) or
 		(self.extended and self._refines->first().containsActionWithPrefix(labelPrefix));
+}
+
+/*
+ * Returns true if Guard and its extensions contain an action of specified label prefix.
+ */
+query eventb::machine::Event::containsGuardWithPrefix(in labelPrefix : String) : Boolean {
+	return self.guards->exists(name.startsWith(labelPrefix)) or
+		(self.extended and self._refines->first().containsGuardWithPrefix(labelPrefix));
+}
+
+/*
+ * Returns true if Guard and its extensions contain an action of specified label suffix.
+ */
+query eventb::machine::Event::containsGuardWithSuffix(in labelSuffix : String) : Boolean {
+	return self.guards->exists(name.endsWith(labelSuffix)) or
+		(self.extended and self._refines->first().containsGuardWithSuffix(labelSuffix));
 }
