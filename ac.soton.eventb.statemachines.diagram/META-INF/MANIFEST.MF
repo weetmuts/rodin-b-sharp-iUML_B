@@ -18,6 +18,7 @@ Export-Package: ac.soton.eventb.statemachines.diagram,
  ac.soton.eventb.statemachines.diagram.parsers,
  ac.soton.eventb.statemachines.diagram.part,
  ac.soton.eventb.statemachines.diagram.preferences,
+ ac.soton.eventb.statemachines.diagram.preferences.custom,
  ac.soton.eventb.statemachines.diagram.providers,
  ac.soton.eventb.statemachines.diagram.sheet,
  ac.soton.eventb.statemachines.diagram.sheet.custom
