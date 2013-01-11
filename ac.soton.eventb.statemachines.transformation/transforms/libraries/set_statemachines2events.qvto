@@ -58,12 +58,28 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
  * Transforms source state to source guard.
  * Generates guard for source state and particular event.
  * Skips transformation if event contains source guard on the same state already.
+ * If event occurs in more than one transition, generates a disjunctive guard
  */
-mapping statemachines::State::sourceState2sourceGuard(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
-	when { not event.containsGuard(ISIN_ + self.name) }
-{
-	name := ISIN_ + self.name;
-	predicate := self.getStatemachine().name + B_EQ + self.name;
-	generated := true;
-	attributes += getGeneratedAttr(generatorID);
+
+ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+ when{ not( event.containsGuardWithPrefix(ISIN_ + self.name) or event.containsGuardWithSuffix(ISIN_ + self.name)) }
+ {
+	var done : Boolean = false;
+	event.guards->forEach(i){
+		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_))then{
+			i.predicate := i.predicate + B_OR + self.getStatemachine().name + B_EQ + self.name; 
+			i.name := i.name + "_or_" + ISIN_ + self.name;
+			name := i.name;
+			predicate := i.predicate;
+			attributes += getGeneratedAttr(generatorID);
+			event.guards := event.guards->excluding(i);
+			done := true;
+		}endif
+	};
+	if(done=false)then{
+		name := ISIN_ + self.name;
+		predicate := self.getStatemachine().name + B_EQ + self.name;
+		generated := true;
+		attributes += getGeneratedAttr(generatorID);
+	}endif
 }
