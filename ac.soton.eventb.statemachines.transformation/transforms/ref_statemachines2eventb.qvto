@@ -42,6 +42,7 @@ mapping inout eventb::machine::Machine::iumlb2eventbMachine(in statemachine : st
 		union(variables->asSequence());
 	invariants := statemachine.map statemachine2typeInvariants(generatorID,self.getRefinmentLevel(),self)->
 		union(statemachine.map statemachine2superstateInvariants(generatorID,self))->
+		union(statemachine.map statemachine2constraintInvariants(generatorID))->
 		union(invariants->asSequence());
 	statemachine.map rootStatemachine2initActions(generatorID,self.getRefinmentLevel());
 	// inactive state actions generated after active to not conflict with latter

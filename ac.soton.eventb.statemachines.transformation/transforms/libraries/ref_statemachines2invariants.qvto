@@ -130,11 +130,10 @@ mapping statemachines::State::state2constraintInvariants(in generatorID : String
  */
 mapping statemachines::State::state2constraintInvariantsFinal(in generatorID : String) : Sequence(eventb::machine::Invariant) {
 	init {
-		var statemachine : statemachines::Statemachine := self.getStatemachine();
 		result := self.invariants->collect(i | object eventb::machine::Invariant {
 			name := i.name;
 			theorem := i.theorem;
-			predicate := (statemachine.name + B_EQ + self.name).parenthesize() + B_IMPL + i.predicate.parenthesize();
+			predicate := (RootStatemachine.name + "_" + refinmentLevel.toString() + B_IN + self.name).parenthesize() + B_IMPL + i.predicate.parenthesize();
 			generated := true;
 			attributes += getGeneratedAttr(generatorID);
 		});
