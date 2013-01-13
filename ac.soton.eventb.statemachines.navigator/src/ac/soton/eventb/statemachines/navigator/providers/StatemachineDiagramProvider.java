@@ -37,8 +37,8 @@ public class StatemachineDiagramProvider implements IDiagramProvider {
 			while (rootStatemachine.eContainer() instanceof State
 					&& rootStatemachine.eContainer().eContainer() instanceof Statemachine)
 				rootStatemachine = (Statemachine) rootStatemachine.eContainer().eContainer();
+			//construct filename
 			filename = rootStatemachine.getName() + ".smd";
-			
 			// prefix with machine name
 			EObject root = EcoreUtil.getRootContainer(element);
 			if (root != null && root instanceof Machine)
