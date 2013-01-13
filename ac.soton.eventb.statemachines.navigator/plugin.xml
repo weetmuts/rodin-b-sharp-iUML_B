@@ -51,32 +51,6 @@
                </with>
             </visibleWhen>
          </command>
-         <command
-               commandId="ac.soton.eventb.statemachines.navigator.commands.deleteStatemachine"
-               label="Delete"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="selection">
-                  <iterate
-                        ifEmpty="false">
-                     <and>
-                        <adapt
-                              type="org.eclipse.emf.ecore.EObject">
-                           <instanceof
-                                 value="ac.soton.eventb.statemachines.Statemachine">
-                           </instanceof>
-                        </adapt>
-                        <test
-                              property="ac.soton.eventb.emf.core.extension.navigator.eventBRootChild"
-                              value="true">
-                        </test>
-                     </and>
-                  </iterate>
-               </with>
-            </visibleWhen>
-         </command>
       </menuContribution>
    </extension>
    <extension
@@ -85,11 +59,6 @@
             defaultHandler="ac.soton.eventb.statemachines.navigator.actions.AddStatemachineHandler"
             id="ac.soton.eventb.statemachines.navigator.commands.addStatemachine"
             name="Add Statemachine">
-      </command>
-      <command
-            defaultHandler="ac.soton.eventb.statemachines.navigator.actions.DeleteStatemachineHandler"
-            id="ac.soton.eventb.statemachines.navigator.commands.deleteStatemachine"
-            name="Delete">
       </command>
    </extension>
    <extension
@@ -111,6 +80,7 @@
             id="statemachineRefiner"
             refinement-id="org.eventb.core.machineRefinement">
       </Participant>
+
    </extension>
 
 </plugin>
