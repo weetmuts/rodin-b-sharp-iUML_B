@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
@@ -38,8 +39,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-
-import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditor;
 
 /**
  * An abstract implementation of a section with a table field with add and
@@ -118,8 +117,7 @@ public abstract class AbstractTablePropertySection
 				Object newChild = getNewChild();
 				if (newChild == null)
 					return;
-				EditingDomain editingDomain = ((StatemachinesDiagramEditor) getPart())
-					.getEditingDomain();
+				EditingDomain editingDomain = ((DiagramEditor) getPart()).getEditingDomain();
 				AddCommand addCommand;
 				if (newChild instanceof Collection)
 					addCommand = (AddCommand) AddCommand.create(
@@ -143,7 +141,7 @@ public abstract class AbstractTablePropertySection
 		removeButton.addSelectionListener(new SelectionAdapter() {
 
 			public void widgetSelected(SelectionEvent event) {
-				EditingDomain editingDomain = ((StatemachinesDiagramEditor) getPart())
+				EditingDomain editingDomain = ((DiagramEditor) getPart())
 					.getEditingDomain();
 				Object object = table.getSelection()[0].getData();
 				EList<EObject> newValues = new BasicEList<EObject>();
@@ -172,7 +170,7 @@ public abstract class AbstractTablePropertySection
 		table.addSelectionListener(new SelectionAdapter() {
 
 			public void widgetSelected(SelectionEvent event) {
-				removeButton.setEnabled(true);
+				rowSelected();
 			}
 		});
 		table.addMouseListener(new MouseAdapter() {
@@ -182,8 +180,8 @@ public abstract class AbstractTablePropertySection
 					Object object = table.getSelection()[0].getData();
 					ISelection selection = getEditorSelection(object);
 					if (selection != null) {
-						((StatemachinesDiagramEditor) getPart()).getDiagramGraphicalViewer().setSelection(selection);
-						((StatemachinesDiagramEditor) getPart()).setFocus();
+						((DiagramEditor) getPart()).getDiagramGraphicalViewer().setSelection(selection);
+						((DiagramEditor) getPart()).setFocus();
 					}
 				}
 			}
@@ -197,6 +195,10 @@ public abstract class AbstractTablePropertySection
 		nameLabel.setLayoutData(data);
 	}
 
+	protected void rowSelected(){
+		removeButton.setEnabled(true);
+	}
+	
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#shouldUseExtraSpace()
 	 */
