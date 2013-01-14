@@ -14,6 +14,7 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="statemachines.ecore#//TranslationKind">
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//TranslationKind/MULTIVAR"/>
       <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//TranslationKind/SINGLEVAR"/>
+      <genEnumLiterals ecoreEnumLiteral="statemachines.ecore#//TranslationKind/REFINEDVAR"/>
     </genEnums>
     <genClasses ecoreClass="statemachines.ecore#//Statemachine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//Statemachine/translation"/>

@@ -42,7 +42,15 @@ public enum TranslationKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SINGLEVAR(1, "SINGLEVAR", "SINGLEVAR");
+	SINGLEVAR(1, "SINGLEVAR", "SINGLEVAR"), /**
+	 * The '<em><b>REFINEDVAR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #REFINEDVAR_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	REFINEDVAR(2, "REFINEDVAR", "REFINEDVAR");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,6 +90,21 @@ public enum TranslationKind implements Enumerator {
 	public static final int SINGLEVAR_VALUE = 1;
 
 	/**
+	 * The '<em><b>REFINEDVAR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>REFINEDVAR</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #REFINEDVAR
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REFINEDVAR_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>Translation Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,6 +114,7 @@ public enum TranslationKind implements Enumerator {
 		new TranslationKind[] {
 			MULTIVAR,
 			SINGLEVAR,
+			REFINEDVAR,
 		};
 
 	/**
@@ -143,6 +167,7 @@ public enum TranslationKind implements Enumerator {
 		switch (value) {
 			case MULTIVAR_VALUE: return MULTIVAR;
 			case SINGLEVAR_VALUE: return SINGLEVAR;
+			case REFINEDVAR_VALUE: return REFINEDVAR;
 		}
 		return null;
 	}

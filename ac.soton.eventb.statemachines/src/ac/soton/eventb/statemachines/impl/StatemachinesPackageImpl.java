@@ -542,6 +542,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");
 		addEEnumLiteral(translationKindEEnum, TranslationKind.MULTIVAR);
 		addEEnumLiteral(translationKindEEnum, TranslationKind.SINGLEVAR);
+		addEEnumLiteral(translationKindEEnum, TranslationKind.REFINEDVAR);
 
 		// Create resource
 		createResource(eNS_URI);

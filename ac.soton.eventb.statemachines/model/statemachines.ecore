@@ -6,6 +6,7 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TranslationKind">
     <eLiterals name="MULTIVAR"/>
     <eLiterals name="SINGLEVAR" value="1"/>
+    <eLiterals name="REFINEDVAR" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//Diagram">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

@@ -11,6 +11,10 @@
         <element xmi:type="ecore:EEnumLiteral" href="statemachines.ecore#//TranslationKind/SINGLEVAR"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_5rs6cREZEeGasKCReBd6Vw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_1axaEfdCEeG2afRDVR5WvA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="statemachines.ecore#//TranslationKind/REFINEDVAR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1axaEvdCEeG2afRDVR5WvA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_5rrsUhEZEeGasKCReBd6Vw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_5rrsUxEZEeGasKCReBd6Vw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_5rrsVBEZEeGasKCReBd6Vw"/>
