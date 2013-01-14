@@ -80,7 +80,11 @@
             id="statemachineRefiner"
             refinement-id="org.eventb.core.machineRefinement">
       </Participant>
-
+      <Participant
+            class="ac.soton.eventb.statemachines.navigator.refiner.RefinedEnumerationStatemachineRefiner"
+            id="RefinedEnumerationStatemachineRefiner"
+            refinement-id="org.eventb.core.machineRefinement">
+      </Participant>
    </extension>
 
 </plugin>
