@@ -27,6 +27,7 @@ property B_RBRC : String = "}";
 property B_COM : String = ", ";
 property B_IMPL : String = " ⇒ ";
 property B_INTER : String = " ∩ ";
+property B_SUB : String = " \u2286 ";
 
 // generated names & labels
 property _STATES : String = "_STATES";

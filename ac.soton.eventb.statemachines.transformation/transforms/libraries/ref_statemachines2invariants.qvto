@@ -35,7 +35,7 @@ mapping statemachines::Statemachine::statemachine2typeInvariant(in generatorID :
 	
 {	  
 	name := TYPEOF_ + self.name + "_" + refinmentLevel.toString();
-	predicate := self.name + "_" + refinmentLevel.toString() + B_IN + "\u2119" + (self.name + _STATES).parenthesize();
+	predicate := self.name + "_" + refinmentLevel.toString() + B_SUB + self.name + _STATES;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 
@@ -133,7 +133,7 @@ mapping statemachines::State::state2constraintInvariantsFinal(in generatorID : S
 		result := self.invariants->collect(i | object eventb::machine::Invariant {
 			name := i.name;
 			theorem := i.theorem;
-			predicate := (RootStatemachine.name + "_" + refinmentLevel.toString() + B_IN + self.name).parenthesize() + B_IMPL + i.predicate.parenthesize();
+			predicate := RootStatemachine.name + "_" + refinmentLevel.toString() + B_SUB + self.name + B_IMPL + i.predicate.parenthesize();
 			generated := true;
 			attributes += getGeneratedAttr(generatorID);
 		});
