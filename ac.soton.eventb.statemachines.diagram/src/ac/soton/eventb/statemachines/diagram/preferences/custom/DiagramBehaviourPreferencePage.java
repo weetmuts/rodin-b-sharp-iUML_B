@@ -83,7 +83,7 @@ public class DiagramBehaviourPreferencePage extends AbstractPreferencePage {
 	public static void initDefaults(IPreferenceStore store) {
 		store.setDefault(
 				IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE,
-				false);
+				true);
 	}
 
 }
