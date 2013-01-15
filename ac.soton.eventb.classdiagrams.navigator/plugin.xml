@@ -16,11 +16,6 @@
                label="Add Classdiagram"
                style="push">
          </command>
-         <command
-               commandId="ac.soton.eventb.classdiagrams.navigator.commands.deleteClassdiagram"
-               label="Delete Classdiagram"
-               style="push">
-         </command>
       </menuContribution>
    </extension>
    <extension
@@ -29,11 +24,6 @@
             defaultHandler="ac.soton.eventb.classdiagrams.navigator.actions.AddClassdiagramHandler"
             id="ac.soton.eventb.classdiagrams.navigator.commands.addClassdiagram"
             name="Add Classdiagram">
-      </command>
-      <command
-            defaultHandler="ac.soton.eventb.classdiagrams.navigator.actions.DeleteClassdiagramHandler"
-            id="ac.soton.eventb.classdiagrams.navigator.commands.deleteClassdiagram"
-            name="Delete">
       </command>
    </extension>
    <extension
