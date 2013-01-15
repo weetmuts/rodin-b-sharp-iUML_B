@@ -23,7 +23,9 @@ mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : S
  * Generates leave actions for events elaborated by transition.
  * Skips initialisation event.
  */
-mapping statemachines::Transition::transition2eventsLeave(in generatorID : String) {
+mapping statemachines::Transition::transition2eventsLeave(in generatorID : String)
+when {not self.isSelfLoop()}
+{
 	self.elaborates[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
 }
 
@@ -47,8 +49,7 @@ mapping inout eventb::machine::Event::event2statemachinesEventLeave(in transitio
  * or if event is extended and contains leave action on the same statemachine already.
  */
 mapping statemachines::Statemachine::statemachine2leaveAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
-	when { not event.containsActionWithPrefix(ENTER_ + self.name) 
-		and not event.containsActionWithPrefix(LEAVE_ + self.name) }
+	when {(not event.containsActionWithPrefix(ENTER_ + self.name) and not event.containsActionWithPrefix(LEAVE_ + self.name)) }
 {
 	name := LEAVE_ + self.name;
 	action := self.name + B_BEQ + self.name + _NULL;
@@ -66,12 +67,14 @@ mapping statemachines::Statemachine::statemachine2leaveAction(in event : eventb:
  * which are not common to target state's superstates,
  * as well as leave actions for source state's statemachines,
  * excluding parallel statemachines that don't contain target state 
- * if transition is local and is directed from parent state towards its nested state.
+ * if transition is local and is directed from parent state towards its nested state. 
  */
-mapping statemachines::State::sourceState2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+mapping statemachines::State::sourceState2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action)
+{
 	init {
 		result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map superState2leaveActions(event, generatorID)->
-			union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map statemachine2leaveActions(event, generatorID)->flatten()->asBag());
+			union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map statemachine2leaveActions(event, generatorID)->asBag())->
+			union(self.getRootStatemachine()->reject(not hasFinalState()).map statemachine2leaveAction(event,generatorID)->asBag());
 	}
 }
 

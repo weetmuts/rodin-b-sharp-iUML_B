@@ -13,7 +13,9 @@ property refinmentLevel : Integer = 0;
 /*
  * Transforms state to enter action.
  */
-mapping statemachines::State::targetState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String, in refLevel : Integer, in RootSM : Statemachine) : Bag(eventb::machine::Action) {
+mapping statemachines::State::targetState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String, in refLevel : Integer, in RootSM : Statemachine) : Bag(eventb::machine::Action) 
+when {not transition.isSelfLoop()}
+{
 	init {
 		RootStatemachine := RootSM;
 		refinmentLevel := refLevel;	

@@ -23,7 +23,8 @@ mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : S
  * Generates leave actions for events elaborated by transition.
  * Skips initialisation event.
  */
-mapping statemachines::Transition::transition2eventsLeave(in generatorID : String) {
+mapping statemachines::Transition::transition2eventsLeave(in generatorID : String) 
+when {not self.isSelfLoop()}{
 	self.elaborates[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
 }
 

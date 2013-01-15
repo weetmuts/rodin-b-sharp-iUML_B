@@ -32,6 +32,26 @@ helper getGeneratedAttr(in generatorID : String) : StringToAttributeMapEntry {
 }
 
 /*
+ * Returns an anticedent for the sequence of partition strings for state variables of a root statemachine.
+ * or empty string if the statemachine has no final state
+ */
+helper statemachines::Statemachine::getStatePartitionAnticedent() : String {
+	return 
+	if self.hasFinalState()
+	then B_TRUE + B_IN + self.getStatePartitions3()->toString(B_COM).asSet() + B_IMPL
+	else ""
+	endif;
+}
+
+/*
+ * Returns a sequence of partition strings for state variables of a statemachine.
+ *
+helper statemachines::Statemachine::getStates() : Sequence(String) {
+	return self.nodes[statemachines::State].map self.;
+}
+*/
+
+/*
  * Returns a sequence of partition strings for state variables of a statemachine.
  */
 helper statemachines::Statemachine::getStatePartitions() : Sequence(String) {
@@ -83,6 +103,15 @@ helper statemachines::AbstractNode::getSuperstates() : Set(statemachines::Abstra
 		then self.eContainer().eContainer().oclAsType(statemachines::State).getSuperstates()->union(self->asSet())
 		else self->asSet()
 		endif;
+}
+
+/*
+ * Returns true if transition is local to source state i.e.
+ * source state is abstract state and target state is its substate.
+ */
+query statemachines::Transition::isSelfLoop() : Boolean {
+	return self.source = self.target;
+	//self.source.oclIsKindOf(statemachines::State) and self.source.oclAsType(statemachines::State).statemachines->exists(contains(self.target)));
 }
 
 /*
@@ -191,6 +220,17 @@ helper statemachines::State::getStatemachine() : statemachines::Statemachine {
 }
 
 /*
+ * Returns state's root level statemachine.
+ */
+helper statemachines::State::getRootStatemachine() : statemachines::Statemachine {
+	return 
+		if self.eContainer().eContainer().oclIsKindOf(statemachines::State)
+		then self.eContainer().eContainer().oclAsType(statemachines::State).getRootStatemachine()
+		else self.eContainer().oclAsType(statemachines::Statemachine)
+		endif;
+}
+
+/*
  * Returns statemachine's superstate
  */
 helper statemachines::Statemachine::getSuperState() : statemachines::State{
@@ -203,6 +243,13 @@ helper statemachines::Statemachine::getSuperState() : statemachines::State{
  */
 query statemachines::Statemachine::hasParentState() : Boolean {
 	return self.eContainer().oclIsTypeOf(statemachines::State);
+}
+
+/*
+ * Returns true if statemachine has a final state.
+ */
+query statemachines::Statemachine::hasFinalState() : Boolean {
+	return self.nodes[statemachines::Final]->notEmpty();
 }
 
 /*

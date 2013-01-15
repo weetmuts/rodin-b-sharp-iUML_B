@@ -14,7 +14,9 @@ library set_statemachines2context;
  */
 mapping statemachines::Statemachine::statemachine2constants(in generatorID : String) : Sequence(eventb::context::Constant) {
 	init {
-		result := self.nodes[statemachines::State].map state2constants(generatorID);
+		result := self.map statemachine2constant(generatorID)->asSequence()->
+			union(self.nodes[statemachines::State].map state2constants(generatorID)->
+			flatten());
 	}
 }
 
@@ -29,11 +31,13 @@ mapping statemachines::State::state2constants(in generatorID : String) : Sequenc
 	}
 }
 
+
 /*
- * Transforms statemachine to constant.
+ * Transforms statemachine to constant representing the null - i.e. statemachine is not in any state.
+ * For root level statemachines the null is only generated if there is at least one final state.
  */
 mapping statemachines::Statemachine::statemachine2constant(in generatorID : String) : eventb::context::Constant 
-	when { self._refines = null }
+	when { self._refines = null and  (self.hasParentState() or self.hasFinalState())}
 {
 	name := self.name + _NULL;
 	generated := true;
@@ -85,7 +89,8 @@ mapping statemachines::Statemachine::statemachine2set(in generatorID : String) :
  */
 mapping statemachines::Statemachine::statemachine2typeAxioms(in generatorID : String) : Sequence(eventb::context::Axiom) {
 	init {
-		result := self.nodes[statemachines::State].map state2typeAxioms(generatorID);
+		result := self.map statemachine2typeAxiom(generatorID)->asSequence()->
+			union(self.nodes[statemachines::State].map state2typeAxioms(generatorID)->flatten());
 	}
 }
 
@@ -101,12 +106,12 @@ mapping statemachines::State::state2typeAxioms(in generatorID : String) : Sequen
 }
 
 /*
- * Transforms statemachine to type axiom.
+ * Transforms statemachine to type axiom for null state.
  */
 mapping statemachines::Statemachine::statemachine2typeAxiom(in generatorID : String) : eventb::context::Axiom 
-	when { self._refines = null }
+	when { self._refines = null and (self.hasParentState() or self.hasFinalState())}
 {
-	name := TYPEOF_ + self.name;
+	name := TYPEOF_ + self.name + _NULL;
 	predicate := self.name + _NULL + B_IN + self.name + _STATES;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
@@ -147,7 +152,7 @@ mapping statemachines::Statemachine::statemachine2partitionAxiom(in generatorID 
 	when { self._refines = null }
 {
 	init {
-		var nullStatePartition : String := if self.hasParentState() then (self.name + _NULL).asSet() else null endif;
+		var nullStatePartition : String := if self.hasParentState() or self.nodes[statemachines::Final]->notEmpty() then (self.name + _NULL).asSet() else null endif;
 	}
 	name := DISTINCT_STATES_IN_ + self.name + _STATES;
 	predicate := "partition" + (self.name + _STATES + B_COM + self.getStatePartitions2()->union(nullStatePartition->asSequence())->toString(B_COM)).parenthesize();

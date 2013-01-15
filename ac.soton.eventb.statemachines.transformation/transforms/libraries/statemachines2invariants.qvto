@@ -68,7 +68,7 @@ mapping statemachines::Statemachine::rootStatemachine2partitionInvariant(in gene
 	when { self._refines = null and self.nodes[statemachines::State]->size() > 1 }
 {
 	name := DISTINCT_STATES_IN_ + self.name + String.incrStrCounter(index).toString();
-	predicate := "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
+	predicate := self.getStatePartitionAnticedent() + "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
