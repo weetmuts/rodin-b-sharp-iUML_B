@@ -29,7 +29,7 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 	static {
 		translationNameMap.put(TranslationKind.SINGLEVAR.getName(), "Enumeration");
 		translationNameMap.put(TranslationKind.MULTIVAR.getName(), "Variables");
-		translationNameMap.put(TranslationKind.REFINEDVAR.getName(), "Refined Enumeration");
+		translationNameMap.put(TranslationKind.REFINEDVAR.getName(), "Refined Enumeration (EXPERIMENTAL)");
 	}
 
 	@Override
