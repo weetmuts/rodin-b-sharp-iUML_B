@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.statemachines;singleton:=true
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.1.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -26,6 +26,6 @@ Export-Package: ac.soton.eventb.statemachines;uses:="org.eclipse.emf.ecore,org.e
    ac.soton.eventb.statemachines"
 Require-Bundle: org.eventb.emf.core;bundle-version="[2.2.4,3.0.0)";visibility:=reexport,
  org.eclipse.emf.validation;bundle-version="[1.4.0,2.0.0)";visibility:=reexport,
- ac.soton.eventb.emf.diagrams;bundle-version="[1.0.1,2.0.0)";visibility:=reexport,
- ac.soton.eventb.emf.core.extension;bundle-version="[1.1.2,2.0.0)";visibility:=reexport
+ ac.soton.eventb.emf.diagrams;bundle-version="[2.0.0,3.0.0)";visibility:=reexport,
+ ac.soton.eventb.emf.core.extension;bundle-version="[2.0.0,3.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
