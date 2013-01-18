@@ -76,6 +76,7 @@ public class ClassRule  extends AbstractRule  implements IRule {
 		// generate supertype invariants
 
 		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
+			int pri = distanceFromCarrierSet(element);
 			switch (dataKind) {
 			case DataKind.SET_VALUE :
 				//nothing to do - sets don't have supertypes
@@ -83,17 +84,33 @@ public class ClassRule  extends AbstractRule  implements IRule {
 			case DataKind.CONSTANT_VALUE :
 				ret.add(Make.descriptor(container, axioms, Make.axiom(
 						Strings.CLASS_SUPERTYPE_NAME(element), 
-						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));
+						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),pri));
 				break;
 			case DataKind.VARIABLE_VALUE :
 				ret.add(Make.descriptor(container, invariants, Make.invariant(
 						Strings.CLASS_SUPERTYPE_NAME(element), 
-						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),10));
+						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),pri));
 				break;
 			}
 		}
 		
 		return ret;
+	}
+
+	private Integer distanceFromCarrierSet(Class element) {
+		Class c = element;
+		if (c.getDataKind().equals(DataKind.SET)){
+			return 0;
+		}else if (c.getSupertypes().isEmpty()){
+			return null;
+		}else{
+			Integer p = 9; //FIXME: There is a limit to the number of priorities we can use.
+			for (int i=0; i<c.getSupertypes().size(); i++){
+					Integer d = distanceFromCarrierSet(c.getSupertypes().get(0));
+					if (d!=null && d<p) p = d;
+			}
+			return p == null? null : p+1;
+		}
 	}
 	
 //OLD CODE :-

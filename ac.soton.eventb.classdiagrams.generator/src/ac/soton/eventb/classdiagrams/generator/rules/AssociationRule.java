@@ -76,7 +76,7 @@ protected static final EReference elaborates = CoreextensionPackage.Literals.EVE
 			ret.add(Make.descriptor(sourceElement, elaborates, newGeneratedElement, 10));
 			ret.add(Make.descriptor(container, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 10));
 			if (newGeneratedInjectionPredicate != null){
-				ret.add(Make.descriptor(container, newGeneratedTypePredicateContainer, newGeneratedTypePredicate, 10));			
+				ret.add(Make.descriptor(container, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, -1));			
 			}
 		}
 		return ret;
