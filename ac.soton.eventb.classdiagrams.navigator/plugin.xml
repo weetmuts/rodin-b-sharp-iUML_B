@@ -47,7 +47,7 @@
             refinement-id="org.eventb.core.machineRefinement">
       </Participant>
       <Participant
-            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramRefiner"
+            class="ac.soton.eventb.classdiagrams.navigator.refiner.ClassdiagramExtender"
             id="classdiagramContextRefiner"
             refinement-id="org.eventb.core.contextRefinement">
       </Participant>
