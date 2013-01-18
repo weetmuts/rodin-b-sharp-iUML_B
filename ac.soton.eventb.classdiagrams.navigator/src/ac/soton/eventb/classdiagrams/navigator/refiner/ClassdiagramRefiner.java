@@ -36,7 +36,7 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 	}
 	
 	/**
-	 * populate the given map with the reference features that the refiner needs to copy for statemachine refinement.
+	 * populate the given map with the reference features that the refiner needs to copy for class diagram refinement.
 	 * This is refines (as references to their abstract counterparts) and
 	 * elaborates, incoming, outgoing, source and target (as intra-level references) 
 	 */
