@@ -77,7 +77,7 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
  {
 	var done : Boolean = false;
 	event.guards->forEach(i){
-		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_))then{
+		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_) and i.isFromSameSM(self))then{
 			i.predicate := i.predicate + B_OR + RootStatemachine.name + "_" + refinmentLevel.toString() + B_EQ + self.name; 
 			i.name := i.name + "_or_" + ISIN_ + self.name;
 			name := i.name;

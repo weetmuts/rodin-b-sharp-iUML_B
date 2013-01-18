@@ -73,7 +73,7 @@ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::mach
  {
 	var done : Boolean = false;
 	event.guards->forEach(i){
-		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_))then{
+		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_) and i.isFromSameSM(self)) then{
 			i.predicate := i.predicate + B_OR + self.name + B_EQ + B_TRUE; 
 			i.name := i.name + "_or_" + ISIN_ + self.name;
 			name := i.name;

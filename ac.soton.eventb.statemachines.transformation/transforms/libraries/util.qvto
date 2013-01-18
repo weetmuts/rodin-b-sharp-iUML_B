@@ -184,6 +184,13 @@ query eventb::machine::Event::containsAction(in label : String) : Boolean {
 }
 
 /*
+ * Returns true if event and its extensions contain an action of specified label.
+ */
+query eventb::machine::Guard::isFromSameSM(in state : statemachines::State) : Boolean {
+	return self.invresolveone(statemachines::State).eContainer() = state.eContainer();
+}
+
+/*
  * Returns true if machine contains an invariant of specified label
  */
 query eventb::machine::Machine::containsGeneratedInvariant(in label : String, in generatorID : String) : Boolean {
