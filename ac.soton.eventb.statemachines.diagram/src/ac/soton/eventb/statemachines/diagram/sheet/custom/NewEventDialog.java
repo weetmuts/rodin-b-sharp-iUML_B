@@ -95,12 +95,13 @@ public class NewEventDialog extends Dialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
-		composite.setSize(500, 500);
 		Group group = new Group(composite, SWT.SHADOW_ETCHED_IN);
 		group.setText("Event");
 		GridLayout layout = new GridLayout(2, false);
 		group.setLayout(layout);
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true);
+		gd.widthHint = 300;
+		group.setLayoutData(gd);
 		
 		// name
 		Label nameLabel = new Label(group, SWT.NONE);

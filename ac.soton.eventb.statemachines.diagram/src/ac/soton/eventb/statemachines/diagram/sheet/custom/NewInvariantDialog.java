@@ -66,7 +66,9 @@ public class NewInvariantDialog extends Dialog {
 		group.setText("Invariant");
 		GridLayout layout = new GridLayout(2, false);
 		group.setLayout(layout);
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true);
+		gd.widthHint = 300;
+		group.setLayoutData(gd);
 		
 		// predicate
 		Label predicateLabel = new Label(group, SWT.NONE);
