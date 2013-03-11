@@ -157,7 +157,19 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		ArrayList<String> result = new ArrayList<String>(getElaborates().size());
 		for (Event event : getElaborates())
 			result.add(event.getName());
-		return result.toString().replaceAll("(^.)|(.$)", "");
+		String rawLabel = result.toString().replaceAll("(^.)|(.$)", "");
+		String formattedLabel = "";
+		int j=0;
+		for (int i=0; i<rawLabel.length();i++){
+			if (j>=50 && ','==rawLabel.charAt(i-1)){
+				formattedLabel = formattedLabel+"\n";
+				j=-1;
+			}else{
+				formattedLabel = formattedLabel + rawLabel.charAt(i);
+			}
+			j++;
+		}
+		return formattedLabel;
 	}
 
 	/**
