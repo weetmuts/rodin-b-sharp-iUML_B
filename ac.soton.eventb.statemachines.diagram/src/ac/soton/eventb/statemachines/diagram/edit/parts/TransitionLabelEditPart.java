@@ -406,7 +406,7 @@ public class TransitionLabelEditPart extends LabelEditPart implements
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void refreshVisuals() {
 		super.refreshVisuals();
@@ -415,6 +415,11 @@ public class TransitionLabelEditPart extends LabelEditPart implements
 		refreshFontColor();
 		refreshUnderline();
 		refreshStrikeThrough();
+		
+		//Added to make label wrap cfs 11/03/13
+		if (figure instanceof WrappingLabel) {
+			((WrappingLabel) figure).setTextWrap(true);
+		}
 	}
 
 	/**
