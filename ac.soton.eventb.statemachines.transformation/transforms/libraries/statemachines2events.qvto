@@ -41,12 +41,15 @@ mapping statemachines::Transition::transition2events(in generatorID : String) {
 
 /*
  * Transforms event to same event augmented with guard and enter actions.
- * Generates guard and enter actions from transition and adds to event.
+ * Generates guard and enter actions from transition and adds to event. union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet())->
+ * Skips mapping of enter actions for self-loop transitions.
  */
 mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : statemachines::Transition, in generatorID : String) {
 	self.guards := transition.source[statemachines::State].map sourceState2sourceGuard(self, generatorID)->
+		union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet())->
 		union(self.guards);
-	self.actions := transition.target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
+	
+	self.actions := transition[source<>target].target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
 		union(self.actions);
 }
 
@@ -73,7 +76,7 @@ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::mach
  {
 	var done : Boolean = false;
 	event.guards->forEach(i){
-		if(i.isGenerated(generatorID) and i.name.startsWith(ISIN_) and i.isFromSameSM(self)) then{
+		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_))) then{	// and i.isFromSameSM(self)
 			i.predicate := i.predicate + B_OR + self.name + B_EQ + B_TRUE; 
 			i.name := i.name + "_or_" + ISIN_ + self.name;
 			name := i.name;
@@ -86,6 +89,49 @@ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::mach
 	if(done=false)then{
 		name := ISIN_ + self.name;
 		predicate := self.name + B_EQ + B_TRUE;
+		generated := true;
+		attributes += getGeneratedAttr(generatorID);
+	}endif
+}
+
+/*
+ * Only for transitions from the root initial state when the root statemachine has a final state
+ * Transforms initial transition to guard that the statemachine is not active.
+ * Generates guard for source state and particular event.
+ * Skips transformation if event contains source guard on the same state already.
+ */
+
+mapping statemachines::Transition::initialTransition2sourceGuard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
+ when{ self.source.oclIsKindOf(statemachines::Initial) and
+ 		self.source.getStatemachine().isRootStatemachine() and
+ 		self.source.getStatemachine().hasFinalState() and
+ 		not(event.containsGuardWithPrefix(ISNOTIN_ + self.source.getStatemachine().name) or
+ 			 event.containsGuardWithSuffix(ISNOTIN_ + self.source.getStatemachine().name)) }
+ {
+	var done : Boolean = false;
+	var pred : String = "";
+	self.source.getStatemachine().nodes[statemachines::State]->forEach(s){
+		if (pred.size()<>0) then {
+			pred := pred +B_AND;
+		}endif;
+		pred := pred + s.name + B_EQ + B_FALSE;
+	};	
+	pred := pred.parenthesize();
+	event.guards->forEach(i){
+		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_))) then{	// and i.isFromSameSM(self.source)
+			i.predicate := i.predicate +B_OR+ pred; 							//why did i change this to and
+			i.name := i.name + "_or_" + ISNOTIN_ + self.source.getStatemachine().name;
+			name := i.name;
+			predicate := i.predicate;
+			generated := true;
+			attributes += getGeneratedAttr(generatorID);
+			event.guards := event.guards->excluding(i);
+			done := true;
+		}endif
+	};
+	if(done=false)then{
+		name := ISNOTIN_ + self.source.getStatemachine().name;
+		predicate := pred;
 		generated := true;
 		attributes += getGeneratedAttr(generatorID);
 	}endif
