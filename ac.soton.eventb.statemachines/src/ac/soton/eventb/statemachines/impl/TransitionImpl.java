@@ -147,6 +147,8 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Returns a label constructed from a list of names of the elaborated events.
+	 * The label is wrapped (i.e. a \n inserted) after the next comma after every 50 chars.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
