@@ -72,7 +72,13 @@ mapping statemachines::State::state2initAction(in event : eventb::machine::Event
  */
 mapping statemachines::State::superState2initActionsActive(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := self.map state2initAction(event, B_TRUE, generatorID)->asBag()->
+		var value : String = "";
+		if (self.getRootStatemachine().instances = null) then {
+			value := B_TRUE;
+		}else{
+			value := self.getRootStatemachine().instances.name;
+		}endif;	
+		result := self.map state2initAction(event, value, generatorID)->asBag()->
 			union(self.statemachines->reject(containsEventTarget(event)).map statemachine2initActionsActive(event, generatorID)->flatten()->asBag());
 	}
 }
@@ -88,7 +94,13 @@ mapping statemachines::State::superState2initActionsActive(in event : eventb::ma
  */
 mapping statemachines::State::state2initActionsActive(in event : eventb::machine::Event, in target : statemachines::State, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := self.map state2initAction(event, B_TRUE, generatorID)->asBag()->
+		var value : String = "";
+		if (self.getRootStatemachine().instances = null) then {
+			value := B_TRUE;
+		}else{
+			value := self.getRootStatemachine().instances.name;
+		}endif;	
+		result := self.map state2initAction(event, value, generatorID)->asBag()->
 			union(self.statemachines[not contains(target)].map statemachine2initActionsActive(event, generatorID)->flatten()->asBag());
 	}
 }
@@ -135,7 +147,13 @@ mapping statemachines::Statemachine::statemachine2initActionsInactive(in event :
  */
 mapping statemachines::State::state2initActionsInactive(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := self.map state2initAction(event, B_FALSE, generatorID)->
+		var value : String = "";
+		if (self.getRootStatemachine().instances = null) then {
+			value := B_FALSE;
+		}else{
+			value := B_EMPTYSET;
+		}endif;	
+		result := self.map state2initAction(event, value, generatorID)->
 			union(self.statemachines.map statemachine2initActionsInactive(event, generatorID)->flatten()->asBag());
 	}
 }

@@ -36,7 +36,16 @@ mapping statemachines::State::state2typeInvariant(in generatorID : String) : eve
 	when { self._refines = null }
 {
 	name := TYPEOF_ + self.name;
-	predicate := self.name + B_IN + B_BOOL;
+	predicate := 
+		if self.getRootStatemachine().instances = null then 
+			self.name + B_IN + B_BOOL
+		else
+			if self.getStatemachine().isRootStatemachine() then
+				self.name + B_SUBSETEQ +  self.getRootStatemachine().instances.name
+			else 
+				self.name + B_SUBSETEQ +  self.getStatemachine().getSuperState().name			
+			endif
+		endif;	
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
@@ -67,8 +76,8 @@ mapping statemachines::Statemachine::rootStatemachine2partitionInvariants(in gen
 mapping statemachines::Statemachine::rootStatemachine2partitionInvariant(in generatorID : String) : eventb::machine::Invariant
 	when { self._refines = null and self.nodes[statemachines::State]->size() > 1 }
 {
-	name := DISTINCT_STATES_IN_ + self.name + String.incrStrCounter(index).toString();
-	predicate := self.getStatePartitionAnticedent() + "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
+	name := DISTINCT_STATES_IN_ + self.name +"_"+ String.incrStrCounter(index).toString();
+	predicate := self.getStatePartitionAnticedent4RootSM() + "partition" + self.getStatePartitionContent();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
@@ -78,16 +87,16 @@ mapping statemachines::Statemachine::rootStatemachine2partitionInvariant(in gene
  */
 mapping statemachines::State::state2partitionInvariants(in prefix : String, in generatorID : String) : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.statemachines.map statemachine2partitionInvariants(self, prefix, generatorID);
+		result := self.statemachines.map statemachine2partitionInvariants(self, prefix+"_"+self.name, generatorID);
 	}
 }
 
 /*
- * Transforms abstract statemachine to partiotion invariants.
+ * Transforms abstract statemachine to partition invariants.
  */
 mapping statemachines::Statemachine::statemachine2partitionInvariants(in parentState : statemachines::State, in prefix : String, in generatorID : String) : Sequence(eventb::machine::Invariant) {
 	init {
-		result := self.map statemachine2partitionInvariant(parentState, prefix, generatorID)->asSequence()->
+		result := self.map statemachine2partitionInvariant(parentState, prefix+"_"+self.name, generatorID)->asSequence()->
 			union(self.nodes[statemachines::State].map state2partitionInvariants(prefix, generatorID)->flatten());
 	}
 }
@@ -100,22 +109,28 @@ mapping statemachines::Statemachine::statemachine2partitionInvariants(in parentS
 mapping statemachines::Statemachine::statemachine2partitionInvariant(in parentState : statemachines::State, in prefix : String, in generatorID : String) : eventb::machine::Invariant
 	when { self._refines = null and self.nodes[statemachines::State]->size() > 1 }
 {
-	name := DISTINCT_STATES_IN_ + prefix + String.incrStrCounter(index).toString();
-	predicate := (parentState.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + "partition" + (B_TRUE.asSet() + B_COM + self.getStatePartitions()->toString(B_COM)).parenthesize();
+	name := DISTINCT_STATES_IN_ + prefix +"_"+ String.incrStrCounter(index).toString();
+	predicate := self.getStatePartitionAnticedent4NestedSM(parentState) + "partition" + self.getStatePartitionContent();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Substate invariants
+// Substate invariants - THESE ARE NOT NEEDED FOR LIFTED SM SINCE IT IS INCLUDED IN THE TYPE OF SUBSTATES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Transforms statemachine to substate invariants.
+ * THESE ARE NOT NEEDED FOR LIFTED SM SINCE IT IS INCLUDED IN THE TYPE OF SUBSTATES
  */
-mapping statemachines::Statemachine::statemachine2substateInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant) {
+mapping statemachines::Statemachine::statemachine2substateInvariants(in generatorID : String) : Sequence(eventb::machine::Invariant){
 	init {
-		result := self.nodes[statemachines::State].map state2substateInvariants(generatorID);
+			result := 
+				if 	self.getRootStatemachine().instances = null then
+					self.nodes[statemachines::State].map state2substateInvariants(generatorID)
+				else
+					{} //empty()
+				endif;
 	}
 }
 
@@ -173,9 +188,80 @@ mapping statemachines::State::state2constraintInvariantsFinal(in generatorID : S
 		result := self.invariants->collect(i | object eventb::machine::Invariant {
 			name := i.name;
 			theorem := i.theorem;
-			predicate := (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + i.predicate.parenthesize();
+			predicate := if self.getRootStatemachine().instances = null
+				then (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + i.predicate.parenthesize()
+				else B_FORALL+self.getRootStatemachine().selfName+B_MIDDOT+
+					(self.getRootStatemachine().selfName+B_IN+self.name).parenthesize() + B_IMPL + i.predicate.parenthesize()
+				endif;
 			generated := true;
 			attributes += getGeneratedAttr(generatorID);
 		});
 	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// helpers specific to this module
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Returns an anticedent for the partition invariant for an unlifted root statemachine with final state.
+ * or empty string otherwise
+ */
+helper statemachines::Statemachine::getStatePartitionAnticedent4RootSM() : String {
+	return 
+	if self.hasFinalState() and self.getRootStatemachine().instances = null then 
+		B_TRUE + B_IN + self.getStateNames()->toString(B_COM).asSet() + B_IMPL
+	else ""
+	endif;
+}
+
+/*
+ * Returns an anticedent for the partition invariant for an unlifted nested statemachine
+ * or empty string otherwise 
+ */
+helper statemachines::Statemachine::getStatePartitionAnticedent4NestedSM(in parentState : statemachines::State) : String {
+	return 
+		if self.getRootStatemachine().instances = null then 
+			(parentState.name + B_EQ + B_TRUE).parenthesize() + B_IMPL
+		else
+			""
+		endif
+}
+
+
+/*
+* Returns the partition content (the bit in brackets and including the brackets)
+* taking into account whether the statemachine is lifted or not and if not
+* whether this is a root statemachine and if so does it have a final state
+*/
+helper statemachines::Statemachine::getStatePartitionContent() : String {
+	return
+	if self.getRootStatemachine().instances = null then 
+		(B_TRUE.asSet() + B_COM + self.getStatesString4Partition()->toString(B_COM)).parenthesize()
+	else
+		if self.isRootStatemachine() then 
+			if self.hasFinalState() then
+				((self.getStateNames()->toString(B_UNION)).parenthesize() + B_COM + self.getStateNames()->toString(B_COM)).parenthesize()
+			else
+				(self.instances.name + B_COM + self.getStateNames()->toString(B_COM)).parenthesize()
+			endif
+		else
+			(self.getSuperState().name + B_COM + self.getStateNames()->toString(B_COM)).parenthesize()
+		endif
+	endif	
+}
+
+/*
+ * Returns the part of the partition string constructed from the state variables of a statemachine.
+ * ONLY FOR NON-LIFTED
+ */
+helper statemachines::Statemachine::getStatesString4Partition() : Sequence(String) {
+	return self.nodes[statemachines::State].map getStateString4Partition();
+}
+
+/*
+ * Returns a string for a single state variable suitable for the partition invariant.
+ * ONLY FOR NON-LIFTED - this is an intersection of the singleton state with TRUE
+ */
+helper statemachines::State::getStateString4Partition() : String {
+	return self.name.asSet() + B_INTER + B_TRUE.asSet()
 }

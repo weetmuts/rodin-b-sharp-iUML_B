@@ -11,23 +11,32 @@ property INIT : String = "INITIALISATION";
 
 // math
 property B_EQ : String = " = ";
-property B_NEQ : String = " ≠ ";
-property B_BEQ : String = " ≔ ";
-property B_IN : String = " ∈ ";
+property B_NEQ : String = " \u2260 ";
+property B_BEQ : String = " \u2254 ";
+property B_IN : String = " \u2208 ";
+property B_NOTIN : String = " \u2209 ";
 property B_BOOL : String = "BOOL";
 property B_TRUE : String = "TRUE";
 property B_FALSE : String = "FALSE";
-property B_NOT : String = " ¬ ";
-property B_AND : String = " ∧ ";
-property B_OR : String = " ∨ ";
+property B_NOT : String = " \u00AC ";
+property B_AND : String = " \u2227 ";
+property B_OR : String = " \u2228 ";
 property B_LPAR : String = "(";
 property B_RPAR : String = ")";
 property B_LBRC : String = "{";
 property B_RBRC : String = "}";
 property B_COM : String = ", ";
-property B_IMPL : String = " ⇒ ";
-property B_INTER : String = " ∩ ";
+property B_FORALL : String = "\u2200";
+property B_MIDDOT : String = "\u00B7";
+property B_IMPL : String = " \u21D2 ";
+property B_EQUIV : String = " \u21D4 ";
+property B_INTER : String = " \u2229 ";
+property B_UNION : String = " \u222A ";
+property B_SETMINUS : String = " \u2216 ";
+property B_EMPTYSET : String = " \u2205  ";
+property B_SUBSETEQ : String = " \u2286  ";
 property B_SUB : String = " \u2286 ";
+
 
 // generated names & labels
 property _STATES : String = "_STATES";

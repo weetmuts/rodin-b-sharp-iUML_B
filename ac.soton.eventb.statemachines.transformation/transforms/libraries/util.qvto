@@ -31,39 +31,6 @@ helper getGeneratedAttr(in generatorID : String) : StringToAttributeMapEntry {
 	}
 }
 
-/*
- * Returns an anticedent for the sequence of partition strings for state variables of a root statemachine.
- * or empty string if the statemachine has no final state
- */
-helper statemachines::Statemachine::getStatePartitionAnticedent() : String {
-	return 
-	if self.hasFinalState()
-	then B_TRUE + B_IN + self.getStatePartitions3()->toString(B_COM).asSet() + B_IMPL
-	else ""
-	endif;
-}
-
-/*
- * Returns a sequence of partition strings for state variables of a statemachine.
- *
-helper statemachines::Statemachine::getStates() : Sequence(String) {
-	return self.nodes[statemachines::State].map self.;
-}
-*/
-
-/*
- * Returns a sequence of partition strings for state variables of a statemachine.
- */
-helper statemachines::Statemachine::getStatePartitions() : Sequence(String) {
-	return self.nodes[statemachines::State].map getPartition();
-}
-
-/*
- * Returns partition string for a state variable.
- */
-helper statemachines::State::getPartition() : String {
-	return self.name.asSet() + B_INTER + B_TRUE.asSet();
-}
 
 /*
  * Returns original string surrounded by curly brackets.
@@ -238,6 +205,17 @@ helper statemachines::AbstractNode::getRootStatemachine() : statemachines::State
 }
 
 /*
+ * Returns statemachines's root level statemachine.
+ */
+helper statemachines::Statemachine::getRootStatemachine() : statemachines::Statemachine {
+	return 
+		if self.isRootStatemachine()
+		then self
+		else self.getSuperState().getRootStatemachine()
+		endif;
+}
+
+/*
  * Returns true if statemachine is root level statemachine.
  */
 query statemachines::Statemachine::isRootStatemachine() : Boolean {
@@ -267,24 +245,17 @@ query statemachines::Statemachine::hasFinalState() : Boolean {
 }
 
 /*
- * Returns a sequence of partition strings for state variables of a statemachine (for SET translation kind).
+ * Returns a sequence of names of the states in a statemachine, each name in curly braces to form a singleton set
  */
-helper statemachines::Statemachine::getStatePartitions2() : Sequence(String) {
+helper statemachines::Statemachine::getStateNamesAsSingletons() : Sequence(String) {
 	return self.nodes[statemachines::State].name.asSet();
 }
-/*
- * Returns a sequence of partition strings for state variables of a statemachine (for SET translation kind).
- */
 
-helper statemachines::Statemachine::getStatePartitions3() : Sequence(String) {
+/*
+ * Returns a sequence of names of the states in a statemachine.
+ */
+helper statemachines::Statemachine::getStateNames() : Sequence(String) {
 	return self.nodes[statemachines::State].name;
-}
-
-/*
- * Returns partition string for a state variable (for SET translation kind).
- */
-helper statemachines::State::getPartition2() : String {
-	return self.name.asSet() + B_INTER + B_TRUE.asSet();
 }
 
 /*
@@ -329,4 +300,11 @@ query eventb::machine::Event::containsGuardWithPrefix(in labelPrefix : String) :
 query eventb::machine::Event::containsGuardWithSuffix(in labelSuffix : String) : Boolean {
 	return self.guards->exists(name.endsWith(labelSuffix)) or
 		(self.extended and self._refines->first().containsGuardWithSuffix(labelSuffix));
+}
+
+/*
+ * Returns true if Guard and its extensions contain an action of specified label suffix.
+ */
+query eventb::machine::Event::containsParameterWithName(in label : String) : Boolean {
+	return self.parameters->exists(name = label);
 }

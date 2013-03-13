@@ -18,7 +18,11 @@ mapping statemachines::State::state2enterAction(in event : eventb::machine::Even
 	when { not event.containsAction(ENTER_ + self.name) }
 {
 	name := ENTER_ + self.name;
-	action := self.name + B_BEQ + B_TRUE;
+	if (self.getRootStatemachine().instances = null) then {
+		action := self.name+B_BEQ+B_TRUE;
+	}else{
+		action := self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet();
+	}endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

@@ -155,7 +155,7 @@ mapping statemachines::Statemachine::statemachine2partitionAxiom(in generatorID 
 		var nullStatePartition : String := if self.hasParentState() or self.nodes[statemachines::Final]->notEmpty() then (self.name + _NULL).asSet() else null endif;
 	}
 	name := DISTINCT_STATES_IN_ + self.name + _STATES;
-	predicate := "partition" + (self.name + _STATES + B_COM + self.getStatePartitions2()->union(nullStatePartition->asSequence())->toString(B_COM)).parenthesize();
+	predicate := "partition" + (self.name + _STATES + B_COM + self.getStateNamesAsSingletons()->union(nullStatePartition->asSequence())->toString(B_COM)).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

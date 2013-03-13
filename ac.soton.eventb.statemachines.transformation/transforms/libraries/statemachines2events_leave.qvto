@@ -52,7 +52,11 @@ mapping statemachines::State::state2leaveAction(in event : eventb::machine::Even
 		and not event.containsAction(LEAVE_ + self.name) }
 {
 	name := LEAVE_ + self.name;
-	action := self.name + B_BEQ + B_FALSE;
+	if (self.getRootStatemachine().instances = null) then {
+		action := self.name+B_BEQ+B_FALSE;
+	}else{
+		action := self.name+B_BEQ+self.name+B_SETMINUS+self.getRootStatemachine().selfName.asSet();
+	}endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

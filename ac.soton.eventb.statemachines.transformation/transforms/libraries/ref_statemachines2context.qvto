@@ -177,13 +177,13 @@ mapping statemachines::Statemachine::statemachine2partitionAxiom(in generatorID 
 {
 	if(not self.hasParentState()) then{
 	name := DISTINCT_STATES_IN_ + self.name + _STATES;
-	predicate := "partition" + (self.name + _STATES + B_COM + self.getStatePartitions3()->toString(B_COM)).parenthesize();
+	predicate := "partition" + (self.name + _STATES + B_COM + self.getStateNames()->toString(B_COM)).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 	}
 	else{
 	name := DISTINCT_STATES_IN_ + self.getSuperState().name;
-	predicate := "partition" + (self.getSuperState().name + B_COM + self.getStatePartitions3()->toString(B_COM)).parenthesize();
+	predicate := "partition" + (self.getSuperState().name + B_COM + self.getStateNames()->toString(B_COM)).parenthesize();
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);	
 	}
