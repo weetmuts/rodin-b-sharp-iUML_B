@@ -27,7 +27,12 @@ mapping statemachines::Statemachine::statemachine2typeInvariant(in generatorID :
 	when { self._refines = null }
 {
 	name := TYPEOF_ + self.name;
-	predicate := self.name + B_IN + self.name + _STATES;
+	predicate := 
+		if self.getRootStatemachine().instances = null then
+			self.name+B_IN+self.name + _STATES
+		else
+			self.name+B_IN+self.getRootStatemachine().instances.name+B_TFUN+self.name+_STATES			
+		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
@@ -63,7 +68,12 @@ mapping statemachines::Statemachine::statemachine2superstateInvariant(in parentS
 	when { self._refines = null }
 {
 	name := SUPERSTATEOF_ + self.name;
-	predicate := self.name + B_NEQ + self.name + _NULL + B_IMPL + parentState.getStatemachine().name + B_EQ + parentState.name;
+	predicate := 
+		if self.getRootStatemachine().instances = null then
+			self.name + B_NEQ + self.name + _NULL + B_EQUIV + parentState.getStatemachine().name + B_EQ + parentState.name
+		else
+			B_DOM+(self.name+B_RANSUB+(self.name+_NULL).asSet()).parenthesize()+B_EQ+B_DOM+(parentState.getStatemachine().name+B_RANRES+(parentState.name).asSet()).parenthesize()
+		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
@@ -100,7 +110,13 @@ mapping statemachines::State::state2constraintInvariantsFinal(in generatorID : S
 		result := self.invariants->collect(i | object eventb::machine::Invariant {
 			name := i.name;
 			theorem := i.theorem;
-			predicate := (statemachine.name + B_EQ + self.name).parenthesize() + B_IMPL + i.predicate.parenthesize();
+			predicate :=
+				if self.getRootStatemachine().instances = null then
+					 (statemachine.name + B_EQ + self.name).parenthesize() + B_IMPL + i.predicate.parenthesize()
+				else
+					B_FORALL+self.getRootStatemachine().selfName+B_MIDDOT+
+					(self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_EQ+self.name).parenthesize() + B_IMPL + i.predicate.parenthesize()
+				endif;
 			generated := true;
 			attributes += getGeneratedAttr(generatorID);
 		});

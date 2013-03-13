@@ -22,6 +22,7 @@ mapping inout eventb::machine::Machine::machine2nonGeneratedMachine(in generator
  * Transforms event to event free from generated elements.
  */
 mapping inout eventb::machine::Event::event2nonGeneratedEvent(in generatorID : String) {
+	parameters := parameters->reject(isGenerated(generatorID));
 	guards := guards->reject(isGenerated(generatorID));
 	actions := actions->reject(isGenerated(generatorID));
 }

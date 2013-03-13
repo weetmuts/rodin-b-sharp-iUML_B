@@ -52,7 +52,12 @@ mapping statemachines::Statemachine::statemachine2leaveAction(in event : eventb:
 	when {(not event.containsActionWithPrefix(ENTER_ + self.name) and not event.containsActionWithPrefix(LEAVE_ + self.name)) }
 {
 	name := LEAVE_ + self.name;
-	action := self.name + B_BEQ + self.name + _NULL;
+	action :=
+		if self.getRootStatemachine().instances = null then
+			self.name + B_BEQ + self.name + _NULL
+		else
+			self.name+(self.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.name+_NULL
+		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
@@ -74,7 +79,7 @@ mapping statemachines::State::sourceState2leaveActions(in event : eventb::machin
 	init {
 		result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map superState2leaveActions(event, generatorID)->
 			union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map statemachine2leaveActions(event, generatorID)->asBag())->
-			union(self.getRootStatemachine()->reject(not hasFinalState()).map statemachine2leaveAction(event,generatorID)->asBag());
+			union(self.getRootStatemachine()->reject(not hasExit(transition)).map statemachine2leaveAction(event,generatorID)->asBag());
 	}
 }
 

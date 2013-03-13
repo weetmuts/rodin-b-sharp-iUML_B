@@ -18,7 +18,12 @@ mapping statemachines::State::state2enterAction(in event : eventb::machine::Even
 	when { not event.containsActionWithPrefix("enter_" + self.getStatemachine().name) }
 {
 	name := ENTER_ + self.getStatemachine().name + "__" + self.name;
-	action := self.getStatemachine().name + B_BEQ + self.name;
+	action :=
+		if self.getRootStatemachine().instances = null then
+			self.getStatemachine().name + B_BEQ + self.name
+		else
+			self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.name
+		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }

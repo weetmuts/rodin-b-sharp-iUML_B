@@ -83,7 +83,7 @@ query statemachines::Transition::isSelfLoop() : Boolean {
 
 /*
  * Returns true if transition is local to source state i.e.
- * source state is abstract state and target state is its substate.
+ * source state is state and target state is its substate.
  */
 query statemachines::Transition::isLocalToSource() : Boolean {
 	return (self.source.oclIsKindOf(statemachines::State) and self.source.oclAsType(statemachines::State).statemachines->exists(contains(self.target)));
@@ -102,6 +102,13 @@ query statemachines::Transition::isLocalToTarget() : Boolean {
  */
 query statemachines::Transition::isLocal() : Boolean {
 	return self.isLocalToSource() or self.isLocalToTarget();
+}
+
+/*
+ * Returns true if satemachine contains a node amongst its states or substates.
+ */
+query statemachines::Statemachine::hasExit(in transition : statemachines::Transition) : Boolean {
+	return self.nodes->includes(transition.target) and transition.target.oclIsTypeOf(statemachines::Final);
 }
 
 /*

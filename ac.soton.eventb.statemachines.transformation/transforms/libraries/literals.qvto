@@ -33,10 +33,15 @@ property B_EQUIV : String = " \u21D4 ";
 property B_INTER : String = " \u2229 ";
 property B_UNION : String = " \u222A ";
 property B_SETMINUS : String = " \u2216 ";
-property B_EMPTYSET : String = " \u2205  ";
-property B_SUBSETEQ : String = " \u2286  ";
+property B_EMPTYSET : String = " \u2205 ";
+property B_SUBSETEQ : String = " \u2286 ";
 property B_SUB : String = " \u2286 ";
-
+property B_TFUN : String = " \u2192 ";
+property B_PFUN : String = " \u2900 ";
+property B_DOM : String = "dom";
+property B_RANSUB : String = " \u2A65 ";
+property B_RANRES : String = " \u25B7 ";
+property B_CPROD : String = " \u00D7 ";
 
 // generated names & labels
 property _STATES : String = "_STATES";

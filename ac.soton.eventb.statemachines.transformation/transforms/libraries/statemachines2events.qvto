@@ -90,8 +90,6 @@ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::mach
 	var done : Boolean = false;
 	event.guards->forEach(i){
 		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_))) then{	// and i.isFromSameSM(self)
-			//i.predicate := i.predicate + B_OR + self.name + B_EQ + B_TRUE; 
-			//i.name := i.name + "_or_" + ISIN_ + self.name;
 			name := i.name + "_or_" + ISIN_ + self.name;
 			predicate := i.predicate + B_OR + self.getSourceStatePredicate();
 			attributes += getGeneratedAttr(generatorID);
@@ -134,14 +132,10 @@ mapping statemachines::Transition::initialTransition2sourceGuard(inout event : e
  			 event.containsGuardWithSuffix(ISNOTIN_ + self.source.getStatemachine().name)) }
  {
 	var done : Boolean = false;
-	var pred : String = "";
-	pred := self.getStateMachineNotActivePredicate();
 	event.guards->forEach(i){
 		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_))) then{	// and i.isFromSameSM(self.source)
-			i.predicate := i.predicate +B_OR+ pred; 							//why did i change this to and
-			i.name := i.name + "_or_" + ISNOTIN_ + self.source.getStatemachine().name;
-			name := i.name;
-			predicate := i.predicate;
+			name := i.name + "_or_" + ISNOTIN_ + self.source.getStatemachine().name;
+			predicate := i.predicate +B_OR+ self.getStateMachineNotActivePredicate();
 			generated := true;
 			attributes += getGeneratedAttr(generatorID);
 			event.guards := event.guards->excluding(i);
@@ -150,7 +144,7 @@ mapping statemachines::Transition::initialTransition2sourceGuard(inout event : e
 	};
 	if(done=false)then{
 		name := ISNOTIN_ + self.source.getStatemachine().name;
-		predicate := pred;
+		predicate := self.getStateMachineNotActivePredicate();
 		generated := true;
 		attributes += getGeneratedAttr(generatorID);
 	}endif
