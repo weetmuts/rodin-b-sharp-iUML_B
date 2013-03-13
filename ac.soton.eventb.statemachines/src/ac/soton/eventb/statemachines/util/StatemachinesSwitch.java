@@ -22,6 +22,7 @@ import org.eventb.emf.core.EventBObject;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
 import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.statemachines.*;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Final;
 import ac.soton.eventb.statemachines.Initial;

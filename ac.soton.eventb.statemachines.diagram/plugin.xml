@@ -330,12 +330,29 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.refines.statemachine"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.InstancesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$RootStatemachineFilter"
+               id="property.section.instances"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.instances"
+               class="ac.soton.eventb.statemachines.diagram.sheet.custom.SelfNamePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$RootStatemachineFilter"
+               id="property.section.selfname"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.selfname"
                class="ac.soton.eventb.statemachines.diagram.sheet.custom.TranslationPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$RootStatemachineFilter"
                id="property.section.translation"
                tab="property.tab.overview">
          </propertySection>
+
       </propertySections>
    </extension>
 

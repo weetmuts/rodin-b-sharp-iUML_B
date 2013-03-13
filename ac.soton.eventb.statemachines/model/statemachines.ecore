@@ -10,7 +10,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//Diagram">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasValidName&#xA;concreteHasNoRefinedStates&#xA;refinedHasNoConcreteStates&#xA;hasOneInitial&#xA;hasOneFinal&#xA;rootHasInitial&#xA;hasInitialIfIncoming&#xA;"/>
+      <details key="constraints" value="hasValidName&#xA;concreteHasNoRefinedStates&#xA;refinedHasNoConcreteStates&#xA;hasOneInitial&#xA;hasOneFinal&#xA;rootHasInitial&#xA;hasInitialIfIncoming&#xA;instancesIsData"/>
     </eAnnotations>
     <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="translation" eType="#//TranslationKind"/>
@@ -19,6 +19,9 @@
         eType="#//AbstractNode" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
         eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selfName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="this"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatemachineOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"

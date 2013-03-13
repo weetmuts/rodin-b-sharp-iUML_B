@@ -319,6 +319,24 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getStatemachine_Instances() {
+		return (EReference)statemachineEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatemachine_SelfName() {
+		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getState() {
 		return stateEClass;
 	}
@@ -428,6 +446,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(statemachineEClass, STATEMACHINE__REFINES);
 		createEReference(statemachineEClass, STATEMACHINE__NODES);
 		createEReference(statemachineEClass, STATEMACHINE__TRANSITIONS);
+		createEReference(statemachineEClass, STATEMACHINE__INSTANCES);
+		createEAttribute(statemachineEClass, STATEMACHINE__SELF_NAME);
 
 		statemachineOwnerEClass = createEClass(STATEMACHINE_OWNER);
 		createEReference(statemachineOwnerEClass, STATEMACHINE_OWNER__STATEMACHINES);
@@ -510,6 +530,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getStatemachine_Refines(), this.getStatemachine(), null, "refines", null, 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStatemachine_Nodes(), this.getAbstractNode(), null, "nodes", null, 0, -1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStatemachine_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatemachine_Instances(), theCorePackage.getEventBNamedCommentedElement(), null, "instances", null, 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatemachine_SelfName(), ecorePackage.getEString(), "selfName", "this", 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statemachineOwnerEClass, StatemachineOwner.class, "StatemachineOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStatemachineOwner_Statemachines(), this.getStatemachine(), null, "statemachines", null, 0, -1, StatemachineOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -584,7 +606,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (statemachineEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\n"
+			 "constraints", "hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\ninstancesIsData"
 		   });			
 		addAnnotation
 		  (transitionEClass, 

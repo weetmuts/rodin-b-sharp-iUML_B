@@ -76,6 +76,8 @@ public class StatemachineItemProvider
 			addExtensionIdPropertyDescriptor(object);
 			addTranslationPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
+			addInstancesPropertyDescriptor(object);
+			addSelfNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -142,6 +144,50 @@ public class StatemachineItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Instances feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInstancesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Statemachine_instances_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Statemachine_instances_feature", "_UI_Statemachine_type"),
+				 StatemachinesPackage.Literals.STATEMACHINE__INSTANCES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Self Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSelfNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Statemachine_selfName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Statemachine_selfName_feature", "_UI_Statemachine_type"),
+				 StatemachinesPackage.Literals.STATEMACHINE__SELF_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -217,6 +263,7 @@ public class StatemachineItemProvider
 			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 			case StatemachinesPackage.STATEMACHINE__REFINES:
+			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StatemachinesPackage.STATEMACHINE__NODES:

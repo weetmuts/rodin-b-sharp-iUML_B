@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
@@ -42,6 +43,8 @@ import ac.soton.eventb.statemachines.TranslationKind;
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getSelfName <em>Self Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +127,36 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Transition> transitions;
+
+	/**
+	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventBNamedCommentedElement instances;
+
+	/**
+	 * The default value of the '{@link #getSelfName() <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSelfName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SELF_NAME_EDEFAULT = "this";
+
+	/**
+	 * The cached value of the '{@link #getSelfName() <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSelfName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String selfName = SELF_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,6 +313,68 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventBNamedCommentedElement getInstances() {
+		if (instances != null && instances.eIsProxy()) {
+			InternalEObject oldInstances = (InternalEObject)instances;
+			instances = (EventBNamedCommentedElement)eResolveProxy(oldInstances);
+			if (instances != oldInstances) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.STATEMACHINE__INSTANCES, oldInstances, instances));
+			}
+		}
+		return instances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBNamedCommentedElement basicGetInstances() {
+		return instances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstances(EventBNamedCommentedElement newInstances) {
+		EventBNamedCommentedElement oldInstances = instances;
+		instances = newInstances;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__INSTANCES, oldInstances, instances));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * If selfName is still at the default (this), returns this_SMName
+	 * Otherwise returns the value of selfName
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getSelfName() {
+		if (getInstances() ==null) return "";
+		else return "this".equals(selfName)? "this_"+getInstances().getName() : selfName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSelfName(String newSelfName) {
+		String oldSelfName = selfName;
+		selfName = newSelfName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__SELF_NAME, oldSelfName, selfName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -310,6 +405,11 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 				return getNodes();
 			case StatemachinesPackage.STATEMACHINE__TRANSITIONS:
 				return getTransitions();
+			case StatemachinesPackage.STATEMACHINE__INSTANCES:
+				if (resolve) return getInstances();
+				return basicGetInstances();
+			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
+				return getSelfName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,6 +440,12 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 				getTransitions().clear();
 				getTransitions().addAll((Collection<? extends Transition>)newValue);
 				return;
+			case StatemachinesPackage.STATEMACHINE__INSTANCES:
+				setInstances((EventBNamedCommentedElement)newValue);
+				return;
+			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
+				setSelfName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -367,6 +473,12 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 			case StatemachinesPackage.STATEMACHINE__TRANSITIONS:
 				getTransitions().clear();
 				return;
+			case StatemachinesPackage.STATEMACHINE__INSTANCES:
+				setInstances((EventBNamedCommentedElement)null);
+				return;
+			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
+				setSelfName(SELF_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,6 +501,10 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 				return nodes != null && !nodes.isEmpty();
 			case StatemachinesPackage.STATEMACHINE__TRANSITIONS:
 				return transitions != null && !transitions.isEmpty();
+			case StatemachinesPackage.STATEMACHINE__INSTANCES:
+				return instances != null;
+			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
+				return SELF_NAME_EDEFAULT == null ? selfName != null : !SELF_NAME_EDEFAULT.equals(selfName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -449,6 +565,8 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		result.append(extensionId);
 		result.append(", translation: ");
 		result.append(translation);
+		result.append(", selfName: ");
+		result.append(selfName);
 		result.append(')');
 		return result.toString();
 	}

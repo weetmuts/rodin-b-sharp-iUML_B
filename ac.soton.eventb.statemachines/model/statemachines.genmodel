@@ -21,6 +21,8 @@
       <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Statemachine/refines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//Statemachine/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//Statemachine/transitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statemachines.ecore#//Statemachine/instances"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statemachines.ecore#//Statemachine/selfName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="statemachines.ecore#//StatemachineOwner">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statemachines.ecore#//StatemachineOwner/statemachines"/>

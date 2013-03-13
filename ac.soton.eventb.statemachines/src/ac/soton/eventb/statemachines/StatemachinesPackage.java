@@ -224,13 +224,31 @@ public interface StatemachinesPackage extends EPackage {
 	int STATEMACHINE__TRANSITIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Instances</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__INSTANCES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Self Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__SELF_NAME = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Statemachine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int STATEMACHINE_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
@@ -968,6 +986,28 @@ public interface StatemachinesPackage extends EPackage {
 	EReference getStatemachine_Transitions();
 
 	/**
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instances</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getInstances()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EReference getStatemachine_Instances();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Self Name</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getSelfName()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EAttribute getStatemachine_SelfName();
+
+	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.State <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1208,6 +1248,22 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATEMACHINE__TRANSITIONS = eINSTANCE.getStatemachine_Transitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Instances</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEMACHINE__INSTANCES = eINSTANCE.getStatemachine_Instances();
+
+		/**
+		 * The meta object literal for the '<em><b>Self Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATEMACHINE__SELF_NAME = eINSTANCE.getStatemachine_SelfName();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.

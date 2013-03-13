@@ -10,6 +10,7 @@
  */
 package ac.soton.eventb.statemachines.util;
 
+import ac.soton.eventb.statemachines.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -20,7 +21,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eventb.emf.core.EventBNamedCommentedElement;
+import org.eventb.emf.core.context.CarrierSet;
+import org.eventb.emf.core.context.Constant;
 import org.eventb.emf.core.machine.Invariant;
+import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Final;
@@ -426,6 +431,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateStatemachine_hasOneFinal(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateStatemachine_rootHasInitial(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateStatemachine_hasInitialIfIncoming(statemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateStatemachine_instancesIsData(statemachine, diagnostics, context);
 		return result;
 	}
 
@@ -619,6 +625,53 @@ public class StatemachinesValidator extends EObjectValidator {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Validates the instancesIsData constraint of '<em>Statemachine</em>'.
+	 * <!-- begin-user-doc -->
+	 * check the instances, if set, is a Variable, Constant or Carrier Set
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateStatemachine_instancesIsData(Statemachine statemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		EventBNamedCommentedElement instances = statemachine.getInstances();
+		//TODO: temporary
+		// Temporary restriction as translation does not support variable instances for statemahcine lifting
+		if (	instances instanceof Variable){
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Variable Instances Statemachine Lifting is not yet supported", getObjectLabel(statemachine, context) },
+						 new Object[] { statemachine },
+						 context));
+			}
+			return false;
+		}
+		//END:
+		
+		if (	instances == null ||
+				instances instanceof Variable ||
+				instances instanceof Constant ||
+				instances instanceof CarrierSet) return true;
+		else {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Instances may only reference a Variable, Constant or Carrier Set", getObjectLabel(statemachine, context) },
+						 new Object[] { statemachine },
+						 context));
+			}
+			return false;
+		}
 	}
 
 	/**

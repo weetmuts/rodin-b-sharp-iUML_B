@@ -1,36 +1,142 @@
+StatemachinesPackage
+This is added:
+	/**
+	 * Statemachines extension ID, assigned to statemachines extensions to Event-B,
+	 * as well as used by transformation to Event-B.
+	 */
+	String STATEMACHINES_EXTENSION_ID = "ac.soton.eventb.statemachines";
 
-Transition
+
+--------------------------
+
+TransitionImpl
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns a label constructed from a list of names of the elaborated events.
+	 * The label is wrapped (i.e. a \n inserted) after the next comma after every 50 chars.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getLabel() {
+		EList<Event> events = getElaborates();
+		if (events.isEmpty())
+			return "";//"<no name - fix elaborates>";
+		ArrayList<String> result = new ArrayList<String>(getElaborates().size());
+		for (Event event : getElaborates())
+			result.add(event.getName());
+		String rawLabel = result.toString().replaceAll("(^.)|(.$)", "");
+		String formattedLabel = "";
+		int j=0;
+		for (int i=0; i<rawLabel.length();i++){
+			if (j>=50 && ','==rawLabel.charAt(i-1)){
+				formattedLabel = formattedLabel+"\n";
+				j=-1;
+			}else{
+				formattedLabel = formattedLabel + rawLabel.charAt(i);
+			}
+			j++;
+		}
+		return formattedLabel;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getLabel() {
-		if (getElaborates() instanceof EventBNamed){
-			return ((EventBNamed) getElaborates()).getName();
-		}else if (getElaborates() instanceof EventBLabeled){
-			return ((EventBLabeled) getElaborates()).getLabel();
-		}else return "<no label - fix elaborates>";
+	public EventBElement getSourceContainer() {
+		if (sourceContainer != null && sourceContainer.eIsProxy()) {
+			InternalEObject oldSourceContainer = (InternalEObject)sourceContainer;
+			sourceContainer = (EventBElement)eResolveProxy(oldSourceContainer);
+			if (sourceContainer != oldSourceContainer) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__SOURCE_CONTAINER, oldSourceContainer, sourceContainer));
+			}
+		} else if (sourceContainer == null) {
+			return getSource();
+		}
+		return sourceContainer;
 	}
-	
-	
-RefinedStatemachine
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getLabel() {
-		if (getRefines() instanceof EventBNamed){
-			return ((EventBNamed) getRefines()).getName();
-		}else if (getRefines() instanceof EventBLabeled){
-			return ((EventBLabeled) getRefines()).getLabel();
-		}else return "<no label - fix elaborates>";
+	public EventBElement getTargetContainer() {
+		if (targetContainer != null && targetContainer.eIsProxy()) {
+			InternalEObject oldTargetContainer = (InternalEObject)targetContainer;
+			targetContainer = (EventBElement)eResolveProxy(oldTargetContainer);
+			if (targetContainer != oldTargetContainer) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.TRANSITION__TARGET_CONTAINER, oldTargetContainer, targetContainer));
+			}
+		} else if (targetContainer == null) {
+			return getTarget();
+		}
+		return targetContainer;
 	}
+
 	
-StateMachine + State
+	/* 
+	 * Customised to fix problem with notification of label change on EReference 'elaborates' change.
+	 */
+	@Override
+	public void eNotify(Notification notification) {
+		super.eNotify(notification);
+		
+		int type = notification.getEventType();
+		Object feature = notification.getFeature();
+		if (StatemachinesPackage.Literals.TRANSITION__ELABORATES.equals(feature)
+				&& (type == Notification.ADD || type == Notification.ADD_MANY
+						|| type == Notification.REMOVE || type == Notification.REMOVE_MANY))
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__LABEL, notification.getOldValue(), notification.getNewValue()));
+			
+	}
+
+
+--------------------------
+	
+Statemachine
+
+	/**
+	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final String EXTENSION_ID_EDEFAULT = StatemachinesPackage.STATEMACHINES_EXTENSION_ID;
+
+	/**
+	 * The cached value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtensionId()
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected String extensionId = EXTENSION_ID_EDEFAULT+"."+EcoreUtil.generateUUID();
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * If selfName is still at the default (this), returns this_SMName
+	 * Otherwise returns the value of selfName
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getSelfName() {
+		return "this".equals(selfName)? "this_"+getName() : selfName;
+	}
+
+
+--------------------------
+	
+State (also similar in Statemachine)
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -38,7 +144,11 @@ StateMachine + State
 	 * @generated NOT
 	 */
 	public String getName() {
-		return doGetName();	}
+		State refines = getRefines();
+		if (refines != null){
+			return refines.getName();
+		} else return doGetName();
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -46,7 +156,56 @@ StateMachine + State
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
+		String oldName = getName();
 		doSetName(newName);
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, newName));
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * On refines change also notify about name change.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setRefines(State newRefines) {
+		State oldRefines = refines;
+		refines = newRefines;
+		if (eNotificationRequired()) {
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__REFINES, oldRefines, refines));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldRefines, refines));
+		}
+	}
+	
+--------------------------
+	
+StatemachinesValidator
+
+populate all the Validate operations
+
+--------------------------
+
+In EDIT plugin
+
+FinalItemProvider (and similarly in InitialItemProvider)
+
+	/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
+//		String label = ((Final)object).getReference();
+//		return label == null || label.length() == 0 ?
+//			getString("_UI_Final_type") :
+//			getString("_UI_Final_type") + " " + label;
+		return getString("_UI_Final_type");
+	}
+
+	
+	
+	
 	
 	

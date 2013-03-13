@@ -8,6 +8,7 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
+import ac.soton.eventb.statemachines.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;

@@ -26,11 +26,13 @@ import ac.soton.eventb.emf.diagrams.Diagram;
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getNodes <em>Nodes</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}</li>
  * </ul>
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\n'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\ninstancesIsData'"
  * @generated
  */
 public interface Statemachine extends EventBNamedCommentedElement, AbstractExtension, Diagram {
@@ -127,5 +129,58 @@ public interface Statemachine extends EventBNamedCommentedElement, AbstractExten
 	 * @generated
 	 */
 	EList<Transition> getTransitions();
+
+	/**
+	 * Returns the value of the '<em><b>Instances</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instances</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instances</em>' reference.
+	 * @see #setInstances(EventBNamedCommentedElement)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine_Instances()
+	 * @model
+	 * @generated
+	 */
+	EventBNamedCommentedElement getInstances();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Instances</em>' reference.
+	 * @see #getInstances()
+	 * @generated
+	 */
+	void setInstances(EventBNamedCommentedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Self Name</b></em>' attribute.
+	 * The default value is <code>"this"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Self Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Self Name</em>' attribute.
+	 * @see #setSelfName(String)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine_SelfName()
+	 * @model default="this"
+	 * @generated
+	 */
+	String getSelfName();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Self Name</em>' attribute.
+	 * @see #getSelfName()
+	 * @generated
+	 */
+	void setSelfName(String value);
 
 } // Statemachine
