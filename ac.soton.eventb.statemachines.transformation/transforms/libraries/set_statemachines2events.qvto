@@ -52,7 +52,7 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
 		union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet())->
 		union(self.guards);
 		
-	self.actions := transition.target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
+	self.actions := transition[source<>target].target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
 		union(self.actions);
 }
 
@@ -105,7 +105,7 @@ helper statemachines::State::getSourceStatePredicate() : String {
 			if self.getRootStatemachine().instances = null then
 				self.getStatemachine().name + B_EQ + self.name
 			else 
-				self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.name
+				self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_EQ+self.name
 			endif;
 }
 
@@ -151,7 +151,7 @@ helper statemachines::Transition::getStateMachineNotActivePredicate() : String {
 			if self.source.getRootStatemachine().instances = null then
 				self.source.getStatemachine().name + B_EQ + self.source.getStatemachine().name+_NULL
 			else 
-				self.source.getStatemachine().name+(self.source.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.source.getStatemachine().name+_NULL
+				self.source.getStatemachine().name+(self.source.getRootStatemachine().selfName).parenthesize()+B_EQ+self.source.getStatemachine().name+_NULL
 			endif;
 }
 

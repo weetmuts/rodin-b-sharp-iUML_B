@@ -148,7 +148,7 @@ mapping statemachines::Statemachine::statemachine2initActionInactive(in event : 
 		if self.getRootStatemachine().instances = null then
 			self.name + B_BEQ + self.name + _NULL
 		else
-			self.name + B_BEQ + self.getRootStatemachine().instances.name+B_CPROD +self.name + _NULL
+			self.name + B_BEQ + self.getRootStatemachine().instances.name+B_CPROD +(self.name + _NULL).asSet()
 		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
