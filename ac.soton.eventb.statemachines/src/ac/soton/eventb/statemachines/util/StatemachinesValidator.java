@@ -602,8 +602,12 @@ public class StatemachinesValidator extends EObjectValidator {
 	 */
 	public boolean validateStatemachine_hasInitialIfIncoming(Statemachine statemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		EObject container = statemachine.eContainer();
-		if (container instanceof State
-				&& ((State) container).getIncoming().size() > 0 
+		if (!(container instanceof State)) return true;
+		int loops = 0;			
+		for (Transition t : ((State) container).getIncoming()){
+			if (((State) container).getOutgoing().contains(t)) loops++;
+		}
+		if(((State) container).getIncoming().size() - loops > 0 
 				&& EcoreUtil.getObjectByType(statemachine.getNodes(), StatemachinesPackage.eINSTANCE.getInitial()) == null) {
 			EList<EObject> nestedStates = statemachine.getAllContained(
 					StatemachinesPackage.eINSTANCE.getState(), true);
