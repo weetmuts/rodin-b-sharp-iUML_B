@@ -48,4 +48,6 @@ public class PredicatePropertySection extends AbstractTextPropertySection {
 		return text;
 	}
 
+	@Override
+	protected int numberOfRows() { return 3;}
 }
