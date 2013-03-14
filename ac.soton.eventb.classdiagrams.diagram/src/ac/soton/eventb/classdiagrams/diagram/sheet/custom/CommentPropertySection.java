@@ -54,4 +54,6 @@ public class CommentPropertySection extends AbstractTextPropertySection {
 		return "change comment";
 	}
 
+	@Override
+	protected int numberOfRows() { return 3;}
 }
