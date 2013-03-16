@@ -79,6 +79,7 @@ mapping statemachines::Statemachine::rootStatemachine2parameter(inout event : ev
  when{ not( event.containsGuardWithPrefix(ISIN_ + self.name) or event.containsGuardWithSuffix(ISIN_ + self.name)) }
  {
 	var done : Boolean = false;
+/*	DISJUNCTIVE GUARD REMOVED AS DOESN'T WORK
 	event.guards->forEach(i){
 		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_)))then{
 			name := i.name + "_or_" + ISIN_ + self.name;
@@ -88,6 +89,7 @@ mapping statemachines::Statemachine::rootStatemachine2parameter(inout event : ev
 			done := true;
 		}endif
 	};
+	*/
 	if(done=false)then{
 		name := ISIN_ + self.name;
 		predicate := self.getSourceStatePredicate();
@@ -124,6 +126,7 @@ mapping statemachines::Transition::initialTransition2sourceGuard(inout event : e
  			 event.containsGuardWithSuffix(ISNOTIN_ + self.source.getStatemachine().name)) }
  {
 	var done : Boolean = false;
+/*	DISJUNCTIVE GUARD REMOVED AS DOESN'T WORK	
 	event.guards->forEach(i){
 		if(i.isGenerated(generatorID) and (i.name.startsWith(ISIN_) or i.name.startsWith(ISNOTIN_))) then{	// and i.isFromSameSM(self.source)
 			name := i.name + "_or_" + ISNOTIN_ + self.source.getStatemachine().name;
@@ -134,6 +137,7 @@ mapping statemachines::Transition::initialTransition2sourceGuard(inout event : e
 			done := true;
 		}endif
 	};
+	*/
 	if(done=false)then{
 		name := ISNOTIN_ + self.source.getStatemachine().name;
 		predicate := self.getStateMachineNotActivePredicate();
