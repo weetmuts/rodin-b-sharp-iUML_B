@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: ac.soton.eventb.classdiagrams.diagram; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: ac.soton.eventb.classdiagrams.diagram.new;singleton:=true
+Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorPlugin
 Bundle-Vendor: %providerName
