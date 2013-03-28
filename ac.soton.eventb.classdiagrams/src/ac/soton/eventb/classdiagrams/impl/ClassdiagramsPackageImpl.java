@@ -11,6 +11,8 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
@@ -22,6 +24,7 @@ import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -75,6 +78,20 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	private EClass classEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classMethodEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classConstraintEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -308,6 +325,42 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClass_Constraints() {
+		return (EReference)classEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClass_Methods() {
+		return (EReference)classEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassMethod() {
+		return classMethodEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassConstraint() {
+		return classConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ClassdiagramsFactory getClassdiagramsFactory() {
 		return (ClassdiagramsFactory)getEFactoryInstance();
 	}
@@ -352,6 +405,12 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		createEReference(classEClass, CLASS__INCOMING);
 		createEReference(classEClass, CLASS__OUTGOING);
 		createEReference(classEClass, CLASS__REFINES);
+		createEReference(classEClass, CLASS__CONSTRAINTS);
+		createEReference(classEClass, CLASS__METHODS);
+
+		classMethodEClass = createEClass(CLASS_METHOD);
+
+		classConstraintEClass = createEClass(CLASS_CONSTRAINT);
 	}
 
 	/**
@@ -390,15 +449,12 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		classdiagramEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
-		associationEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		associationEClass.getESuperTypes().add(theCoreextensionPackage.getEventBDataElaboration());
-		associationEClass.getESuperTypes().add(theCoreextensionPackage.getEventBRelationKind());
-		classAttributeEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		classAttributeEClass.getESuperTypes().add(theCoreextensionPackage.getEventBDataElaboration());
-		classAttributeEClass.getESuperTypes().add(theCoreextensionPackage.getEventBRelationKind());
-		classEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
-		classEClass.getESuperTypes().add(theCoreextensionPackage.getEventBDataElaboration());
+		associationEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedRelationDataElaborationElement());
+		classAttributeEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedRelationDataElaborationElement());
+		classEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedDataElaborationElement());
 		classEClass.getESuperTypes().add(theDiagramsPackage.getDiagramOwner());
+		classMethodEClass.getESuperTypes().add(theCoreextensionPackage.getEventBCommentedLabeledEventGroupElement());
+		classConstraintEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedDerivedPredicateElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classdiagramOwnerEClass, ClassdiagramOwner.class, "ClassdiagramOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -422,6 +478,12 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEReference(getClass_Incoming(), this.getAssociation(), this.getAssociation_Target(), "incoming", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Outgoing(), this.getAssociation(), this.getAssociation_Source(), "outgoing", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Refines(), this.getClass_(), null, "refines", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Constraints(), this.getClassConstraint(), null, "constraints", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Methods(), this.getClassMethod(), null, "methods", null, 0, -1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classMethodEClass, ClassMethod.class, "ClassMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(classConstraintEClass, ClassConstraint.class, "ClassConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -65,6 +65,24 @@ public interface ClassdiagramsFactory extends EFactory {
 	Class createClass();
 
 	/**
+	 * Returns a new object of class '<em>Class Method</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Method</em>'.
+	 * @generated
+	 */
+	ClassMethod createClassMethod();
+
+	/**
+	 * Returns a new object of class '<em>Class Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Constraint</em>'.
+	 * @generated
+	 */
+	ClassConstraint createClassConstraint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

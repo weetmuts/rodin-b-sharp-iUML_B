@@ -11,8 +11,11 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
@@ -49,50 +52,20 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getElaborates <em>Elaborates</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getDataKind <em>Data Kind</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getDiagrams <em>Diagrams</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getSupertypes <em>Supertypes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getClassAttributes <em>Class Attributes</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getMethods <em>Methods</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.soton.eventb.classdiagrams.Class {
-	/**
-	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElaborates()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventBNamed elaborates;
-
-	/**
-	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDataKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.SET;
-
-	/**
-	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDataKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected DataKind dataKind = DATA_KIND_EDEFAULT;
-
+public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl implements ac.soton.eventb.classdiagrams.Class {
 	/**
 	 * The cached value of the '{@link #getDiagrams() <em>Diagrams</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -154,6 +127,26 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	protected ac.soton.eventb.classdiagrams.Class refines;
 
 	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassConstraint> constraints;
+
+	/**
+	 * The cached value of the '{@link #getMethods() <em>Methods</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMethods()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassMethod> methods;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -170,65 +163,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	protected EClass eStaticClass() {
 		return ClassdiagramsPackage.Literals.CLASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamed getElaborates() {
-		if (elaborates != null && elaborates.eIsProxy()) {
-			InternalEObject oldElaborates = (InternalEObject)elaborates;
-			elaborates = (EventBNamed)eResolveProxy(oldElaborates);
-			if (elaborates != oldElaborates) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.CLASS__ELABORATES, oldElaborates, elaborates));
-			}
-		}
-		return elaborates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamed basicGetElaborates() {
-		return elaborates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setElaborates(EventBNamed newElaborates) {
-		EventBNamed oldElaborates = elaborates;
-		elaborates = newElaborates;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__ELABORATES, oldElaborates, elaborates));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataKind getDataKind() {
-		return dataKind;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDataKind(DataKind newDataKind) {
-		DataKind oldDataKind = dataKind;
-		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__DATA_KIND, oldDataKind, dataKind));
 	}
 
 	/**
@@ -334,6 +268,30 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ClassConstraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList.Resolving<ClassConstraint>(ClassConstraint.class, this, ClassdiagramsPackage.CLASS__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ClassMethod> getMethods() {
+		if (methods == null) {
+			methods = new EObjectContainmentEList.Resolving<ClassMethod>(ClassMethod.class, this, ClassdiagramsPackage.CLASS__METHODS);
+		}
+		return methods;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -362,6 +320,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
 			case ClassdiagramsPackage.CLASS__OUTGOING:
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case ClassdiagramsPackage.CLASS__METHODS:
+				return ((InternalEList<?>)getMethods()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -374,11 +336,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassdiagramsPackage.CLASS__ELABORATES:
-				if (resolve) return getElaborates();
-				return basicGetElaborates();
-			case ClassdiagramsPackage.CLASS__DATA_KIND:
-				return getDataKind();
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 				return getDiagrams();
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
@@ -392,6 +349,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				if (resolve) return getRefines();
 				return basicGetRefines();
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+				return getConstraints();
+			case ClassdiagramsPackage.CLASS__METHODS:
+				return getMethods();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -405,12 +366,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassdiagramsPackage.CLASS__ELABORATES:
-				setElaborates((EventBNamed)newValue);
-				return;
-			case ClassdiagramsPackage.CLASS__DATA_KIND:
-				setDataKind((DataKind)newValue);
-				return;
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 				getDiagrams().clear();
 				getDiagrams().addAll((Collection<? extends Diagram>)newValue);
@@ -434,6 +389,14 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				setRefines((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends ClassConstraint>)newValue);
+				return;
+			case ClassdiagramsPackage.CLASS__METHODS:
+				getMethods().clear();
+				getMethods().addAll((Collection<? extends ClassMethod>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -446,12 +409,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassdiagramsPackage.CLASS__ELABORATES:
-				setElaborates((EventBNamed)null);
-				return;
-			case ClassdiagramsPackage.CLASS__DATA_KIND:
-				setDataKind(DATA_KIND_EDEFAULT);
-				return;
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 				getDiagrams().clear();
 				return;
@@ -470,6 +427,12 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			case ClassdiagramsPackage.CLASS__REFINES:
 				setRefines((ac.soton.eventb.classdiagrams.Class)null);
 				return;
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+				getConstraints().clear();
+				return;
+			case ClassdiagramsPackage.CLASS__METHODS:
+				getMethods().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -482,10 +445,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassdiagramsPackage.CLASS__ELABORATES:
-				return elaborates != null;
-			case ClassdiagramsPackage.CLASS__DATA_KIND:
-				return dataKind != DATA_KIND_EDEFAULT;
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 				return diagrams != null && !diagrams.isEmpty();
 			case ClassdiagramsPackage.CLASS__SUPERTYPES:
@@ -498,6 +457,10 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 				return outgoing != null && !outgoing.isEmpty();
 			case ClassdiagramsPackage.CLASS__REFINES:
 				return refines != null;
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
+			case ClassdiagramsPackage.CLASS__METHODS:
+				return methods != null && !methods.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -509,13 +472,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBDataElaboration.class) {
-			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.CLASS__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
-				case ClassdiagramsPackage.CLASS__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
-				default: return -1;
-			}
-		}
 		if (baseClass == DiagramOwner.class) {
 			switch (derivedFeatureID) {
 				case ClassdiagramsPackage.CLASS__DIAGRAMS: return DiagramsPackage.DIAGRAM_OWNER__DIAGRAMS;
@@ -532,13 +488,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBDataElaboration.class) {
-			switch (baseFeatureID) {
-				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return ClassdiagramsPackage.CLASS__ELABORATES;
-				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return ClassdiagramsPackage.CLASS__DATA_KIND;
-				default: return -1;
-			}
-		}
 		if (baseClass == DiagramOwner.class) {
 			switch (baseFeatureID) {
 				case DiagramsPackage.DIAGRAM_OWNER__DIAGRAMS: return ClassdiagramsPackage.CLASS__DIAGRAMS;
@@ -546,22 +495,6 @@ public class ClassImpl extends EventBNamedCommentedElementImpl implements ac.sot
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (dataKind: ");
-		result.append(dataKind);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ClassImpl

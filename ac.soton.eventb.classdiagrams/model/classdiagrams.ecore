@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classdiagrams"
-    nsURI="http://soton.ac.uk/models/eventb/classdiagrams" nsPrefix="classdiagrams">
+    nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313" nsPrefix="classdiagrams">
   <eClassifiers xsi:type="ecore:EClass" name="ClassdiagramOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classdiagrams" upperBound="-1"
         eType="#//Classdiagram" containment="true"/>
@@ -15,7 +15,7 @@
         eType="#//Association" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//Classdiagram"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBDataElaboration ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind">
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBNamedCommentedRelationDataElaborationElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="isAssociationTypeRight"/>
     </eAnnotations>
@@ -24,11 +24,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Class" eOpposite="#//Class/outgoing"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBDataElaboration ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBRelationKind">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBNamedCommentedRelationDataElaborationElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBDataElaboration ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//DiagramOwner">
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBNamedCommentedDataElaborationElement ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//DiagramOwner">
     <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
         eType="#//Class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classAttributes" upperBound="-1"
@@ -42,5 +42,11 @@
         <details key="constraints" value="parentIsNotConstant"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//ClassConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//ClassMethod" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMethod" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBCommentedLabeledEventGroupElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassConstraint" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedDerivedPredicateElement"/>
 </ecore:EPackage>

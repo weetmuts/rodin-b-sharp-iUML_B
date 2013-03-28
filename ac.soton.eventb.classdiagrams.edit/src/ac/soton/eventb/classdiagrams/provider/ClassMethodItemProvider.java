@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 - University of Southampton.
+ * Copyright (c) 2013 - University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -10,9 +10,10 @@
 package ac.soton.eventb.classdiagrams.provider;
 
 
-import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBCommentedLabeledEventGroupElementItemProvider;
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBEventGroupItemProvider;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,11 +21,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -32,26 +28,30 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eventb.emf.core.CorePackage;
 
 /**
- * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.ClassdiagramOwner} object.
+ * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.ClassMethod} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassdiagramOwnerItemProvider
-	extends ItemProviderAdapter
+public class ClassMethodItemProvider
+	extends EventBCommentedLabeledEventGroupElementItemProvider
 	implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IItemColorProvider {
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource,
+		IItemColorProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassdiagramOwnerItemProvider(AdapterFactory adapterFactory) {
+	public ClassMethodItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -71,33 +71,14 @@ public class ClassdiagramOwnerItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This returns ClassMethod.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASSDIAGRAM_OWNER__CLASSDIAGRAMS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMethod"));
 	}
 
 	/**
@@ -108,7 +89,10 @@ public class ClassdiagramOwnerItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ClassdiagramOwner_type");
+		String label = ((ClassMethod)object).getReference();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ClassMethod_type") :
+			getString("_UI_ClassMethod_type") + " " + label;
 	}
 
 	/**
@@ -121,12 +105,6 @@ public class ClassdiagramOwnerItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ClassdiagramOwner.class)) {
-			case ClassdiagramsPackage.CLASSDIAGRAM_OWNER__CLASSDIAGRAMS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -143,19 +121,8 @@ public class ClassdiagramOwnerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ClassdiagramsPackage.Literals.CLASSDIAGRAM_OWNER__CLASSDIAGRAMS,
+				(CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS,
 				 ClassdiagramsFactory.eINSTANCE.createClassdiagram()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ((IChildCreationExtender)adapterFactory).getResourceLocator();
 	}
 
 }

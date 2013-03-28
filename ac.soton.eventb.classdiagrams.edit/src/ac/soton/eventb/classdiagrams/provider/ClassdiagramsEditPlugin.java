@@ -13,6 +13,7 @@ import ac.soton.eventb.emf.core.extension.coreextension.provider.Eventbcoreexten
 
 import ac.soton.eventb.emf.diagrams.provider.DiagramsEditPlugin;
 
+import ac.soton.eventb.statemachines.provider.StatemachinesEditPlugin;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;

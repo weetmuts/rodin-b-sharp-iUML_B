@@ -11,6 +11,8 @@ package ac.soton.eventb.classdiagrams.impl;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
@@ -38,7 +40,7 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	 */
 	public static ClassdiagramsFactory init() {
 		try {
-			ClassdiagramsFactory theClassdiagramsFactory = (ClassdiagramsFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/classdiagrams"); 
+			ClassdiagramsFactory theClassdiagramsFactory = (ClassdiagramsFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/classdiagrams/0313"); 
 			if (theClassdiagramsFactory != null) {
 				return theClassdiagramsFactory;
 			}
@@ -71,6 +73,8 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 			case ClassdiagramsPackage.ASSOCIATION: return createAssociation();
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE: return createClassAttribute();
 			case ClassdiagramsPackage.CLASS: return createClass();
+			case ClassdiagramsPackage.CLASS_METHOD: return createClassMethod();
+			case ClassdiagramsPackage.CLASS_CONSTRAINT: return createClassConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +118,26 @@ public class ClassdiagramsFactoryImpl extends EFactoryImpl implements Classdiagr
 	public ac.soton.eventb.classdiagrams.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassMethod createClassMethod() {
+		ClassMethodImpl classMethod = new ClassMethodImpl();
+		return classMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassConstraint createClassConstraint() {
+		ClassConstraintImpl classConstraint = new ClassConstraintImpl();
+		return classConstraint;
 	}
 
 	/**

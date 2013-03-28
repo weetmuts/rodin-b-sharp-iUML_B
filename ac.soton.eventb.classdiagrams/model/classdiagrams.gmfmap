@@ -52,10 +52,71 @@
               href="classdiagrams.gmfgraph#AttributeLabel"/>
         </ownedChild>
       </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.1">
+        <containmentFeature
+            href="classdiagrams.ecore#//Class/methods"/>
+        <ownedChild>
+          <domainMetaElement
+              href="classdiagrams.ecore#//ClassMethod"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping"
+              readOnly="true">
+            <diagramLabel
+                href="classdiagrams.gmfgraph#MethodLabel"/>
+            <features
+                href="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBLabeled/label"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="classdiagrams.gmftool#//@palette/@tools.1/@tools.1"/>
+          <diagramNode
+              href="classdiagrams.gmfgraph#MethodLabel"/>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.2">
+        <containmentFeature
+            href="classdiagrams.ecore#//Class/constraints"/>
+        <ownedChild>
+          <domainMetaElement
+              href="classdiagrams.ecore#//ClassConstraint"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="{0}: {1}"
+              editorPattern="{0}: {1}">
+            <diagramLabel
+                href="classdiagrams.gmfgraph#ConstraintLabel"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+            <features
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+            <editableFeatures
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed/name"/>
+            <editableFeatures
+                href="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBPredicate/predicate"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="classdiagrams.gmftool#//@palette/@tools.1/@tools.2"/>
+          <diagramNode
+              href="classdiagrams.gmfgraph#ConstraintLabel"/>
+        </ownedChild>
+      </children>
       <compartments
           children="//@nodes.0/@ownedChild/@children.0">
         <compartment
             href="classdiagrams.gmfgraph#AttributesCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.1">
+        <compartment
+            href="classdiagrams.gmfgraph#MethodsCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.2">
+        <compartment
+            href="classdiagrams.gmfgraph#ConstraintsCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>

@@ -13,10 +13,12 @@ package ac.soton.eventb.classdiagrams.provider;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBNamedCommentedDataElaborationElementItemProvider;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
+import ac.soton.eventb.statemachines.StatemachinesFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,6 +29,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
@@ -46,13 +49,9 @@ import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
  * @generated
  */
 public class ClassItemProvider
-	extends EventBNamedCommentedElementItemProvider
+	extends EventBNamedCommentedDataElaborationElementItemProvider
 	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IItemColorProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -74,58 +73,12 @@ public class ClassItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addElaboratesPropertyDescriptor(object);
-			addDataKindPropertyDescriptor(object);
 			addSupertypesPropertyDescriptor(object);
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Elaborates feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addElaboratesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventBDataElaboration_elaborates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_elaborates_feature", "_UI_EventBDataElaboration_type"),
-				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Data Kind feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDataKindPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventBDataElaboration_dataKind_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_dataKind_feature", "_UI_EventBDataElaboration_type"),
-				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -230,6 +183,8 @@ public class ClassItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(DiagramsPackage.Literals.DIAGRAM_OWNER__DIAGRAMS);
 			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASS__CLASS_ATTRIBUTES);
+			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASS__CONSTRAINTS);
+			childrenFeatures.add(ClassdiagramsPackage.Literals.CLASS__METHODS);
 		}
 		return childrenFeatures;
 	}
@@ -284,11 +239,10 @@ public class ClassItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ac.soton.eventb.classdiagrams.Class.class)) {
-			case ClassdiagramsPackage.CLASS__DATA_KIND:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
+			case ClassdiagramsPackage.CLASS__CONSTRAINTS:
+			case ClassdiagramsPackage.CLASS__METHODS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -320,6 +274,16 @@ public class ClassItemProvider
 			(createChildParameter
 				(ClassdiagramsPackage.Literals.CLASS__CLASS_ATTRIBUTES,
 				 ClassdiagramsFactory.eINSTANCE.createClassAttribute()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClassdiagramsPackage.Literals.CLASS__CONSTRAINTS,
+				 ClassdiagramsFactory.eINSTANCE.createClassConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ClassdiagramsPackage.Literals.CLASS__METHODS,
+				 ClassdiagramsFactory.eINSTANCE.createClassMethod()));
 	}
 
 	/**

@@ -24,6 +24,25 @@
             fill="false">
           <layoutData
               xsi:type="gmfgraph:BorderLayoutData"
+              alignment="BEGINNING"
+              vertical="true"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="ClassMethodsCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
+              vertical="true"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="ClassContraintsCompartmentFigure"
+            outline="false"
+            fill="false">
+          <layoutData
+              xsi:type="gmfgraph:BorderLayoutData"
               alignment="END"
               vertical="true"/>
         </children>
@@ -31,6 +50,10 @@
       <accessors
           accessor="getFigureClassAttributesCompartmentFigure"
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.3"/>
       <accessors
           accessor="getFigureClassLabelFigure"
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
@@ -65,7 +88,7 @@
             text=""/>
       </actualFigure>
       <accessors
-          accessor="getFigureAssociationSource"
+          accessor="getFigureAssociationLabelSource"
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
       <accessors
           accessor="getFigureAssociationLabelTarget"
@@ -86,11 +109,32 @@
       </actualFigure>
     </descriptors>
     <descriptors
+        name="MethodFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="ClassMethod">
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="lightGray"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
+        name="ConstraintFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="ClassConstraint"
+          text="">
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="lightGray"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
         name="SupertypeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SupertypeFigure"
-          targetDecoration="//@figures.0/@descriptors.3/@actualFigure/@children.1">
+          targetDecoration="//@figures.0/@descriptors.5/@actualFigure/@children.1">
         <children
             xsi:type="gmfgraph:Label"
             name="SupertypeLabelFigure"
@@ -111,7 +155,7 @@
       </actualFigure>
       <accessors
           accessor="getFigureSupertypeLabelFigure"
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -120,6 +164,12 @@
   <nodes
       name="AttributeNode"
       figure="AttributeFigure"/>
+  <nodes
+      name="MethodNode"
+      figure="MethodFigure"/>
+  <nodes
+      name="ConstraintNode"
+      figure="ConstraintFigure"/>
   <connections
       name="Supertype"
       figure="SupertypeFigure"/>
@@ -131,6 +181,16 @@
       figure="ClassFigure"
       collapsible="true"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <compartments
+      name="MethodsCompartment"
+      figure="ClassFigure"
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <compartments
+      name="ConstraintsCompartment"
+      figure="ClassFigure"
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <labels
       name="AssociationLabel"
       figure="AssociationFigure"
@@ -146,10 +206,16 @@
   <labels
       name="SupertypeLabel"
       figure="SupertypeFigure"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
   <labels
       name="AttributeLabel"
       figure="AttributeFigure"/>
+  <labels
+      name="MethodLabel"
+      figure="MethodFigure"/>
+  <labels
+      name="ConstraintLabel"
+      figure="ConstraintFigure"/>
   <labels
       name="AssociationLabelTarget"
       figure="AssociationFigure"
@@ -178,5 +244,5 @@
   <labels
       name="ClassLabel"
       figure="ClassFigure"
-      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.3"/>
 </gmfgraph:Canvas>

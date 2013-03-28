@@ -9,6 +9,7 @@
  */
 package ac.soton.eventb.classdiagrams;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRelationDataElaborationElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
@@ -30,7 +31,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * @model
  * @generated
  */
-public interface ClassAttribute extends EventBNamedCommentedElement, EventBDataElaboration, EventBRelationKind {
+public interface ClassAttribute extends EventBNamedCommentedRelationDataElaborationElement {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' attribute.
 	 * <!-- begin-user-doc -->

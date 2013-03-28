@@ -11,6 +11,8 @@ package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
@@ -107,6 +109,10 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateClassAttribute((ClassAttribute)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS:
 				return validateClass((ac.soton.eventb.classdiagrams.Class)value, diagnostics, context);
+			case ClassdiagramsPackage.CLASS_METHOD:
+				return validateClassMethod((ClassMethod)value, diagnostics, context);
+			case ClassdiagramsPackage.CLASS_CONSTRAINT:
+				return validateClassConstraint((ClassConstraint)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -193,6 +199,24 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 */
 	public boolean validateClass(ac.soton.eventb.classdiagrams.Class class_, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(class_, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassMethod(ClassMethod classMethod, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(classMethod, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassConstraint(ClassConstraint classConstraint, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(classConstraint, diagnostics, context);
 	}
 
 	/**

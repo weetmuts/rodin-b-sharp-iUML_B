@@ -11,16 +11,25 @@ package ac.soton.eventb.classdiagrams.util;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRelationDataElaborationElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
+import ac.soton.eventb.statemachines.StatemachineOwner;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -29,10 +38,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
+import org.eventb.emf.core.EventBDerived;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
+import org.eventb.emf.core.EventBNamedCommentedPredicateElement;
 import org.eventb.emf.core.EventBObject;
+import org.eventb.emf.core.EventBPredicate;
 
 /**
  * <!-- begin-user-doc -->
@@ -131,9 +144,11 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.ASSOCIATION: {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
+				if (result == null) result = caseEventBNamedCommentedRelationDataElaborationElement(association);
+				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(association);
+				if (result == null) result = caseEventBRelationKind(association);
 				if (result == null) result = caseEventBNamedCommentedElement(association);
 				if (result == null) result = caseEventBDataElaboration(association);
-				if (result == null) result = caseEventBRelationKind(association);
 				if (result == null) result = caseEventBCommentedElement(association);
 				if (result == null) result = caseEventBNamed(association);
 				if (result == null) result = caseEventBElement(association);
@@ -145,9 +160,11 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.CLASS_ATTRIBUTE: {
 				ClassAttribute classAttribute = (ClassAttribute)theEObject;
 				T result = caseClassAttribute(classAttribute);
+				if (result == null) result = caseEventBNamedCommentedRelationDataElaborationElement(classAttribute);
+				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(classAttribute);
+				if (result == null) result = caseEventBRelationKind(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedElement(classAttribute);
 				if (result == null) result = caseEventBDataElaboration(classAttribute);
-				if (result == null) result = caseEventBRelationKind(classAttribute);
 				if (result == null) result = caseEventBCommentedElement(classAttribute);
 				if (result == null) result = caseEventBNamed(classAttribute);
 				if (result == null) result = caseEventBElement(classAttribute);
@@ -159,14 +176,45 @@ public class ClassdiagramsSwitch<T> {
 			case ClassdiagramsPackage.CLASS: {
 				ac.soton.eventb.classdiagrams.Class class_ = (ac.soton.eventb.classdiagrams.Class)theEObject;
 				T result = caseClass(class_);
+				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(class_);
+				if (result == null) result = caseDiagramOwner(class_);
 				if (result == null) result = caseEventBNamedCommentedElement(class_);
 				if (result == null) result = caseEventBDataElaboration(class_);
-				if (result == null) result = caseDiagramOwner(class_);
 				if (result == null) result = caseEventBCommentedElement(class_);
 				if (result == null) result = caseEventBNamed(class_);
 				if (result == null) result = caseEventBElement(class_);
 				if (result == null) result = caseEventBCommented(class_);
 				if (result == null) result = caseEventBObject(class_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassdiagramsPackage.CLASS_METHOD: {
+				ClassMethod classMethod = (ClassMethod)theEObject;
+				T result = caseClassMethod(classMethod);
+				if (result == null) result = caseEventBCommentedLabeledEventGroupElement(classMethod);
+				if (result == null) result = caseEventBCommentedLabeledElement(classMethod);
+				if (result == null) result = caseEventBEventGroup(classMethod);
+				if (result == null) result = caseEventBCommentedElement(classMethod);
+				if (result == null) result = caseEventBLabeled(classMethod);
+				if (result == null) result = caseEventBElement(classMethod);
+				if (result == null) result = caseEventBCommented(classMethod);
+				if (result == null) result = caseEventBObject(classMethod);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassdiagramsPackage.CLASS_CONSTRAINT: {
+				ClassConstraint classConstraint = (ClassConstraint)theEObject;
+				T result = caseClassConstraint(classConstraint);
+				if (result == null) result = caseEventBNamedCommentedDerivedPredicateElement(classConstraint);
+				if (result == null) result = caseEventBNamedCommentedPredicateElement(classConstraint);
+				if (result == null) result = caseEventBDerived(classConstraint);
+				if (result == null) result = caseEventBNamedCommentedElement(classConstraint);
+				if (result == null) result = caseEventBPredicate(classConstraint);
+				if (result == null) result = caseEventBCommentedElement(classConstraint);
+				if (result == null) result = caseEventBNamed(classConstraint);
+				if (result == null) result = caseEventBElement(classConstraint);
+				if (result == null) result = caseEventBCommented(classConstraint);
+				if (result == null) result = caseEventBObject(classConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,6 +294,36 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseClass(ac.soton.eventb.classdiagrams.Class object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Method</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Method</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassMethod(ClassMethod object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassConstraint(ClassConstraint object) {
 		return null;
 	}
 
@@ -385,6 +463,21 @@ public class ClassdiagramsSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BNamed Commented Data Elaboration Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BNamed Commented Data Elaboration Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBNamedCommentedDataElaborationElement(EventBNamedCommentedDataElaborationElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Event BRelation Kind</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -400,6 +493,21 @@ public class ClassdiagramsSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BNamed Commented Relation Data Elaboration Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BNamed Commented Relation Data Elaboration Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBNamedCommentedRelationDataElaborationElement(EventBNamedCommentedRelationDataElaborationElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Diagram Owner</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -411,6 +519,126 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseDiagramOwner(DiagramOwner object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BLabeled</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BLabeled</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBLabeled(EventBLabeled object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BCommented Labeled Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BCommented Labeled Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBCommentedLabeledElement(EventBCommentedLabeledElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BEvent Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BEvent Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBEventGroup(EventBEventGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BCommented Labeled Event Group Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BCommented Labeled Event Group Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBCommentedLabeledEventGroupElement(EventBCommentedLabeledEventGroupElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BPredicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BPredicate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBPredicate(EventBPredicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BNamed Commented Predicate Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BNamed Commented Predicate Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBNamedCommentedPredicateElement(EventBNamedCommentedPredicateElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BDerived</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BDerived</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBDerived(EventBDerived object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BNamed Commented Derived Predicate Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BNamed Commented Derived Predicate Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBNamedCommentedDerivedPredicateElement(EventBNamedCommentedDerivedPredicateElement object) {
 		return null;
 	}
 

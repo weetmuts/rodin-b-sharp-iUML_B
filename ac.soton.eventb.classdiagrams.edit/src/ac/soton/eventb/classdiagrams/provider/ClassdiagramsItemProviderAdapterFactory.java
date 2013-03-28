@@ -44,6 +44,7 @@ import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
@@ -110,6 +111,7 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);
+		supportedTypes.add(IItemColorProvider.class);
 	}
 
 	/**
@@ -202,6 +204,52 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		}
 
 		return classItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.ClassMethod} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassMethodItemProvider classMethodItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.ClassMethod}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassMethodAdapter() {
+		if (classMethodItemProvider == null) {
+			classMethodItemProvider = new ClassMethodItemProvider(this);
+		}
+
+		return classMethodItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.classdiagrams.ClassConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassConstraintItemProvider classConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.classdiagrams.ClassConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassConstraintAdapter() {
+		if (classConstraintItemProvider == null) {
+			classConstraintItemProvider = new ClassConstraintItemProvider(this);
+		}
+
+		return classConstraintItemProvider;
 	}
 
 	/**
@@ -334,6 +382,8 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 		if (associationItemProvider != null) associationItemProvider.dispose();
 		if (classAttributeItemProvider != null) classAttributeItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
+		if (classMethodItemProvider != null) classMethodItemProvider.dispose();
+		if (classConstraintItemProvider != null) classConstraintItemProvider.dispose();
 	}
 
 	/**
@@ -528,6 +578,22 @@ public class ClassdiagramsItemProviderAdapterFactory extends ClassdiagramsAdapte
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
 							 ClassdiagramsFactory.eINSTANCE.createClass()));
+
+				
+				annotation = ClassdiagramsPackage.Literals.CLASS_METHOD.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 ClassdiagramsFactory.eINSTANCE.createClassMethod()));
+
+				
+				annotation = ClassdiagramsPackage.Literals.CLASS_CONSTRAINT.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 ClassdiagramsFactory.eINSTANCE.createClassConstraint()));
 
 				return null;
 			}

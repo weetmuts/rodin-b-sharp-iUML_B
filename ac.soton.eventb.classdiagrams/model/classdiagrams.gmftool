@@ -21,7 +21,15 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="Attribute"
-          description="Add an new attribute to a class"/>
+          description="Add a new attribute to a class"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Method"
+          description="Add a new method to a class"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Constraint"
+          description="Add a new invariant/axiom to a class"/>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

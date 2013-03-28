@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.edit;visibility:=reexport,
  org.eventb.emf.core;visibility:=reexport,
- ac.soton.eventb.emf.core.extension;visibility:=reexport
+ ac.soton.eventb.emf.core.extension;visibility:=reexport,
+ ac.soton.eventb.statemachines.edit;bundle-version="1.2.0"
 Bundle-ActivationPolicy: lazy

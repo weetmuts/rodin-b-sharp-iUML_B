@@ -15,6 +15,9 @@ import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
 
+import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.statemachines.StatemachineOwner;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

@@ -12,6 +12,7 @@ package ac.soton.eventb.classdiagrams.impl;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
+import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedRelationDataElaborationElementImpl;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
@@ -36,12 +37,6 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getElaborates <em>Elaborates</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getDataKind <em>Data Kind</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isSurjective <em>Surjective</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isInjective <em>Injective</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isTotal <em>Total</em>}</li>
- *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  * </ul>
@@ -49,117 +44,7 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  *
  * @generated
  */
-public class AssociationImpl extends EventBNamedCommentedElementImpl implements Association {
-	/**
-	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElaborates()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventBNamed elaborates;
-
-	/**
-	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDataKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.SET;
-
-	/**
-	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDataKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected DataKind dataKind = DATA_KIND_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSurjective()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SURJECTIVE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isSurjective() <em>Surjective</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSurjective()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean surjective = SURJECTIVE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isInjective() <em>Injective</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInjective()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INJECTIVE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isInjective() <em>Injective</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInjective()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean injective = INJECTIVE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isTotal() <em>Total</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTotal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean TOTAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isTotal() <em>Total</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTotal()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean total = TOTAL_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFunctional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FUNCTIONAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFunctional()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean functional = FUNCTIONAL_EDEFAULT;
-
+public class AssociationImpl extends EventBNamedCommentedRelationDataElaborationElementImpl implements Association {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -197,149 +82,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	@Override
 	protected EClass eStaticClass() {
 		return ClassdiagramsPackage.Literals.ASSOCIATION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamed getElaborates() {
-		if (elaborates != null && elaborates.eIsProxy()) {
-			InternalEObject oldElaborates = (InternalEObject)elaborates;
-			elaborates = (EventBNamed)eResolveProxy(oldElaborates);
-			if (elaborates != oldElaborates) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassdiagramsPackage.ASSOCIATION__ELABORATES, oldElaborates, elaborates));
-			}
-		}
-		return elaborates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventBNamed basicGetElaborates() {
-		return elaborates;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setElaborates(EventBNamed newElaborates) {
-		EventBNamed oldElaborates = elaborates;
-		elaborates = newElaborates;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__ELABORATES, oldElaborates, elaborates));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataKind getDataKind() {
-		return dataKind;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDataKind(DataKind newDataKind) {
-		DataKind oldDataKind = dataKind;
-		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__DATA_KIND, oldDataKind, dataKind));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSurjective() {
-		return surjective;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSurjective(boolean newSurjective) {
-		boolean oldSurjective = surjective;
-		surjective = newSurjective;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__SURJECTIVE, oldSurjective, surjective));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInjective() {
-		return injective;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInjective(boolean newInjective) {
-		boolean oldInjective = injective;
-		injective = newInjective;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__INJECTIVE, oldInjective, injective));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isTotal() {
-		return total;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTotal(boolean newTotal) {
-		boolean oldTotal = total;
-		total = newTotal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__TOTAL, oldTotal, total));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFunctional() {
-		return functional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFunctional(boolean newFunctional) {
-		boolean oldFunctional = functional;
-		functional = newFunctional;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL, oldFunctional, functional));
 	}
 
 	/**
@@ -506,19 +248,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
-				if (resolve) return getElaborates();
-				return basicGetElaborates();
-			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
-				return getDataKind();
-			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
-				return isSurjective();
-			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
-				return isInjective();
-			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
-				return isTotal();
-			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-				return isFunctional();
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -537,24 +266,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
-				setElaborates((EventBNamed)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
-				setDataKind((DataKind)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
-				setSurjective((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
-				setInjective((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
-				setTotal((Boolean)newValue);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-				setFunctional((Boolean)newValue);
-				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
@@ -573,24 +284,6 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
-				setElaborates((EventBNamed)null);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
-				setDataKind(DATA_KIND_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
-				setSurjective(SURJECTIVE_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
-				setInjective(INJECTIVE_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
-				setTotal(TOTAL_EDEFAULT);
-				return;
-			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-				setFunctional(FUNCTIONAL_EDEFAULT);
-				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)null);
 				return;
@@ -609,100 +302,12 @@ public class AssociationImpl extends EventBNamedCommentedElementImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassdiagramsPackage.ASSOCIATION__ELABORATES:
-				return elaborates != null;
-			case ClassdiagramsPackage.ASSOCIATION__DATA_KIND:
-				return dataKind != DATA_KIND_EDEFAULT;
-			case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE:
-				return surjective != SURJECTIVE_EDEFAULT;
-			case ClassdiagramsPackage.ASSOCIATION__INJECTIVE:
-				return injective != INJECTIVE_EDEFAULT;
-			case ClassdiagramsPackage.ASSOCIATION__TOTAL:
-				return total != TOTAL_EDEFAULT;
-			case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL:
-				return functional != FUNCTIONAL_EDEFAULT;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				return target != null;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
 				return source != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBDataElaboration.class) {
-			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATION__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
-				case ClassdiagramsPackage.ASSOCIATION__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
-				default: return -1;
-			}
-		}
-		if (baseClass == EventBRelationKind.class) {
-			switch (derivedFeatureID) {
-				case ClassdiagramsPackage.ASSOCIATION__SURJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATION__INJECTIVE: return CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE;
-				case ClassdiagramsPackage.ASSOCIATION__TOTAL: return CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL;
-				case ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL: return CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBDataElaboration.class) {
-			switch (baseFeatureID) {
-				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return ClassdiagramsPackage.ASSOCIATION__ELABORATES;
-				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return ClassdiagramsPackage.ASSOCIATION__DATA_KIND;
-				default: return -1;
-			}
-		}
-		if (baseClass == EventBRelationKind.class) {
-			switch (baseFeatureID) {
-				case CoreextensionPackage.EVENT_BRELATION_KIND__SURJECTIVE: return ClassdiagramsPackage.ASSOCIATION__SURJECTIVE;
-				case CoreextensionPackage.EVENT_BRELATION_KIND__INJECTIVE: return ClassdiagramsPackage.ASSOCIATION__INJECTIVE;
-				case CoreextensionPackage.EVENT_BRELATION_KIND__TOTAL: return ClassdiagramsPackage.ASSOCIATION__TOTAL;
-				case CoreextensionPackage.EVENT_BRELATION_KIND__FUNCTIONAL: return ClassdiagramsPackage.ASSOCIATION__FUNCTIONAL;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (dataKind: ");
-		result.append(dataKind);
-		result.append(", surjective: ");
-		result.append(surjective);
-		result.append(", injective: ");
-		result.append(injective);
-		result.append(", total: ");
-		result.append(total);
-		result.append(", functional: ");
-		result.append(functional);
-		result.append(')');
-		return result.toString();
 	}
 
 } //AssociationImpl

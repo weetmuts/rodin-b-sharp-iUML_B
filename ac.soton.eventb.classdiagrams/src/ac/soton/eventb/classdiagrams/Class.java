@@ -9,6 +9,7 @@
  */
 package ac.soton.eventb.classdiagrams;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 import ac.soton.eventb.emf.diagrams.DiagramOwner;
@@ -30,6 +31,8 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Class#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Class#getMethods <em>Methods</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,7 +40,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * @model
  * @generated
  */
-public interface Class extends EventBNamedCommentedElement, EventBDataElaboration, DiagramOwner {
+public interface Class extends EventBNamedCommentedDataElaborationElement, DiagramOwner {
 	/**
 	 * Returns the value of the '<em><b>Supertypes</b></em>' reference list.
 	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.Class}.
@@ -131,5 +134,37 @@ public interface Class extends EventBNamedCommentedElement, EventBDataElaboratio
 	 * @generated
 	 */
 	void setRefines(Class value);
+
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.ClassConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Constraints()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<ClassConstraint> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Methods</b></em>' containment reference list.
+	 * The list contents are of type {@link ac.soton.eventb.classdiagrams.ClassMethod}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Methods</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Methods</em>' containment reference list.
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_Methods()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<ClassMethod> getMethods();
 
 } // Class

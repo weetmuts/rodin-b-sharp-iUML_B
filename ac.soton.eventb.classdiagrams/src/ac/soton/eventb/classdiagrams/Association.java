@@ -9,6 +9,7 @@
  */
 package ac.soton.eventb.classdiagrams;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRelationDataElaborationElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 
@@ -31,7 +32,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='isAssociationTypeRight'"
  * @generated
  */
-public interface Association extends EventBNamedCommentedElement, EventBDataElaboration, EventBRelationKind {
+public interface Association extends EventBNamedCommentedRelationDataElaborationElement {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ac.soton.eventb.classdiagrams.Class#getIncoming <em>Incoming</em>}'.
