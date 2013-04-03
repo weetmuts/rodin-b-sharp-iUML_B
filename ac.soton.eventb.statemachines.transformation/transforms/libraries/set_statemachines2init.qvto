@@ -60,7 +60,7 @@ mapping statemachines::State::state2initActionActive(in event : eventb::machine:
 		if self.getRootStatemachine().instances = null then
 			self.getStatemachine().name + B_BEQ + self.name
 		else
-			self.getStatemachine().name + B_BEQ + self.getRootStatemachine().instances.name+B_CPROD +self.name
+			self.getStatemachine().name + B_BEQ + self.getRootStatemachine().instances.name+B_CPROD +self.name.asSet()
 		endif;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
