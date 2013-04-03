@@ -29,7 +29,7 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 	static {
 		translationNameMap.put(TranslationKind.SINGLEVAR.getName(), "Enumeration");
 		translationNameMap.put(TranslationKind.MULTIVAR.getName(), "Variables");
-		translationNameMap.put(TranslationKind.REFINEDVAR.getName(), "Refined Enumeration (EXPERIMENTAL)");
+		//translationNameMap.put(TranslationKind.REFINEDVAR.getName(), "Refined Enumeration (EXPERIMENTAL)");
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 	@Override
 	protected String[] getEnumerationFeatureValues() {
 		List<TranslationKind> values = TranslationKind.VALUES;
-		String[] ret = new String[values.size()];
-		for (int i = 0; i < values.size(); i++) {
+		String[] ret = new String[values.size() - 1];			// - 1 is due to refined enumeration not being presented in UI 
+		for (int i = 0; i < values.size()-1; i++) {				// "
 			ret[i] = translationNameMap.get(values.get(i).getName());
 		}
 		return ret;
