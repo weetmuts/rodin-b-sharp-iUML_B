@@ -6,29 +6,6 @@ modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/sta
 library set_statemachines2events_enter;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Enter action
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
- * Transforms state to enter action.
- * Generates enter action for targeted state and particular event.
- * Skips transformation if event contains enter action on the same state already.
- */
-mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
-	when { not event.containsActionWithPrefix("enter_" + self.getStatemachine().name) }
-{
-	name := ENTER_ + self.getStatemachine().name + "__" + self.name;
-	action :=
-		if self.getRootStatemachine().instances = null then
-			self.getStatemachine().name + B_BEQ + self.name
-		else
-			self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.name
-		endif;
-	generated := true;
-	attributes += getGeneratedAttr(generatorID);
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Target actions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,6 +59,8 @@ mapping statemachines::State::state2enterActions(in event : eventb::machine::Eve
 }
 
 /*
+ * THIS RULE IS DISABLED - IT USED TO GENERATE ENTER ACTIONS FOR NESTED STATEMACHINES BASED ON ANONYMOUS (I.E. NO ELABORATES) TRANSITIONS
+ * HOWEVER THIS IS NOW DONE BY THE USER EXPLICITLY ELABORATING THE INITIAL TRANSITIONS
  * Transforms statemachine to enter actions.
  * Finds starting state in statemachine (state, linked by transition with Initial state)
  * and generates enter actions for all superstates of found state up to current statemachine,
@@ -89,8 +68,32 @@ mapping statemachines::State::state2enterActions(in event : eventb::machine::Eve
  */
 mapping statemachines::Statemachine::statemachine2enterActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		var target : statemachines::State := self.getStartingState();
-		result := target.getSuperstatesTo(self).map state2enterActions(event, target, generatorID)->flatten()->asBag()->
-			union(target.map state2enterActions(event, target, generatorID));
+		//var target : statemachines::State := self.getStartingState();
+		result := Bag {} ;
+		//target.getSuperstatesTo(self).map state2enterActions(event, target, generatorID)->flatten()->asBag()->
+		//	union(target.map state2enterActions(event, target, generatorID));
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Enter action
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms state to enter action.
+ * Generates enter action for targeted state and particular event.
+ * Skips transformation if event contains enter action on the same state already.
+ */
+mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
+	when { not event.containsActionWithPrefix("enter_" + self.getStatemachine().name) }
+{
+	name := ENTER_ + self.getStatemachine().name + "__" + self.name;
+	action :=
+		if self.getRootStatemachine().instances = null then
+			self.getStatemachine().name + B_BEQ + self.name
+		else
+			self.getStatemachine().name+(self.getRootStatemachine().selfName).parenthesize()+B_BEQ+self.name
+		endif;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
 }

@@ -6,28 +6,6 @@ modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/sta
 library statemachines2events_enter;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Enter action
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
- * Transforms state to enter action.
- * Generates enter action for targeted state and particular event.
- * Skips transformation if event is extended and contains enter action on the same state already.
- */
-mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
-	when { not event.containsAction(ENTER_ + self.name) }
-{
-	name := ENTER_ + self.name;
-	if (self.getRootStatemachine().instances = null) then {
-		action := self.name+B_BEQ+B_TRUE;
-	}else{
-		action := self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet();
-	}endif;
-	generated := true;
-	attributes += getGeneratedAttr(generatorID);
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Target actions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,6 +59,8 @@ mapping statemachines::State::state2enterActions(in event : eventb::machine::Eve
 }
 
 /*
+ * THIS RULE IS DISABLED - IT USED TO GENERATE ENTER ACTIONS FOR NESTED STATEMACHINES BASED ON ANONYMOUS (I.E. NO ELABORATES) TRANSITIONS
+ * HOWEVER THIS IS NOW DONE BY THE USER EXPLICITLY ELABORATING THE INITIAL TRANSITIONS
  * Transforms statemachine to enter actions.
  * Finds starting state in statemachine (state, linked by transition with Initial state)
  * and generates enter actions for all superstates of found state up to current statemachine,
@@ -88,8 +68,32 @@ mapping statemachines::State::state2enterActions(in event : eventb::machine::Eve
  */
 mapping statemachines::Statemachine::statemachine2enterActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		var target : statemachines::State := self.getStartingState();
-		result := target.getSuperstatesTo(self).map state2enterActions(event, target, generatorID)->flatten()->asBag()->
-			union(target.map state2enterActions(event, target, generatorID));
+		//var target : statemachines::State := self.getStartingState();
+		result := Bag {} ;
+		//target.getSuperstatesTo(self).map state2enterActions(event, target, generatorID)->flatten()->asBag()->
+		//	union(target.map state2enterActions(event, target, generatorID));
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Enter action
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms state to enter action.
+ * Generates enter action for targeted state and particular event.
+ * Skips transformation if event contains enter action on the same state already.
+ */
+mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
+	when { not event.containsAction(ENTER_ + self.name) }
+{
+	name := ENTER_ + self.name;
+	action :=
+		if self.getRootStatemachine().instances = null then
+			self.name+B_BEQ+B_TRUE
+		else
+			self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet()
+		endif;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
 }
