@@ -27,6 +27,8 @@ import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlug
  */
 public class StatemachineDiagramProvider implements IDiagramProvider {
 
+	private static final String fileExtension = "smd";
+	
 	@Override
 	public String getDiagramFileName(EObject element) {
 		if (element instanceof Statemachine) {
@@ -38,7 +40,7 @@ public class StatemachineDiagramProvider implements IDiagramProvider {
 					&& rootStatemachine.eContainer().eContainer() instanceof Statemachine)
 				rootStatemachine = (Statemachine) rootStatemachine.eContainer().eContainer();
 			//construct filename
-			filename = rootStatemachine.getName() + ".smd";
+			filename = rootStatemachine.getName() + "."+fileExtension;
 			// prefix with machine name
 			EObject root = EcoreUtil.getRootContainer(element);
 			if (root != null && root instanceof Machine)
@@ -64,4 +66,9 @@ public class StatemachineDiagramProvider implements IDiagramProvider {
 		return StatemachinesDiagramEditor.ID;
 	}
 
+
+	@Override
+	public String getFileExtension() {
+		return fileExtension;
+	}
 }

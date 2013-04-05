@@ -20,6 +20,8 @@ import ac.soton.eventb.emf.diagrams.navigator.provider.IDiagramProvider;
  */
 public class ClassdiagramDiagramProvider implements IDiagramProvider {
 
+	private static final String fileExtension = "cd";
+	
 	@Override
 	public String getDiagramFileName(EObject element) {
 		if (element instanceof Classdiagram) {
@@ -30,7 +32,7 @@ public class ClassdiagramDiagramProvider implements IDiagramProvider {
 			while (rootClassdiagram.eContainer() instanceof Classdiagram
 					&& rootClassdiagram.eContainer().eContainer() instanceof Classdiagram)
 				rootClassdiagram = (Classdiagram) rootClassdiagram.eContainer().eContainer();
-			filename = rootClassdiagram.getName() + ".cd";
+			filename = rootClassdiagram.getName() + "."+fileExtension;
 			
 			// prefix with machine name
 			EObject root = EcoreUtil.getRootContainer(element);
@@ -55,6 +57,11 @@ public class ClassdiagramDiagramProvider implements IDiagramProvider {
 	@Override
 	public String getEditorId() {
 		return ClassdiagramsDiagramEditor.ID;
+	}
+	
+	@Override
+	public String getFileExtension() {
+		return fileExtension;
 	}
 	
 }
