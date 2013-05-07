@@ -313,5 +313,6 @@ query eventb::machine::Event::containsGuardWithSuffix(in labelSuffix : String) :
  * Returns true if Guard and its extensions contain an action of specified label suffix.
  */
 query eventb::machine::Event::containsParameterWithName(in label : String) : Boolean {
-	return self.parameters->exists(name = label);
+	return self.parameters->exists(name = label) or
+		(self.extended and self._refines->first().containsParameterWithName(label));
 }
