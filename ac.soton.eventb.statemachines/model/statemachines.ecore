@@ -10,7 +10,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statemachine" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//Diagram">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasValidName&#xA;concreteHasNoRefinedStates&#xA;refinedHasNoConcreteStates&#xA;hasOneInitial&#xA;hasOneFinal&#xA;rootHasInitial&#xA;hasInitialIfIncoming&#xA;instancesIsData"/>
+      <details key="constraints" value="hasValidName&#xA;concreteHasNoRefinedStates&#xA;refinedHasNoConcreteStates&#xA;hasOneInitial&#xA;hasOneFinal&#xA;rootHasInitial&#xA;hasInitialIfIncoming&#xA;instancesIsData&#xA;hasValidSelfName"/>
     </eAnnotations>
     <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="translation" eType="#//TranslationKind"/>

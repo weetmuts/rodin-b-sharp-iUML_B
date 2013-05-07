@@ -432,6 +432,7 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateStatemachine_rootHasInitial(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateStatemachine_hasInitialIfIncoming(statemachine, diagnostics, context);
 		if (result || diagnostics != null) result &= validateStatemachine_instancesIsData(statemachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateStatemachine_hasValidSelfName(statemachine, diagnostics, context);
 		return result;
 	}
 
@@ -679,15 +680,15 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the hasNoRefinedStates constraint of '<em>Statemachine</em>'.
+	 * Validates the hasValidSelfName constraint of '<em>Statemachine</em>'.
 	 * <!-- begin-user-doc -->
-	 * Statemachine has no refined states.
+	 * Statemachine has a valid self name if it has instances.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unused")
-	public boolean validateStatemachine_hasNoRefinedStates(Statemachine statemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (false){//EcoreUtil.getObjectByType(statemachine.eContents(), StatemachinesPackage.eINSTANCE.getRefinedState()) != null) {
+	public boolean validateStatemachine_hasValidSelfName(Statemachine statemachine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (statemachine.getInstances() == null) return true;
+		else if (statemachine.getSelfName() == null || "".equals(statemachine.getSelfName())) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -695,13 +696,14 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "Concrete statemachine cannot contain refined states", getObjectLabel(statemachine, context) },
+						 new Object[] { "Statemachine self name is not valid", getObjectLabel(statemachine, context) },
 						 new Object[] { statemachine },
 						 context));
 			}
 			return false;
+		}else{
+			return true;
 		}
-		return true;
 	}
 
 	/**

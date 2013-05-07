@@ -349,13 +349,13 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * If selfName is still at the default (this), returns this_SMName
-	 * Otherwise returns the value of selfName
+	 * Otherwise returns the value of selfName (trimmed of leading trailing whitespace)
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getSelfName() {
 		if (getInstances() ==null) return "";
-		else return "this".equals(selfName)? "this_"+getInstances().getName() : selfName;
+		else return "this".equals(selfName)? "this_"+getInstances().getName() : selfName.trim();
 	}
 
 	/**
