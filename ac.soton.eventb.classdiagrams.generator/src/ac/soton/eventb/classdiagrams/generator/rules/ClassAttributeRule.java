@@ -64,14 +64,18 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 				newGeneratedElementContainer = constants;
 				newGeneratedTypePredicate = (EventBElement) Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED(element), element.getComment());
 				newGeneratedTypePredicateContainer = axioms;
-				newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), element.getComment());
+				if (!element.isFunctional() && element.isInjective()){
+					newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), element.getComment());
+				}
 				break;
 			case DataKind.VARIABLE_VALUE :
 				newGeneratedElement = Make.variable(element.getName(), element.getComment());
 				newGeneratedElementContainer = variables;
 				newGeneratedTypePredicate = (EventBElement) Make.invariant(Strings.CLASS_ATTRIBUTE_PRED_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED(element), element.getComment());
 				newGeneratedTypePredicateContainer = invariants;
-				newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), element.getComment());
+				if (!element.isFunctional() && element.isInjective()){
+					newGeneratedInjectionPredicate = (EventBElement) Make.invariant(Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(element.getName()), Strings.CLASS_ATTRIBUTE_PRED_INJECTIVE(element), element.getComment());
+				}
 				break;
 			}
 			ret.add(Make.descriptor(container,newGeneratedElementContainer,newGeneratedElement,10));
