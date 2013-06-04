@@ -24,6 +24,16 @@
                rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassAttributeRule"
                source_class="ClassAttribute">
          </rule>
+         <rule
+               name="ClassConstraintRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassConstraintRule"
+               source_class="ClassConstraint">
+         </rule>
+         <rule
+               name="ClassMethodRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassMethodRule"
+               source_class="ClassMethod">
+         </rule>
       </generator>
    </extension>
    <extension

@@ -60,19 +60,6 @@ public class Strings {
 		return "";
 	}
 
-	private static String getUnionConnectorNames(Association pw) {
-		String connectorUnion = "";
-//		for (Association dp : pw.get()) {
-//			if (connectorUnion.equals("")) {
-//				connectorUnion = CN_NAME(dp.getConnector());
-//			} else {
-//				connectorUnion = connectorUnion + " \u222a "
-//						+ CN_NAME(dp.getConnector());
-//			}
-//		}
-		return connectorUnion;
-	}
-
 	public static String CLASS_SUPERTYPE_PRED;
 
 	public static String CLASS_SUPERTYPE_PRED(Class cp, EList<Class> cp2) {
@@ -193,7 +180,6 @@ public class Strings {
 	}
 	
 	public static String ASSOCIATION_INJECTIVE_PRED;
-
 	public static String ASSOCIATION_PRED_INJECTIVE(Association element) {
 		return bind(ASSOCIATION_INJECTIVE_PRED, 
 				element.getName(), 
@@ -202,13 +188,11 @@ public class Strings {
 	}
 	
 	public static String ASSOCIATION_PRED_NAME;
-
 	public static String ASSOCIATION_PRED_NAME(String name) {
 		return bind(ASSOCIATION_PRED_NAME, name);
 	}
 
 	public static String ASSOCIATION_PRED_INJECTIVE_NAME;
-	
 	public static String ASSOCIATION_PRED_INJECTIVE_NAME(String name) {
 		return bind(ASSOCIATION_PRED_INJECTIVE_NAME, name);
 	}
@@ -216,7 +200,6 @@ public class Strings {
 	
 	//CLASS ATTRIBUTE
 	public static String CLASS_ATTRIBUTE_PRED;
-
 	public static String CLASS_ATTRIBUTE_PRED(ClassAttribute element) {
 		return bind(CLASS_ATTRIBUTE_PRED, 
 				element.getName(), 
@@ -226,7 +209,6 @@ public class Strings {
 	}
 	
 	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED;
-
 	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE(ClassAttribute element) {
 		return bind(CLASS_ATTRIBUTE_INJECTIVE_PRED, 
 				element.getName(), 
@@ -235,15 +217,43 @@ public class Strings {
 	}
 	
 	public static String CLASS_ATTRIBUTE_PRED_NAME;
-
 	public static String CLASS_ATTRIBUTE_PRED_NAME(String name) {
 		return bind(CLASS_ATTRIBUTE_PRED_NAME, name);
 	}
 
 	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME;
-	
 	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(String name) {
 		return bind(CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME, name);
+	}
+	
+	public static String CLASS_CONSTRAINT_NAME;
+	public static String CLASS_CONSTRAINT_NAME(String name) {
+		return bind(CLASS_CONSTRAINT_NAME, name);
+	}
+	
+	public static String CLASS_CONSTRAINT_PRED;
+	public static String CLASS_CONSTRAINT_PRED(String selfName, String instances, String predicate) {
+		return bind(CLASS_CONSTRAINT_PRED, 
+				selfName, 
+				instances,
+				predicate);
+	}
+	
+	public static String CLASS_PARAMETER_NAME;
+	public static String CLASS_PARAMETER_NAME(String name) {
+		return bind(CLASS_PARAMETER_NAME, name);
+	}
+	
+	public static String CLASS_PARAMETER_GUARD_NAME;
+	public static String CLASS_PARAMETER_GUARD_NAME(String name) {
+		return bind(CLASS_PARAMETER_GUARD_NAME, name);
+	}
+	
+	public static String CLASS_PARAMETER_GUARD_PRED;
+	public static String CLASS_PARAMETER_GUARD_PRED(String selfName, String instances) {
+		return bind(CLASS_PARAMETER_GUARD_PRED, 
+				selfName, 
+				instances);
 	}
 	
 }
