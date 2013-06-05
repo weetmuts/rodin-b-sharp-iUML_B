@@ -117,7 +117,7 @@ public class AssociationSurjectiveInjectiveEditPart extends LabelEditPart
 	 * @generated
 	 */
 	public int getKeyPoint() {
-		return ConnectionLocator.SOURCE;
+		return ConnectionLocator.TARGET;	//SOURCE;
 	}
 
 	/**
