@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2010 University of Southampton.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,40 +8,49 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eventb.emf.core.EventBPredicate;
 
-import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
- * Type property section for Class Attributes.
+ * Predicate property section for constraints.
  * 
- * @author gintautas
+ * @author vitaly
  *
  */
-public class ClassAttributeTargetSection extends AbstractTextPropertySection {
+public class PredicatePropertySection extends AbstractTextPropertySection {
 
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBPredicate;
+		}
+	}
+	
 	@Override
 	protected String getPropertyNameLabel() {
-		return "Type:";
+		return "Predicate:";
 	}
 
 	@Override
 	protected void setPropertyValue(EObject object, Object value) {
-		assert object instanceof ClassAttributeImpl;
-		((ClassAttributeImpl) object).setTarget((String) value);
+		((EventBPredicate) object).setPredicate((String) value);
 	}
 
 	@Override
 	protected String getPropertyValueString() {
-		String comment = ((ClassAttributeImpl) getEObject()).getTarget();
-		return comment == null ? "" : comment;
+		return ((EventBPredicate) getEObject()).getPredicate();
 	}
 
 	@Override
 	protected String getPropertyChangeCommandName() {
-		return "change type";
+		return "change predicate";
 	}
 
 	@Override
@@ -51,15 +60,7 @@ public class ClassAttributeTargetSection extends AbstractTextPropertySection {
 		text.setFont(PropertySectionUtil.rodinFont);
 		return text;
 	}
-	
+
 	@Override
-	public void refresh() {
-		super.refresh();
-		
-		if (((ClassAttribute)eObject).getElaborates() != null){
-			getTextWidget().setEditable(false);
-		} else {
-			getTextWidget().setEditable(true);
-		}
-	}
+	protected int numberOfRows() { return 3;}
 }

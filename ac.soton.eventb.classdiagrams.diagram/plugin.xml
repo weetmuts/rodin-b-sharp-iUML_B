@@ -639,7 +639,7 @@ http://www.eclipse.org/legal/epl-v10.html
                tab="property.tab.overview">
          </propertySection>
          <propertySection
-               afterSection="property.section.name"
+               afterSection="property.section.label"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTargetSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
@@ -656,15 +656,15 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.dataKind"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesDataPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection$Filter"
-               id="property.section.elaborates"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesDataPropertySection$Filter"
+               id="property.section.elaboratesData"
                tab="property.tab.overview">
          </propertySection>
 
          <propertySection
-               afterSection="property.section.elaborates"
+               afterSection="property.section.elaboratesData"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection$Filter"
@@ -711,14 +711,43 @@ http://www.eclipse.org/legal/epl-v10.html
                id="property.section.classContextRefinesSection"
                tab="property.tab.overview">
          </propertySection>
+         
          <propertySection
                afterSection="property.section.classContextRefinesSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.PredicatePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.PredicatePropertySection$Filter"
+               id="property.section.predicate"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.predicate"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.TheoremPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.TheoremPropertySection$Filter"
+               id="property.section.theorem"
+               tab="property.tab.overview">
+         </propertySection>
+         
+          <propertySection
+               afterSection="property.section.theorem"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection$Filter"
+               id="property.section.elaborates"
+               tab="property.tab.overview">
+         </propertySection>        
+         
+         <propertySection
+               afterSection="property.section.elaborates"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection$Filter"
                id="property.section.comment"
                tab="property.tab.overview">
          </propertySection>
+         
+
       </propertySections>
    </extension>
       
