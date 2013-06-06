@@ -51,6 +51,8 @@ import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassMethodItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextNonResizableEditPolicy;
@@ -58,6 +60,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSele
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -198,17 +201,6 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 	 */
 	protected EObject getParserElement() {
 		return resolveSemanticElement();
-	}
-
-	/**
-	 * @generated
-	 */
-	protected Image getLabelIcon() {
-		EObject parserElement = getParserElement();
-		if (parserElement == null) {
-			return null;
-		}
-		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 
 	/**
@@ -629,4 +621,23 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 
 	}
 
+	////////////////CUSTOM SECTION///////////
+	
+	
+	/**
+	 * This has been altered to return the icon for a Machine event
+	 * 
+	 * @generated NOT
+	 */
+	protected Image getLabelIcon() {
+		return ClassdiagramsElementTypes.getImage(MachinePackage.Literals.EVENT);
+		
+		//This is the original generated code
+//		EObject parserElement = getParserElement();
+//		if (parserElement == null) {
+//			return null;
+//		}
+//		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
+	}
+	
 }

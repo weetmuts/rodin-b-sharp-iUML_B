@@ -16,6 +16,7 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
@@ -51,6 +52,13 @@ import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.context.Context;
+import org.eventb.emf.core.context.ContextPackage;
+import org.eventb.emf.core.machine.Machine;
+import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassConstraintItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextNonResizableEditPolicy;
@@ -58,6 +66,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSele
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -198,17 +207,6 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 	 */
 	protected EObject getParserElement() {
 		return resolveSemanticElement();
-	}
-
-	/**
-	 * @generated
-	 */
-	protected Image getLabelIcon() {
-		EObject parserElement = getParserElement();
-		if (parserElement == null) {
-			return null;
-		}
-		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 
 	/**
@@ -629,4 +627,40 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 
 	}
 
+	/**
+	 * This has been altered to return the icon for a Machine event
+	 * 
+	 * @generated NOT
+	 */
+	protected Image getLabelIcon() {
+		
+		Object theorem = DiagramUtils.getModelFeatureValue(this, "theorem");
+		EObject element =  DiagramUtils.unwrap(this);
+		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(element);
+		Image image = null;
+		//TODO: fix the dynamic display of theorem icon
+		if (false){ //theorem instanceof Boolean && ((Boolean)theorem).booleanValue()==true){
+			image = ClassdiagramsElementTypes.getImage(MachinePackage.Literals.INVARIANT); // should get a theorem image here
+		}else if (container instanceof  Machine){
+			image = ClassdiagramsElementTypes.getImage(MachinePackage.Literals.INVARIANT);
+		}else if (container instanceof Context){
+			image = ClassdiagramsElementTypes.getImage(ContextPackage.Literals.AXIOM);
+		}
+		//the default is the standard generated code:
+		if (image == null){
+			EObject parserElement = getParserElement();
+			if (parserElement != null) {
+				image = ClassdiagramsElementTypes.getImage(parserElement.eClass());
+			}
+		}
+		return image;
+		
+		//This is the original generated code
+//		EObject parserElement = getParserElement();
+//		if (parserElement == null) {
+//			return null;
+//		}
+//		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
+	}
+	
 }
