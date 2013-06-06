@@ -8,9 +8,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
-import org.eventb.emf.core.context.CarrierSet;
-import org.eventb.emf.core.context.Constant;
-import org.eventb.emf.core.machine.Variable;
+import org.eventb.emf.core.context.Context;
+import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassConstraint;
@@ -56,10 +55,10 @@ public class ClassConstraintRule extends AbstractRule  implements IRule {
 		EventBNamed classSet = parentClass.getElaborates();
 		String predicate = Strings.CLASS_CONSTRAINT_PRED("this"+parentClass.getName(), classSet.getName(), element.getPredicate());
 
-		if (classSet instanceof Variable){
+		if (container instanceof Machine){
 			newGeneratedPredicateContainmentFeature = invariants;
 			newGeneratedPredicateElement = (EventBElement) Make.invariant(Strings.CLASS_CONSTRAINT_NAME(element.getName()), element.isTheorem(), predicate, element.getComment());			
-		}else if (classSet instanceof Constant || classSet instanceof CarrierSet){
+		}else if (container instanceof Context){
 			newGeneratedPredicateContainmentFeature = axioms;
 			newGeneratedPredicateElement = (EventBElement) Make.axiom(Strings.CLASS_CONSTRAINT_NAME(element.getName()), element.isTheorem(), predicate, element.getComment());			
 		}
