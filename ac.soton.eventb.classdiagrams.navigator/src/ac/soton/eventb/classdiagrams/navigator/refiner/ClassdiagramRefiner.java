@@ -33,6 +33,7 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 	@Override
 	protected void populateFilterByTypeList(final List<EClass> filterList){
 		filterList.add(MachinePackage.Literals.INVARIANT);
+		filterList.add(ClassdiagramsPackage.Literals.CLASS_CONSTRAINT);
 	}
 	
 	/**
