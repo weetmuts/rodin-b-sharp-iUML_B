@@ -57,8 +57,8 @@ public class ClassMethodRule extends AbstractRule  implements IRule {
 		
 		//make the descriptors
 		for (Event event : events){
-			ret.add(Make.descriptor(event, parameters, Make.parameter(parameterName, "generated class instance"), -1));
-			ret.add(Make.descriptor(event, guards, Make.guard(guardName, guardPredicate), -1));			
+			ret.add(Make.descriptor(event, parameters, Make.parameter(parameterName, "generated class instance"), 1));
+			ret.add(Make.descriptor(event, guards, Make.guard(guardName, guardPredicate), 1));			
 		}
 		return ret;
 	}	
