@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
-import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.emf.core.extension.navigator.refiner.AbstractExtensionRefiner;
@@ -32,19 +31,19 @@ public class StatemachineRefiner extends AbstractExtensionRefiner {
 	 */
 	@Override
 	protected void populateFilterByTypeList(final List<EClass> filterList){
-		filterList.add(MachinePackage.Literals.INVARIANT);
+		super.populateFilterByTypeList(filterList);
 	}
 	
 	/**
 	 * populate the given map with the reference features that the refiner needs to copy for statemachine refinement.
 	 * This is refines (as references to their abstract counterparts) and
-	 * elaborates, incoming, outgoing, source and target (as intra-level references) 
+	 * incoming, outgoing, source and target (as intra-level references) 
 	 */
 	@Override
 	protected void populateReferenceMap(final Map<EReference,Boolean> referencemap){
+		super.populateReferenceMap(referencemap);
 		referencemap.put(StatemachinesPackage.Literals.STATE__REFINES, true);
 		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__REFINES, true);	
-		referencemap.put(StatemachinesPackage.Literals.TRANSITION__ELABORATES, false);
 		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__INCOMING, false);
 		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__OUTGOING, false);
 		referencemap.put(StatemachinesPackage.Literals.TRANSITION__SOURCE, false);
