@@ -41,7 +41,7 @@ import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachinePackage;
 
-import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.statemachines.Transition;
 
 /**
@@ -76,7 +76,7 @@ public class ElaboratesPropertySection extends AbstractTablePropertySection {
 
 	@Override
 	protected EStructuralFeature getFeature() {
-		return StatemachinesPackage.Literals.TRANSITION__ELABORATES;
+		return CoreextensionPackage.Literals.EVENT_BEVENT_GROUP__ELABORATES;
 	}
 
 	@Override

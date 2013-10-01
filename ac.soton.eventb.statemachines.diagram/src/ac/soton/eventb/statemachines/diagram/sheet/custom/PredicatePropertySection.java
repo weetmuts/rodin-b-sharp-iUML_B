@@ -10,10 +10,10 @@ package ac.soton.eventb.statemachines.diagram.sheet.custom;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-import org.eventb.emf.core.machine.Invariant;
+import org.eventb.emf.core.EventBNamedCommentedDerivedPredicateElement;
 
 /**
- * Predicate property section for Invariant.
+ * Predicate property section for EventBNamedCommentedDerivedPredicateElement.
  * 
  * @author vitaly
  *
@@ -27,12 +27,12 @@ public class PredicatePropertySection extends AbstractTextPropertySection {
 
 	@Override
 	protected void setPropertyValue(EObject object, Object value) {
-		((Invariant) object).setPredicate((String) value);
+		((EventBNamedCommentedDerivedPredicateElement) object).setPredicate((String) value);
 	}
 
 	@Override
 	protected String getPropertyValueString() {
-		return ((Invariant) getEObject()).getPredicate();
+		return ((EventBNamedCommentedDerivedPredicateElement) getEObject()).getPredicate();
 	}
 
 	@Override

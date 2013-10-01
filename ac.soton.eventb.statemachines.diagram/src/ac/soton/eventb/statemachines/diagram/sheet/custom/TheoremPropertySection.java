@@ -8,18 +8,33 @@
 package ac.soton.eventb.statemachines.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.viewers.IFilter;
 import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.machine.Invariant;
+import org.eventb.emf.core.EventBDerived;
+
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
- * Theorem property section for Invariant.
+ * Theorem property section for EventBDerived.
  * 
  * @author vitaly
  *
  */
 public class TheoremPropertySection extends AbstractEnumerationPropertySection {
-	private static final String[] theoremValues = new String[]{Boolean.toString(Boolean.TRUE), Boolean.toString(Boolean.FALSE)};
 
+	/**
+	 * Element Filter for this property section.
+	 * @since 2.0
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBDerived;
+		}
+	}
+	
+	private static final String[] theoremValues = new String[]{Boolean.toString(Boolean.TRUE), Boolean.toString(Boolean.FALSE)};
+	
 	@Override
 	protected boolean isEqual(int index) {
 		// TODO Auto-generated method stub
@@ -33,7 +48,7 @@ public class TheoremPropertySection extends AbstractEnumerationPropertySection {
 
 	@Override
 	protected String getFeatureAsText() {
-		return Boolean.toString(((Invariant) eObject).isTheorem());
+		return Boolean.toString(((EventBDerived) eObject).isTheorem());
 	}
 
 	@Override
