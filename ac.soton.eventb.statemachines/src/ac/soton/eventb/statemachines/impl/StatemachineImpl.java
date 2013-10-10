@@ -8,6 +8,7 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
+import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -39,24 +40,24 @@ import ac.soton.eventb.statemachines.TranslationKind;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getExtensionId <em>Extension Id</em>}</li>
- *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTranslation <em>Translation</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getSelfName <em>Self Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTranslation <em>Translation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatemachineImpl extends EventBNamedCommentedElementImpl implements Statemachine {
+public class StatemachineImpl extends EventBNamedCommentedDataElaborationElementImpl implements Statemachine {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
@@ -77,26 +78,6 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 	 * @ordered
 	 */
 	protected String extensionId = EXTENSION_ID_EDEFAULT+"."+EcoreUtil.generateUUID();
-
-	/**
-	 * The default value of the '{@link #getTranslation() <em>Translation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTranslation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final TranslationKind TRANSLATION_EDEFAULT = TranslationKind.MULTIVAR;
-
-	/**
-	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTranslation()
-	 * @generated
-	 * @ordered
-	 */
-	protected TranslationKind translation = TRANSLATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
@@ -157,6 +138,26 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 	 * @ordered
 	 */
 	protected String selfName = SELF_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTranslation() <em>Translation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TranslationKind TRANSLATION_EDEFAULT = TranslationKind.MULTIVAR;
+
+	/**
+	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslation()
+	 * @generated
+	 * @ordered
+	 */
+	protected TranslationKind translation = TRANSLATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -396,8 +397,6 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 				return getExtensionId();
-			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
-				return getTranslation();
 			case StatemachinesPackage.STATEMACHINE__REFINES:
 				if (resolve) return getRefines();
 				return basicGetRefines();
@@ -410,6 +409,8 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 				return basicGetInstances();
 			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 				return getSelfName();
+			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
+				return getTranslation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -425,9 +426,6 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 				setExtensionId((String)newValue);
-				return;
-			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
-				setTranslation((TranslationKind)newValue);
 				return;
 			case StatemachinesPackage.STATEMACHINE__REFINES:
 				setRefines((Statemachine)newValue);
@@ -446,6 +444,9 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 				setSelfName((String)newValue);
 				return;
+			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
+				setTranslation((TranslationKind)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -460,9 +461,6 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 				setExtensionId(EXTENSION_ID_EDEFAULT);
-				return;
-			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
-				setTranslation(TRANSLATION_EDEFAULT);
 				return;
 			case StatemachinesPackage.STATEMACHINE__REFINES:
 				setRefines((Statemachine)null);
@@ -479,6 +477,9 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 				setSelfName(SELF_NAME_EDEFAULT);
 				return;
+			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
+				setTranslation(TRANSLATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -493,8 +494,6 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		switch (featureID) {
 			case StatemachinesPackage.STATEMACHINE__EXTENSION_ID:
 				return EXTENSION_ID_EDEFAULT == null ? extensionId != null : !EXTENSION_ID_EDEFAULT.equals(extensionId);
-			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
-				return translation != TRANSLATION_EDEFAULT;
 			case StatemachinesPackage.STATEMACHINE__REFINES:
 				return refines != null;
 			case StatemachinesPackage.STATEMACHINE__NODES:
@@ -505,6 +504,8 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 				return instances != null;
 			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 				return SELF_NAME_EDEFAULT == null ? selfName != null : !SELF_NAME_EDEFAULT.equals(selfName);
+			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
+				return translation != TRANSLATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -563,10 +564,10 @@ public class StatemachineImpl extends EventBNamedCommentedElementImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (extensionId: ");
 		result.append(extensionId);
-		result.append(", translation: ");
-		result.append(translation);
 		result.append(", selfName: ");
 		result.append(selfName);
+		result.append(", translation: ");
+		result.append(translation);
 		result.append(')');
 		return result.toString();
 	}

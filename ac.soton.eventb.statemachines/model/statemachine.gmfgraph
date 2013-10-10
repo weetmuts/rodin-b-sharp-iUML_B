@@ -106,6 +106,95 @@
       </actualFigure>
     </descriptors>
     <descriptors
+        name="ORFigure">
+      <actualFigure
+          xsi:type="gmfgraph:ScalablePolygon"
+          name="ORFigure">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="darkGray"/>
+        <template
+            x="10"/>
+        <template
+            x="20"
+            y="10"/>
+        <template
+            x="10"
+            y="20"/>
+        <template
+            y="10"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
+        name="ANYFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Ellipse"
+          name="ANYFigure"
+          outline="false">
+        <layout
+            xsi:type="gmfgraph:StackLayout"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"/>
+        <children
+            xsi:type="gmfgraph:ScalablePolygon"
+            name="ANYFigureInner">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="darkGray"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"/>
+          <template
+              x="20"/>
+          <template
+              x="24"
+              y="10"/>
+          <template
+              x="34"
+              y="6"/>
+          <template
+              x="30"
+              y="16"/>
+          <template
+              x="40"
+              y="20"/>
+          <template
+              x="30"
+              y="24"/>
+          <template
+              x="34"
+              y="34"/>
+          <template
+              x="24"
+              y="30"/>
+          <template
+              x="20"
+              y="40"/>
+          <template
+              x="16"
+              y="30"/>
+          <template
+              x="6"
+              y="34"/>
+          <template
+              x="10"
+              y="24"/>
+          <template
+              y="20"/>
+          <template
+              x="10"
+              y="16"/>
+          <template
+              x="6"
+              y="6"/>
+          <template
+              x="16"
+              y="10"/>
+          <template
+              x="20"/>
+        </children>
+      </actualFigure>
+    </descriptors>
+    <descriptors
         name="InvariantFigure">
       <actualFigure
           xsi:type="gmfgraph:Label"
@@ -151,14 +240,14 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="TransitionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="TransitionFigure"
-          targetDecoration="//@figures.0/@descriptors.5/@actualFigure/@children.1">
+          targetDecoration="//@figures.0/@descriptors.7/@actualFigure/@children.1">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="gray"/>
@@ -172,7 +261,7 @@
             fill="false"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -187,6 +276,26 @@
   <nodes
       name="Final"
       figure="FinalFigure"/>
+  <nodes
+      name="OR"
+      figure="ORFigure">
+    <facets
+        xsi:type="gmfgraph:DefaultSizeFacet">
+      <defaultSize
+          dx="21"
+          dy="21"/>
+    </facets>
+  </nodes>
+  <nodes
+      name="ANY"
+      figure="ANYFigure">
+    <facets
+        xsi:type="gmfgraph:DefaultSizeFacet">
+      <defaultSize
+          dx="21"
+          dy="21"/>
+    </facets>
+  </nodes>
   <connections
       name="Transition"
       figure="TransitionFigure"/>
@@ -204,7 +313,7 @@
       name="StatemachineStatesCompartment"
       figure="StatemachineFigure"
       collapsible="true"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
   <labels
       name="StateName"
       figure="StateFigure"
@@ -215,7 +324,7 @@
       figure="TransitionFigure"
       resizeConstraint="NONE"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.0">
+      accessor="//@figures.0/@descriptors.7/@accessors.0">
     <facets
         xsi:type="gmfgraph:LabelOffsetFacet"
         x="-8"

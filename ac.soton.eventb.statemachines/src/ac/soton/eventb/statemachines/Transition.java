@@ -8,11 +8,10 @@
  */
 package ac.soton.eventb.statemachines;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.machine.Event;
-
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
 
 /**
@@ -25,7 +24,6 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getSource <em>Source</em>}</li>
- *   <li>{@link ac.soton.eventb.statemachines.Transition#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getTargetContainer <em>Target Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Transition#getOperations <em>Operations</em>}</li>
@@ -33,16 +31,16 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToAny\nnotToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates'"
  * @generated
  */
-public interface Transition extends EventBCommentedElement, EventBLabeled {
+public interface Transition extends EventBCommentedElement, EventBLabeled, EventBEventGroup {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
@@ -99,22 +97,6 @@ public interface Transition extends EventBCommentedElement, EventBLabeled {
 	 * @generated
 	 */
 	void setSource(AbstractNode value);
-
-	/**
-	 * Returns the value of the '<em><b>Elaborates</b></em>' reference list.
-	 * The list contents are of type {@link org.eventb.emf.core.machine.Event}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Elaborates</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Elaborates</em>' reference list.
-	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition_Elaborates()
-	 * @model
-	 * @generated
-	 */
-	EList<Event> getElaborates();
 
 	/**
 	 * Returns the value of the '<em><b>Source Container</b></em>' reference.

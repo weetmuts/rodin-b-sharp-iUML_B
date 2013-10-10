@@ -36,6 +36,14 @@
             path="/icons/png/Final.png"
             bundle="ac.soton.eventb.statemachines"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="OR"
+          description="Create new 'OR' pseudo-state for joining transitions from several source states"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ANY"
+          description="Create new 'ANY' pseudo-state for transitions from several source states"/>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

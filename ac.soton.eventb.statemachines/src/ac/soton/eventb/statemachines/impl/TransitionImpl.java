@@ -17,13 +17,20 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.impl.EventBCommentedElementImpl;
+import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Event;
 
+import org.eventb.emf.core.machine.Guard;
+import org.eventb.emf.core.machine.Witness;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
@@ -36,9 +43,14 @@ import ac.soton.eventb.statemachines.Transition;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#isExtended <em>Extended</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getGuards <em>Guards</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getWitnesses <em>Witnesses</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSource <em>Source</em>}</li>
- *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getElaborates <em>Elaborates</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getSourceContainer <em>Source Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getTargetContainer <em>Target Container</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.TransitionImpl#getOperations <em>Operations</em>}</li>
@@ -53,7 +65,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -64,6 +76,76 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * @ordered
 	 */
 	protected static final String LABEL_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElaborates()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Event> elaborates;
+
+	/**
+	 * The default value of the '{@link #isExtended() <em>Extended</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtended()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXTENDED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExtended() <em>Extended</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtended()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean extended = EXTENDED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypedParameter> parameters;
+
+	/**
+	 * The cached value of the '{@link #getGuards() <em>Guards</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGuards()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Guard> guards;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
+
+	/**
+	 * The cached value of the '{@link #getWitnesses() <em>Witnesses</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWitnesses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Witness> witnesses;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -84,16 +166,6 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	 * @ordered
 	 */
 	protected AbstractNode source;
-
-	/**
-	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElaborates()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Event> elaborates;
 
 	/**
 	 * The cached value of the '{@link #getSourceContainer() <em>Source Container</em>}' reference.
@@ -309,6 +381,75 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isExtended() {
+		return extended;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtended(boolean newExtended) {
+		boolean oldExtended = extended;
+		extended = newExtended;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__EXTENDED, oldExtended, extended));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypedParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList.Resolving<TypedParameter>(TypedParameter.class, this, StatemachinesPackage.TRANSITION__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Guard> getGuards() {
+		if (guards == null) {
+			guards = new EObjectContainmentEList.Resolving<Guard>(Guard.class, this, StatemachinesPackage.TRANSITION__GUARDS);
+		}
+		return guards;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList.Resolving<Action>(Action.class, this, StatemachinesPackage.TRANSITION__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Witness> getWitnesses() {
+		if (witnesses == null) {
+			witnesses = new EObjectContainmentEList.Resolving<Witness>(Witness.class, this, StatemachinesPackage.TRANSITION__WITNESSES);
+		}
+		return witnesses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public EventBElement getSourceContainer() {
@@ -435,6 +576,14 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StatemachinesPackage.TRANSITION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.TRANSITION__GUARDS:
+				return ((InternalEList<?>)getGuards()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.TRANSITION__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.TRANSITION__WITNESSES:
+				return ((InternalEList<?>)getWitnesses()).basicRemove(otherEnd, msgs);
 			case StatemachinesPackage.TRANSITION__TARGET:
 				return basicSetTarget(null, msgs);
 			case StatemachinesPackage.TRANSITION__SOURCE:
@@ -453,14 +602,24 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		switch (featureID) {
 			case StatemachinesPackage.TRANSITION__LABEL:
 				return getLabel();
+			case StatemachinesPackage.TRANSITION__ELABORATES:
+				return getElaborates();
+			case StatemachinesPackage.TRANSITION__EXTENDED:
+				return isExtended();
+			case StatemachinesPackage.TRANSITION__PARAMETERS:
+				return getParameters();
+			case StatemachinesPackage.TRANSITION__GUARDS:
+				return getGuards();
+			case StatemachinesPackage.TRANSITION__ACTIONS:
+				return getActions();
+			case StatemachinesPackage.TRANSITION__WITNESSES:
+				return getWitnesses();
 			case StatemachinesPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
 			case StatemachinesPackage.TRANSITION__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case StatemachinesPackage.TRANSITION__ELABORATES:
-				return getElaborates();
 			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
 				if (resolve) return getSourceContainer();
 				return basicGetSourceContainer();
@@ -482,15 +641,34 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StatemachinesPackage.TRANSITION__ELABORATES:
+				getElaborates().clear();
+				getElaborates().addAll((Collection<? extends Event>)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__EXTENDED:
+				setExtended((Boolean)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends TypedParameter>)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__GUARDS:
+				getGuards().clear();
+				getGuards().addAll((Collection<? extends Guard>)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
+				return;
+			case StatemachinesPackage.TRANSITION__WITNESSES:
+				getWitnesses().clear();
+				getWitnesses().addAll((Collection<? extends Witness>)newValue);
+				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__SOURCE:
 				setSource((AbstractNode)newValue);
-				return;
-			case StatemachinesPackage.TRANSITION__ELABORATES:
-				getElaborates().clear();
-				getElaborates().addAll((Collection<? extends Event>)newValue);
 				return;
 			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
 				setSourceContainer((EventBElement)newValue);
@@ -513,14 +691,29 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StatemachinesPackage.TRANSITION__ELABORATES:
+				getElaborates().clear();
+				return;
+			case StatemachinesPackage.TRANSITION__EXTENDED:
+				setExtended(EXTENDED_EDEFAULT);
+				return;
+			case StatemachinesPackage.TRANSITION__PARAMETERS:
+				getParameters().clear();
+				return;
+			case StatemachinesPackage.TRANSITION__GUARDS:
+				getGuards().clear();
+				return;
+			case StatemachinesPackage.TRANSITION__ACTIONS:
+				getActions().clear();
+				return;
+			case StatemachinesPackage.TRANSITION__WITNESSES:
+				getWitnesses().clear();
+				return;
 			case StatemachinesPackage.TRANSITION__TARGET:
 				setTarget((AbstractNode)null);
 				return;
 			case StatemachinesPackage.TRANSITION__SOURCE:
 				setSource((AbstractNode)null);
-				return;
-			case StatemachinesPackage.TRANSITION__ELABORATES:
-				getElaborates().clear();
 				return;
 			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
 				setSourceContainer((EventBElement)null);
@@ -545,12 +738,22 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		switch (featureID) {
 			case StatemachinesPackage.TRANSITION__LABEL:
 				return LABEL_EDEFAULT == null ? getLabel() != null : !LABEL_EDEFAULT.equals(getLabel());
+			case StatemachinesPackage.TRANSITION__ELABORATES:
+				return elaborates != null && !elaborates.isEmpty();
+			case StatemachinesPackage.TRANSITION__EXTENDED:
+				return extended != EXTENDED_EDEFAULT;
+			case StatemachinesPackage.TRANSITION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case StatemachinesPackage.TRANSITION__GUARDS:
+				return guards != null && !guards.isEmpty();
+			case StatemachinesPackage.TRANSITION__ACTIONS:
+				return actions != null && !actions.isEmpty();
+			case StatemachinesPackage.TRANSITION__WITNESSES:
+				return witnesses != null && !witnesses.isEmpty();
 			case StatemachinesPackage.TRANSITION__TARGET:
 				return target != null;
 			case StatemachinesPackage.TRANSITION__SOURCE:
 				return source != null;
-			case StatemachinesPackage.TRANSITION__ELABORATES:
-				return elaborates != null && !elaborates.isEmpty();
 			case StatemachinesPackage.TRANSITION__SOURCE_CONTAINER:
 				return sourceContainer != null;
 			case StatemachinesPackage.TRANSITION__TARGET_CONTAINER:
@@ -574,6 +777,17 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				default: return -1;
 			}
 		}
+		if (baseClass == EventBEventGroup.class) {
+			switch (derivedFeatureID) {
+				case StatemachinesPackage.TRANSITION__ELABORATES: return CoreextensionPackage.EVENT_BEVENT_GROUP__ELABORATES;
+				case StatemachinesPackage.TRANSITION__EXTENDED: return CoreextensionPackage.EVENT_BEVENT_GROUP__EXTENDED;
+				case StatemachinesPackage.TRANSITION__PARAMETERS: return CoreextensionPackage.EVENT_BEVENT_GROUP__PARAMETERS;
+				case StatemachinesPackage.TRANSITION__GUARDS: return CoreextensionPackage.EVENT_BEVENT_GROUP__GUARDS;
+				case StatemachinesPackage.TRANSITION__ACTIONS: return CoreextensionPackage.EVENT_BEVENT_GROUP__ACTIONS;
+				case StatemachinesPackage.TRANSITION__WITNESSES: return CoreextensionPackage.EVENT_BEVENT_GROUP__WITNESSES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -590,6 +804,17 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 				default: return -1;
 			}
 		}
+		if (baseClass == EventBEventGroup.class) {
+			switch (baseFeatureID) {
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__ELABORATES: return StatemachinesPackage.TRANSITION__ELABORATES;
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__EXTENDED: return StatemachinesPackage.TRANSITION__EXTENDED;
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__PARAMETERS: return StatemachinesPackage.TRANSITION__PARAMETERS;
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__GUARDS: return StatemachinesPackage.TRANSITION__GUARDS;
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__ACTIONS: return StatemachinesPackage.TRANSITION__ACTIONS;
+				case CoreextensionPackage.EVENT_BEVENT_GROUP__WITNESSES: return StatemachinesPackage.TRANSITION__WITNESSES;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -603,7 +828,9 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (operations: ");
+		result.append(" (extended: ");
+		result.append(extended);
+		result.append(", operations: ");
 		result.append(operations);
 		result.append(')');
 		return result.toString();
@@ -618,7 +845,7 @@ public class TransitionImpl extends EventBCommentedElementImpl implements Transi
 		
 		int type = notification.getEventType();
 		Object feature = notification.getFeature();
-		if (StatemachinesPackage.Literals.TRANSITION__ELABORATES.equals(feature)
+		if (CoreextensionPackage.Literals.EVENT_BEVENT_GROUP__ELABORATES.equals(feature)
 				&& (type == Notification.ADD || type == Notification.ADD_MANY
 						|| type == Notification.REMOVE || type == Notification.REMOVE_MANY))
 			if (eNotificationRequired())

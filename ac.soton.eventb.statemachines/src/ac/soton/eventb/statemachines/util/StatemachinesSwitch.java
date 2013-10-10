@@ -8,6 +8,8 @@
  */
 package ac.soton.eventb.statemachines.util;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +23,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.EventBObject;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
 import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.statemachines.*;
 import ac.soton.eventb.statemachines.AbstractNode;
@@ -51,7 +54,7 @@ public class StatemachinesSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The cached model package
@@ -116,9 +119,11 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.STATEMACHINE: {
 				Statemachine statemachine = (Statemachine)theEObject;
 				T result = caseStatemachine(statemachine);
-				if (result == null) result = caseEventBNamedCommentedElement(statemachine);
+				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(statemachine);
 				if (result == null) result = caseAbstractExtension(statemachine);
 				if (result == null) result = caseDiagram(statemachine);
+				if (result == null) result = caseEventBNamedCommentedElement(statemachine);
+				if (result == null) result = caseEventBDataElaboration(statemachine);
 				if (result == null) result = caseEventBCommentedElement(statemachine);
 				if (result == null) result = caseEventBNamed(statemachine);
 				if (result == null) result = caseEventBElement(statemachine);
@@ -138,6 +143,7 @@ public class StatemachinesSwitch<T> {
 				T result = caseTransition(transition);
 				if (result == null) result = caseEventBCommentedElement(transition);
 				if (result == null) result = caseEventBLabeled(transition);
+				if (result == null) result = caseEventBEventGroup(transition);
 				if (result == null) result = caseEventBElement(transition);
 				if (result == null) result = caseEventBCommented(transition);
 				if (result == null) result = caseEventBObject(transition);
@@ -178,6 +184,24 @@ public class StatemachinesSwitch<T> {
 				if (result == null) result = caseAbstractNode(final_);
 				if (result == null) result = caseEventBElement(final_);
 				if (result == null) result = caseEventBObject(final_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.ANY: {
+				Any any = (Any)theEObject;
+				T result = caseAny(any);
+				if (result == null) result = caseAbstractNode(any);
+				if (result == null) result = caseEventBElement(any);
+				if (result == null) result = caseEventBObject(any);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.OR: {
+				Or or = (Or)theEObject;
+				T result = caseOr(or);
+				if (result == null) result = caseAbstractNode(or);
+				if (result == null) result = caseEventBElement(or);
+				if (result == null) result = caseEventBObject(or);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,6 +270,21 @@ public class StatemachinesSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BEvent Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BEvent Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBEventGroup(EventBEventGroup object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>State</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -287,6 +326,36 @@ public class StatemachinesSwitch<T> {
 	 * @generated
 	 */
 	public T caseFinal(Final object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Any</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Any</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAny(Any object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOr(Or object) {
 		return null;
 	}
 
@@ -422,6 +491,36 @@ public class StatemachinesSwitch<T> {
 	 * @generated
 	 */
 	public T caseEventBNamedCommentedElement(EventBNamedCommentedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BData Elaboration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BData Elaboration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBDataElaboration(EventBDataElaboration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BNamed Commented Data Elaboration Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BNamed Commented Data Elaboration Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBNamedCommentedDataElaborationElement(EventBNamedCommentedDataElaborationElement object) {
 		return null;
 	}
 

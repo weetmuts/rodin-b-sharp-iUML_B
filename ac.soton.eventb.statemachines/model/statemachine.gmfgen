@@ -6,7 +6,7 @@
     domainFileExtension="bum"
     dynamicTemplates="true"
     templateDirectory="/ac.soton.eventb.statemachines/templates/gmf"
-    copyrightText="Copyright (c) 2010 University of Southampton.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html">
+    copyrightText="Copyright (c) 2013 University of Southampton.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html">
   <diagram
       visualID="1000"
       editPartClassName="RootStatemachineEditPart"
@@ -30,10 +30,9 @@
     <domainDiagramElement
         href="statemachines.genmodel#//statemachines/Statemachine"/>
     <childNodes
-        visualID="3001"
+        visualID="3015"
         editPartClassName="StatemachineEditPart"
         itemSemanticEditPolicyClassName="StatemachineItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineViewFactory"
         canonicalEditPolicyClassName="StatemachineCanonicalEditPolicy"
         compartments="//@diagram/@compartments.2"
         graphicalNodeEditPolicyClassName="StatemachineGraphicalNodeEditPolicy"
@@ -52,10 +51,6 @@
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"
             fixedBackground="true"/>
-        <attributes
-            xsi:type="gmfgen:DefaultSizeAttributes"
-            width="100"
-            height="80"/>
       </viewmap>
       <behaviour
           xsi:type="gmfgen:OpenDiagramBehaviour"/>
@@ -69,13 +64,12 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        visualID="3011"
-        editPartClassName="InnerInitialEditPart"
-        itemSemanticEditPolicyClassName="InnerInitialItemSemanticEditPolicy"
-        notationViewFactoryClassName="InitialViewFactory"
-        canonicalEditPolicyClassName="InnerInitialCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InnerInitialGraphicalNodeEditPolicy"
-        createCommandClassName="InnerInitialCreateCommand"
+        visualID="3016"
+        editPartClassName="Initial2EditPart"
+        itemSemanticEditPolicyClassName="Initial2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="Initial2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Initial2GraphicalNodeEditPolicy"
+        createCommandClassName="Initial2CreateCommand"
         containers="//@diagram/@compartments.2">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -104,13 +98,12 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        visualID="3012"
-        editPartClassName="InnerFinalEditPart"
-        itemSemanticEditPolicyClassName="InnerFinalItemSemanticEditPolicy"
-        notationViewFactoryClassName="FinalViewFactory"
-        canonicalEditPolicyClassName="InnerFinalCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InnerFinalGraphicalNodeEditPolicy"
-        createCommandClassName="InnerFinalCreateCommand"
+        visualID="3017"
+        editPartClassName="Final2EditPart"
+        itemSemanticEditPolicyClassName="Final2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="Final2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Final2GraphicalNodeEditPolicy"
+        createCommandClassName="Final2CreateCommand"
         containers="//@diagram/@compartments.2">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -139,14 +132,13 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        visualID="3013"
-        editPartClassName="InnerStateEditPart"
-        itemSemanticEditPolicyClassName="InnerStateItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateViewFactory"
-        canonicalEditPolicyClassName="InnerStateCanonicalEditPolicy"
+        visualID="3018"
+        editPartClassName="State2EditPart"
+        itemSemanticEditPolicyClassName="State2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="State2CanonicalEditPolicy"
         compartments="//@diagram/@compartments.3 //@diagram/@compartments.4"
-        graphicalNodeEditPolicyClassName="InnerStateGraphicalNodeEditPolicy"
-        createCommandClassName="InnerStateCreateCommand"
+        graphicalNodeEditPolicyClassName="State2GraphicalNodeEditPolicy"
+        createCommandClassName="State2CreateCommand"
         containers="//@diagram/@compartments.2">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -171,10 +163,9 @@
             href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
       </modelFacet>
       <labels
-          visualID="5008"
-          editPartClassName="InnerStateNameEditPart"
-          itemSemanticEditPolicyClassName="InnerStateNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateNameViewFactory">
+          visualID="5010"
+          editPartClassName="StateName2EditPart"
+          itemSemanticEditPolicyClassName="StateName2ItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -196,10 +187,9 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildLabelNode"
-        visualID="3014"
+        visualID="3019"
         editPartClassName="InvariantEditPart"
         itemSemanticEditPolicyClassName="InvariantItemSemanticEditPolicy"
-        notationViewFactoryClassName="InvariantViewFactory"
         canonicalEditPolicyClassName="InvariantCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InvariantGraphicalNodeEditPolicy"
         createCommandClassName="InvariantCreateCommand"
@@ -233,11 +223,78 @@
             href="../../org.eventb.emf.core/model/eventbcore.genmodel#//core/EventBPredicate/predicate"/>
       </labelModelFacet>
     </childNodes>
+    <childNodes
+        visualID="3020"
+        editPartClassName="Or2EditPart"
+        itemSemanticEditPolicyClassName="Or2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="Or2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Or2GraphicalNodeEditPolicy"
+        createCommandClassName="Or2CreateCommand"
+        containers="//@diagram/@compartments.2">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="OrEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ORFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ORFigure extends org.eclipse.draw2d.ScalablePolygonShape {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ORFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;this.setFill(true);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkGray);&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedForeground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="21"
+            height="21"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Or"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+      </modelFacet>
+    </childNodes>
+    <childNodes
+        visualID="3021"
+        editPartClassName="Any2EditPart"
+        itemSemanticEditPolicyClassName="Any2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="Any2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Any2GraphicalNodeEditPolicy"
+        createCommandClassName="Any2CreateCommand"
+        containers="//@diagram/@compartments.2">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="AnyEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ANYFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ANYFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ANYFigure() {&#xA;&#x9;&#x9;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setOutline(false);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.ScalablePolygonShape aNYFigureInner0 = new org.eclipse.draw2d.ScalablePolygonShape();&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;aNYFigureInner0.setFill(true);&#xA;&#x9;aNYFigureInner0.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkGray);&#xA;&#x9;aNYFigureInner0.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#xA;this.add(aNYFigureInner0);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedForeground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="21"
+            height="21"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Any"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+      </modelFacet>
+    </childNodes>
     <topLevelNodes
-        visualID="2006"
+        visualID="2009"
         editPartClassName="InitialEditPart"
         itemSemanticEditPolicyClassName="InitialItemSemanticEditPolicy"
-        notationViewFactoryClassName="InitialViewFactory"
         canonicalEditPolicyClassName="InitialCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="InitialGraphicalNodeEditPolicy"
         createCommandClassName="InitialCreateCommand">
@@ -268,10 +325,9 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2007"
+        visualID="2010"
         editPartClassName="FinalEditPart"
         itemSemanticEditPolicyClassName="FinalItemSemanticEditPolicy"
-        notationViewFactoryClassName="FinalViewFactory"
         canonicalEditPolicyClassName="FinalCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="FinalGraphicalNodeEditPolicy"
         createCommandClassName="FinalCreateCommand">
@@ -302,10 +358,9 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="2008"
+        visualID="2011"
         editPartClassName="StateEditPart"
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateCanonicalEditPolicy"
         compartments="//@diagram/@compartments.0 //@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="StateGraphicalNodeEditPolicy"
@@ -333,10 +388,9 @@
             href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
       </modelFacet>
       <labels
-          visualID="5009"
+          visualID="5011"
           editPartClassName="StateNameEditPart"
-          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateNameViewFactory">
+          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -356,11 +410,76 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="2012"
+        editPartClassName="OrEditPart"
+        itemSemanticEditPolicyClassName="OrItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="OrCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="OrGraphicalNodeEditPolicy"
+        createCommandClassName="OrCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.5/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ORFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ORFigure extends org.eclipse.draw2d.ScalablePolygonShape {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ORFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;this.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;this.setFill(true);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkGray);&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedForeground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="21"
+            height="21"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Or"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+      </modelFacet>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2013"
+        editPartClassName="AnyEditPart"
+        itemSemanticEditPolicyClassName="AnyItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="AnyCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="AnyGraphicalNodeEditPolicy"
+        createCommandClassName="AnyCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.6/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ANYFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ANYFigure extends org.eclipse.draw2d.Ellipse {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ANYFigure() {&#xA;&#x9;&#x9;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setOutline(false);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.ScalablePolygonShape aNYFigureInner0 = new org.eclipse.draw2d.ScalablePolygonShape();&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(30)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(34)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(24)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(40)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(34)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(24)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(6)&#xA;, getMapMode().DPtoLP(6)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;aNYFigureInner0.addPoint(new org.eclipse.draw2d.geometry.Point(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(0)&#xA;));&#xA;aNYFigureInner0.setFill(true);&#xA;&#x9;aNYFigureInner0.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkGray);&#xA;&#x9;aNYFigureInner0.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#xA;this.add(aNYFigureInner0);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedForeground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="21"
+            height="21"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="statemachines.genmodel#//statemachines/Any"/>
+        <containmentMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+        <childMetaFeature
+            href="statemachines.genmodel#//statemachines/Statemachine/nodes"/>
+      </modelFacet>
+    </topLevelNodes>
     <links
-        visualID="4001"
+        visualID="4003"
         editPartClassName="TransitionEditPart"
         itemSemanticEditPolicyClassName="TransitionItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
         createCommandClassName="TransitionCreateCommand"
         reorientCommandClassName="TransitionReorientCommand">
       <diagramRunTimeClass
@@ -391,10 +510,9 @@
             href="statemachines.genmodel#//statemachines/Transition/target"/>
       </modelFacet>
       <labels
-          visualID="6001"
+          visualID="6003"
           editPartClassName="TransitionLabelEditPart"
           itemSemanticEditPolicyClassName="TransitionLabelItemSemanticEditPolicy"
-          notationViewFactoryClassName="TransitionLabelViewFactory"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -417,12 +535,11 @@
       </labels>
     </links>
     <links
-        visualID="4002"
-        editPartClassName="TransitionGhostEditPart"
-        itemSemanticEditPolicyClassName="TransitionGhostItemSemanticEditPolicy"
-        notationViewFactoryClassName="TransitionViewFactory"
-        createCommandClassName="TransitionGhostCreateCommand"
-        reorientCommandClassName="TransitionGhostReorientCommand">
+        visualID="4004"
+        editPartClassName="Transition2EditPart"
+        itemSemanticEditPolicyClassName="Transition2ItemSemanticEditPolicy"
+        createCommandClassName="Transition2CreateCommand"
+        reorientCommandClassName="Transition2ReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
@@ -451,10 +568,9 @@
             href="statemachines.genmodel#//statemachines/Transition/targetContainer"/>
       </modelFacet>
       <labels
-          visualID="6002"
-          editPartClassName="TransitionGhostLabelEditPart"
-          itemSemanticEditPolicyClassName="TransitionGhostLabelItemSemanticEditPolicy"
-          notationViewFactoryClassName="TransitionLabelViewFactory"
+          visualID="6004"
+          editPartClassName="TransitionLabel2EditPart"
+          itemSemanticEditPolicyClassName="TransitionLabel2ItemSemanticEditPolicy"
           readOnly="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -477,36 +593,27 @@
       </labels>
     </links>
     <compartments
-        visualID="7012"
-        editPartClassName="StateStatemachinesCompartmentEditPart"
-        itemSemanticEditPolicyClassName="StateStatemachinesCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateStateStatemachinesCompartmentViewFactory"
-        canonicalEditPolicyClassName="StateStatemachinesCompartmentCanonicalEditPolicy"
+        visualID="7016"
+        editPartClassName="StateStateStatemachinesCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateStateStatemachinesCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStateStatemachinesCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
         title="StateStatemachinesCompartment"
         needsTitle="false"
-        node="//@diagram/@topLevelNodes.2">
+        node="//@diagram/@topLevelNodes.2"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
           xsi:type="gmfgen:ParentAssignedViewmap"
           getterName="getFigureStateStatemachinesCompartmentFigure"
-          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
-      <behaviour
-          xsi:type="gmfgen:CustomBehaviour"
-          key="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy.TROCC_ROLE"
-          editPolicyQualifiedClassName="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy"/>
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7013"
-        editPartClassName="StateInvariantsCompartmentEditPart"
-        itemSemanticEditPolicyClassName="StateInvariantsCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateStateInvariantsCompartmentViewFactory"
-        canonicalEditPolicyClassName="StateInvariantsCompartmentCanonicalEditPolicy"
+        visualID="7017"
+        editPartClassName="StateStateInvariantsCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateStateInvariantsCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStateInvariantsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="StateInvariantsCompartment"
         needsTitle="false"
@@ -519,12 +626,11 @@
           figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7003"
-        editPartClassName="StatemachineStatesCompartmentEditPart"
-        itemSemanticEditPolicyClassName="StatemachineStatesCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StatemachineStatemachineStatesCompartmentViewFactory"
-        canonicalEditPolicyClassName="StatemachineStatesCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3"
+        visualID="7018"
+        editPartClassName="StatemachineStatemachineStatesCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StatemachineStatemachineStatesCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StatemachineStatemachineStatesCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.5 //@diagram/@childNodes.6"
         title="StatemachineStatesCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.0"
@@ -535,42 +641,29 @@
           xsi:type="gmfgen:ParentAssignedViewmap"
           getterName="getFigureStatemachineCompartmentFigure"
           figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
-      <behaviour
-          xsi:type="gmfgen:CustomBehaviour"
-          key="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy.TROCC_ROLE"
-          editPolicyQualifiedClassName="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy"/>
     </compartments>
     <compartments
-        visualID="7014"
-        editPartClassName="InnerStateStatemachinesCompartmentEditPart"
-        itemSemanticEditPolicyClassName="InnerStateStatemachinesCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateStateStatemachinesCompartmentViewFactory"
-        canonicalEditPolicyClassName="InnerStateStatemachinesCompartmentCanonicalEditPolicy"
+        visualID="7019"
+        editPartClassName="StateStateStatemachinesCompartment2EditPart"
+        itemSemanticEditPolicyClassName="StateStateStatemachinesCompartment2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStateStatemachinesCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
         title="StateStatemachinesCompartment"
         needsTitle="false"
-        node="//@diagram/@childNodes.3">
+        node="//@diagram/@childNodes.3"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
           xsi:type="gmfgen:ParentAssignedViewmap"
           getterName="getFigureStateStatemachinesCompartmentFigure"
-          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedBackground="true"/>
-      </viewmap>
-      <behaviour
-          xsi:type="gmfgen:CustomBehaviour"
-          key="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy.TROCC_ROLE"
-          editPolicyQualifiedClassName="ac.soton.eventb.statemachines.diagram.edit.policies.custom.TransitionReorientOnCollapsedCompartmentEditPolicy"/>
+          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7015"
-        editPartClassName="InnerStateInvariantsCompartmentEditPart"
-        itemSemanticEditPolicyClassName="InnerStateInvariantsCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateStateInvariantsCompartmentViewFactory"
-        canonicalEditPolicyClassName="InnerStateInvariantsCompartmentCanonicalEditPolicy"
+        visualID="7020"
+        editPartClassName="StateStateInvariantsCompartment2EditPart"
+        itemSemanticEditPolicyClassName="StateStateInvariantsCompartment2ItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="StateStateInvariantsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="StateInvariantsCompartment"
         needsTitle="false"
@@ -604,6 +697,16 @@
             description="Create new Final State"
             smallIconPath="/ac.soton.eventb.statemachines/icons/png/Final.png"
             genNodes="//@diagram/@topLevelNodes.1 //@diagram/@childNodes.2"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="OR"
+            description="Create new 'OR' pseudo-state for joining transitions from several source states"
+            genNodes="//@diagram/@childNodes.5 //@diagram/@topLevelNodes.3"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="ANY"
+            description="Create new 'ANY' pseudo-state for transitions from several source states"
+            genNodes="//@diagram/@childNodes.6 //@diagram/@topLevelNodes.4"/>
       </groups>
       <groups
           title="Features"
@@ -667,7 +770,7 @@
   <plugin
       name="Statemachines Diagram Plugin"
       provider="University of Southampton"
-      version="1.0.1.qualifier"
+      version="2.0.0"
       printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
@@ -699,6 +802,12 @@
         parent="//@diagram/@childNodes.0"
         child="//@diagram/@childNodes.3"/>
     <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.5"/>
+    <childReferences
+        parent="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.6"/>
+    <childReferences
         parent="//@diagram/@topLevelNodes.2"
         child="//@diagram/@childNodes.0"/>
     <childReferences
@@ -709,6 +818,12 @@
         child="//@diagram/@topLevelNodes.2"/>
     <childReferences
         parent="//@diagram"
+        child="//@diagram/@topLevelNodes.3"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.4"/>
+    <childReferences
+        parent="//@diagram"
         child="//@diagram/@links.0"
         groupName="links"
         groupIcon="icons/linksNavigatorGroup.gif"/>
@@ -750,6 +865,30 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.3"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@childNodes.1"
         referenceType="out_target"
         groupName="target"
@@ -780,6 +919,30 @@
         groupIcon="icons/linkTargetNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.5"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.5"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.6"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.6"
         child="//@diagram/@links.0"
         referenceType="in_source"
         groupName="incoming links"
@@ -822,6 +985,30 @@
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.3"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@childNodes.1"
         referenceType="in_source"
         groupName="source"
@@ -852,6 +1039,30 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.5"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.5"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@childNodes.6"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.6"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -899,6 +1110,30 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.3"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
         child="//@diagram/@childNodes.0"
         referenceType="out_target"
         groupName="target"
@@ -941,6 +1176,30 @@
         groupIcon="icons/linkTargetNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@childNodes.5"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.5"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@childNodes.6"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.6"
         child="//@diagram/@links.1"
         referenceType="in_source"
         groupName="incoming links"
@@ -1007,6 +1266,30 @@
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.3"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
         child="//@diagram/@childNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -1049,6 +1332,30 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@childNodes.3"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@childNodes.5"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.5"
+        child="//@diagram/@links.1"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@childNodes.6"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@childNodes.6"
         child="//@diagram/@links.1"
         referenceType="out_target"
         groupName="outgoing links"
@@ -1124,12 +1431,14 @@
     <items
         xsi:type="gmfgen:CreateShortcutAction"/>
   </contextMenus>
-  <contextMenus
-      context="//@diagram/@childNodes.0">
+  <contextMenus>
     <items
         xsi:type="gmfgen:GenCustomAction"
         qualifiedClassName="ac.soton.eventb.statemachines.diagram.part.OpenDiagramAction"
         generateBoilerplate="true"
         name="&amp;Open Diagram"/>
+    <context
+        xsi:type="gmfgen:GenChildNode"
+        href="#//@diagram/@childNodes.0"/>
   </contextMenus>
 </gmfgen:GenEditorGenerator>

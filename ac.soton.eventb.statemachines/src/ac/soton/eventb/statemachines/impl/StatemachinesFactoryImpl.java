@@ -37,7 +37,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * Creates the default factory implementation.
@@ -47,7 +47,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 */
 	public static StatemachinesFactory init() {
 		try {
-			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines"); 
+			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines/0713"); 
 			if (theStatemachinesFactory != null) {
 				return theStatemachinesFactory;
 			}
@@ -81,6 +81,8 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			case StatemachinesPackage.STATE: return createState();
 			case StatemachinesPackage.INITIAL: return createInitial();
 			case StatemachinesPackage.FINAL: return createFinal();
+			case StatemachinesPackage.ANY: return createAny();
+			case StatemachinesPackage.OR: return createOr();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -164,6 +166,26 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	public Final createFinal() {
 		FinalImpl final_ = new FinalImpl();
 		return final_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Any createAny() {
+		AnyImpl any = new AnyImpl();
+		return any;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Or createOr() {
+		OrImpl or = new OrImpl();
+		return or;
 	}
 
 	/**

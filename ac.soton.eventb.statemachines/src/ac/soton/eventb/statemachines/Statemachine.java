@@ -8,6 +8,7 @@
  */
 package ac.soton.eventb.statemachines;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
 import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBNamedCommentedElement;
@@ -22,26 +23,26 @@ import ac.soton.eventb.emf.diagrams.Diagram;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getNodes <em>Nodes</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}</li>
  * </ul>
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\ninstancesIsData'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasValidName\nconcreteHasNoRefinedStates\nrefinedHasNoConcreteStates\nhasOneInitial\nhasOneFinal\nrootHasInitial\nhasInitialIfIncoming\ninstancesIsData\nhasValidSelfName'"
  * @generated
  */
-public interface Statemachine extends EventBNamedCommentedElement, AbstractExtension, Diagram {
+public interface Statemachine extends EventBNamedCommentedDataElaborationElement, AbstractExtension, Diagram {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * Returns the value of the '<em><b>Translation</b></em>' attribute.

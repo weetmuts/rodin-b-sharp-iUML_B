@@ -8,15 +8,34 @@
  available under the terms of the Eclipse Public License v1.0 which accompanies this 
  distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  
+
+ $Id$
 -->
 
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://soton.ac.uk/models/eventb/statemachines"
+            uri="http://soton.ac.uk/models/eventb/statemachines/0713"
             class="ac.soton.eventb.statemachines.StatemachinesPackage"
             genModel="model/statemachines.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            uri="http://soton.ac.uk/models/eventb/statemachines/0713"
+            class="ac.soton.eventb.statemachines.provider.StatemachinesItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.childCreationExtenders">
+      <extender
+            uri="http://emf.eventb.org/models/core/machine"
+            class="ac.soton.eventb.statemachines.provider.StatemachinesItemProviderAdapterFactory$CoreChildCreationExtender"/>
+   </extension>
 </plugin>

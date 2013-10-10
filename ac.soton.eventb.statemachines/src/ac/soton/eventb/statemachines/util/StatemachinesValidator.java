@@ -50,7 +50,7 @@ public class StatemachinesValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The cached model package
@@ -130,6 +130,10 @@ public class StatemachinesValidator extends EObjectValidator {
 				return validateInitial((Initial)value, diagnostics, context);
 			case StatemachinesPackage.FINAL:
 				return validateFinal((Final)value, diagnostics, context);
+			case StatemachinesPackage.ANY:
+				return validateAny((Any)value, diagnostics, context);
+			case StatemachinesPackage.OR:
+				return validateOr((Or)value, diagnostics, context);
 			case StatemachinesPackage.TRANSLATION_KIND:
 				return validateTranslationKind((TranslationKind)value, diagnostics, context);
 			default:
@@ -296,11 +300,40 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_notToAny(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notToInitial(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromInitialToFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_elaborates(transition, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the notToAny constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransition_notToAny(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "notToAny", getObjectLabel(transition, context) },
+						 new Object[] { transition },
+						 context));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -892,6 +925,91 @@ public class StatemachinesValidator extends EObjectValidator {
 						 "_UI_GenericConstraint_diagnostic",
 						 new Object[] { "Final state should have an incoming transition", getObjectLabel(final_, context) },
 						 new Object[] { final_ },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAny(Any any, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(any, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOr(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_NoCircularContainment(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOr_hasIncoming(or, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOr_hasOneOutgoing(or, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the hasIncoming constraint of '<em>Or</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOr_hasIncoming(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "hasIncoming", getObjectLabel(or, context) },
+						 new Object[] { or },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the hasOneOutgoing constraint of '<em>Or</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOr_hasOneOutgoing(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO implement the constraint
+		// -> specify the condition that violates the constraint
+		// -> verify the diagnostic details, including severity, code, and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "hasOneOutgoing", getObjectLabel(or, context) },
+						 new Object[] { or },
 						 context));
 			}
 			return false;

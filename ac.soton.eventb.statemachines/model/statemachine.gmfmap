@@ -85,8 +85,20 @@
             <containmentFeature
                 href="statemachines.ecore#//Statemachine/nodes"/>
           </children>
+          <children
+              compartment="//@nodes.2/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.3/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//Statemachine/nodes"/>
+          </children>
+          <children
+              compartment="//@nodes.2/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.4/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//Statemachine/nodes"/>
+          </children>
           <compartments
-              children="//@nodes.2/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.2">
+              children="//@nodes.2/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.4 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.3">
             <compartment
                 href="statemachine.gmfgraph#StatemachineStatesCompartment"/>
           </compartments>
@@ -128,6 +140,32 @@
         <compartment
             href="statemachine.gmfgraph#StateInvariantsCompartment"/>
       </compartments>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="statemachines.ecore#//Statemachine/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="statemachines.ecore#//Or"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.3"/>
+      <diagramNode
+          href="statemachine.gmfgraph#OR"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="statemachines.ecore#//Statemachine/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="statemachines.ecore#//Any"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="statemachine.gmfgraph#ANY"/>
     </ownedChild>
   </nodes>
   <links>
