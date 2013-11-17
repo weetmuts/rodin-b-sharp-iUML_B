@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmftool:ToolRegistry xmi:version="2.0"
+<gmftool:ToolRegistry
+    xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
@@ -38,12 +39,31 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="OR"
-          description="Create new 'OR' pseudo-state for joining transitions from several source states"/>
+          title="Any"
+          description="Create new 'Any' pseudo-state for transitions from any source state">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/ANY.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ANY"
-          description="Create new 'ANY' pseudo-state for transitions from several source states"/>
+          title="Junction"
+          description="Create new 'Junction' pseudo-state for composing transitions from/to several source/target states">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Junction.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Fork/Join"
+          description="Create new 'Fork/Join' pseudo-state for composing parallel transitions to/from several nested state machines">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="/icons/png/Fork.png"
+            bundle="ac.soton.eventb.statemachines"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

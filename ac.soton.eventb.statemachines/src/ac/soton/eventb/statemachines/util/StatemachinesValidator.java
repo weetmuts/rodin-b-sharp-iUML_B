@@ -11,6 +11,9 @@
 package ac.soton.eventb.statemachines.util;
 
 import ac.soton.eventb.statemachines.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -21,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.context.CarrierSet;
 import org.eventb.emf.core.context.Constant;
@@ -132,8 +136,10 @@ public class StatemachinesValidator extends EObjectValidator {
 				return validateFinal((Final)value, diagnostics, context);
 			case StatemachinesPackage.ANY:
 				return validateAny((Any)value, diagnostics, context);
-			case StatemachinesPackage.OR:
-				return validateOr((Or)value, diagnostics, context);
+			case StatemachinesPackage.JUNCTION:
+				return validateJunction((Junction)value, diagnostics, context);
+			case StatemachinesPackage.FORK:
+				return validateFork((Fork)value, diagnostics, context);
 			case StatemachinesPackage.TRANSLATION_KIND:
 				return validateTranslationKind((TranslationKind)value, diagnostics, context);
 			default:
@@ -305,21 +311,19 @@ public class StatemachinesValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateTransition_notFromFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_notFromInitialToFinal(transition, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransition_elaborates(transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransition_guards(transition, diagnostics, context);
 		return result;
 	}
 
 	/**
 	 * Validates the notToAny constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
+	 * transition should not target an Any state
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateTransition_notToAny(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+		if (transition.getTarget() instanceof Any) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -327,7 +331,7 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "notToAny", getObjectLabel(transition, context) },
+						 new Object[] { "Transition should not target an Any state", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -414,18 +418,17 @@ public class StatemachinesValidator extends EObjectValidator {
 	/**
 	 * Validates the elaborates constraint of '<em>Transition</em>'.
 	 * <!-- begin-user-doc -->
-	 * Transition elaborates events.
+	 *  if transition is either targeting a Junction OR targeting a Join, OR from a Fork it should elaborate an event,
+	 *  otherwise it should not
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean validateTransition_elaborates(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// if transitions does not elaborate an event AND
-		// it is either on root OR
-		// in nested statemachine, in which it is NOT initial or final transition
-		if (transition.getElaborates().isEmpty()
-				&& (transition.getTarget().eContainer().eContainer() instanceof State == false
-						|| (transition.getSource() instanceof Initial == false
-								&& transition.getTarget() instanceof Final == false))) {
+		// if transition does not elaborate an event AND it is neither targeting a Junction NOR targeting a Join, NOR from a Fork
+		if (transition.getElaborates().isEmpty() && 	
+				!(transition.getTarget() instanceof Junction) &&
+				!(transition.getTarget() instanceof Fork && ((Fork)transition.getTarget()).isJoin()) &&
+				!(transition.getSource() instanceof Fork && ((Fork)transition.getSource()).isFork())		) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -434,6 +437,53 @@ public class StatemachinesValidator extends EObjectValidator {
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
 						 new Object[] { "Transition should elaborate an event", getObjectLabel(transition, context) },
+						 new Object[] { transition },
+						 context));
+			}
+			return false;
+		}else 
+			// if transition does elaborate an event or have actions AND it is either targeting a Junction OR targeting a Join, OR from a Fork
+			if ((!transition.getElaborates().isEmpty() || !transition.getActions().isEmpty()) && 	
+				(	(transition.getTarget() instanceof Junction) ||
+					(transition.getTarget() instanceof Fork && ((Fork)transition.getTarget()).isJoin()) ||
+					(transition.getSource() instanceof Fork && ((Fork)transition.getSource()).isFork())	) 
+				) {
+				if (diagnostics != null) {
+					diagnostics.add
+						(createDiagnostic
+							(Diagnostic.WARNING,
+							 DIAGNOSTIC_SOURCE,
+							 0,
+							 "_UI_GenericConstraint_diagnostic",
+							 new Object[] { "Transition should NOT elaborate an event or have actions", getObjectLabel(transition, context) },
+							 new Object[] { transition },
+							 context));
+				}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the guards constraint of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * "Transition should NOT have guards, parameters or witnesses
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateTransition_guards(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (	(!transition.getGuards().isEmpty() || !transition.getWitnesses().isEmpty() || !transition.getParameters().isEmpty()) 
+				&& 
+				((transition.getTarget() instanceof Fork && ((Fork)transition.getTarget()).isJoin()) || (transition.getSource() instanceof Fork && ((Fork)transition.getSource()).isFork()))
+			) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Transition should NOT have guards, parameters or witnesses", getObjectLabel(transition, context) },
 						 new Object[] { transition },
 						 context));
 			}
@@ -946,33 +996,30 @@ public class StatemachinesValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOr(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_NoCircularContainment(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOr_hasIncoming(or, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOr_hasOneOutgoing(or, diagnostics, context);
+	public boolean validateJunction(Junction junction, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_NoCircularContainment(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validateJunction_hasIncoming(junction, diagnostics, context);
+		if (result || diagnostics != null) result &= validateJunction_hasOutgoing(junction, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the hasIncoming constraint of '<em>Or</em>'.
+	 * Validates the hasIncoming constraint of '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
+	 * Junction should have at least one incoming transition
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public boolean validateOr_hasIncoming(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+	public boolean validateJunction_hasIncoming(Junction junction, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (junction.getIncoming().isEmpty()) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -980,8 +1027,8 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasIncoming", getObjectLabel(or, context) },
-						 new Object[] { or },
+						 new Object[] { "Junction should have at least one incoming transition", getObjectLabel(junction, context) },
+						 new Object[] { junction },
 						 context));
 			}
 			return false;
@@ -990,17 +1037,14 @@ public class StatemachinesValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the hasOneOutgoing constraint of '<em>Or</em>'.
+	 * Validates the hasOutgoing constraint of '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
+	 * Junction should have at least one outgoing transition
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public boolean validateOr_hasOneOutgoing(Or or, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+	public boolean validateJunction_hasOutgoing(Junction junction, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (junction.getOutgoing().isEmpty()) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(createDiagnostic
@@ -1008,8 +1052,120 @@ public class StatemachinesValidator extends EObjectValidator {
 						 DIAGNOSTIC_SOURCE,
 						 0,
 						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "hasOneOutgoing", getObjectLabel(or, context) },
-						 new Object[] { or },
+						 new Object[] { "Junction should have at least one outgoing transition", getObjectLabel(junction, context) },
+						 new Object[] { junction },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFork(Fork fork, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = validate_NoCircularContainment(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFork_isForkORJoin(fork, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFork_nodesInParallelStatemachines(fork, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the isForkORJoin constraint of '<em>Fork</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateFork_isForkORJoin(Fork fork, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!fork.isFork() && !fork.isJoin()) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "Fork/join node is neither forking nor joining transitions", getObjectLabel(fork, context) },
+						 new Object[] { fork },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the nodesInParallelStatemachines constraint of '<em>Fork</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateFork_nodesInParallelStatemachines(Fork fork, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		/*
+		 * and all of its outgoing transitions target nodes that are in different parallel statemachines contained within the same
+		 * parent state that is also contained within the same parent state-machine as the fork node.
+		 */
+
+		boolean valid = true;
+	
+		List<AbstractNode> nodes = new ArrayList<AbstractNode>();
+		
+		if (fork.isFork()){
+			for (Transition out : fork.getOutgoing()){
+				nodes.add(((out.getTarget()==null)? null: out.getTarget()));
+			}
+		}else if (fork.isJoin()){
+			for (Transition in : fork.getIncoming()){
+				nodes.add(((in.getSource()==null)? null: in.getSource()));
+			}
+		}
+								
+		if (nodes.size() >0) {
+			//from the first node, get the parent state that is on the same level as the fork node
+			EObject parentState = nodes.get(0);
+			while (parentState instanceof State && parentState.eContainer()!=fork.eContainer()){
+				if (!(parentState.eContainer() instanceof Statemachine)) valid = false; 
+				parentState = ((Statemachine)parentState.eContainer()).eContainer();
+				if (!(parentState instanceof State)) valid = false;
+			}
+			if (!(parentState instanceof State)) valid = false;
+			else{
+				//this list will record the statemachines that directly contain target/source states
+				List<Statemachine> statemachines = new ArrayList<Statemachine>();
+				//now check all the nodes have the same parent state and are in different statemachines
+				for (AbstractNode node : nodes){
+					EObject sm = (node==null)? null: node.eContainer();
+					if (!(sm instanceof Statemachine) || statemachines.contains(sm)) valid = false;
+					statemachines.add((Statemachine) sm);
+					while (sm.eContainer()!=parentState){
+						if (!(sm.eContainer() instanceof State)) valid = false; 
+						sm = ((State)sm.eContainer()).eContainer();
+						if (!(sm instanceof Statemachine)) valid = false;
+					}
+				}
+			}
+		}
+		if (valid == false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "forked/joined nodes should be in parallel statemachines", getObjectLabel(fork, context) },
+						 new Object[] { fork },
 						 context));
 			}
 			return false;

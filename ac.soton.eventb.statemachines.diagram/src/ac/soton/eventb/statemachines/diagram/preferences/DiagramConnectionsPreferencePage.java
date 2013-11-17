@@ -26,7 +26,7 @@ public class DiagramConnectionsPreferencePage extends ConnectionsPreferencePage 
 		setPreferenceStore(StatemachinesDiagramEditorPlugin.getInstance()
 				.getPreferenceStore());
 	}
-	
+
 	/**
 	 * Initializes the default preference values for this preference store.
 	 * 
@@ -36,7 +36,7 @@ public class DiagramConnectionsPreferencePage extends ConnectionsPreferencePage 
 
 	public static void initDefaults(IPreferenceStore preferenceStore) {
 		preferenceStore.setDefault(IPreferenceConstants.PREF_LINE_STYLE,
-			Routing.RECTILINEAR);
+				Routing.RECTILINEAR);
 	}
-	
+
 }

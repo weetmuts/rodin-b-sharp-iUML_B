@@ -325,7 +325,12 @@ public class StatemachineItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatemachinesPackage.Literals.STATEMACHINE__NODES,
-				 StatemachinesFactory.eINSTANCE.createOr()));
+				 StatemachinesFactory.eINSTANCE.createJunction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatemachinesPackage.Literals.STATEMACHINE__NODES,
+				 StatemachinesFactory.eINSTANCE.createFork()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -12,12 +12,17 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.structure.DiagramStructure;
 import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.AnyEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Fork2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.ForkEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerFinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart;
@@ -26,6 +31,8 @@ import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateInvariantsComp
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateNameEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateStatemachinesCompartmentEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InvariantEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.JunctionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RootStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateInvariantsCompartmentEditPart;
@@ -160,6 +167,18 @@ public class StatemachinesVisualIDRegistry {
 					domainElement.eClass())) {
 				return StateEditPart.VISUAL_ID;
 			}
+			if (StatemachinesPackage.eINSTANCE.getJunction().isSuperTypeOf(
+					domainElement.eClass())) {
+				return JunctionEditPart.VISUAL_ID;
+			}
+			if (StatemachinesPackage.eINSTANCE.getAny().isSuperTypeOf(
+					domainElement.eClass())) {
+				return AnyEditPart.VISUAL_ID;
+			}
+			if (StatemachinesPackage.eINSTANCE.getFork().isSuperTypeOf(
+					domainElement.eClass())) {
+				return ForkEditPart.VISUAL_ID;
+			}
 			break;
 		case StateStatemachinesCompartmentEditPart.VISUAL_ID:
 			if (StatemachinesPackage.eINSTANCE.getStatemachine().isSuperTypeOf(
@@ -185,6 +204,18 @@ public class StatemachinesVisualIDRegistry {
 			if (StatemachinesPackage.eINSTANCE.getState().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InnerStateEditPart.VISUAL_ID;
+			}
+			if (StatemachinesPackage.eINSTANCE.getJunction().isSuperTypeOf(
+					domainElement.eClass())) {
+				return Junction2EditPart.VISUAL_ID;
+			}
+			if (StatemachinesPackage.eINSTANCE.getAny().isSuperTypeOf(
+					domainElement.eClass())) {
+				return Any2EditPart.VISUAL_ID;
+			}
+			if (StatemachinesPackage.eINSTANCE.getFork().isSuperTypeOf(
+					domainElement.eClass())) {
+				return Fork2EditPart.VISUAL_ID;
 			}
 			break;
 		case InnerStateStatemachinesCompartmentEditPart.VISUAL_ID:
@@ -235,6 +266,15 @@ public class StatemachinesVisualIDRegistry {
 			if (StateEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
+			if (JunctionEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (AnyEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (ForkEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
 			break;
 		case StateEditPart.VISUAL_ID:
 			if (StateNameEditPart.VISUAL_ID == nodeVisualID) {
@@ -281,6 +321,15 @@ public class StatemachinesVisualIDRegistry {
 				return true;
 			}
 			if (InnerStateEditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (Junction2EditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (Any2EditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (Fork2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -357,5 +406,120 @@ public class StatemachinesVisualIDRegistry {
 				domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();
 	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean checkNodeVisualID(View containerView,
+			EObject domainElement, int candidate) {
+		if (candidate == -1) {
+			//unrecognized id is always bad
+			return false;
+		}
+		int basic = getNodeVisualID(containerView, domainElement);
+		return basic == candidate;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean isCompartmentVisualID(int visualID) {
+		switch (visualID) {
+		case StateStatemachinesCompartmentEditPart.VISUAL_ID:
+		case StateInvariantsCompartmentEditPart.VISUAL_ID:
+		case StatemachineStatesCompartmentEditPart.VISUAL_ID:
+		case InnerStateStatemachinesCompartmentEditPart.VISUAL_ID:
+		case InnerStateInvariantsCompartmentEditPart.VISUAL_ID:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean isSemanticLeafVisualID(int visualID) {
+		switch (visualID) {
+		case RootStatemachineEditPart.VISUAL_ID:
+			return false;
+		case InitialEditPart.VISUAL_ID:
+		case FinalEditPart.VISUAL_ID:
+		case JunctionEditPart.VISUAL_ID:
+		case AnyEditPart.VISUAL_ID:
+		case ForkEditPart.VISUAL_ID:
+		case InnerInitialEditPart.VISUAL_ID:
+		case InnerFinalEditPart.VISUAL_ID:
+		case InvariantEditPart.VISUAL_ID:
+		case Junction2EditPart.VISUAL_ID:
+		case Any2EditPart.VISUAL_ID:
+		case Fork2EditPart.VISUAL_ID:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static final DiagramStructure TYPED_INSTANCE = new DiagramStructure() {
+		/**
+		 * @generated
+		 */
+		@Override
+		public int getVisualID(View view) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.getVisualID(view);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public String getModelID(View view) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.getModelID(view);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public int getNodeVisualID(View containerView, EObject domainElement) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.getNodeVisualID(containerView, domainElement);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean checkNodeVisualID(View containerView,
+				EObject domainElement, int candidate) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.checkNodeVisualID(containerView, domainElement, candidate);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean isCompartmentVisualID(int visualID) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.isCompartmentVisualID(visualID);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean isSemanticLeafVisualID(int visualID) {
+			return ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry
+					.isSemanticLeafVisualID(visualID);
+		}
+	};
 
 }

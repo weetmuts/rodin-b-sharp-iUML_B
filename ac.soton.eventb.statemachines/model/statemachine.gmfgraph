@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmfgraph:Canvas xmi:version="2.0"
+<gmfgraph:Canvas
+    xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="statemachine">
+    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition"
+    name="statemachine">
   <figures
       name="Default">
     <descriptors
@@ -106,23 +108,16 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="ORFigure">
+        name="JunctionFigure">
       <actualFigure
-          xsi:type="gmfgraph:ScalablePolygon"
-          name="ORFigure">
-        <foregroundColor
+          xsi:type="gmfgraph:Ellipse"
+          name="JunctionFigure">
+        <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="darkGray"/>
-        <template
-            x="10"/>
-        <template
-            x="20"
-            y="10"/>
-        <template
-            x="10"
-            y="20"/>
-        <template
-            y="10"/>
+        <preferredSize
+            dx="10"
+            dy="10"/>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -263,6 +258,19 @@
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="ForkFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ForkFigure">
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="darkGray"/>
+        <preferredSize
+            dx="6"
+            dy="20"/>
+      </actualFigure>
+    </descriptors>
   </figures>
   <nodes
       name="Statemachine"
@@ -277,13 +285,13 @@
       name="Final"
       figure="FinalFigure"/>
   <nodes
-      name="OR"
-      figure="ORFigure">
+      name="Junction"
+      figure="JunctionFigure">
     <facets
         xsi:type="gmfgraph:DefaultSizeFacet">
       <defaultSize
-          dx="21"
-          dy="21"/>
+          dx="10"
+          dy="10"/>
     </facets>
   </nodes>
   <nodes
@@ -294,6 +302,16 @@
       <defaultSize
           dx="21"
           dy="21"/>
+    </facets>
+  </nodes>
+  <nodes
+      name="Fork"
+      figure="ForkFigure">
+    <facets
+        xsi:type="gmfgraph:DefaultSizeFacet">
+      <defaultSize
+          dx="6"
+          dy="20"/>
     </facets>
   </nodes>
   <connections

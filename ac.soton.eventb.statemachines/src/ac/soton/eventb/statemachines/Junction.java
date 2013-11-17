@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2013
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -13,15 +13,15 @@ package ac.soton.eventb.statemachines;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Or</b></em>'.
+ * A representation of the model object '<em><b>Junction</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see ac.soton.eventb.statemachines.StatemachinesPackage#getOr()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasIncoming\nhasOneOutgoing'"
+ * @see ac.soton.eventb.statemachines.StatemachinesPackage#getJunction()
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='hasIncoming\nhasOutgoing'"
  * @generated
  */
-public interface Or extends AbstractNode {
+public interface Junction extends AbstractNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -29,4 +29,4 @@ public interface Or extends AbstractNode {
 	 */
 	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
-} // Or
+} // Junction

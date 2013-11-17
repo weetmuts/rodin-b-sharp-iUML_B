@@ -10,9 +10,12 @@ package ac.soton.eventb.statemachines.diagram.edit.policies;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 
+import ac.soton.eventb.statemachines.diagram.edit.commands.Any2CreateCommand;
+import ac.soton.eventb.statemachines.diagram.edit.commands.Fork2CreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.InnerFinalCreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.InnerInitialCreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.InnerStateCreateCommand;
+import ac.soton.eventb.statemachines.diagram.edit.commands.Junction2CreateCommand;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -40,6 +43,15 @@ public class StatemachineStatesCompartmentItemSemanticEditPolicy extends
 		}
 		if (StatemachinesElementTypes.State_3013 == req.getElementType()) {
 			return getGEFWrapper(new InnerStateCreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Junction_3015 == req.getElementType()) {
+			return getGEFWrapper(new Junction2CreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Any_3016 == req.getElementType()) {
+			return getGEFWrapper(new Any2CreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Fork_3017 == req.getElementType()) {
+			return getGEFWrapper(new Fork2CreateCommand(req));
 		}
 		return super.getCreateCommand(req);
 	}

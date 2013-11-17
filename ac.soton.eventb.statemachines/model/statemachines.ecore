@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statemachines"
-    nsURI="http://soton.ac.uk/models/eventb/statemachines/0713" nsPrefix="statemachines">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statemachines" nsURI="http://soton.ac.uk/models/eventb/statemachines/1013"
+    nsPrefix="statemachines">
   <eClassifiers xsi:type="ecore:EEnum" name="TranslationKind">
     <eLiterals name="MULTIVAR"/>
     <eLiterals name="SINGLEVAR" value="1"/>
@@ -27,9 +26,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"
         eType="#//Statemachine" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBCommentedElement ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBLabeled ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBEventGroup">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBCommentedLabeledEventGroupElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="notToAny&#xA;notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaborates"/>
+      <details key="constraints" value="notToAny&#xA;notToInitial&#xA;notFromFinal&#xA;notFromInitialToFinal&#xA;elaborates&#xA;guards"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//AbstractNode" eOpposite="#//AbstractNode/incoming"/>
@@ -72,9 +71,16 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Any" eSuperTypes="#//AbstractNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//AbstractNode">
+  <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//AbstractNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="hasIncoming&#xA;hasOneOutgoing"/>
+      <details key="constraints" value="hasIncoming&#xA;hasOutgoing"/>
     </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//AbstractNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="isForkORJoin&#xA;nodesInParallelStatemachines&#xA;"/>
+    </eAnnotations>
+    <eOperations name="isFork" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eOperations name="isJoin" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

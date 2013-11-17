@@ -47,6 +47,9 @@ public class StatemachinesPaletteFactory {
 		paletteContainer.add(createState1CreationTool());
 		paletteContainer.add(createInitial2CreationTool());
 		paletteContainer.add(createFinal3CreationTool());
+		paletteContainer.add(createAny4CreationTool());
+		paletteContainer.add(createJunction5CreationTool());
+		paletteContainer.add(createForkJoin6CreationTool());
 		return paletteContainer;
 	}
 
@@ -122,6 +125,57 @@ public class StatemachinesPaletteFactory {
 		entry.setId("createFinal3CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
 				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Final.png")); //$NON-NLS-1$
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createAny4CreationTool() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
+		types.add(StatemachinesElementTypes.Any_3016);
+		types.add(StatemachinesElementTypes.Any_2010);
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.Any4CreationTool_title,
+				Messages.Any4CreationTool_desc, types);
+		entry.setId("createAny4CreationTool"); //$NON-NLS-1$
+		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
+				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/ANY.png")); //$NON-NLS-1$
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createJunction5CreationTool() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
+		types.add(StatemachinesElementTypes.Junction_3015);
+		types.add(StatemachinesElementTypes.Junction_2009);
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.Junction5CreationTool_title,
+				Messages.Junction5CreationTool_desc, types);
+		entry.setId("createJunction5CreationTool"); //$NON-NLS-1$
+		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
+				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Junction.png")); //$NON-NLS-1$
+		entry.setLargeIcon(entry.getSmallIcon());
+		return entry;
+	}
+
+	/**
+	 * @generated
+	 */
+	private ToolEntry createForkJoin6CreationTool() {
+		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
+		types.add(StatemachinesElementTypes.Fork_3017);
+		types.add(StatemachinesElementTypes.Fork_2011);
+		NodeToolEntry entry = new NodeToolEntry(
+				Messages.ForkJoin6CreationTool_title,
+				Messages.ForkJoin6CreationTool_desc, types);
+		entry.setId("createForkJoin6CreationTool"); //$NON-NLS-1$
+		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
+				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Fork.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

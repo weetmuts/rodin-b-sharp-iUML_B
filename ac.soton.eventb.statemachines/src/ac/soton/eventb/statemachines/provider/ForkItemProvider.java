@@ -11,7 +11,7 @@
 package ac.soton.eventb.statemachines.provider;
 
 
-//import ac.soton.eventb.statemachines.Or;
+import ac.soton.eventb.statemachines.Fork;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,12 +30,12 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.Or} object.
+ * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.Fork} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class OrItemProvider
+public class ForkItemProvider
 	extends AbstractNodeItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -59,7 +59,7 @@ public class OrItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OrItemProvider(AdapterFactory adapterFactory) {
+	public ForkItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -79,29 +79,28 @@ public class OrItemProvider
 	}
 
 	/**
-	 * This returns Or.gif.
+	 * This returns Fork.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Or"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Fork"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-//		String label = ((Or)object).getReference();
-//		return label == null || label.length() == 0 ?
-//			getString("_UI_Or_type") :
-//			getString("_UI_Or_type") + " " + label;
-		return getString("_UI_Or_type");
+		String label = ((Fork)object).getReference();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Fork_type") :
+			getString("_UI_Fork_type") + " " + label;
 	}
 
 	/**

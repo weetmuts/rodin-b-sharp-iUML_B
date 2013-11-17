@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2013
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -10,21 +10,21 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
-import ac.soton.eventb.statemachines.Or;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-
 import org.eclipse.emf.ecore.EClass;
+
+import ac.soton.eventb.statemachines.Fork;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Or</b></em>'.
+ * An implementation of the model object '<em><b>Fork</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class OrImpl extends AbstractNodeImpl implements Or {
+public class ForkImpl extends AbstractNodeImpl implements Fork {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -37,7 +37,7 @@ public class OrImpl extends AbstractNodeImpl implements Or {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OrImpl() {
+	protected ForkImpl() {
 		super();
 	}
 
@@ -48,7 +48,27 @@ public class OrImpl extends AbstractNodeImpl implements Or {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StatemachinesPackage.Literals.OR;
+		return StatemachinesPackage.Literals.FORK;
 	}
 
-} //OrImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * A fork is only a true fork if it has multiple outgoing transitions and one incoming transition)
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isFork() {
+		return this.getIncoming().size() == 1 && this.getOutgoing().size() > 1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * A fork is actually a join if it has multiple incoming transitions and one outgoing transitions
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isJoin() {
+		return this.getIncoming().size() > 1 && this.getOutgoing().size() == 1;
+	}
+
+} //ForkImpl

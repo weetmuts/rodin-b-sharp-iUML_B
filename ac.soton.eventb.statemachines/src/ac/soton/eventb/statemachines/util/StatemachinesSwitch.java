@@ -8,6 +8,8 @@
  */
 package ac.soton.eventb.statemachines.util;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import java.util.List;
@@ -141,9 +143,11 @@ public class StatemachinesSwitch<T> {
 			case StatemachinesPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
+				if (result == null) result = caseEventBCommentedLabeledEventGroupElement(transition);
+				if (result == null) result = caseEventBCommentedLabeledElement(transition);
+				if (result == null) result = caseEventBEventGroup(transition);
 				if (result == null) result = caseEventBCommentedElement(transition);
 				if (result == null) result = caseEventBLabeled(transition);
-				if (result == null) result = caseEventBEventGroup(transition);
 				if (result == null) result = caseEventBElement(transition);
 				if (result == null) result = caseEventBCommented(transition);
 				if (result == null) result = caseEventBObject(transition);
@@ -196,12 +200,21 @@ public class StatemachinesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StatemachinesPackage.OR: {
-				Or or = (Or)theEObject;
-				T result = caseOr(or);
-				if (result == null) result = caseAbstractNode(or);
-				if (result == null) result = caseEventBElement(or);
-				if (result == null) result = caseEventBObject(or);
+			case StatemachinesPackage.JUNCTION: {
+				Junction junction = (Junction)theEObject;
+				T result = caseJunction(junction);
+				if (result == null) result = caseAbstractNode(junction);
+				if (result == null) result = caseEventBElement(junction);
+				if (result == null) result = caseEventBObject(junction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatemachinesPackage.FORK: {
+				Fork fork = (Fork)theEObject;
+				T result = caseFork(fork);
+				if (result == null) result = caseAbstractNode(fork);
+				if (result == null) result = caseEventBElement(fork);
+				if (result == null) result = caseEventBObject(fork);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -270,6 +283,21 @@ public class StatemachinesSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BCommented Labeled Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BCommented Labeled Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBCommentedLabeledElement(EventBCommentedLabeledElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Event BEvent Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -281,6 +309,21 @@ public class StatemachinesSwitch<T> {
 	 * @generated
 	 */
 	public T caseEventBEventGroup(EventBEventGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BCommented Labeled Event Group Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BCommented Labeled Event Group Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBCommentedLabeledEventGroupElement(EventBCommentedLabeledEventGroupElement object) {
 		return null;
 	}
 
@@ -345,17 +388,32 @@ public class StatemachinesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Junction</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOr(Or object) {
+	public T caseJunction(Junction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fork</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fork</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFork(Fork object) {
 		return null;
 	}
 

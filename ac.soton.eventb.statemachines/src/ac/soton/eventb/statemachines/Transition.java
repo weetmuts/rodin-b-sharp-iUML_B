@@ -8,6 +8,7 @@
  */
 package ac.soton.eventb.statemachines;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.EventBCommentedElement;
@@ -31,10 +32,10 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
  * </p>
  *
  * @see ac.soton.eventb.statemachines.StatemachinesPackage#getTransition()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToAny\nnotToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='notToAny\nnotToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates\nguards'"
  * @generated
  */
-public interface Transition extends EventBCommentedElement, EventBLabeled, EventBEventGroup {
+public interface Transition extends EventBCommentedLabeledEventGroupElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

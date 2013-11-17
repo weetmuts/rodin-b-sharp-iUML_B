@@ -38,8 +38,38 @@ public class StatemachinesOCLFactory {
 	/**
 	 * @generated
 	 */
+	private final String[] expressionBodies;
+
+	/**
+	 * @generated
+	 */
 	protected StatemachinesOCLFactory() {
 		this.expressions = new StatemachinesAbstractExpression[2];
+		this.expressionBodies = new String[] {
+				"self.source = self.sourceContainer and self.target = self.targetContainer", //$NON-NLS-1$
+				"self.source <> self.sourceContainer or self.target <> self.targetContainer", //$NON-NLS-1$
+		};
+	}
+
+	/**
+	 * @generated
+	 */
+	private static StatemachinesOCLFactory getInstance() {
+		StatemachinesOCLFactory instance = StatemachinesDiagramEditorPlugin
+				.getInstance().getStatemachinesOCLFactory();
+		if (instance == null) {
+			StatemachinesDiagramEditorPlugin.getInstance()
+					.setStatemachinesOCLFactory(
+							instance = new StatemachinesOCLFactory());
+		}
+		return instance;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static String getExpressionBody(int index) {
+		return getInstance().expressionBodies[index];
 	}
 
 	/**
@@ -47,23 +77,13 @@ public class StatemachinesOCLFactory {
 	 */
 	public static StatemachinesAbstractExpression getExpression(int index,
 			EClassifier context, Map<String, EClassifier> environment) {
-		StatemachinesOCLFactory cached = StatemachinesDiagramEditorPlugin
-				.getInstance().getStatemachinesOCLFactory();
-		if (cached == null) {
-			StatemachinesDiagramEditorPlugin.getInstance()
-					.setStatemachinesOCLFactory(
-							cached = new StatemachinesOCLFactory());
-		}
+		StatemachinesOCLFactory cached = getInstance();
 		if (index < 0 || index >= cached.expressions.length) {
 			throw new IllegalArgumentException();
 		}
 		if (cached.expressions[index] == null) {
-			final String[] exprBodies = new String[] {
-					"self.source = self.sourceContainer and self.target = self.targetContainer", //$NON-NLS-1$
-					"self.source <> self.sourceContainer or self.target <> self.targetContainer", //$NON-NLS-1$
-			};
 			cached.expressions[index] = getExpression(
-					exprBodies[index],
+					cached.expressionBodies[index],
 					context,
 					environment == null ? Collections
 							.<String, EClassifier> emptyMap() : environment);

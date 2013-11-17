@@ -26,8 +26,9 @@ import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Any;
 import ac.soton.eventb.statemachines.Final;
+import ac.soton.eventb.statemachines.Fork;
 import ac.soton.eventb.statemachines.Initial;
-import ac.soton.eventb.statemachines.Or;
+import ac.soton.eventb.statemachines.Junction;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachineOwner;
@@ -105,7 +106,14 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass orEClass = null;
+	private EClass junctionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass forkEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -407,8 +415,17 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getOr() {
-		return orEClass;
+	public EClass getJunction() {
+		return junctionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFork() {
+		return forkEClass;
 	}
 
 	/**
@@ -499,7 +516,9 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 
 		anyEClass = createEClass(ANY);
 
-		orEClass = createEClass(OR);
+		junctionEClass = createEClass(JUNCTION);
+
+		forkEClass = createEClass(FORK);
 
 		// Create enums
 		translationKindEEnum = createEEnum(TRANSLATION_KIND);
@@ -543,9 +562,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		statemachineEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedDataElaborationElement());
 		statemachineEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		statemachineEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
-		transitionEClass.getESuperTypes().add(theCorePackage.getEventBCommentedElement());
-		transitionEClass.getESuperTypes().add(theCoreextensionPackage.getEventBLabeled());
-		transitionEClass.getESuperTypes().add(theCoreextensionPackage.getEventBEventGroup());
+		transitionEClass.getESuperTypes().add(theCoreextensionPackage.getEventBCommentedLabeledEventGroupElement());
 		abstractNodeEClass.getESuperTypes().add(theCorePackage.getEventBElement());
 		stateEClass.getESuperTypes().add(this.getAbstractNode());
 		stateEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
@@ -553,7 +570,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initialEClass.getESuperTypes().add(this.getAbstractNode());
 		finalEClass.getESuperTypes().add(this.getAbstractNode());
 		anyEClass.getESuperTypes().add(this.getAbstractNode());
-		orEClass.getESuperTypes().add(this.getAbstractNode());
+		junctionEClass.getESuperTypes().add(this.getAbstractNode());
+		forkEClass.getESuperTypes().add(this.getAbstractNode());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(statemachineEClass, Statemachine.class, "Statemachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -592,7 +610,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 
 		initEClass(anyEClass, Any.class, "Any", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(junctionEClass, Junction.class, "Junction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(forkEClass, theEcorePackage.getEBoolean(), "isFork", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(forkEClass, theEcorePackage.getEBoolean(), "isJoin", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");
@@ -625,7 +649,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		   },
 		   new URI[] {
 			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
-		   });					
+		   });						
 	}
 
 	/**
@@ -646,7 +670,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		  (transitionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "notToAny\nnotToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates"
+			 "constraints", "notToAny\nnotToInitial\nnotFromFinal\nnotFromInitialToFinal\nelaborates\nguards"
 		   });		
 		addAnnotation
 		  (stateEClass, 
@@ -667,10 +691,16 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 			 "constraints", "hasIncoming"
 		   });		
 		addAnnotation
-		  (orEClass, 
+		  (junctionEClass, 
 		   source, 
 		   new String[] {
-			 "constraints", "hasIncoming\nhasOneOutgoing"
+			 "constraints", "hasIncoming\nhasOutgoing"
+		   });		
+		addAnnotation
+		  (forkEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "isForkORJoin\nnodesInParallelStatemachines\n"
 		   });
 	}
 

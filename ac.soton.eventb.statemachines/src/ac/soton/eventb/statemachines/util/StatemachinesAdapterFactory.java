@@ -8,6 +8,8 @@
  */
 package ac.soton.eventb.statemachines.util;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import org.eclipse.emf.common.notify.Adapter;
@@ -131,8 +133,12 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createAnyAdapter();
 			}
 			@Override
-			public Adapter caseOr(Or object) {
-				return createOrAdapter();
+			public Adapter caseJunction(Junction object) {
+				return createJunctionAdapter();
+			}
+			@Override
+			public Adapter caseFork(Fork object) {
+				return createForkAdapter();
 			}
 			@Override
 			public Adapter caseEventBObject(EventBObject object) {
@@ -179,8 +185,16 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 				return createEventBLabeledAdapter();
 			}
 			@Override
+			public Adapter caseEventBCommentedLabeledElement(EventBCommentedLabeledElement object) {
+				return createEventBCommentedLabeledElementAdapter();
+			}
+			@Override
 			public Adapter caseEventBEventGroup(EventBEventGroup object) {
 				return createEventBEventGroupAdapter();
+			}
+			@Override
+			public Adapter caseEventBCommentedLabeledEventGroupElement(EventBCommentedLabeledEventGroupElement object) {
+				return createEventBCommentedLabeledEventGroupElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -259,6 +273,20 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement <em>Event BCommented Labeled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement
+	 * @generated
+	 */
+	public Adapter createEventBCommentedLabeledElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup <em>Event BEvent Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -269,6 +297,20 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEventBEventGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement <em>Event BCommented Labeled Event Group Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement
+	 * @generated
+	 */
+	public Adapter createEventBCommentedLabeledEventGroupElementAdapter() {
 		return null;
 	}
 
@@ -329,16 +371,30 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.Or <em>Or</em>}'.
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.Junction <em>Junction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ac.soton.eventb.statemachines.Or
+	 * @see ac.soton.eventb.statemachines.Junction
 	 * @generated
 	 */
-	public Adapter createOrAdapter() {
+	public Adapter createJunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.Fork <em>Fork</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.statemachines.Fork
+	 * @generated
+	 */
+	public Adapter createForkAdapter() {
 		return null;
 	}
 

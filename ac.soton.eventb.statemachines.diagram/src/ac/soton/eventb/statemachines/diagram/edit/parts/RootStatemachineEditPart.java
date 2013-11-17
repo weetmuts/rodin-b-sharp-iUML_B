@@ -29,9 +29,11 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
+import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
 import ac.soton.eventb.statemachines.diagram.edit.commands.StatemachinesCreateShortcutDecorationsCommand;
 import ac.soton.eventb.statemachines.diagram.edit.policies.RootStatemachineCanonicalEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.RootStatemachineItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 
 /**
  * @generated
@@ -64,6 +66,9 @@ public class RootStatemachineEditPart extends DiagramEditPart {
 				new RootStatemachineItemSemanticEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
 				new RootStatemachineCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CreationEditPolicyWithCustomReparent(
+						StatemachinesVisualIDRegistry.TYPED_INSTANCE));
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
 				new DiagramDragDropEditPolicy() {
 					public Command getDropObjectsCommand(
@@ -103,54 +108,6 @@ public class RootStatemachineEditPart extends DiagramEditPart {
 					}
 				});
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
-	}
-
-	/**
-	 * @generated
-	 */
-	/*package-local*/static class NodeLabelDragPolicy extends
-			NonResizableEditPolicy {
-
-		/**
-		 * @generated
-		 */
-		@SuppressWarnings("rawtypes")
-		protected List createSelectionHandles() {
-			MoveHandle h = new MoveHandle((GraphicalEditPart) getHost());
-			h.setBorder(null);
-			return Collections.singletonList(h);
-		}
-
-		/**
-		 * @generated
-		 */
-		public Command getCommand(Request request) {
-			return null;
-		}
-
-		/**
-		 * @generated
-		 */
-		public boolean understandsRequest(Request request) {
-			return false;
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	/*package-local*/static class LinkLabelDragPolicy extends
-			NonResizableLabelEditPolicy {
-
-		/**
-		 * @generated
-		 */
-		@SuppressWarnings("rawtypes")
-		protected List createSelectionHandles() {
-			MoveHandle mh = new MoveHandle((GraphicalEditPart) getHost());
-			mh.setBorder(null);
-			return Collections.singletonList(mh);
-		}
 	}
 
 }

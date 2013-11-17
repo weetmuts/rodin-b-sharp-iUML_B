@@ -28,11 +28,17 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 
+import ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.AnyEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Fork2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.ForkEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerFinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.JunctionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RootStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
@@ -53,10 +59,13 @@ public class StatemachinesModelingAssistantProvider extends
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
 		if (editPart instanceof RootStatemachineEditPart) {
-			ArrayList<IElementType> types = new ArrayList<IElementType>(3);
+			ArrayList<IElementType> types = new ArrayList<IElementType>(6);
 			types.add(StatemachinesElementTypes.Initial_2006);
 			types.add(StatemachinesElementTypes.Final_2007);
 			types.add(StatemachinesElementTypes.State_2008);
+			types.add(StatemachinesElementTypes.Junction_2009);
+			types.add(StatemachinesElementTypes.Any_2010);
+			types.add(StatemachinesElementTypes.Fork_2011);
 			return types;
 		}
 		if (editPart instanceof StateEditPart) {
@@ -72,10 +81,13 @@ public class StatemachinesModelingAssistantProvider extends
 			return types;
 		}
 		if (editPart instanceof StatemachineStatesCompartmentEditPart) {
-			ArrayList<IElementType> types = new ArrayList<IElementType>(3);
+			ArrayList<IElementType> types = new ArrayList<IElementType>(6);
 			types.add(StatemachinesElementTypes.Initial_3011);
 			types.add(StatemachinesElementTypes.Final_3012);
 			types.add(StatemachinesElementTypes.State_3013);
+			types.add(StatemachinesElementTypes.Junction_3015);
+			types.add(StatemachinesElementTypes.Any_3016);
+			types.add(StatemachinesElementTypes.Fork_3017);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -96,6 +108,15 @@ public class StatemachinesModelingAssistantProvider extends
 		if (sourceEditPart instanceof StateEditPart) {
 			return ((StateEditPart) sourceEditPart).getMARelTypesOnSource();
 		}
+		if (sourceEditPart instanceof JunctionEditPart) {
+			return ((JunctionEditPart) sourceEditPart).getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof AnyEditPart) {
+			return ((AnyEditPart) sourceEditPart).getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof ForkEditPart) {
+			return ((ForkEditPart) sourceEditPart).getMARelTypesOnSource();
+		}
 		if (sourceEditPart instanceof StatemachineEditPart) {
 			return ((StatemachineEditPart) sourceEditPart)
 					.getMARelTypesOnSource();
@@ -111,6 +132,15 @@ public class StatemachinesModelingAssistantProvider extends
 		if (sourceEditPart instanceof InnerStateEditPart) {
 			return ((InnerStateEditPart) sourceEditPart)
 					.getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof Junction2EditPart) {
+			return ((Junction2EditPart) sourceEditPart).getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof Any2EditPart) {
+			return ((Any2EditPart) sourceEditPart).getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof Fork2EditPart) {
+			return ((Fork2EditPart) sourceEditPart).getMARelTypesOnSource();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -130,6 +160,15 @@ public class StatemachinesModelingAssistantProvider extends
 		if (targetEditPart instanceof StateEditPart) {
 			return ((StateEditPart) targetEditPart).getMARelTypesOnTarget();
 		}
+		if (targetEditPart instanceof JunctionEditPart) {
+			return ((JunctionEditPart) targetEditPart).getMARelTypesOnTarget();
+		}
+		if (targetEditPart instanceof AnyEditPart) {
+			return ((AnyEditPart) targetEditPart).getMARelTypesOnTarget();
+		}
+		if (targetEditPart instanceof ForkEditPart) {
+			return ((ForkEditPart) targetEditPart).getMARelTypesOnTarget();
+		}
 		if (targetEditPart instanceof StatemachineEditPart) {
 			return ((StatemachineEditPart) targetEditPart)
 					.getMARelTypesOnTarget();
@@ -145,6 +184,15 @@ public class StatemachinesModelingAssistantProvider extends
 		if (targetEditPart instanceof InnerStateEditPart) {
 			return ((InnerStateEditPart) targetEditPart)
 					.getMARelTypesOnTarget();
+		}
+		if (targetEditPart instanceof Junction2EditPart) {
+			return ((Junction2EditPart) targetEditPart).getMARelTypesOnTarget();
+		}
+		if (targetEditPart instanceof Any2EditPart) {
+			return ((Any2EditPart) targetEditPart).getMARelTypesOnTarget();
+		}
+		if (targetEditPart instanceof Fork2EditPart) {
+			return ((Fork2EditPart) targetEditPart).getMARelTypesOnTarget();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -170,6 +218,18 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((StateEditPart) sourceEditPart)
 					.getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
+		if (sourceEditPart instanceof JunctionEditPart) {
+			return ((JunctionEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof AnyEditPart) {
+			return ((AnyEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof ForkEditPart) {
+			return ((ForkEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
 		if (sourceEditPart instanceof StatemachineEditPart) {
 			return ((StatemachineEditPart) sourceEditPart)
 					.getMARelTypesOnSourceAndTarget(targetEditPart);
@@ -184,6 +244,18 @@ public class StatemachinesModelingAssistantProvider extends
 		}
 		if (sourceEditPart instanceof InnerStateEditPart) {
 			return ((InnerStateEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof Junction2EditPart) {
+			return ((Junction2EditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof Any2EditPart) {
+			return ((Any2EditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof Fork2EditPart) {
+			return ((Fork2EditPart) sourceEditPart)
 					.getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
 		return Collections.EMPTY_LIST;
@@ -208,6 +280,18 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((StateEditPart) targetEditPart)
 					.getMATypesForSource(relationshipType);
 		}
+		if (targetEditPart instanceof JunctionEditPart) {
+			return ((JunctionEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
+		if (targetEditPart instanceof AnyEditPart) {
+			return ((AnyEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
+		if (targetEditPart instanceof ForkEditPart) {
+			return ((ForkEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
 		if (targetEditPart instanceof StatemachineEditPart) {
 			return ((StatemachineEditPart) targetEditPart)
 					.getMATypesForSource(relationshipType);
@@ -222,6 +306,18 @@ public class StatemachinesModelingAssistantProvider extends
 		}
 		if (targetEditPart instanceof InnerStateEditPart) {
 			return ((InnerStateEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
+		if (targetEditPart instanceof Junction2EditPart) {
+			return ((Junction2EditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
+		if (targetEditPart instanceof Any2EditPart) {
+			return ((Any2EditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
+		if (targetEditPart instanceof Fork2EditPart) {
+			return ((Fork2EditPart) targetEditPart)
 					.getMATypesForSource(relationshipType);
 		}
 		return Collections.EMPTY_LIST;
@@ -246,6 +342,18 @@ public class StatemachinesModelingAssistantProvider extends
 			return ((StateEditPart) sourceEditPart)
 					.getMATypesForTarget(relationshipType);
 		}
+		if (sourceEditPart instanceof JunctionEditPart) {
+			return ((JunctionEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof AnyEditPart) {
+			return ((AnyEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof ForkEditPart) {
+			return ((ForkEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
 		if (sourceEditPart instanceof StatemachineEditPart) {
 			return ((StatemachineEditPart) sourceEditPart)
 					.getMATypesForTarget(relationshipType);
@@ -260,6 +368,18 @@ public class StatemachinesModelingAssistantProvider extends
 		}
 		if (sourceEditPart instanceof InnerStateEditPart) {
 			return ((InnerStateEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof Junction2EditPart) {
+			return ((Junction2EditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof Any2EditPart) {
+			return ((Any2EditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof Fork2EditPart) {
+			return ((Fork2EditPart) sourceEditPart)
 					.getMATypesForTarget(relationshipType);
 		}
 		return Collections.EMPTY_LIST;

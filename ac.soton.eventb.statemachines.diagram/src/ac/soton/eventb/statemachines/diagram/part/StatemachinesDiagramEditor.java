@@ -410,9 +410,8 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 		getSite().getPage().removePartListener(this);
 	}
 
-
 	private boolean deactivating = false;
-	
+
 	/**
 	 * Saves editor if it is deactivated and autosave preference is on.
 	 * 
@@ -420,27 +419,28 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	 */
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
-		if (part == this){
+		if (part == this) {
 			//System.out.println("may be deactivating : "+ part.getTitle());
-			deactivating = true;			
+			deactivating = true;
 		}
 	}
 
-	
 	@Override
-	public void partActivated(IWorkbenchPart part) {		
+	public void partActivated(IWorkbenchPart part) {
 		//System.out.println(this.getTitle()+ " sees activating : "+ part.getTitle());
-		if (deactivating == true){
-			if (part!=this && isDirty() && !(part instanceof PropertySheet) 
-				&& StatemachinesDiagramEditorPlugin
-						.getInstance()
-						.getPreferenceStore()
-						.getBoolean(
-								IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE)){
+		if (deactivating == true) {
+			if (part != this
+					&& isDirty()
+					&& !(part instanceof PropertySheet)
+					&& StatemachinesDiagramEditorPlugin
+							.getInstance()
+							.getPreferenceStore()
+							.getBoolean(
+									IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE)) {
 				doSave(new NullProgressMonitor());
 				//System.out.println(this.getTitle()+ " SAVED");
 			}
-			if (part==this){
+			if (part == this) {
 				//System.out.println(this.getTitle()+ " finished de-activating");
 				deactivating = false;
 			}

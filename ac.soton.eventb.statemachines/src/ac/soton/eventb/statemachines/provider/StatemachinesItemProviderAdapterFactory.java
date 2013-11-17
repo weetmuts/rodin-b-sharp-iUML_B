@@ -265,26 +265,49 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.Or} instances.
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.Junction} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OrItemProvider orItemProvider;
+	protected JunctionItemProvider junctionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.Or}.
+	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.Junction}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createOrAdapter() {
-		if (orItemProvider == null) {
-			orItemProvider = new OrItemProvider(this);
+	public Adapter createJunctionAdapter() {
+		if (junctionItemProvider == null) {
+			junctionItemProvider = new JunctionItemProvider(this);
 		}
 
-		return orItemProvider;
+		return junctionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link ac.soton.eventb.statemachines.Fork} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ForkItemProvider forkItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link ac.soton.eventb.statemachines.Fork}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createForkAdapter() {
+		if (forkItemProvider == null) {
+			forkItemProvider = new ForkItemProvider(this);
+		}
+
+		return forkItemProvider;
 	}
 
 	/**
@@ -419,7 +442,8 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 		if (initialItemProvider != null) initialItemProvider.dispose();
 		if (finalItemProvider != null) finalItemProvider.dispose();
 		if (anyItemProvider != null) anyItemProvider.dispose();
-		if (orItemProvider != null) orItemProvider.dispose();
+		if (junctionItemProvider != null) junctionItemProvider.dispose();
+		if (forkItemProvider != null) forkItemProvider.dispose();
 	}
 
 	/**
@@ -632,12 +656,20 @@ public class StatemachinesItemProviderAdapterFactory extends StatemachinesAdapte
 							 StatemachinesFactory.eINSTANCE.createAny()));
 
 				
-				annotation = StatemachinesPackage.Literals.OR.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				annotation = StatemachinesPackage.Literals.JUNCTION.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
 				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
 					newChildDescriptors.add
 						(createChildParameter
 							(CorePackage.Literals.ANNOTATION__CONTENTS,
-							 StatemachinesFactory.eINSTANCE.createOr()));
+							 StatemachinesFactory.eINSTANCE.createJunction()));
+
+				
+				annotation = StatemachinesPackage.Literals.FORK.getEAnnotation("org.eventb.emf.core.extendedMetaClasses");
+				if (annotation == null  || annotation.getReferences().contains(object.eClass()))
+					newChildDescriptors.add
+						(createChildParameter
+							(CorePackage.Literals.ANNOTATION__CONTENTS,
+							 StatemachinesFactory.eINSTANCE.createFork()));
 
 				return null;
 			}

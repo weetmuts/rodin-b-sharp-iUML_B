@@ -37,6 +37,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelations
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.edit.helpers.GeneratedEditHelperBase;
 import org.eventb.emf.core.EventBElement;
 
 import ac.soton.eventb.statemachines.AbstractNode;
@@ -136,17 +137,15 @@ public class StatemachinesBaseItemSemanticEditPolicy extends SemanticEditPolicy 
 		if (editPolicyCommand != null) {
 			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand)
 					.getICommand() : new CommandProxy(editPolicyCommand);
-			request.setParameter(
-					StatemachinesBaseEditHelper.EDIT_POLICY_COMMAND, command);
+			request.setParameter(GeneratedEditHelperBase.EDIT_POLICY_COMMAND,
+					command);
 		}
 		IElementType requestContextElementType = getContextElementType(request);
-		request.setParameter(StatemachinesBaseEditHelper.CONTEXT_ELEMENT_TYPE,
+		request.setParameter(GeneratedEditHelperBase.CONTEXT_ELEMENT_TYPE,
 				requestContextElementType);
 		ICommand command = requestContextElementType.getEditCommand(request);
-		request.setParameter(StatemachinesBaseEditHelper.EDIT_POLICY_COMMAND,
-				null);
-		request.setParameter(StatemachinesBaseEditHelper.CONTEXT_ELEMENT_TYPE,
-				null);
+		request.setParameter(GeneratedEditHelperBase.EDIT_POLICY_COMMAND, null);
+		request.setParameter(GeneratedEditHelperBase.CONTEXT_ELEMENT_TYPE, null);
 		if (command != null) {
 			if (!(command instanceof CompositeTransactionalCommand)) {
 				command = new CompositeTransactionalCommand(getEditingDomain(),

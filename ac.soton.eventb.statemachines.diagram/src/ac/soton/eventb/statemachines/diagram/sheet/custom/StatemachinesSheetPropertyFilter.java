@@ -16,10 +16,15 @@ import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.machine.Invariant;
 
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.Fork;
+import ac.soton.eventb.statemachines.Junction;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.Transition;
+import ac.soton.eventb.statemachines.TranslationKind;
 
 /**
  * Custom property sheet filter collection.
@@ -96,12 +101,66 @@ public class StatemachinesSheetPropertyFilter {
 	}
 	
 	/**
+	 * Filter for elaborates properties of transition element.
+	 * (elaborates property is suppressed for certain kinds of transition)
+	 */
+	public static final class TransitionElaboratesFilter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			EObject unwrapped = unwrap(toTest);
+			if (! (unwrapped instanceof Transition)) return false;
+			AbstractNode target = ((Transition)unwrapped).getTarget();
+			AbstractNode source = ((Transition)unwrapped).getSource();
+			if (target instanceof Junction || 
+				(target instanceof Fork && ((Fork)target).isJoin()) ||
+				(source instanceof Fork && ((Fork)source).isFork())){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	
+	/**
+	 * Filter for guards of transition element.
+	 * (guards are suppressed for certain kinds of transition)
+	 */
+	public static final class TransitionGuardsFilter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			EObject unwrapped = unwrap(toTest);
+			if (! (unwrapped instanceof Transition)) return false;
+			AbstractNode target = ((Transition)unwrapped).getTarget();
+			AbstractNode source = ((Transition)unwrapped).getSource();
+			if (
+				(target instanceof Fork && ((Fork)target).isJoin()) ||
+				(source instanceof Fork && ((Fork)source).isFork())){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	
+	/**
 	 * Filter for properties of statemachine element.
 	 */
 	public static final class StatemachineFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
 			return unwrap(toTest) instanceof Statemachine;
+		}
+	}
+	
+	/**
+	 * Filter for properties of statemachine element.
+	 */
+	public static final class StatemachineElaboratesDataFilter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			EObject unwrapped = unwrap(toTest);
+			return 	unwrapped instanceof EventBDataElaboration && unwrapped instanceof Statemachine && 
+					TranslationKind.SINGLEVAR == ((Statemachine)unwrapped).getTranslation();
 		}
 	}
 	

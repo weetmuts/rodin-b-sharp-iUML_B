@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBNamedCommentedElement;
-import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.statemachines.AbstractNode;

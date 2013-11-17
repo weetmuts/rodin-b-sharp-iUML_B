@@ -19,18 +19,26 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.gmf.tooling.runtime.providers.DiagramElementTypeImages;
+import org.eclipse.gmf.tooling.runtime.providers.DiagramElementTypes;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.AnyEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Fork2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.ForkEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerFinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InvariantEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.JunctionEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.RootStatemachineEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart;
@@ -57,7 +65,9 @@ public class StatemachinesElementTypes {
 	/**
 	 * @generated
 	 */
-	private static ImageRegistry imageRegistry;
+	private static DiagramElementTypeImages elementTypeImages = new DiagramElementTypeImages(
+			StatemachinesDiagramEditorPlugin.getInstance()
+					.getItemProvidersAdapterFactory());
 
 	/**
 	 * @generated
@@ -83,6 +93,21 @@ public class StatemachinesElementTypes {
 	/**
 	 * @generated
 	 */
+	public static final IElementType Junction_2009 = getElementType("ac.soton.eventb.statemachines.diagram.Junction_2009"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType Any_2010 = getElementType("ac.soton.eventb.statemachines.diagram.Any_2010"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType Fork_2011 = getElementType("ac.soton.eventb.statemachines.diagram.Fork_2011"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
 	public static final IElementType Statemachine_3001 = getElementType("ac.soton.eventb.statemachines.diagram.Statemachine_3001"); //$NON-NLS-1$
 	/**
 	 * @generated
@@ -103,6 +128,21 @@ public class StatemachinesElementTypes {
 	/**
 	 * @generated
 	 */
+	public static final IElementType Junction_3015 = getElementType("ac.soton.eventb.statemachines.diagram.Junction_3015"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType Any_3016 = getElementType("ac.soton.eventb.statemachines.diagram.Any_3016"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType Fork_3017 = getElementType("ac.soton.eventb.statemachines.diagram.Fork_3017"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
 	public static final IElementType Transition_4001 = getElementType("ac.soton.eventb.statemachines.diagram.Transition_4001"); //$NON-NLS-1$
 	/**
 	 * @generated
@@ -112,102 +152,29 @@ public class StatemachinesElementTypes {
 	/**
 	 * @generated
 	 */
-	private static ImageRegistry getImageRegistry() {
-		if (imageRegistry == null) {
-			imageRegistry = new ImageRegistry();
-		}
-		return imageRegistry;
-	}
-
-	/**
-	 * @generated
-	 */
-	private static String getImageRegistryKey(ENamedElement element) {
-		return element.getName();
-	}
-
-	/**
-	 * @generated
-	 */
-	private static ImageDescriptor getProvidedImageDescriptor(
-			ENamedElement element) {
-		if (element instanceof EStructuralFeature) {
-			EStructuralFeature feature = ((EStructuralFeature) element);
-			EClass eContainingClass = feature.getEContainingClass();
-			EClassifier eType = feature.getEType();
-			if (eContainingClass != null && !eContainingClass.isAbstract()) {
-				element = eContainingClass;
-			} else if (eType instanceof EClass
-					&& !((EClass) eType).isAbstract()) {
-				element = eType;
-			}
-		}
-		if (element instanceof EClass) {
-			EClass eClass = (EClass) element;
-			if (!eClass.isAbstract()) {
-				return StatemachinesDiagramEditorPlugin.getInstance()
-						.getItemImageDescriptor(
-								eClass.getEPackage().getEFactoryInstance()
-										.create(eClass));
-			}
-		}
-		// TODO : support structural features
-		return null;
-	}
-
-	/**
-	 * @generated
-	 */
 	public static ImageDescriptor getImageDescriptor(ENamedElement element) {
-		String key = getImageRegistryKey(element);
-		ImageDescriptor imageDescriptor = getImageRegistry().getDescriptor(key);
-		if (imageDescriptor == null) {
-			imageDescriptor = getProvidedImageDescriptor(element);
-			if (imageDescriptor == null) {
-				imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
-			}
-			getImageRegistry().put(key, imageDescriptor);
-		}
-		return imageDescriptor;
+		return elementTypeImages.getImageDescriptor(element);
 	}
 
 	/**
 	 * @generated
 	 */
 	public static Image getImage(ENamedElement element) {
-		String key = getImageRegistryKey(element);
-		Image image = getImageRegistry().get(key);
-		if (image == null) {
-			ImageDescriptor imageDescriptor = getProvidedImageDescriptor(element);
-			if (imageDescriptor == null) {
-				imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
-			}
-			getImageRegistry().put(key, imageDescriptor);
-			image = getImageRegistry().get(key);
-		}
-		return image;
+		return elementTypeImages.getImage(element);
 	}
 
 	/**
 	 * @generated
 	 */
 	public static ImageDescriptor getImageDescriptor(IAdaptable hint) {
-		ENamedElement element = getElement(hint);
-		if (element == null) {
-			return null;
-		}
-		return getImageDescriptor(element);
+		return getImageDescriptor(getElement(hint));
 	}
 
 	/**
 	 * @generated
 	 */
 	public static Image getImage(IAdaptable hint) {
-		ENamedElement element = getElement(hint);
-		if (element == null) {
-			return null;
-		}
-		return getImage(element);
+		return getImage(getElement(hint));
 	}
 
 	/**
@@ -230,6 +197,13 @@ public class StatemachinesElementTypes {
 
 			elements.put(State_2008, StatemachinesPackage.eINSTANCE.getState());
 
+			elements.put(Junction_2009,
+					StatemachinesPackage.eINSTANCE.getJunction());
+
+			elements.put(Any_2010, StatemachinesPackage.eINSTANCE.getAny());
+
+			elements.put(Fork_2011, StatemachinesPackage.eINSTANCE.getFork());
+
 			elements.put(Statemachine_3001,
 					StatemachinesPackage.eINSTANCE.getStatemachine());
 
@@ -242,6 +216,13 @@ public class StatemachinesElementTypes {
 
 			elements.put(Invariant_3014,
 					MachinePackage.eINSTANCE.getInvariant());
+
+			elements.put(Junction_3015,
+					StatemachinesPackage.eINSTANCE.getJunction());
+
+			elements.put(Any_3016, StatemachinesPackage.eINSTANCE.getAny());
+
+			elements.put(Fork_3017, StatemachinesPackage.eINSTANCE.getFork());
 
 			elements.put(Transition_4001,
 					StatemachinesPackage.eINSTANCE.getTransition());
@@ -269,11 +250,17 @@ public class StatemachinesElementTypes {
 			KNOWN_ELEMENT_TYPES.add(Initial_2006);
 			KNOWN_ELEMENT_TYPES.add(Final_2007);
 			KNOWN_ELEMENT_TYPES.add(State_2008);
+			KNOWN_ELEMENT_TYPES.add(Junction_2009);
+			KNOWN_ELEMENT_TYPES.add(Any_2010);
+			KNOWN_ELEMENT_TYPES.add(Fork_2011);
 			KNOWN_ELEMENT_TYPES.add(Statemachine_3001);
 			KNOWN_ELEMENT_TYPES.add(Initial_3011);
 			KNOWN_ELEMENT_TYPES.add(Final_3012);
 			KNOWN_ELEMENT_TYPES.add(State_3013);
 			KNOWN_ELEMENT_TYPES.add(Invariant_3014);
+			KNOWN_ELEMENT_TYPES.add(Junction_3015);
+			KNOWN_ELEMENT_TYPES.add(Any_3016);
+			KNOWN_ELEMENT_TYPES.add(Fork_3017);
 			KNOWN_ELEMENT_TYPES.add(Transition_4001);
 			KNOWN_ELEMENT_TYPES.add(Transition_4002);
 		}
@@ -293,6 +280,12 @@ public class StatemachinesElementTypes {
 			return Final_2007;
 		case StateEditPart.VISUAL_ID:
 			return State_2008;
+		case JunctionEditPart.VISUAL_ID:
+			return Junction_2009;
+		case AnyEditPart.VISUAL_ID:
+			return Any_2010;
+		case ForkEditPart.VISUAL_ID:
+			return Fork_2011;
 		case StatemachineEditPart.VISUAL_ID:
 			return Statemachine_3001;
 		case InnerInitialEditPart.VISUAL_ID:
@@ -303,6 +296,12 @@ public class StatemachinesElementTypes {
 			return State_3013;
 		case InvariantEditPart.VISUAL_ID:
 			return Invariant_3014;
+		case Junction2EditPart.VISUAL_ID:
+			return Junction_3015;
+		case Any2EditPart.VISUAL_ID:
+			return Any_3016;
+		case Fork2EditPart.VISUAL_ID:
+			return Fork_3017;
 		case TransitionEditPart.VISUAL_ID:
 			return Transition_4001;
 		case TransitionGhostEditPart.VISUAL_ID:
@@ -310,5 +309,40 @@ public class StatemachinesElementTypes {
 		}
 		return null;
 	}
+
+	/**
+	 * @generated
+	 */
+	public static final DiagramElementTypes TYPED_INSTANCE = new DiagramElementTypes(
+			elementTypeImages) {
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public boolean isKnownElementType(IElementType elementType) {
+			return ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes
+					.isKnownElementType(elementType);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public IElementType getElementTypeForVisualId(int visualID) {
+			return ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes
+					.getElementType(visualID);
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public ENamedElement getDefiningNamedElement(
+				IAdaptable elementTypeAdapter) {
+			return ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes
+					.getElement(elementTypeAdapter);
+		}
+	};
 
 }

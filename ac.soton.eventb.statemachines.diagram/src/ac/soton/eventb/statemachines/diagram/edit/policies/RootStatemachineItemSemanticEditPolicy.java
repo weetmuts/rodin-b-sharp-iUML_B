@@ -14,8 +14,11 @@ import org.eclipse.gmf.runtime.emf.commands.core.commands.DuplicateEObjectsComma
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DuplicateElementsRequest;
 
+import ac.soton.eventb.statemachines.diagram.edit.commands.AnyCreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.FinalCreateCommand;
+import ac.soton.eventb.statemachines.diagram.edit.commands.ForkCreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.InitialCreateCommand;
+import ac.soton.eventb.statemachines.diagram.edit.commands.JunctionCreateCommand;
 import ac.soton.eventb.statemachines.diagram.edit.commands.StateCreateCommand;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
@@ -44,6 +47,15 @@ public class RootStatemachineItemSemanticEditPolicy extends
 		}
 		if (StatemachinesElementTypes.State_2008 == req.getElementType()) {
 			return getGEFWrapper(new StateCreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Junction_2009 == req.getElementType()) {
+			return getGEFWrapper(new JunctionCreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Any_2010 == req.getElementType()) {
+			return getGEFWrapper(new AnyCreateCommand(req));
+		}
+		if (StatemachinesElementTypes.Fork_2011 == req.getElementType()) {
+			return getGEFWrapper(new ForkCreateCommand(req));
 		}
 		return super.getCreateCommand(req);
 	}

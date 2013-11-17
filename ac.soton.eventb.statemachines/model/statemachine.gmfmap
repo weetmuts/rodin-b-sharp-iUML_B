@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmfmap:Mapping xmi:version="2.0"
+<gmfmap:Mapping
+    xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
@@ -97,8 +98,14 @@
             <containmentFeature
                 href="statemachines.ecore#//Statemachine/nodes"/>
           </children>
+          <children
+              compartment="//@nodes.2/@ownedChild/@children.0/@ownedChild/@compartments.0"
+              referencedChild="//@nodes.5/@ownedChild">
+            <containmentFeature
+                href="statemachines.ecore#//Statemachine/nodes"/>
+          </children>
           <compartments
-              children="//@nodes.2/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.4 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.3">
+              children="//@nodes.2/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.4 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.3 //@nodes.2/@ownedChild/@children.0/@ownedChild/@children.5">
             <compartment
                 href="statemachine.gmfgraph#StatemachineStatesCompartment"/>
           </compartments>
@@ -147,12 +154,12 @@
         href="statemachines.ecore#//Statemachine/nodes"/>
     <ownedChild>
       <domainMetaElement
-          href="statemachines.ecore#//Or"/>
+          href="statemachines.ecore#//Junction"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
-          href="statemachine.gmfgraph#OR"/>
+          href="statemachine.gmfgraph#Junction"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -163,9 +170,22 @@
           href="statemachines.ecore#//Any"/>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="statemachine.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="statemachine.gmfgraph#ANY"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="statemachines.ecore#//Statemachine/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="statemachines.ecore#//Fork"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="statemachine.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="statemachine.gmfgraph#Fork"/>
     </ownedChild>
   </nodes>
   <links>

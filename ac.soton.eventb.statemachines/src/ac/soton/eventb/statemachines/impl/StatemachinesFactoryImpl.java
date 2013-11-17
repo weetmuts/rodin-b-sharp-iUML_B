@@ -47,7 +47,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 */
 	public static StatemachinesFactory init() {
 		try {
-			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines/0713"); 
+			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines/1013"); 
 			if (theStatemachinesFactory != null) {
 				return theStatemachinesFactory;
 			}
@@ -82,7 +82,8 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 			case StatemachinesPackage.INITIAL: return createInitial();
 			case StatemachinesPackage.FINAL: return createFinal();
 			case StatemachinesPackage.ANY: return createAny();
-			case StatemachinesPackage.OR: return createOr();
+			case StatemachinesPackage.JUNCTION: return createJunction();
+			case StatemachinesPackage.FORK: return createFork();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -183,9 +184,19 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Or createOr() {
-		OrImpl or = new OrImpl();
-		return or;
+	public Junction createJunction() {
+		JunctionImpl junction = new JunctionImpl();
+		return junction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Fork createFork() {
+		ForkImpl fork = new ForkImpl();
+		return fork;
 	}
 
 	/**

@@ -226,6 +226,15 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof StateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4001);
 		}
+		if (targetEditPart instanceof JunctionEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
+		if (targetEditPart instanceof AnyEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
+		if (targetEditPart instanceof ForkEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
 		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4001);
 		}
@@ -235,6 +244,15 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof InnerStateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4001);
 		}
+		if (targetEditPart instanceof Junction2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
+		if (targetEditPart instanceof Any2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
+		if (targetEditPart instanceof Fork2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4001);
+		}
 		if (targetEditPart instanceof InitialEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
@@ -242,6 +260,15 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
 		if (targetEditPart instanceof StateEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
+		if (targetEditPart instanceof JunctionEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
+		if (targetEditPart instanceof AnyEditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
+		if (targetEditPart instanceof ForkEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
 		if (targetEditPart instanceof StatemachineEditPart) {
@@ -256,6 +283,15 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 		if (targetEditPart instanceof InnerStateEditPart) {
 			types.add(StatemachinesElementTypes.Transition_4002);
 		}
+		if (targetEditPart instanceof Junction2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
+		if (targetEditPart instanceof Any2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
+		if (targetEditPart instanceof Fork2EditPart) {
+			types.add(StatemachinesElementTypes.Transition_4002);
+		}
 		return types;
 	}
 
@@ -268,17 +304,29 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 			types.add(StatemachinesElementTypes.Initial_2006);
 			types.add(StatemachinesElementTypes.Final_2007);
 			types.add(StatemachinesElementTypes.State_2008);
+			types.add(StatemachinesElementTypes.Junction_2009);
+			types.add(StatemachinesElementTypes.Any_2010);
+			types.add(StatemachinesElementTypes.Fork_2011);
 			types.add(StatemachinesElementTypes.Initial_3011);
 			types.add(StatemachinesElementTypes.Final_3012);
 			types.add(StatemachinesElementTypes.State_3013);
+			types.add(StatemachinesElementTypes.Junction_3015);
+			types.add(StatemachinesElementTypes.Any_3016);
+			types.add(StatemachinesElementTypes.Fork_3017);
 		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
 			types.add(StatemachinesElementTypes.Initial_2006);
 			types.add(StatemachinesElementTypes.Final_2007);
 			types.add(StatemachinesElementTypes.State_2008);
+			types.add(StatemachinesElementTypes.Junction_2009);
+			types.add(StatemachinesElementTypes.Any_2010);
+			types.add(StatemachinesElementTypes.Fork_2011);
 			types.add(StatemachinesElementTypes.Statemachine_3001);
 			types.add(StatemachinesElementTypes.Initial_3011);
 			types.add(StatemachinesElementTypes.Final_3012);
 			types.add(StatemachinesElementTypes.State_3013);
+			types.add(StatemachinesElementTypes.Junction_3015);
+			types.add(StatemachinesElementTypes.Any_3016);
+			types.add(StatemachinesElementTypes.Fork_3017);
 		}
 		return types;
 	}
@@ -302,17 +350,29 @@ public class InnerInitialEditPart extends ShapeNodeEditPart {
 			types.add(StatemachinesElementTypes.Initial_2006);
 			types.add(StatemachinesElementTypes.Final_2007);
 			types.add(StatemachinesElementTypes.State_2008);
+			types.add(StatemachinesElementTypes.Junction_2009);
+			types.add(StatemachinesElementTypes.Any_2010);
+			types.add(StatemachinesElementTypes.Fork_2011);
 			types.add(StatemachinesElementTypes.Initial_3011);
 			types.add(StatemachinesElementTypes.Final_3012);
 			types.add(StatemachinesElementTypes.State_3013);
+			types.add(StatemachinesElementTypes.Junction_3015);
+			types.add(StatemachinesElementTypes.Any_3016);
+			types.add(StatemachinesElementTypes.Fork_3017);
 		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
 			types.add(StatemachinesElementTypes.Initial_2006);
 			types.add(StatemachinesElementTypes.Final_2007);
 			types.add(StatemachinesElementTypes.State_2008);
+			types.add(StatemachinesElementTypes.Junction_2009);
+			types.add(StatemachinesElementTypes.Any_2010);
+			types.add(StatemachinesElementTypes.Fork_2011);
 			types.add(StatemachinesElementTypes.Statemachine_3001);
 			types.add(StatemachinesElementTypes.Initial_3011);
 			types.add(StatemachinesElementTypes.Final_3012);
 			types.add(StatemachinesElementTypes.State_3013);
+			types.add(StatemachinesElementTypes.Junction_3015);
+			types.add(StatemachinesElementTypes.Any_3016);
+			types.add(StatemachinesElementTypes.Fork_3017);
 		}
 		return types;
 	}

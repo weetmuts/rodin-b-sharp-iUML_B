@@ -295,6 +295,36 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String Any4CreationTool_title;
+
+	/**
+	 * @generated
+	 */
+	public static String Any4CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
+	public static String Junction5CreationTool_title;
+
+	/**
+	 * @generated
+	 */
+	public static String Junction5CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
+	public static String ForkJoin6CreationTool_title;
+
+	/**
+	 * @generated
+	 */
+	public static String ForkJoin6CreationTool_desc;
+
+	/**
+	 * @generated
+	 */
 	public static String Statemachine1CreationTool_title;
 
 	/**
@@ -361,6 +391,36 @@ public class Messages extends NLS {
 	 * @generated
 	 */
 	public static String NavigatorGroupName_State_3013_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Junction_3015_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Junction_3015_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Any_3016_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Any_3016_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Fork_3017_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Fork_3017_outgoinglinks;
 
 	/**
 	 * @generated
@@ -470,22 +530,37 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String NavigatorGroupName_Junction_2009_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Junction_2009_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Any_2010_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Any_2010_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Fork_2011_incominglinks;
+
+	/**
+	 * @generated
+	 */
+	public static String NavigatorGroupName_Fork_2011_outgoinglinks;
+
+	/**
+	 * @generated
+	 */
 	public static String NavigatorActionProvider_OpenDiagramActionName;
-
-	/**
-	 * @generated
-	 */
-	public static String AbstractParser_UnexpectedValueType;
-
-	/**
-	 * @generated
-	 */
-	public static String AbstractParser_WrongStringConversion;
-
-	/**
-	 * @generated
-	 */
-	public static String AbstractParser_UnknownLiteral;
 
 	/**
 	 * @generated

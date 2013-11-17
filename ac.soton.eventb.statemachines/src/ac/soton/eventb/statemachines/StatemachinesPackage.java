@@ -59,7 +59,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://soton.ac.uk/models/eventb/statemachines/0713";
+	String eNS_URI = "http://soton.ac.uk/models/eventb/statemachines/1013";
 
 	/**
 	 * The package namespace name.
@@ -334,7 +334,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__ANNOTATIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT__ANNOTATIONS;
+	int TRANSITION__ANNOTATIONS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -343,7 +343,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__EXTENSIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT__EXTENSIONS;
+	int TRANSITION__EXTENSIONS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -352,7 +352,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__ATTRIBUTES = CorePackage.EVENT_BCOMMENTED_ELEMENT__ATTRIBUTES;
+	int TRANSITION__ATTRIBUTES = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -361,7 +361,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__REFERENCE = CorePackage.EVENT_BCOMMENTED_ELEMENT__REFERENCE;
+	int TRANSITION__REFERENCE = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -370,7 +370,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__GENERATED;
+	int TRANSITION__GENERATED = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -379,7 +379,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__LOCAL_GENERATED = CorePackage.EVENT_BCOMMENTED_ELEMENT__LOCAL_GENERATED;
+	int TRANSITION__LOCAL_GENERATED = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -388,7 +388,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__COMMENT = CorePackage.EVENT_BCOMMENTED_ELEMENT__COMMENT;
+	int TRANSITION__COMMENT = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -397,7 +397,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__LABEL = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 0;
+	int TRANSITION__LABEL = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Elaborates</b></em>' reference list.
@@ -406,7 +406,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__ELABORATES = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 1;
+	int TRANSITION__ELABORATES = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__ELABORATES;
 
 	/**
 	 * The feature id for the '<em><b>Extended</b></em>' attribute.
@@ -415,7 +415,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__EXTENDED = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 2;
+	int TRANSITION__EXTENDED = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__EXTENDED;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -424,7 +424,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__PARAMETERS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 3;
+	int TRANSITION__PARAMETERS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Guards</b></em>' containment reference list.
@@ -433,7 +433,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__GUARDS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 4;
+	int TRANSITION__GUARDS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__GUARDS;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -442,7 +442,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__ACTIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 5;
+	int TRANSITION__ACTIONS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Witnesses</b></em>' containment reference list.
@@ -451,7 +451,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__WITNESSES = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 6;
+	int TRANSITION__WITNESSES = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__WITNESSES;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -460,7 +460,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 7;
+	int TRANSITION__TARGET = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -469,7 +469,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 8;
+	int TRANSITION__SOURCE = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source Container</b></em>' reference.
@@ -478,7 +478,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 9;
+	int TRANSITION__SOURCE_CONTAINER = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Target Container</b></em>' reference.
@@ -487,7 +487,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET_CONTAINER = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 10;
+	int TRANSITION__TARGET_CONTAINER = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' attribute.
@@ -496,7 +496,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__OPERATIONS = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 11;
+	int TRANSITION__OPERATIONS = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -505,7 +505,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = CorePackage.EVENT_BCOMMENTED_ELEMENT_FEATURE_COUNT + 12;
+	int TRANSITION_FEATURE_COUNT = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -968,14 +968,14 @@ public interface StatemachinesPackage extends EPackage {
 	int ANY_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.OrImpl <em>Or</em>}' class.
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.JunctionImpl <em>Junction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.OrImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getOr()
+	 * @see ac.soton.eventb.statemachines.impl.JunctionImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getJunction()
 	 * @generated
 	 */
-	int OR = 8;
+	int JUNCTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -984,7 +984,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__ANNOTATIONS = ABSTRACT_NODE__ANNOTATIONS;
+	int JUNCTION__ANNOTATIONS = ABSTRACT_NODE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -993,7 +993,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__EXTENSIONS = ABSTRACT_NODE__EXTENSIONS;
+	int JUNCTION__EXTENSIONS = ABSTRACT_NODE__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -1002,7 +1002,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__ATTRIBUTES = ABSTRACT_NODE__ATTRIBUTES;
+	int JUNCTION__ATTRIBUTES = ABSTRACT_NODE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -1011,7 +1011,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__REFERENCE = ABSTRACT_NODE__REFERENCE;
+	int JUNCTION__REFERENCE = ABSTRACT_NODE__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -1020,7 +1020,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__GENERATED = ABSTRACT_NODE__GENERATED;
+	int JUNCTION__GENERATED = ABSTRACT_NODE__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -1029,7 +1029,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+	int JUNCTION__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -1038,7 +1038,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__INCOMING = ABSTRACT_NODE__INCOMING;
+	int JUNCTION__INCOMING = ABSTRACT_NODE__INCOMING;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -1047,16 +1047,107 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR__OUTGOING = ABSTRACT_NODE__OUTGOING;
+	int JUNCTION__OUTGOING = ABSTRACT_NODE__OUTGOING;
 
 	/**
-	 * The number of structural features of the '<em>Or</em>' class.
+	 * The number of structural features of the '<em>Junction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OR_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 0;
+	int JUNCTION_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.ForkImpl <em>Fork</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.ForkImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getFork()
+	 * @generated
+	 */
+	int FORK = 9;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__ANNOTATIONS = ABSTRACT_NODE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__EXTENSIONS = ABSTRACT_NODE__EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__ATTRIBUTES = ABSTRACT_NODE__ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__REFERENCE = ABSTRACT_NODE__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__GENERATED = ABSTRACT_NODE__GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__INCOMING = ABSTRACT_NODE__INCOMING;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__OUTGOING = ABSTRACT_NODE__OUTGOING;
+
+	/**
+	 * The number of structural features of the '<em>Fork</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}' enum.
@@ -1066,7 +1157,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getTranslationKind()
 	 * @generated
 	 */
-	int TRANSLATION_KIND = 9;
+	int TRANSLATION_KIND = 10;
 
 
 	/**
@@ -1316,14 +1407,24 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getAny();
 
 	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Or <em>Or</em>}'.
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Junction <em>Junction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Or</em>'.
-	 * @see ac.soton.eventb.statemachines.Or
+	 * @return the meta object for class '<em>Junction</em>'.
+	 * @see ac.soton.eventb.statemachines.Junction
 	 * @generated
 	 */
-	EClass getOr();
+	EClass getJunction();
+
+	/**
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Fork <em>Fork</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fork</em>'.
+	 * @see ac.soton.eventb.statemachines.Fork
+	 * @generated
+	 */
+	EClass getFork();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.StatemachineOwner <em>Statemachine Owner</em>}'.
@@ -1577,14 +1678,24 @@ public interface StatemachinesPackage extends EPackage {
 		EClass ANY = eINSTANCE.getAny();
 
 		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.OrImpl <em>Or</em>}' class.
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.JunctionImpl <em>Junction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.statemachines.impl.OrImpl
-		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getOr()
+		 * @see ac.soton.eventb.statemachines.impl.JunctionImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getJunction()
 		 * @generated
 		 */
-		EClass OR = eINSTANCE.getOr();
+		EClass JUNCTION = eINSTANCE.getJunction();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.ForkImpl <em>Fork</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.statemachines.impl.ForkImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getFork()
+		 * @generated
+		 */
+		EClass FORK = eINSTANCE.getFork();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl <em>Statemachine Owner</em>}' class.

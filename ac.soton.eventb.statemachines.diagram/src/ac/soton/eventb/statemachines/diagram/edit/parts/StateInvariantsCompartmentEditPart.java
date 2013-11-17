@@ -19,9 +19,11 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.notation.View;
 
+import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateInvariantsCompartmentCanonicalEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateInvariantsCompartmentItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.Messages;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 
 /**
  * @generated
@@ -74,7 +76,8 @@ public class StateInvariantsCompartmentEditPart extends ListCompartmentEditPart 
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 				new StateInvariantsCompartmentItemSemanticEditPolicy());
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicy());
+				new CreationEditPolicyWithCustomReparent(
+						StatemachinesVisualIDRegistry.TYPED_INSTANCE));
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
 				new DragDropEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,

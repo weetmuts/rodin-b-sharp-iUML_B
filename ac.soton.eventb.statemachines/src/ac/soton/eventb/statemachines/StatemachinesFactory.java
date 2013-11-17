@@ -89,13 +89,22 @@ public interface StatemachinesFactory extends EFactory {
 	Any createAny();
 
 	/**
-	 * Returns a new object of class '<em>Or</em>'.
+	 * Returns a new object of class '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Or</em>'.
+	 * @return a new object of class '<em>Junction</em>'.
 	 * @generated
 	 */
-	Or createOr();
+	Junction createJunction();
+
+	/**
+	 * Returns a new object of class '<em>Fork</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Fork</em>'.
+	 * @generated
+	 */
+	Fork createFork();
 
 	/**
 	 * Returns the package supported by this factory.

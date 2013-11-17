@@ -28,9 +28,12 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Fork2EditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerFinalEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart;
 import ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateEditPart;
+import ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramUpdater;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesNodeDescriptor;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -77,9 +80,16 @@ public class StatemachineStatesCompartmentCanonicalEditPolicy extends
 	 */
 	private boolean isMyDiagramElement(View view) {
 		int visualID = StatemachinesVisualIDRegistry.getVisualID(view);
-		return visualID == InnerInitialEditPart.VISUAL_ID
-				|| visualID == InnerFinalEditPart.VISUAL_ID
-				|| visualID == InnerStateEditPart.VISUAL_ID;
+		switch (visualID) {
+		case InnerInitialEditPart.VISUAL_ID:
+		case InnerFinalEditPart.VISUAL_ID:
+		case InnerStateEditPart.VISUAL_ID:
+		case Junction2EditPart.VISUAL_ID:
+		case Any2EditPart.VISUAL_ID:
+		case Fork2EditPart.VISUAL_ID:
+			return true;
+		}
+		return false;
 	}
 
 	/**
