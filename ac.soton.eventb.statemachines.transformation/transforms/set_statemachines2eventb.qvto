@@ -6,7 +6,11 @@ import libraries.set_statemachines2init;
 import libraries.set_statemachines2events;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core');
-modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
+
+/*
+* This transformation is for the SINGLEVAR statemachine translation
+*/
 
 transformation statemachines2eventb(inout inoutMachine:eventb, inout inoutContext:eventb, in inStatemachine:statemachines);
 

@@ -1,7 +1,7 @@
 import util;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core');
-modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 library cleanup;
 
@@ -23,6 +23,7 @@ mapping inout eventb::machine::Machine::machine2nonGeneratedMachine(in generator
  */
 mapping inout eventb::machine::Event::event2nonGeneratedEvent(in generatorID : String) {
 	parameters := parameters->reject(isGenerated(generatorID));
+	witnesses := witnesses->reject(isGenerated(generatorID));
 	guards := guards->reject(isGenerated(generatorID));
 	actions := actions->reject(isGenerated(generatorID));
 }

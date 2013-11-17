@@ -5,7 +5,12 @@ import libraries.statemachines2init;
 import libraries.statemachines2events;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core');
-modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
+
+
+/*
+* This transformation is for the MULTIVAR statemachine translation
+*/
 
 transformation statemachines2eventb(inout inoutModel:eventb, in inStatemachine:statemachines);
 
