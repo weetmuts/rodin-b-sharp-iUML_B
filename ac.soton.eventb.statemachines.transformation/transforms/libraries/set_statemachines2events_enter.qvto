@@ -24,21 +24,6 @@ mapping statemachines::State::targetState2enterActions(in event : eventb::machin
 	}
 }
 
-/*
- * Transforms target fork to enter actions.
- * Generates enter actions for all the superstates of target state, 
- * which are not common to source state's superstates,
- * as well as enter actions for target state's statemachines,
- * excluding parallel statemachines that don't contain source state 
- * if transition is local and is directed from nested state towards its parent state.
- *
-mapping statemachines::Fork::targetFork2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
-	init {
-		result := (self.getSuperstates()-(transition.source.getSuperstates()))[statemachines::State].map superState2enterActions(event, generatorID)->
-			union(self.statemachines->reject(transition.isLocalToTarget() and not contains(transition.source)).map statemachine2enterActions(event, generatorID)->flatten()->asBag());
-	}
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Superstate actions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
