@@ -94,3 +94,13 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
 		attributes += getGeneratedAttr(generatorID);
 	}endif
 }
+
+/////////////Utility rules///////////////
+
+/*
+ * Returns true if guard ???.
+ */
+query eventb::machine::Guard::isFromSameSM(in state : statemachines::AbstractNode) : Boolean {
+	return self.invresolveone(statemachines::State).eContainer() = state.eContainer();
+}
+
