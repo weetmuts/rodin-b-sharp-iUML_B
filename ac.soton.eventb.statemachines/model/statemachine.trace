@@ -59,7 +59,7 @@
   </childNodeTraces>
   <childNodeTraces
       visualID="3014"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://emf.eventb.org/models/core/machine' and _eClass_.name = 'Invariant') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/statemachines/1013' and _eClass_.name = 'State') and _containmentMF_.name = 'invariants')"/>
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://emf.eventb.org/models/core/machine/2014' and _eClass_.name = 'Invariant') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/statemachines/1013' and _eClass_.name = 'State') and _containmentMF_.name = 'invariants')"/>
   <childNodeTraces
       visualID="3015"
       queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/statemachines/1013' and _eClass_.name = 'Junction') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://soton.ac.uk/models/eventb/statemachines/1013' and _eClass_.name = 'Statemachine') and _containmentMF_.name = 'nodes')"/>

@@ -196,7 +196,7 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	 */
 	public void setName(String newName) {
 		String oldName = getName();
-		doSetName(newName);
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldName, newName));
 	}
@@ -277,10 +277,12 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	 */
 	public void setRefines(Statemachine newRefines) {
 		Statemachine oldRefines = refines;
+		String oldName = getName();
 		refines = newRefines;
+		String newName = getName();
 		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__REFINES, oldRefines, refines));
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldRefines, refines));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldName, newName));
 		}
 	}
 

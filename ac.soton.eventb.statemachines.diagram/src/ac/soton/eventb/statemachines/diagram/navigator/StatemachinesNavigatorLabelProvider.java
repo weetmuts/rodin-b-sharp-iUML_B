@@ -158,7 +158,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?State", StatemachinesElementTypes.State_3013); //$NON-NLS-1$
 		case InvariantEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://emf.eventb.org/models/core/machine?Invariant", StatemachinesElementTypes.Invariant_3014); //$NON-NLS-1$
+					"Navigator?Node?http://emf.eventb.org/models/core/machine/2014?Invariant", StatemachinesElementTypes.Invariant_3014); //$NON-NLS-1$
 		case Junction2EditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Junction", StatemachinesElementTypes.Junction_3015); //$NON-NLS-1$

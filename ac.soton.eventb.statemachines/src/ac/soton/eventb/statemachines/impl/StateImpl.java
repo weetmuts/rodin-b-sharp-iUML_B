@@ -64,6 +64,16 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	protected static final String NAME_EDEFAULT = "";
 
 	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getStatemachines() <em>Statemachines</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,10 +188,12 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 */
 	public void setRefines(State newRefines) {
 		State oldRefines = refines;
+		String oldName = getName();
 		refines = newRefines;
+		String newName = getName();
 		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__REFINES, oldRefines, refines));
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldRefines, refines));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME,  oldName, newName));
 		}
 	}
 
@@ -224,20 +236,15 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 * @generated
 	 */
 	public String doGetName() {
-		assert (this instanceof EventBElement);
-		String reference = ((EventBElement)this).getReferenceWithoutResolving();
-		return reference.length() > this.eStaticClass().getInstanceClassName().length() ?
-			reference.substring(this.eStaticClass().getInstanceClassName().length()+1)
-			: "";
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void doSetName(String newName) {
-		((EventBElement)this).setReference(this.eStaticClass().getInstanceClassName()+"."+newName);
+		if (this.eIsProxy()){
+			String fragment = ((InternalEObject)this).eProxyURI().fragment();
+			int ind = fragment.lastIndexOf("::");
+			if (ind>-1) fragment = fragment.substring(ind+2);
+			fragment = fragment.substring(fragment.lastIndexOf('.')+1);
+			return fragment;
+		}else{
+			return name;
+		}
 	}
 
 	/**
@@ -275,9 +282,9 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 */
 	public void setName(String newName) {
 		String oldName = getName();
-		doSetName(newName);
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, newName));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, name));
 	}
 
 	/**
@@ -369,7 +376,7 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StatemachinesPackage.STATE__NAME:
-				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StatemachinesPackage.STATE__STATEMACHINES:
 				return statemachines != null && !statemachines.isEmpty();
 			case StatemachinesPackage.STATE__REFINES:
@@ -436,7 +443,9 @@ public class StateImpl extends AbstractNodeImpl implements State {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (active: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", active: ");
 		result.append(active);
 		result.append(')');
 		return result.toString();

@@ -35,7 +35,7 @@
 
    <extension point="org.eclipse.emf.edit.childCreationExtenders">
       <extender
-            uri="http://emf.eventb.org/models/core/machine"
+            uri="http://emf.eventb.org/models/core/machine/2014"
             class="ac.soton.eventb.statemachines.provider.StatemachinesItemProviderAdapterFactory$CoreChildCreationExtender"/>
    </extension>
 </plugin>

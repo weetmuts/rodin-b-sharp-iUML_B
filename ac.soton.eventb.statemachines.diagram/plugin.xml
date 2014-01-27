@@ -630,7 +630,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3013"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Invariant_3014"
                name="%metatype.name.Invariant_3014"
