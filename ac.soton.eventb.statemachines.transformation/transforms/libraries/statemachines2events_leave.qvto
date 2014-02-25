@@ -1,17 +1,15 @@
 import util;
 
-modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 library statemachines2events_leave;
 
 /*
- * Transforms statemachine to event with leave actions.
- * Generates leave actions on transition source states and substates,
- * as well as required superstates.
+ * Transforms statemachine hierarchy by adding transition leave actions to all elaborated events.
  * Separated from event transformation rules (which generate guards and enter actions) 
  * to be able to track enter actions already generated
- * and avoid generation of leave action if enter action on the same state exists.
+ * and avoid generation of leave action if enter action on the same statemachine exists.
  */
 mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : String) {
 	self.transitions.map transition2eventsLeave(generatorID);
@@ -23,8 +21,9 @@ mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : S
  * Generates leave actions for events elaborated by transition.
  * Skips initialisation event.
  */
-mapping statemachines::Transition::transition2eventsLeave(in generatorID : String) 
-when {not self.isSelfLoop()}{
+mapping statemachines::Transition::transition2eventsLeave(in generatorID : String)
+when {not self.isSelfLoop()}
+{
 	self.elaborates[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
 }
 
@@ -102,6 +101,17 @@ mapping statemachines::State::superState2leaveActions(in event : eventb::machine
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
+ * Transforms statemachine to leave actions.
+ * Generates leave actions for all states of statemachine.
+ */
+mapping statemachines::Statemachine::statemachine2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := self.nodes[statemachines::State].map state2leaveActions(event, generatorID)->asBag();
+	}
+}
+
+
+/*
  * Transforms state to leave actions.
  * Generates leave action for state
  * as well as leave actions for its statemachines.
@@ -110,16 +120,6 @@ mapping statemachines::State::state2leaveActions(in event : eventb::machine::Eve
 	init {
 		result := self.map state2leaveAction(event, generatorID)->asBag()->
 			union(self.statemachines.map statemachine2leaveActions(event, generatorID)->flatten()->asBag());
-	}
-}
-
-/*
- * Transforms statemachine to leave actions.
- * Generates leave actions for all states of statemachine.
- */
-mapping statemachines::Statemachine::statemachine2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
-	init {
-		result := self.nodes[statemachines::State].map state2leaveActions(event, generatorID)->asBag();
 	}
 }
 
