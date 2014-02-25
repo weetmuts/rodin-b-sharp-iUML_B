@@ -184,7 +184,7 @@ public class RefinedEnumerationStatemachineRefiner implements IRefinementPartici
 					refinedEnumSMmap.put(key, value);
 				}
 			}
-		} catch (RodinDBException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Collections.emptyMap();
