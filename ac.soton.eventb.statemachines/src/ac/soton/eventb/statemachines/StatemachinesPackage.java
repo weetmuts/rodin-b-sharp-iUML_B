@@ -162,6 +162,15 @@ public interface StatemachinesPackage extends EPackage {
 	int STATEMACHINE__LOCAL_GENERATED = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__INTERNAL_ID = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -382,6 +391,15 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION__LOCAL_GENERATED = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__INTERNAL_ID = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -562,6 +580,15 @@ public interface StatemachinesPackage extends EPackage {
 	int ABSTRACT_NODE__LOCAL_GENERATED = CorePackage.EVENT_BELEMENT__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__INTERNAL_ID = CorePackage.EVENT_BELEMENT__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -641,6 +668,15 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATE__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -769,6 +805,15 @@ public interface StatemachinesPackage extends EPackage {
 	int INITIAL__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -848,6 +893,15 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -941,6 +995,15 @@ public interface StatemachinesPackage extends EPackage {
 	int ANY__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1032,6 +1095,15 @@ public interface StatemachinesPackage extends EPackage {
 	int JUNCTION__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
 
 	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JUNCTION__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1121,6 +1193,15 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORK__LOCAL_GENERATED = ABSTRACT_NODE__LOCAL_GENERATED;
+
+	/**
+	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.

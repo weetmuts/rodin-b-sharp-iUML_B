@@ -551,7 +551,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		CoreextensionPackage theCoreextensionPackage = (CoreextensionPackage)EPackage.Registry.INSTANCE.getEPackage(CoreextensionPackage.eNS_URI);
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 		DiagramsPackage theDiagramsPackage = (DiagramsPackage)EPackage.Registry.INSTANCE.getEPackage(DiagramsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		MachinePackage theMachinePackage = (MachinePackage)EPackage.Registry.INSTANCE.getEPackage(MachinePackage.eNS_URI);
 
 		// Create type parameters
@@ -590,7 +589,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getTransition_Source(), this.getAbstractNode(), this.getAbstractNode_Outgoing(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_SourceContainer(), theCorePackage.getEventBElement(), null, "sourceContainer", null, 0, 1, Transition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_TargetContainer(), theCorePackage.getEventBElement(), null, "targetContainer", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(theEcorePackage.getEEList());
+		EGenericType g1 = createEGenericType(ecorePackage.getEEList());
 		EGenericType g2 = createEGenericType();
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getTransition_Operations(), g1, "operations", null, 0, 1, Transition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -602,7 +601,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getState_Refines(), this.getState(), null, "refines", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_Invariants(), theMachinePackage.getInvariant(), null, "invariants", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Active(), theEcorePackage.getEBoolean(), "active", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Active(), ecorePackage.getEBoolean(), "active", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(initialEClass, Initial.class, "Initial", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -614,9 +613,9 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 
 		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(forkEClass, theEcorePackage.getEBoolean(), "isFork", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(forkEClass, ecorePackage.getEBoolean(), "isFork", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(forkEClass, theEcorePackage.getEBoolean(), "isJoin", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(forkEClass, ecorePackage.getEBoolean(), "isJoin", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(translationKindEEnum, TranslationKind.class, "TranslationKind");

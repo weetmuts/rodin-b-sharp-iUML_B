@@ -277,12 +277,16 @@ public class StateImpl extends AbstractNodeImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Set the name attribute.
+	 * Since : and . are used as delimiters in references which are formed from name, 
+	 * these characters are not permitted and are changed automatically
+	 * to ; and , respectively.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
-		String oldName = getName();
-		name = newName;
+		String oldName = name;
+		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, name));
 	}
