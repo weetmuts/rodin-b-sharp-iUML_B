@@ -1,6 +1,6 @@
 import util;
 
-modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 library statemachines2events_enter;
@@ -87,13 +87,26 @@ mapping statemachines::Statemachine::statemachine2enterActions(in event : eventb
 mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
 	when { not event.containsAction(ENTER_ + self.name) }
 {
+	var root : statemachines::Statemachine := self.getRootStatemachine();
 	name := ENTER_ + self.name;
-	action :=
-		if self.getRootStatemachine().instances = null then
-			self.name+B_BEQ+B_TRUE
-		else
-			self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet()
-		endif;
+	switch{
+	case (root.translation = statemachines::TranslationKind::MULTIVAR)
+		action :=
+			if root.instances = null then
+				self.name+B_BEQ+B_TRUE
+			else
+				self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet()
+			endif;
+	case (root.translation = statemachines::TranslationKind::SINGLEVAR)
+		action :=
+			if root.instances = null then
+				self.getStatemachine().name + B_BEQ + self.name
+			else
+				self.getStatemachine().name+(root.selfName).parenthesize()+B_BEQ+self.name
+			endif;
+	else
+		action := "<Statemachine translation error: unknown translation kind>";
+	};
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
 }
