@@ -1,10 +1,10 @@
 import libraries.cleanup;
-import libraries.statemachines2variables;
+//import libraries.statemachines2variables;
 import libraries.statemachines2invariants;
 import libraries.statemachines2init;
 import libraries.statemachines2events;
 
-modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 
@@ -23,6 +23,7 @@ main() {
  */
 mapping inout eventb::machine::Machine::iumlb2eventb(in rootStatemachine : statemachines::Statemachine) {
 	var generatorID : String := rootStatemachine.extensionId;
+	var translationKind : statemachines::TranslationKind := rootStatemachine.translation;
 	self.map machine2nonGeneratedMachine(generatorID);
 	
 	setupMachineContext(self);
@@ -47,4 +48,37 @@ helper setupMachineContext(inout machine : eventb::machine::Machine) {
 	if machine.seesNames->includes(getImplicitContextName(machine.name))
 	then machine.seesNames := machine.seesNames->excluding(getImplicitContextName(machine.name))
 	endif;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms statemachine to variables.
+ */
+mapping statemachines::Statemachine::statemachine2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := self.nodes[statemachines::State].map state2variables(generatorID);
+	}
+}
+
+/*
+ * Transforms state to variables.
+ */
+mapping statemachines::State::state2variables(in generatorID : String) : Sequence(eventb::machine::Variable) {
+	init {
+		result := self.map state2variable(generatorID)->asSequence()->
+			union(self.statemachines.map statemachine2variables(generatorID)->flatten());
+	}
+}
+
+/*
+ * Transforms state to variable.
+ */
+mapping statemachines::State::state2variable(in generatorID : String) : eventb::machine::Variable {
+	name := self.name;
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
 }
