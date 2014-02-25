@@ -1,6 +1,6 @@
 import literals;
 
-modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 library util;
@@ -105,14 +105,14 @@ query statemachines::Transition::isLocal() : Boolean {
 }
 
 /*
- * Returns true if satemachine contains a node amongst its states or substates.
+ * Returns true if statemachine contains a node amongst its states or substates.
  */
 query statemachines::Statemachine::hasExit(in transition : statemachines::Transition) : Boolean {
 	return self.nodes->includes(transition.target) and transition.target.oclIsTypeOf(statemachines::Final);
 }
 
 /*
- * Returns true if satemachine contains a node amongst its states or substates.
+ * Returns true if statemachine contains a node amongst its states or substates.
  */
 query statemachines::Statemachine::contains(in node : statemachines::AbstractNode) : Boolean {
 	return self.nodes->includes(node) or self.nodes[statemachines::State].statemachines->exists(contains(node));
@@ -157,12 +157,7 @@ query eventb::machine::Event::containsAction(in label : String) : Boolean {
 		(self.extended and self._refines->first().containsAction(label));
 }
 
-/*
- * Returns true if event and its extensions contain an action of specified label.
- */
-query eventb::machine::Guard::isFromSameSM(in state : statemachines::AbstractNode) : Boolean {
-	return self.invresolveone(statemachines::State).eContainer() = state.eContainer();
-}
+
 
 /*
  * Returns true if machine contains an invariant of specified label
@@ -294,7 +289,7 @@ query eventb::machine::Event::containsActionWithPrefix(in labelPrefix : String) 
 }
 
 /*
- * Returns true if Guard and its extensions contain an action of specified label prefix.
+ * Returns true if event and its extensions contain an guard of specified label prefix.
  */
 query eventb::machine::Event::containsGuardWithPrefix(in labelPrefix : String) : Boolean {
 	return self.guards->exists(name.startsWith(labelPrefix)) or
@@ -302,7 +297,7 @@ query eventb::machine::Event::containsGuardWithPrefix(in labelPrefix : String) :
 }
 
 /*
- * Returns true if Guard and its extensions contain an action of specified label suffix.
+ * Returns true if event and its extensions contain an guard of specified label suffix.
  */
 query eventb::machine::Event::containsGuardWithSuffix(in labelSuffix : String) : Boolean {
 	return self.guards->exists(name.endsWith(labelSuffix)) or
@@ -310,7 +305,7 @@ query eventb::machine::Event::containsGuardWithSuffix(in labelSuffix : String) :
 }
 
 /*
- * Returns true if Guard and its extensions contain an action of specified label suffix.
+ * Returns true if event and its extensions contain an parameter of specified label.
  */
 query eventb::machine::Event::containsParameterWithName(in label : String) : Boolean {
 	return self.parameters->exists(name = label) or
