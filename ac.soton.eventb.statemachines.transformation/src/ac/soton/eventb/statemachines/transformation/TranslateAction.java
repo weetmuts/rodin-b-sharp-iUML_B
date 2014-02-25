@@ -376,7 +376,8 @@ public class TranslateAction extends AbstractHandler {
 			else if(TranslationKind.MULTIVAR.equals(kind))
 				scriptPath = "/transforms/statemachines2eventb.qvto";
 			else if (TranslationKind.REFINEDVAR.equals(kind))
-				scriptPath = "/transforms/ref_statemachines2eventb.qvto";
+				TransformationPlugin.getDefault().logError("Statemachine translation kind 'Refined' is no longer supported");
+				//scriptPath = "/transforms/ref_statemachines2eventb.qvto";
 			else 
 				return null;
 			
