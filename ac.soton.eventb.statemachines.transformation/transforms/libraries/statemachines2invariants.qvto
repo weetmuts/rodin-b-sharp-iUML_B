@@ -1,6 +1,6 @@
 import util;
 
-modeltype eventb uses core('http://emf.eventb.org/models/core');
+modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
 
 library statemachines2invariants;
@@ -188,9 +188,11 @@ mapping statemachines::State::state2constraintInvariantsFinal(in generatorID : S
 		result := self.invariants->collect(i | object eventb::machine::Invariant {
 			name := i.name;
 			theorem := i.theorem;
-			predicate := if self.getRootStatemachine().instances = null
-				then (self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + i.predicate.parenthesize()
-				else B_FORALL+self.getRootStatemachine().selfName+B_MIDDOT+
+			predicate :=
+				if self.getRootStatemachine().instances = null then
+					(self.name + B_EQ + B_TRUE).parenthesize() + B_IMPL + i.predicate.parenthesize()
+				else
+					B_FORALL+self.getRootStatemachine().selfName+B_MIDDOT+
 					(self.getRootStatemachine().selfName+B_IN+self.name).parenthesize() + B_IMPL + i.predicate.parenthesize()
 				endif;
 			generated := true;
