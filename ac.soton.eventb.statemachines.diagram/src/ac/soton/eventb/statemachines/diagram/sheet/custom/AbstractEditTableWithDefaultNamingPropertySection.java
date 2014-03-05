@@ -20,7 +20,7 @@ public abstract class AbstractEditTableWithDefaultNamingPropertySection extends
 	protected Object getNewValue(){
 		Object newVal = super.getNewValue();
 		if (newVal instanceof EventBNamed && newVal instanceof EventBElement){
-			String newName = NameUtils.getName((Diagram)owner.getContaining(DiagramsPackage.Literals.DIAGRAM))+"."+getFeature().getName();
+			String newName = NameUtils.getName((Diagram)owner.getContaining(DiagramsPackage.Literals.DIAGRAM))+"_"+getFeature().getName();
 			((EventBNamed)newVal).setName(NameUtils.getSafeName((EventBElement)newVal, newName, owner, getFeature()));
 		}
 		return newVal;
