@@ -1,7 +1,7 @@
 import util;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
-modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/1013');
+modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/2014');
 
 library statemachines2events_enter;
 

@@ -47,7 +47,7 @@ public class StatemachinesFactoryImpl extends EFactoryImpl implements Statemachi
 	 */
 	public static StatemachinesFactory init() {
 		try {
-			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines/1013"); 
+			StatemachinesFactory theStatemachinesFactory = (StatemachinesFactory)EPackage.Registry.INSTANCE.getEFactory("http://soton.ac.uk/models/eventb/statemachines/2014"); 
 			if (theStatemachinesFactory != null) {
 				return theStatemachinesFactory;
 			}

@@ -527,7 +527,7 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Statemachine_1000"
                name="%metatype.name.Statemachine_1000"
@@ -537,7 +537,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Initial_2006"
                name="%metatype.name.Initial_2006"
@@ -547,7 +547,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2006"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Final_2007"
                name="%metatype.name.Final_2007"
@@ -557,7 +557,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2007"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.State_2008"
                name="%metatype.name.State_2008"
@@ -567,7 +567,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2008"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Junction_2009"
                name="%metatype.name.Junction_2009"
@@ -576,7 +576,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2009"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Any_2010"
                name="%metatype.name.Any_2010"
@@ -585,7 +585,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2010"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Fork_2011"
                name="%metatype.name.Fork_2011"
@@ -594,7 +594,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2011"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Statemachine_3001"
                name="%metatype.name.Statemachine_3001"
@@ -603,7 +603,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3001"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Initial_3011"
                name="%metatype.name.Initial_3011"
@@ -612,7 +612,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3011"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Final_3012"
                name="%metatype.name.Final_3012"
@@ -621,7 +621,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3012"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.State_3013"
                name="%metatype.name.State_3013"
@@ -640,7 +640,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3014"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Junction_3015"
                name="%metatype.name.Junction_3015"
@@ -650,7 +650,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3015"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Any_3016"
                name="%metatype.name.Any_3016"
@@ -660,7 +660,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3016"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Fork_3017"
                name="%metatype.name.Fork_3017"
@@ -670,7 +670,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3017"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <metamodelType
                id="ac.soton.eventb.statemachines.diagram.Transition_4001"
                name="%metatype.name.Transition_4001"
@@ -680,7 +680,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/1013">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/statemachines/2014">
          <specializationType
                id="ac.soton.eventb.statemachines.diagram.Transition_4002"
                name="%metatype.name.Transition_4002"

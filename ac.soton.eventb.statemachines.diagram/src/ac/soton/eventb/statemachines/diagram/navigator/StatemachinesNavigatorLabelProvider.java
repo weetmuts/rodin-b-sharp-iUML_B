@@ -125,55 +125,55 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 		switch (StatemachinesVisualIDRegistry.getVisualID(view)) {
 		case RootStatemachineEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://soton.ac.uk/models/eventb/statemachines/1013?Statemachine", StatemachinesElementTypes.Statemachine_1000); //$NON-NLS-1$
+					"Navigator?Diagram?http://soton.ac.uk/models/eventb/statemachines/2014?Statemachine", StatemachinesElementTypes.Statemachine_1000); //$NON-NLS-1$
 		case InitialEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?Initial", StatemachinesElementTypes.Initial_2006); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?Initial", StatemachinesElementTypes.Initial_2006); //$NON-NLS-1$
 		case FinalEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?Final", StatemachinesElementTypes.Final_2007); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?Final", StatemachinesElementTypes.Final_2007); //$NON-NLS-1$
 		case StateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?State", StatemachinesElementTypes.State_2008); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?State", StatemachinesElementTypes.State_2008); //$NON-NLS-1$
 		case JunctionEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?Junction", StatemachinesElementTypes.Junction_2009); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?Junction", StatemachinesElementTypes.Junction_2009); //$NON-NLS-1$
 		case AnyEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?Any", StatemachinesElementTypes.Any_2010); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?Any", StatemachinesElementTypes.Any_2010); //$NON-NLS-1$
 		case ForkEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/1013?Fork", StatemachinesElementTypes.Fork_2011); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://soton.ac.uk/models/eventb/statemachines/2014?Fork", StatemachinesElementTypes.Fork_2011); //$NON-NLS-1$
 		case StatemachineEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Statemachine", StatemachinesElementTypes.Statemachine_3001); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Statemachine", StatemachinesElementTypes.Statemachine_3001); //$NON-NLS-1$
 		case InnerInitialEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Initial", StatemachinesElementTypes.Initial_3011); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Initial", StatemachinesElementTypes.Initial_3011); //$NON-NLS-1$
 		case InnerFinalEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Final", StatemachinesElementTypes.Final_3012); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Final", StatemachinesElementTypes.Final_3012); //$NON-NLS-1$
 		case InnerStateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?State", StatemachinesElementTypes.State_3013); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?State", StatemachinesElementTypes.State_3013); //$NON-NLS-1$
 		case InvariantEditPart.VISUAL_ID:
 			return getImage(
 					"Navigator?Node?http://emf.eventb.org/models/core/machine/2014?Invariant", StatemachinesElementTypes.Invariant_3014); //$NON-NLS-1$
 		case Junction2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Junction", StatemachinesElementTypes.Junction_3015); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Junction", StatemachinesElementTypes.Junction_3015); //$NON-NLS-1$
 		case Any2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Any", StatemachinesElementTypes.Any_3016); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Any", StatemachinesElementTypes.Any_3016); //$NON-NLS-1$
 		case Fork2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/1013?Fork", StatemachinesElementTypes.Fork_3017); //$NON-NLS-1$
+					"Navigator?Node?http://soton.ac.uk/models/eventb/statemachines/2014?Fork", StatemachinesElementTypes.Fork_3017); //$NON-NLS-1$
 		case TransitionEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/statemachines/1013?Transition", StatemachinesElementTypes.Transition_4001); //$NON-NLS-1$
+					"Navigator?Link?http://soton.ac.uk/models/eventb/statemachines/2014?Transition", StatemachinesElementTypes.Transition_4001); //$NON-NLS-1$
 		case TransitionGhostEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://soton.ac.uk/models/eventb/statemachines/1013?Transition", StatemachinesElementTypes.Transition_4002); //$NON-NLS-1$
+					"Navigator?Link?http://soton.ac.uk/models/eventb/statemachines/2014?Transition", StatemachinesElementTypes.Transition_4002); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}

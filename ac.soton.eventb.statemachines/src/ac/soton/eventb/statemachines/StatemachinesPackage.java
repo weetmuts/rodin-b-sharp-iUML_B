@@ -59,7 +59,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://soton.ac.uk/models/eventb/statemachines/1013";
+	String eNS_URI = "http://soton.ac.uk/models/eventb/statemachines/2014";
 
 	/**
 	 * The package namespace name.
