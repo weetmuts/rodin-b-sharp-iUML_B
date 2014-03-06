@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -37,7 +36,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.Transaction;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -295,14 +293,18 @@ public class TranslateAction extends AbstractHandler {
 			List<Resource> resources = new ArrayList<Resource>(inResourceURIs.size());
 			try {
 				for (URI uri : inResourceURIs) {
-					Resource resource = editingDomain.getResourceSet().getResource(uri,true);
-					IFile file = WorkspaceSynchronizer.getFile(resource);
-					if (!file.exists()) {
+					Resource resource = null;
+					try {
+						resource = editingDomain.getResourceSet().getResource(uri,true);
+					}catch(Exception e){
+						resource = editingDomain.getResourceSet().createResource(uri);
 						createResourceContent(resource);
+						resource.save(Collections.EMPTY_MAP);
+						resource.load(Collections.EMPTY_MAP);
 					}
 					resources.add(resource);
 				}
-			} catch (NoEClassException e) {
+			} catch (Exception e) {
 				throw new WrappedException("Creating a resource failed: " + e.getMessage(), e);
 			}
 			return resources;
