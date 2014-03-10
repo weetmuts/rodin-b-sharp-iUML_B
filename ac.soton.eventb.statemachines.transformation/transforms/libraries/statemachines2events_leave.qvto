@@ -17,9 +17,8 @@ mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : S
 }
 
 /*
- * Transforms transition to event with leave actions.
- * Generates leave actions for events elaborated by transition.
- * Skips initialisation event.
+ * Transforms transition to source state leave actions in all events elaborated by the transition
+ * except the initialisation event.
  */
 mapping statemachines::Transition::transition2eventsLeave(in generatorID : String)
 when {not self.isSelfLoop()}
@@ -28,12 +27,24 @@ when {not self.isSelfLoop()}
 }
 
 /*
+ * Transforms transition to source state leave actions in the event passed as a parameter
+ * (This is needed to handle junctions - by recursing up the incomers to a proper source state)
+ */
+mapping statemachines::Transition::transition2eventsLeave(in event : eventb::machine::Event, in generatorID : String)
+when {not self.isSelfLoop()}
+{
+	event[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
+}
+
+/*
  * Transforms event to same event augmented with leave actions.
  * Generates leave actions from transition and adds to event.
  */
 mapping inout eventb::machine::Event::event2statemachinesEventLeave(in transition : statemachines::Transition, in generatorID : String) {
-	self.actions := transition.source[statemachines::State].map sourceState2leaveActions(self, transition, generatorID)->
-		union(self.actions);
+	self.actions := 
+	transition.source[statemachines::State].map sourceState2leaveActions(self, transition, generatorID)->
+	union(transition.source[statemachines::Junction].incoming.map transition2eventsLeave(self, generatorID)->asBag()) ->
+	union(self.actions);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +120,6 @@ mapping statemachines::Statemachine::statemachine2leaveActions(in event : eventb
 		result := self.nodes[statemachines::State].map state2leaveActions(event, generatorID)->asBag();
 	}
 }
-
 
 /*
  * Transforms state to leave actions.
