@@ -15,7 +15,7 @@ library set_statemachines2events;
 /*
  * Transforms root statemachine to events.
  * Augments events with guards and actions.
- * First generates guards and enter actions, then leave actions (to be able to track down enter actions and avoid multiple action generation on same variable).
+ * First generates guards and enter actions, then leave actions (to be able to track enter actions and avoid multiple action generation on same variable).
  */
 mapping statemachines::Statemachine::rootStatemachine2events(in generatorID : String) {
 	self.map statemachine2events(generatorID);
@@ -180,7 +180,7 @@ mapping statemachines::Statemachine::rootStatemachine2parameter(inout event : ev
  mapping coreextension::TypedParameter::transitionParameter2guard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
  {
  	name := self.name+"_type";
- 	predicate := self.name+" : "+self.type;
+ 	predicate := self.name+B_IN+self.type;
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
  }
@@ -220,13 +220,14 @@ mapping statemachines::Statemachine::rootStatemachine2parameter(inout event : ev
 }
 
 /*
- * Adds, by conjunction, the predicates from the guards of the contextual transition to the given predicate
+ * Adds to the given predicate, by conjunction, the predicates from the guards of the
+ * contextual transition segment, which does not target a real state.
  * NOTE - THIS RULE SHOULD ONLY BE USED TO GENERATE A SUB-CLAUSE IN A DISJUNCTION (E.G. WHEN THERE IS A DOWNSTREAM JUNCTION).
  *  NORMALLY TRANSITION GUARDS ARE JUST ADDED TO THE EVENT'S GUARD COLLECTION
  */
 helper statemachines::Transition::addTransitionGuards(in predicate : String) : String {
 	var p : String = predicate;
-	if not self.guards->isEmpty() then {
+	if not self.target.oclIsKindOf(statemachines::State) and not self.guards->isEmpty() then {
 		self.guards->forEach(g){
 			p := p+B_AND+g.predicate;
 		};
