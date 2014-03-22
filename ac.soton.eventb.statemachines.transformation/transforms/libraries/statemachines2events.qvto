@@ -1,6 +1,7 @@
 import util;
-import libraries.statemachines2events_enter;
+//import libraries.statemachines2events_enter;
 import libraries.statemachines2events_leave;
+import libraries.set_statemachines2events_leave;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype coreextension uses coreextension('http://soton.ac.uk/models/eventb/coreextension/2014');
@@ -8,9 +9,10 @@ modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/sta
 
 library statemachines2events;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Event guards and actions
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// Generate Guards and Actions into Elaborated Events  ////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Works for both translation kinds
 
 /*
  * Transforms root statemachine to events.
@@ -57,7 +59,7 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
 		union(self.witnesses);
 
 	self.guards := 
-		transition.map transition2sourceGuards(self, generatorID) -> //transition.source[statemachines::State].map sourceState2sourceGuard(self, generatorID)->
+		transition.map transition2sourceGuards(self, generatorID) ->
 		union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet())->
 		union(transition.parameters.map transitionParameter2guard(self, generatorID)->asOrderedSet())->
 		union(transition.guards.map transitionGuard2guard(self, generatorID)->asOrderedSet())->
@@ -65,7 +67,6 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
 
 	self.actions := 
 		transition.map transition2enterActions(self, generatorID)->
-		//transition[source<>target].target[statemachines::State].map targetState2enterActions(self, transition, generatorID)->
 		union(transition.actions.map transitionAction2action(self, generatorID)->asOrderedSet())->
 		union(self.actions);
 }
@@ -91,8 +92,7 @@ mapping statemachines::Transition::transition2sourceGuards(inout event : eventb:
  */
 
 mapping statemachines::Transition::junction2disjunctiveSourceGuard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
-	when{self.source.oclIsKindOf(statemachines::Junction)} 
-	{
+	when{self.source.oclIsKindOf(statemachines::Junction)} {
 		var nm : String = "";
 		var pred : String = "";
 		self.source.incoming[source<>target and source.oclIsKindOf(statemachines::State)].map guardedTransition2conjunctiveSourceGuard(event, generatorID)->asBag() ->
@@ -223,12 +223,11 @@ mapping statemachines::Statemachine::rootStatemachine2parameter(inout event : ev
 
 /*
  * Adds to the given predicate, by conjunction, the predicates from the guards of the
- * contextual transition segment, which does not target a real state.  
+ * contextual transition segment, which does not target a real state.
  * NOTE - THIS RULE SHOULD ONLY BE USED TO GENERATE A SUB-CLAUSE IN A DISJUNCTION (E.G. WHEN THERE IS A DOWNSTREAM JUNCTION).
  *  NORMALLY TRANSITION GUARDS ARE JUST ADDED TO THE EVENT'S GUARD COLLECTION
  */
-helper statemachines::Transition::addTransitionGuards(in predicate : String) : String 
-{
+helper statemachines::Transition::addTransitionGuards(in predicate : String) : String {
 	var p : String = predicate;
 	if not self.target.oclIsKindOf(statemachines::State) and not self.guards->isEmpty() then {
 		self.guards->forEach(g){
@@ -256,15 +255,28 @@ mapping statemachines::State::sourceState2sourceGuard(inout event : eventb::mach
 
 /*
  * Returns a predicate string representing the guard for the transition source state
- * this is either state = TRUE of self : state depending on lifting
+ * for enumeration translation this is either statemachine = state or statemachine(self) = state depending on lifting
+ * for variables translation this is either state = TRUE of self : state depending on lifting
  */
 helper statemachines::State::getSourceStatePredicate() : String {
-	return 
-			if self.getRootStatemachine().instances = null then
+var root : statemachines::Statemachine := self.getRootStatemachine();
+	return
+		switch{
+		case (root.translation = statemachines::TranslationKind::SINGLEVAR)
+			if root.instances = null then
+				self.getStatemachine().name + B_EQ + self.name
+			else 
+				self.getStatemachine().name+(root.selfName).parenthesize()+B_EQ+self.name
+			endif;	
+		case (root.translation = statemachines::TranslationKind::MULTIVAR)	
+			if root.instances = null then
 				self.name + B_EQ + B_TRUE
 			else 
-				self.getRootStatemachine().selfName+B_IN+self.name
+				root.selfName+B_IN+self.name
 			endif;
+		else
+			"<Statemachine translation error: unknown translation kind>";
+		};
 }
 
 /*
@@ -289,15 +301,28 @@ mapping statemachines::Transition::initialTransition2sourceGuard(inout event : e
 
 /*
  * Returns a predicate string representing the guard that the root statemachine being activiated is not already activiated
- * this is either TRUE or self /: union of states depending on lifting
+ * for enumeration translation this is either statemachine = null or statemachine(self) = null depending on lifting
+ * for variables translation this is either TRUE or self /: union of states depending on lifting
  */
 helper statemachines::Transition::getStateMachineNotActivePredicate() : String {
-	return 
-			if self.source.getRootStatemachine().instances = null then
+var root : statemachines::Statemachine := self.source.getRootStatemachine();
+	return
+		switch{
+		case (root.translation = statemachines::TranslationKind::SINGLEVAR)
+			if root.instances = null then
+				self.source.getStatemachine().name + B_EQ + self.source.getStatemachine().name+_NULL
+			else 
+				self.source.getStatemachine().name+(root.selfName).parenthesize()+B_EQ+self.source.getStatemachine().name+_NULL
+			endif;
+		case (root.translation = statemachines::TranslationKind::MULTIVAR)				
+			if root.instances = null then
 				B_TRUE+B_NOTIN+(self.source.getStatemachine().getStateNamesAsSingletons()->toString(B_UNION)).parenthesize()
 			else 
-				self.source.getRootStatemachine().selfName+B_NOTIN+(self.source.getStatemachine().getStateNames()->toString(B_UNION)).parenthesize()
+				root.selfName+B_NOTIN+(self.source.getStatemachine().getStateNames()->toString(B_UNION)).parenthesize()
 			endif;
+		else
+			"<Statemachine translation error: unknown translation kind>";
+		};
 }
 
  
@@ -313,4 +338,129 @@ helper statemachines::Transition::getStateMachineNotActivePredicate() : String {
 	generated := true;
 	attributes += getGeneratedAttr(generatorID);
  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Generate Actions for entering the new target state and any superstates as necessary ///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Transforms target state to enter actions.
+ * Generates enter actions for all the superstates of target state, 
+ * which are not common to source state's superstates,
+ * as well as enter actions for target state's statemachines,
+ * excluding parallel statemachines that don't contain source state 
+ * if transition is local and is directed from nested state towards its parent state.
+ */
+mapping statemachines::State::targetState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := (self.getSuperstates()-(transition.source.getSuperstates()))[statemachines::State].map state2enterAction(event, generatorID);
+	}
+}
+
+/*
+ * Transforms state to enter action.
+ * Generates enter action for targeted state and particular event.
+ * Skips transformation if event contains enter action on the same state already.
+ */
+mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
+	when { not event.containsAction(ENTER_ + self.name) }
+{
+	var root : statemachines::Statemachine := self.getRootStatemachine();
+	name := ENTER_ + self.name;
+	switch{
+	case (root.translation = statemachines::TranslationKind::MULTIVAR)
+		action :=
+			if root.instances = null then
+				self.name+B_BEQ+B_TRUE
+			else
+				self.name+B_BEQ+self.name+B_UNION+self.getRootStatemachine().selfName.asSet()
+			endif;
+	case (root.translation = statemachines::TranslationKind::SINGLEVAR)
+		action :=
+			if root.instances = null then
+				self.getStatemachine().name + B_BEQ + self.name
+			else
+				self.getStatemachine().name+(root.selfName).parenthesize()+B_BEQ+self.name
+			endif;
+	else
+		action := "<Statemachine translation error: unknown translation kind>";
+	};
+	generated := true;
+	attributes += getGeneratedAttr(generatorID);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Generate Actions for leaving the old source state and any superstates as necessary ///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////
+// WAS IN statemachines2events_leave ///
+////////////////////////////////////////
+/*
+ * Transforms statemachine hierarchy by adding transition leave actions to all elaborated events.
+ * Separated from event transformation rules (which generate guards and enter actions) 
+ * to be able to track enter actions already generated
+ * and avoid generation of leave action if enter action on the same statemachine exists.
+ */
+mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : String) {
+	self.transitions.map transition2eventsLeave(generatorID);
+	self.nodes[statemachines::State].statemachines.map statemachine2eventsLeave(generatorID);
+}
+
+/*
+ * Transforms transition to source state leave actions in all events elaborated by the transition
+ * except the initialisation event.
+ */
+mapping statemachines::Transition::transition2eventsLeave(in generatorID : String)
+when {not self.isSelfLoop()}
+{
+	self.elaborates[name <> INIT].map event2statemachinesEventLeave(self, generatorID);
+}
+
+/*
+ * Transforms event to same event augmented with leave actions.
+ * Generates leave actions from transition and adds to event.
+ */
+mapping inout eventb::machine::Event::event2statemachinesEventLeave(in transition : statemachines::Transition, in generatorID : String) {
+	self.actions := transition.source.map node2leaveActions(self, transition, generatorID)->
+		union(self.actions);
+}
+
+/*
+ * recurses up the chain of incomers until a real source state is found 
+ * then invokes sourceState to leave Actions
+ *
+ */
+mapping statemachines::AbstractNode::node2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String)  : Bag(eventb::machine::Action) {
+	init {
+		result := 	self[statemachines::State].map sourceState2leaveActions(event, transition, generatorID)->
+		union(self[statemachines::Junction].incoming.source.map node2leaveActions(event, transition, generatorID)->asBag())->
+		union(self[statemachines::Fork].incoming.source.map node2leaveActions(event, transition, generatorID)->asBag())
+		}
+}
+
+/*
+ * Transforms source state to leave actions.
+ * Generates leave actions for all the superstates of source state, 
+ * which are not common to target state's superstates,
+ * as well as leave actions for source state's statemachines,
+ * excluding parallel statemachines that don't contain target state 
+ * if transition is local and is directed from parent state towards its nested state.
+ */
+mapping statemachines::State::sourceState2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		var root : statemachines::Statemachine := self.getRootStatemachine();
+		switch{
+		case (root.translation = statemachines::TranslationKind::SINGLEVAR)
+			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map enum_superState2leaveActions(event, generatorID)->
+				union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map enum_statemachine2leaveActions(event, generatorID)->asBag())->
+				union(self.getRootStatemachine()->reject(not hasExit(transition)).map enum_statemachine2leaveAction(event,generatorID)->asBag());
+		case (root.translation = statemachines::TranslationKind::MULTIVAR)
+			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map vars_superState2leaveActions(event, generatorID)->
+				union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map vars_statemachine2leaveActions(event, generatorID)->flatten()->asBag());
+		else
+			result := Bag {};
+		};
+
+	}
+}
 

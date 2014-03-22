@@ -3,7 +3,7 @@ import libraries.set_statemachines2context;
 //import libraries.set_statemachines2variables;
 import libraries.set_statemachines2invariants;
 import libraries.set_statemachines2init;
-import libraries.set_statemachines2events;
+import libraries.statemachines2events;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype statemachines uses statemachines('http://soton.ac.uk/models/eventb/statemachines/2014');
