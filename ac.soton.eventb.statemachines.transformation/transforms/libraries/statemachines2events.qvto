@@ -1,7 +1,7 @@
 import util;
 //import libraries.statemachines2events_enter;
-import libraries.statemachines2events_leave;
-import libraries.set_statemachines2events_leave;
+import libraries.vars_statemachines2events_leave;
+import libraries.enum_statemachines2events_leave;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
 modeltype coreextension uses coreextension('http://soton.ac.uk/models/eventb/coreextension/2014');

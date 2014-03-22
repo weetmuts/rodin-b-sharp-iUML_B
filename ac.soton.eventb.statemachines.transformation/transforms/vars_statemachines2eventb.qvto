@@ -1,7 +1,7 @@
 import libraries.cleanup;
 //import libraries.statemachines2variables;
-import libraries.statemachines2invariants;
-import libraries.statemachines2init;
+import libraries.vars_statemachines2invariants;
+import libraries.vars_statemachines2init;
 import libraries.statemachines2events;
 
 modeltype eventb uses core('http://emf.eventb.org/models/core/2014');
