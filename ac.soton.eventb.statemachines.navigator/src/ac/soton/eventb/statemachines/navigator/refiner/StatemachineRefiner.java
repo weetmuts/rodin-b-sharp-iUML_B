@@ -48,6 +48,7 @@ public class StatemachineRefiner extends AbstractExtensionRefiner {
 		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__OUTGOING, false);
 		referencemap.put(StatemachinesPackage.Literals.TRANSITION__SOURCE, false);
 		referencemap.put(StatemachinesPackage.Literals.TRANSITION__TARGET, false);
+		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__INSTANCES, false);
 	}
 
 /**
