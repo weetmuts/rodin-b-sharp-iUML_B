@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="1.5.0.r15631"
+      version="2.0.0.rc1"
       provider-name="%providerName"
       plugin="ac.soton.iumlb.branding">
 
@@ -63,19 +63,12 @@
       <import plugin="org.eclipse.m2m.qvt.oml.project" version="3.1.0" match="compatible"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor" version="1.4.1" match="compatible"/>
       <import plugin="org.rodinp.core" version="1.5.0" match="compatible"/>
-      <import feature="org.eventb.emf.feature" version="3.3.0" match="compatible"/>
+      <import feature="org.eventb.emf.feature" version="4.0.0" match="compatible"/>
       <import feature="org.eclipse.gmf" version="1.4.1" match="compatible"/>
       <import feature="org.eclipse.ocl" version="3.0.0" match="compatible"/>
-      <import feature="ac.soton.eventb.emf.core.extension.feature" version="2.1.0" match="compatible"/>
-      <import feature="ac.soton.eventb.emf.diagrams.feature" version="3.2.0" match="compatible"/>
+      <import feature="ac.soton.eventb.emf.core.extension.feature" version="3.0.0" match="compatible"/>
+      <import feature="ac.soton.eventb.emf.diagrams.feature" version="4.0.0" match="compatible"/>
    </requires>
-
-   <plugin
-         id="ac.soton.eventb.statemachines.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="ac.soton.eventb.statemachines.diagram"
