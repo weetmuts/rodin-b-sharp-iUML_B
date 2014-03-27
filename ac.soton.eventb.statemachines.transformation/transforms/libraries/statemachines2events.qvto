@@ -434,8 +434,16 @@ mapping statemachines::AbstractNode::node2leaveActions(in event : eventb::machin
 	init {
 		result := 	self[statemachines::State].map sourceState2leaveActions(event, transition, generatorID)->
 		union(self[statemachines::Junction].incoming.source.map node2leaveActions(event, transition, generatorID)->asBag())->
-		union(self[statemachines::Fork].incoming.source.map node2leaveActions(event, transition, generatorID)->asBag())
+		union(self[statemachines::Fork].incoming.source.map node2leaveActions(event, transition, generatorID)->asBag())->
+		union(self[statemachines::Any].map any2leaveActions(event, transition, generatorID)->asBag())
 		}
+}
+
+
+mapping statemachines::Any::any2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
+	init {
+		result := ((self.getStatemachine().getAllStates())-(transition.target.getSuperstates()[statemachines::State])).map sourceState2leaveActions(event,transition,generatorID)
+	}
 }
 
 /*
