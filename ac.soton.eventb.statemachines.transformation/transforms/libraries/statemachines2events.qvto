@@ -60,13 +60,13 @@ mapping inout eventb::machine::Event::event2statemachinesEvent(in transition : s
 
 	self.guards := 
 		transition.map transition2sourceGuards(self, generatorID) ->
-		union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet())->
+		union(transition.map initialTransition2sourceGuard(self, generatorID)->asOrderedSet()) -> reject(""=name) ->
 		union(transition.parameters.map transitionParameter2guard(self, generatorID)->asOrderedSet())->
 		union(transition.guards.map transitionGuard2guard(self, generatorID)->asOrderedSet())->
 		union(self.guards);
 
 	self.actions := 
-		transition.map transition2enterActions(self, generatorID)->
+		transition.map transition2enterActions(self, generatorID) -> reject(""=name) ->
 		union(transition.actions.map transitionAction2action(self, generatorID)->asOrderedSet())->
 		union(self.actions);
 }
@@ -93,15 +93,20 @@ mapping statemachines::Transition::transition2sourceGuards(inout event : eventb:
 
 mapping statemachines::Transition::junction2disjunctiveSourceGuard(inout event : eventb::machine::Event, in generatorID : String) : eventb::machine::Guard
 	when{self.source.oclIsKindOf(statemachines::Junction)} {
-		var nm : String = "";
-		var pred : String = "";
-		self.source.incoming[source<>target and source.oclIsKindOf(statemachines::State)].map guardedTransition2conjunctiveSourceGuard(event, generatorID)->asBag() ->
-		union(self.source.incoming[source<>target and source.oclIsKindOf(statemachines::Junction)].map junction2disjunctiveSourceGuard(event, generatorID)->asBag()) ->
-		union(self.source.incoming[source<>target and source.oclIsKindOf(statemachines::Fork)].map fork2conjunctiveSourceGuard(event, generatorID)->asBag()) ->
-		forEach(gs){
-			if (nm="") then {nm := gs.name} else {nm := nm + "_or_" + gs.name} endif;
-			if (pred="") then {pred := gs.predicate} else {pred := pred + B_OR + gs.predicate} endif;
+		init{
+			var nm : String = "";
+			var pred : String = "";
+			self.source.incoming[source<>target and source.oclIsKindOf(statemachines::State)].map guardedTransition2conjunctiveSourceGuard(event, generatorID)->asBag() ->
+			union(self.source.incoming[source<>target and source.oclIsKindOf(statemachines::Junction)].map junction2disjunctiveSourceGuard(event, generatorID)->asBag()) ->
+			union(self.source.incoming[source<>target and source.oclIsKindOf(statemachines::Fork)].map fork2conjunctiveSourceGuard(event, generatorID)->asBag()) ->
+			forEach(gs){
+				if (gs.name!=null) then {
+					if (nm="") then {nm := gs.name} else {nm := nm + "_or_" + gs.name} endif;
+					if (pred="") then {pred := gs.predicate} else {pred := pred + B_OR + gs.predicate} endif;
+				} endif;
 		};
+		//if nm="" then return null endif; doesn't work - reject later
+		}
 		name := nm;
 		predicate := self.addTransitionGuards("("+pred+")");	
 		generated := true;
