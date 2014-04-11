@@ -191,12 +191,17 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Set the name attribute.
+	 * Since : and . are used as delimiters in references which are formed from name, 
+	 * these characters are not permitted and are changed automatically
+	 * to ; and , respectively.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
+		if (newName == null) return;		
 		String oldName = getName();
-		name = newName;
+		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldName, newName));
 	}

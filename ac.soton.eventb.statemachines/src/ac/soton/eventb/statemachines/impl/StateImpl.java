@@ -284,8 +284,9 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 * @generated NOT
 	 */
 	public void setName(String newName) {
-		String oldName = name;
-		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");;
+		if (newName == null) return;		
+		String oldName = getName();
+		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, name));
 	}
