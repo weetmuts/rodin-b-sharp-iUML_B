@@ -9,7 +9,6 @@
 package ac.soton.eventb.statemachines.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -17,20 +16,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.impl.EventBCommentedElementImpl;
-import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Event;
 
-import org.eventb.emf.core.machine.Guard;
-import org.eventb.emf.core.machine.Witness;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
-import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBCommentedLabeledEventGroupElementImpl;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -448,7 +437,7 @@ public class TransitionImpl extends EventBCommentedLabeledEventGroupElementImpl 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

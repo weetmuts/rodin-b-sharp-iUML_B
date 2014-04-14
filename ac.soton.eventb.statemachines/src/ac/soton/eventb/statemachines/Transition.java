@@ -8,12 +8,10 @@
  */
 package ac.soton.eventb.statemachines;
 
-import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 import org.eclipse.emf.common.util.EList;
-import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 
 /**
  * <!-- begin-user-doc -->

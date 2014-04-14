@@ -10,8 +10,6 @@
  */
 package ac.soton.eventb.statemachines.util;
 
-import ac.soton.eventb.statemachines.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.context.CarrierSet;
 import org.eventb.emf.core.context.Constant;
@@ -32,8 +29,11 @@ import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.statemachines.AbstractNode;
+import ac.soton.eventb.statemachines.Any;
 import ac.soton.eventb.statemachines.Final;
+import ac.soton.eventb.statemachines.Fork;
 import ac.soton.eventb.statemachines.Initial;
+import ac.soton.eventb.statemachines.Junction;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachineOwner;
