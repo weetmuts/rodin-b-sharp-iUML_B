@@ -1148,10 +1148,13 @@ public class StatemachinesValidator extends EObjectValidator {
 					EObject sm = (node==null)? null: node.eContainer();
 					if (!(sm instanceof Statemachine) || statemachines.contains(sm)) valid = false;
 					statemachines.add((Statemachine) sm);
-					while (sm.eContainer()!=parentState){
-						if (!(sm.eContainer() instanceof State)) valid = false; 
-						sm = ((State)sm.eContainer()).eContainer();
-						if (!(sm instanceof Statemachine)) valid = false;
+					while (valid ==true && sm.eContainer()!=parentState){
+						if (sm.eContainer() instanceof State) { 
+							sm = ((State)sm.eContainer()).eContainer();
+							if (!(sm instanceof Statemachine)) valid = false;
+						}else{
+							 valid = false;
+						}
 					}
 				}
 			}
