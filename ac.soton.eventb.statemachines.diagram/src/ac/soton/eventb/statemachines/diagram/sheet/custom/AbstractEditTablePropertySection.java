@@ -74,8 +74,8 @@ import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.Project;
 import org.eventb.emf.core.util.NameUtils;
-import org.rodinp.keyboard.RodinKeyboardPlugin;
-import org.rodinp.keyboard.preferences.PreferenceConstants;
+import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
+import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
 
 
@@ -366,7 +366,7 @@ public abstract class AbstractEditTablePropertySection extends AbstractStatemach
 
 	private Combo combo=null;
 	private Text text= null;
-	private final ModifyListener rodinKbdListener = RodinKeyboardPlugin.getDefault().createRodinModifyListener();
+	private final ModifyListener rodinKbdListener = RodinKeyboardUIPlugin.getDefault().createRodinModifyListener();
 	private final Font font = JFaceResources.getFont(PreferenceConstants.RODIN_MATH_FONT);
 	private TableEditor editor;
 

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -30,15 +28,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.eventb.core.IEventBRoot;
-import org.eventb.core.ISCContextRoot;
-import org.eventb.core.ISCMachineRoot;
-import org.eventb.core.ast.FormulaFactory;
-import org.eventb.core.ast.ITypeEnvironment;
-import org.eventb.core.basis.ContextRoot;
-import org.eventb.core.basis.MachineRoot;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
@@ -48,8 +38,6 @@ import org.eventb.emf.core.context.Constant;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.Variable;
-import org.rodinp.core.RodinCore;
-import org.rodinp.core.RodinDBException;
 
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
@@ -58,10 +46,7 @@ import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
-import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.TranslationKind;
-import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
 
 /**
  * Elaborates data property section for statemachine diagrams.
@@ -299,30 +284,30 @@ private List<EventBNamed> getAvailableDataElements(EventBNamedCommentedComponent
 		return "";
 	}
 	
-	private ITypeEnvironment getTypeEnvironment(IEventBRoot sourceRoot) {
-	       FormulaFactory formulaFactory = sourceRoot.getFormulaFactory();
-	       ITypeEnvironment typeEnvironment = FormulaFactory.getDefault()
-	               .makeTypeEnvironment();
-	       try {
-
-	           if (sourceRoot instanceof ContextRoot) {
-	               ISCContextRoot scContextRoot = sourceRoot.getSCContextRoot();
-	               typeEnvironment = scContextRoot
-	                       .getTypeEnvironment(formulaFactory);
-	           } else if (sourceRoot instanceof MachineRoot) {
-	               ISCMachineRoot scMachineRoot = sourceRoot.getSCMachineRoot();
-	               typeEnvironment = scMachineRoot
-	                       .getTypeEnvironment(formulaFactory);
-	           }
-	       } catch (RodinDBException e) {
-	           Status status = new Status(IStatus.ERROR,
-	        		   StatemachinesDiagramEditorPlugin.ID,
-	                   "Failed Translation: RodinDBException:"
-	                   + e.getMessage(), e);
-	               StatusManager.getManager().handle(status,
-	                   StatusManager.SHOW);        }
-
-	       //typeEnvironment.addAll(defaultTypeEnvironment);
-	       return typeEnvironment;
-	   }
+//	private ITypeEnvironment getTypeEnvironment(IEventBRoot sourceRoot) {
+//	       FormulaFactory formulaFactory = sourceRoot.getFormulaFactory();
+//	       ITypeEnvironment typeEnvironment = FormulaFactory.getDefault()
+//	               .makeTypeEnvironment();
+//	       try {
+//
+//	           if (sourceRoot instanceof ContextRoot) {
+//	               ISCContextRoot scContextRoot = sourceRoot.getSCContextRoot();
+//	               typeEnvironment = scContextRoot
+//	                       .getTypeEnvironment(formulaFactory);
+//	           } else if (sourceRoot instanceof MachineRoot) {
+//	               ISCMachineRoot scMachineRoot = sourceRoot.getSCMachineRoot();
+//	               typeEnvironment = scMachineRoot
+//	                       .getTypeEnvironment(formulaFactory);
+//	           }
+//	       } catch (RodinDBException e) {
+//	           Status status = new Status(IStatus.ERROR,
+//	        		   StatemachinesDiagramEditorPlugin.ID,
+//	                   "Failed Translation: RodinDBException:"
+//	                   + e.getMessage(), e);
+//	               StatusManager.getManager().handle(status,
+//	                   StatusManager.SHOW);        }
+//
+//	       //typeEnvironment.addAll(defaultTypeEnvironment);
+//	       return typeEnvironment;
+//	   }
 }

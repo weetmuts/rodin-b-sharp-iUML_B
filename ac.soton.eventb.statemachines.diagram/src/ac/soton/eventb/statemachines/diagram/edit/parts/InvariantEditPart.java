@@ -59,12 +59,11 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Text;
-import org.rodinp.keyboard.RodinKeyboardPlugin;
-import org.rodinp.keyboard.preferences.PreferenceConstants;
+import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
+import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
 import ac.soton.eventb.statemachines.diagram.edit.policies.InvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
-import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextSelectionEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesParserProvider;
@@ -366,7 +365,7 @@ public class InvariantEditPart extends CompartmentEditPart implements
 					Font font = JFaceResources
 							.getFont(PreferenceConstants.RODIN_MATH_FONT);
 					text.setFont(font);
-					ModifyListener eventBListener = RodinKeyboardPlugin
+					ModifyListener eventBListener = RodinKeyboardUIPlugin
 							.getDefault().createRodinModifyListener();
 					text.addModifyListener(eventBListener);
 				}
