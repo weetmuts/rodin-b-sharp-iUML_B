@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="rodin3.0" sequenceNumber="23">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="fr.systerel.editor.feature.group" version="0.7.0.201403141545-e3d282b"/>
+<unit id="org.rodinp.feature.group" version="1.7.0.201403141545-e3d282b"/>
+<unit id="org.eventb.ide.feature.group" version="3.0.0.201403141545-e3d282b"/>
+<unit id="org.rodinp.platform.tests.feature.group" version="3.0.0.201403141545-e3d282b"/>
+<unit id="org.rodinp.platform.sources.feature.group" version="3.0.0.201403141545-e3d282b"/>
+<unit id="org.rodinp.platform.feature.group" version="3.0.0.201403141545-e3d282b"/>
+<repository location="jar:file:/Volumes/Code/Rodins4test/rodinTargets/org.rodinp.dev-3.0.0-e3d282b.zip!/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.1.0.201403031044"/>
+<repository location="http://download.eclipse.org/modeling/gmp/gmf-tooling/updates/releases/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.1.0.v20110314-1530-7U7A-CL5RuMpMxGs7uZhafWQlGUu"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="1.2.2.v20120214-0915"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.2.v20120130-0943"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.5.1.v20110823-1800-777T19A_WsXmjNatPxcrPm1rOKlH"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.rodinp.platform.product" version="3.0.0.201403141545-e3d282b"/>
+<repository location="http://rodin-b-sharp.sourceforge.net/core-updates"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.prob2.feature.feature.group" version="3.0.2.201403281050"/>
+<repository location="http://www.stups.uni-duesseldorf.de/prob_updates_rodin3"/>
+</location>
+</locations>
+</target>
