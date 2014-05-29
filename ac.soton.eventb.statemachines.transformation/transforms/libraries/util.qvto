@@ -73,6 +73,27 @@ helper statemachines::AbstractNode::getSuperstates() : Set(statemachines::Abstra
 }
 
 /*
+ * 
+ */
+helper statemachines::Transition::getAllTrueSources() : Set(statemachines::AbstractNode) {
+	return if self.source.oclIsKindOf(statemachines::Junction)
+		then self.source.incoming.map getAllTrueSources()->asSet()
+		else self.source->asSet()
+		endif;
+}
+
+/*
+ * 
+ */
+helper statemachines::Transition::getCommonSourceSuperstates(in base : Set(statemachines::AbstractNode)) : Set(statemachines::AbstractNode) {
+	var ret : Set(statemachines::AbstractNode) := base;
+	self.getAllTrueSources() -> forEach (ts){
+		 ret := ts.getSuperstates() -> intersection(ret);
+	};
+	return ret;
+}
+
+/*
  * Returns all true States that are directly or indirectly contained in the statemachine
  */
 helper statemachines::Statemachine::getAllStates() : Set(statemachines::State) {
@@ -185,7 +206,7 @@ query eventb::machine::Machine::containsGeneratedInvariantWithSuffix(in labelSuf
  * Returns true if statemachine contains nested state, which is target for event (transition's elaborated).
  */
 helper statemachines::Statemachine::containsEventTarget(in event : eventb::machine::Event) : Boolean {
-	return self.nodes[statemachines::State].incoming->exists(elaborates->includes(event))
+	return self.nodes[statemachines::State].incoming->exists(elaboratesEventBkw(event))
 		or self.nodes[statemachines::State].statemachines->exists(containsEventTarget(event));
 }
 
@@ -193,8 +214,24 @@ helper statemachines::Statemachine::containsEventTarget(in event : eventb::machi
  * Returns true if statemachine contains nested state, which is source for event (transition's elaborated).
  */
 helper statemachines::Statemachine::containsEventSource(in event : eventb::machine::Event) : Boolean {
-	return self.nodes[statemachines::State].outgoing->exists(elaborates->includes(event))
+	return self.nodes[statemachines::State].outgoing->exists(elaboratesEventFwd(event))
 		or self.nodes[statemachines::State].statemachines->exists(containsEventSource(event));
+}
+
+helper statemachines::Transition::elaboratesEvent(in event : eventb::machine::Event) : Boolean {
+	return self.elaborates->includes(event)
+		or self.elaboratesEventFwd(event)
+		or self.elaboratesEventBkw(event)
+}
+helper statemachines::Transition::elaboratesEventFwd(in event : eventb::machine::Event) : Boolean {
+	return self.elaborates->includes(event)
+		or self.target[statemachines::Junction].outgoing->exists(elaboratesEvent(event))
+		or self.target[statemachines::Fork].outgoing->exists(elaboratesEvent(event))
+}
+helper statemachines::Transition::elaboratesEventBkw(in event : eventb::machine::Event) : Boolean {
+	return self.elaborates->includes(event)
+		or self.target[statemachines::Junction].incoming->exists(elaboratesEvent(event))
+		or self.target[statemachines::Fork].incoming->exists(elaboratesEvent(event))
 }
 
 /*

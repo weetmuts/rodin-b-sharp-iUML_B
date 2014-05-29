@@ -128,8 +128,9 @@ mapping statemachines::Transition::fork2conjunctiveSourceGuard(inout event : eve
 			if (pred="") then {pred := gs.predicate} else {pred := pred + B_AND + gs.predicate} endif;
 		};
 		name := nm;
-		//predicate := "("+self.addTransitionGuards(pred)+")";	
-		predicate := self.addTransitionGuards(pred);
+		pred := self.addTransitionGuards(pred); 
+		if (self.target.oclIsKindOf(statemachines::Junction))	then {pred := pred.parenthesize()} endif; // brackets are needed if there is a downstream junction
+		predicate := pred;
 		generated := true;
 		attributes += getGeneratedAttr(generatorID);	
 }
@@ -349,22 +350,20 @@ var root : statemachines::Statemachine := self.source.getRootStatemachine();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
- * Transforms target state to enter actions.
+ * Transforms target state to enter actions:
  * Generates enter actions for all the superstates of target state, 
- * which are not common to source state's superstates,
- * as well as enter actions for target state's statemachines,
- * excluding parallel statemachines that don't contain source state 
- * if transition is local and is directed from nested state towards its parent state.
+ * (unless they are also superstates of all the source states of the transition)
  */
 mapping statemachines::State::targetState2enterActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := (self.getSuperstates()-(transition.source.getSuperstates()))[statemachines::State].map state2enterAction(event, generatorID);
+		result := (self.getSuperstates()-(transition.getCommonSourceSuperstates(self.getSuperstates())))[statemachines::State].map state2enterAction(event, generatorID);
 	}
 }
 
 /*
- * Transforms state to enter action.
- * Generates enter action for targeted state and particular event.
+ * Transforms state to enter action:
+ * Generates an enter action for an individual state in the given event  
+ * using the translation specified for the root Statemachine containing the state.
  * Skips transformation if event contains enter action on the same state already.
  */
 mapping statemachines::State::state2enterAction(in event : eventb::machine::Event, in generatorID : String) : eventb::machine::Action 
@@ -401,9 +400,9 @@ mapping statemachines::State::state2enterAction(in event : eventb::machine::Even
 // WAS IN statemachines2events_leave ///
 ////////////////////////////////////////
 /*
- * Transforms statemachine hierarchy by adding transition leave actions to all elaborated events.
- * Separated from event transformation rules (which generate guards and enter actions) 
- * to be able to track enter actions already generated
+ * Traverses hierarchy of nested statemachines to generate leave actions for all transitions.
+ * (Note that the containment of transitions in statemachines has no semantic and depends only on where the user originally drew the transition)
+ * Separated from event transformation rules (which generate guards and enter actions) to be able to track enter actions already generated
  * and avoid generation of leave action if enter action on the same statemachine exists.
  */
 mapping statemachines::Statemachine::statemachine2eventsLeave(in generatorID : String) {
@@ -452,24 +451,24 @@ mapping statemachines::Any::any2leaveActions(in event : eventb::machine::Event, 
 }
 
 /*
- * Transforms source state to leave actions.
- * Generates leave actions for all the superstates of source state, 
- * which are not common to target state's superstates,
- * as well as leave actions for source state's statemachines,
- * excluding parallel statemachines that don't contain target state 
- * if transition is local and is directed from parent state towards its nested state.
+ * Transforms source state to leave actions:
+ * Generates leave actions for all the superstates of source state that are not also superstates of the target state,
+ * also generates leave actions for the source state's statemachines except for parallel statemachines that don't contain target state 
+ * 		if transition is local and is directed from parent state towards its nested state.
  */
 mapping statemachines::State::sourceState2leaveActions(in event : eventb::machine::Event, in transition : statemachines::Transition, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
 		var root : statemachines::Statemachine := self.getRootStatemachine();
 		switch{
 		case (root.translation = statemachines::TranslationKind::SINGLEVAR)
-			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map enum_superState2leaveActions(event, generatorID)->
-				union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map enum_statemachine2leaveActions(event, generatorID)->asBag())->
-				union(self.getRootStatemachine()->reject(not hasExit(transition)).map enum_statemachine2leaveAction(event,generatorID)->asBag());
+			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map enum_superState2leaveActions(event, generatorID)
+				->union(self.statemachines->reject((transition.isLocalToSource() and not contains(transition.target))).map enum_statemachine2leaveActions(event, generatorID)->asBag()) 
+				->union(self.getRootStatemachine()->reject(not hasExit(transition)).map enum_statemachine2leaveAction(event,generatorID)->asBag())
+				;
 		case (root.translation = statemachines::TranslationKind::MULTIVAR)
-			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map vars_superState2leaveActions(event, generatorID)->
-				union(self.statemachines->reject(transition.isLocalToSource() and not contains(transition.target)).map vars_statemachine2leaveActions(event, generatorID)->flatten()->asBag());
+			result := (self.getSuperstates()-(transition.target.getSuperstates()))[statemachines::State].map vars_superState2leaveActions(event, generatorID)
+				->union(self.statemachines->reject((transition.isLocalToSource() and not contains(transition.target))).map vars_statemachine2leaveActions(event, generatorID)->flatten()->asBag()) 
+				;
 		else
 			result := Bag {};
 		};

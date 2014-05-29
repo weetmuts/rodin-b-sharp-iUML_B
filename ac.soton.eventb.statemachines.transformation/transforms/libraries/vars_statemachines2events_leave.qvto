@@ -13,13 +13,14 @@ library statemachines2events_leave;
 /*
  * Transforms superstate to leave actions.
  * Generates leave action for state itself and leave actions for its statemachines,
- * excluding those which contain a source state of some another transition elaborating same event 
- * (so leave actions will be generated for those from their own transition).
+ * 		excluding those which contain a source state of another transition elaborating the same event 
+ * 		(i.e. leave actions will be generated for those from their own transition).
  */
 mapping statemachines::State::vars_superState2leaveActions(in event : eventb::machine::Event, in generatorID : String) : Bag(eventb::machine::Action) {
 	init {
-		result := self.map vars_state2leaveAction(event, generatorID)->asBag()->
-			union(self.statemachines->reject(containsEventSource(event)).map vars_statemachine2leaveActions(event, generatorID)->flatten()->asBag());
+		result := self.map vars_state2leaveAction(event, generatorID)->asBag()
+					->union(self.statemachines->reject(containsEventSource(event)).map vars_statemachine2leaveActions(event, generatorID)->flatten()->asBag())
+					;
 	}
 }
 
