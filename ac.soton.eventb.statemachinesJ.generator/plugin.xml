@@ -209,11 +209,11 @@
                rule_class="ac.soton.eventb.statemachines.generator.enumRules.RemoveRedundantContextsRule"
                source_class="Statemachine">
          </rule> 
-         <rule
+         <!--rule
                name="Enum_PopulateExtends"
                rule_class="ac.soton.eventb.statemachines.generator.enumRules.PopulateExtendsRule"
                source_class="Statemachine">
-         </rule>                                                                                      
+         </rule-->                                                                                      
         </generator>   
      </extension>
      

@@ -55,13 +55,16 @@ public class RemoveRedundantContextsRule extends AbstractRule implements IRule{
 			implicitContext = (Context) Find.named(container.getSees(), Strings.CTX_NAME(container));
 			if(implicitContext == null)
 				return false;
-			else
+			else{
 				return true;
+			}
 			
 		}
 			
-		else
-			return true;
+		else{
+				return true;
+		}
+		
 	}
 	
 	
@@ -92,6 +95,7 @@ public class RemoveRedundantContextsRule extends AbstractRule implements IRule{
 		List<Context> redundant = new ArrayList<Context>();
 		redundant.addAll(ctx.getExtends());
 		for(Context ictx : ctx.getExtends()){
+			System.out.println(ictx.getName());
 			redundant.addAll(findRedundantCtx(ictx));
 		}
 		return redundant;

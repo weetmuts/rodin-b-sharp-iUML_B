@@ -27,10 +27,10 @@ public class RootStatemachine2NewContextRule extends AbstractRule implements IRu
 	
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception  {	
-		Machine container = (Machine)EcoreUtil.getRootContainer(sourceElement);
+		//Machine container = (Machine)EcoreUtil.getRootContainer(sourceElement);
 		return Utils.isRootStatemachine((Statemachine)sourceElement) &&
-				((Statemachine) sourceElement).getTranslation().equals(TranslationKind.SINGLEVAR) && 
-				!hasImplicitContext(container);
+				((Statemachine) sourceElement).getTranslation().equals(TranslationKind.SINGLEVAR); //&& 
+				//!hasImplicitContext(container);
 				
 	
 	}
@@ -45,10 +45,20 @@ public class RootStatemachine2NewContextRule extends AbstractRule implements IRu
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 	
 		Context ctx =  (Context) Make.context(container.getName() + Strings._IMPLICIT_CONTEXT, "");
-		ret.add(Make.descriptor(Find.project(container), components,ctx ,1));
-		ret.add(Make.descriptor(container, seesNames, ctx.getName(), 1));
+		if(!hasImplicitContext(container)){
+			ret.add(Make.descriptor(Find.project(container), components,ctx ,1));
+			ret.add(Make.descriptor(container, seesNames, ctx.getName(), 1));
+		}
+		else if(!container.getSeesNames().contains(Strings.CTX_NAME(container))){
+			container.getSeesNames().add(Strings.CTX_NAME(container));
+		}
+		if(container.getRefines().size() != 0){
+			List<Context> abstractCtxs = getGeneratedAbstractContext(container);
 
-
+			for(Context ictx : abstractCtxs)
+				if(!ctx.getExtendsNames().contains(ictx.getName()))
+					ctx.getExtendsNames().add(ictx.getName());
+		}
 
 		return ret;
 
@@ -65,6 +75,23 @@ public class RootStatemachine2NewContextRule extends AbstractRule implements IRu
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(uri.segment(1).toString());	
 	}
 
+	
+	private List<Context> getGeneratedAbstractContext(Machine mac){
+		List<Context> abstractCtxs = new ArrayList<Context>();
+		for(Machine imac : mac.getRefines()){
+			for(Context ctx : imac.getSees()){
+				if(ctx.getName().equals(imac.getName() + Strings._IMPLICIT_CONTEXT)){
+					abstractCtxs.add(ctx);
+				}
+			}
+
+		}
+		return abstractCtxs;
+	}
+	
+	
+	
+	
 	
 }
 
