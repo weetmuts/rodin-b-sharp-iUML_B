@@ -15,8 +15,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Control;
-import org.rodinp.keyboard.RodinKeyboardPlugin;
-import org.rodinp.keyboard.preferences.PreferenceConstants;
+import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
+import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
 /**
  * Utility class for property sections.
@@ -30,7 +30,7 @@ public final class PropertySectionUtil {
 	 * Event-B keyboard input modify listener.
 	 * Converts ASCII to Event-B mathematical symbols.
 	 */
-	public static final ModifyListener eventBListener = RodinKeyboardPlugin.getDefault().createRodinModifyListener();
+	public static final ModifyListener eventBListener = RodinKeyboardUIPlugin.getDefault().createRodinModifyListener();
 	
 	/**
 	 * Rodin font.
