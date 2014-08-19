@@ -1,7 +1,5 @@
 package ac.soton.eventb.classdiagrams.generator;
 
-import java.util.logging.Logger;
-
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
