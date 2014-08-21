@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.machine.Event;
 
-import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBCommentedLabeledEventGroupElementImpl;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -117,36 +116,6 @@ public class TransitionImpl extends EventBCommentedLabeledEventGroupElementImpl 
 	@Override
 	protected EClass eStaticClass() {
 		return StatemachinesPackage.Literals.TRANSITION;
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Returns a label constructed from a list of names of the elaborated events.
-	 * The label is wrapped (i.e. a \n inserted) after the next comma after every 50 chars.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getLabel() {
-		EList<Event> events = getElaborates();
-		if (events.isEmpty())
-			return "";//"<no name - fix elaborates>";
-		ArrayList<String> result = new ArrayList<String>(getElaborates().size());
-		for (Event event : getElaborates())
-			result.add(event.getName());
-		String rawLabel = result.toString().replaceAll("(^.)|(.$)", "");
-		String formattedLabel = "";
-		int j=0;
-		for (int i=0; i<rawLabel.length();i++){
-			if (j>=50 && ','==rawLabel.charAt(i-1)){
-				formattedLabel = formattedLabel+"\n";
-				j=-1;
-			}else{
-				formattedLabel = formattedLabel + rawLabel.charAt(i);
-			}
-			j++;
-		}
-		return formattedLabel;
 	}
 
 	/**
@@ -523,23 +492,6 @@ public class TransitionImpl extends EventBCommentedLabeledEventGroupElementImpl 
 		result.append(operations);
 		result.append(')');
 		return result.toString();
-	}
-
-	/* 
-	 * Customised to fix problem with notification of label change on EReference 'elaborates' change.
-	 */
-	@Override
-	public void eNotify(Notification notification) {
-		super.eNotify(notification);
-		
-		int type = notification.getEventType();
-		Object feature = notification.getFeature();
-		if (CoreextensionPackage.Literals.EVENT_BEVENT_GROUP__ELABORATES.equals(feature)
-				&& (type == Notification.ADD || type == Notification.ADD_MANY
-						|| type == Notification.REMOVE || type == Notification.REMOVE_MANY))
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.TRANSITION__LABEL, notification.getOldValue(), notification.getNewValue()));
-			
 	}
 
 } //TransitionImpl
