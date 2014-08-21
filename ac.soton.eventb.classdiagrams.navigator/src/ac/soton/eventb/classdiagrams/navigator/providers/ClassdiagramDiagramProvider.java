@@ -13,7 +13,7 @@ import ac.soton.eventb.emf.diagrams.navigator.provider.IDiagramProvider;
 
 
 /**
- * Diagram provider for classdiargams.
+ * Diagram provider for classdiagrams.
  * 
  * @author vitaly
  *
@@ -28,7 +28,7 @@ public class ClassdiagramDiagramProvider implements IDiagramProvider {
 			String filename = "";
 			Classdiagram rootClassdiagram = (Classdiagram) element;
 			
-			// find a root classdiargam
+			// find a root classdiagram
 			while (rootClassdiagram.eContainer() instanceof Classdiagram
 					&& rootClassdiagram.eContainer().eContainer() instanceof Classdiagram)
 				rootClassdiagram = (Classdiagram) rootClassdiagram.eContainer().eContainer();

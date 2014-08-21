@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package ac.soton.eventb.classdiagrams.navigator.actions;
 
 import java.util.Collections;
@@ -99,21 +106,21 @@ public class AddClassdiagramHandler extends AbstractHandler {
 				if (file != null && file.exists()) {
 					InputDialog dialog = new InputDialog(Display.getCurrent().getActiveShell(), 
 							"New Classdiagram", 
-							"Enter classdiargam name: ",
+							"Enter classdiagram name: ",
 							null, nameValidator);
 					if (dialog.open() == InputDialog.CANCEL)
 						return null;
 					String name = dialog.getValue().trim();
 					
 					URI eventBElementURI = URI.createPlatformResourceURI(file.getFullPath().toOSString(), true);
-					Classdiagram classdiargam = ClassdiagramsFactory.eINSTANCE.createClassdiagram();
-					classdiargam.setName(name);
+					Classdiagram classdiagram = ClassdiagramsFactory.eINSTANCE.createClassdiagram();
+					classdiagram.setName(name);
 					try {
-						AddClassdiagramCommand command = new AddClassdiagramCommand(eventBElementURI, classdiargam);
+						AddClassdiagramCommand command = new AddClassdiagramCommand(eventBElementURI, classdiagram);
 						if (command.canExecute())
 							command.execute(new NullProgressMonitor(), null);
 					} catch (Exception e) {
-						ClassdiagramsNavigatorPlugin.getDefault().logError("Creating classdiargam failed", e);
+						ClassdiagramsNavigatorPlugin.getDefault().logError("Creating classdiagram failed", e);
 					}
 				}
 			}
