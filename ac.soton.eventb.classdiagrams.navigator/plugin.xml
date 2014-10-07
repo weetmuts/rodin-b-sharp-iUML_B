@@ -13,6 +13,7 @@
             locationURI="popup:fr.systerel.explorer.navigator.view">
          <command
                commandId="ac.soton.eventb.classdiagrams.navigator.commands.addClassdiagram"
+               icon="icons/NewClassdiagram.gif"
                label="Add Classdiagram"
                style="push">
          </command>
