@@ -10,20 +10,11 @@
 package ac.soton.eventb.classdiagrams.provider;
 
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
-import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBNamedCommentedRelationDataElaborationElementItemProvider;
-import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
-
-import ac.soton.eventb.statemachines.StatemachinesFactory;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -32,12 +23,12 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eventb.emf.core.CorePackage;
 
-import org.eventb.emf.core.provider.EventBNamedCommentedElementItemProvider;
+import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBNamedCommentedRelationDataElaborationElementItemProvider;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.Association} object.

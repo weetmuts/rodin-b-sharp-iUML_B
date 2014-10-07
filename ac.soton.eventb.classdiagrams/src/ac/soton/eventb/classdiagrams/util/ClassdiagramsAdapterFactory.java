@@ -29,7 +29,6 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
-import ac.soton.eventb.statemachines.StatemachineOwner;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 

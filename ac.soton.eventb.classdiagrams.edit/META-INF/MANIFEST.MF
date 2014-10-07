@@ -16,6 +16,5 @@ Require-Bundle: org.eventb.emf.core;bundle-version="[3.0.0,4.0.0)";visibility:=r
  org.eclipse.emf.ecore;bundle-version="[2.7.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.edit;bundle-version="[2.7.1,3.0.0)";visibility:=reexport,
  org.eclipse.emf.edit;bundle-version="[2.7.2,3.0.0)";visibility:=reexport,
- ac.soton.eventb.classdiagrams;bundle-version="[0.0.1,1.0.0)",
- ac.soton.eventb.statemachines;bundle-version="[2.0.0,3.0.0)"
+ ac.soton.eventb.classdiagrams;bundle-version="[0.0.1,1.0.0)"
 Bundle-ActivationPolicy: lazy

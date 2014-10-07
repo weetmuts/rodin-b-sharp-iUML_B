@@ -14,8 +14,6 @@ import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
-import ac.soton.eventb.statemachines.StatemachinesFactory;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
 import java.util.Collection;
 import java.util.List;
 

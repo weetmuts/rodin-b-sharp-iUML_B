@@ -24,7 +24,6 @@ import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
-import ac.soton.eventb.statemachines.StatemachinesPackage;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EAttribute;

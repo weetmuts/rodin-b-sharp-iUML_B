@@ -13,8 +13,6 @@ package ac.soton.eventb.classdiagrams.provider;
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 
-import ac.soton.eventb.statemachines.StatemachinesFactory;
-
 import java.util.Collection;
 import java.util.List;
 

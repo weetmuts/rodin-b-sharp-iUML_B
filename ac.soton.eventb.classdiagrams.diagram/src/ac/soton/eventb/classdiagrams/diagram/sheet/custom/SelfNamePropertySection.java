@@ -8,10 +8,10 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
-import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.classdiagrams.*;
 
 /**
- * SelfName property section for Statemachine.
+ * SelfName property section for Class.
  * 
  * @author cfs
  *
@@ -25,13 +25,13 @@ public class SelfNamePropertySection extends AbstractTextPropertySection {
 
 	@Override
 	protected void setPropertyValue(EObject object, Object value) {
-		assert object instanceof Statemachine;
-		((Statemachine) object).setSelfName((String) value);
+		assert object instanceof ac.soton.eventb.classdiagrams.Class;
+		//((ac.soton.eventb.classdiagrams.Class) object)..setSelfName((String) value);
 	}
 
 	@Override
 	protected String getPropertyValueString() {
-		return ((Statemachine) getEObject()).getSelfName();
+		return ""; //((ac.soton.eventb.classdiagrams.Class) getEObject()).getSelfName();
 	}
 
 	@Override

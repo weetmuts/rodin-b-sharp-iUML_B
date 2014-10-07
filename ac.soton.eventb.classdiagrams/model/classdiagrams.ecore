@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classdiagrams"
-    nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313" nsPrefix="classdiagrams">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classdiagrams" nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313"
+    nsPrefix="classdiagrams">
   <eClassifiers xsi:type="ecore:EClass" name="ClassdiagramOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classdiagrams" upperBound="-1"
         eType="#//Classdiagram" containment="true"/>
@@ -46,6 +45,7 @@
         eType="#//ClassConstraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
         eType="#//ClassMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selfName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassMethod" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBCommentedLabeledEventGroupElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassConstraint" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedDerivedPredicateElement"/>
