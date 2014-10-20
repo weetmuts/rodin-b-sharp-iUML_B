@@ -1,14 +1,16 @@
-/*
- * Copyright (c) 2010 University of Southampton.
+/*******************************************************************************
+ * Copyright (c) 2014 University of Southampton and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+ *******************************************************************************/
+
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CLabel;
@@ -20,7 +22,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
 
 /**
  * An abstract implementation of a section with a enumeration field using a
@@ -29,7 +30,7 @@ import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor;
  * @author copied from {@link org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractEnumerationPropertySection AbstractEnumerationPropertySection}
  */
 public abstract class AbstractEnumerationPropertySection
-	extends AbstractClassPropertySection {
+	extends AbstractIumlbPropertySection {
 
 	/**
 	 * the combo box control for the section.
@@ -74,11 +75,11 @@ public abstract class AbstractEnumerationPropertySection
 	 * Handle the combo modified event.
 	 */
 	protected void handleComboModified() {
-		boolean equals = isEqual(combo.getItem(combo.getSelectionIndex()));
+		EditingDomain editingDomain = ((DiagramDocumentEditor) getPart()).getEditingDomain();
+		int index = combo.getSelectionIndex();
+		boolean equals = isEqual(combo.getItem(index));
 		if (!equals) {
-			EditingDomain editingDomain = ((ClassdiagramsDiagramEditor) getPart())
-				.getEditingDomain();
-			Object value = getFeatureValue(combo.getItem(combo.getSelectionIndex()));
+				Object value = getFeatureValue(combo.getItem(index));
 			/* apply the property change to single selected object */
 			editingDomain.getCommandStack().execute(
 				SetCommand.create(editingDomain, eObject, getFeature(),
@@ -97,11 +98,11 @@ public abstract class AbstractEnumerationPropertySection
 	}
 
 	/**
-	 * Determine if the provided index of the enumeration is equal to the
+	 * Determine if the provided selection of the enumeration is equal to the
 	 * current setting of the enumeration property.
 	 * 
 	 * @param index
-	 *            the new index in the enumeration.
+	 *            the new selection in the enumeration.
 	 * @return <code>true</code> if the new index value is equal to the
 	 *         current property setting.
 	 */
@@ -123,10 +124,10 @@ public abstract class AbstractEnumerationPropertySection
 	protected abstract String getFeatureAsText();
 
 	/**
-	 * Get the new value of the feature for the text field for the section.
+	 * Get the new value of the feature for the the selection in the enumeration.
 	 * 
 	 * @param index
-	 *            the new index in the enumeration.
+	 *            the new selection in the enumeration.
 	 * @return the new value of the feature.
 	 */
 	protected abstract Object getFeatureValue(String selection);

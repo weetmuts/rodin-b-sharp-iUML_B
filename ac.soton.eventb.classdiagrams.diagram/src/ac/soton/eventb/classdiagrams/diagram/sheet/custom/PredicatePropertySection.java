@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eventb.emf.core.EventBPredicate;
 
+import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
+import ac.soton.eventb.emf.diagrams.sheet.PropertySectionUtil;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**

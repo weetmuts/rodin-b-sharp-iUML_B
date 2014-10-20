@@ -19,6 +19,7 @@ import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.diagrams.sheet.DataKindPropertySection;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.Class;

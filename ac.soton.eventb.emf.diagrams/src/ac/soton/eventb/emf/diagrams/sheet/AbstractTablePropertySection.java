@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2013 University of Southampton.
+/*******************************************************************************
+ * Copyright (c) 2014 University of Southampton and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+ *******************************************************************************/
+
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
  * @author copied from {@link org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractTablePropertySection AbstractTablePropertySection}
  */
 public abstract class AbstractTablePropertySection
-	extends AbstractClassPropertySection {
+	extends AbstractIumlbPropertySection {
 
 	/**
 	 * the table control for the section.

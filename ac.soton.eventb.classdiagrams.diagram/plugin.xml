@@ -195,6 +195,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <propertyContributor
             contributorId="ac.soton.eventb.classdiagrams.diagram"
             labelProvider="ac.soton.eventb.classdiagrams.diagram.sheet.ClassdiagramsSheetLabelProvider">
+         <propertyCategory category="custom_domain"/> 
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -213,6 +214,7 @@ http://www.eclipse.org/legal/epl-v10.html
              id="property.tab.DiagramPropertySection"
              label="%tab.diagram"/>
           <propertyTab
+                          afterTab="property.tab.overview"
              category="domain"
              id="property.tab.domain"
              label="%tab.domain"/>
@@ -612,11 +614,46 @@ http://www.eclipse.org/legal/epl-v10.html
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
       <?gmfgen generated="false"?>   
       <propertyTabs contributorId="ac.soton.eventb.classdiagrams.diagram">
+
           <propertyTab
-                category="domain"
+                category="custom_domain"
                 id="property.tab.overview"
                 label="Overview">
           </propertyTab>
+          
+          <propertyTab
+               afterTab="property.tab.overview"
+               category="custom_domain"
+               id="property.tab.parameters"
+               image="icons/obj16/var_obj.gif"
+               indented="true"
+               label="Parameters">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.parameters"
+               category="custom_domain"
+               id="property.tab.witnesses"
+               image="icons/obj16/var_obj.gif"
+               indented="true"
+               label="Witnesses">
+          </propertyTab>          
+          <propertyTab
+                afterTab="property.tab.witnesses"
+                category="custom_domain"
+                id="property.tab.guards"
+                image="icons/obj16/grd_obj.gif"
+                indented="true"
+                label="Guards">
+          </propertyTab>
+          <propertyTab
+                afterTab="property.tab.guards"
+                category="custom_domain"
+                id="property.tab.actions"
+                image="icons/obj16/act_obj.gif"
+                indented="true"
+                label="Actions">
+          </propertyTab>
+          
       </propertyTabs>
    </extension>
    
@@ -624,17 +661,17 @@ http://www.eclipse.org/legal/epl-v10.html
       <?gmfgen generated="false"?>   
       <propertySections contributorId="ac.soton.eventb.classdiagrams.diagram">
          <propertySection
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.NamePropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$NamedElementFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection$Filter"
                id="property.section.name"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.name"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.LabelPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.LabelPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$LabeledElementFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.LabelPropertySection$Filter"
                id="property.section.label"
                tab="property.tab.overview">
          </propertySection>
@@ -656,42 +693,42 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.dataKind"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesDataPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ElaboratesDataPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesDataPropertySection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.ElaboratesDataPropertySection$Filter"
                id="property.section.elaboratesData"
                tab="property.tab.overview">
          </propertySection>
 
          <propertySection
                afterSection="property.section.elaboratesData"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection"
+               class="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindSurjectiveSection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindSurjectiveSection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindSurjectiveSection$Filter"
                id="property.section.surjectiveRelationType"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.surjectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindInjectiveSection"
+               class="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindInjectiveSection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindInjectiveSection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindInjectiveSection$Filter"
                id="property.section.injectiveRelationType"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.injectiveRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindTotalSection"
+               class="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindTotalSection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindTotalSection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindTotalSection$Filter"
                id="property.section.totalRelationType"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.totalRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindFunctionalSection"
+               class="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindFunctionalSection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.EventBRelationKindFunctionalSection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindFunctionalSection$Filter"
                id="property.section.functionalRelationType"
                tab="property.tab.overview">
          </propertySection>
@@ -722,31 +759,63 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.predicate"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.TheoremPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.TheoremPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.TheoremPropertySection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.TheoremPropertySection$Filter"
                id="property.section.theorem"
                tab="property.tab.overview">
          </propertySection>
          
           <propertySection
                afterSection="property.section.theorem"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ElaboratesPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ElaboratesPropertySection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.ElaboratesPropertySection$Filter"
                id="property.section.elaborates"
                tab="property.tab.overview">
          </propertySection>        
          
          <propertySection
                afterSection="property.section.elaborates"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.CommentPropertySection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection$Filter"
                id="property.section.comment"
                tab="property.tab.overview">
          </propertySection>
          
+         <propertySection
+               afterSection="property.section.comment"
+               class="ac.soton.eventb.emf.diagrams.sheet.ParametersPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.emf.diagrams.sheet.ParametersPropertySection$Filter"
+               id="property.section.parameters"
+               tab="property.tab.parameters">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.parameters"
+               class="ac.soton.eventb.emf.diagrams.sheet.WitnessesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.emf.diagrams.sheet.WitnessesPropertySection$Filter"
+               id="property.section.witnesses"
+               tab="property.tab.witnesses">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.witnesses"
+               class="ac.soton.eventb.emf.diagrams.sheet.GuardsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.emf.diagrams.sheet.GuardsPropertySection$Filter"
+               id="property.section.guards"
+               tab="property.tab.guards">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.guards"
+               class="ac.soton.eventb.emf.diagrams.sheet.ActionsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.emf.diagrams.sheet.ActionsPropertySection$Filter"
+               id="property.section.actions"
+               tab="property.tab.actions">
+         </propertySection>
 
       </propertySections>
    </extension>

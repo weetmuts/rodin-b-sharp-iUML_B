@@ -21,6 +21,7 @@ import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractLOVPropertySection;
 
 public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	

@@ -1,11 +1,12 @@
-/*
- * Copyright (c) 2010 University of Southampton.
+/**
+ * Copyright (c) 2014 University of Southampton.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.common.core.util.StringStatics;
@@ -19,16 +20,19 @@ import org.eclipse.swt.widgets.Text;
 
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
-
 /**
  * General text property section, used for string properties of an object.
  * 
- * @author vitaly
  *
  */
 public abstract class AbstractTextPropertySection extends
 		AbstractBasicTextPropertySection {
 
+	@Override
+	protected EObject unwrap(Object object) {
+		return DiagramUtils.unwrap(object);
+	}
+	
 	@Override
 	protected Text createTextWidget(Composite parent) {
 		Text text;
@@ -51,7 +55,7 @@ public abstract class AbstractTextPropertySection extends
 		return text;
 	}
 
-
+	
 	/**
 	 * Returns width of property label.
 	 * Standard implementation uses label text width to calculate the width.
@@ -62,13 +66,6 @@ public abstract class AbstractTextPropertySection extends
 	 */
 	private int getPropertyLabelWidth(Composite parent) {
 		return 100;
-//		return getStandardLabelWidth(parent,
-//				getPropertyNameStringsArray());
-	}
-
-	@Override
-	protected EObject unwrap(Object object) {
-		return DiagramUtils.unwrap(object);
 	}
 
 	/**
@@ -78,5 +75,4 @@ public abstract class AbstractTextPropertySection extends
 	protected int numberOfRows(){
 		return 1;
 	}
-	
 }

@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Text;
 
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.emf.diagrams.sheet.DecoratedInputValidator;
+import ac.soton.eventb.emf.diagrams.sheet.PropertySectionUtil;
 
 /**
  * New invariant creation dialog.

@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IFilter;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
-
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**

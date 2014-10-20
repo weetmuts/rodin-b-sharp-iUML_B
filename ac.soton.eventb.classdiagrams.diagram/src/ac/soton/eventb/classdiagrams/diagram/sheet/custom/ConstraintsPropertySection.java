@@ -35,6 +35,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.Class;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractTablePropertySection;
+import ac.soton.eventb.emf.diagrams.sheet.PropertySectionUtil;
 
 /**
  * Constraints property section.

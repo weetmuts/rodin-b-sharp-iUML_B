@@ -8,7 +8,9 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+
 import ac.soton.eventb.classdiagrams.*;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
 
 /**
  * SelfName property section for Class.

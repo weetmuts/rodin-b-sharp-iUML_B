@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
@@ -16,6 +17,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * Name property section for EventBNamed.
@@ -25,6 +27,16 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
  */
 public class NamePropertySection extends AbstractTextPropertySection {
 
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBNamed;
+		}
+	}
+	
 	@Override
 	protected String getPropertyNameLabel() {
 		return "Name:";

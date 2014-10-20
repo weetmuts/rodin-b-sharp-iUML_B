@@ -5,11 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.IFilter;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * Label property section for EventBLabeled.
@@ -19,6 +21,16 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
  */
 public class LabelPropertySection extends AbstractTextPropertySection {
 
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof EventBLabeled;
+		}
+	}
+	
 	@Override
 	protected String getPropertyNameLabel() {
 		return "Label:";
@@ -36,7 +48,7 @@ public class LabelPropertySection extends AbstractTextPropertySection {
 
 	@Override
 	protected String getPropertyChangeCommandName() {
-		return "cnahge nothing";
+		return "change nothing";
 	}
 
 	@Override

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,7 +48,7 @@ import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 
 /**
- * Elaborates property section for Method.
+ * Elaborates property section for EventBEventGroup.
  * 
  * @author cfsnook
  *

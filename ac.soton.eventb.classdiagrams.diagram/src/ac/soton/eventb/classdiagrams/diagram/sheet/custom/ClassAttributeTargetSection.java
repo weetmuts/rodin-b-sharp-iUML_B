@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Text;
 
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
+import ac.soton.eventb.emf.diagrams.sheet.PropertySectionUtil;
 
 /**
  * Type property section for Class Attributes.

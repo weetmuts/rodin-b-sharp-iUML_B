@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
+package ac.soton.eventb.emf.diagrams.sheet;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,6 +35,7 @@ import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachineFactory;
 import org.eventb.emf.persistence.PersistencePlugin;
+
 
 /**
  * New event creation dialog.

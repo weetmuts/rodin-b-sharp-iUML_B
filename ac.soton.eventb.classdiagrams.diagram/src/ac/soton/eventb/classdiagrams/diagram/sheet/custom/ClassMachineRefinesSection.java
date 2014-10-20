@@ -28,6 +28,7 @@ import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractLOVPropertySection;
 
 public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 	
