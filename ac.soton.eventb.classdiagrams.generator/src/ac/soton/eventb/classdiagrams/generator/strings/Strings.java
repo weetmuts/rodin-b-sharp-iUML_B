@@ -11,6 +11,7 @@ import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
+import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 
 public class Strings {
 
@@ -255,5 +256,18 @@ public class Strings {
 				selfName, 
 				instances);
 	}
+	
+	public static String USER_PARAMETER_TYPE_GUARD_NAME;
+	public static String USER_PARAMETER_TYPE_GUARD_NAME(TypedParameter p) {
+		return bind(USER_PARAMETER_TYPE_GUARD_NAME, p.getName());
+	}
+	
+	public static String USER_PARAMETER_TYPE_GUARD_PRED;
+	public static String USER_PARAMETER_TYPE_GUARD_PRED(TypedParameter p) {
+		return bind(USER_PARAMETER_TYPE_GUARD_PRED, 
+				p.getName(), 
+				p.getType());
+	}
+	
 	
 }
