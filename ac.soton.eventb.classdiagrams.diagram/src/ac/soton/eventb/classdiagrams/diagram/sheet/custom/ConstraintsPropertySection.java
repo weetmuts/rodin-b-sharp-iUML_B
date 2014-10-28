@@ -10,6 +10,7 @@ package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.command.MoveCommand;
@@ -134,7 +135,7 @@ public class ConstraintsPropertySection extends AbstractTablePropertySection {
 	}
 
 	@Override
-	protected List getOwnedRows() {
+	protected EList<?> getOwnedRows() {
 		return ((Class) eObject).getConstraints();
 	}
 
