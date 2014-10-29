@@ -14,7 +14,7 @@ Export-Package: ac.soton.eventb.statemachines,
  ac.soton.eventb.statemachines.provider;uses:="org.eclipse.emf.edit.command,  org.eventb.emf.core.util,  org.eclipse.emf.common.util,  org.eventb.emf.core,  org.eclipse.emf.common.notify,  ac.soton.eventb.emf.diagrams,  ac.soton.eventb.emf.core.extension.coreextension.provider,  ac.soton.eventb.statemachines.util,  org.eclipse.emf.ecore,  org.eventb.emf.core.provider,  org.eclipse.emf.common,  org.eclipse.emf.edit.provider,  org.eclipse.emf.edit.domain,  ac.soton.eventb.emf.diagrams.util"
 Require-Bundle: org.eventb.emf.core;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
  ac.soton.eventb.emf.core.extension;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
- ac.soton.eventb.emf.diagrams;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
+ ac.soton.eventb.emf.diagrams.edit;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
  org.eclipse.emf.ecore;bundle-version="[2.7.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.edit;bundle-version="[2.7.1,3.0.0)";visibility:=reexport,
