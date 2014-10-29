@@ -547,7 +547,10 @@ public class ClassAttributeEditPart extends CompartmentEditPart implements
 	}
 
 	/**
-	 * @generated
+	 * This has been changed to always update the label as the icon was sometimes not getting updated
+	 * when the elaborates property was changed
+	 * 
+	 * @generated NOT
 	 */
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
@@ -586,6 +589,9 @@ public class ClassAttributeEditPart extends CompartmentEditPart implements
 				}
 			}
 		}
+		//+++++
+		refreshLabel();	//force icon etc to update
+		//+++++
 		super.handleNotificationEvent(event);
 	}
 

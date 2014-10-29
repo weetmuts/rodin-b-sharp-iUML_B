@@ -677,12 +677,20 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.label"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.SelfNamePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.SelfNamePropertySection$Filter"
+               id="property.section.selfname"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.selfname"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassAttributeTargetSection"
                enablesFor="1"
                filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ClassAttributeFilter"
                id="property.section.classAttributeTarget"
                tab="property.tab.overview">
-         </propertySection>
+         </propertySection>         
          <propertySection
                afterSection="property.section.classAttributeTarget"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.FilteredDataKindPropertySection"

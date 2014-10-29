@@ -8,9 +8,11 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.IFilter;
 
-import ac.soton.eventb.classdiagrams.*;
+import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * SelfName property section for Class.
@@ -20,20 +22,29 @@ import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
  */
 public class SelfNamePropertySection extends AbstractTextPropertySection {
 
+	/**
+	 * Element Filter for this property section.
+	 */
+	public static final class Filter implements IFilter {
+		@Override
+		public boolean select(Object toTest) {
+			return DiagramUtils.unwrap(toTest) instanceof Class;
+		}
+	}
 	@Override
 	protected String getPropertyNameLabel() {
-		return "SelfName:";
+		return "Self Name:";
 	}
 
 	@Override
 	protected void setPropertyValue(EObject object, Object value) {
-		assert object instanceof ac.soton.eventb.classdiagrams.Class;
-		//((ac.soton.eventb.classdiagrams.Class) object)..setSelfName((String) value);
+		assert object instanceof Class;
+		((Class) object).setSelfName((String) value);
 	}
 
 	@Override
 	protected String getPropertyValueString() {
-		return ""; //((ac.soton.eventb.classdiagrams.Class) getEObject()).getSelfName();
+		return ((Class) getEObject()).getSelfName();
 	}
 
 	@Override
