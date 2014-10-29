@@ -60,6 +60,7 @@ import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getMethods <em>Methods</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.ClassImpl#getSelfName <em>Self Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -145,6 +146,26 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 	 * @ordered
 	 */
 	protected EList<ClassMethod> methods;
+
+	/**
+	 * The default value of the '{@link #getSelfName() <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSelfName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SELF_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSelfName() <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSelfName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String selfName = SELF_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -289,6 +310,32 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * gets the name to be used for the contextual instance of the class
+	 * defaults to "this<ClassName>" if null or empty
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getSelfName() {
+		if (selfName ==null || selfName.trim().equals("")){
+			selfName = "this_"+ this.getName();
+		}
+		return selfName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSelfName(String newSelfName) {
+		String oldSelfName = selfName;
+		selfName = newSelfName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.CLASS__SELF_NAME, oldSelfName, selfName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -353,6 +400,8 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 				return getConstraints();
 			case ClassdiagramsPackage.CLASS__METHODS:
 				return getMethods();
+			case ClassdiagramsPackage.CLASS__SELF_NAME:
+				return getSelfName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -397,6 +446,9 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 				getMethods().clear();
 				getMethods().addAll((Collection<? extends ClassMethod>)newValue);
 				return;
+			case ClassdiagramsPackage.CLASS__SELF_NAME:
+				setSelfName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -433,6 +485,9 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 			case ClassdiagramsPackage.CLASS__METHODS:
 				getMethods().clear();
 				return;
+			case ClassdiagramsPackage.CLASS__SELF_NAME:
+				setSelfName(SELF_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -461,6 +516,8 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 				return constraints != null && !constraints.isEmpty();
 			case ClassdiagramsPackage.CLASS__METHODS:
 				return methods != null && !methods.isEmpty();
+			case ClassdiagramsPackage.CLASS__SELF_NAME:
+				return SELF_NAME_EDEFAULT == null ? selfName != null : !SELF_NAME_EDEFAULT.equals(selfName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -495,6 +552,22 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (selfName: ");
+		result.append(selfName);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ClassImpl

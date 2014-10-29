@@ -23,7 +23,10 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemColorProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eventb.emf.core.CorePackage;
 
@@ -41,7 +44,7 @@ import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 public class ClassItemProvider
 	extends EventBNamedCommentedDataElaborationElementItemProvider
 	implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IItemColorProvider {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, IItemColorProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -67,6 +70,7 @@ public class ClassItemProvider
 			addIncomingPropertyDescriptor(object);
 			addOutgoingPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
+			addSelfNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -160,6 +164,28 @@ public class ClassItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Self Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSelfNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_selfName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_selfName_feature", "_UI_Class_type"),
+				 ClassdiagramsPackage.Literals.CLASS__SELF_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -229,6 +255,9 @@ public class ClassItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ac.soton.eventb.classdiagrams.Class.class)) {
+			case ClassdiagramsPackage.CLASS__SELF_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case ClassdiagramsPackage.CLASS__DIAGRAMS:
 			case ClassdiagramsPackage.CLASS__CLASS_ATTRIBUTES:
 			case ClassdiagramsPackage.CLASS__CONSTRAINTS:

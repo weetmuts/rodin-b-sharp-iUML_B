@@ -33,6 +33,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.Class#getMethods <em>Methods</em>}</li>
+ *   <li>{@link ac.soton.eventb.classdiagrams.Class#getSelfName <em>Self Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,5 +167,31 @@ public interface Class extends EventBNamedCommentedDataElaborationElement, Diagr
 	 * @generated
 	 */
 	EList<ClassMethod> getMethods();
+
+	/**
+	 * Returns the value of the '<em><b>Self Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Self Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Self Name</em>' attribute.
+	 * @see #setSelfName(String)
+	 * @see ac.soton.eventb.classdiagrams.ClassdiagramsPackage#getClass_SelfName()
+	 * @model
+	 * @generated
+	 */
+	String getSelfName();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.classdiagrams.Class#getSelfName <em>Self Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Self Name</em>' attribute.
+	 * @see #getSelfName()
+	 * @generated
+	 */
+	void setSelfName(String value);
 
 } // Class
