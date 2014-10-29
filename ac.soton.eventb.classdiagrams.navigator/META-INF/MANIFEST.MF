@@ -13,7 +13,7 @@ Require-Bundle: org.eventb.ui;bundle-version="[2.3.0,4.0.0)",
  ac.soton.eventb.emf.core.extension.navigator;bundle-version="[3.0.0,4.0.0)",
  ac.soton.eventb.classdiagrams;bundle-version="[0.0.0,1.0.0)",
  ac.soton.eventb.classdiagrams.diagram;bundle-version="[0.0.0,1.0.0)",
- ac.soton.eventb.classdiagrams.edit;bundle-version="[0.0.1,1.0.0)"
+ ac.soton.eventb.classdiagrams.edit;bundle-version="[0.0.0,1.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: %providerName
