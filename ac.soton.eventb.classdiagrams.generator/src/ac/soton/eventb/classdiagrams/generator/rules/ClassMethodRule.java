@@ -20,7 +20,6 @@ import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
 import ac.soton.eventb.emf.diagrams.generator.IRule;
-import ac.soton.eventb.emf.diagrams.generator.utils.Is;
 import ac.soton.eventb.emf.diagrams.generator.utils.Make;
 
 public class ClassMethodRule extends AbstractRule  implements IRule {
@@ -31,33 +30,25 @@ public class ClassMethodRule extends AbstractRule  implements IRule {
 	public boolean enabled(EventBElement sourceElement) throws Exception{
 		assert(sourceElement instanceof ClassMethod);
 		if (!(((ClassMethod)sourceElement).eContainer() instanceof Class)) return false;
-		return true;
+		return ((Class)((ClassMethod)sourceElement).eContainer()).getElaborates() != null;
 	}
 	
-	@Override
-	public boolean dependenciesOK(EventBElement sourceElement, final List<GenerationDescriptor> generatedElements) throws Exception  {
-		Class parentClass = (Class) ((ClassMethod)sourceElement).eContainer();	
-		if (parentClass.getElaborates() != null || Is.generated(generatedElements,null,null,parentClass.getName())) {
-			return true;
-		}else{
-			return false;
-		}
-	}
 
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
-		Class parentClass = (Class) ((ClassMethod)sourceElement).eContainer();	
-		EventBNamed classSet = parentClass.getElaborates();
 		ClassMethod element = (ClassMethod)sourceElement;
+		Class parentClass = (Class) element.eContainer();	
+		EventBNamed classSet = parentClass.getElaborates();
+		String selfName = parentClass.getSelfName();
 		EList<Event> events = element.getElaborates();
 
 		//create a parameter and its typing guard for each elaborated event
 		
 		//prepare the strings
-		String parameterName = Strings.CLASS_PARAMETER_NAME("this"+parentClass.getName());
-		String guardName = Strings.CLASS_PARAMETER_GUARD_NAME("this"+parentClass.getName());
-		String guardPredicate = Strings.CLASS_PARAMETER_GUARD_PRED("this"+parentClass.getName(), classSet.getName());
+		String parameterName = Strings.CLASS_PARAMETER_NAME(selfName);
+		String guardName = Strings.CLASS_PARAMETER_GUARD_NAME(selfName);
+		String guardPredicate = Strings.CLASS_PARAMETER_GUARD_PRED(selfName, classSet.getName());
 		
 		//make the descriptors
 		for (Event elaboratedEvent : events){
