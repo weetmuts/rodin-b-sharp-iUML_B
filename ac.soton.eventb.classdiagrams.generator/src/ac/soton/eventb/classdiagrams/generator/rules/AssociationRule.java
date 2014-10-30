@@ -50,7 +50,7 @@ protected static final EReference elaborates = CoreextensionPackage.Literals.EVE
 			newGeneratedTypePredicate = (EventBElement) Make.invariant(Strings.ASSOCIATION_PRED_NAME(element.getName()), Strings.ASSOCIATION_PRED(element), element.getComment());
 			newGeneratedTypePredicateContainer = invariants;
 			if (!element.isFunctional() && element.isInjective()){
-				newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), Strings.ASSOCIATION_PRED_INJECTIVE(element), element.getComment());
+				newGeneratedInjectionPredicate = (EventBElement) Make.invariant(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), Strings.ASSOCIATION_PRED_INJECTIVE(element), element.getComment());
 			}
 			break;
 		}
