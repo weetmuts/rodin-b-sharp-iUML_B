@@ -20,9 +20,11 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 
@@ -50,7 +52,7 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 	 * @return a new child instance.
 	 */
 	protected Object getNewChild() {
-		EObject container = EcoreUtil.getRootContainer(eObject);
+		EventBObject container = eObject instanceof EventBObject? ((EventBObject)eObject).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null;
 		String popupTitle = "no name";
 		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
 		
@@ -203,7 +205,7 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 	}
 	
 	public EventBNamed getGenerated(EventBNamed pEventBNamed) {
-		EObject container = EcoreUtil.getRootContainer(pEventBNamed);
+		EventBObject container = pEventBNamed instanceof EventBObject? ((EventBObject)pEventBNamed).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null;
 		List<EventBElement> objectsToCompare = new LinkedList<EventBElement>();
 		
 		if (container instanceof Machine){

@@ -19,6 +19,8 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Class;
@@ -70,7 +72,7 @@ public class ClassAttributeCreateCommand extends EditElementCommand {
 		Class owner = (Class) getElementToEdit();
 	
 //+++
-		if (EcoreUtil.getRootContainer(owner) instanceof Context) {
+		if ((owner instanceof EventBObject? ((EventBObject)owner).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null) instanceof Context) {
 			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
 			newElement.setDataKind(DataKind.VARIABLE);

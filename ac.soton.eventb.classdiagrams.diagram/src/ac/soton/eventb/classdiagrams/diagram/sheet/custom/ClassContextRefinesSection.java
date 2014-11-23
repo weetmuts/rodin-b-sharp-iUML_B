@@ -15,8 +15,10 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Class;
@@ -44,11 +46,9 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 	 */
 
 	protected Object getNewChild() {
-		EObject container = EcoreUtil.getRootContainer(eObject);
+		EventBObject container = eObject instanceof EventBObject? ((EventBObject)eObject).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null;
 		String popupTitle = "no name";
-		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;
-		
-		
+		List<EventBNamed> valuesList = new LinkedList<EventBNamed>() ;	
 		if (container instanceof Context){
 			List<Context> contexts = ((Context) container).getExtends();
 			

@@ -19,6 +19,8 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 
 import ac.soton.eventb.classdiagrams.Association;
@@ -97,7 +99,7 @@ public class AssociationCreateCommand extends EditElementCommand {
 		Association newElement = ClassdiagramsFactory.eINSTANCE
 				.createAssociation();
 //+++
-		if (EcoreUtil.getRootContainer(getContainer()) instanceof Context) {
+		if ((getContainer() instanceof EventBObject? ((EventBObject)getContainer()).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null) instanceof Context) {
 			newElement.setDataKind(DataKind.CONSTANT);
 		} else {
 			newElement.setDataKind(DataKind.VARIABLE);

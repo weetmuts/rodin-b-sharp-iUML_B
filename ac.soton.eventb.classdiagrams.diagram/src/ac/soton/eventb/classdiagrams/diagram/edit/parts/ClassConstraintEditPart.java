@@ -55,6 +55,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.machine.Machine;
@@ -633,10 +634,9 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		
 		Object theorem = DiagramUtils.getModelFeatureValue(this, "theorem");
 		EObject element =  DiagramUtils.unwrap(this);
-		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)EcoreUtil.getRootContainer(element);
+		EventBObject container = element instanceof EventBObject? ((EventBObject)element).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null;
 		Image image = null;
 		//TODO: fix the dynamic display of theorem icon
 		if (false){ //theorem instanceof Boolean && ((Boolean)theorem).booleanValue()==true){
