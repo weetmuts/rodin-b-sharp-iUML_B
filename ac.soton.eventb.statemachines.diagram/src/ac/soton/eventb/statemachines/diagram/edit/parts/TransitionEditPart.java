@@ -11,17 +11,32 @@ import java.util.Collection;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.KeyEvent;
+import org.eclipse.draw2d.KeyListener;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.LayerConstants;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITreeBranchEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.widgets.Composite;
+import org.eventb.emf.core.machine.Action;
+import org.eventb.emf.core.machine.Guard;
+import org.eventb.emf.core.machine.Witness;
 
+import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.TransitionItemSemanticEditPolicy;
@@ -43,7 +58,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	public TransitionEditPart(View view) {
 		super(view);
 	}
-
+	
 	/**
 	 * @generated
 	 */
@@ -184,4 +199,107 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 
 		super.handleNotificationEvent(event);
 	}
+	
+	
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure=null;
+	String feedbackText=null;;
+
+	
+	/*
+	 * Provides mouse over feedback:
+	 * Customised to  show the contents (params, witnesses, guards and actions) of the method
+	 * @custom
+	 */
+	@Override
+	public void showTargetFeedback(Request request) {
+		super.showTargetFeedback(request);
+		// the feedback layer figures do not receive mouse e
+		if (feedbackText==null) {
+			feedbackText = getMethodText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				bounds.setLocation(getFigure().getBounds().getLocation()
+						.translate(200, 100));
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+	
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
+		}
+	}
+
+	private String getMethodText() {
+		Transition method = (Transition) resolveSemanticElement();
+		String text = "";
+
+		if (method.getParameters().size()>0){
+			text = text + "\nParameters: \n"; 
+			for (TypedParameter p : method.getParameters()){
+				text = text + "\t"+p.getName()+" : "+p.getType()+"\n";
+			}
+		}
+		if (method.getWitnesses().size()>0){
+			text = text + "\nWitnesses: \n";
+			for (Witness w : method.getWitnesses()){
+				text = text + "\t"+w.getName()+" : "+indent(w.getName().length(),w.getPredicate())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+			}
+		}
+		if (method.getGuards().size()>0){
+			text = text + "\nGuards: \n";
+			for (Guard w : method.getGuards()){
+				text = text + "\t"+w.getName()+":"+indent(w.getName().length(),w.getPredicate())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+			}
+		}
+		if (method.getActions().size()>0){
+			text = text + "\nActions: \n";
+			for (Action w : method.getActions()){
+				text = text + "\t"+w.getName()+" : "+indent(w.getName().length(),w.getAction())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+			}
+		}
+		
+		if (text.length()>0){
+			text = method.getLabel()
+				+(method.isExtended()? "  [extended]":"")
+				+(method.getComment()!=null && method.getComment().length()>0? "  //"+method.getComment():"")+"\n"
+				+text;
+		}
+
+		return text;
+	}
+	
+	private static String indent(int nameLength, String text){
+		if (text==null || text.length()<1) return "";
+		int tabs = ((nameLength+1)/4) + 1;
+		String indent = "";
+		for (int i=0; i<tabs; i++){
+			indent = indent+"\t";
+		}
+		return "\t"+text.replace("\n", "\n"+indent);
+	}
+
+	/* Erases mouse-over feedback.
+	 * @custom
+	 */
+	@Override
+	public void eraseTargetFeedback(Request request) {
+		super.eraseTargetFeedback(request);
+		if (request instanceof CreateConnectionRequest)
+			return;
+		
+		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+		if (layer != null && feedbackFigure != null
+				&& feedbackFigure.getParent() != null) {
+			layer.remove(feedbackFigure);
+		}
+		feedbackFigure = null;
+		feedbackText = null;
+	}
+
 }
