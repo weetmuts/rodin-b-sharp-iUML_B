@@ -19,6 +19,7 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
 
+import ac.soton.eventb.emf.diagrams.sheet.AbstractEnumerationPropertySection;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
@@ -31,18 +32,15 @@ import ac.soton.eventb.statemachines.StatemachinesPackage;
 public class InstancesPropertySection extends AbstractEnumerationPropertySection {
 	
 	@Override
-	protected boolean isEqual(int index) {
-		return getAvailableDataElements().get(index)==((Statemachine) eObject).getInstances();
-	}
-
-	@Override
 	protected String[] getEnumerationFeatureValues() {
-		// find all data elements in scope
-		List<EventBNamed> values = getAvailableDataElements();
+		List<Object> values = getAvailableDataElements();
 		String[] ret = new String[values.size()];
 		for (int i = 0; i < values.size(); i++) {
-			if (values.get(i)==null) ret[i] = "";
-			else ret[i] = values.get(i).eClass().getName()+": "+values.get(i).getName();
+			if (values.get(i)instanceof EventBNamed) {
+				ret[i] = ((EventBNamed)values.get(i)).eClass().getName()+": "+((EventBNamed)values.get(i)).getName();
+			}else{
+				ret[i] = "";
+			}
 		}
 		return ret;
 	}
@@ -51,11 +49,6 @@ public class InstancesPropertySection extends AbstractEnumerationPropertySection
 	protected String getFeatureAsText() {
 		EventBNamedCommentedElement instances = ((Statemachine) eObject).getInstances();
 		return instances==null? "" : instances.getName();
-	}
-
-	@Override
-	protected Object getFeatureValue(int index) {
-		return getAvailableDataElements().get(index);
 	}
 
 	@Override
@@ -68,17 +61,17 @@ public class InstancesPropertySection extends AbstractEnumerationPropertySection
 		return StatemachinesPackage.Literals.STATEMACHINE__INSTANCES;
 	}
 
-
-	private List<EventBNamed> getAvailableDataElements(){
+	@Override
+	protected List<Object> getAvailableDataElements(){
 		EventBNamedCommentedComponentElement container = (EventBNamedCommentedComponentElement)((EventBElement)eObject).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
 		// find all data elements in scope
-		List<EventBNamed> values = getAvailableDataElements(container);
+		List<Object> values = getAvailableDataElements(container);
 		values.add(0, null);
 		return values;
 	}
 	
-	private List<EventBNamed> getAvailableDataElements(EventBNamedCommentedComponentElement container) {
-		List<EventBNamed> list =  new ArrayList<EventBNamed>() ;
+	private List<Object> getAvailableDataElements(EventBNamedCommentedComponentElement container) {
+		List<Object> list =  new ArrayList<Object>() ;
 		if (container instanceof Machine){
 			Machine m = ((Machine)container);
 			list.addAll(m.getVariables());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 University of Southampton.
+ * Copyright (c) 2014 University of Southampton.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import ac.soton.eventb.emf.diagrams.sheet.AbstractEnumerationPropertySection;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.TranslationKind;
@@ -20,7 +21,6 @@ import ac.soton.eventb.statemachines.TranslationKind;
 /**
  * Translation property section for Statemachine.
  * 
- * @author vitaly
  *
  */
 public class TranslationPropertySection extends AbstractEnumerationPropertySection {
@@ -31,20 +31,11 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 		translationNameMap.put(TranslationKind.MULTIVAR.getName(), "Variables");
 		//translationNameMap.put(TranslationKind.REFINEDVAR.getName(), "Refined Enumeration (EXPERIMENTAL)");
 	}
-
-	@Override
-	protected boolean isEqual(int index) {
-		return TranslationKind.VALUES.get(index).equals(((Statemachine) eObject).getTranslation());
-	}
+	private static final String[] stringValues = {"Enumeration","Variables"};
 
 	@Override
 	protected String[] getEnumerationFeatureValues() {
-		List<TranslationKind> values = TranslationKind.VALUES;
-		String[] ret = new String[values.size() - 1];			// - 1 is due to refined enumeration not being presented in UI 
-		for (int i = 0; i < values.size()-1; i++) {				// "
-			ret[i] = translationNameMap.get(values.get(i).getName());
-		}
-		return ret;
+		return  stringValues;
 	}
 
 	@Override
@@ -53,8 +44,12 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 	}
 
 	@Override
-	protected Object getFeatureValue(int index) {
-		return TranslationKind.VALUES.get(index);
+	protected Object getFeatureValue(String selection) {
+		for (TranslationKind tk : TranslationKind.values()){
+			if (translationNameMap.get(tk.getName()).equals(selection))
+				return tk;
+		}
+		return null;		
 	}
 
 	@Override
@@ -65,6 +60,11 @@ public class TranslationPropertySection extends AbstractEnumerationPropertySecti
 	@Override
 	protected EStructuralFeature getFeature() {
 		return StatemachinesPackage.Literals.STATEMACHINE__TRANSLATION;
+	}
+
+	@Override
+	protected List<TranslationKind> getAvailableDataElements() {
+		return TranslationKind.VALUES;
 	}
 
 }

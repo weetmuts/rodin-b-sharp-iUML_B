@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 University of Southampton.
+ * Copyright (c) 2014 University of Southampton.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,29 +7,26 @@
  */
 package ac.soton.eventb.statemachines.diagram.sheet.custom;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.machine.Machine;
 
+import ac.soton.eventb.emf.diagrams.sheet.AbstractEnumerationPropertySection;
 import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
  * Refines property section for State.
  * 
- * @author vitaly
  *
  */
 public class RefinesStatePropertySection extends AbstractEnumerationPropertySection {
-
-	private EList<EObject> statesToRefine;
-
-	@Override
-	protected boolean isEqual(int index) {
-		return false;
-	}
 
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -38,22 +35,14 @@ public class RefinesStatePropertySection extends AbstractEnumerationPropertySect
 
 	@Override
 	protected String[] getEnumerationFeatureValues() {
-		EObject container = EcoreUtil.getRootContainer(eObject);
-		if (container instanceof Machine) {
-			Machine machine = (Machine) container;
-			EList<Machine> abstractMachines = machine.getRefines();
-			if (abstractMachines.size() > 0) {
-				statesToRefine = abstractMachines.get(0).getAllContained(StatemachinesPackage.Literals.STATE, true);
-				String[] values = new String[statesToRefine.size()];
-				int i = 0;
-				for (EObject s : statesToRefine) {
-					values[i++] = s == null ? ""
-							: ((State) s).getName();
-				}
-				return values;
-			}
+		EList<EObject> statesToRefine = getStatesToRefine();
+		String[] values = new String[statesToRefine.size()];
+		int i = 0;
+		for (EObject sm : statesToRefine) {
+			values[i++] = sm == null ? ""
+					: ((Statemachine) sm).getName();
 		}
-		return new String[0];
+		return values;
 	}
 
 	@Override
@@ -64,13 +53,26 @@ public class RefinesStatePropertySection extends AbstractEnumerationPropertySect
 	}
 
 	@Override
-	protected Object getFeatureValue(int index) {
-		return statesToRefine.get(index);
-	}
-
-	@Override
 	protected String getLabelText() {
 		return "Refines:";
 	}
 
+	@Override
+	protected List<EObject> getAvailableDataElements(){
+		return (List<EObject>)getStatesToRefine();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private EList<EObject> getStatesToRefine(){
+		EObject container = EcoreUtil.getRootContainer(eObject);
+		if (container instanceof Machine) {
+			Machine machine = (Machine) container;
+			EList<Machine> abstractMachines = machine.getRefines();
+			if (abstractMachines.size() > 0) {
+				return abstractMachines.get(0).getAllContained(StatemachinesPackage.Literals.STATE, true);
+			}
+		}
+		return (EList<EObject>) ECollections.EMPTY_ELIST;
+	}
+	
 }

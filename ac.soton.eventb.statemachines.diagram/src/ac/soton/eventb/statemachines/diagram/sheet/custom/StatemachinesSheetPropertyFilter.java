@@ -61,36 +61,6 @@ public class StatemachinesSheetPropertyFilter {
 	}
 	
 	/**
-	 * Filter for properties of named element.
-	 */
-	public static final class NamedElementFilter implements IFilter {
-		@Override
-		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBNamed;
-		}
-	}
-	
-	/**
-	 * Filter for properties of labelled element.
-	 */
-	public static final class LabeledElementFilter implements IFilter {
-		@Override
-		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBLabeled;
-		}
-	}
-	
-	/**
-	 * Filter for comment property of commented element.
-	 */
-	public static final class CommentedElementFilter implements IFilter {
-		@Override
-		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof EventBCommented;
-		}
-	}
-	
-	/**
 	 * Filter for properties of transition element.
 	 */
 	public static final class TransitionFilter implements IFilter {
@@ -165,22 +135,12 @@ public class StatemachinesSheetPropertyFilter {
 	}
 	
 	/**
-	 * Filter for properties of tate element.
+	 * Filter for properties of State element.
 	 */
 	public static final class StateFilter implements IFilter {
 		@Override
 		public boolean select(Object toTest) {
 			return unwrap(toTest) instanceof State;
-		}
-	}
-	
-	/**
-	 * Filter for properties of invariant element.
-	 */
-	public static final class InvariantFilter implements IFilter {
-		@Override
-		public boolean select(Object toTest) {
-			return unwrap(toTest) instanceof Invariant;
 		}
 	}
 	

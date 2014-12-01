@@ -233,6 +233,14 @@ http://www.eclipse.org/legal/epl-v10.html
           <propertyTab
                afterTab="property.tab.overview"
                category="custom_domain"
+               id="property.tab.invariants"
+               image="icons/obj16/inv_obj.gif"
+               indented="false"
+               label="Invariants">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.invariants"
+               category="custom_domain"
                id="property.tab.parameters"
                image="icons/obj16/var_obj.gif"
                indented="true"
@@ -298,24 +306,24 @@ http://www.eclipse.org/legal/epl-v10.html
             <input type="ac.soton.eventb.statemachines.diagram.navigator.StatemachinesAbstractNavigatorItem"/>
          </propertySection>
          <propertySection
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.CommentPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$CommentedElementFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection$Filter"
                id="property.section.comment"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.NamePropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$NamedElementFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection$Filter"
                id="property.section.name"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.name"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.LabelPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.LabelPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$LabeledElementFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.LabelPropertySection$Filter"
                id="property.section.label"
                tab="property.tab.overview">
          </propertySection>
@@ -323,7 +331,7 @@ http://www.eclipse.org/legal/epl-v10.html
                   
          <propertySection
                afterSection="property.section.label"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ExtendedPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ExtendedPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
                id="property.section.extended"
@@ -331,7 +339,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.extended"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ElaboratesPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ElaboratesPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
                id="property.section.elaborates"
@@ -360,21 +368,21 @@ http://www.eclipse.org/legal/epl-v10.html
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$StateFilter"
                id="property.section.invariants"
-               tab="property.tab.overview">
+               tab="property.tab.invariants">
          </propertySection>
          <propertySection
                afterSection="property.section.name"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.PredicatePropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.PredicatePropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$InvariantFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.PredicatePropertySection$Filter"
                id="property.section.predicate"
                tab="property.tab.overview">
          </propertySection>
          <propertySection
                afterSection="property.section.predicate"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.TheoremPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.TheoremPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$InvariantFilter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.TheoremPropertySection$Filter"
                id="property.section.theorem"
                tab="property.tab.overview">
          </propertySection>
@@ -404,7 +412,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.translation"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ElaboratesDataPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ElaboratesDataPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$StatemachineElaboratesDataFilter"
                id="property.section.elaboratesData"
@@ -414,7 +422,7 @@ http://www.eclipse.org/legal/epl-v10.html
          
          <propertySection
                afterSection="property.section.elaboratesData"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ParametersPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ParametersPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
                id="property.section.parameters"
@@ -422,7 +430,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.parameters"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.WitnessesPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.WitnessesPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
                id="property.section.witnesses"
@@ -430,7 +438,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.witnesses"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.GuardsPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.GuardsPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionGuardsFilter"
                id="property.section.guards"
@@ -438,7 +446,7 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.guards"
-               class="ac.soton.eventb.statemachines.diagram.sheet.custom.ActionsPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.ActionsPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.statemachines.diagram.sheet.custom.StatemachinesSheetPropertyFilter$TransitionElaboratesFilter"
                id="property.section.actions"

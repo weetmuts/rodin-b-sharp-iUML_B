@@ -8,6 +8,8 @@
 package ac.soton.eventb.statemachines.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+
+import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
 import ac.soton.eventb.statemachines.Statemachine;
 
 /**
