@@ -16,8 +16,10 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
@@ -59,16 +61,18 @@ import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Guard;
 import org.eventb.emf.core.machine.MachinePackage;
-import org.eventb.emf.core.machine.Parameter;
 import org.eventb.emf.core.machine.Witness;
 
 import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassMethodItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextNonResizableEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSelectionEditPolicy;
+import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorPlugin;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
+import ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory;
+import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
@@ -649,7 +653,10 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 //		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 	
-	Label feedbackFigure;
+	
+	/////////// mouse-over feedback text ///////////
+	Label feedbackFigure=null;
+	String feedbackText=null;;
 	
 	/*
 	 * Provides mouse over feedback:
@@ -660,30 +667,34 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 	public void showTargetFeedback(Request request) {
 		super.showTargetFeedback(request);
 		// the feedback layer figures do not receive mouse e
-		if (feedbackFigure == null) {
-			feedbackFigure = new Label(getMethodText());
-			feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
-			Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
-			bounds.setLocation(getFigure().getBounds().getLocation()
-					.translate(0, 20));
-			feedbackFigure.setBounds(bounds);
-			feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
-			feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
-			feedbackFigure.setOpaque(true);
-			//feedbackFigure.setBorder(new LineBorder());
-
-			IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
-			layer.add(feedbackFigure);
+		if (feedbackText==null) {
+			feedbackText = getMethodText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				bounds.setLocation(getFigure().getBounds().getLocation()
+						.translate(0, 20));
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+	
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
 		}
 	}
 
 	private String getMethodText() {
 		ClassMethod method = (ClassMethod) resolveSemanticElement();
-		String text = method.getLabel()+(method.getComment()!=null && method.getComment().length()>0? " //"+method.getComment():"")+"\n";
+		String text = "";
+
 		if (method.getParameters().size()>0){
-			text = text + "\nParameters: \n";
-			for (Parameter p : method.getParameters()){
-				text = text + "\t"+p.getName()+"\n";
+			text = text + "\nParameters: \n"; 
+			for (TypedParameter p : method.getParameters()){
+				text = text + "\t"+p.getName()+" : "+p.getType()+"\n";
 			}
 		}
 		if (method.getWitnesses().size()>0){
@@ -704,6 +715,13 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 				text = text + "\t"+w.getName()+" : "+w.getAction()+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
 			}
 		}
+		
+		if (text.length()>0){
+			text = method.getLabel()
+				+(method.isExtended()? "  [extended]":"")
+				+(method.getComment()!=null && method.getComment().length()>0? "  //"+method.getComment():"")+"\n"
+				+text;
+		}
 
 		return text;
 	}
@@ -723,6 +741,7 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 			layer.remove(feedbackFigure);
 		}
 		feedbackFigure = null;
+		feedbackText = null;
 	}
 	
 }
