@@ -18,7 +18,6 @@ import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.emf.diagrams.sheet.AbstractEnumerationPropertySection;
 import ac.soton.eventb.statemachines.State;
-import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
@@ -40,7 +39,7 @@ public class RefinesStatePropertySection extends AbstractEnumerationPropertySect
 		int i = 0;
 		for (EObject sm : statesToRefine) {
 			values[i++] = sm == null ? ""
-					: ((Statemachine) sm).getName();
+					: ((State) sm).getName();
 		}
 		return values;
 	}
