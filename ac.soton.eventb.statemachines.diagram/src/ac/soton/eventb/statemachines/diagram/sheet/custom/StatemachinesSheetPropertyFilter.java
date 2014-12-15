@@ -12,12 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.IFilter;
-import org.eventb.emf.core.EventBCommented;
-import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.machine.Invariant;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Fork;
 import ac.soton.eventb.statemachines.Junction;
