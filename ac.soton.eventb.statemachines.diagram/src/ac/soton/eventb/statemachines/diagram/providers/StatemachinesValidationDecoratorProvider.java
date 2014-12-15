@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditDomain;
@@ -125,7 +126,8 @@ public class StatemachinesValidationDecoratorProvider extends AbstractProvider
 	}
 
 	/**
-	 * @generated
+	 * check for null editing domain
+	 * @generated NOT
 	 */
 	private static void refreshDecorators(String viewId, Diagram diagram) {
 		final List decorators = viewId != null ? (List) allDecorators
@@ -134,18 +136,16 @@ public class StatemachinesValidationDecoratorProvider extends AbstractProvider
 			return;
 		}
 		final Diagram fdiagram = diagram;
+		final TransactionalEditingDomain ed = TransactionUtil.getEditingDomain(fdiagram);
+		if (ed==null) return;
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-
 			public void run() {
 				try {
-					TransactionUtil.getEditingDomain(fdiagram).runExclusive(
+					ed.runExclusive(
 							new Runnable() {
-
 								public void run() {
-									for (Iterator it = decorators.iterator(); it
-											.hasNext();) {
-										IDecorator decorator = (IDecorator) it
-												.next();
+									for (Iterator it = decorators.iterator(); it.hasNext();) {
+										IDecorator decorator = (IDecorator) it.next();
 										decorator.refresh();
 									}
 								}
