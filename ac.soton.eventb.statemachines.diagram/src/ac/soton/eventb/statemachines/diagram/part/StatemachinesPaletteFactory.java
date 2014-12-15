@@ -90,7 +90,7 @@ public class StatemachinesPaletteFactory {
 				Messages.State1CreationTool_desc, types);
 		entry.setId("createState1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/State.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/State.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -107,7 +107,7 @@ public class StatemachinesPaletteFactory {
 				Messages.Initial2CreationTool_desc, types);
 		entry.setId("createInitial2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Initial.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Initial.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -124,7 +124,7 @@ public class StatemachinesPaletteFactory {
 				Messages.Final3CreationTool_desc, types);
 		entry.setId("createFinal3CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Final.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Final.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -141,7 +141,7 @@ public class StatemachinesPaletteFactory {
 				Messages.Any4CreationTool_desc, types);
 		entry.setId("createAny4CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/ANY.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/ANY.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -158,7 +158,7 @@ public class StatemachinesPaletteFactory {
 				Messages.Junction5CreationTool_desc, types);
 		entry.setId("createJunction5CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Junction.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Junction.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -175,7 +175,7 @@ public class StatemachinesPaletteFactory {
 				Messages.ForkJoin6CreationTool_desc, types);
 		entry.setId("createForkJoin6CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Fork.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Fork.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -191,7 +191,7 @@ public class StatemachinesPaletteFactory {
 						.singletonList(StatemachinesElementTypes.Statemachine_3001));
 		entry.setId("createStatemachine1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Statemachine.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Statemachine.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -207,7 +207,7 @@ public class StatemachinesPaletteFactory {
 						.singletonList(StatemachinesElementTypes.Invariant_3014));
 		entry.setId("createInvariant2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Invariant.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Invariant.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -223,7 +223,7 @@ public class StatemachinesPaletteFactory {
 						.singletonList(StatemachinesElementTypes.Transition_4001));
 		entry.setId("createTransition1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines/icons/png/Transition.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Transition.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
