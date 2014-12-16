@@ -799,37 +799,37 @@
             xsi:type="gmfgen:ToolEntry"
             title="State"
             description="Create new State"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/State.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/State.png"
             genNodes="//@diagram/@topLevelNodes.2 //@diagram/@childNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Initial"
             description="Create new Initial State"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Initial.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Initial.png"
             genNodes="//@diagram/@topLevelNodes.0 //@diagram/@childNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Final"
             description="Create new Final State"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Final.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Final.png"
             genNodes="//@diagram/@topLevelNodes.1 //@diagram/@childNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Any"
             description="Create new 'Any' pseudo-state for transitions from any source state"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/ANY.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Any.png"
             genNodes="//@diagram/@childNodes.6 //@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Junction"
             description="Create new 'Junction' pseudo-state for composing transitions from/to several source/target states"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Junction.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Junction.png"
             genNodes="//@diagram/@childNodes.5 //@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Fork/Join"
             description="Create new 'Fork/Join' pseudo-state for composing parallel transitions to/from several nested state machines"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Fork.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Fork.png"
             genNodes="//@diagram/@childNodes.7 //@diagram/@topLevelNodes.5"/>
       </groups>
       <groups
@@ -839,13 +839,13 @@
             xsi:type="gmfgen:ToolEntry"
             title="Statemachine"
             description="Create new Statemachine"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Statemachine.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Statemachine.png"
             genNodes="//@diagram/@childNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Invariant"
             description="Create new Invariant"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Invariant.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Invariant.png"
             genNodes="//@diagram/@childNodes.4"/>
       </groups>
       <groups
@@ -855,7 +855,7 @@
             xsi:type="gmfgen:ToolEntry"
             title="Transition"
             description="Create new Transition"
-            smallIconPath="/ac.soton.eventb.statemachines/icons/png/Transition.png"
+            smallIconPath="/ac.soton.eventb.statemachines.edit/icons/png/Transition.png"
             genLinks="//@diagram/@links.0"/>
       </groups>
     </palette>
@@ -883,12 +883,6 @@
           iD="ac.soton.eventb.statemachines.diagram.rulersAndGrid"
           name="Rulers And Grid"
           kind="RulersAndGrid"/>
-      <children
-          xsi:type="gmfgen:GenCustomPreferencePage"
-          iD="ac.soton.eventb.statemachines.diagram.behaviour"
-          name="Behaviour"
-          qualifiedClassName="ac.soton.eventb.statemachines.diagram.preferences.custom.DiagramBehaviourPreferencePage"
-          generateBoilerplate="true"/>
     </preferencePages>
   </diagram>
   <plugin

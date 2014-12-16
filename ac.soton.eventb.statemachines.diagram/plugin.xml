@@ -46,7 +46,7 @@ http://www.eclipse.org/legal/epl-v10.html
       </context>
    </extension>
 
-   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+   <!--extension point="org.eclipse.ui.newWizards" id="creation-wizard">
       <?gmfgen generated="true"?>
   	  <wizard
   	     name="%newWizardName"
@@ -56,9 +56,10 @@ http://www.eclipse.org/legal/epl-v10.html
   	     id="ac.soton.eventb.statemachines.diagram.part.StatemachinesCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
-   </extension>
+   </extension-->
 
-   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+
+   <!--extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
       <?gmfgen generated="true"?>
       <objectContribution
             id="ac.soton.eventb.statemachines.diagram.InitDiagram"
@@ -72,8 +73,8 @@ http://www.eclipse.org/legal/epl-v10.html
                id="ac.soton.eventb.statemachines.diagram.InitDiagramAction">
          </action>
       </objectContribution>
-   </extension>
-	
+   </extension-->
+
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
@@ -187,12 +188,6 @@ http://www.eclipse.org/legal/epl-v10.html
             name="%prefpage.ac.soton.eventb.statemachines.diagram.rulersAndGrid"
             category="ac.soton.eventb.statemachines.diagram.general"
             class="ac.soton.eventb.statemachines.diagram.preferences.DiagramRulersAndGridPreferencePage">
-      </page>
-      <page
-            id="ac.soton.eventb.statemachines.diagram.behaviour"
-            name="%prefpage.ac.soton.eventb.statemachines.diagram.behaviour"
-            category="ac.soton.eventb.statemachines.diagram.general"
-            class="ac.soton.eventb.statemachines.diagram.preferences.custom.DiagramBehaviourPreferencePage">
       </page>
    </extension>
 
