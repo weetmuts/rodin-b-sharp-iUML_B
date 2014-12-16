@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -68,8 +69,11 @@ import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.properties.PropertySheet;
 
+import ac.soton.eventb.statemachines.State;
+import ac.soton.eventb.statemachines.Statemachine;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesNavigatorItem;
-import ac.soton.eventb.statemachines.diagram.preferences.custom.IStatemachinesPreferenceConstants;
 
 /**
  * @generated NOT
@@ -420,32 +424,43 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
 		if (part == this) {
-			//System.out.println("may be deactivating : "+ part.getTitle());
 			deactivating = true;
 		}
 	}
 
 	@Override
 	public void partActivated(IWorkbenchPart part) {
-		//System.out.println(this.getTitle()+ " sees activating : "+ part.getTitle());
 		if (deactivating == true) {
 			if (part != this
 					&& isDirty()
 					&& !(part instanceof PropertySheet)
-					&& StatemachinesDiagramEditorPlugin
-							.getInstance()
-							.getPreferenceStore()
-							.getBoolean(
-									IStatemachinesPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE)) {
+					&& !animating()		) {
 				doSave(new NullProgressMonitor());
-				//System.out.println(this.getTitle()+ " SAVED");
 			}
 			if (part == this) {
-				//System.out.println(this.getTitle()+ " finished de-activating");
 				deactivating = false;
 			}
 		}
 	}
+	
+	/*
+	 * checks whether the Statemachine of this diagram is being animated
+	 */
+	private boolean animating(){
+		Statemachine sm = (Statemachine) this.getDiagram().getElement();
+		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
+		for (EObject eo : states){
+			if (eo instanceof State && ((State)eo).isActive()) return true;
+		}
+		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
+		for (EObject eo : transitions){
+			if (eo instanceof Transition 
+					&& ((Transition)eo).getOperations()!=null
+					&& ((Transition)eo).getOperations().size()>0) return true;
+		}
+		return false;
+	}
+	
 
 	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
