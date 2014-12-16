@@ -17,7 +17,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/State.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -26,7 +26,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Initial.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -35,7 +35,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Final.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -44,7 +44,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/ANY.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -53,7 +53,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Junction.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -62,7 +62,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Fork.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
     </tools>
     <tools
@@ -76,7 +76,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Statemachine.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
@@ -85,7 +85,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Invariant.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
     </tools>
     <tools
@@ -99,7 +99,7 @@
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="/icons/png/Transition.png"
-            bundle="ac.soton.eventb.statemachines"/>
+            bundle="ac.soton.eventb.statemachines.edit"/>
       </tools>
     </tools>
   </palette>
