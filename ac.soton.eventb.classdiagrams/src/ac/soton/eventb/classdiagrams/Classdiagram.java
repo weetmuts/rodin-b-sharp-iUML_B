@@ -9,11 +9,11 @@
  */
 package ac.soton.eventb.classdiagrams;
 
-import ac.soton.eventb.emf.diagrams.Diagram;
-
 import org.eclipse.emf.common.util.EList;
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBNamedCommentedElement;
+
+import ac.soton.eventb.emf.diagrams.Diagram;
 
 /**
  * <!-- begin-user-doc -->

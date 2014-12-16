@@ -5,8 +5,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import ac.soton.eventb.classdiagrams.navigator.ClassdiagramsNavigatorPlugin;
-
 /**
  * The activator class controls the plug-in life cycle
  */

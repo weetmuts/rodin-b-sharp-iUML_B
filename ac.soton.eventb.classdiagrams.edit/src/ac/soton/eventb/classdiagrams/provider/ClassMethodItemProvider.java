@@ -10,17 +10,11 @@
 package ac.soton.eventb.classdiagrams.provider;
 
 
-import ac.soton.eventb.classdiagrams.ClassMethod;
-import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
-import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBCommentedLabeledEventGroupElementItemProvider;
-import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBEventGroupItemProvider;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -31,6 +25,10 @@ import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eventb.emf.core.CorePackage;
+
+import ac.soton.eventb.classdiagrams.ClassMethod;
+import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBCommentedLabeledEventGroupElementItemProvider;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.classdiagrams.ClassMethod} object.

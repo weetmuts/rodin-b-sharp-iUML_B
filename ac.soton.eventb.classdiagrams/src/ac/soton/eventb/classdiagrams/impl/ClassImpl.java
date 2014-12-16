@@ -9,41 +9,28 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassConstraint;
-import ac.soton.eventb.classdiagrams.ClassMethod;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
-import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
-import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
-import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
-
-import ac.soton.eventb.emf.diagrams.Diagram;
-import ac.soton.eventb.emf.diagrams.DiagramOwner;
-import ac.soton.eventb.emf.diagrams.DiagramsPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eventb.emf.core.EventBNamed;
-
-import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
+import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
+import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 
 /**
  * <!-- begin-user-doc -->

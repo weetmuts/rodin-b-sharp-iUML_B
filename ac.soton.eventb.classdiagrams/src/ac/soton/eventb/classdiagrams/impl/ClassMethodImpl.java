@@ -9,13 +9,11 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBCommentedLabeledEventGroupElementImpl;
-import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBEventGroupImpl;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

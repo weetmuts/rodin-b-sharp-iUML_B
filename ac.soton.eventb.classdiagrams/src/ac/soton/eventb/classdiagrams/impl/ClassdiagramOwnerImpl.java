@@ -9,23 +9,19 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
-import ac.soton.eventb.classdiagrams.Classdiagram;
-import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import ac.soton.eventb.classdiagrams.Classdiagram;
+import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 
 /**
  * <!-- begin-user-doc -->

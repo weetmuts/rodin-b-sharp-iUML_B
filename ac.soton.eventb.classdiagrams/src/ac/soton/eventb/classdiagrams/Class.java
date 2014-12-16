@@ -9,14 +9,10 @@
  */
 package ac.soton.eventb.classdiagrams;
 
-import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
-
-import ac.soton.eventb.emf.diagrams.DiagramOwner;
-
 import org.eclipse.emf.common.util.EList;
 
-import org.eventb.emf.core.EventBNamedCommentedElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
 /**
  * <!-- begin-user-doc -->

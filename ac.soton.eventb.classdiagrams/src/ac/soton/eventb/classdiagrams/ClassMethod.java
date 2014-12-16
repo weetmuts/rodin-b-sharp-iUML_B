@@ -10,7 +10,6 @@
 package ac.soton.eventb.classdiagrams;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
 
 /**
  * <!-- begin-user-doc -->

@@ -9,12 +9,11 @@
  */
 package ac.soton.eventb.classdiagrams.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eventb.emf.core.impl.EventBNamedCommentedDerivedPredicateElementImpl;
+
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eventb.emf.core.impl.EventBNamedCommentedDerivedPredicateElementImpl;
 
 /**
  * <!-- begin-user-doc -->

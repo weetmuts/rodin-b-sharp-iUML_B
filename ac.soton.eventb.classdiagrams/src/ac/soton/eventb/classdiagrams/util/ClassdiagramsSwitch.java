@@ -9,31 +9,10 @@
  */
 package ac.soton.eventb.classdiagrams.util;
 
-import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.ClassAttribute;
-import ac.soton.eventb.classdiagrams.ClassConstraint;
-import ac.soton.eventb.classdiagrams.ClassMethod;
-import ac.soton.eventb.classdiagrams.Classdiagram;
-import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
-import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRelationDataElaborationElement;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
-
-import ac.soton.eventb.emf.diagrams.Diagram;
-import ac.soton.eventb.emf.diagrams.DiagramOwner;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
@@ -45,6 +24,24 @@ import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.EventBNamedCommentedPredicateElement;
 import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.EventBPredicate;
+
+import ac.soton.eventb.classdiagrams.Association;
+import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.ClassConstraint;
+import ac.soton.eventb.classdiagrams.ClassMethod;
+import ac.soton.eventb.classdiagrams.Classdiagram;
+import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRelationDataElaborationElement;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
+import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
 
 /**
  * <!-- begin-user-doc -->

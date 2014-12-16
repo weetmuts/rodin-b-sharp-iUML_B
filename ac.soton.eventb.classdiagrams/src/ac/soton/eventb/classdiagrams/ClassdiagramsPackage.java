@@ -9,13 +9,13 @@
  */
 package ac.soton.eventb.classdiagrams;
 
-import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eventb.emf.core.CorePackage;
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 /**
  * <!-- begin-user-doc -->

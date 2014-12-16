@@ -9,16 +9,6 @@
  */
 package ac.soton.eventb.classdiagrams.provider;
 
-import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
-import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-
-import ac.soton.eventb.classdiagrams.util.ClassdiagramsAdapterFactory;
-
-import ac.soton.eventb.emf.diagrams.DiagramOwner;
-import ac.soton.eventb.emf.diagrams.DiagramsPackage;
-
-import ac.soton.eventb.emf.diagrams.util.DiagramsSwitch;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,16 +16,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.edit.command.CommandParameter;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ChildCreationExtenderManager;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -52,12 +37,17 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eventb.emf.core.Annotation;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
-
 import org.eventb.emf.core.util.CoreSwitch;
+
+import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
+import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.util.ClassdiagramsAdapterFactory;
+import ac.soton.eventb.emf.diagrams.DiagramOwner;
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
+import ac.soton.eventb.emf.diagrams.util.DiagramsSwitch;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.

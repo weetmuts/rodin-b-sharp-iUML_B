@@ -29,10 +29,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eventb.core.IEventBRoot;
-import org.eventb.core.IMachineRoot;
-import org.eventb.core.basis.EventBRoot;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
