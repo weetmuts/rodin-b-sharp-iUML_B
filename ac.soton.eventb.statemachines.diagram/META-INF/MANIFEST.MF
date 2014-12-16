@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.statemachines.diagram; singleton:=true
-Bundle-Version: 2.1.1
+Bundle-Version: 3.0.0
 Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin
 Bundle-Vendor: %providerName
@@ -17,7 +17,6 @@ Export-Package: ac.soton.eventb.statemachines.diagram.edit.commands,
  ac.soton.eventb.statemachines.diagram.parsers,
  ac.soton.eventb.statemachines.diagram.part,
  ac.soton.eventb.statemachines.diagram.preferences,
- ac.soton.eventb.statemachines.diagram.preferences.custom,
  ac.soton.eventb.statemachines.diagram.providers,
  ac.soton.eventb.statemachines.diagram.sheet,
  ac.soton.eventb.statemachines.diagram.sheet.custom
@@ -28,10 +27,7 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  org.eclipse.gmf.runtime.diagram.ui.properties;bundle-version="[1.4.2,2.0.0)",
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide;bundle-version="[1.2.1,2.0.0)",
  org.eclipse.ocl.ecore;bundle-version="[3.1.1,4.0.0)",
- org.rodinp.keyboard.ui;bundle-version="[2.0.0,3.0.0)",
- org.eventb.ui;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.emf.ecore;bundle-version="[2.7.0,3.0.0)",
- org.eventb.emf.persistence;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
  org.eclipse.core.resources;bundle-version="[3.7.101,4.0.0)",
  org.eclipse.core.expressions;bundle-version="[3.4.300,4.0.0)",
@@ -49,13 +45,21 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  org.eclipse.gmf.runtime.diagram.ui.render;bundle-version="[1.4.1,2.0.0)",
  org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="[1.4.1,2.0.0)",
  org.eclipse.gmf.runtime.draw2d.ui;bundle-version="[1.5.0,2.0.0)",
- ac.soton.eventb.statemachines;bundle-version="[2.0.0,3.0.0)",
  org.eclipse.emf.ecore.edit;bundle-version="[2.7.1,3.0.0)",
- org.eventb.emf.core;bundle-version="[3.0.0,4.0.0)",
- ac.soton.eventb.emf.core.extension;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.emf.validation;bundle-version="[1.4.0,2.0.0)",
  org.eclipse.gef;bundle-version="[3.7.0,4.0.0)",
  org.eclipse.gmf.tooling.runtime;bundle-version="[3.1.0,4.0.0)",
- ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.1.0,4.0.0)"
+ org.rodinp.keyboard.ui;bundle-version="[2.0.0,3.0.0)",
+ org.eventb.ui;bundle-version="[3.0.0,4.0.0)",
+ org.eventb.emf.core.edit;bundle-version="[1.0.0,2.0.0)",
+ org.eventb.emf.persistence;bundle-version="[3.0.0,4.0.0)",
+ ac.soton.eventb.emf.core.extension;bundle-version="[4.0.0,5.0.0)",
+ ac.soton.eventb.emf.core.extension.edit;bundle-version="[1.0.0,2.0.0)",
+ ac.soton.eventb.emf.diagrams;bundle-version="[4.0.1,5.0.0)",
+ ac.soton.eventb.emf.diagrams.edit;bundle-version="[2.0.1,3.0.0)",
+ ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.1.0,4.0.0)",
+ ac.soton.eventb.statemachines;bundle-version="[3.0.0,4.0.0)",
+ ac.soton.eventb.statemachines.edit;bundle-version="[1.0.0,2.0.0)",
+ org.eventb.emf.core;bundle-version="[4.0.0,5.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
