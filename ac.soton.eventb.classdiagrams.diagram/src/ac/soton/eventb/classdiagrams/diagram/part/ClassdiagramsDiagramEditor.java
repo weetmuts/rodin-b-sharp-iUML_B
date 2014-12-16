@@ -434,15 +434,7 @@ public class ClassdiagramsDiagramEditor extends DiagramDocumentEditor implements
 	public void partActivated(IWorkbenchPart part) {
 		//System.out.println(this.getTitle()+ " sees activating : "+ part.getTitle());
 		if (deactivating == true) {
-			if (part != this
-					&& isDirty()
-					&& !(part instanceof PropertySheet)
-//					&& ClassdiagramsDiagramEditorPlugin
-//							.getInstance()
-//							.getPreferenceStore()
-//							.getBoolean(
-//									IClassDiagramsPreferenceConstants.PREF_AUTOSAVE_ON_DEACTIVATE)
-									) {
+			if (part != this && isDirty() && !(part instanceof PropertySheet)) {
 				doSave(new NullProgressMonitor());
 			}
 			if (part == this) {
