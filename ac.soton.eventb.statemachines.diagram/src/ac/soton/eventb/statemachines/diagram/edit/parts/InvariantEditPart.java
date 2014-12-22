@@ -10,16 +10,20 @@ package ac.soton.eventb.statemachines.diagram.edit.parts;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.DirectEditManager;
@@ -59,9 +63,15 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Text;
+import org.eventb.emf.core.machine.Action;
+import org.eventb.emf.core.machine.Guard;
+import org.eventb.emf.core.machine.Invariant;
+import org.eventb.emf.core.machine.Witness;
 import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
 import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
+import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
+import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -682,4 +692,76 @@ public class InvariantEditPart extends CompartmentEditPart implements
 		return new WrappingLabel();
 	}
 
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure=null;
+	String feedbackText=null;;
+
+	
+	/*
+	 * Provides mouse over feedback:
+	 * Customised to  show the contents of the invariant
+	 * @custom
+	 */
+	@Override
+	public void showTargetFeedback(Request request) {
+		super.showTargetFeedback(request);
+		// the feedback layer figures do not receive mouse e
+		if (feedbackText==null) {
+			feedbackText = getMethodText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				bounds.setLocation(getFigure().getBounds().getLocation()
+						.translate(100, 100));
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGreen);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+	
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
+		}
+	}
+
+	private String getMethodText() {
+		Invariant invariant = (Invariant) resolveSemanticElement();
+		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
+		text = text + indent(1,"",invariant.getPredicate());
+		if (invariant.getComment().length()>0) {
+			text = text + "\n"+ indent(2, "//", invariant.getComment());
+		}
+		return text;
+	}
+	
+	private static String indent(int tabs, String prefix, String text){
+		if (text==null || text.length()<1) return "";
+		String indent = "";
+		for (int i=0; i<tabs; i++){
+			indent = indent+"\t";
+		}
+		indent = indent+prefix;
+		return indent+text.replace("\n", "\n"+indent);
+	}
+
+	/* Erases mouse-over feedback.
+	 * @custom
+	 */
+	@Override
+	public void eraseTargetFeedback(Request request) {
+		super.eraseTargetFeedback(request);
+		if (request instanceof CreateConnectionRequest)
+			return;
+		
+		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+		if (layer != null && feedbackFigure != null
+				&& feedbackFigure.getParent() != null) {
+			layer.remove(feedbackFigure);
+		}
+		feedbackFigure = null;
+		feedbackText = null;
+	}
+	
 }

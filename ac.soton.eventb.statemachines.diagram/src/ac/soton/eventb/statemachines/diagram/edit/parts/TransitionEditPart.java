@@ -222,7 +222,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
 				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
 				bounds.setLocation(getFigure().getBounds().getLocation()
-						.translate(200, 100));
+						.translate(200, -100));
 				feedbackFigure.setBounds(bounds);
 				feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
@@ -248,19 +248,29 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		if (method.getWitnesses().size()>0){
 			text = text + "\nWitnesses: \n";
 			for (Witness w : method.getWitnesses()){
-				text = text + "\t"+w.getName()+" : "+indent(w.getName().length(),w.getPredicate())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getPredicate());
+				if (w.getComment().length()>0){
+					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+				}
 			}
 		}
 		if (method.getGuards().size()>0){
 			text = text + "\nGuards: \n";
 			for (Guard w : method.getGuards()){
-				text = text + "\t"+w.getName()+":"+indent(w.getName().length(),w.getPredicate())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+				text = text + "\t"+w.getName()+(w.isTheorem()? "(THEOREM) :\n" : " :\n");
+				text = text + indent(2,"",w.getPredicate());
+				if (w.getComment().length()>0){
+					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+				}
 			}
 		}
 		if (method.getActions().size()>0){
 			text = text + "\nActions: \n";
 			for (Action w : method.getActions()){
-				text = text + "\t"+w.getName()+" : "+indent(w.getName().length(),w.getAction())+(w.getComment().length()>0? " //"+w.getComment():"")+"\n";
+				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getAction());
+				if (w.getComment().length()>0){
+					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+				}
 			}
 		}
 		
@@ -274,14 +284,14 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		return text;
 	}
 	
-	private static String indent(int nameLength, String text){
+	private static String indent(int tabs, String prefix, String text){
 		if (text==null || text.length()<1) return "";
-		int tabs = ((nameLength+1)/4) + 1;
 		String indent = "";
 		for (int i=0; i<tabs; i++){
 			indent = indent+"\t";
 		}
-		return "\t"+text.replace("\n", "\n"+indent);
+		indent = indent+prefix;
+		return indent+text.replace("\n", "\n"+indent);
 	}
 
 	/* Erases mouse-over feedback.
