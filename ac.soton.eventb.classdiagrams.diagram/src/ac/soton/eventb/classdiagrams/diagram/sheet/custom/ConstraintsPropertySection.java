@@ -161,7 +161,7 @@ public class ConstraintsPropertySection extends AbstractTablePropertySection {
 
 	@Override
 	protected String getLabelText() {
-		return "Constraints:";
+		return "xxxConstraints:";
 	}
 
 	@Override

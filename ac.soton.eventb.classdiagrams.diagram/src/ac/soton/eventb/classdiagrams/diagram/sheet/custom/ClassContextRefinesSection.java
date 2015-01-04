@@ -139,11 +139,11 @@ public class ClassContextRefinesSection extends AbstractLOVPropertySection {
 				}
 				
 				if (eObject != null && 
-						(((Class)eObject).getRefines() != null || 
-						((Class)eObject).getElaborates() != null)){
-						lovText.setEnabled(false);
+					(((Class)eObject).getRefines() != null || 
+					((Class)eObject).getElaborates() != null)){
+					lovText.setEnabled(false);
 				} else {
-						lovText.setEnabled(true);
+					lovText.setEnabled(true);
 				}
 			}
 			

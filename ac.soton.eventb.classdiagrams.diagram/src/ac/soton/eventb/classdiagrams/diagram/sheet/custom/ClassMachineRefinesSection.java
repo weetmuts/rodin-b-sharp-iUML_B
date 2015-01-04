@@ -71,11 +71,9 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 					}
 				}
 			}
-			
 		}
 		
 		filterList((EventBNamedCommentedComponentElement)container, valuesList);
-		
 		
 		//TODO limit only to a single selection
 		PopupDialog variablesDialog = new PopupDialog(getPart().getSite()
@@ -102,7 +100,6 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 				filteredList.add((EventBNamed)eb);
 			}
 		}
-		
 		pValuesList.clear();
 		pValuesList.addAll(filteredList);
 	}
@@ -231,7 +228,7 @@ public class ClassMachineRefinesSection extends AbstractLOVPropertySection {
 		if (eObject != null && ((Class) eObject).getRefines() != null) { 
 			return ((Class) eObject).getRefines().getName();
 		} else {
-			return "no name";
+			return "";
 		}
 	}
 
