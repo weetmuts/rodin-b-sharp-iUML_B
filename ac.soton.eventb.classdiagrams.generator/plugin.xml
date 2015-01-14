@@ -8,7 +8,7 @@
             generatorID="ac.soton.eventb.classdiagrams.generator"
             name="Classdiagram Generator"
             root_source_class="Classdiagram"
-            sourcePackage="http://soton.ac.uk/models/eventb/classdiagrams">
+            sourcePackage="http://soton.ac.uk/models/eventb/classdiagrams/0313">
          <rule
                name="ClassRule"
                rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassRule"
