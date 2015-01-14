@@ -52,6 +52,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.context.ContextPackage;
@@ -552,7 +553,9 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 	}
 
 	/**
-	 * @generated
+	 * customised to refreshLabel when event is a change to the theorem attribute
+	 * 
+	 * @generated NOT
 	 */
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
@@ -574,6 +577,10 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(
 						feature)) {
 			refreshFont();
+			//++++
+		}else if (CorePackage.eINSTANCE.getEventBDerived_Theorem().equals(feature)){
+			refreshLabel();
+			//++++
 		} else {
 			if (getParser() != null
 					&& getParser().isAffectingEvent(event,
@@ -625,39 +632,20 @@ public class ClassConstraintEditPart extends CompartmentEditPart implements
 
 	}
 
+	////////////////CUSTOM SECTION///////////
+	
+	
 	/**
-	 * This has been altered to return the icon for a Machine event
+	 * This has been altered to dynamically find an icon depending on the values
+	 * of the domain model using a custom method in ClassDiagramsElementTypes.
 	 * 
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		Object theorem = DiagramUtils.getModelFeatureValue(this, "theorem");
-		EObject element =  DiagramUtils.unwrap(this);
-		EventBObject container = element instanceof EventBObject? ((EventBObject)element).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT):null;
-		Image image = null;
-		//TODO: fix the dynamic display of theorem icon
-		if (false){ //theorem instanceof Boolean && ((Boolean)theorem).booleanValue()==true){
-			image = ClassdiagramsElementTypes.getImage(MachinePackage.Literals.INVARIANT); // should get a theorem image here
-		}else if (container instanceof  Machine){
-			image = ClassdiagramsElementTypes.getImage(MachinePackage.Literals.INVARIANT);
-		}else if (container instanceof Context){
-			image = ClassdiagramsElementTypes.getImage(ContextPackage.Literals.AXIOM);
-		}
-		//the default is the standard generated code:
-		if (image == null){
 			EObject parserElement = getParserElement();
-			if (parserElement != null) {
-				image = ClassdiagramsElementTypes.getImage(parserElement.eClass());
-			}
-		}
-		return image;
-		
-		//This is the original generated code
-//		EObject parserElement = getParserElement();
-//		if (parserElement == null) {
-//			return null;
-//		}
-//		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
+			return  (parserElement instanceof EventBElement) ?
+				ClassdiagramsElementTypes.getImage((EventBElement)parserElement) :
+					parserElement==null? null: ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 	
 }

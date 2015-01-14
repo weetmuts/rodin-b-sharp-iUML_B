@@ -627,26 +627,21 @@ public class ClassMethodEditPart extends CompartmentEditPart implements
 		}
 
 	}
-
-	////////////////CUSTOM SECTION///////////
-	
 	
 	/**
-	 * This has been altered to return the icon for a Machine event
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	protected Image getLabelIcon() {
-		return ClassdiagramsElementTypes.getImage(MachinePackage.Literals.EVENT);
-		
-		//This is the original generated code
-//		EObject parserElement = getParserElement();
-//		if (parserElement == null) {
-//			return null;
-//		}
-//		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
+		EObject parserElement = getParserElement();
+		if (parserElement == null) {
+			return null;
+		}
+		return ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 	
+	
+	////////////////CUSTOM SECTION///////////
 	
 	/////////// mouse-over feedback text ///////////
 	Label feedbackFigure=null;

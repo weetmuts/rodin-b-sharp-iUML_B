@@ -16,15 +16,19 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
-import org.eventb.emf.core.EventBNamed;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.context.ContextPackage;
+import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.core.provider.EventbcoreEditPlugin;
+import org.eventb.ui.IEventBSharedImages;
 
+import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.AssociationEditPart;
 import ac.soton.eventb.classdiagrams.diagram.edit.parts.ClassAttributeEditPart;
@@ -202,17 +206,32 @@ public class ClassdiagramsElementTypes {
 	 * @param imageDescriptor
 	 * @return
 	 */
-	public static Image getImage(EObject element){
+	public static Image getImage(EventBElement element){
+
 		ENamedElement elementType = element.eClass();
 		if (element instanceof EventBDataElaboration){
-			EventBNamed data = ((EventBDataElaboration)element).getElaborates();
-			if (data != null){
-				elementType = data.eClass(); 
+			Object refines = element ;
+			while (refines instanceof EventBElement){
+				element = (EventBElement)refines;
+				EStructuralFeature feature = element.eClass().getEStructuralFeature("refines");
+				refines = (feature==null? null : element.eGet(feature));
 			}
+			EStructuralFeature elaboratesfeature = element.eClass().getEStructuralFeature("elaborates");
+			Object elabs = elaboratesfeature==null? null : element.eGet(elaboratesfeature);
+			if (elabs instanceof EventBElement){
+				elementType = ((EventBElement) elabs).eClass();
+			}
+		} else if (elementType == ClassdiagramsPackage.Literals.CLASS_CONSTRAINT){
+			if (((ClassConstraint)element).isTheorem()) {
+				return IMAGE_THEOREM;
+			}
+			elementType = ((ClassConstraint)element).getContaining(ContextPackage.Literals.CONTEXT)==null ?
+						MachinePackage.Literals.INVARIANT : ContextPackage.Literals.AXIOM;
 		}
 		return getImage(elementType);
 	}
 	
+	private static final Image IMAGE_THEOREM = EventbcoreEditPlugin.getEventBImage(IEventBSharedImages.IMG_THEOREM);
 	/**
 	 * Returns 'type' of the ecore object associated with the hint.
 	 * 

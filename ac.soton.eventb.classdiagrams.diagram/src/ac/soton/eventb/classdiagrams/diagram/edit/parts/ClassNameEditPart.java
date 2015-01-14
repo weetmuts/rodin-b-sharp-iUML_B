@@ -51,7 +51,6 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSele
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
-import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -582,34 +581,21 @@ public class ClassNameEditPart extends CompartmentEditPart implements
 		// Parent should assign one using setLabel() method
 		return null;
 	}
+	
 
 	////////////////CUSTOM SECTION///////////
 	
 	
 	/**
 	 * This has been altered to dynamically find an icon depending on the values
-	 * of the elaborates and refines features.
+	 * of the domain model using a custom method in ClassDiagramsElementTypes.
 	 * 
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		Object refines = DiagramUtils.getModelFeatureValue(this, "refines");
-		Object elabs = DiagramUtils.getModelFeatureValue(this, "elaborates");
-		Image image = null;
-		if (refines instanceof EventBElement){
-			image = ClassdiagramsElementTypes.getImage((EventBElement)refines)	;		
-		}else{
-			if (elabs instanceof EventBElement){
-				image = ClassdiagramsElementTypes.getImage(((EventBElement) elabs).eClass());
-			}
-		}
-		//the default is the standard generated code:
-		if (image == null){
 			EObject parserElement = getParserElement();
-			if (parserElement != null) {
-				image = ClassdiagramsElementTypes.getImage(parserElement.eClass());
-			}
-		}
-		return image;
+			return  (parserElement instanceof EventBElement) ?
+				ClassdiagramsElementTypes.getImage((EventBElement)parserElement) :
+				ClassdiagramsElementTypes.getImage(parserElement.eClass());
 	}
 }
