@@ -15,7 +15,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http://soton.ac.uk/models/eventb/classdiagrams"
+            uri="http://soton.ac.uk/models/eventb/classdiagrams/0313"
             class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
@@ -30,8 +30,12 @@
             uri="http://soton.ac.uk/models/eventb/diagrams"
             class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$DiagramsChildCreationExtender"/>
       <extender
-            uri="http://emf.eventb.org/models/core"
+            uri="http://emf.eventb.org/models/core/machine/2014"
             class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"/>
+      <extender
+            class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"
+            uri="http://emf.eventb.org/models/core/context/2014">
+      </extender>
    </extension>
 
 </plugin>
