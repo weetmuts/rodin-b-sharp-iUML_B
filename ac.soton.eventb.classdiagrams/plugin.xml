@@ -15,7 +15,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://soton.ac.uk/models/eventb/classdiagrams"
+            uri="http://soton.ac.uk/models/eventb/classdiagrams/0313"
             class="ac.soton.eventb.classdiagrams.ClassdiagramsPackage"
             genModel="model/classdiagrams.genmodel"/>
    </extension>
