@@ -24,7 +24,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.provider.EventbcoreEditPlugin;
+import org.eventb.ui.IEventBSharedImages;
 
 import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
@@ -40,6 +43,9 @@ public class ClassMethodItemProvider
 	extends EventBCommentedLabeledEventGroupElementItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, IItemColorProvider {
+
+	private static final Image IMAGE = EventbcoreEditPlugin.getEventBImage(IEventBSharedImages.IMG_EVENT);
+	
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -66,25 +72,27 @@ public class ClassMethodItemProvider
 	}
 
 	/**
-	 * This returns ClassMethod.gif.
+	 * 
 	 * <!-- begin-user-doc -->
+	 * 	Returns the corresponding Rodin Event B image or a default image if this has not been found.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassMethod"));
+		return overlayImage(object, (IMAGE!=null ? IMAGE : getResourceLocator().getImage("full/obj16/Event")) ); 
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
+	 * customised to return the label instead of reference
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ClassMethod)object).getReference();
+		String label = ((ClassMethod)object).getLabel();	//was .getReference();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ClassMethod_type") :
 			getString("_UI_ClassMethod_type") + " " + label;

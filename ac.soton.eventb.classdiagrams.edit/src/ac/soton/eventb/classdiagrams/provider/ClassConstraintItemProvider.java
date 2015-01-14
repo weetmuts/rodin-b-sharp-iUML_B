@@ -24,8 +24,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.provider.EventBNamedCommentedDerivedPredicateElementItemProvider;
+import org.eventb.emf.core.provider.EventbcoreEditPlugin;
+import org.eventb.ui.IEventBSharedImages;
 
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
@@ -40,6 +44,12 @@ public class ClassConstraintItemProvider
 	extends EventBNamedCommentedDerivedPredicateElementItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, IItemColorProvider {
+
+	private static final Image IMAGE_AXIOM = EventbcoreEditPlugin.getEventBImage(IEventBSharedImages.IMG_AXIOM);
+	private static final Image IMAGE_INVARIANT = EventbcoreEditPlugin.getEventBImage(IEventBSharedImages.IMG_INVARIANT);
+	private static final Image IMAGE_THEOREM = EventbcoreEditPlugin.getEventBImage(IEventBSharedImages.IMG_THEOREM);
+
+	
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -66,14 +76,20 @@ public class ClassConstraintItemProvider
 	}
 
 	/**
-	 * This returns ClassConstraint.gif.
+	 * 
 	 * <!-- begin-user-doc -->
+	 * 	Returns the corresponding Rodin Event B image or a default image if this has not been found.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassConstraint"));
+		Image image = ((ClassConstraint)object).isTheorem()?
+				IMAGE_THEOREM 
+				:
+				((ClassConstraint)object).getContaining(ContextPackage.Literals.CONTEXT)==null ?
+						IMAGE_INVARIANT : IMAGE_AXIOM;
+		return overlayImage(object, (image!=null ? image : getResourceLocator().getImage("full/obj16/Event")) ); 
 	}
 
 	/**
