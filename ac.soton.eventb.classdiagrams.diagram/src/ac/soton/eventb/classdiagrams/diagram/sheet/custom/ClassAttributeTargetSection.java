@@ -8,13 +8,9 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 
-import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl;
 import ac.soton.eventb.emf.diagrams.sheet.AbstractTextPropertySection;
-import ac.soton.eventb.emf.diagrams.sheet.PropertySectionUtil;
 
 /**
  * Type property section for Class Attributes.
@@ -37,31 +33,22 @@ public class ClassAttributeTargetSection extends AbstractTextPropertySection {
 
 	@Override
 	protected String getPropertyValueString() {
-		String comment = ((ClassAttributeImpl) getEObject()).getTarget();
-		return comment == null ? "" : comment;
+		String target = ((ClassAttributeImpl) getEObject()).getTarget();
+		return target == null ? "" : target;
 	}
 
 	@Override
 	protected String getPropertyChangeCommandName() {
 		return "change type";
 	}
-
+	
 	@Override
-	protected Text createTextWidget(Composite parent) {
-		Text text = super.createTextWidget(parent);
-		text.addModifyListener(PropertySectionUtil.eventBListener);
-		text.setFont(PropertySectionUtil.rodinFont);
-		return text;
+	public boolean isRodinKeyboard() {
+		return true;
 	}
 	
 	@Override
 	public void refresh() {
 		super.refresh();
-		
-		if (((ClassAttribute)eObject).getElaborates() != null){
-			getTextWidget().setEditable(false);
-		} else {
-			getTextWidget().setEditable(true);
-		}
 	}
 }

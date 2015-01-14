@@ -15,11 +15,12 @@ import org.eventb.emf.core.CorePackage;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.emf.diagrams.sheet.AbstractEditTableWithDefaultNamingPropertySection;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractEditTablePropertySection;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 
-public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNamingPropertySection {
+public class MethodsPropertySection extends AbstractEditTablePropertySection {
 
 	/**
 	 * Element Filter for this property section.
@@ -33,43 +34,41 @@ public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNami
 
 	@Override
 	protected EReference getFeature() {
-		return ClassdiagramsPackage.eINSTANCE.getClass_Constraints();
+		return ClassdiagramsPackage.eINSTANCE.getClass_Methods();
 	}
 
 	@Override
 	protected EStructuralFeature getFeatureForCol(final int col) {
 		switch (col) {
-		case 0 : return CorePackage.eINSTANCE.getEventBNamed_Name();
-		case 1 : return CorePackage.eINSTANCE.getEventBPredicate_Predicate();
-		case 2 : return CorePackage.eINSTANCE.getEventBDerived_Theorem();
-		case 3 : return	CorePackage.eINSTANCE.getEventBCommented_Comment();
+		case 0 : return CoreextensionPackage.eINSTANCE.getEventBLabeled_Label();
+		case 1 : return CoreextensionPackage.eINSTANCE.getEventBEventGroup_Extended();
+		case 2 : return CorePackage.eINSTANCE.getEventBCommented_Comment();
 		default : return null;
 		}
 	}
 
 	@Override
 	protected boolean isMulti(final int col){
-		return col==1 || col==3 ;
+		return col==2 ? true : false;
 	}
 	
 	
 	@Override
 	protected boolean isRodinKeyboard(final int col) {
-		return  col == 1;
+		return  false;
 	}
 	
 	@Override
 	protected boolean isReadOnly(final int col) {
-		return  false;
+		return  col==0;
 	}
 
 	@Override
 	protected int columnWidth(final int col){
 		switch (col) {
-		case 0 : return 150;	//name field
-		case 1 : return 400;	//predicate field
-		case 2 : return 100;	//derived field
-		case 3 : return 400;	//comment field
+		case 0 : return 250;	//label field
+		case 1 : return 100;	//extended field
+		case 2 : return 400;	//comment field
 		default : return -1;	//unknown
 		}
 	}
@@ -77,10 +76,6 @@ public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNami
 	@Override
 	protected String getButtonLabelText() {
 		return "Method  ";
-	}
-	
-	protected String getFeaturePrefix() {
-		return "cnstrnt";
 	}
 	
 }

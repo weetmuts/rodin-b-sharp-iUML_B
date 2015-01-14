@@ -8,7 +8,15 @@
 package ac.soton.eventb.classdiagrams.diagram.sheet.custom;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.common.core.util.StringStatics;
+import org.eclipse.gmf.runtime.common.ui.util.StatusLineUtil;
+import org.eclipse.gmf.runtime.diagram.ui.properties.views.TextChangeHelper;
 import org.eclipse.jface.viewers.IFilter;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Guard;
 import org.eventb.emf.core.machine.Witness;
@@ -40,7 +48,7 @@ public class SelfNamePropertySection extends AbstractTextPropertySection {
 	protected String getPropertyNameLabel() {
 		return "Self Name:";
 	}
-
+	
 	@Override
 	protected void setPropertyValue(EObject object, Object value) {
 		assert object instanceof Class;
@@ -80,4 +88,61 @@ public class SelfNamePropertySection extends AbstractTextPropertySection {
 		return "change selfName";
 	}
 
+	@Override
+	protected boolean isReadOnly() {
+		return super.isReadOnly() || (eObject !=null && ((Class) eObject).getRefines() != null) ;
+	}
+	
+	
+	///////// FIX problem with selfName text changing to Class name when selected /////
+	// This problem occurred when clicking in the text box for the Self Name property.
+	// The text field immediately changed to the Class name and would not reset until
+	// the property sheet was redrawn (e.g. by selecting a different kind of element
+	// in the diagram).
+	
+	/**
+	 * @return Returns the new listener.
+	 */
+	protected TextChangeHelper getListener() {
+		return newlistener;
+	}
+	
+	/**
+	 * A helper to listen for events that indicate that a text field has been
+	 * changed.
+	 */
+	private TextChangeHelper newlistener = new TextChangeHelper() {
+		boolean textModified = false;
+		/**
+		 * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
+		 */
+		public void handleEvent(Event event) {
+			switch (event.type) {
+				case SWT.Modify :
+					textModified = !isNonUserChange();
+					break;
+				case SWT.KeyDown :
+					if (event.character == SWT.CR) {
+						textChanged((Control)event.widget);
+					}
+					break;
+				case SWT.FocusOut :
+					textChanged((Control)event.widget);
+					refresh();							//this refresh added to solve default text changing problem
+					break;
+			}
+		}
+		
+		public void textChanged(Control control) {
+			if (textModified) {
+				// clear error message
+				IWorkbenchPart part = PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage().getActivePart();
+				StatusLineUtil.outputErrorMessage(part, StringStatics.BLANK);
+
+				setPropertyValue(control);
+				textModified = false;
+			}
+		}		
+	};
 }

@@ -15,11 +15,12 @@ import org.eventb.emf.core.CorePackage;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.emf.diagrams.sheet.AbstractEditTableWithDefaultNamingPropertySection;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.diagrams.sheet.AbstractEditTablePropertySection;
 import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 
-public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNamingPropertySection {
+public class AttributesPropertySection extends AbstractEditTablePropertySection {
 
 	/**
 	 * Element Filter for this property section.
@@ -33,54 +34,65 @@ public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNami
 
 	@Override
 	protected EReference getFeature() {
-		return ClassdiagramsPackage.eINSTANCE.getClass_Constraints();
+		return ClassdiagramsPackage.eINSTANCE.getClass_ClassAttributes();
 	}
 
 	@Override
 	protected EStructuralFeature getFeatureForCol(final int col) {
 		switch (col) {
 		case 0 : return CorePackage.eINSTANCE.getEventBNamed_Name();
-		case 1 : return CorePackage.eINSTANCE.getEventBPredicate_Predicate();
-		case 2 : return CorePackage.eINSTANCE.getEventBDerived_Theorem();
-		case 3 : return	CorePackage.eINSTANCE.getEventBCommented_Comment();
+		case 1 : return ClassdiagramsPackage.eINSTANCE.getClassAttribute_Target();
+		case 2 : return CoreextensionPackage.eINSTANCE.getEventBDataElaboration_DataKind();
+		case 3 : return CoreextensionPackage.eINSTANCE.getEventBDataElaboration_Elaborates();
+		case 4 : return CoreextensionPackage.eINSTANCE.getEventBRelationKind_Surjective();
+		case 5 : return CoreextensionPackage.eINSTANCE.getEventBRelationKind_Injective();
+		case 6 : return CoreextensionPackage.eINSTANCE.getEventBRelationKind_Functional();
+		case 7 : return CoreextensionPackage.eINSTANCE.getEventBRelationKind_Total();
+		case 8 : return CorePackage.eINSTANCE.getEventBCommented_Comment();
 		default : return null;
 		}
 	}
 
 	@Override
 	protected boolean isMulti(final int col){
-		return col==1 || col==3 ;
+		return col==8 ? true : false;
 	}
 	
 	
 	@Override
 	protected boolean isRodinKeyboard(final int col) {
-		return  col == 1;
+		return  col==1;
 	}
 	
 	@Override
 	protected boolean isReadOnly(final int col) {
-		return  false;
+		return  col>1 && col<4 ? true : false;
 	}
 
 	@Override
 	protected int columnWidth(final int col){
 		switch (col) {
-		case 0 : return 150;	//name field
-		case 1 : return 400;	//predicate field
-		case 2 : return 100;	//derived field
-		case 3 : return 400;	//comment field
+		case 0 : return 100;	//name field
+		case 1 : return 100;	//target field
+		case 2 : return 100;	//dataKind field
+		case 3 : return 100;	//elaborates field
+		case 4 : return 50;		//surjective field
+		case 5 : return 50;		//injective field
+		case 6 : return 50;		//functional field
+		case 7 : return 50;		//total field
+		case 8 : return 400;	//comment field
 		default : return -1;	//unknown
 		}
 	}
 
 	@Override
 	protected String getButtonLabelText() {
-		return "Method  ";
+		return "Attribute  ";
 	}
-	
-	protected String getFeaturePrefix() {
-		return "cnstrnt";
-	}
+//
+//	@Override
+//	protected String getLabelText() {
+//		return "Attributes:";
+//	}
 	
 }

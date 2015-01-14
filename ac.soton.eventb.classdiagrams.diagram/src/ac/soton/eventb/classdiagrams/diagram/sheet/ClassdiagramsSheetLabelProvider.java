@@ -19,6 +19,7 @@ import org.eventb.emf.core.EventBElement;
 import ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsNavigatorGroup;
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
+import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated
@@ -39,6 +40,9 @@ public class ClassdiagramsSheetLabelProvider extends BaseLabelProvider
 	}
 
 	/**
+	 * modified to use a custom getImage in ClassdiagramsElementTypes which supports 
+	 * icons that change depending on model state
+	 * 
 	 * @generated NOT
 	 */
 	public Image getImage(Object element) {
@@ -48,9 +52,12 @@ public class ClassdiagramsSheetLabelProvider extends BaseLabelProvider
 //		return etype == null ? null : ClassdiagramsElementTypes.getImage(etype);
 		
 		//Modified version to support dynamic icons
-		Object unwrappedElement = unwrap(element);
-		return unwrappedElement instanceof EventBElement ? ClassdiagramsElementTypes.getImage((EventBElement) unwrappedElement) : null;
-		
+		Object domain = DiagramUtils.unwrap(unwrap(element));
+			if (domain instanceof EventBElement){
+				return ClassdiagramsElementTypes.getImage((EventBElement) domain);
+			}
+
+		return null;	
 	}
 
 	/**

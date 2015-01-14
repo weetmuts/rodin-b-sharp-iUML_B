@@ -46,6 +46,8 @@ http://www.eclipse.org/legal/epl-v10.html
       </context>
    </extension>
 
+
+<!--
    <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
       <?gmfgen generated="true"?>
   	  <wizard
@@ -73,7 +75,8 @@ http://www.eclipse.org/legal/epl-v10.html
          </action>
       </objectContribution>
    </extension>
-	
+-->
+
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
@@ -620,7 +623,58 @@ http://www.eclipse.org/legal/epl-v10.html
                 id="property.tab.overview"
                 label="Overview">
           </propertyTab>
-          
+ 
+          <propertyTab
+               afterTab="property.tab.overview"
+               category="custom_domain"
+               id="property.tab.classes"
+               image="icons/obj16/Class.gif"
+               indented="false"
+               label="Classes">
+         </propertyTab>         
+          <propertyTab
+               afterTab="property.tab.classes"
+               category="custom_domain"
+               id="property.tab.associations"
+               image="icons/obj16/Association.gif"
+               indented="false"
+               label="Associations">
+         </propertyTab>
+  
+  
+          <propertyTab
+               afterTab="property.tab.associations"
+               category="custom_domain"
+               id="property.tab.supertypes"
+               image="icons/obj16/Supertype.gif"
+               indented="false"
+               label="Supertypes">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.supertypes"
+               category="custom_domain"
+               id="property.tab.attributes"
+               image="icons/obj16/var_obj.gif"
+               indented="false"
+               label="Attributes">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.attributes"
+               category="custom_domain"
+               id="property.tab.methods"
+               image="icons/obj16/ClassMethod.gif"
+               indented="false"
+               label="Methods">
+         </propertyTab>
+         <propertyTab
+               afterTab="property.tab.methods"
+               category="custom_domain"
+               id="property.tab.constraints"
+               image="icons/obj16/inv_obj.gif"
+               indented="false"
+               label="Constraints">
+         </propertyTab>
+                 
           <propertyTab
                afterTab="property.tab.overview"
                category="custom_domain"
@@ -667,6 +721,49 @@ http://www.eclipse.org/legal/epl-v10.html
                id="property.section.name"
                tab="property.tab.overview">
          </propertySection>
+         
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassesPropertySection$Filter"
+               id="property.section.classes"
+               tab="property.tab.classes">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.classes"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AssociationsPropertySection$Filter"
+               id="property.section.associations"
+               tab="property.tab.associations">
+         </propertySection>
+              
+         <propertySection
+               afterSection="property.section.name"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AttributesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.AttributesPropertySection$Filter"
+               id="property.section.attributes"
+               tab="property.tab.attributes">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.attributes"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.MethodsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.MethodsPropertySection$Filter"
+               id="property.section.methods"
+               tab="property.tab.methods">
+         </propertySection>
+          <propertySection
+               afterSection="property.section.methods"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ConstraintsPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ConstraintsPropertySection$Filter"
+               id="property.section.constraints"
+               tab="property.tab.constraints">
+         </propertySection>
+                          
          <propertySection
                afterSection="property.section.name"
                class="ac.soton.eventb.emf.diagrams.sheet.LabelPropertySection"
@@ -707,9 +804,18 @@ http://www.eclipse.org/legal/epl-v10.html
                id="property.section.elaboratesData"
                tab="property.tab.overview">
          </propertySection>
-
+         
          <propertySection
                afterSection="property.section.elaboratesData"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.SupertypesPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.SupertypesPropertySection$Filter"
+               id="property.section.supertypes"
+               tab="property.tab.supertypes">
+         </propertySection>
+
+         <propertySection
+               afterSection="property.section.supertypes"
                class="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindSurjectiveSection"
                enablesFor="1"
                filter="ac.soton.eventb.emf.diagrams.sheet.EventBRelationKindSurjectiveSection$Filter"
@@ -742,26 +848,17 @@ http://www.eclipse.org/legal/epl-v10.html
          </propertySection>
          <propertySection
                afterSection="property.section.functionalRelationType"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassMachineRefinesSection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.RefinesClassPropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$MachineClassFilter"
-               id="property.section.classMachineRefinesSection"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.RefinesClassPropertySection$Filter"
+               id="property.section.refinesClassSection"
                tab="property.tab.overview">
-         </propertySection>
+         </propertySection> 
          <propertySection
-               afterSection="property.section.classMachineRefinesSection"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassContextRefinesSection"
+               afterSection="property.section.refinesClassPropertySection"
+               class="ac.soton.eventb.emf.diagrams.sheet.PredicatePropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsSheetPropertyFilter$ContextClassFilter"
-               id="property.section.classContextRefinesSection"
-               tab="property.tab.overview">
-         </propertySection>
-         
-         <propertySection
-               afterSection="property.section.classContextRefinesSection"
-               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.PredicatePropertySection"
-               enablesFor="1"
-               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.PredicatePropertySection$Filter"
+               filter="ac.soton.eventb.emf.diagrams.sheet.PredicatePropertySection$Filter"
                id="property.section.predicate"
                tab="property.tab.overview">
          </propertySection>
