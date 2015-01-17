@@ -715,13 +715,12 @@ http://www.eclipse.org/legal/epl-v10.html
       <?gmfgen generated="false"?>   
       <propertySections contributorId="ac.soton.eventb.classdiagrams.diagram">
          <propertySection
-               class="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsNamePropertySection"
                enablesFor="1"
-               filter="ac.soton.eventb.emf.diagrams.sheet.NamePropertySection$Filter"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassdiagramsNamePropertySection$Filter"
                id="property.section.name"
                tab="property.tab.overview">
          </propertySection>
-         
          <propertySection
                afterSection="property.section.name"
                class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.ClassesPropertySection"
