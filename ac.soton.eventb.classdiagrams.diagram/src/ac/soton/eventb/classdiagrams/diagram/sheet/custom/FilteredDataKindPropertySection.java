@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.IFilter;
 import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBObject;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
@@ -28,7 +27,7 @@ import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
  * property section for Data elaboration, DataKinds
  * where the options are filtered depending on the parent element.
  * 
- * @author colin
+ * @author cfs
  *
  */
 public class FilteredDataKindPropertySection extends DataKindPropertySection {
@@ -45,18 +44,22 @@ public class FilteredDataKindPropertySection extends DataKindPropertySection {
 	
 	@Override
 	protected List<String> filterDataKinds(List<String> values) {
-		EventBObject container =((EventBElement)eObject).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+		EventBObject container =owner.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
 		if (container instanceof Context){
 			values.remove(DataKind.VARIABLE.getLiteral());
 		}else if (container instanceof Machine){
-			values.remove(DataKind.SET.getLiteral());
-			values.remove(DataKind.CONSTANT.getLiteral());
+			//Sets and constants can be linked from a machine so nothing to remove
 		}
-		if (eObject instanceof Class && !((Class)eObject).getSupertypes().isEmpty() ||
-			eObject instanceof Association || eObject instanceof ClassAttribute	){
+		if (owner instanceof Class && !((Class) owner).getSupertypes().isEmpty() ||
+			owner instanceof Association || owner instanceof ClassAttribute	){
 			values.remove(DataKind.SET.getLiteral());
 		}
 		return values;
+	}
+	
+	@Override
+	protected boolean isReadOnly() {
+		return super.isReadOnly() || (owner instanceof Class && ((Class) owner).getRefines() != null);
 	}
 
 }
