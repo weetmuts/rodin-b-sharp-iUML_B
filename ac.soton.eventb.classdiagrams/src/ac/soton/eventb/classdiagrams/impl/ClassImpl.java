@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassConstraint;
 import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
 import ac.soton.eventb.emf.diagrams.Diagram;
 import ac.soton.eventb.emf.diagrams.DiagramOwner;
@@ -298,13 +300,17 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 	/**
 	 * <!-- begin-user-doc -->
 	 * gets the name to be used for the contextual instance of the class
-	 * defaults to "this<ClassName>" if null or empty
+	 * if this class refines another the refined class' self name is returned, otherwise
+	 * defaults to "this_<ClassName>" if null or empty
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getSelfName() {
+		if (getRefines()!=null) {
+			return  getRefines().getSelfName();
+		}
 		if (selfName ==null || selfName.trim().equals("")){
-			selfName = "this_"+ this.getName();
+			return "this_"+ this.getName();
 		}
 		return selfName;
 	}
@@ -557,4 +563,56 @@ public class ClassImpl extends EventBNamedCommentedDataElaborationElementImpl im
 		return result.toString();
 	}
 
+	
+	////custom - override getters to return refined Class values for some attributes
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * gets the name of the class
+	 * if this class refines another the refined class' name is returned, 
+	 * otherwise the local Name attribute is returned
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public String getName() { 
+		if (getRefines()!=null) {
+			return getRefines().getName();
+		}
+		return super.getName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * gets the dataKind of the class
+	 * if this class refines another the refined class' dataKind is returned, 
+	 * otherwise the local dataKind attribute is returned
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public DataKind getDataKind() { 
+		if (getRefines()!=null) {
+			return getRefines().getDataKind();
+		}
+		return super.getDataKind();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * gets the elaborates of the class
+	 * if this class refines another the refined class' elaborates is returned, 
+	 * otherwise the local elaborates attribute is returned
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public EventBNamed getElaborates() { 
+		if (getRefines()!=null) {
+			return getRefines().getElaborates();
+		}
+		return super.getElaborates();
+	}
+	
+	
 } //ClassImpl
