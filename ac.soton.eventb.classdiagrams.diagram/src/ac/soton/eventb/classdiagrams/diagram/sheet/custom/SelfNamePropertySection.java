@@ -90,7 +90,7 @@ public class SelfNamePropertySection extends AbstractTextPropertySection {
 
 	@Override
 	protected boolean isReadOnly() {
-		return super.isReadOnly() || (eObject !=null && ((Class) eObject).getRefines() != null) ;
+		return super.isReadOnly() || (eObject instanceof Class && ((Class) eObject).getRefines() != null) ;
 	}
 	
 	
@@ -103,6 +103,7 @@ public class SelfNamePropertySection extends AbstractTextPropertySection {
 	/**
 	 * @return Returns the new listener.
 	 */
+	@Override
 	protected TextChangeHelper getListener() {
 		return newlistener;
 	}
