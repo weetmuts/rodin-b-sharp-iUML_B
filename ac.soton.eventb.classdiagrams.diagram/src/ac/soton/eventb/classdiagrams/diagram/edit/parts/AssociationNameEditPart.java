@@ -52,6 +52,7 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSele
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 /**
  * @generated
@@ -527,8 +528,7 @@ public class AssociationNameEditPart extends LabelEditPart implements
 	}
 
 	/**
-	 * This has been changed to always update the label as the icon was sometimes not getting updated
-	 * when the elaborates property was changed
+	 * This has been changed to update the label when the elaborates property was changed
 	 * 
 	 * @generated NOT
 	 */
@@ -552,6 +552,10 @@ public class AssociationNameEditPart extends LabelEditPart implements
 				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(
 						feature)) {
 			refreshFont();
+			//++++
+		}else if (CoreextensionPackage.eINSTANCE.getEventBDataElaboration_Elaborates().equals(feature)){
+			refreshLabel();
+			//++++
 		} else {
 			if (getParser() != null
 					&& getParser().isAffectingEvent(event,
@@ -569,9 +573,6 @@ public class AssociationNameEditPart extends LabelEditPart implements
 				}
 			}
 		}
-		//+++++
-		refreshLabel();	//force icon etc to update
-		//+++++
 		super.handleNotificationEvent(event);
 	}
 

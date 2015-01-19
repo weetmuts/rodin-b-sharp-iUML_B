@@ -53,11 +53,6 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.EventBObject;
-import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.context.ContextPackage;
-import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.MachinePackage;
 
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassConstraintItemSemanticEditPolicy;
 import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextNonResizableEditPolicy;
@@ -65,7 +60,6 @@ import ac.soton.eventb.classdiagrams.diagram.edit.policies.ClassdiagramsTextSele
 import ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsVisualIDRegistry;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsElementTypes;
 import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsParserProvider;
-import ac.soton.eventb.emf.diagrams.util.custom.DiagramUtils;
 
 /**
  * @generated

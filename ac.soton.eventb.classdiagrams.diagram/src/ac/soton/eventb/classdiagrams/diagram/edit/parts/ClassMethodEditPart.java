@@ -57,7 +57,6 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Guard;
-import org.eventb.emf.core.machine.MachinePackage;
 import org.eventb.emf.core.machine.Witness;
 
 import ac.soton.eventb.classdiagrams.ClassMethod;
