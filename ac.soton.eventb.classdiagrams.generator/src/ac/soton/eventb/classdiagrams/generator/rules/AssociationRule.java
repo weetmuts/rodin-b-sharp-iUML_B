@@ -24,7 +24,7 @@ protected static final EReference elaborates = CoreextensionPackage.Literals.EVE
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
 		assert(sourceElement instanceof Association);
-		return ((Association)sourceElement).getElaborates() != null;
+		return ((Association)sourceElement).getElaborates() != null  && !((Association)sourceElement).isRefinedElement();
 	}
 
 	@Override
@@ -54,9 +54,9 @@ protected static final EReference elaborates = CoreextensionPackage.Literals.EVE
 			}
 			break;
 		}
-		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 10));
+		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 5));
 		if (newGeneratedInjectionPredicate != null){
-			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, -1));			
+			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, 6));			
 		}
 		return ret;
 	}

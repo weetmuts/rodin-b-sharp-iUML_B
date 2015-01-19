@@ -24,7 +24,7 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 	@Override
 	public boolean enabled(EventBElement sourceElement) throws Exception{
 		assert(sourceElement instanceof ClassAttribute);
-		return ((ClassAttribute)sourceElement).getElaborates() != null;
+		return ((ClassAttribute)sourceElement).getElaborates() != null && !((ClassAttribute)sourceElement).isRefinedElement();
 	}
 	
 	@Override
@@ -54,9 +54,9 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 			}
 			break;
 		}
-		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 10));
+		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 5));
 		if (newGeneratedInjectionPredicate != null){
-			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, -1));			
+			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, 6));			
 		}
 		return ret;
 	}
