@@ -85,4 +85,12 @@ public interface Association extends EventBNamedCommentedRelationDataElaboration
 	 */
 	void setSource(ac.soton.eventb.classdiagrams.Class value);
 
+	/**
+	 * checks whether this association is refining an attribute or association in the refined class
+	 * i.e. if the refined class contains an attribute or association with the same name
+	 * 
+	 * @custom
+	 */
+	boolean isRefinedElement();
+	
 } // Association

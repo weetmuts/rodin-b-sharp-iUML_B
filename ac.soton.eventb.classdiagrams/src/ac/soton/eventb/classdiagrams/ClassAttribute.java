@@ -53,5 +53,13 @@ public interface ClassAttribute extends EventBNamedCommentedRelationDataElaborat
 	 * @generated
 	 */
 	void setTarget(String value);
+	
+	/**
+	 * checks whether this attribute is refining an attribute or association in the refined class
+	 * i.e. if the refined class contains an attribute or association with the same name
+	 * 
+	 * @custom
+	 */
+	boolean isRefinedElement();
 
 } // ClassAttribute

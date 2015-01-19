@@ -12,7 +12,9 @@ package ac.soton.eventb.classdiagrams.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eventb.emf.core.EventBNamed;
 
+import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedRelationDataElaborationElementImpl;
@@ -163,6 +165,26 @@ public class ClassAttributeImpl extends EventBNamedCommentedRelationDataElaborat
 		result.append(target);
 		result.append(')');
 		return result.toString();
+	}
+	
+	// Custom //
+	
+	/**
+	 * checks whether this attribute is refining an attribute or association in the refined class
+	 * i.e. if the refined class contains an attribute or association with the same name
+	 * @custom
+	 */
+	public boolean isRefinedElement() {
+		Class refinedClass = eContainer() instanceof Class ? ((Class)eContainer()).getRefines() :  null;
+		String name = getName();
+		if (refinedClass==null || name==null) return false;
+		for (EventBNamed en : refinedClass.getClassAttributes()){
+			if (en.getName().equals(name)) return true;
+		}
+		for (EventBNamed en : refinedClass.getOutgoing()){
+			if (en.getName().equals(name)) return true;
+		}
+		return false;
 	}
 
 } //ClassAttributeImpl
