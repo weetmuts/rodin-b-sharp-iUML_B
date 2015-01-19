@@ -1,9 +1,7 @@
 package ac.soton.eventb.classdiagrams.generator.strings;
 
 import java.text.MessageFormat;
-import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 
@@ -62,30 +60,10 @@ public class Strings {
 	}
 
 	public static String CLASS_SUPERTYPE_PRED;
+	public static String CLASS_SUPERTYPE_PRED(Class cp, Class cp2) {
+		return bind(CLASS_SUPERTYPE_PRED, rootComponentPrefix(cp), rootComponentPrefix(cp2));
+	}
 
-	public static String CLASS_SUPERTYPE_PRED(Class cp, EList<Class> cp2) {
-		Iterator<Class> i = cp2.iterator();
-		String superTypeUnion;
-		
-		superTypeUnion = (i.hasNext()) ? i.next().getName() : "";
-		
-		while (i.hasNext()){
-			superTypeUnion = CLASS_SUPERTYPE_UNION(superTypeUnion, i.next().getName());
-		}
-		
-		return bind(CLASS_SUPERTYPE_PRED, rootComponentPrefix(cp), superTypeUnion);
-	}
-	
-	public static String CLASS_SUPERTYPE_UNION;
-	
-	public static String CLASS_SUPERTYPE_UNION(Class cp, Class cp2) {
-		return bind(CLASS_SUPERTYPE_UNION, rootComponentPrefix(cp), rootComponentPrefix(cp2));
-	}
-	
-	public static String CLASS_SUPERTYPE_UNION(String cp, String cp2) {
-		return bind(CLASS_SUPERTYPE_UNION, cp, cp2);
-	}
-	
 	public static String CLASS_SUPERTYPE_NAME;
 	
 	public static String CLASS_SUPERTYPE_NAME(Class cp) {

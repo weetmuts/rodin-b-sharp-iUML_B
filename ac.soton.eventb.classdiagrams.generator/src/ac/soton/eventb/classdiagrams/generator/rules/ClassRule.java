@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.context.Constant;
 import org.eventb.emf.core.context.Context;
-import org.eventb.emf.core.context.ContextPackage;
 import org.eventb.emf.core.machine.Machine;
-import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.core.machine.Variable;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.generator.strings.Strings;
@@ -33,31 +35,44 @@ public class ClassRule  extends AbstractRule  implements IRule {
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 	
-		// generate supertype invariants
+		// generate supertype invariants/axioms
 		Class element = (Class)sourceElement;
 		EventBElement elaborated = (EventBElement) element.getElaborates();
 		if (element.getSupertypes() != null && element.getSupertypes().size() > 0){
 			int pri = distanceFromCarrierSet(element);
-			switch (element.getDataKind().getValue()) {
-			case DataKind.SET_VALUE :
-				//nothing to do - sets don't have supertypes
-				break;
-			case DataKind.CONSTANT_VALUE :
-				Context context = (Context) elaborated.getContaining(ContextPackage.Literals.CONTEXT);
-				ret.add(Make.descriptor(context, axioms, Make.axiom(
-						Strings.CLASS_SUPERTYPE_NAME(element), 
-						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),pri));
-				break;
-			case DataKind.VARIABLE_VALUE :
-				Machine machine = (Machine) elaborated.getContaining(MachinePackage.Literals.MACHINE);
-				ret.add(Make.descriptor(machine, invariants, Make.invariant(
-						Strings.CLASS_SUPERTYPE_NAME(element), 
-						Strings.CLASS_SUPERTYPE_PRED(element, element.getSupertypes()), element.getComment()),pri));
-				break;
+			EventBNamedCommentedComponentElement sourceContainer = (EventBNamedCommentedComponentElement) element.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+			EventBNamedCommentedComponentElement targetContainer = sourceContainer ;
+			for (Class superClass : element.getSupertypes()){
+				if (sourceContainer instanceof Machine && elaborated instanceof Constant && !(superClass.getElaborates() instanceof Variable)){
+					for (Context ctx : ((Machine)sourceContainer).getSees()){
+						if (sees(ctx,elaborated) && sees(ctx,(EventBElement) superClass.getElaborates())) {
+							targetContainer = ctx;
+						};
+					}
+				}
+				if (targetContainer instanceof Machine){
+					ret.add(Make.descriptor(targetContainer, invariants, Make.invariant(
+							Strings.CLASS_SUPERTYPE_NAME(element), 
+							Strings.CLASS_SUPERTYPE_PRED(element, superClass), element.getComment()),pri));
+				}else if (targetContainer instanceof Context){
+					ret.add(Make.descriptor(targetContainer, axioms, Make.axiom(
+							Strings.CLASS_SUPERTYPE_NAME(element), 
+							Strings.CLASS_SUPERTYPE_PRED(element, superClass), element.getComment()),pri));					
+				}
+			}	
+		}
+		return ret;
+	}
+	
+	private boolean sees(Context ctx, EventBElement el) {
+		if (ctx.getConstants().contains(el) || ctx.getSets().contains(el)){
+			return true;
+		}else{
+			for (Context ectx : ctx.getExtends()){
+				if (sees(ectx, el)) return true;
 			}
 		}
-		
-		return ret;
+		return false;
 	}
 
 	private Integer distanceFromCarrierSet(Class element) {
