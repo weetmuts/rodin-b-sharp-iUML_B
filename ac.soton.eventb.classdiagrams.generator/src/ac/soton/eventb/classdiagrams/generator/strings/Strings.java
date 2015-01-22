@@ -4,10 +4,12 @@ import java.text.MessageFormat;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
+import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.classdiagrams.Association;
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassAttribute;
+import ac.soton.eventb.classdiagrams.EventBInitialisable;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBRelationKind;
 import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
 
@@ -223,17 +225,49 @@ public class Strings {
 		return bind(CLASS_PARAMETER_NAME, name);
 	}
 	
+	////guard for selecting an instance parameter
+	
 	public static String CLASS_PARAMETER_GUARD_NAME;
 	public static String CLASS_PARAMETER_GUARD_NAME(String name) {
 		return bind(CLASS_PARAMETER_GUARD_NAME, name);
 	}
 	
+	public static String CLASS_PARAMETER_CONSTRUCTOR_GUARD_PRED;
+	public static String CLASS_PARAMETER_CONSTRUCTOR_GUARD_PRED(String selfName, String instances) {
+		return bind(CLASS_PARAMETER_CONSTRUCTOR_GUARD_PRED, 
+				selfName,
+				instances);
+	}
+	
 	public static String CLASS_PARAMETER_GUARD_PRED;
 	public static String CLASS_PARAMETER_GUARD_PRED(String selfName, String instances) {
 		return bind(CLASS_PARAMETER_GUARD_PRED, 
-				selfName, 
+				selfName,
 				instances);
 	}
+	
+	///action for constructing/destructing instances
+	
+	public static String CLASS_PARAMETER_ACTION_NAME;
+	public static String CLASS_PARAMETER_ACTION_NAME(String name) {
+		return bind(CLASS_PARAMETER_ACTION_NAME, name);
+	}
+	
+	public static String CLASS_PARAMETER_CONSTRUCTOR_ACTION_EXPR;
+	public static String CLASS_PARAMETER_CONSTRUCTOR_ACTION_EXPR(String selfName, String instances) {
+		return bind(CLASS_PARAMETER_CONSTRUCTOR_ACTION_EXPR, 
+				selfName,
+				instances);
+	}
+	
+	public static String CLASS_PARAMETER_DESTRUCTOR_ACTION_EXPR;
+	public static String CLASS_PARAMETER_DESTRUCTOR_ACTION_EXPR(String selfName, String instances) {
+		return bind(CLASS_PARAMETER_DESTRUCTOR_ACTION_EXPR, 
+				selfName,
+				instances);
+	}
+	
+	///// extra user parameters in methods
 	
 	public static String USER_PARAMETER_TYPE_GUARD_NAME;
 	public static String USER_PARAMETER_TYPE_GUARD_NAME(TypedParameter p) {
@@ -247,5 +281,42 @@ public class Strings {
 				p.getType());
 	}
 	
-	
+	/// intialisation to intialValue of associations/attributes
+	/// ....in fixed classes
+	public static String FIXED_INITIALISATION_NAME;
+	public static String FIXED_INITIALISATION_NAME(EventBNamed e) {
+		return bind(FIXED_INITIALISATION_NAME, e.getName());
+	}
+
+	public static String FIXED_INITIALISATION_ACTION;
+	public static String FIXED_INITIALISATION_ACTION(EventBNamed e) {
+		return bind(FIXED_INITIALISATION_ACTION, 
+				e.getName(), 
+				((EventBNamed) e.eContainer()).getName(), 
+				((EventBInitialisable)e).getInitialValue());
+	}
+	/// ....in constructors of variable classes	
+	public static String ATTRIBUTE_INITIALISATION_ACTION_NAME;
+	public static String ATTRIBUTE_INITIALISATION_ACTION_NAME(String name) {
+		return bind(ATTRIBUTE_INITIALISATION_ACTION_NAME, name);
+	}
+
+	public static String ATTRIBUTE_INITIALISATION_ACTION_EXPR;
+	public static String ATTRIBUTE_INITIALISATION_ACTION_EXPR(String name, String selfName, String intialValue) {
+		return bind(ATTRIBUTE_INITIALISATION_ACTION_EXPR, 
+				name, 
+				selfName, 
+				intialValue);
+	}
+	public static String ATTRIBUTE_DESTRUCTION_ACTION_NAME;
+	public static String ATTRIBUTE_DESTRUCTION_ACTION_NAME(String name) {
+		return bind(ATTRIBUTE_DESTRUCTION_ACTION_NAME, name);
+	}
+
+	public static String ATTRIBUTE_DESTRUCTION_ACTION_EXPR;
+	public static String ATTRIBUTE_DESTRUCTION_ACTION_EXPR(String name, String selfName) {
+		return bind(ATTRIBUTE_DESTRUCTION_ACTION_EXPR, 
+				name, 
+				selfName);
+	}
 }

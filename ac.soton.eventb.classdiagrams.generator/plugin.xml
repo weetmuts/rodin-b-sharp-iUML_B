@@ -34,6 +34,26 @@
                rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassMethodRule"
                source_class="ClassMethod">
          </rule>
+         <rule
+               name="AssociationFixedInitialisationRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.FixedIntialisationRule"
+               source_class="Association">
+         </rule>
+         <rule
+               name="ClassAttributeFixedInitialisationRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.FixedIntialisationRule"
+               source_class="ClassAttribute">
+         </rule>
+         <rule
+               name="ClassMethodConstructorRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassMethodConstructorRule"
+               source_class="ClassMethod">
+         </rule>
+         <rule
+               name="ClassMethodDestructorRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassMethodDestructorRule"
+               source_class="ClassMethod">
+         </rule>
       </generator>
    </extension>
    <extension
