@@ -24,6 +24,8 @@ import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.EventBInitialisable;
+import ac.soton.eventb.classdiagrams.MethodKind;
 
 /**
  * <!-- begin-user-doc -->
@@ -111,6 +113,10 @@ public class ClassdiagramsValidator extends EObjectValidator {
 				return validateClassMethod((ClassMethod)value, diagnostics, context);
 			case ClassdiagramsPackage.CLASS_CONSTRAINT:
 				return validateClassConstraint((ClassConstraint)value, diagnostics, context);
+			case ClassdiagramsPackage.EVENT_BINITIALISABLE:
+				return validateEventBInitialisable((EventBInitialisable)value, diagnostics, context);
+			case ClassdiagramsPackage.METHOD_KIND:
+				return validateMethodKind((MethodKind)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -215,6 +221,24 @@ public class ClassdiagramsValidator extends EObjectValidator {
 	 */
 	public boolean validateClassConstraint(ClassConstraint classConstraint, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(classConstraint, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventBInitialisable(EventBInitialisable eventBInitialisable, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(eventBInitialisable, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMethodKind(MethodKind methodKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
 	}
 
 	/**

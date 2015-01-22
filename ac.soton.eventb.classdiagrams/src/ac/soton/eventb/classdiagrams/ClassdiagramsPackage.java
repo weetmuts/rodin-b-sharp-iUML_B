@@ -11,6 +11,7 @@ package ac.soton.eventb.classdiagrams;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eventb.emf.core.CorePackage;
@@ -55,7 +56,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://soton.ac.uk/models/eventb/classdiagrams/0313";
+	String eNS_URI = "http://soton.ac.uk/models/eventb/classdiagrams/2015";
 
 	/**
 	 * The package namespace name.
@@ -383,13 +384,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int ASSOCIATION__FUNCTIONAL = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT__FUNCTIONAL;
 
 	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__INITIAL_VALUE = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__TARGET = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 0;
+	int ASSOCIATION__TARGET = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -398,7 +408,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION__SOURCE = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 1;
+	int ASSOCIATION__SOURCE = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Association</em>' class.
@@ -407,7 +417,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 2;
+	int ASSOCIATION_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
@@ -555,13 +565,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS_ATTRIBUTE__FUNCTIONAL = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT__FUNCTIONAL;
 
 	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__INITIAL_VALUE = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Target</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE__TARGET = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 0;
+	int CLASS_ATTRIBUTE__TARGET = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Class Attribute</em>' class.
@@ -570,7 +589,7 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_ATTRIBUTE_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_ATTRIBUTE_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_RELATION_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassImpl <em>Class</em>}' class.
@@ -918,13 +937,22 @@ public interface ClassdiagramsPackage extends EPackage {
 	int CLASS_METHOD__WITNESSES = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT__WITNESSES;
 
 	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_METHOD__KIND = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Class Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_METHOD_FEATURE_COUNT = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 0;
+	int CLASS_METHOD_FEATURE_COUNT = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.ClassConstraintImpl <em>Class Constraint</em>}' class.
@@ -1043,6 +1071,45 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_CONSTRAINT_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_DERIVED_PREDICATE_ELEMENT_FEATURE_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.impl.EventBInitialisableImpl <em>Event BInitialisable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.classdiagrams.impl.EventBInitialisableImpl
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getEventBInitialisable()
+	 * @generated
+	 */
+	int EVENT_BINITIALISABLE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Initial Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BINITIALISABLE__INITIAL_VALUE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Event BInitialisable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_BINITIALISABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.classdiagrams.MethodKind <em>Method Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.classdiagrams.MethodKind
+	 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getMethodKind()
+	 * @generated
+	 */
+	int METHOD_KIND = 8;
 
 
 	/**
@@ -1271,6 +1338,17 @@ public interface ClassdiagramsPackage extends EPackage {
 	EClass getClassMethod();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.ClassMethod#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see ac.soton.eventb.classdiagrams.ClassMethod#getKind()
+	 * @see #getClassMethod()
+	 * @generated
+	 */
+	EAttribute getClassMethod_Kind();
+
+	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.ClassConstraint <em>Class Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1279,6 +1357,37 @@ public interface ClassdiagramsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getClassConstraint();
+
+	/**
+	 * Returns the meta object for class '{@link ac.soton.eventb.classdiagrams.EventBInitialisable <em>Event BInitialisable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event BInitialisable</em>'.
+	 * @see ac.soton.eventb.classdiagrams.EventBInitialisable
+	 * @generated
+	 */
+	EClass getEventBInitialisable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.classdiagrams.EventBInitialisable#getInitialValue <em>Initial Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Initial Value</em>'.
+	 * @see ac.soton.eventb.classdiagrams.EventBInitialisable#getInitialValue()
+	 * @see #getEventBInitialisable()
+	 * @generated
+	 */
+	EAttribute getEventBInitialisable_InitialValue();
+
+	/**
+	 * Returns the meta object for enum '{@link ac.soton.eventb.classdiagrams.MethodKind <em>Method Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Method Kind</em>'.
+	 * @see ac.soton.eventb.classdiagrams.MethodKind
+	 * @generated
+	 */
+	EEnum getMethodKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1483,6 +1592,14 @@ public interface ClassdiagramsPackage extends EPackage {
 		EClass CLASS_METHOD = eINSTANCE.getClassMethod();
 
 		/**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS_METHOD__KIND = eINSTANCE.getClassMethod_Kind();
+
+		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.ClassConstraintImpl <em>Class Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1491,6 +1608,34 @@ public interface ClassdiagramsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CLASS_CONSTRAINT = eINSTANCE.getClassConstraint();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.impl.EventBInitialisableImpl <em>Event BInitialisable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.classdiagrams.impl.EventBInitialisableImpl
+		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getEventBInitialisable()
+		 * @generated
+		 */
+		EClass EVENT_BINITIALISABLE = eINSTANCE.getEventBInitialisable();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_BINITIALISABLE__INITIAL_VALUE = eINSTANCE.getEventBInitialisable_InitialValue();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.classdiagrams.MethodKind <em>Method Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.classdiagrams.MethodKind
+		 * @see ac.soton.eventb.classdiagrams.impl.ClassdiagramsPackageImpl#getMethodKind()
+		 * @generated
+		 */
+		EEnum METHOD_KIND = eINSTANCE.getMethodKind();
 
 	}
 

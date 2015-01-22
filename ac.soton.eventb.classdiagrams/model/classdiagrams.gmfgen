@@ -14,6 +14,7 @@
       itemSemanticEditPolicyClassName="ClassdiagramItemSemanticEditPolicy"
       canonicalEditPolicyClassName="ClassdiagramCanonicalEditPolicy"
       iconProviderPriority="Low"
+      creationWizardClassName="ClassdiagramsCreationWizard"
       validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true">
@@ -403,6 +404,8 @@
           xsi:type="gmfgen:ParentAssignedViewmap"
           getterName="getFigureClassContraintsCompartmentFigure"
           figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
+      <styles
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/SortingStyle"/>
     </compartments>
     <palette>
       <groups

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 - University of Southampton.&#xD;All rights reserved. This program and the accompanying materials  are made&#xD;available under the terms of the Eclipse Public License v1.0 which accompanies this &#xD;distribution, and is available at http://www.eclipse.org/legal/epl-v10.html&#xA;"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2015 - University of Southampton.&#xD;All rights reserved. This program and the accompanying materials  are made&#xD;available under the terms of the Eclipse Public License v1.0 which accompanies this &#xD;distribution, and is available at http://www.eclipse.org/legal/epl-v10.html&#xA;"
     modelDirectory="/ac.soton.eventb.classdiagrams/src" editDirectory="/ac.soton.eventb.classdiagrams.edit/src"
     modelPluginID="ac.soton.eventb.classdiagrams" templateDirectory="/org.eventb.emf.core/templates"
     dynamicTemplates="true" modelName="Classdiagrams" importerID="org.eclipse.emf.importer.ecore"
@@ -11,6 +11,11 @@
   <genPackages prefix="Classdiagrams" basePackage="ac.soton.eventb" disposableProviderFactory="true"
       extensibleProviderFactory="true" childCreationExtenders="true" fileExtensions="cls"
       ecorePackage="classdiagrams.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="classdiagrams.ecore#//MethodKind">
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//MethodKind/normal"/>
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//MethodKind/constructor"/>
+      <genEnumLiterals ecoreEnumLiteral="classdiagrams.ecore#//MethodKind/destructor"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="classdiagrams.ecore#//ClassdiagramOwner">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//ClassdiagramOwner/classdiagrams"/>
     </genClasses>
@@ -36,7 +41,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference classdiagrams.ecore#//Class/methods"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//Class/selfName"/>
     </genClasses>
-    <genClasses ecoreClass="classdiagrams.ecore#//ClassMethod"/>
+    <genClasses ecoreClass="classdiagrams.ecore#//ClassMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//ClassMethod/kind"/>
+    </genClasses>
     <genClasses ecoreClass="classdiagrams.ecore#//ClassConstraint"/>
+    <genClasses ecoreClass="classdiagrams.ecore#//EventBInitialisable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute classdiagrams.ecore#//EventBInitialisable/initialValue"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

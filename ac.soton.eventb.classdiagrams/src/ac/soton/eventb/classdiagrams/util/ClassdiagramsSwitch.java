@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.EventBAction;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
 import org.eventb.emf.core.EventBDerived;
@@ -32,6 +33,7 @@ import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.EventBInitialisable;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
@@ -141,6 +143,7 @@ public class ClassdiagramsSwitch<T> {
 				Association association = (Association)theEObject;
 				T result = caseAssociation(association);
 				if (result == null) result = caseEventBNamedCommentedRelationDataElaborationElement(association);
+				if (result == null) result = caseEventBInitialisable(association);
 				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(association);
 				if (result == null) result = caseEventBRelationKind(association);
 				if (result == null) result = caseEventBNamedCommentedElement(association);
@@ -157,6 +160,7 @@ public class ClassdiagramsSwitch<T> {
 				ClassAttribute classAttribute = (ClassAttribute)theEObject;
 				T result = caseClassAttribute(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedRelationDataElaborationElement(classAttribute);
+				if (result == null) result = caseEventBInitialisable(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedDataElaborationElement(classAttribute);
 				if (result == null) result = caseEventBRelationKind(classAttribute);
 				if (result == null) result = caseEventBNamedCommentedElement(classAttribute);
@@ -211,6 +215,12 @@ public class ClassdiagramsSwitch<T> {
 				if (result == null) result = caseEventBElement(classConstraint);
 				if (result == null) result = caseEventBCommented(classConstraint);
 				if (result == null) result = caseEventBObject(classConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassdiagramsPackage.EVENT_BINITIALISABLE: {
+				EventBInitialisable eventBInitialisable = (EventBInitialisable)theEObject;
+				T result = caseEventBInitialisable(eventBInitialisable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -320,6 +330,21 @@ public class ClassdiagramsSwitch<T> {
 	 * @generated
 	 */
 	public T caseClassConstraint(ClassConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event BInitialisable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event BInitialisable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventBInitialisable(EventBInitialisable object) {
 		return null;
 	}
 

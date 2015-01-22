@@ -27,7 +27,7 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedRela
  * @model
  * @generated
  */
-public interface ClassAttribute extends EventBNamedCommentedRelationDataElaborationElement {
+public interface ClassAttribute extends EventBNamedCommentedRelationDataElaborationElement, EventBInitialisable {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -14,11 +14,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBAction;
 import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.classdiagrams.Association;
-import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.EventBInitialisable;
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedRelationDataElaborationElementImpl;
 
 /**
@@ -28,6 +30,7 @@ import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommente
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getInitialValue <em>Initial Value</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link ac.soton.eventb.classdiagrams.impl.AssociationImpl#getSource <em>Source</em>}</li>
  * </ul>
@@ -36,6 +39,26 @@ import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommente
  * @generated
  */
 public class AssociationImpl extends EventBNamedCommentedRelationDataElaborationElementImpl implements Association {
+	/**
+	 * The default value of the '{@link #getInitialValue() <em>Initial Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitialValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String INITIAL_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitialValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String initialValue = INITIAL_VALUE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -73,6 +96,27 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	@Override
 	protected EClass eStaticClass() {
 		return ClassdiagramsPackage.Literals.ASSOCIATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getInitialValue() {
+		return initialValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitialValue(String newInitialValue) {
+		String oldInitialValue = initialValue;
+		initialValue = newInitialValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE, oldInitialValue, initialValue));
 	}
 
 	/**
@@ -239,6 +283,8 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE:
+				return getInitialValue();
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -257,6 +303,9 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE:
+				setInitialValue((String)newValue);
+				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)newValue);
 				return;
@@ -275,6 +324,9 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE:
+				setInitialValue(INITIAL_VALUE_EDEFAULT);
+				return;
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				setTarget((ac.soton.eventb.classdiagrams.Class)null);
 				return;
@@ -293,6 +345,8 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE:
+				return INITIAL_VALUE_EDEFAULT == null ? initialValue != null : !INITIAL_VALUE_EDEFAULT.equals(initialValue);
 			case ClassdiagramsPackage.ASSOCIATION__TARGET:
 				return target != null;
 			case ClassdiagramsPackage.ASSOCIATION__SOURCE:
@@ -301,6 +355,54 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 		return super.eIsSet(featureID);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == EventBInitialisable.class) {
+			switch (derivedFeatureID) {
+				case ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE: return ClassdiagramsPackage.EVENT_BINITIALISABLE__INITIAL_VALUE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == EventBInitialisable.class) {
+			switch (baseFeatureID) {
+				case ClassdiagramsPackage.EVENT_BINITIALISABLE__INITIAL_VALUE: return ClassdiagramsPackage.ASSOCIATION__INITIAL_VALUE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (initialValue: ");
+		result.append(initialValue);
+		result.append(')');
+		return result.toString();
+	}
+
 	// Custom //
 	
 	/**
@@ -309,7 +411,7 @@ public class AssociationImpl extends EventBNamedCommentedRelationDataElaboration
 	 * @custom
 	 */
 	public boolean isRefinedElement() {
-		Class refinedClass = this.getSource()==null? null : this.getSource().getRefines();
+		ac.soton.eventb.classdiagrams.Class refinedClass = this.getSource()==null? null : this.getSource().getRefines();
 		String name = getName();
 		if (refinedClass==null || name==null) return false;
 		for (EventBNamed en : refinedClass.getClassAttributes()){

@@ -5,7 +5,7 @@
          point="org.eventb.emf.persistence.synchroniser">
       <emfPackage
             name="Classdiagrams Package"
-            nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+            nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <synchroniser
                emf_class="Classdiagram"
                name="Classdiagram"

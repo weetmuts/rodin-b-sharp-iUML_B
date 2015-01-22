@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.classdiagrams;singleton:=true
-Bundle-Version: 0.0.2
+Bundle-Version: 0.0.3
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -10,8 +10,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: ac.soton.eventb.classdiagrams,
  ac.soton.eventb.classdiagrams.impl,
  ac.soton.eventb.classdiagrams.util
-Require-Bundle: org.eventb.emf.core;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
- ac.soton.eventb.emf.core.extension;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
+Require-Bundle: org.eventb.emf.core;bundle-version="[4.0.0,5.0.0)";visibility:=reexport,
+ ac.soton.eventb.emf.core.extension;bundle-version="[4.0.0,5.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="[2.7.0,3.0.0)";visibility:=reexport,
- ac.soton.eventb.emf.diagrams;bundle-version="[4.0.0,5.0.0)"
+ ac.soton.eventb.emf.diagrams;bundle-version="[4.0.0,5.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy

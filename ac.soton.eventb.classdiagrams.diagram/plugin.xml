@@ -332,7 +332,7 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.Classdiagram_1000"
                name="%metatype.name.Classdiagram_1000"
@@ -342,7 +342,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.Class_2003"
                name="%metatype.name.Class_2003"
@@ -352,7 +352,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="2003"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.ClassAttribute_3022"
                name="%metatype.name.ClassAttribute_3022"
@@ -362,7 +362,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3022"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.ClassMethod_3023"
                name="%metatype.name.ClassMethod_3023"
@@ -372,7 +372,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3023"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.ClassConstraint_3024"
                name="%metatype.name.ClassConstraint_3024"
@@ -382,7 +382,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="3024"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <metamodelType
                id="ac.soton.eventb.classdiagrams.diagram.Association_4005"
                name="%metatype.name.Association_4005"
@@ -392,7 +392,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <param name="semanticHint" value="4005"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/0313">
+      <metamodel nsURI="http://soton.ac.uk/models/eventb/classdiagrams/2015">
          <specializationType
                id="ac.soton.eventb.classdiagrams.diagram.ClassSupertypes_4006"
                name="%metatype.name.ClassSupertypes_4006"

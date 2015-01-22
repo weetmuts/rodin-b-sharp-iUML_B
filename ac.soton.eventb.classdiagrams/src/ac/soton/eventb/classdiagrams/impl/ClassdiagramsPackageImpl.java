@@ -13,6 +13,7 @@ package ac.soton.eventb.classdiagrams.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
@@ -28,6 +29,8 @@ import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramOwner;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
+import ac.soton.eventb.classdiagrams.EventBInitialisable;
+import ac.soton.eventb.classdiagrams.MethodKind;
 import ac.soton.eventb.classdiagrams.util.ClassdiagramsValidator;
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
@@ -87,6 +90,20 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * @generated
 	 */
 	private EClass classConstraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventBInitialisableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum methodKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -356,8 +373,44 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getClassMethod_Kind() {
+		return (EAttribute)classMethodEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClassConstraint() {
 		return classConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEventBInitialisable() {
+		return eventBInitialisableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEventBInitialisable_InitialValue() {
+		return (EAttribute)eventBInitialisableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getMethodKind() {
+		return methodKindEEnum;
 	}
 
 	/**
@@ -414,8 +467,15 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		createEAttribute(classEClass, CLASS__SELF_NAME);
 
 		classMethodEClass = createEClass(CLASS_METHOD);
+		createEAttribute(classMethodEClass, CLASS_METHOD__KIND);
 
 		classConstraintEClass = createEClass(CLASS_CONSTRAINT);
+
+		eventBInitialisableEClass = createEClass(EVENT_BINITIALISABLE);
+		createEAttribute(eventBInitialisableEClass, EVENT_BINITIALISABLE__INITIAL_VALUE);
+
+		// Create enums
+		methodKindEEnum = createEEnum(METHOD_KIND);
 	}
 
 	/**
@@ -456,7 +516,9 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		classdiagramEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		classdiagramEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
 		associationEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedRelationDataElaborationElement());
+		associationEClass.getESuperTypes().add(this.getEventBInitialisable());
 		classAttributeEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedRelationDataElaborationElement());
+		classAttributeEClass.getESuperTypes().add(this.getEventBInitialisable());
 		classEClass.getESuperTypes().add(theCoreextensionPackage.getEventBNamedCommentedDataElaborationElement());
 		classEClass.getESuperTypes().add(theDiagramsPackage.getDiagramOwner());
 		classMethodEClass.getESuperTypes().add(theCoreextensionPackage.getEventBCommentedLabeledEventGroupElement());
@@ -489,8 +551,18 @@ public class ClassdiagramsPackageImpl extends EPackageImpl implements Classdiagr
 		initEAttribute(getClass_SelfName(), theEcorePackage.getEString(), "selfName", null, 0, 1, ac.soton.eventb.classdiagrams.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classMethodEClass, ClassMethod.class, "ClassMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClassMethod_Kind(), this.getMethodKind(), "kind", "normal", 1, 1, ClassMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classConstraintEClass, ClassConstraint.class, "ClassConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(eventBInitialisableEClass, EventBInitialisable.class, "EventBInitialisable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEventBInitialisable_InitialValue(), theEcorePackage.getEString(), "initialValue", null, 0, 1, EventBInitialisable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(methodKindEEnum, MethodKind.class, "MethodKind");
+		addEEnumLiteral(methodKindEEnum, MethodKind.NORMAL);
+		addEEnumLiteral(methodKindEEnum, MethodKind.CONSTRUCTOR);
+		addEEnumLiteral(methodKindEEnum, MethodKind.DESTRUCTOR);
 
 		// Create resource
 		createResource(eNS_URI);

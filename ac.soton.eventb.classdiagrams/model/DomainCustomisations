@@ -22,3 +22,23 @@
 	 */
 	protected String extensionId = EXTENSION_ID_EDEFAULT+"."+EcoreUtil.generateUUID();
 
+**********************************************************************************************
+* in edit plugin.xml - 
+* 	the extensions need to be corrected to reference machine and context instead of just core
+*	also make sure to keep the uri references up to date if the referenced metamodels are changed
+**********************************************************************************************
+
+   <extension point="org.eclipse.emf.edit.childCreationExtenders">
+      <extender
+            uri="http://soton.ac.uk/models/eventb/diagrams"
+            class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$DiagramsChildCreationExtender"/>
+      <extender
+            uri="http://emf.eventb.org/models/core/machine/2014"
+            class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"/>
+      <extender
+            class="ac.soton.eventb.classdiagrams.provider.ClassdiagramsItemProviderAdapterFactory$CoreChildCreationExtender"
+            uri="http://emf.eventb.org/models/core/context/2014">
+      </extender>
+   </extension>
+   
+   
