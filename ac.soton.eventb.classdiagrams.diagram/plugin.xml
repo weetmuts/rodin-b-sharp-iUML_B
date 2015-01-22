@@ -795,8 +795,16 @@ http://www.eclipse.org/legal/epl-v10.html
                id="property.section.dataKind"
                tab="property.tab.overview">
          </propertySection>
-         <propertySection
+          <propertySection
                afterSection="property.section.dataKind"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.InitialValuePropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.InitialValuePropertySection$Filter"
+               id="property.section.initialValue"
+               tab="property.tab.overview">
+         </propertySection>        
+         <propertySection
+               afterSection="property.section.initialValue"
                class="ac.soton.eventb.emf.diagrams.sheet.ElaboratesDataPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.emf.diagrams.sheet.ElaboratesDataPropertySection$Filter"
@@ -877,10 +885,17 @@ http://www.eclipse.org/legal/epl-v10.html
                filter="ac.soton.eventb.emf.diagrams.sheet.ElaboratesPropertySection$Filter"
                id="property.section.elaborates"
                tab="property.tab.overview">
-         </propertySection>        
-         
+         </propertySection>    
          <propertySection
                afterSection="property.section.elaborates"
+               class="ac.soton.eventb.classdiagrams.diagram.sheet.custom.MethodKindPropertySection"
+               enablesFor="1"
+               filter="ac.soton.eventb.classdiagrams.diagram.sheet.custom.MethodKindPropertySection$Filter"
+               id="property.section.methodKind"
+               tab="property.tab.overview">
+         </propertySection>
+         <propertySection
+               afterSection="property.section.methodKind"
                class="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection"
                enablesFor="1"
                filter="ac.soton.eventb.emf.diagrams.sheet.CommentPropertySection$Filter"

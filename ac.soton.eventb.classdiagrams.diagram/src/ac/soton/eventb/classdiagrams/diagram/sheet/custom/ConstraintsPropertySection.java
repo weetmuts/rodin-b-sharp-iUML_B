@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.IFilter;
 import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.machine.Machine;
 
 import ac.soton.eventb.classdiagrams.Class;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
@@ -76,11 +77,13 @@ public class ConstraintsPropertySection extends AbstractEditTableWithDefaultNami
 
 	@Override
 	protected String getButtonLabelText() {
-		return "Method  ";
+		return owner.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT) instanceof Machine? 
+				"Invariant" : "Axiom";
 	}
 	
 	protected String getFeaturePrefix() {
-		return "cnstrnt";
+		return owner.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT) instanceof Machine? 
+				"inv" : "axm";
 	}
 	
 }
