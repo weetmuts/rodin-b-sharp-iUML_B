@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.classdiagrams.feature"
       label="%featureName"
-      version="0.2.0"
+      version="1.0.0"
       provider-name="%providerName"
       plugin="ac.soton.iumlb.branding">
 
@@ -26,7 +26,7 @@
       <import plugin="org.eventb.emf.core" version="4.0.0" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.core.extension" version="4.0.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore" version="2.7.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams" version="4.0.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.diagrams" version="4.0.1" match="compatible"/>
       <import plugin="org.eclipse.ui.navigator" version="3.5.100" match="compatible"/>
       <import plugin="org.eclipse.ui.navigator.resources" version="3.4.300" match="compatible"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.printing" version="1.4.1" match="compatible"/>
@@ -56,30 +56,25 @@
       <import plugin="org.eclipse.gef" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.gmf.tooling.runtime" version="3.1.0" match="compatible"/>
       <import plugin="org.rodinp.keyboard.ui" version="2.0.0" match="compatible"/>
-      <import plugin="org.eventb.ui" version="3.0.0" match="compatible"/>
+      <import plugin="org.eventb.ui" version="3.1.0" match="compatible"/>
       <import plugin="org.eventb.emf.core.edit" version="1.0.0" match="compatible"/>
       <import plugin="org.eventb.emf.persistence" version="3.0.0" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.core.extension.edit" version="1.0.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams" version="4.0.1" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.edit" version="2.0.1" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.generator" version="3.1.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.classdiagrams" version="0.0.1" match="compatible"/>
-      <import plugin="ac.soton.eventb.classdiagrams.edit" version="0.0.1" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.diagrams.edit" version="2.2.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.diagrams.generator" version="3.5.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.classdiagrams" version="1.0.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.classdiagrams.edit" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.emf.edit" version="2.7.2" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.edit" version="2.0.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.generator" version="3.3.0" match="compatible"/>
-      <import plugin="org.rodinp.core" version="1.5.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace" version="1.5.1" match="compatible"/>
+      <import plugin="org.eclipse.swt" version="3.103.1" match="compatible"/>
       <import plugin="org.rodinp.core" version="1.7.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.classdiagrams.diagram" version="1.0.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.workspace" version="1.5.1" match="compatible"/>
       <import plugin="org.eventb.core" version="3.1.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.core.extension.navigator" version="3.2.1" match="greaterOrEqual"/>
       <import plugin="ac.soton.eventb.emf.core.extension.persistence" version="2.0.0" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.diagrams.navigator" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.emf.transaction" version="1.4.0" match="compatible"/>
-      <import plugin="org.eclipse.osgi"/>
       <import feature="ac.soton.eventb.emf.diagrams.feature" version="5.0.2" match="compatible"/>
-      <import feature="ac.soton.eventb.emf.core.extension.feature" version="3.2.0" match="compatible"/>
-      <import feature="org.eventb.emf.feature" version="5.0.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.core.extension.navigator" version="3.2.1" match="compatible"/>
    </requires>
 
    <plugin
