@@ -14,8 +14,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBAction;
 import org.eventb.emf.core.EventBNamed;
 
 import ac.soton.eventb.classdiagrams.Association;

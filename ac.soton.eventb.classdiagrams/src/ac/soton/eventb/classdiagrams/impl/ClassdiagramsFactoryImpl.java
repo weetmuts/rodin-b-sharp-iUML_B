@@ -23,7 +23,6 @@ import ac.soton.eventb.classdiagrams.ClassMethod;
 import ac.soton.eventb.classdiagrams.Classdiagram;
 import ac.soton.eventb.classdiagrams.ClassdiagramsFactory;
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.classdiagrams.EventBInitialisable;
 import ac.soton.eventb.classdiagrams.MethodKind;
 
 /**

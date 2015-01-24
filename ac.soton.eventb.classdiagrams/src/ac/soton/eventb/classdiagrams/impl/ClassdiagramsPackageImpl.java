@@ -10,6 +10,8 @@
 package ac.soton.eventb.classdiagrams.impl;
 
 
+//import static ac.soton.eventb.classdiagrams.ClassdiagramsPackage.CLASS;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
