@@ -37,18 +37,19 @@ public class StatemachineRefiner extends AbstractExtensionRefiner {
 	/**
 	 * populate the given map with the reference features that the refiner needs to copy for statemachine refinement.
 	 * This is refines (as references to their abstract counterparts) and
-	 * incoming, outgoing, source and target (as intra-level references) 
+	 * incoming, outgoing, source and target (as intra-level references).
+	 * Instances
 	 */
 	@Override
-	protected void populateReferenceMap(final Map<EReference,Boolean> referencemap){
+	protected void populateReferenceMap(final Map<EReference,RefHandling> referencemap){
 		super.populateReferenceMap(referencemap);
-		referencemap.put(StatemachinesPackage.Literals.STATE__REFINES, true);
-		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__REFINES, true);	
-		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__INCOMING, false);
-		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__OUTGOING, false);
-		referencemap.put(StatemachinesPackage.Literals.TRANSITION__SOURCE, false);
-		referencemap.put(StatemachinesPackage.Literals.TRANSITION__TARGET, false);
-		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__INSTANCES, false);
+		referencemap.put(StatemachinesPackage.Literals.STATE__REFINES, RefHandling.CHAIN);
+		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__REFINES, RefHandling.CHAIN);	
+		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__INCOMING, RefHandling.EQUIV);
+		referencemap.put(StatemachinesPackage.Literals.ABSTRACT_NODE__OUTGOING, RefHandling.EQUIV);
+		referencemap.put(StatemachinesPackage.Literals.TRANSITION__SOURCE, RefHandling.EQUIV);
+		referencemap.put(StatemachinesPackage.Literals.TRANSITION__TARGET, RefHandling.EQUIV);
+		referencemap.put(StatemachinesPackage.Literals.STATEMACHINE__INSTANCES, RefHandling.EQUIV);
 	}
 
 /**
