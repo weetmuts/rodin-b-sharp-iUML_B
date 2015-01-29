@@ -42,14 +42,14 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 	 * elaborates, incoming, outgoing, source and target (as intra-level references) 
 	 */
 	@Override
-	protected void populateReferenceMap(final Map<EReference,Boolean> referencemap){
+	protected void populateReferenceMap(final Map<EReference,RefHandling> referencemap){
 		super.populateReferenceMap(referencemap);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, true);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, true);	
-		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, false);
-		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, false);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, false);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, false);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, RefHandling.CHAIN);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, RefHandling.CHAIN);	
+		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, RefHandling.EQUIV);
+		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, RefHandling.EQUIV);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, RefHandling.EQUIV);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, RefHandling.EQUIV);
 	}
 
 /**

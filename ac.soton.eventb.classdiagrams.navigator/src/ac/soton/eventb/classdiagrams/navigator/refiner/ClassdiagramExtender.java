@@ -43,10 +43,10 @@ public class ClassdiagramExtender extends AbstractExtensionRefiner {
 	 * none (as intra-level references) 
 	 */
 	@Override
-	protected void populateReferenceMap(final Map<EReference,Boolean> referencemap){
+	protected void populateReferenceMap(final Map<EReference,RefHandling> referencemap){
 		super.populateReferenceMap(referencemap);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, true);
-		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, true);	
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, RefHandling.CHAIN);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, RefHandling.CHAIN);	
 //		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, false);
 //		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, false);
 //		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, false);
