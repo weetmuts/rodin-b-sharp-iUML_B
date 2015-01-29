@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="rodin2.8" sequenceNumber="22">
+<?pde version="3.8"?><target name="rodin2.8" sequenceNumber="26">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.rodinp.platform.product" version="2.8.0.66956b4"/>
@@ -14,11 +14,11 @@
 <repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.1.0.201403031044"/>
+<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.2.0.201406111907"/>
 <repository location="http://download.eclipse.org/modeling/gmp/gmf-tooling/updates/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="de.prob2.feature.feature.group" version="2.4.6.201404281443"/>
+<unit id="de.prob2.feature.feature.group" version="2.4.8.201408190939"/>
 <repository location="http://www.stups.uni-duesseldorf.de/prob_updates"/>
 </location>
 </locations>

@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="rodin3.0" sequenceNumber="23">
+<?pde version="3.8"?><target name="rodin3.0" sequenceNumber="24">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="fr.systerel.editor.feature.group" version="0.7.0.201403141545-e3d282b"/>
-<unit id="org.rodinp.feature.group" version="1.7.0.201403141545-e3d282b"/>
-<unit id="org.eventb.ide.feature.group" version="3.0.0.201403141545-e3d282b"/>
-<unit id="org.rodinp.platform.tests.feature.group" version="3.0.0.201403141545-e3d282b"/>
-<unit id="org.rodinp.platform.sources.feature.group" version="3.0.0.201403141545-e3d282b"/>
-<unit id="org.rodinp.platform.feature.group" version="3.0.0.201403141545-e3d282b"/>
-<repository location="jar:file:/Volumes/Code/Rodins4test/rodinTargets/org.rodinp.dev-3.0.0-e3d282b.zip!/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.1.0.201403031044"/>
+<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.2.1.201409171321"/>
 <repository location="http://download.eclipse.org/modeling/gmp/gmf-tooling/updates/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -27,8 +18,30 @@
 <repository location="http://rodin-b-sharp.sourceforge.net/core-updates"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="de.prob2.feature.feature.group" version="3.0.2.201403281050"/>
+<unit id="de.prob2.feature.feature.group" version="3.0.6.201408181326"/>
 <repository location="http://www.stups.uni-duesseldorf.de/prob_updates_rodin3"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eventb.ide.feature.group" version="3.0.1.201406111447-5326174"/>
+<unit id="org.rodinp.platform.feature.group" version="3.0.0.201406111447-5326174"/>
+<unit id="org.eclipse.equinox.p2.core.feature.source.feature.group" version="1.1.0.v20121211-153934-8297FndFWmE7h7Bpz-vcqkxyKz0"/>
+<unit id="org.eclipse.rcp.feature.group" version="3.8.2.v20130118-180157-96BuGOZFxwOAeG8Ofmqicz0tPK"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="2.2.0.v20121212-204731-62DG9JXTlTj-UXcQ2y3NLn6U4Z3H"/>
+<unit id="org.rodinp.platform.sources.feature.group" version="3.0.0.201406111447-5326174"/>
+<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.1.0.v20121211-153934-8297FndFWmE7h7Bpz-vcqkxyKz0"/>
+<unit id="org.eclipse.equinox.p2.rcp.feature.feature.group" version="1.1.0.v20121211-153934-785EoBqNKNZz-DW7sUc8hFwz00wd"/>
+<unit id="fr.systerel.editor.feature.group" version="0.7.0.201406111447-5326174"/>
+<unit id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="2.2.0.v20121212-204731-62DG9JXTlTj-UXcQ2y3NLn6U4Z3H"/>
+<unit id="org.rodinp.platform.tests.feature.group" version="3.0.0.201406111447-5326174"/>
+<unit id="org.eclipse.platform.source.feature.group" version="3.8.1.v20130118-180812-9jF7oIBFG8eU2pim-VbIlTuQjY0RWWK3x-bv4I"/>
+<unit id="org.eclipse.equinox.p2.rcp.feature.source.feature.group" version="1.1.0.v20121211-153934-785EoBqNKNZz-DW7sUc8hFwz00wd"/>
+<unit id="org.eclipse.platform.feature.group" version="3.8.1.v20130118-180812-9jF7oIBFG8eU2pim-VbIlTuQjY0RWWK3x-bv4I"/>
+<unit id="org.eclipse.equinox.p2.extras.feature.source.feature.group" version="1.1.0.v20121211-153934-7A6FEcDiVOTg2RYDuZuFz-L2z00w"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="3.8.2.v20130118-180157-96BuGOZFxwOAeG8Ofmqicz0tPK"/>
+<unit id="org.rodinp.feature.group" version="1.7.0.201406111447-5326174"/>
+<unit id="org.eclipse.equinox.p2.extras.feature.feature.group" version="1.1.0.v20121211-153934-7A6FEcDiVOTg2RYDuZuFz-L2z00w"/>
+<unit id="org.eclipse.help.feature.group" version="1.4.1.v20120912-145617-8R7xFOXFLWUl7PpMEeZNIGkb4"/>
+<repository location="jar:file:/Volumes/Code/Rodins4test/rodinTargets/Rodin3.0.1/org.rodinp.dev-3.0.1-5326174.zip!/"/>
 </location>
 </locations>
 </target>
