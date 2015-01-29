@@ -2,7 +2,6 @@ package ac.soton.eventb.classdiagrams.generator.strings;
 
 import java.text.MessageFormat;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 import org.eventb.emf.core.EventBNamed;
 
@@ -45,54 +44,15 @@ public class Strings {
 		return MessageFormat.format(message, bindings);
 	}
 
-	/**
-	 * Returns the given components name if it is on of several root components
-	 * in a machine otherwise returns an empty string
-	 * 
-	 * @param cp
-	 * @return
-	 */
-	private static String rootComponentPrefix(Class cp) {
-		for (EObject el : cp.eContainer().eContents()) {
-			if (el instanceof Class && el != cp) {
-				return cp.getName();
-			}
-		}
-		return "";
-	}
-
 	public static String CLASS_SUPERTYPE_PRED;
-	public static String CLASS_SUPERTYPE_PRED(Class cp, Class cp2) {
-		return bind(CLASS_SUPERTYPE_PRED, rootComponentPrefix(cp), rootComponentPrefix(cp2));
+	public static String CLASS_SUPERTYPE_PRED(Class cp, Class sc) {
+		return bind(CLASS_SUPERTYPE_PRED, cp.getName(), sc.getName());
 	}
 
 	public static String CLASS_SUPERTYPE_NAME;
-	
-	public static String CLASS_SUPERTYPE_NAME(Class cp) {
-		return bind(CLASS_SUPERTYPE_NAME, rootComponentPrefix(cp));
+	public static String CLASS_SUPERTYPE_NAME(Class cp, Class sc) {
+		return bind(CLASS_SUPERTYPE_NAME, cp.getName(), sc.getName());
 	}
-	
-	public static String CLASS_INSTANCE_NAME;
-	
-	public static String CLASS_INSTANCE_NAME(Class cp) {
-		return bind(CLASS_INSTANCE_NAME, rootComponentPrefix(cp));
-	}
-	
-	public static String CLASS_INSTANCE;
-	
-	public static String CLASS_INITIALIZATION_NAME;
-
-	public static String CLASS_INITIALIZATION_NAME(Class cp) {
-		return bind(CLASS_INSTANCE_NAME, rootComponentPrefix(cp));
-	}
-	
-	public static String DYNAMIC_CLASS_VALUE;
-
-	public static String DYNAMIC_CLASS_VALUE(Class cp) {
-		return bind(DYNAMIC_CLASS_VALUE, rootComponentPrefix(cp));
-	}
-
-	public static String CLASS_INITIALIZATION_EXPR;
 	
 	public static String ASSOCIATION_PRED;
 
@@ -283,18 +243,25 @@ public class Strings {
 	
 	/// intialisation to intialValue of associations/attributes
 	/// ....in fixed classes
-	public static String FIXED_INITIALISATION_NAME;
-	public static String FIXED_INITIALISATION_NAME(EventBNamed e) {
-		return bind(FIXED_INITIALISATION_NAME, e.getName());
+	public static String INITIALISATION_NAME;
+	public static String INITIALISATION_NAME(EventBNamed e) {
+		return bind(INITIALISATION_NAME, e.getName());
 	}
 
-	public static String FIXED_INITIALISATION_ACTION;
-	public static String FIXED_INITIALISATION_ACTION(EventBNamed e) {
-		return bind(FIXED_INITIALISATION_ACTION, 
+	public static String ATTR_VALUE_INITIALISATION_ACTION_EXPR;
+	public static String ATTR_VALUE_INITIALISATION_ACTION_EXPR(EventBNamed e) {
+		return bind(ATTR_VALUE_INITIALISATION_ACTION_EXPR, 
 				e.getName(), 
 				((EventBNamed) e.eContainer()).getName(), 
 				((EventBInitialisable)e).getInitialValue());
 	}
+	//initialisation to empty set of associations/attributes etc.
+	//... in variable classes
+	public static String EMPTY_INITIALISATION_ACTION_EXPR;
+	public static String EMPTY_INITIALISATION_ACTION_EXPR(EventBNamed e) {
+		return bind(EMPTY_INITIALISATION_ACTION_EXPR, e.getName());
+	}
+	
 	/// ....in constructors of variable classes	
 	public static String ATTRIBUTE_INITIALISATION_ACTION_NAME;
 	public static String ATTRIBUTE_INITIALISATION_ACTION_NAME(String name) {
