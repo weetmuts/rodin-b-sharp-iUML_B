@@ -35,6 +35,7 @@ public class ClassdiagramExtender extends AbstractExtensionRefiner {
 		filterList.add(ContextPackage.Literals.AXIOM);
 		filterList.add(ClassdiagramsPackage.Literals.ASSOCIATION);
 		filterList.add(ClassdiagramsPackage.Literals.CLASS_ATTRIBUTE);
+		filterList.add(ClassdiagramsPackage.Literals.CLASS_CONSTRAINT);
 	}
 	
 	/**
@@ -47,10 +48,11 @@ public class ClassdiagramExtender extends AbstractExtensionRefiner {
 		super.populateReferenceMap(referencemap);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__REFINES, RefHandling.CHAIN);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASSDIAGRAM__REFINES, RefHandling.CHAIN);	
-//		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, false);
-//		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, false);
-//		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, false);
-//		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, false);
+		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__SOURCE, RefHandling.DROP);
+		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, RefHandling.DROP);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, RefHandling.DROP);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, RefHandling.DROP);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__SUPERTYPES, RefHandling.DROP);
 	}
 
 /**

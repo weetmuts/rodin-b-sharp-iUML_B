@@ -50,6 +50,7 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 		referencemap.put(ClassdiagramsPackage.Literals.ASSOCIATION__TARGET, RefHandling.EQUIV);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__INCOMING, RefHandling.EQUIV);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, RefHandling.EQUIV);
+		referencemap.put(ClassdiagramsPackage.Literals.CLASS__SUPERTYPES, RefHandling.DROP);
 	}
 
 /**
