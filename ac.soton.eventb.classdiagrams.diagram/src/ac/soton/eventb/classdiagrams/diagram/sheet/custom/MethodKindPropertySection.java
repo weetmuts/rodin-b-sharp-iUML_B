@@ -59,7 +59,7 @@ public class MethodKindPropertySection extends AbstractEnumerationPropertySectio
 
 	@Override
 	protected String getLabelText() {
-		return "Method Kind:";
+		return "Kind:";
 	}
 
 	@Override
