@@ -82,9 +82,17 @@
       </Participant>
       <Participant
             class="ac.soton.eventb.statemachines.navigator.refiner.RefinedEnumerationStatemachineRefiner"
-            id="RefinedEnumerationStatemachineRefiner"
+            id="refinedEnumerationStatemachineRefiner"
             refinement-id="org.eventb.core.machineRefinement">
       </Participant>
+      <Order
+            first-participant-id="org.eventb.core.machineRefiner"
+            second-participant-id="ac.soton.eventb.statemachines.navigator.statemachineRefiner">
+      </Order>
+      <Order
+            first-participant-id="ac.soton.eventb.statemachines.navigator.statemachineRefiner"
+            second-participant-id="ac.soton.eventb.statemachines.navigator.refinedEnumerationStatemachineRefiner">
+      </Order>
    </extension>
 
 </plugin>
