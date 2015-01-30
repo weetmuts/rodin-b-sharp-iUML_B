@@ -170,7 +170,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://emf.eventb.org/models/core">
+      <metamodel nsURI="http://emf.eventb.org/models/core/2014">
          <metamodelType
                id="org.eventb.emf.diagram.project.Project_1000"
                name="%metatype.name.Project_1000"
@@ -180,7 +180,7 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine/2014">
          <metamodelType
                id="org.eventb.emf.diagram.project.Machine_2001"
                name="%metatype.name.Machine_2001"
@@ -190,7 +190,7 @@
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/context">
+      <metamodel nsURI="http://emf.eventb.org/models/core/context/2014">
          <metamodelType
                id="org.eventb.emf.diagram.project.Context_2002"
                name="%metatype.name.Context_2002"
@@ -200,7 +200,7 @@
             <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/context">
+      <metamodel nsURI="http://emf.eventb.org/models/core/context/2014">
          <specializationType
                id="org.eventb.emf.diagram.project.ContextExtends_4001"
                name="%metatype.name.ContextExtends_4001"
@@ -209,7 +209,7 @@
             <param name="semanticHint" value="4001"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine/2014">
          <specializationType
                id="org.eventb.emf.diagram.project.MachineSees_4002"
                name="%metatype.name.MachineSees_4002"
@@ -218,7 +218,7 @@
             <param name="semanticHint" value="4002"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://emf.eventb.org/models/core/machine">
+      <metamodel nsURI="http://emf.eventb.org/models/core/machine/2014">
          <specializationType
                id="org.eventb.emf.diagram.project.MachineRefines_4003"
                name="%metatype.name.MachineRefines_4003"

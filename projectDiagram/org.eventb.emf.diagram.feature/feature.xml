@@ -2,7 +2,7 @@
 <feature
       id="org.eventb.emf.diagram.feature"
       label="Event-B Project Diagram Plugin"
-      version="1.0.0"
+      version="1.0.1"
       provider-name="University of Southampton">
 
    <description>
@@ -161,10 +161,11 @@ Inc. in the United States, other countries, or both.
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.gef"/>
-      <import plugin="fr.systerel.explorer" version="1.3.1" match="compatible"/>
-      <import plugin="org.eventb.emf.core" version="2.1.0" match="compatible"/>
       <import plugin="org.rodinp.core" version="1.3.1" match="compatible"/>
-      <import plugin="org.eventb.emf.persistence" version="2.2.1" match="compatible"/>
+      <import plugin="fr.systerel.explorer" version="2.1.0" match="compatible"/>
+      <import plugin="org.eventb.emf.core" version="4.0.0" match="compatible"/>
+      <import plugin="org.eventb.emf.persistence" version="3.0.0" match="compatible"/>
+      <import plugin="org.eventb.emf.core.edit" version="1.1.0" match="compatible"/>
    </requires>
 
    <plugin

@@ -93,22 +93,22 @@ public class EventbcoreNavigatorLabelProvider extends LabelProvider implements
 		switch (EventbcoreVisualIDRegistry.getVisualID(view)) {
 		case MachineSeesEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://emf.eventb.org/models/core/machine?Machine?sees", EventbcoreElementTypes.MachineSees_4002); //$NON-NLS-1$
+					"Navigator?Link?http://emf.eventb.org/models/core/machine/2014?Machine?sees", EventbcoreElementTypes.MachineSees_4002); //$NON-NLS-1$
 		case ContextExtendsEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://emf.eventb.org/models/core/context?Context?extends", EventbcoreElementTypes.ContextExtends_4001); //$NON-NLS-1$
+					"Navigator?Link?http://emf.eventb.org/models/core/context/2014?Context?extends", EventbcoreElementTypes.ContextExtends_4001); //$NON-NLS-1$
 		case ContextEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://emf.eventb.org/models/core/context?Context", EventbcoreElementTypes.Context_2002); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://emf.eventb.org/models/core/context/2014?Context", EventbcoreElementTypes.Context_2002); //$NON-NLS-1$
 		case MachineRefinesEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://emf.eventb.org/models/core/machine?Machine?refines", EventbcoreElementTypes.MachineRefines_4003); //$NON-NLS-1$
+					"Navigator?Link?http://emf.eventb.org/models/core/machine/2014?Machine?refines", EventbcoreElementTypes.MachineRefines_4003); //$NON-NLS-1$
 		case ProjectEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://emf.eventb.org/models/core?Project", EventbcoreElementTypes.Project_1000); //$NON-NLS-1$
+					"Navigator?Diagram?http://emf.eventb.org/models/core/2014?Project", EventbcoreElementTypes.Project_1000); //$NON-NLS-1$
 		case MachineEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://emf.eventb.org/models/core/machine?Machine", EventbcoreElementTypes.Machine_2001); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://emf.eventb.org/models/core/machine/2014?Machine", EventbcoreElementTypes.Machine_2001); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
