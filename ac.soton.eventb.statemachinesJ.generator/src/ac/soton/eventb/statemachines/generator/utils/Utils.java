@@ -3,6 +3,7 @@ package ac.soton.eventb.statemachines.generator.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Guard;
@@ -523,7 +524,8 @@ public class Utils {
 	 * @return
 	 */
 	public static State getSuperState(State sourceState) {
-		return (State) sourceState.eContainer().eContainer();
+		EObject statemachineContainer = sourceState.eContainer().eContainer();
+		return statemachineContainer instanceof State? (State) statemachineContainer : null;
 	}
 	
 	
