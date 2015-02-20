@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.machine.Invariant;
-import org.eventb.emf.core.machine.impl.MachineImpl;
 
 import ac.soton.eventb.emf.diagrams.generator.AbstractRule;
 import ac.soton.eventb.emf.diagrams.generator.GenerationDescriptor;
@@ -27,7 +26,8 @@ public class State2SubstateInvariantRule extends AbstractRule  implements IRule 
 		Statemachine rootSM = Utils.getRootStatemachine(sourceState);
 		return rootSM.getTranslation().equals(TranslationKind.MULTIVAR) && //Variables translation only
 				rootSM.getInstances() == null && //NON-LIFTED STATEMACHINE
-				(!(sourceState.eContainer().eContainer() instanceof MachineImpl) && sourceState.getRefines() == null); //If it is not a state from the root statemachine
+				((Utils.getSuperState(sourceState)!=null ) && //Has a superState i.e. not a state from the root statemachine
+				sourceState.getRefines() == null); //not a refined state
 	}
 	
 	
