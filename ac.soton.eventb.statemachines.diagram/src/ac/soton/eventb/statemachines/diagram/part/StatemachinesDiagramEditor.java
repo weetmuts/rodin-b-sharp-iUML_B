@@ -68,7 +68,12 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.properties.PropertySheet;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 
+import ac.soton.eventb.emf.diagrams.navigator.refactor.Recorder;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -402,6 +407,13 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////
+	/// The following methods have been overridden to 
+	// a) save on de-activation to avoid synch problems between several editors
+	// b) provide change recording
+	////////////////////////////////////////////////////////////////////////////////
+	
+	
 	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
@@ -410,6 +422,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	@Override
 	public void dispose() {
+		ecr.disposeChangeRecorder();
 		super.dispose();
 		getSite().getPage().removePartListener(this);
 	}
@@ -417,7 +430,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	private boolean deactivating = false;
 
 	/**
-	 * Saves editor if it is deactivated and autosave preference is on.
+	 * Saves editor if it is deactivated.
 	 * 
 	 * @param part
 	 */
@@ -440,8 +453,11 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			if (part == this) {
 				deactivating = false;
 			}
+		}else if (part==this){
+			
 		}
 	}
+	
 	
 	/*
 	 * checks whether the Statemachine of this diagram is being animated
@@ -460,18 +476,42 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 		}
 		return false;
 	}
-	
 
 	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
+
 	}
+	
+///////////////////changeRecording///////////////////
 
 	@Override
 	public void partClosed(IWorkbenchPart part) {
+		System.out.println("closing");
+		if (ecr!=null) ecr.disposeChangeRecorder();
+		System.out.println("closed and disposed");
 	}
 
 	@Override
 	public void partOpened(IWorkbenchPart part) {
+		System.out.println("opening");
+		EObject diagramElement = this.getDiagram().getElement();
+		if (diagramElement instanceof EventBElement){
+			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
+			ecr.resumeRecording();
+		}
+		System.out.println("opened and recording");
 	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		System.out.println("saving");
+		if (ecr!=null) ecr.saveChanges();
+		super.doSave(progressMonitor);
+		if (ecr!=null) ecr.resumeRecording();
+		System.out.println("saved and still recording");
+	}
+	
+	private Recorder ecr=null;
 
 }
