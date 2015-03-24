@@ -63,15 +63,10 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Text;
-import org.eventb.emf.core.machine.Action;
-import org.eventb.emf.core.machine.Guard;
 import org.eventb.emf.core.machine.Invariant;
-import org.eventb.emf.core.machine.Witness;
 import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
 import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
-import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
-import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -712,14 +707,14 @@ public class InvariantEditPart extends CompartmentEditPart implements
 				feedbackFigure = new Label(feedbackText);
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
 				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
-				bounds.setLocation(getFigure().getBounds().getLocation()
-						.translate(100, 100));
+				Point location = getFigure().getBounds().getLocation().translate(50, 0);			
+				getFigure().translateToAbsolute(location);
+				bounds.setLocation(location);
 				feedbackFigure.setBounds(bounds);
 				feedbackFigure.setForegroundColor(ColorConstants.darkGreen);  //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
 				feedbackFigure.setOpaque(true);
 				//feedbackFigure.setBorder(new LineBorder());
-	
 				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 				layer.add(feedbackFigure);
 			}
@@ -730,7 +725,7 @@ public class InvariantEditPart extends CompartmentEditPart implements
 		Invariant invariant = (Invariant) resolveSemanticElement();
 		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
 		text = text + indent(1,"",invariant.getPredicate());
-		if (invariant.getComment().length()>0) {
+		if (invariant.getComment()!=null && invariant.getComment().length()>0) {
 			text = text + "\n"+ indent(2, "//", invariant.getComment());
 		}
 		return text;
@@ -752,9 +747,8 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest)
-			return;
-		
+		if (request instanceof CreateConnectionRequest) return;
+		if (getViewer()==null) return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {

@@ -297,9 +297,8 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest)
-			return;
-		
+		if (request instanceof CreateConnectionRequest) return;
+		if (getViewer()==null) return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {
