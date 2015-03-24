@@ -18,7 +18,10 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eventb.emf.core.util.NameUtils;
 
+import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.statemachines.Fork;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
@@ -57,7 +60,7 @@ public class Fork2CreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -66,8 +69,15 @@ public class Fork2CreateCommand extends EditElementCommand {
 		Statemachine owner = (Statemachine) getElementToEdit();
 		owner.getNodes().add(newElement);
 
+		//+++++++++
+		String name = NameUtils.getName( (Diagram) newElement.getContaining(DiagramsPackage.Literals.DIAGRAM))+
+				"_"+newElement.eClass().getName().toLowerCase();
+		name = NameUtils.getSafeName(newElement, name, owner, null);
+		newElement.setName(name);
+		//---------
+		
 		doConfigure(newElement, monitor, info);
-
+		
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
 		return CommandResult.newOKCommandResult(newElement);
 	}

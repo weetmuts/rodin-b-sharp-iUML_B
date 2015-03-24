@@ -18,7 +18,11 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.util.NameUtils;
 
+import ac.soton.eventb.emf.diagrams.Diagram;
+import ac.soton.eventb.emf.diagrams.DiagramsPackage;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachineOwner;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
@@ -57,7 +61,7 @@ public class StatemachineCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -66,7 +70,13 @@ public class StatemachineCreateCommand extends EditElementCommand {
 
 		StatemachineOwner owner = (StatemachineOwner) getElementToEdit();
 		owner.getStatemachines().add(newElement);
-
+		
+		//+++++++++
+		String name = NameUtils.getName(owner)+"_sm";
+		name = NameUtils.getSafeName(newElement, name, owner, null);
+		newElement.setName(name);
+		//---------
+		
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);

@@ -20,6 +20,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.MachineFactory;
+import org.eventb.emf.core.util.NameUtils;
 
 import ac.soton.eventb.statemachines.State;
 
@@ -57,7 +58,7 @@ public class InvariantCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -65,7 +66,13 @@ public class InvariantCreateCommand extends EditElementCommand {
 
 		State owner = (State) getElementToEdit();
 		owner.getInvariants().add(newElement);
-
+		
+		//+++++++++
+		String name = NameUtils.getName(owner)+"_inv";
+		name = NameUtils.getSafeName(newElement, name, owner, null);
+		newElement.setName(name);
+		//---------
+		
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
