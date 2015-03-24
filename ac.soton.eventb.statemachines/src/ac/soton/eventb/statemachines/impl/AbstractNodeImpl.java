@@ -1,10 +1,12 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
@@ -16,7 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eventb.emf.core.impl.EventBElementImpl;
+import org.eventb.emf.core.impl.EventBNamedCommentedElementImpl;
 
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -36,13 +38,13 @@ import ac.soton.eventb.statemachines.Transition;
  *
  * @generated
  */
-public abstract class AbstractNodeImpl extends EventBElementImpl implements AbstractNode {
+public abstract class AbstractNodeImpl extends EventBNamedCommentedElementImpl implements AbstractNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
@@ -209,6 +211,30 @@ public abstract class AbstractNodeImpl extends EventBElementImpl implements Abst
 				return outgoing != null && !outgoing.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * return the name (using doGetName()) if it is not null
+	 * otherwise return the local id of this node (initialising it if necessary).
+	 * This means that users do not have to bother with naming pseudo-states  (usually they are not visible anyway)
+	 * unless they want prettier names (e.g. in text representations)
+	 * 
+	 * note: this method avoids using getInternalID since it will call back getName()
+	 * 
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public String getName() {
+		String name = doGetName();
+		
+		if ((name==null || name.length()==0) &&						// THIS IS A TEMPORARY MEASURE TO
+				(internalId != null && internalId.length()>0)){		// SUPPORT LEGACY MODELS THAT USED
+			return internalId;										// internalId FOR REFERENCING PSEUDO-STATES
+		}
+		
+		return name;
 	}
 
 } //AbstractNodeImpl

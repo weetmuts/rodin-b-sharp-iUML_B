@@ -1,10 +1,12 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines;
 
@@ -24,7 +26,7 @@ public interface StatemachinesFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The singleton instance of the factory.
@@ -35,15 +37,6 @@ public interface StatemachinesFactory extends EFactory {
 	StatemachinesFactory eINSTANCE = ac.soton.eventb.statemachines.impl.StatemachinesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transition</em>'.
-	 * @generated
-	 */
-	Transition createTransition();
-
-	/**
 	 * Returns a new object of class '<em>Statemachine</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,6 +44,15 @@ public interface StatemachinesFactory extends EFactory {
 	 * @generated
 	 */
 	Statemachine createStatemachine();
+
+	/**
+	 * Returns a new object of class '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transition</em>'.
+	 * @generated
+	 */
+	Transition createTransition();
 
 	/**
 	 * Returns a new object of class '<em>State</em>'.

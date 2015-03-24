@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2013
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -10,10 +10,10 @@
  */
 package ac.soton.eventb.statemachines.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import ac.soton.eventb.statemachines.Fork;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ public class ForkImpl extends AbstractNodeImpl implements Fork {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * <!-- begin-user-doc -->

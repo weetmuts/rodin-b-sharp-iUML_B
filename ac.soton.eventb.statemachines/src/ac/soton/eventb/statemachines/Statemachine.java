@@ -1,19 +1,23 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines;
 
 import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
-import org.eclipse.emf.common.util.EList;
-import org.eventb.emf.core.AbstractExtension;
-import org.eventb.emf.core.EventBNamedCommentedElement;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.EventBNamedCommentedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +33,7 @@ import ac.soton.eventb.emf.diagrams.Diagram;
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.Statemachine#getEnumeration <em>Enumeration</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,36 +47,7 @@ public interface Statemachine extends EventBNamedCommentedDataElaborationElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
-
-	/**
-	 * Returns the value of the '<em><b>Translation</b></em>' attribute.
-	 * The literals are from the enumeration {@link ac.soton.eventb.statemachines.TranslationKind}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Translation</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Translation</em>' attribute.
-	 * @see ac.soton.eventb.statemachines.TranslationKind
-	 * @see #setTranslation(TranslationKind)
-	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine_Translation()
-	 * @model
-	 * @generated
-	 */
-	TranslationKind getTranslation();
-
-	/**
-	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Translation</em>' attribute.
-	 * @see ac.soton.eventb.statemachines.TranslationKind
-	 * @see #getTranslation()
-	 * @generated
-	 */
-	void setTranslation(TranslationKind value);
+	String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * Returns the value of the '<em><b>Refines</b></em>' reference.
@@ -183,5 +159,60 @@ public interface Statemachine extends EventBNamedCommentedDataElaborationElement
 	 * @generated
 	 */
 	void setSelfName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Translation</b></em>' attribute.
+	 * The literals are from the enumeration {@link ac.soton.eventb.statemachines.TranslationKind}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Translation</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Translation</em>' attribute.
+	 * @see ac.soton.eventb.statemachines.TranslationKind
+	 * @see #setTranslation(TranslationKind)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine_Translation()
+	 * @model
+	 * @generated
+	 */
+	TranslationKind getTranslation();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Translation</em>' attribute.
+	 * @see ac.soton.eventb.statemachines.TranslationKind
+	 * @see #getTranslation()
+	 * @generated
+	 */
+	void setTranslation(TranslationKind value);
+
+	/**
+	 * Returns the value of the '<em><b>Enumeration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Enumeration</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Enumeration</em>' attribute.
+	 * @see #setEnumeration(String)
+	 * @see ac.soton.eventb.statemachines.StatemachinesPackage#getStatemachine_Enumeration()
+	 * @model
+	 * @generated
+	 */
+	String getEnumeration();
+
+	/**
+	 * Sets the value of the '{@link ac.soton.eventb.statemachines.Statemachine#getEnumeration <em>Enumeration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Enumeration</em>' attribute.
+	 * @see #getEnumeration()
+	 * @generated
+	 */
+	void setEnumeration(String value);
 
 } // Statemachine

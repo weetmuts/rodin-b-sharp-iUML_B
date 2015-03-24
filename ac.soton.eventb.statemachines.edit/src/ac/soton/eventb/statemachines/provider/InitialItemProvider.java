@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2013
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -11,7 +11,7 @@
 package ac.soton.eventb.statemachines.provider;
 
 
-//import ac.soton.eventb.statemachines.Initial;
+import ac.soton.eventb.statemachines.Initial;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,7 +51,7 @@ public class InitialItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -93,15 +93,14 @@ public class InitialItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
-//		String label = ((Initial)object).getReference();
-//		return label == null || label.length() == 0 ?
-//			getString("_UI_Initial_type") :
-//			getString("_UI_Initial_type") + " " + label;
-		return getString("_UI_Initial_type");
+		String label = ((Initial)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Initial_type") :
+			getString("_UI_Initial_type") + " " + label;
 	}
 
 	/**

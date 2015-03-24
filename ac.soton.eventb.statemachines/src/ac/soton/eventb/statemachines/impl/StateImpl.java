@@ -1,31 +1,43 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBNamed;
-import org.eventb.emf.core.machine.Invariant;
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+import ac.soton.eventb.emf.core.extension.coreextension.DataKind;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachineOwner;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eventb.emf.core.EventBNamed;
+
+import org.eventb.emf.core.machine.Action;
+import org.eventb.emf.core.machine.Invariant;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,11 +46,16 @@ import ac.soton.eventb.statemachines.StatemachinesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getElaborates <em>Elaborates</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getDataKind <em>Data Kind</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getStatemachines <em>Statemachines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getInvariants <em>Invariants</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#isActive <em>Active</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getActiveInstances <em>Active Instances</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getEntryActions <em>Entry Actions</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getExitActions <em>Exit Actions</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StateImpl#getTimeout <em>Timeout</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,27 +67,37 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getElaborates() <em>Elaborates</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getElaborates()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "";
+	protected EventBNamed elaborates;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getDataKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected static final DataKind DATA_KIND_EDEFAULT = DataKind.VARIABLE;
+
+	/**
+	 * The cached value of the '{@link #getDataKind() <em>Data Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataKind dataKind = DATA_KIND_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStatemachines() <em>Statemachines</em>}' containment reference list.
@@ -123,6 +150,56 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	protected boolean active = ACTIVE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getActiveInstances() <em>Active Instances</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActiveInstances()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<?> activeInstances;
+
+	/**
+	 * The cached value of the '{@link #getEntryActions() <em>Entry Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntryActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> entryActions;
+
+	/**
+	 * The cached value of the '{@link #getExitActions() <em>Exit Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> exitActions;
+
+	/**
+	 * The default value of the '{@link #getTimeout() <em>Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer TIMEOUT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTimeout() <em>Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer timeout = TIMEOUT_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -139,6 +216,65 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	@Override
 	protected EClass eStaticClass() {
 		return StatemachinesPackage.Literals.STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBNamed getElaborates() {
+		if (elaborates != null && elaborates.eIsProxy()) {
+			InternalEObject oldElaborates = (InternalEObject)elaborates;
+			elaborates = (EventBNamed)eResolveProxy(oldElaborates);
+			if (elaborates != oldElaborates) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatemachinesPackage.STATE__ELABORATES, oldElaborates, elaborates));
+			}
+		}
+		return elaborates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventBNamed basicGetElaborates() {
+		return elaborates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElaborates(EventBNamed newElaborates) {
+		EventBNamed oldElaborates = elaborates;
+		elaborates = newElaborates;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__ELABORATES, oldElaborates, elaborates));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataKind getDataKind() {
+		return dataKind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDataKind(DataKind newDataKind) {
+		DataKind oldDataKind = dataKind;
+		dataKind = newDataKind == null ? DATA_KIND_EDEFAULT : newDataKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__DATA_KIND, oldDataKind, dataKind));
 	}
 
 	/**
@@ -234,16 +370,65 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String doGetName() {
-		if (this.eIsProxy()){
-			String fragment = ((InternalEObject)this).eProxyURI().fragment();
-			int ind = fragment.lastIndexOf("::");
-			if (ind>-1) fragment = fragment.substring(ind+2);
-			fragment = fragment.substring(fragment.lastIndexOf('.')+1);
-			return fragment;
-		}else{
-			return name;
+	public EList<?> getActiveInstances() {
+		return activeInstances;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActiveInstances(EList<?> newActiveInstances) {
+		EList<?> oldActiveInstances = activeInstances;
+		activeInstances = newActiveInstances;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__ACTIVE_INSTANCES, oldActiveInstances, activeInstances));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getEntryActions() {
+		if (entryActions == null) {
+			entryActions = new EObjectContainmentEList.Resolving<Action>(Action.class, this, StatemachinesPackage.STATE__ENTRY_ACTIONS);
 		}
+		return entryActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getExitActions() {
+		if (exitActions == null) {
+			exitActions = new EObjectContainmentEList.Resolving<Action>(Action.class, this, StatemachinesPackage.STATE__EXIT_ACTIONS);
+		}
+		return exitActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getTimeout() {
+		return timeout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTimeout(Integer newTimeout) {
+		Integer oldTimeout = timeout;
+		timeout = newTimeout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__TIMEOUT, oldTimeout, timeout));
 	}
 
 	/**
@@ -258,37 +443,12 @@ public class StateImpl extends AbstractNodeImpl implements State {
 				return ((InternalEList<?>)getStatemachines()).basicRemove(otherEnd, msgs);
 			case StatemachinesPackage.STATE__INVARIANTS:
 				return ((InternalEList<?>)getInvariants()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+				return ((InternalEList<?>)getEntryActions()).basicRemove(otherEnd, msgs);
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
+				return ((InternalEList<?>)getExitActions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getName() {
-		State refines = getRefines();
-		if (refines != null){
-			return refines.getName();
-		} else return doGetName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Set the name attribute.
-	 * Since : and . are used as delimiters in references which are formed from name, 
-	 * these characters are not permitted and are changed automatically
-	 * to ; and , respectively.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void setName(String newName) {
-		if (newName == null) return;		
-		String oldName = getName();
-		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATE__NAME, oldName, name));
 	}
 
 	/**
@@ -299,8 +459,11 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				return getName();
+			case StatemachinesPackage.STATE__ELABORATES:
+				if (resolve) return getElaborates();
+				return basicGetElaborates();
+			case StatemachinesPackage.STATE__DATA_KIND:
+				return getDataKind();
 			case StatemachinesPackage.STATE__STATEMACHINES:
 				return getStatemachines();
 			case StatemachinesPackage.STATE__REFINES:
@@ -310,6 +473,14 @@ public class StateImpl extends AbstractNodeImpl implements State {
 				return getInvariants();
 			case StatemachinesPackage.STATE__ACTIVE:
 				return isActive();
+			case StatemachinesPackage.STATE__ACTIVE_INSTANCES:
+				return getActiveInstances();
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+				return getEntryActions();
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
+				return getExitActions();
+			case StatemachinesPackage.STATE__TIMEOUT:
+				return getTimeout();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -323,8 +494,11 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				setName((String)newValue);
+			case StatemachinesPackage.STATE__ELABORATES:
+				setElaborates((EventBNamed)newValue);
+				return;
+			case StatemachinesPackage.STATE__DATA_KIND:
+				setDataKind((DataKind)newValue);
 				return;
 			case StatemachinesPackage.STATE__STATEMACHINES:
 				getStatemachines().clear();
@@ -340,6 +514,20 @@ public class StateImpl extends AbstractNodeImpl implements State {
 			case StatemachinesPackage.STATE__ACTIVE:
 				setActive((Boolean)newValue);
 				return;
+			case StatemachinesPackage.STATE__ACTIVE_INSTANCES:
+				setActiveInstances((EList<?>)newValue);
+				return;
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+				getEntryActions().clear();
+				getEntryActions().addAll((Collection<? extends Action>)newValue);
+				return;
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
+				getExitActions().clear();
+				getExitActions().addAll((Collection<? extends Action>)newValue);
+				return;
+			case StatemachinesPackage.STATE__TIMEOUT:
+				setTimeout((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -352,8 +540,11 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				setName(NAME_EDEFAULT);
+			case StatemachinesPackage.STATE__ELABORATES:
+				setElaborates((EventBNamed)null);
+				return;
+			case StatemachinesPackage.STATE__DATA_KIND:
+				setDataKind(DATA_KIND_EDEFAULT);
 				return;
 			case StatemachinesPackage.STATE__STATEMACHINES:
 				getStatemachines().clear();
@@ -367,6 +558,18 @@ public class StateImpl extends AbstractNodeImpl implements State {
 			case StatemachinesPackage.STATE__ACTIVE:
 				setActive(ACTIVE_EDEFAULT);
 				return;
+			case StatemachinesPackage.STATE__ACTIVE_INSTANCES:
+				setActiveInstances((EList<?>)null);
+				return;
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+				getEntryActions().clear();
+				return;
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
+				getExitActions().clear();
+				return;
+			case StatemachinesPackage.STATE__TIMEOUT:
+				setTimeout(TIMEOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,8 +582,10 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatemachinesPackage.STATE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StatemachinesPackage.STATE__ELABORATES:
+				return elaborates != null;
+			case StatemachinesPackage.STATE__DATA_KIND:
+				return dataKind != DATA_KIND_EDEFAULT;
 			case StatemachinesPackage.STATE__STATEMACHINES:
 				return statemachines != null && !statemachines.isEmpty();
 			case StatemachinesPackage.STATE__REFINES:
@@ -389,6 +594,14 @@ public class StateImpl extends AbstractNodeImpl implements State {
 				return invariants != null && !invariants.isEmpty();
 			case StatemachinesPackage.STATE__ACTIVE:
 				return active != ACTIVE_EDEFAULT;
+			case StatemachinesPackage.STATE__ACTIVE_INSTANCES:
+				return activeInstances != null;
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+				return entryActions != null && !entryActions.isEmpty();
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
+				return exitActions != null && !exitActions.isEmpty();
+			case StatemachinesPackage.STATE__TIMEOUT:
+				return TIMEOUT_EDEFAULT == null ? timeout != null : !TIMEOUT_EDEFAULT.equals(timeout);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -400,9 +613,10 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (derivedFeatureID) {
-				case StatemachinesPackage.STATE__NAME: return CorePackage.EVENT_BNAMED__NAME;
+				case StatemachinesPackage.STATE__ELABORATES: return CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES;
+				case StatemachinesPackage.STATE__DATA_KIND: return CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND;
 				default: return -1;
 			}
 		}
@@ -422,9 +636,10 @@ public class StateImpl extends AbstractNodeImpl implements State {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == EventBNamed.class) {
+		if (baseClass == EventBDataElaboration.class) {
 			switch (baseFeatureID) {
-				case CorePackage.EVENT_BNAMED__NAME: return StatemachinesPackage.STATE__NAME;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__ELABORATES: return StatemachinesPackage.STATE__ELABORATES;
+				case CoreextensionPackage.EVENT_BDATA_ELABORATION__DATA_KIND: return StatemachinesPackage.STATE__DATA_KIND;
 				default: return -1;
 			}
 		}
@@ -447,12 +662,33 @@ public class StateImpl extends AbstractNodeImpl implements State {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (dataKind: ");
+		result.append(dataKind);
 		result.append(", active: ");
 		result.append(active);
+		result.append(", activeInstances: ");
+		result.append(activeInstances);
+		result.append(", timeout: ");
+		result.append(timeout);
 		result.append(')');
 		return result.toString();
 	}
 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * if refines is set the name of this state is the name of the refined state
+	 * otherwise return the local name of this state
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public String getName() {
+		State refines = getRefines();
+		if (refines != null){
+			return refines.getName();
+		} else return doGetName();
+	}
+
+	
 } //StateImpl

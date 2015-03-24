@@ -21,6 +21,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="selfName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="this"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="translation" eType="#//TranslationKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumeration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatemachineOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statemachines" upperBound="-1"
@@ -43,13 +44,13 @@
       </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamedCommentedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/source"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractNode ../../org.eventb.emf.core/model/eventbcore.ecore#//EventBNamed #//StatemachineOwner">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractNode ../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBDataElaboration #//StatemachineOwner">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="hasValidName&#xA;concreteHasNoRefinedStatemachines&#xA;validInvariants&#xA;"/>
     </eAnnotations>
@@ -59,6 +60,18 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="active" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activeInstances" transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryActions" upperBound="-1"
+        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Action"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitActions" upperBound="-1"
+        eType="ecore:EClass ../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Action"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Initial" eSuperTypes="#//AbstractNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

@@ -1,27 +1,19 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.machine.MachinePackage;
-
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+
 import ac.soton.eventb.emf.diagrams.DiagramsPackage;
+
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Any;
 import ac.soton.eventb.statemachines.Final;
@@ -35,7 +27,24 @@ import ac.soton.eventb.statemachines.StatemachinesFactory;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.TranslationKind;
+
 import ac.soton.eventb.statemachines.util.StatemachinesValidator;
+
+import org.eclipse.emf.common.util.URI;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import org.eventb.emf.core.CorePackage;
+
+import org.eventb.emf.core.machine.MachinePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,14 +58,21 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass abstractNodeEClass = null;
+	private EClass statemachineEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statemachineOwnerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +86,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass statemachineEClass = null;
+	private EClass abstractNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,13 +129,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * @generated
 	 */
 	private EClass forkEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass statemachineOwnerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,8 +216,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAbstractNode() {
-		return abstractNodeEClass;
+	public EClass getStatemachine() {
+		return statemachineEClass;
 	}
 
 	/**
@@ -216,8 +225,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_Incoming() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(0);
+	public EReference getStatemachine_Refines() {
+		return (EReference)statemachineEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -225,8 +234,71 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_Outgoing() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
+	public EReference getStatemachine_Nodes() {
+		return (EReference)statemachineEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatemachine_Transitions() {
+		return (EReference)statemachineEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatemachine_Instances() {
+		return (EReference)statemachineEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatemachine_SelfName() {
+		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatemachine_Translation() {
+		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatemachine_Enumeration() {
+		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStatemachineOwner() {
+		return statemachineOwnerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatemachineOwner_Statemachines() {
+		return (EReference)statemachineOwnerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -288,8 +360,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStatemachine() {
-		return statemachineEClass;
+	public EClass getAbstractNode() {
+		return abstractNodeEClass;
 	}
 
 	/**
@@ -297,8 +369,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStatemachine_Translation() {
-		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(5);
+	public EReference getAbstractNode_Incoming() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -306,44 +378,8 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatemachine_Refines() {
-		return (EReference)statemachineEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatemachine_Nodes() {
-		return (EReference)statemachineEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatemachine_Transitions() {
-		return (EReference)statemachineEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatemachine_Instances() {
-		return (EReference)statemachineEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStatemachine_SelfName() {
-		return (EAttribute)statemachineEClass.getEStructuralFeatures().get(4);
+	public EReference getAbstractNode_Outgoing() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -380,6 +416,42 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 */
 	public EAttribute getState_Active() {
 		return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_ActiveInstances() {
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_EntryActions() {
+		return (EReference)stateEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_ExitActions() {
+		return (EReference)stateEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_Timeout() {
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -432,24 +504,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStatemachineOwner() {
-		return statemachineOwnerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatemachineOwner_Statemachines() {
-		return (EReference)statemachineOwnerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getTranslationKind() {
 		return translationKindEEnum;
 	}
@@ -489,6 +543,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(statemachineEClass, STATEMACHINE__INSTANCES);
 		createEAttribute(statemachineEClass, STATEMACHINE__SELF_NAME);
 		createEAttribute(statemachineEClass, STATEMACHINE__TRANSLATION);
+		createEAttribute(statemachineEClass, STATEMACHINE__ENUMERATION);
 
 		statemachineOwnerEClass = createEClass(STATEMACHINE_OWNER);
 		createEReference(statemachineOwnerEClass, STATEMACHINE_OWNER__STATEMACHINES);
@@ -508,6 +563,10 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEReference(stateEClass, STATE__REFINES);
 		createEReference(stateEClass, STATE__INVARIANTS);
 		createEAttribute(stateEClass, STATE__ACTIVE);
+		createEAttribute(stateEClass, STATE__ACTIVE_INSTANCES);
+		createEReference(stateEClass, STATE__ENTRY_ACTIONS);
+		createEReference(stateEClass, STATE__EXIT_ACTIONS);
+		createEAttribute(stateEClass, STATE__TIMEOUT);
 
 		initialEClass = createEClass(INITIAL);
 
@@ -561,9 +620,9 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		statemachineEClass.getESuperTypes().add(theCorePackage.getAbstractExtension());
 		statemachineEClass.getESuperTypes().add(theDiagramsPackage.getDiagram());
 		transitionEClass.getESuperTypes().add(theCoreextensionPackage.getEventBCommentedLabeledEventGroupElement());
-		abstractNodeEClass.getESuperTypes().add(theCorePackage.getEventBElement());
+		abstractNodeEClass.getESuperTypes().add(theCorePackage.getEventBNamedCommentedElement());
 		stateEClass.getESuperTypes().add(this.getAbstractNode());
-		stateEClass.getESuperTypes().add(theCorePackage.getEventBNamed());
+		stateEClass.getESuperTypes().add(theCoreextensionPackage.getEventBDataElaboration());
 		stateEClass.getESuperTypes().add(this.getStatemachineOwner());
 		initialEClass.getESuperTypes().add(this.getAbstractNode());
 		finalEClass.getESuperTypes().add(this.getAbstractNode());
@@ -579,6 +638,7 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getStatemachine_Instances(), theCorePackage.getEventBNamedCommentedElement(), null, "instances", null, 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStatemachine_SelfName(), ecorePackage.getEString(), "selfName", "this", 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStatemachine_Translation(), this.getTranslationKind(), "translation", null, 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatemachine_Enumeration(), ecorePackage.getEString(), "enumeration", null, 0, 1, Statemachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statemachineOwnerEClass, StatemachineOwner.class, "StatemachineOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStatemachineOwner_Statemachines(), this.getStatemachine(), null, "statemachines", null, 0, -1, StatemachineOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -601,6 +661,13 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		initEReference(getState_Refines(), this.getState(), null, "refines", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getState_Invariants(), theMachinePackage.getInvariant(), null, "invariants", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Active(), ecorePackage.getEBoolean(), "active", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEEList());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getState_ActiveInstances(), g1, "activeInstances", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_EntryActions(), theMachinePackage.getAction(), null, "entryActions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getState_ExitActions(), theMachinePackage.getAction(), null, "exitActions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Timeout(), ecorePackage.getEIntegerObject(), "timeout", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(initialEClass, Initial.class, "Initial", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -630,24 +697,6 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		createEcoreAnnotations();
 		// org.eventb.emf.core.extendedMetaClasses
 		createOrgAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>org.eventb.emf.core.extendedMetaClasses</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOrgAnnotations() {
-		String source = "org.eventb.emf.core.extendedMetaClasses";			
-		addAnnotation
-		  (statemachineEClass, 
-		   source, 
-		   new String[] {
-		   },
-		   new URI[] {
-			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
-		   });						
 	}
 
 	/**
@@ -700,6 +749,24 @@ public class StatemachinesPackageImpl extends EPackageImpl implements Statemachi
 		   new String[] {
 			 "constraints", "isForkORJoin\nnodesInParallelStatemachines\n"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>org.eventb.emf.core.extendedMetaClasses</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOrgAnnotations() {
+		String source = "org.eventb.emf.core.extendedMetaClasses";			
+		addAnnotation
+		  (statemachineEClass, 
+		   source, 
+		   new String[] {
+		   },
+		   new URI[] {
+			 URI.createURI(CorePackage.eNS_URI).appendFragment("//machine/Machine")
+		   });						
 	}
 
 } //StatemachinesPackageImpl

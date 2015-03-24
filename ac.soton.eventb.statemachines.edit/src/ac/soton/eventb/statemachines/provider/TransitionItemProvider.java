@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2013
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -11,11 +11,18 @@
 package ac.soton.eventb.statemachines.provider;
 
 
+import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBCommentedLabeledEventGroupElementItemProvider;
+
+import ac.soton.eventb.statemachines.StatemachinesFactory;
+import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -28,12 +35,8 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eventb.emf.core.CorePackage;
 
-import ac.soton.eventb.emf.core.extension.coreextension.provider.EventBCommentedLabeledEventGroupElementItemProvider;
-import ac.soton.eventb.statemachines.StatemachinesFactory;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.Transition;
+import org.eventb.emf.core.CorePackage;
 
 /**
  * This is the item provider adapter for a {@link ac.soton.eventb.statemachines.Transition} object.
@@ -57,7 +60,7 @@ public class TransitionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

@@ -1,35 +1,44 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.impl;
 
 import ac.soton.eventb.emf.core.extension.coreextension.impl.EventBNamedCommentedDataElaborationElementImpl;
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eventb.emf.core.AbstractExtension;
-import org.eventb.emf.core.CorePackage;
-import org.eventb.emf.core.EventBNamedCommentedElement;
 
 import ac.soton.eventb.emf.diagrams.Diagram;
+
 import ac.soton.eventb.statemachines.AbstractNode;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.TranslationKind;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBNamedCommentedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,6 +54,7 @@ import ac.soton.eventb.statemachines.TranslationKind;
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getSelfName <em>Self Name</em>}</li>
  *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getTranslation <em>Translation</em>}</li>
+ *   <li>{@link ac.soton.eventb.statemachines.impl.StatemachineImpl#getEnumeration <em>Enumeration</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,7 +66,7 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The default value of the '{@link #getExtensionId() <em>Extension Id</em>}' attribute.
@@ -159,6 +169,26 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	protected TranslationKind translation = TRANSLATION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getEnumeration() <em>Enumeration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnumeration()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ENUMERATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEnumeration() <em>Enumeration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnumeration()
+	 * @generated
+	 * @ordered
+	 */
+	protected String enumeration = ENUMERATION_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -180,35 +210,6 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getName() {
-		Statemachine refines = getRefines();
-		if (refines != null){
-			return refines.getName();
-		} else return doGetName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Set the name attribute.
-	 * Since : and . are used as delimiters in references which are formed from name, 
-	 * these characters are not permitted and are changed automatically
-	 * to ; and , respectively.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void setName(String newName) {
-		if (newName == null) return;		
-		String oldName = getName();
-		name = newName.replaceAll("\\.", ",").replaceAll(":", ";");
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__NAME, oldName, newName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getExtensionId() {
@@ -225,27 +226,6 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 		extensionId = newExtensionId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__EXTENSION_ID, oldExtensionId, extensionId));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TranslationKind getTranslation() {
-		return translation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTranslation(TranslationKind newTranslation) {
-		TranslationKind oldTranslation = translation;
-		translation = newTranslation == null ? TRANSLATION_EDEFAULT : newTranslation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__TRANSLATION, oldTranslation, translation));
 	}
 
 	/**
@@ -382,6 +362,48 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TranslationKind getTranslation() {
+		return translation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTranslation(TranslationKind newTranslation) {
+		TranslationKind oldTranslation = translation;
+		translation = newTranslation == null ? TRANSLATION_EDEFAULT : newTranslation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__TRANSLATION, oldTranslation, translation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getEnumeration() {
+		return enumeration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnumeration(String newEnumeration) {
+		String oldEnumeration = enumeration;
+		enumeration = newEnumeration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatemachinesPackage.STATEMACHINE__ENUMERATION, oldEnumeration, enumeration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -417,6 +439,8 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 				return getSelfName();
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				return getTranslation();
+			case StatemachinesPackage.STATEMACHINE__ENUMERATION:
+				return getEnumeration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -453,6 +477,9 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				setTranslation((TranslationKind)newValue);
 				return;
+			case StatemachinesPackage.STATEMACHINE__ENUMERATION:
+				setEnumeration((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -486,6 +513,9 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				setTranslation(TRANSLATION_EDEFAULT);
 				return;
+			case StatemachinesPackage.STATEMACHINE__ENUMERATION:
+				setEnumeration(ENUMERATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -512,6 +542,8 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 				return SELF_NAME_EDEFAULT == null ? selfName != null : !SELF_NAME_EDEFAULT.equals(selfName);
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
 				return translation != TRANSLATION_EDEFAULT;
+			case StatemachinesPackage.STATEMACHINE__ENUMERATION:
+				return ENUMERATION_EDEFAULT == null ? enumeration != null : !ENUMERATION_EDEFAULT.equals(enumeration);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -574,8 +606,24 @@ public class StatemachineImpl extends EventBNamedCommentedDataElaborationElement
 		result.append(selfName);
 		result.append(", translation: ");
 		result.append(translation);
+		result.append(", enumeration: ");
+		result.append(enumeration);
 		result.append(')');
 		return result.toString();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * if refines is set the name of this statemachine is the name of the refined statemachine
+	 * otherwise return the local name of this statemachine
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	public String getName() {
+		Statemachine refines = getRefines();
+		if (refines != null){
+			return refines.getName();
+		} else return doGetName();
+	}
+	
 } //StatemachineImpl

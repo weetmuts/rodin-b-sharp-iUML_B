@@ -1,10 +1,12 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines.util;
 
@@ -12,10 +14,20 @@ import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEl
 import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBDataElaboration;
 import ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
+import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
+
+import ac.soton.eventb.emf.diagrams.Diagram;
+
+import ac.soton.eventb.statemachines.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
+
 import org.eventb.emf.core.AbstractExtension;
 import org.eventb.emf.core.EventBCommented;
 import org.eventb.emf.core.EventBCommentedElement;
@@ -23,19 +35,6 @@ import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.EventBObject;
-
-import ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled;
-import ac.soton.eventb.emf.core.extension.coreextension.EventBNamedCommentedDataElaborationElement;
-import ac.soton.eventb.emf.diagrams.Diagram;
-import ac.soton.eventb.statemachines.*;
-import ac.soton.eventb.statemachines.AbstractNode;
-import ac.soton.eventb.statemachines.Final;
-import ac.soton.eventb.statemachines.Initial;
-import ac.soton.eventb.statemachines.State;
-import ac.soton.eventb.statemachines.Statemachine;
-import ac.soton.eventb.statemachines.StatemachineOwner;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
-import ac.soton.eventb.statemachines.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +50,7 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The cached model package.
@@ -217,16 +216,30 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.AbstractNode <em>Abstract Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.Statemachine <em>Statemachine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ac.soton.eventb.statemachines.AbstractNode
+	 * @see ac.soton.eventb.statemachines.Statemachine
 	 * @generated
 	 */
-	public Adapter createAbstractNodeAdapter() {
+	public Adapter createStatemachineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.StatemachineOwner <em>Statemachine Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.statemachines.StatemachineOwner
+	 * @generated
+	 */
+	public Adapter createStatemachineOwnerAdapter() {
 		return null;
 	}
 
@@ -245,72 +258,16 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.Statemachine <em>Statemachine</em>}'.
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.AbstractNode <em>Abstract Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ac.soton.eventb.statemachines.Statemachine
+	 * @see ac.soton.eventb.statemachines.AbstractNode
 	 * @generated
 	 */
-	public Adapter createStatemachineAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled <em>Event BLabeled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled
-	 * @generated
-	 */
-	public Adapter createEventBLabeledAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement <em>Event BCommented Labeled Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement
-	 * @generated
-	 */
-	public Adapter createEventBCommentedLabeledElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup <em>Event BEvent Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup
-	 * @generated
-	 */
-	public Adapter createEventBEventGroupAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement <em>Event BCommented Labeled Event Group Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement
-	 * @generated
-	 */
-	public Adapter createEventBCommentedLabeledEventGroupElementAdapter() {
+	public Adapter createAbstractNodeAdapter() {
 		return null;
 	}
 
@@ -399,20 +356,6 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.statemachines.StatemachineOwner <em>Statemachine Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.statemachines.StatemachineOwner
-	 * @generated
-	 */
-	public Adapter createStatemachineOwnerAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBObject <em>Event BObject</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -469,34 +412,6 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.AbstractExtension <em>Abstract Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eventb.emf.core.AbstractExtension
-	 * @generated
-	 */
-	public Adapter createAbstractExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.diagrams.Diagram <em>Diagram</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ac.soton.eventb.emf.diagrams.Diagram
-	 * @generated
-	 */
-	public Adapter createDiagramAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.EventBNamed <em>Event BNamed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -549,6 +464,90 @@ public class StatemachinesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEventBNamedCommentedDataElaborationElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eventb.emf.core.AbstractExtension <em>Abstract Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eventb.emf.core.AbstractExtension
+	 * @generated
+	 */
+	public Adapter createAbstractExtensionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.diagrams.Diagram <em>Diagram</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.diagrams.Diagram
+	 * @generated
+	 */
+	public Adapter createDiagramAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled <em>Event BLabeled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBLabeled
+	 * @generated
+	 */
+	public Adapter createEventBLabeledAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement <em>Event BCommented Labeled Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledElement
+	 * @generated
+	 */
+	public Adapter createEventBCommentedLabeledElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup <em>Event BEvent Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBEventGroup
+	 * @generated
+	 */
+	public Adapter createEventBEventGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement <em>Event BCommented Labeled Event Group Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement
+	 * @generated
+	 */
+	public Adapter createEventBCommentedLabeledEventGroupElementAdapter() {
 		return null;
 	}
 

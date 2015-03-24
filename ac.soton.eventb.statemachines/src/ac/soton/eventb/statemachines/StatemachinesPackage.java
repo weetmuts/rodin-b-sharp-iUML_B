@@ -1,19 +1,23 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines;
 
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eventb.emf.core.CorePackage;
 
 /**
@@ -43,7 +47,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * The package name.
@@ -76,26 +80,6 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 */
 	StatemachinesPackage eINSTANCE = ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl.init();
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.AbstractNodeImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractNode()
-	 * @generated
-	 */
-	int ABSTRACT_NODE = 3;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.TransitionImpl <em>Transition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.TransitionImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getTransition()
-	 * @generated
-	 */
-	int TRANSITION = 2;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StatemachineImpl <em>Statemachine</em>}' class.
@@ -270,43 +254,22 @@ public interface StatemachinesPackage extends EPackage {
 	int STATEMACHINE__TRANSLATION = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Enumeration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMACHINE__ENUMERATION = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Statemachine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMACHINE_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.StateImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getState()
-	 * @generated
-	 */
-	int STATE = 4;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.InitialImpl <em>Initial</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.InitialImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getInitial()
-	 * @generated
-	 */
-	int INITIAL = 5;
-
-	/**
-	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.FinalImpl <em>Final</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ac.soton.eventb.statemachines.impl.FinalImpl
-	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getFinal()
-	 * @generated
-	 */
-	int FINAL = 6;
+	int STATEMACHINE_FEATURE_COUNT = CoreextensionPackage.EVENT_BNAMED_COMMENTED_DATA_ELABORATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl <em>Statemachine Owner</em>}' class.
@@ -335,6 +298,16 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATEMACHINE_OWNER_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.TransitionImpl <em>Transition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.TransitionImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getTransition()
+	 * @generated
+	 */
+	int TRANSITION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -526,13 +499,23 @@ public interface StatemachinesPackage extends EPackage {
 	int TRANSITION_FEATURE_COUNT = CoreextensionPackage.EVENT_BCOMMENTED_LABELED_EVENT_GROUP_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.AbstractNodeImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractNode()
+	 * @generated
+	 */
+	int ABSTRACT_NODE = 3;
+
+	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__ANNOTATIONS = CorePackage.EVENT_BELEMENT__ANNOTATIONS;
+	int ABSTRACT_NODE__ANNOTATIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -541,7 +524,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__EXTENSIONS = CorePackage.EVENT_BELEMENT__EXTENSIONS;
+	int ABSTRACT_NODE__EXTENSIONS = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' map.
@@ -550,7 +533,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__ATTRIBUTES = CorePackage.EVENT_BELEMENT__ATTRIBUTES;
+	int ABSTRACT_NODE__ATTRIBUTES = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -559,7 +542,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__REFERENCE = CorePackage.EVENT_BELEMENT__REFERENCE;
+	int ABSTRACT_NODE__REFERENCE = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Generated</b></em>' attribute.
@@ -568,7 +551,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__GENERATED = CorePackage.EVENT_BELEMENT__GENERATED;
+	int ABSTRACT_NODE__GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Local Generated</b></em>' attribute.
@@ -577,7 +560,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__LOCAL_GENERATED = CorePackage.EVENT_BELEMENT__LOCAL_GENERATED;
+	int ABSTRACT_NODE__LOCAL_GENERATED = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__LOCAL_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Internal Id</b></em>' attribute.
@@ -586,7 +569,25 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__INTERNAL_ID = CorePackage.EVENT_BELEMENT__INTERNAL_ID;
+	int ABSTRACT_NODE__INTERNAL_ID = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__INTERNAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__COMMENT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__NAME = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -595,7 +596,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__INCOMING = CorePackage.EVENT_BELEMENT_FEATURE_COUNT + 0;
+	int ABSTRACT_NODE__INCOMING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing</b></em>' reference list.
@@ -604,7 +605,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__OUTGOING = CorePackage.EVENT_BELEMENT_FEATURE_COUNT + 1;
+	int ABSTRACT_NODE__OUTGOING = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
@@ -613,7 +614,17 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE_FEATURE_COUNT = CorePackage.EVENT_BELEMENT_FEATURE_COUNT + 2;
+	int ABSTRACT_NODE_FEATURE_COUNT = CorePackage.EVENT_BNAMED_COMMENTED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.StateImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getState()
+	 * @generated
+	 */
+	int STATE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -679,6 +690,24 @@ public interface StatemachinesPackage extends EPackage {
 	int STATE__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NAME = ABSTRACT_NODE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -697,13 +726,22 @@ public interface StatemachinesPackage extends EPackage {
 	int STATE__OUTGOING = ABSTRACT_NODE__OUTGOING;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Elaborates</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAME = ABSTRACT_NODE_FEATURE_COUNT + 0;
+	int STATE__ELABORATES = ABSTRACT_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Data Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__DATA_KIND = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Statemachines</b></em>' containment reference list.
@@ -712,7 +750,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__STATEMACHINES = ABSTRACT_NODE_FEATURE_COUNT + 1;
+	int STATE__STATEMACHINES = ABSTRACT_NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
@@ -721,7 +759,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REFINES = ABSTRACT_NODE_FEATURE_COUNT + 2;
+	int STATE__REFINES = ABSTRACT_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Invariants</b></em>' containment reference list.
@@ -730,7 +768,7 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__INVARIANTS = ABSTRACT_NODE_FEATURE_COUNT + 3;
+	int STATE__INVARIANTS = ABSTRACT_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Active</b></em>' attribute.
@@ -739,7 +777,43 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__ACTIVE = ABSTRACT_NODE_FEATURE_COUNT + 4;
+	int STATE__ACTIVE = ABSTRACT_NODE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Active Instances</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__ACTIVE_INSTANCES = ABSTRACT_NODE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Entry Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__ENTRY_ACTIONS = ABSTRACT_NODE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Exit Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__EXIT_ACTIONS = ABSTRACT_NODE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__TIMEOUT = ABSTRACT_NODE_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -748,7 +822,17 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 5;
+	int STATE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 10;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.InitialImpl <em>Initial</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.InitialImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getInitial()
+	 * @generated
+	 */
+	int INITIAL = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -814,6 +898,24 @@ public interface StatemachinesPackage extends EPackage {
 	int INITIAL__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INITIAL__NAME = ABSTRACT_NODE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -839,6 +941,16 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int INITIAL_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link ac.soton.eventb.statemachines.impl.FinalImpl <em>Final</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ac.soton.eventb.statemachines.impl.FinalImpl
+	 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getFinal()
+	 * @generated
+	 */
+	int FINAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -902,6 +1014,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL__NAME = ABSTRACT_NODE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -1004,6 +1134,24 @@ public interface StatemachinesPackage extends EPackage {
 	int ANY__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY__NAME = ABSTRACT_NODE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1102,6 +1250,24 @@ public interface StatemachinesPackage extends EPackage {
 	 * @ordered
 	 */
 	int JUNCTION__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JUNCTION__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JUNCTION__NAME = ABSTRACT_NODE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
@@ -1204,6 +1370,24 @@ public interface StatemachinesPackage extends EPackage {
 	int FORK__INTERNAL_ID = ABSTRACT_NODE__INTERNAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__COMMENT = ABSTRACT_NODE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORK__NAME = ABSTRACT_NODE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Incoming</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1242,36 +1426,112 @@ public interface StatemachinesPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.AbstractNode <em>Abstract Node</em>}'.
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Statemachine <em>Statemachine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Node</em>'.
-	 * @see ac.soton.eventb.statemachines.AbstractNode
+	 * @return the meta object for class '<em>Statemachine</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine
 	 * @generated
 	 */
-	EClass getAbstractNode();
+	EClass getStatemachine();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ac.soton.eventb.statemachines.AbstractNode#getIncoming <em>Incoming</em>}'.
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Statemachine#getRefines <em>Refines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Incoming</em>'.
-	 * @see ac.soton.eventb.statemachines.AbstractNode#getIncoming()
-	 * @see #getAbstractNode()
+	 * @return the meta object for the reference '<em>Refines</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getRefines()
+	 * @see #getStatemachine()
 	 * @generated
 	 */
-	EReference getAbstractNode_Incoming();
+	EReference getStatemachine_Refines();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ac.soton.eventb.statemachines.AbstractNode#getOutgoing <em>Outgoing</em>}'.
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.Statemachine#getNodes <em>Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Outgoing</em>'.
-	 * @see ac.soton.eventb.statemachines.AbstractNode#getOutgoing()
-	 * @see #getAbstractNode()
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getNodes()
+	 * @see #getStatemachine()
 	 * @generated
 	 */
-	EReference getAbstractNode_Outgoing();
+	EReference getStatemachine_Nodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.Statemachine#getTransitions <em>Transitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getTransitions()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EReference getStatemachine_Transitions();
+
+	/**
+	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instances</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getInstances()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EReference getStatemachine_Instances();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Self Name</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getSelfName()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EAttribute getStatemachine_SelfName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Translation</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getTranslation()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EAttribute getStatemachine_Translation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getEnumeration <em>Enumeration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Enumeration</em>'.
+	 * @see ac.soton.eventb.statemachines.Statemachine#getEnumeration()
+	 * @see #getStatemachine()
+	 * @generated
+	 */
+	EAttribute getStatemachine_Enumeration();
+
+	/**
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.StatemachineOwner <em>Statemachine Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statemachine Owner</em>'.
+	 * @see ac.soton.eventb.statemachines.StatemachineOwner
+	 * @generated
+	 */
+	EClass getStatemachineOwner();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.StatemachineOwner#getStatemachines <em>Statemachines</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statemachines</em>'.
+	 * @see ac.soton.eventb.statemachines.StatemachineOwner#getStatemachines()
+	 * @see #getStatemachineOwner()
+	 * @generated
+	 */
+	EReference getStatemachineOwner_Statemachines();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Transition <em>Transition</em>}'.
@@ -1339,80 +1599,36 @@ public interface StatemachinesPackage extends EPackage {
 	EAttribute getTransition_Operations();
 
 	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Statemachine <em>Statemachine</em>}'.
+	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.AbstractNode <em>Abstract Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statemachine</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine
+	 * @return the meta object for class '<em>Abstract Node</em>'.
+	 * @see ac.soton.eventb.statemachines.AbstractNode
 	 * @generated
 	 */
-	EClass getStatemachine();
+	EClass getAbstractNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getTranslation <em>Translation</em>}'.
+	 * Returns the meta object for the reference list '{@link ac.soton.eventb.statemachines.AbstractNode#getIncoming <em>Incoming</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Translation</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getTranslation()
-	 * @see #getStatemachine()
+	 * @return the meta object for the reference list '<em>Incoming</em>'.
+	 * @see ac.soton.eventb.statemachines.AbstractNode#getIncoming()
+	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getStatemachine_Translation();
+	EReference getAbstractNode_Incoming();
 
 	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Statemachine#getRefines <em>Refines</em>}'.
+	 * Returns the meta object for the reference list '{@link ac.soton.eventb.statemachines.AbstractNode#getOutgoing <em>Outgoing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Refines</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getRefines()
-	 * @see #getStatemachine()
+	 * @return the meta object for the reference list '<em>Outgoing</em>'.
+	 * @see ac.soton.eventb.statemachines.AbstractNode#getOutgoing()
+	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EReference getStatemachine_Refines();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.Statemachine#getNodes <em>Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getNodes()
-	 * @see #getStatemachine()
-	 * @generated
-	 */
-	EReference getStatemachine_Nodes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.Statemachine#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getTransitions()
-	 * @see #getStatemachine()
-	 * @generated
-	 */
-	EReference getStatemachine_Transitions();
-
-	/**
-	 * Returns the meta object for the reference '{@link ac.soton.eventb.statemachines.Statemachine#getInstances <em>Instances</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instances</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getInstances()
-	 * @see #getStatemachine()
-	 * @generated
-	 */
-	EReference getStatemachine_Instances();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.Statemachine#getSelfName <em>Self Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Self Name</em>'.
-	 * @see ac.soton.eventb.statemachines.Statemachine#getSelfName()
-	 * @see #getStatemachine()
-	 * @generated
-	 */
-	EAttribute getStatemachine_SelfName();
+	EReference getAbstractNode_Outgoing();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.State <em>State</em>}'.
@@ -1456,6 +1672,50 @@ public interface StatemachinesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Active();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.State#getActiveInstances <em>Active Instances</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active Instances</em>'.
+	 * @see ac.soton.eventb.statemachines.State#getActiveInstances()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_ActiveInstances();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.State#getEntryActions <em>Entry Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Entry Actions</em>'.
+	 * @see ac.soton.eventb.statemachines.State#getEntryActions()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_EntryActions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.State#getExitActions <em>Exit Actions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exit Actions</em>'.
+	 * @see ac.soton.eventb.statemachines.State#getExitActions()
+	 * @see #getState()
+	 * @generated
+	 */
+	EReference getState_ExitActions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ac.soton.eventb.statemachines.State#getTimeout <em>Timeout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Timeout</em>'.
+	 * @see ac.soton.eventb.statemachines.State#getTimeout()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Timeout();
 
 	/**
 	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.Initial <em>Initial</em>}'.
@@ -1508,27 +1768,6 @@ public interface StatemachinesPackage extends EPackage {
 	EClass getFork();
 
 	/**
-	 * Returns the meta object for class '{@link ac.soton.eventb.statemachines.StatemachineOwner <em>Statemachine Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statemachine Owner</em>'.
-	 * @see ac.soton.eventb.statemachines.StatemachineOwner
-	 * @generated
-	 */
-	EClass getStatemachineOwner();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ac.soton.eventb.statemachines.StatemachineOwner#getStatemachines <em>Statemachines</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Statemachines</em>'.
-	 * @see ac.soton.eventb.statemachines.StatemachineOwner#getStatemachines()
-	 * @see #getStatemachineOwner()
-	 * @generated
-	 */
-	EReference getStatemachineOwner_Statemachines();
-
-	/**
 	 * Returns the meta object for enum '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1561,30 +1800,88 @@ public interface StatemachinesPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineImpl <em>Statemachine</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.statemachines.impl.AbstractNodeImpl
-		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractNode()
+		 * @see ac.soton.eventb.statemachines.impl.StatemachineImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachine()
 		 * @generated
 		 */
-		EClass ABSTRACT_NODE = eINSTANCE.getAbstractNode();
+		EClass STATEMACHINE = eINSTANCE.getStatemachine();
 
 		/**
-		 * The meta object literal for the '<em><b>Incoming</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_NODE__INCOMING = eINSTANCE.getAbstractNode_Incoming();
+		EReference STATEMACHINE__REFINES = eINSTANCE.getStatemachine_Refines();
 
 		/**
-		 * The meta object literal for the '<em><b>Outgoing</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_NODE__OUTGOING = eINSTANCE.getAbstractNode_Outgoing();
+		EReference STATEMACHINE__NODES = eINSTANCE.getStatemachine_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEMACHINE__TRANSITIONS = eINSTANCE.getStatemachine_Transitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Instances</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEMACHINE__INSTANCES = eINSTANCE.getStatemachine_Instances();
+
+		/**
+		 * The meta object literal for the '<em><b>Self Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATEMACHINE__SELF_NAME = eINSTANCE.getStatemachine_SelfName();
+
+		/**
+		 * The meta object literal for the '<em><b>Translation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATEMACHINE__TRANSLATION = eINSTANCE.getStatemachine_Translation();
+
+		/**
+		 * The meta object literal for the '<em><b>Enumeration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATEMACHINE__ENUMERATION = eINSTANCE.getStatemachine_Enumeration();
+
+		/**
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl <em>Statemachine Owner</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachineOwner()
+		 * @generated
+		 */
+		EClass STATEMACHINE_OWNER = eINSTANCE.getStatemachineOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Statemachines</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEMACHINE_OWNER__STATEMACHINES = eINSTANCE.getStatemachineOwner_Statemachines();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.TransitionImpl <em>Transition</em>}' class.
@@ -1637,62 +1934,30 @@ public interface StatemachinesPackage extends EPackage {
 		EAttribute TRANSITION__OPERATIONS = eINSTANCE.getTransition_Operations();
 
 		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineImpl <em>Statemachine</em>}' class.
+		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.statemachines.impl.StatemachineImpl
-		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachine()
+		 * @see ac.soton.eventb.statemachines.impl.AbstractNodeImpl
+		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getAbstractNode()
 		 * @generated
 		 */
-		EClass STATEMACHINE = eINSTANCE.getStatemachine();
+		EClass ABSTRACT_NODE = eINSTANCE.getAbstractNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Translation</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Incoming</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATEMACHINE__TRANSLATION = eINSTANCE.getStatemachine_Translation();
+		EReference ABSTRACT_NODE__INCOMING = eINSTANCE.getAbstractNode_Incoming();
 
 		/**
-		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Outgoing</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATEMACHINE__REFINES = eINSTANCE.getStatemachine_Refines();
-
-		/**
-		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATEMACHINE__NODES = eINSTANCE.getStatemachine_Nodes();
-
-		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATEMACHINE__TRANSITIONS = eINSTANCE.getStatemachine_Transitions();
-
-		/**
-		 * The meta object literal for the '<em><b>Instances</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATEMACHINE__INSTANCES = eINSTANCE.getStatemachine_Instances();
-
-		/**
-		 * The meta object literal for the '<em><b>Self Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATEMACHINE__SELF_NAME = eINSTANCE.getStatemachine_SelfName();
+		EReference ABSTRACT_NODE__OUTGOING = eINSTANCE.getAbstractNode_Outgoing();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StateImpl <em>State</em>}' class.
@@ -1727,6 +1992,38 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__ACTIVE = eINSTANCE.getState_Active();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Instances</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__ACTIVE_INSTANCES = eINSTANCE.getState_ActiveInstances();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry Actions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__ENTRY_ACTIONS = eINSTANCE.getState_EntryActions();
+
+		/**
+		 * The meta object literal for the '<em><b>Exit Actions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__EXIT_ACTIONS = eINSTANCE.getState_ExitActions();
+
+		/**
+		 * The meta object literal for the '<em><b>Timeout</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__TIMEOUT = eINSTANCE.getState_Timeout();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.InitialImpl <em>Initial</em>}' class.
@@ -1777,24 +2074,6 @@ public interface StatemachinesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FORK = eINSTANCE.getFork();
-
-		/**
-		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl <em>Statemachine Owner</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ac.soton.eventb.statemachines.impl.StatemachineOwnerImpl
-		 * @see ac.soton.eventb.statemachines.impl.StatemachinesPackageImpl#getStatemachineOwner()
-		 * @generated
-		 */
-		EClass STATEMACHINE_OWNER = eINSTANCE.getStatemachineOwner();
-
-		/**
-		 * The meta object literal for the '<em><b>Statemachines</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATEMACHINE_OWNER__STATEMACHINES = eINSTANCE.getStatemachineOwner_Statemachines();
 
 		/**
 		 * The meta object literal for the '{@link ac.soton.eventb.statemachines.TranslationKind <em>Translation Kind</em>}' enum.

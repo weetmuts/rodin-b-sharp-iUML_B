@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2013
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -62,7 +62,7 @@ public class StatemachineItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -90,6 +90,7 @@ public class StatemachineItemProvider
 			addInstancesPropertyDescriptor(object);
 			addSelfNamePropertyDescriptor(object);
 			addTranslationPropertyDescriptor(object);
+			addEnumerationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -205,6 +206,28 @@ public class StatemachineItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Enumeration feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEnumerationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Statemachine_enumeration_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Statemachine_enumeration_feature", "_UI_Statemachine_type"),
+				 StatemachinesPackage.Literals.STATEMACHINE__ENUMERATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -276,6 +299,7 @@ public class StatemachineItemProvider
 			case StatemachinesPackage.STATEMACHINE__REFINES:
 			case StatemachinesPackage.STATEMACHINE__SELF_NAME:
 			case StatemachinesPackage.STATEMACHINE__TRANSLATION:
+			case StatemachinesPackage.STATEMACHINE__ENUMERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StatemachinesPackage.STATEMACHINE__NODES:

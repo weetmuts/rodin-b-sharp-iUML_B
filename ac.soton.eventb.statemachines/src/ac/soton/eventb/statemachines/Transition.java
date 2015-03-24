@@ -1,17 +1,20 @@
 /**
- * Copyright (c) 2010
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
+ *
+ * $Id$
  */
 package ac.soton.eventb.statemachines;
 
-import org.eclipse.emf.common.util.EList;
-import org.eventb.emf.core.EventBElement;
-
 import ac.soton.eventb.emf.core.extension.coreextension.EventBCommentedLabeledEventGroupElement;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eventb.emf.core.EventBElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +42,7 @@ public interface Transition extends EventBCommentedLabeledEventGroupElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
@@ -153,7 +156,7 @@ public interface Transition extends EventBCommentedLabeledEventGroupElement {
 	 * Returns the value of the '<em><b>Operations</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operations</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Operations</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

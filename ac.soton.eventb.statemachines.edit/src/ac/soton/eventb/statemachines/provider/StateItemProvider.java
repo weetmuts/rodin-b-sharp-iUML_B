@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2013
+ * Copyright (c) 2010-2015
  * University of Southampton.
  * All rights reserved. This program and the accompanying materials  are made
  * available under the terms of the Eclipse Public License v1.0 which accompanies this 
@@ -10,6 +10,8 @@
  */
 package ac.soton.eventb.statemachines.provider;
 
+
+import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.StatemachinesFactory;
@@ -62,7 +64,7 @@ public class StateItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2010-2013\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
+	public static final String copyright = "Copyright (c) 2010-2015\rUniversity of Southampton.\rAll rights reserved. This program and the accompanying materials  are made\ravailable under the terms of the Eclipse Public License v1.0 which accompanies this \rdistribution, and is available at http://www.eclipse.org/legal/epl-v10.html\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -85,27 +87,52 @@ public class StateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addElaboratesPropertyDescriptor(object);
+			addDataKindPropertyDescriptor(object);
 			addRefinesPropertyDescriptor(object);
 			addActivePropertyDescriptor(object);
+			addActiveInstancesPropertyDescriptor(object);
+			addTimeoutPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Elaborates feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addElaboratesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventBNamed_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventBNamed_name_feature", "_UI_EventBNamed_type"),
-				 CorePackage.Literals.EVENT_BNAMED__NAME,
+				 getString("_UI_EventBDataElaboration_elaborates_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_elaborates_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Data Kind feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDataKindPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EventBDataElaboration_dataKind_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventBDataElaboration_dataKind_feature", "_UI_EventBDataElaboration_type"),
+				 CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__DATA_KIND,
 				 true,
 				 false,
 				 false,
@@ -159,6 +186,50 @@ public class StateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Active Instances feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveInstancesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_activeInstances_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_activeInstances_feature", "_UI_State_type"),
+				 StatemachinesPackage.Literals.STATE__ACTIVE_INSTANCES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Timeout feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTimeoutPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_State_timeout_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_State_timeout_feature", "_UI_State_type"),
+				 StatemachinesPackage.Literals.STATE__TIMEOUT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -172,6 +243,8 @@ public class StateItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES);
 			childrenFeatures.add(StatemachinesPackage.Literals.STATE__INVARIANTS);
+			childrenFeatures.add(StatemachinesPackage.Literals.STATE__ENTRY_ACTIONS);
+			childrenFeatures.add(StatemachinesPackage.Literals.STATE__EXIT_ACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -226,13 +299,17 @@ public class StateItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(State.class)) {
-			case StatemachinesPackage.STATE__NAME:
+			case StatemachinesPackage.STATE__DATA_KIND:
 			case StatemachinesPackage.STATE__REFINES:
 			case StatemachinesPackage.STATE__ACTIVE:
+			case StatemachinesPackage.STATE__ACTIVE_INSTANCES:
+			case StatemachinesPackage.STATE__TIMEOUT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StatemachinesPackage.STATE__STATEMACHINES:
 			case StatemachinesPackage.STATE__INVARIANTS:
+			case StatemachinesPackage.STATE__ENTRY_ACTIONS:
+			case StatemachinesPackage.STATE__EXIT_ACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -259,6 +336,16 @@ public class StateItemProvider
 			(createChildParameter
 				(StatemachinesPackage.Literals.STATE__INVARIANTS,
 				 MachineFactory.eINSTANCE.createInvariant()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatemachinesPackage.Literals.STATE__ENTRY_ACTIONS,
+				 MachineFactory.eINSTANCE.createAction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatemachinesPackage.Literals.STATE__EXIT_ACTIONS,
+				 MachineFactory.eINSTANCE.createAction()));
 	}
 
 	/**
@@ -274,7 +361,9 @@ public class StateItemProvider
 
 		boolean qualify =
 			childFeature == CorePackage.Literals.EVENT_BELEMENT__EXTENSIONS ||
-			childFeature == StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES;
+			childFeature == StatemachinesPackage.Literals.STATEMACHINE_OWNER__STATEMACHINES ||
+			childFeature == StatemachinesPackage.Literals.STATE__ENTRY_ACTIONS ||
+			childFeature == StatemachinesPackage.Literals.STATE__EXIT_ACTIONS;
 
 		if (qualify) {
 			return getString

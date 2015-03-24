@@ -137,6 +137,42 @@ State (also similar in Statemachine)
 		}
 	}
 	
+	
+	
+--------------------------
+In AbstractNodeImpl, Override getName to use internalID when a name has not been set.
+This enables legacy models to continue to work in the new meta-model.
+
+	
+		/**
+	 * <!-- begin-user-doc -->
+	 * return the name (using doGetName()) if it is not null
+	 * otherwise return the local id of this node (initialising it if necessary).
+	 * This means that users do not have to bother with naming pseudo-states  (usually they are not visible anyway)
+	 * unless they want prettier names (e.g. in text representations)
+	 * 
+	 * note: this method avoids using getInternalID since it will call back getName()
+	 * 
+	 * <!-- end-user-doc -->
+	 * @custom
+	 */
+	@Override
+	public String getName() {
+		String name = doGetName();
+		
+		if ((name==null || name.length()==0) &&						// THIS IS A TEMPORARY MEASURE TO
+				(internalId != null && internalId.length()>0)){		// SUPPORT LEGACY MODELS THAT USED
+			return internalId;										// internalId FOR REFERENCING PSEUDO-STATES
+		}
+		
+		return name;
+	}
+	
+	
+	
+	--------------------------
+	
+	
 --------------------------
 	
 StatemachinesValidator
@@ -145,27 +181,119 @@ populate all the Validate operations
 
 --------------------------
 
-In EDIT plugin
 
-FinalItemProvider (and similarly in InitialItemProvider)
+
+
+CUSTOMISATIONS IN GENERATED DIAGRAM CODE
+-----------------------------------------
+
+
+Many of the edit.commands have their doExecuteWithResult method customised to automatically name the new element
+E.g. For Any2CreateCommand  
+(n.b. Any2CreateCommand is for nested statemachines. without the 2 - AnyCreateCommand - is for the root level canvas.
+In fact these two classes are identical).
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	@Override
-	public String getText(Object object) {
-//		String label = ((Final)object).getReference();
-//		return label == null || label.length() == 0 ?
-//			getString("_UI_Final_type") :
-//			getString("_UI_Final_type") + " " + label;
-		return getString("_UI_Final_type");
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+			IAdaptable info) throws ExecutionException {
+		Any newElement = StatemachinesFactory.eINSTANCE.createAny();
+
+		Statemachine owner = (Statemachine) getElementToEdit();
+		owner.getNodes().add(newElement);
+
+		//+++++++++
+		String name = NameUtils.getName( (Diagram) newElement.getContaining(DiagramsPackage.Literals.DIAGRAM))+
+				"_"+newElement.eClass().getName().toLowerCase();
+		name = NameUtils.getSafeName(newElement, name, owner, null);
+		newElement.setName(name);
+		//---------
+		
+		doConfigure(newElement, monitor, info);
+
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
 	}
 
+-----------------------------------------
+
+Some Edit Parts have extra methods to provide hover over feedback.
+E.G InvariantEditPart
+
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure=null;
+	String feedbackText=null;;
+
 	
+	/*
+	 * Provides mouse over feedback:
+	 * Customised to  show the contents of the invariant
+	 * @custom
+	 */
+	@Override
+	public void showTargetFeedback(Request request) {
+		super.showTargetFeedback(request);
+		// the feedback layer figures do not receive mouse e
+		if (feedbackText==null) {
+			feedbackText = getMethodText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				Point location = getFigure().getBounds().getLocation().translate(50, 0);			
+				getFigure().translateToAbsolute(location);
+				bounds.setLocation(location);
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGreen);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
+		}
+	}
+
+	private String getMethodText() {
+		Invariant invariant = (Invariant) resolveSemanticElement();
+		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
+		text = text + indent(1,"",invariant.getPredicate());
+		if (invariant.getComment()!=null && invariant.getComment().length()>0) {
+			text = text + "\n"+ indent(2, "//", invariant.getComment());
+		}
+		return text;
+	}
 	
+	private static String indent(int tabs, String prefix, String text){
+		if (text==null || text.length()<1) return "";
+		String indent = "";
+		for (int i=0; i<tabs; i++){
+			indent = indent+"\t";
+		}
+		indent = indent+prefix;
+		return indent+text.replace("\n", "\n"+indent);
+	}
+
+	/* Erases mouse-over feedback.
+	 * @custom
+	 */
+	@Override
+	public void eraseTargetFeedback(Request request) {
+		super.eraseTargetFeedback(request);
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer()==null) {
+			return;
+		}
+		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+		if (layer != null && feedbackFigure != null
+				&& feedbackFigure.getParent() != null) {
+			layer.remove(feedbackFigure);
+		}
+		feedbackFigure = null;
+		feedbackText = null;
+	}
 	
 	
 	
