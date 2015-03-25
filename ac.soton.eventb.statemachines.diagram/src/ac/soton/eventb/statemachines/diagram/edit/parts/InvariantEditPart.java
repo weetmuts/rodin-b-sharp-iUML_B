@@ -67,6 +67,7 @@ import org.eventb.emf.core.machine.Invariant;
 import org.rodinp.keyboard.ui.RodinKeyboardUIPlugin;
 import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 
+import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -723,6 +724,7 @@ public class InvariantEditPart extends CompartmentEditPart implements
 
 	private String getMethodText() {
 		Invariant invariant = (Invariant) resolveSemanticElement();
+		if (((State)invariant.eContainer()).getActiveInstances()!=null) return "";	//no feedback while animating
 		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
 		text = text + indent(1,"",invariant.getPredicate());
 		if (invariant.getComment()!=null && invariant.getComment().length()>0) {

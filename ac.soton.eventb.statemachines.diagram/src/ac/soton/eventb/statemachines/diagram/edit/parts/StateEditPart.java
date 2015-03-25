@@ -14,22 +14,28 @@ import java.util.List;
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
+import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.edithelpers.CreateElementRequestAdapter;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -43,8 +49,11 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 
+import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
@@ -651,5 +660,75 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	static final Color THIS_BACK = new Color(null, 196, 204, 255);
+
+	
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure=null;
+	String feedbackText=null;;
+
+	
+	/*
+	 * Provides mouse over feedback:
+	 * Customised to show the active instances (probably only while animating)
+	 * @custom
+	 */
+	@Override
+	public void showTargetFeedback(Request request) {
+		super.showTargetFeedback(request);
+		// the feedback layer figures do not receive mouse e
+		if (feedbackText==null) {
+			feedbackText = getText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(2, 2);
+				Dimension stateSize = getFigure().getSize();
+				Point location = getFigure().getBounds().getLocation().translate(stateSize.width-bounds.width,stateSize.height-bounds.height);			
+				getFigure().translateToAbsolute(location);
+				bounds.setLocation(location);
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.black);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.white); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+	
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
+		}
+	}
+
+	private String getText() {
+		State state = (State) resolveSemanticElement();
+		String text = "";
+		EList<?> ains = state.getActiveInstances();
+		if (ains!=null && ains.size()>0){
+			for (Object ins : ains){
+				if (ins instanceof String){
+					if (text.length()>0) text=text+"\n";
+					text = text+ins;
+				}
+			}
+		}
+		return text;
+	}
+	
+
+	/* Erases mouse-over feedback.
+	 * @custom
+	 */
+	@Override
+	public void eraseTargetFeedback(Request request) {
+		super.eraseTargetFeedback(request);
+		if (request instanceof CreateConnectionRequest) return;
+		if (getViewer()==null) return;
+		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+		if (layer != null && feedbackFigure != null
+				&& feedbackFigure.getParent() != null) {
+			layer.remove(feedbackFigure);
+		}
+		feedbackFigure = null;
+		feedbackText = null;
+	}
 
 }

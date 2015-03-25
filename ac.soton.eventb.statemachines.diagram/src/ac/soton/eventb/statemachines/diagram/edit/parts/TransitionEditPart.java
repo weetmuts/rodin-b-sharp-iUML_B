@@ -233,27 +233,29 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	}
 
 	private String getMethodText() {
-		Transition method = (Transition) resolveSemanticElement();
+		Transition transition = (Transition) resolveSemanticElement();
+		
+		if (transition.getOperations()!=null) return ""; //no feedback while animating
+		
 		String text = "";
-
-		if (method.getParameters().size()>0){
+		if (transition.getParameters().size()>0){
 			text = text + "\nParameters: \n"; 
-			for (TypedParameter p : method.getParameters()){
+			for (TypedParameter p : transition.getParameters()){
 				text = text + "\t"+p.getName()+" : "+p.getType()+"\n";
 			}
 		}
-		if (method.getWitnesses().size()>0){
+		if (transition.getWitnesses().size()>0){
 			text = text + "\nWitnesses: \n";
-			for (Witness w : method.getWitnesses()){
+			for (Witness w : transition.getWitnesses()){
 				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getPredicate());
 				if (w.getComment().length()>0){
 					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
 				}
 			}
 		}
-		if (method.getGuards().size()>0){
+		if (transition.getGuards().size()>0){
 			text = text + "\nGuards: \n";
-			for (Guard w : method.getGuards()){
+			for (Guard w : transition.getGuards()){
 				text = text + "\t"+w.getName()+(w.isTheorem()? "(THEOREM) :\n" : " :\n");
 				text = text + indent(2,"",w.getPredicate());
 				if (w.getComment().length()>0){
@@ -261,9 +263,9 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 				}
 			}
 		}
-		if (method.getActions().size()>0){
+		if (transition.getActions().size()>0){
 			text = text + "\nActions: \n";
-			for (Action w : method.getActions()){
+			for (Action w : transition.getActions()){
 				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getAction());
 				if (w.getComment().length()>0){
 					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
@@ -272,9 +274,9 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		}
 		
 		if (text.length()>0){
-			text = method.getLabel()
-				+(method.isExtended()? "  [extended]":"")
-				+(method.getComment()!=null && method.getComment().length()>0? "  //"+method.getComment():"")+"\n"
+			text = transition.getLabel()
+				+(transition.isExtended()? "  [extended]":"")
+				+(transition.getComment()!=null && transition.getComment().length()>0? "  //"+transition.getComment():"")+"\n"
 				+text;
 		}
 
