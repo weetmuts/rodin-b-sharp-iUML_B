@@ -73,16 +73,18 @@ public class LiftedRootStatemachine2TypingInvariantRule extends AbstractRule  im
 	private List<Invariant> state2typeInvariants(State s){
 		List<Invariant> ret = new ArrayList<Invariant>();
 		
-		
 		//XXX The order of these calls is important. This makes sure invariants
-		//are added in the right order. They must be generated in the inverse order
-		//of dependency to use positive priority and come before user's invariants.
-		for(Statemachine sm : s.getStatemachines())
-			ret.addAll(statemachine2typeInvariant(sm));
-		
+		//are added in the right order. They must be generated in the order
+		//of dependency (i.e. state and then sub-states
+
 		//Only generate refinements for non-refined states
 		if(s.getRefines() == null)
 			ret.add(generateInvariantFromState(s));
+		
+		for(Statemachine sm : s.getStatemachines())
+			ret.addAll(statemachine2typeInvariant(sm));
+		
+
 		return ret;
 	}
 
