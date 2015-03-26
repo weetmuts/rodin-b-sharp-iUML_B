@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.statemachines.diagram; singleton:=true
-Bundle-Version: 3.1.0
+Bundle-Version: 3.2.0
 Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin
 Bundle-Vendor: %providerName
@@ -51,6 +51,7 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  org.eclipse.gmf.tooling.runtime;bundle-version="[3.1.0,4.0.0)",
  org.rodinp.keyboard.ui;bundle-version="[2.0.0,3.0.0)",
  org.eventb.ui;bundle-version="[3.0.0,4.0.0)",
+ org.eventb.emf.core;bundle-version="[4.2.0,5.0.0)",
  org.eventb.emf.core.edit;bundle-version="[1.0.0,2.0.0)",
  org.eventb.emf.persistence;bundle-version="[3.0.0,4.0.0)",
  ac.soton.eventb.emf.core.extension;bundle-version="[4.0.0,5.0.0)",
@@ -58,8 +59,7 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  ac.soton.eventb.emf.diagrams;bundle-version="[4.0.1,5.0.0)",
  ac.soton.eventb.emf.diagrams.edit;bundle-version="[2.1.0,3.0.0)",
  ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.1.0,4.0.0)",
- ac.soton.eventb.statemachines;bundle-version="[3.0.0,4.0.0)",
- ac.soton.eventb.statemachines.edit;bundle-version="[2.0.0,3.0.0)",
- org.eventb.emf.core;bundle-version="[4.0.0,5.0.0)"
+ ac.soton.eventb.statemachines;bundle-version="[3.1.0,4.0.0)",
+ ac.soton.eventb.statemachines.edit;bundle-version="[2.1.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
