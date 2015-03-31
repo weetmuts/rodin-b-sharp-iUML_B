@@ -248,7 +248,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 			text = text + "\nWitnesses: \n";
 			for (Witness w : transition.getWitnesses()){
 				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getPredicate());
-				if (w.getComment().length()>0){
+				if (w.getComment()!=null && w.getComment().length()>0){
 					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
 				}
 			}
@@ -258,7 +258,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 			for (Guard w : transition.getGuards()){
 				text = text + "\t"+w.getName()+(w.isTheorem()? "(THEOREM) :\n" : " :\n");
 				text = text + indent(2,"",w.getPredicate());
-				if (w.getComment().length()>0){
+				if (w.getComment()!=null && w.getComment().length()>0){
 					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
 				}
 			}
@@ -267,7 +267,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 			text = text + "\nActions: \n";
 			for (Action w : transition.getActions()){
 				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getAction());
-				if (w.getComment().length()>0){
+				if (w.getComment()!=null && w.getComment().length()>0){
 					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
 				}
 			}
