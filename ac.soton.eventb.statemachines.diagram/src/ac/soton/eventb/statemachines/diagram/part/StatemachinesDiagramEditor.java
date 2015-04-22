@@ -506,7 +506,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		System.out.println("saving");
-		if (ecr!=null) ecr.saveChanges();
+		if (ecr!=null) ecr.endRecording();
 		super.doSave(progressMonitor);
 		if (ecr!=null) ecr.resumeRecording();
 		System.out.println("saved and still recording");
