@@ -26,6 +26,7 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -486,32 +487,54 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	@Override
 	public void partClosed(IWorkbenchPart part) {
-		System.out.println("closing");
+		System.out.println("closing "+part.getTitle());
 		if (ecr!=null) ecr.disposeChangeRecorder();
-		System.out.println("closed and disposed");
+		System.out.println("... closed and disposed");
 	}
 
 	@Override
 	public void partOpened(IWorkbenchPart part) {
-		System.out.println("opening");
+		System.out.println("opening "+part.getTitle());
+		checkForXTEXT();
 		EObject diagramElement = this.getDiagram().getElement();
 		if (diagramElement instanceof EventBElement){
 			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
 			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
-			ecr.resumeRecording();
+			int result = ecr.resumeRecording();
+			if (result==1){
+				//TODO: message dialogue here, save old changes in a different file
+				System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
+			}
+			
 		}
-		System.out.println("opened and recording");
+		checkForXTEXT();
+		System.out.println("... opened and recording");
 	}
 	
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-		System.out.println("saving");
+		System.out.println("saving "+this.getPartName());
+		checkForXTEXT();
 		if (ecr!=null) ecr.endRecording();
 		super.doSave(progressMonitor);
 		if (ecr!=null) ecr.resumeRecording();
-		System.out.println("saved and still recording");
+		System.out.println("... saved and still recording");
 	}
 	
+	//FIXME: This is a hack to get rid of xtext resources from our editing domain
+	// Not sure how they are getting in there. Only seems to happen in refinements.
+	private void checkForXTEXT() {
+		List<Resource> remove = new ArrayList<Resource>();
+		//TransactionalEditingDomain ed = this.getEditingDomain();
+		EList<Resource> resources = this.getEditingDomain().getResourceSet().getResources();
+		for (Resource res : resources){
+			if ("mch".equals(res.getURI().fileExtension())){
+				remove.add(res);
+			}
+		}
+		resources.removeAll(remove);
+	}
+
 	private Recorder ecr=null;
 
 }
