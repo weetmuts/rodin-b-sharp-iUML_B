@@ -26,6 +26,7 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -68,7 +69,12 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.properties.PropertySheet;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 
+import ac.soton.eventb.emf.diagrams.navigator.refactor.Recorder;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.Statemachine;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
@@ -402,6 +408,13 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////
+	/// The following methods have been overridden to 
+	// a) save on de-activation to avoid synch problems between several editors
+	// b) provide change recording
+	////////////////////////////////////////////////////////////////////////////////
+	
+	
 	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
@@ -410,6 +423,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	@Override
 	public void dispose() {
+		ecr.disposeChangeRecorder();
 		super.dispose();
 		getSite().getPage().removePartListener(this);
 	}
@@ -417,7 +431,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	private boolean deactivating = false;
 
 	/**
-	 * Saves editor if it is deactivated and autosave preference is on.
+	 * Saves editor if it is deactivated.
 	 * 
 	 * @param part
 	 */
@@ -440,8 +454,11 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			if (part == this) {
 				deactivating = false;
 			}
+		}else if (part==this){
+			
 		}
 	}
+	
 	
 	/*
 	 * checks whether the Statemachine of this diagram is being animated
@@ -460,18 +477,64 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 		}
 		return false;
 	}
-	
 
 	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
+
 	}
+	
+///////////////////changeRecording///////////////////
 
 	@Override
 	public void partClosed(IWorkbenchPart part) {
+		System.out.println("closing "+part.getTitle());
+		if (ecr!=null) ecr.disposeChangeRecorder();
+		System.out.println("... closed and disposed");
 	}
 
 	@Override
 	public void partOpened(IWorkbenchPart part) {
+		System.out.println("opening "+part.getTitle());
+		checkForXTEXT();
+		EObject diagramElement = this.getDiagram().getElement();
+		if (diagramElement instanceof EventBElement){
+			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
+			int result = ecr.resumeRecording();
+			if (result==1){
+				//TODO: message dialogue here, save old changes in a different file
+				System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
+			}
+			
+		}
+		checkForXTEXT();
+		System.out.println("... opened and recording");
 	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		System.out.println("saving "+this.getPartName());
+		checkForXTEXT();
+		if (ecr!=null) ecr.endRecording();
+		super.doSave(progressMonitor);
+		if (ecr!=null) ecr.resumeRecording();
+		System.out.println("... saved and still recording");
+	}
+	
+	//FIXME: This is a hack to get rid of xtext resources from our editing domain
+	// Not sure how they are getting in there. Only seems to happen in refinements.
+	private void checkForXTEXT() {
+		List<Resource> remove = new ArrayList<Resource>();
+		//TransactionalEditingDomain ed = this.getEditingDomain();
+		EList<Resource> resources = this.getEditingDomain().getResourceSet().getResources();
+		for (Resource res : resources){
+			if ("mch".equals(res.getURI().fileExtension())){
+				remove.add(res);
+			}
+		}
+		resources.removeAll(remove);
+	}
+
+	private Recorder ecr=null;
 
 }

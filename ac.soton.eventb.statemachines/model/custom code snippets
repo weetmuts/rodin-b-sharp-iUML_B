@@ -297,3 +297,114 @@ E.G InvariantEditPart
 	
 	
 	
+For Refactoring
+-----------------------------------------
+
+in StatemachinesDiagramEditor all this has been added 
+	
+///////////////////////////////////////////////////////////////////////////////////////
+	/// The following methods have been overridden to 
+	// a) save on de-activation to avoid synch problems between several editors
+	// b) provide change recording
+	////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@Override
+	public void setInput(IEditorInput input) {
+		super.setInput(input);
+		getSite().getPage().addPartListener(this);
+	}
+
+	@Override
+	public void dispose() {
+		ecr.disposeChangeRecorder();
+		super.dispose();
+		getSite().getPage().removePartListener(this);
+	}
+
+	private boolean deactivating = false;
+
+	/**
+	 * Saves editor if it is deactivated.
+	 * 
+	 * @param part
+	 */
+	@Override
+	public void partDeactivated(IWorkbenchPart part) {
+		if (part == this) {
+			deactivating = true;
+		}
+	}
+
+	@Override
+	public void partActivated(IWorkbenchPart part) {
+		if (deactivating == true) {
+			if (part != this
+					&& isDirty()
+					&& !(part instanceof PropertySheet)
+					&& !animating()		) {
+				doSave(new NullProgressMonitor());
+			}
+			if (part == this) {
+				deactivating = false;
+			}
+		}else if (part==this){
+			
+		}
+	}
+	
+	
+	/*
+	 * checks whether the Statemachine of this diagram is being animated
+	 */
+	private boolean animating(){
+		Statemachine sm = (Statemachine) this.getDiagram().getElement();
+		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
+		for (EObject eo : states){
+			if (eo instanceof State && ((State)eo).isActive()) return true;
+		}
+		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
+		for (EObject eo : transitions){
+			if (eo instanceof Transition 
+					&& ((Transition)eo).getOperations()!=null
+					&& ((Transition)eo).getOperations().size()>0) return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void partBroughtToTop(IWorkbenchPart part) {
+
+	}
+	
+///////////////////changeRecording///////////////////
+
+	@Override
+	public void partClosed(IWorkbenchPart part) {
+		System.out.println("closing");
+		if (ecr!=null) ecr.disposeChangeRecorder();
+		System.out.println("closed and disposed");
+	}
+
+	@Override
+	public void partOpened(IWorkbenchPart part) {
+		System.out.println("opening");
+		EObject diagramElement = this.getDiagram().getElement();
+		if (diagramElement instanceof EventBElement){
+			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
+			ecr.resumeRecording();
+		}
+		System.out.println("opened and recording");
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		System.out.println("saving");
+		if (ecr!=null) ecr.saveChanges();
+		super.doSave(progressMonitor);
+		if (ecr!=null) ecr.resumeRecording();
+		System.out.println("saved and still recording");
+	}
+	
+	private Recorder ecr=null;

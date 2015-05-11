@@ -94,5 +94,12 @@
             second-participant-id="ac.soton.eventb.statemachines.navigator.refinedEnumerationStatemachineRefiner">
       </Order>
    </extension>
+   <extension
+         point="ac.soton.eventb.emf.core.extension.navigator.elementRefinement">
+      <refinementDefinition
+            refiner_class="ac.soton.eventb.statemachines.navigator.refiner.StatemachineElementRefiner"
+            ePackage="http://soton.ac.uk/models/eventb/statemachines/2014">
+      </refinementDefinition>
+   </extension>
 
 </plugin>
