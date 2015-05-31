@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="3.2.0.refactor_v20150527"
+      version="3.2.0.refactor_v20150531a"
       provider-name="%providerName"
       plugin="ac.soton.iumlb.branding">
 
