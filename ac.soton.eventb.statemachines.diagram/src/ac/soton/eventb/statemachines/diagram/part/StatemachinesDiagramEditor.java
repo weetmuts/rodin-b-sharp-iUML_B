@@ -37,6 +37,7 @@ import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramDropTargetListener;
+import org.eclipse.gmf.runtime.diagram.ui.properties.views.PropertiesBrowserPage;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
@@ -66,9 +67,11 @@ import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.navigator.resources.ProjectExplorer;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.properties.PropertySheet;
+import org.eventb.emf.core.Attribute;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
@@ -82,10 +85,10 @@ import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.navigator.StatemachinesNavigatorItem;
 
 /**
- * @generated NOT
+ * @generated
  */
 public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
-		IGotoMarker, IPartListener {
+		IGotoMarker {
 
 	/**
 	 * @generated
@@ -415,110 +418,157 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	////////////////////////////////////////////////////////////////////////////////
 	
 	
+	/**
+	 * This listens for when the outline becomes active 
+	 * <!-- begin-user-doc -->
+	 * It also listens for possible deactivation of the editor (i.e. deactivation of the
+	 * content outline view, property sheets or the editor itself) and if the subsequent 
+	 * activation confirms that none of these associated views are being activated,
+	 *  and the editor is dirty, all changes are automatically saved.
+	 * This prevents editor conflicts if the same resource is edited with another editor.
+	 *  <!-- end-user-doc -->
+	 * 
+	 * @custom
+	 */
+	protected IPartListener deactivationPartListener = new IPartListener() {
+
+		private boolean deactivated = false;
+
+		public void partActivated(IWorkbenchPart p) {
+			if (p instanceof PropertySheet) {
+				IPage cp = ((PropertySheet) p).getCurrentPage();
+				if (cp instanceof PropertiesBrowserPage
+						&& ((PropertiesBrowserPage) cp).getContributor() == StatemachinesDiagramEditor.this) {
+					deactivated = false;
+				}
+			} else if (p == StatemachinesDiagramEditor.this) {
+				deactivated = false;
+			}
+			if (deactivated && isDirty() && !animating())
+				doSave(new NullProgressMonitor());
+		}
+
+		@Override
+		public void partBroughtToTop(IWorkbenchPart p) {
+			// Ignore.
+		}
+
+		@Override
+		public void partDeactivated(IWorkbenchPart p) {
+			if (p instanceof PropertySheet) {
+				IPage cp = ((PropertySheet) p).getCurrentPage();
+				if (cp instanceof PropertiesBrowserPage
+						&& ((PropertiesBrowserPage) cp).getContributor() == StatemachinesDiagramEditor.this) {
+					deactivated = true;
+				}
+			} else if (p == StatemachinesDiagramEditor.this) {
+				deactivated = true;
+			}
+		}
+	
+		/*
+		 * checks whether the Statemachine of this diagram is being animated
+		 */
+		private boolean animating(){
+			
+			//TODO: if we get the animating controls to work, could change to this
+			if (animating) return true;
+			
+			Statemachine sm = (Statemachine) StatemachinesDiagramEditor.this.getDiagram().getElement();
+			
+			Attribute animatingAttribute = sm.getAttributes().get("ac.soton.eventb.statemachines.animation");
+			if (animatingAttribute!=null){
+				return (boolean) animatingAttribute.getValue();
+			}else{
+				return false;
+			}
+			
+//			EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
+//			for (EObject eo : states){
+//				if (eo instanceof State && ((State)eo).isActive()) return true;
+//			}
+//			EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
+//			for (EObject eo : transitions){
+//				if (eo instanceof Transition 
+//						&& ((Transition)eo).getOperations()!=null
+//						&& ((Transition)eo).getOperations().size()>0) return true;
+//			}
+//			return false;
+		}
+
+	
+		
+		///////////////////changeRecording///////////////////
+	
+		@Override
+		public void partClosed(IWorkbenchPart part) {
+			if (part==StatemachinesDiagramEditor.this){
+				System.out.println("closing "+part.getTitle());
+				if (ecr!=null) {
+					ecr.disposeChangeRecorder();
+					System.out.println("... disposed change recorder");
+				}
+			}
+		}
+	
+		@Override
+		public void partOpened(IWorkbenchPart part) {
+			if (part==StatemachinesDiagramEditor.this){
+				System.out.println("opening "+part.getTitle());
+				checkForXTEXT();
+				EObject diagramElement = StatemachinesDiagramEditor.this.getDiagram().getElement();
+				if (diagramElement instanceof EventBElement){
+					EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+					ecr=new Recorder((EventBNamedCommentedComponentElement)component);
+					int result = ecr.resumeRecording();
+					if (result==1){
+						//TODO: message dialogue here, save old changes in a different file
+						System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
+					}
+					
+				}
+				checkForXTEXT();
+				System.out.println("... opened and recording");
+			}
+		}
+	};
+
+	/**
+	 * Add the deactivation part Listener to the Page
+	 * @custom
+	 */
 	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
-		getSite().getPage().addPartListener(this);
+		getSite().getPage().addPartListener(deactivationPartListener);
 	}
 
+	/**
+	 * Remove the deactivation part Listener from the Page
+	 * @custom
+	 */
 	@Override
 	public void dispose() {
 		ecr.disposeChangeRecorder();
 		super.dispose();
-		getSite().getPage().removePartListener(this);
-	}
-
-	private boolean deactivating = false;
-
-	/**
-	 * Saves editor if it is deactivated.
-	 * 
-	 * @param part
-	 */
-	@Override
-	public void partDeactivated(IWorkbenchPart part) {
-		if (part == this) {
-			deactivating = true;
-		}
-	}
-
-	@Override
-	public void partActivated(IWorkbenchPart part) {
-		if (deactivating == true) {
-			if (part != this
-					&& isDirty()
-					&& !(part instanceof PropertySheet)
-					&& !animating()		) {
-				doSave(new NullProgressMonitor());
-			}
-			if (part == this) {
-				deactivating = false;
-			}
-		}else if (part==this){
-			
-		}
-	}
-	
-	
-	/*
-	 * checks whether the Statemachine of this diagram is being animated
-	 */
-	private boolean animating(){
-		Statemachine sm = (Statemachine) this.getDiagram().getElement();
-		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
-		for (EObject eo : states){
-			if (eo instanceof State && ((State)eo).isActive()) return true;
-		}
-		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
-		for (EObject eo : transitions){
-			if (eo instanceof Transition 
-					&& ((Transition)eo).getOperations()!=null
-					&& ((Transition)eo).getOperations().size()>0) return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void partBroughtToTop(IWorkbenchPart part) {
-
-	}
-	
-///////////////////changeRecording///////////////////
-
-	@Override
-	public void partClosed(IWorkbenchPart part) {
-		System.out.println("closing "+part.getTitle());
-		if (ecr!=null) ecr.disposeChangeRecorder();
-		System.out.println("... closed and disposed");
-	}
-
-	@Override
-	public void partOpened(IWorkbenchPart part) {
-		System.out.println("opening "+part.getTitle());
-		checkForXTEXT();
-		EObject diagramElement = this.getDiagram().getElement();
-		if (diagramElement instanceof EventBElement){
-			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
-			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
-			int result = ecr.resumeRecording();
-			if (result==1){
-				//TODO: message dialogue here, save old changes in a different file
-				System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
-			}
-			
-		}
-		checkForXTEXT();
-		System.out.println("... opened and recording");
+		getSite().getPage().removePartListener(deactivationPartListener);
 	}
 	
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		System.out.println("saving "+this.getPartName());
 		checkForXTEXT();
-		if (ecr!=null) ecr.endRecording();
+		if (ecr!=null) {
+			ecr.endRecording();
+			System.out.println("... end recording");
+		}
 		super.doSave(progressMonitor);
-		if (ecr!=null) ecr.resumeRecording();
-		System.out.println("... saved and still recording");
+		System.out.println("... saved");
+		if (ecr!=null) {
+			ecr.resumeRecording();
+			System.out.println("... resume recording");
+		}
+
 	}
 	
 	//FIXME: This is a hack to get rid of xtext resources from our editing domain
@@ -536,5 +586,25 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	}
 
 	private Recorder ecr=null;
-
+	
+	private boolean animating = false;
+	
+	public void startAnimating(){
+		animating = true;
+		System.out.println("animating started");
+		if (ecr!=null) {
+			ecr.endRecording();
+			System.out.println("... stopped recording");
+		}
+		//super.doSave(new NullProgressMonitor());
+	}
+	
+	public void stopAnimating(){
+		animating = false;
+		System.out.println("animating ended");
+		if (ecr!=null) {
+			ecr.resumeRecording();
+			System.out.println("... resume recording");
+		}
+	}
 }
