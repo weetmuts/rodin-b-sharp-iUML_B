@@ -466,35 +466,6 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			}
 		}
 	
-		/*
-		 * checks whether the Statemachine of this diagram is being animated
-		 */
-		private boolean animating(){
-			
-			//TODO: if we get the animating controls to work, could change to this
-			if (animating) return true;
-			
-			Statemachine sm = (Statemachine) StatemachinesDiagramEditor.this.getDiagram().getElement();
-			
-			Attribute animatingAttribute = sm.getAttributes().get("ac.soton.eventb.statemachines.animation");
-			if (animatingAttribute!=null){
-				return (boolean) animatingAttribute.getValue();
-			}else{
-				return false;
-			}
-			
-//			EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
-//			for (EObject eo : states){
-//				if (eo instanceof State && ((State)eo).isActive()) return true;
-//			}
-//			EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
-//			for (EObject eo : transitions){
-//				if (eo instanceof Transition 
-//						&& ((Transition)eo).getOperations()!=null
-//						&& ((Transition)eo).getOperations().size()>0) return true;
-//			}
-//			return false;
-		}
 
 	
 		
@@ -556,6 +527,9 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
+		if (animating()){
+			int i=0;
+		}
 		System.out.println("saving "+this.getPartName());
 		checkForXTEXT();
 		if (ecr!=null) {
@@ -606,5 +580,34 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			ecr.resumeRecording();
 			System.out.println("... resume recording");
 		}
+	}
+	
+	/*
+	 * checks whether the Statemachine of this diagram is being animated
+	 */
+	private boolean animating(){
+		
+		if (animating) return true;
+		
+		Statemachine sm = (Statemachine) StatemachinesDiagramEditor.this.getDiagram().getElement();
+		Attribute animatingAttribute = sm.getAttributes().get("ac.soton.eventb.statemachines.animation");
+		if (animatingAttribute!=null){
+			Object val = animatingAttribute.getValue();
+			return val instanceof Boolean? ((Boolean)val).booleanValue() : false; // animatingAttribute.getValue();
+		}else{
+			return false;
+		}
+		
+//		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
+//		for (EObject eo : states){
+//			if (eo instanceof State && ((State)eo).isActive()) return true;
+//		}
+//		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
+//		for (EObject eo : transitions){
+//			if (eo instanceof Transition 
+//					&& ((Transition)eo).getOperations()!=null
+//					&& ((Transition)eo).getOperations().size()>0) return true;
+//		}
+//		return false;
 	}
 }
