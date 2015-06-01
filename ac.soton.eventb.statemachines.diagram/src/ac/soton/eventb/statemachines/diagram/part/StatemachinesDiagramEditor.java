@@ -470,7 +470,8 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	
 		
 		///////////////////changeRecording///////////////////
-	
+		//FIXME: probably, this should be made into a different listener that only listens to the Statemachines Diagram Editor Part
+		//instead of all parts on the page.
 		@Override
 		public void partClosed(IWorkbenchPart part) {
 			if (part==StatemachinesDiagramEditor.this){
@@ -547,6 +548,10 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	
 	//FIXME: This is a hack to get rid of xtext resources from our editing domain
 	// Not sure how they are getting in there. Only seems to happen in refinements.
+	// 
+	// UPDATE: this problem was almost certainly due to the deactivation listener responding to the text editor
+	//		Probably, this hack can be removed now that the part listener is more selective
+	
 	private void checkForXTEXT() {
 		List<Resource> remove = new ArrayList<Resource>();
 		//TransactionalEditingDomain ed = this.getEditingDomain();
@@ -570,7 +575,6 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			ecr.endRecording();
 			System.out.println("... stopped recording");
 		}
-		//super.doSave(new NullProgressMonitor());
 	}
 	
 	public void stopAnimating(){
@@ -593,21 +597,9 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 		Attribute animatingAttribute = sm.getAttributes().get("ac.soton.eventb.statemachines.animation");
 		if (animatingAttribute!=null){
 			Object val = animatingAttribute.getValue();
-			return val instanceof Boolean? ((Boolean)val).booleanValue() : false; // animatingAttribute.getValue();
+			return val instanceof Boolean? ((Boolean)val).booleanValue() : false;
 		}else{
 			return false;
 		}
-		
-//		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
-//		for (EObject eo : states){
-//			if (eo instanceof State && ((State)eo).isActive()) return true;
-//		}
-//		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
-//		for (EObject eo : transitions){
-//			if (eo instanceof Transition 
-//					&& ((Transition)eo).getOperations()!=null
-//					&& ((Transition)eo).getOperations().size()>0) return true;
-//		}
-//		return false;
 	}
 }
