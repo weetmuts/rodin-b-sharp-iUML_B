@@ -163,9 +163,10 @@ http://www.eclipse.org/legal/epl-v10.html
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
       <?gmfgen generated="true"?>
       <page
+            category="ac.soton.eventb.iumlb"
+            class="ac.soton.eventb.classdiagrams.diagram.preferences.DiagramGeneralPreferencePage"
             id="ac.soton.eventb.classdiagrams.diagram.general"
-            name="%prefpage.ac.soton.eventb.classdiagrams.diagram.general"
-            class="ac.soton.eventb.classdiagrams.diagram.preferences.DiagramGeneralPreferencePage">
+            name="%prefpage.ac.soton.eventb.classdiagrams.diagram.general">
       </page>
       <page
             id="ac.soton.eventb.classdiagrams.diagram.appearance"
