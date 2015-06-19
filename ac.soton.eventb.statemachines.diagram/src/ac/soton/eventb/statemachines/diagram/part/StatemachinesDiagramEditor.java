@@ -444,7 +444,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 			} else if (p == StatemachinesDiagramEditor.this) {
 				deactivated = false;
 			}
-			if (deactivated && isDirty() && !animating())
+			if (deactivated && isDirty() && !isAnimating())
 				doSave(new NullProgressMonitor());
 		}
 
@@ -528,9 +528,9 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-		if (animating()){
-			int i=0;
-		}
+		
+		if (isAnimating()) return;	//must never save while animating as model contains animation artifacts which will not save
+		
 		System.out.println("saving "+this.getPartName());
 		checkForXTEXT();
 		if (ecr!=null) {
@@ -566,11 +566,12 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 	private Recorder ecr=null;
 	
+	/////////////animating////////////////
 	private boolean animating = false;
 	
 	public void startAnimating(){
 		animating = true;
-		System.out.println("animating started");
+		System.out.println("started animating "+this.getPartName());
 		if (ecr!=null) {
 			ecr.endRecording();
 			System.out.println("... stopped recording");
@@ -579,7 +580,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	
 	public void stopAnimating(){
 		animating = false;
-		System.out.println("animating ended");
+		System.out.println("stopped animating "+this.getPartName());
 		if (ecr!=null) {
 			ecr.resumeRecording();
 			System.out.println("... resume recording");
@@ -589,17 +590,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	/*
 	 * checks whether the Statemachine of this diagram is being animated
 	 */
-	private boolean animating(){
-		
-		if (animating) return true;
-		
-		Statemachine sm = (Statemachine) StatemachinesDiagramEditor.this.getDiagram().getElement();
-		Attribute animatingAttribute = sm.getAttributes().get("ac.soton.eventb.statemachines.animation");
-		if (animatingAttribute!=null){
-			Object val = animatingAttribute.getValue();
-			return val instanceof Boolean? ((Boolean)val).booleanValue() : false;
-		}else{
-			return false;
-		}
+	public boolean isAnimating(){
+		return animating; 
 	}
 }
