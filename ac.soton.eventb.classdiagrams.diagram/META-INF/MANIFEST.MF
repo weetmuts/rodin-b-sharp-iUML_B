@@ -50,6 +50,7 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  ac.soton.eventb.emf.diagrams.edit;bundle-version="[2.2.0,3.0.0)",
  ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.5.0,4.0.0)",
  ac.soton.eventb.classdiagrams;bundle-version="[1.0.0,2.0.0)",
- ac.soton.eventb.classdiagrams.edit;bundle-version="[1.0.0,2.0.0)"
+ ac.soton.eventb.classdiagrams.edit;bundle-version="[1.0.0,2.0.0)",
+ ac.soton.eventb.emf.diagrams.navigator;bundle-version="[2.2.2,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
