@@ -35,6 +35,7 @@ import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramDropTargetListener;
+import org.eclipse.gmf.runtime.diagram.ui.properties.views.PropertiesBrowserPage;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
@@ -64,17 +65,23 @@ import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.navigator.resources.ProjectExplorer;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.views.properties.PropertySheet;
+import org.eventb.emf.core.CorePackage;
+import org.eventb.emf.core.EventBElement;
+import org.eventb.emf.core.EventBNamedCommentedComponentElement;
+import org.eventb.emf.core.EventBObject;
 
+import ac.soton.eventb.emf.diagrams.navigator.refactor.Recorder;
 import ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsNavigatorItem;
 
 /**
- * @generated NOT
+ * @generated
  */
 public class ClassdiagramsDiagramEditor extends DiagramDocumentEditor implements
-		IGotoMarker, IPartListener {
+		IGotoMarker {
 
 	/**
 	 * @generated
@@ -400,59 +407,163 @@ public class ClassdiagramsDiagramEditor extends DiagramDocumentEditor implements
 
 	}
 
-	// IPartListener 
-	// This saves the editor when it is de-activated
-	//
-	
+	////////////////////////////////////////////////////////////////////////////////
+	/// The following methods have been overridden to 
+	// a) save on de-activation to avoid synch problems between several editors
+	// b) provide change recording
+	////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * This listens for when the outline becomes active 
+	 * <!-- begin-user-doc -->
+	 * It also listens for possible deactivation of the editor (i.e. deactivation of the
+	 * content outline view, property sheets or the editor itself) and if the subsequent 
+	 * activation confirms that none of these associated views are being activated,
+	 *  and the editor is dirty, all changes are automatically saved.
+	 * This prevents editor conflicts if the same resource is edited with another editor.
+	 *  <!-- end-user-doc -->
+	 * 
+	 * @custom
+	 */
+	protected IPartListener deactivationPartListener = new IPartListener() {
+
+		private boolean deactivated = false;
+
+		public void partActivated(IWorkbenchPart p) {
+			if (p instanceof PropertySheet) {
+				IPage cp = ((PropertySheet) p).getCurrentPage();
+				if (cp instanceof PropertiesBrowserPage
+						&& ((PropertiesBrowserPage) cp).getContributor() == ClassdiagramsDiagramEditor.this) {
+					deactivated = false;
+				}
+			} else if (p == ClassdiagramsDiagramEditor.this) {
+				deactivated = false;
+			}
+			if (deactivated && isDirty() && !isAnimating())
+				doSave(new NullProgressMonitor());
+		}
+
+		@Override
+		public void partBroughtToTop(IWorkbenchPart p) {
+			// Ignore.
+		}
+
+		@Override
+		public void partDeactivated(IWorkbenchPart p) {
+			if (p instanceof PropertySheet) {
+				IPage cp = ((PropertySheet) p).getCurrentPage();
+				if (cp instanceof PropertiesBrowserPage
+						&& ((PropertiesBrowserPage) cp).getContributor() == ClassdiagramsDiagramEditor.this) {
+					deactivated = true;
+				}
+			} else if (p == ClassdiagramsDiagramEditor.this) {
+				deactivated = true;
+			}
+		}
+		
+		///////////////////changeRecording///////////////////
+		//FIXME: probably, this should be made into a different listener that only listens to the Statemachines Diagram Editor Part
+		//instead of all parts on the page.
+		@Override
+		public void partClosed(IWorkbenchPart part) {
+			if (part==ClassdiagramsDiagramEditor.this){
+				System.out.println("closing "+part.getTitle());
+				if (ecr!=null) {
+					ecr.disposeChangeRecorder();
+					System.out.println("... disposed change recorder");
+				}
+			}
+		}
+
+		@Override
+		public void partOpened(IWorkbenchPart part) {
+			if (part==ClassdiagramsDiagramEditor.this){
+				System.out.println("opening "+part.getTitle());
+				EObject diagramElement = ClassdiagramsDiagramEditor.this.getDiagram().getElement();
+				if (diagramElement instanceof EventBElement){
+					EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+					ecr= Recorder.getNewRecorder((EventBNamedCommentedComponentElement)component);
+					if (ecr!=null){
+						int result = ecr.resumeRecording();
+						if (result==1){
+							//TODO: message dialogue here, save old changes in a different file
+							System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
+						}
+					}
+				}
+				System.out.println(ecr==null? "...opened but not recording" : "... opened and recording");
+			}
+		}
+	};
+
+	/**
+	 * Add the deactivation part Listener to the Page
+	 * @custom
+	 */
 	@Override
 	public void setInput(IEditorInput input) {
 		super.setInput(input);
-		getSite().getPage().addPartListener(this);
+		getSite().getPage().addPartListener(deactivationPartListener);
 	}
-
-	@Override
-	public void dispose() {
-		super.dispose();
-		getSite().getPage().removePartListener(this);
-	}
-
-	private boolean deactivating = false;
 
 	/**
-	 * Saves editor if it is deactivated and autosave preference is on.
-	 * 
-	 * @param part
+	 * Remove the deactivation part Listener from the Page
+	 * @custom
 	 */
 	@Override
-	public void partDeactivated(IWorkbenchPart part) {
-		if (part == this) {
-			deactivating = true;
+	public void dispose() {
+		if (ecr!=null) ecr.disposeChangeRecorder();
+		super.dispose();
+		getSite().getPage().removePartListener(deactivationPartListener);
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		
+		if (isAnimating()) return;	//must never save while animating as model contains animation artifacts which will not save
+		
+		System.out.println("saving "+this.getPartName());
+		if (ecr!=null) {
+			ecr.endRecording();
+			System.out.println("... end recording");
+		}
+		super.doSave(progressMonitor);
+		System.out.println("... saved");
+		if (ecr!=null) {
+			ecr.resumeRecording();
+			System.out.println("... resume recording");
+		}
+
+	}
+
+	private Recorder ecr=null;
+
+	/////////////animating////////////////
+	private boolean animating = false;
+
+	public void startAnimating(){
+		animating = true;
+		System.out.println("started animating "+this.getPartName());
+		if (ecr!=null) {
+			ecr.endRecording();
+			System.out.println("... stopped recording");
 		}
 	}
 
-	@Override
-	public void partActivated(IWorkbenchPart part) {
-		//System.out.println(this.getTitle()+ " sees activating : "+ part.getTitle());
-		if (deactivating == true) {
-			if (part != this && isDirty() && !(part instanceof PropertySheet)) {
-				doSave(new NullProgressMonitor());
-			}
-			if (part == this) {
-				deactivating = false;
-			}
+	public void stopAnimating(){
+		animating = false;
+		System.out.println("stopped animating "+this.getPartName());
+		if (ecr!=null) {
+			ecr.resumeRecording();
+			System.out.println("... resume recording");
 		}
 	}
 
-	@Override
-	public void partBroughtToTop(IWorkbenchPart part) {
+	/*
+	 * checks whether this diagram is being animated
+	 */
+	public boolean isAnimating(){
+		return animating; 
 	}
-
-	@Override
-	public void partClosed(IWorkbenchPart part) {
-	}
-
-	@Override
-	public void partOpened(IWorkbenchPart part) {
-	}
-
 }
