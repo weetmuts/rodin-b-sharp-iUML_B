@@ -94,7 +94,11 @@ public class Strings {
 				}
 			}else{
 				if (element.isSurjective()){
-					return REL_PARTIAL_SURJECTION;				//partial surjection
+					if (element.isInjective()){
+						return REL_PARTIAL_SURJECTION;				//partial bijection - but not supported by Rodin so we have to add an extra predicate elsewhere	
+					}else{
+						return REL_PARTIAL_SURJECTION;				//partial surjection
+					}
 				}else{
 					if (element.isInjective()){
 						return REL_PARTIAL_INJECTION;				//partial injection	
@@ -121,7 +125,7 @@ public class Strings {
 	}
 	
 	public static String ASSOCIATION_INJECTIVE_PRED;
-	public static String ASSOCIATION_PRED_INJECTIVE(Association element) {
+	public static String ASSOCIATION_INJECTIVE_PRED(Association element) {
 		return bind(ASSOCIATION_INJECTIVE_PRED, 
 				element.getName(), 
 				element.getTarget().getName(),
@@ -133,9 +137,9 @@ public class Strings {
 		return bind(ASSOCIATION_PRED_NAME, name);
 	}
 
-	public static String ASSOCIATION_PRED_INJECTIVE_NAME;
-	public static String ASSOCIATION_PRED_INJECTIVE_NAME(String name) {
-		return bind(ASSOCIATION_PRED_INJECTIVE_NAME, name);
+	public static String ASSOCIATION_INJECTIVE_PRED_NAME;
+	public static String ASSOCIATION_INJECTIVE_PRED_NAME(String name) {
+		return bind(ASSOCIATION_INJECTIVE_PRED_NAME, name);
 	}
 	
 	
@@ -150,7 +154,7 @@ public class Strings {
 	}
 	
 	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED;
-	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE(ClassAttribute element) {
+	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED(ClassAttribute element) {
 		return bind(CLASS_ATTRIBUTE_INJECTIVE_PRED, 
 				element.getName(), 
 				element.getTarget(),
@@ -162,9 +166,9 @@ public class Strings {
 		return bind(CLASS_ATTRIBUTE_PRED_NAME, name);
 	}
 
-	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME;
-	public static String CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME(String name) {
-		return bind(CLASS_ATTRIBUTE_PRED_INJECTIVE_NAME, name);
+	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED_NAME;
+	public static String CLASS_ATTRIBUTE_INJECTIVE_PRED_NAME(String name) {
+		return bind(CLASS_ATTRIBUTE_INJECTIVE_PRED_NAME, name);
 	}
 	
 	public static String CLASS_CONSTRAINT_NAME;

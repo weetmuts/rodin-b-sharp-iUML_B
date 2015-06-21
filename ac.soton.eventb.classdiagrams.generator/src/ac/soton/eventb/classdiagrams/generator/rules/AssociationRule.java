@@ -42,15 +42,15 @@ protected static final EReference elaborates = CoreextensionPackage.Literals.EVE
 		case DataKind.CONSTANT_VALUE :
 			newGeneratedTypePredicate = (EventBElement) Make.axiom(Strings.ASSOCIATION_PRED_NAME(element.getName()), Strings.ASSOCIATION_PRED(element), element.getComment());
 			newGeneratedTypePredicateContainer = axioms;
-			if (!element.isFunctional() && element.isInjective()){
-				newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), Strings.ASSOCIATION_PRED_INJECTIVE(element), element.getComment());
+			if (element.isInjective() && (!element.isFunctional() || (element.isSurjective() && !element.isTotal()) )){
+				newGeneratedInjectionPredicate = (EventBElement) Make.axiom(Strings.ASSOCIATION_INJECTIVE_PRED_NAME(element.getName()), Strings.ASSOCIATION_INJECTIVE_PRED(element), element.getComment());
 			}
 			break;
 		case DataKind.VARIABLE_VALUE :
 			newGeneratedTypePredicate = (EventBElement) Make.invariant(Strings.ASSOCIATION_PRED_NAME(element.getName()), Strings.ASSOCIATION_PRED(element), element.getComment());
 			newGeneratedTypePredicateContainer = invariants;
-			if (!element.isFunctional() && element.isInjective()){
-				newGeneratedInjectionPredicate = (EventBElement) Make.invariant(Strings.ASSOCIATION_PRED_INJECTIVE_NAME(element.getName()), Strings.ASSOCIATION_PRED_INJECTIVE(element), element.getComment());
+			if (element.isInjective() && (!element.isFunctional() || (element.isSurjective() && !element.isTotal()) )){
+				newGeneratedInjectionPredicate = (EventBElement) Make.invariant(Strings.ASSOCIATION_INJECTIVE_PRED_NAME(element.getName()), Strings.ASSOCIATION_INJECTIVE_PRED(element), element.getComment());
 			}
 			break;
 		}
