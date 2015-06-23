@@ -66,12 +66,11 @@ public class RootStatemachine2NewContextRule extends AbstractRule implements IRu
 	
 	private boolean hasImplicitContext(Machine m){
 		IProject project = getProject(m);
-		project.exists();
-		return project.getFile(m.getName() + Strings._IMPLICIT_CONTEXT + ".buc").exists();
+		return project.exists() && project.getFile(m.getName() + Strings._IMPLICIT_CONTEXT + ".buc").exists();
 	}
 	
 	private IProject getProject(Machine m){
-		URI uri = m.eResource().getURI();
+		URI uri = EcoreUtil.getURI(m);
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(uri.segment(1).toString());	
 	}
 
