@@ -1,47 +1,39 @@
-/*******************************************************************************
- * Copyright (c) 2012 University of Southampton.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package ac.soton.eventb.classdiagrams.navigator.refiner;
 
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.core.EventBObject;
 
 import ac.soton.eventb.classdiagrams.ClassdiagramsPackage;
-import ac.soton.eventb.emf.core.extension.navigator.refiner.AbstractExtensionRefiner;
+import ac.soton.eventb.emf.core.extension.navigator.refiner.CoreextensionElementRefiner;
 
 /**
- * Class diagram Refiner 
+ * Class diagram Element Refiner 
  * 
  * @author cfsnook
  *
- *
  */
-//FIXME: this only works for machine class diagrams
-public class ClassdiagramRefiner extends AbstractExtensionRefiner {
+
+public class ClassdiagramElementRefiner extends CoreextensionElementRefiner {
 
 	/**
 	 * populate the given list with the meta-classes that the refiner needs to filter out
-	 *  from the copy for statemachine refinement.
+	 *  from the copy for class diagram refinement.
 	 * (e.g. state invariants)
 	 */
 	@Override
 	protected void populateFilterByTypeList(final List<EClass> filterList){
-		filterList.add(MachinePackage.Literals.INVARIANT);
+		super.populateFilterByTypeList(filterList);
 		filterList.add(ClassdiagramsPackage.Literals.CLASS_CONSTRAINT);
 	}
 	
 	/**
 	 * populate the given map with the reference features that the refiner needs to copy for class diagram refinement.
-	 * This is refines (as references to their abstract counterparts) and
-	 * elaborates, incoming, outgoing, source and target (as intra-level references) 
+	 * 
 	 */
 	@Override
 	protected void populateReferenceMap(final Map<EReference,RefHandling> referencemap){
@@ -54,13 +46,14 @@ public class ClassdiagramRefiner extends AbstractExtensionRefiner {
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__OUTGOING, RefHandling.EQUIV);
 		referencemap.put(ClassdiagramsPackage.Literals.CLASS__SUPERTYPES, RefHandling.DROP);
 	}
-
-/**
- * returns the Components Extension ID
- */
-	@Override
-	protected String getExtensionID() {
-		return ClassdiagramsPackage.CLASSDIAGRAMS_EXTENSION_ID;
+	
+	/**
+	 * Change this to specialise the meaning of 'equivalent' 
+	 * (used when finding reference targets in the refined model)
+	 * 
+	 */
+	public EventBObject getEquivalentObject(EObject concreteParent, EObject abstractObject) {
+		return super.getEquivalentObject(concreteParent, abstractObject);
 	}
-
+		
 }
