@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.classdiagrams.diagram;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.0
 Bundle-ClassPath: .
 Bundle-Activator: ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorPlugin
 Bundle-Vendor: %providerName
@@ -51,6 +51,6 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.5.0,4.0.0)",
  ac.soton.eventb.classdiagrams;bundle-version="[1.0.0,2.0.0)",
  ac.soton.eventb.classdiagrams.edit;bundle-version="[1.0.0,2.0.0)",
- ac.soton.eventb.emf.diagrams.navigator;bundle-version="[2.2.2,3.0.0)"
+ ac.soton.eventb.emf.diagrams.navigator;bundle-version="[2.3.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
