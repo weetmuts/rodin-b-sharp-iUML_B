@@ -16,6 +16,24 @@
                icon="icons/NewClassdiagram.gif"
                label="Add Classdiagram"
                style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false">
+                     <or>
+                        <instanceof
+                              value="org.eventb.core.IMachineRoot">
+                        </instanceof>
+                        <instanceof
+                              value="org.eventb.core.IContextRoot">
+                        </instanceof>
+                     </or>
+
+                  </iterate>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
    </extension>
