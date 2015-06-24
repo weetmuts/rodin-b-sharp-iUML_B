@@ -90,7 +90,7 @@ public class ClassdiagramsNewDiagramFileWizard extends Wizard {
 		}
 		myFileCreationPage.setContainerFullPath(filePath);
 		myFileCreationPage.setFileName(ClassdiagramsDiagramEditorUtil
-				.getUniqueFileName(filePath, fileName, "cld")); //$NON-NLS-1$
+				.getUniqueFileName(filePath, fileName, "cd")); //$NON-NLS-1$
 
 		diagramRootElementSelectionPage = new DiagramRootElementSelectionPage(
 				Messages.ClassdiagramsNewDiagramFileWizard_RootSelectionPageName);

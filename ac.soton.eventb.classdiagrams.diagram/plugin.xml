@@ -11,13 +11,13 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
       <?gmfgen generated="true"?>
-      <fileTypes type="text" extension="cld"/>
+      <fileTypes type="text" extension="cd"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
       <?gmfgen generated="true"?>
       <parser
-         type="cld"
+         type="cd"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -28,7 +28,7 @@ http://www.eclipse.org/legal/epl-v10.html
          id="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/ClassdiagramsDiagramFile.gif"
-         extensions="cld"
+         extensions="cd"
          default="true"
          class="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsDiagramEditor"
          matchingStrategy="ac.soton.eventb.classdiagrams.diagram.part.ClassdiagramsMatchingStrategy"
@@ -476,7 +476,7 @@ http://www.eclipse.org/legal/epl-v10.html
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="cld"/>
+        	      <test property="org.eclipse.core.resources.extension" value="cd"/>
                </and>
                <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
            	   <adapt type="org.eclipse.gmf.runtime.notation.View">
@@ -499,7 +499,7 @@ http://www.eclipse.org/legal/epl-v10.html
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="cld"/>
+        	         <test property="org.eclipse.core.resources.extension" value="cd"/>
                   </and>
                   <instanceof value="ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsAbstractNavigatorItem"/>
                </or>
