@@ -2,7 +2,7 @@
 <feature
       id="ac.soton.eventb.statemachines.feature"
       label="%featureName"
-      version="3.2.0.refactor_v20150531a"
+      version="3.3.0"
       provider-name="%providerName"
       plugin="ac.soton.iumlb.branding">
 
@@ -71,6 +71,7 @@
       <import plugin="org.rodinp.core" version="1.7.0" match="compatible"/>
       <import plugin="org.eventb.core" version="3.1.0" match="compatible"/>
       <import plugin="org.eventb.emf.core" version="4.0.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.core.extension.navigator" version="4.1.0" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.diagrams.navigator" version="2.0.0" match="compatible"/>
       <import plugin="ac.soton.eventb.statemachines.diagram" version="3.0.0" match="compatible"/>
       <import plugin="ac.soton.eventb.statemachines.edit" version="2.0.0" match="compatible"/>
@@ -82,8 +83,7 @@
       <import plugin="org.eclipse.emf.edit" version="2.7.2" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore" version="2.10.1" match="compatible"/>
       <import plugin="ac.soton.eventb.emf.diagrams.edit" version="2.0.0" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.diagrams.navigator" version="2.2.2.refactor_v20150527" match="compatible"/>
-      <import plugin="ac.soton.eventb.emf.core.extension.navigator" version="4.1.0" match="compatible"/>
+      <import plugin="ac.soton.eventb.emf.diagrams.navigator" version="2.3.0" match="compatible"/>
    </requires>
 
    <plugin
