@@ -10,6 +10,7 @@ package ac.soton.eventb.statemachines.navigator.refiner;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -17,6 +18,7 @@ import org.eventb.emf.core.EventBObject;
 
 import ac.soton.eventb.emf.core.extension.navigator.refiner.CoreextensionElementRefiner;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
+import ac.soton.eventb.statemachines.Transition;
 
 /**
  * State-machine Element Refiner 
@@ -60,7 +62,29 @@ public class StatemachineElementRefiner extends CoreextensionElementRefiner {
 	 * 
 	 */
 	public EventBObject getEquivalentObject(EObject concreteParent, EObject abstractObject) {
-		return super.getEquivalentObject(concreteParent, abstractObject);
+		//EClass clazz = abstractObject.eClass();
+		if (abstractObject instanceof Transition){
+			Transition t = (Transition) abstractObject;
+			TreeIterator<EObject> contents = concreteParent.eAllContents();
+			while (contents.hasNext()){
+				Object possible = contents.next();
+				if (possible instanceof Transition){
+					Transition e = (Transition) possible;
+					if (//e.getInternalId().equals(t.getInternalId()) || 
+							(
+							e.getLabel().equals(t.getLabel()) &&
+							e.getSource()==getEquivalentObject(concreteParent, t.getSource()) &&
+							e.getTarget()==getEquivalentObject(concreteParent, t.getTarget())
+							)
+						){
+						return (EventBObject) possible;
+					}
+				}
+			}
+			return null;
+		}else{
+			return super.getEquivalentObject(concreteParent, abstractObject);
+		}
 	}
 	
 }
