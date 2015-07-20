@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eventb.emf.core.EventBObject;
 
 import ac.soton.eventb.emf.core.extension.navigator.refiner.CoreextensionElementRefiner;
@@ -61,7 +62,8 @@ public class StatemachineElementRefiner extends CoreextensionElementRefiner {
 	 * (used when finding reference targets in the refined model)
 	 * 
 	 */
-	public EventBObject getEquivalentObject(EObject concreteParent, EObject abstractObject) {
+	
+	public EventBObject getEquivalentObject(EObject concreteParent, EStructuralFeature feature, EObject abstractObject) {
 		//EClass clazz = abstractObject.eClass();
 		if (abstractObject instanceof Transition){
 			Transition t = (Transition) abstractObject;
@@ -83,7 +85,7 @@ public class StatemachineElementRefiner extends CoreextensionElementRefiner {
 			}
 			return null;
 		}else{
-			return super.getEquivalentObject(concreteParent, abstractObject);
+			return super.getEquivalentObject(concreteParent, feature, abstractObject);
 		}
 	}
 	
