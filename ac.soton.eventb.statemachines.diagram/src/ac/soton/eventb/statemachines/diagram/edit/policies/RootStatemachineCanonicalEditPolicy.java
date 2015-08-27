@@ -554,4 +554,30 @@ public class RootStatemachineCanonicalEditPolicy extends
 			return ((Transition) relationship).getTarget();
 		return null;
 	}
+	
+	////////////CUSTOM/////
+	
+	/**
+	 * Return <tt>true</tt> if this editpolicy should try and delete the
+	 * supplied view; otherwise <tt>false<tt>. 
+	 *  
+	 * For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.
+	 * (i.e. if the transition has been moved to a different source or target state)
+	 * 
+	 * Otherwise the default behavior is returned
+	 * 
+	 * @CUSTOM
+	 */
+	protected boolean shouldDeleteView(View view) {
+		EObject sel = ViewUtil.resolveSemanticElement(view);
+		if (sel instanceof Transition && view instanceof Edge){
+			Transition tr = (Transition)sel;
+			Edge ed = (Edge)view;
+			if (ed.getSource().getElement()!=tr.getSource() || ed.getTarget().getElement()!=tr.getTarget() ){
+				return true;
+			}			
+		}
+		return super.shouldDeleteView(view) ;
+	}
+
 }

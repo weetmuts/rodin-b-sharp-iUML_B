@@ -185,8 +185,9 @@ populate all the Validate operations
 
 
 CUSTOMISATIONS IN GENERATED DIAGRAM CODE
------------------------------------------
-
+-------------------------------------------------------------------------------------
+These should possibly be moved to the custom templates before the next re-generation
+-------------------------------------------------------------------------------------
 
 Many of the edit.commands have their doExecuteWithResult method customised to automatically name the new element
 E.g. For Any2CreateCommand  
@@ -295,6 +296,38 @@ E.G InvariantEditPart
 		feedbackText = null;
 	}
 	
+	
+	
+-----------------------------------
+re targetting or re-sourcing a transition (if done outside of diagram editors, such as by Rose or refactoring) would 
+not delete the old view from the layout resulting in both the old edge and the new edge being drawn.
+to fix this, RootStatemachineCanonicalEditPolicy$shouldDeleteView(View view) is modified to check that the 
+element's source and target match the edge's 
+
+
+	
+	/**
+	 * Return <tt>true</tt> if this editpolicy should try and delete the
+	 * supplied view; otherwise <tt>false<tt>. 
+	 *  
+	 * For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.
+	 * (i.e. if the transition has been moved to a different source or target state)
+	 * 
+	 * Otherwise the default behavior is returned
+	 * 
+	 * @CUSTOM
+	 */
+	protected boolean shouldDeleteView(View view) {
+		EObject sel = ViewUtil.resolveSemanticElement(view);
+		if (sel instanceof Transition && view instanceof Edge){
+			Transition tr = (Transition)sel;
+			Edge ed = (Edge)view;
+			if (ed.getSource().getElement()!=tr.getSource() || ed.getTarget().getElement()!=tr.getTarget() ){
+				return true;
+			}			
+		}
+		return super.shouldDeleteView(view) ;
+	}
 	
 	
 For Refactoring
