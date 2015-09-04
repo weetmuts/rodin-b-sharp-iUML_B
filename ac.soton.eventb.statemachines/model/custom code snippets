@@ -296,7 +296,16 @@ E.G InvariantEditPart
 		feedbackText = null;
 	}
 	
-	
+----------------------------------
+
+Validate action did not work when fired from the property sheet
+Changed ValidatAction in ac.soton...part to get the active editor instead of the active part
+	/**
+	 * @generated NOT
+	 */
+	public void run() {
+		IWorkbenchPart workbenchPart = page.getActiveEditor();	
+	...
 	
 -----------------------------------
 re targetting or re-sourcing a transition (if done outside of diagram editors, such as by Rose or refactoring) would 

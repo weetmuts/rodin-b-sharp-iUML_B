@@ -67,10 +67,10 @@ public class ValidateAction extends Action {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void run() {
-		IWorkbenchPart workbenchPart = page.getActivePart();
+		IWorkbenchPart workbenchPart = page.getActiveEditor();
 		if (workbenchPart instanceof IDiagramWorkbenchPart) {
 			final IDiagramWorkbenchPart part = (IDiagramWorkbenchPart) workbenchPart;
 			try {
