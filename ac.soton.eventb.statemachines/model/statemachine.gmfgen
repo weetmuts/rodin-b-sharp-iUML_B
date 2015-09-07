@@ -862,7 +862,8 @@
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
         iD="ac.soton.eventb.statemachines.diagram.general"
-        name="Statemachines Diagram">
+        name="Statemachines Diagram"
+        parentCategory="ac.soton.eventb.iumlb">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
           iD="ac.soton.eventb.statemachines.diagram.appearance"
