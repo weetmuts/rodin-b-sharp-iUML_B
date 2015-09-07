@@ -306,7 +306,7 @@ Changed ValidatAction in ac.soton...part to get the active editor instead of the
 	public void run() {
 		IWorkbenchPart workbenchPart = page.getActiveEditor();	
 	...
-	
+
 -----------------------------------
 re targetting or re-sourcing a transition (if done outside of diagram editors, such as by Rose or refactoring) would 
 not delete the old view from the layout resulting in both the old edge and the new edge being drawn.
