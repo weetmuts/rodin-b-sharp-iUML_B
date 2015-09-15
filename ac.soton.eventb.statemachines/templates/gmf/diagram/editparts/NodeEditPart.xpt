@@ -66,20 +66,6 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 
 	«EXPAND impl::diagram::editparts::NodeEditPart::getPrimaryChildEditPart-»
 
-«IF getAssistantOutgoingLinks(self)->size() > 0-»
-	«EXPAND impl::diagram::editparts::NodeEditPart::getMARelTypesOnSource-»
-
-	«EXPAND impl::diagram::editparts::NodeEditPart::getMARelTypesOnSourceAndTarget-»
-
-	«EXPAND impl::diagram::editparts::NodeEditPart::getMATypesForTarget-»
-«ENDIF-»
-
-«IF getAssistantIncomingLinks(self)->size() > 0-»
-	«EXPAND impl::diagram::editparts::NodeEditPart::getMARelTypesOnTarget-»
-
-	«EXPAND impl::diagram::editparts::NodeEditPart::getMATypesForSource-»
-«ENDIF-»
-
 «IF hasChildrenInListCompartments(self)-»
 	«EXPAND impl::diagram::editparts::NodeEditPart::getTargetEditPartMethod-»
 «ENDIF-»
