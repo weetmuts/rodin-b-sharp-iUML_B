@@ -55,7 +55,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	public TransitionEditPart(View view) {
 		super(view);
 	}
-	
+
 	/**
 	 * @generated
 	 */
@@ -196,13 +196,11 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 
 		super.handleNotificationEvent(event);
 	}
-	
-	
-	/////////// mouse-over feedback text ///////////	
-	Label feedbackFigure=null;
-	String feedbackText=null;;
 
-	
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure = null;
+	String feedbackText = null;;
+
 	/*
 	 * Provides mouse over feedback:
 	 * Customised to  show the contents (params, witnesses, guards and actions) of the method
@@ -212,20 +210,21 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	public void showTargetFeedback(Request request) {
 		super.showTargetFeedback(request);
 		// the feedback layer figures do not receive mouse e
-		if (feedbackText==null) {
+		if (feedbackText == null) {
 			feedbackText = getMethodText();
-			if (feedbackText.length()>0){
+			if (feedbackText.length() > 0) {
 				feedbackFigure = new Label(feedbackText);
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
-				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy()
+						.expand(10, 10);
 				bounds.setLocation(getFigure().getBounds().getLocation()
 						.translate(200, -100));
 				feedbackFigure.setBounds(bounds);
-				feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGray); //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
 				feedbackFigure.setOpaque(true);
 				//feedbackFigure.setBorder(new LineBorder());
-	
+
 				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 				layer.add(feedbackFigure);
 			}
@@ -234,63 +233,69 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 
 	private String getMethodText() {
 		Transition transition = (Transition) resolveSemanticElement();
-		
-		if (transition.getOperations()!=null) return ""; //no feedback while animating
-		
+
+		if (transition.getOperations() != null)
+			return ""; //no feedback while animating
+
 		String text = "";
-		if (transition.getParameters().size()>0){
-			text = text + "\nParameters: \n"; 
-			for (TypedParameter p : transition.getParameters()){
-				text = text + "\t"+p.getName()+" : "+p.getType()+"\n";
+		if (transition.getParameters().size() > 0) {
+			text = text + "\nParameters: \n";
+			for (TypedParameter p : transition.getParameters()) {
+				text = text + "\t" + p.getName() + " : " + p.getType() + "\n";
 			}
 		}
-		if (transition.getWitnesses().size()>0){
+		if (transition.getWitnesses().size() > 0) {
 			text = text + "\nWitnesses: \n";
-			for (Witness w : transition.getWitnesses()){
-				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getPredicate());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Witness w : transition.getWitnesses()) {
+				text = text + "\t" + w.getName() + " : \n"
+						+ indent(2, "", w.getPredicate());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		if (transition.getGuards().size()>0){
+		if (transition.getGuards().size() > 0) {
 			text = text + "\nGuards: \n";
-			for (Guard w : transition.getGuards()){
-				text = text + "\t"+w.getName()+(w.isTheorem()? "(THEOREM) :\n" : " :\n");
-				text = text + indent(2,"",w.getPredicate());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Guard w : transition.getGuards()) {
+				text = text + "\t" + w.getName()
+						+ (w.isTheorem() ? "(THEOREM) :\n" : " :\n");
+				text = text + indent(2, "", w.getPredicate());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		if (transition.getActions().size()>0){
+		if (transition.getActions().size() > 0) {
 			text = text + "\nActions: \n";
-			for (Action w : transition.getActions()){
-				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getAction());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Action w : transition.getActions()) {
+				text = text + "\t" + w.getName() + " : \n"
+						+ indent(2, "", w.getAction());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		
-		if (text.length()>0){
+
+		if (text.length() > 0) {
 			text = transition.getLabel()
-				+(transition.isExtended()? "  [extended]":"")
-				+(transition.getComment()!=null && transition.getComment().length()>0? "  //"+transition.getComment():"")+"\n"
-				+text;
+					+ (transition.isExtended() ? "  [extended]" : "")
+					+ (transition.getComment() != null
+							&& transition.getComment().length() > 0 ? "  //"
+							+ transition.getComment() : "") + "\n" + text;
 		}
 
 		return text;
 	}
-	
-	private static String indent(int tabs, String prefix, String text){
-		if (text==null || text.length()<1) return "";
+
+	private static String indent(int tabs, String prefix, String text) {
+		if (text == null || text.length() < 1)
+			return "";
 		String indent = "";
-		for (int i=0; i<tabs; i++){
-			indent = indent+"\t";
+		for (int i = 0; i < tabs; i++) {
+			indent = indent + "\t";
 		}
-		indent = indent+prefix;
-		return indent+text.replace("\n", "\n"+indent);
+		indent = indent + prefix;
+		return indent + text.replace("\n", "\n" + indent);
 	}
 
 	/* Erases mouse-over feedback.
@@ -299,8 +304,10 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest) return;
-		if (getViewer()==null) return;
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer() == null)
+			return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {

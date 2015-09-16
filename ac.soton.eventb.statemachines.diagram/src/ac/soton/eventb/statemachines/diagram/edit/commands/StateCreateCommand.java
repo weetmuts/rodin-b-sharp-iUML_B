@@ -68,11 +68,11 @@ public class StateCreateCommand extends EditElementCommand {
 		owner.getNodes().add(newElement);
 
 		//+++++++++
-		String name = NameUtils.getName(owner)+"_S";
+		String name = NameUtils.getName(owner) + "_S";
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
 		//---------
-		
+
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);

@@ -346,7 +346,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getFinal_2007Text(View view) {
 		Final domainModelElement = (Final) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 2007); //$NON-NLS-1$
@@ -380,7 +380,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getInitial_2006Text(View view) {
 		Initial domainModelElement = (Initial) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 2006); //$NON-NLS-1$
@@ -394,7 +394,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getInitial_3011Text(View view) {
 		Initial domainModelElement = (Initial) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 3011); //$NON-NLS-1$
@@ -408,7 +408,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getFinal_3012Text(View view) {
 		Final domainModelElement = (Final) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 3012); //$NON-NLS-1$
@@ -442,7 +442,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getJunction_2009Text(View view) {
 		Junction domainModelElement = (Junction) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 2009); //$NON-NLS-1$
@@ -456,7 +456,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getAny_2010Text(View view) {
 		Any domainModelElement = (Any) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 2010); //$NON-NLS-1$
@@ -470,7 +470,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getFork_2011Text(View view) {
 		Fork domainModelElement = (Fork) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 2011); //$NON-NLS-1$
@@ -504,7 +504,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getJunction_3015Text(View view) {
 		Junction domainModelElement = (Junction) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 3015); //$NON-NLS-1$
@@ -518,7 +518,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getAny_3016Text(View view) {
 		Any domainModelElement = (Any) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 3016); //$NON-NLS-1$
@@ -532,7 +532,7 @@ public class StatemachinesNavigatorLabelProvider extends LabelProvider
 	private String getFork_3017Text(View view) {
 		Fork domainModelElement = (Fork) view.getElement();
 		if (domainModelElement != null) {
-			return domainModelElement.getReference();
+			return domainModelElement.getName();
 		} else {
 			StatemachinesDiagramEditorPlugin.getInstance().logError(
 					"No domain element for view with visualID = " + 3017); //$NON-NLS-1$

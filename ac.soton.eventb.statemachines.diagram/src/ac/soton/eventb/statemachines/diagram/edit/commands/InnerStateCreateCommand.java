@@ -66,13 +66,13 @@ public class InnerStateCreateCommand extends EditElementCommand {
 
 		Statemachine owner = (Statemachine) getElementToEdit();
 		owner.getNodes().add(newElement);
-		
+
 		//+++++++++
-		String name = NameUtils.getName(owner)+"_S";
+		String name = NameUtils.getName(owner) + "_S";
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
 		//---------
-		
+
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);

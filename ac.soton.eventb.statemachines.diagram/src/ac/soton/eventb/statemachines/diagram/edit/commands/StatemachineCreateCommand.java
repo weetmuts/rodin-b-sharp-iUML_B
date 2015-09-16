@@ -70,13 +70,13 @@ public class StatemachineCreateCommand extends EditElementCommand {
 
 		StatemachineOwner owner = (StatemachineOwner) getElementToEdit();
 		owner.getStatemachines().add(newElement);
-		
+
 		//+++++++++
-		String name = NameUtils.getName(owner)+"_sm";
+		String name = NameUtils.getName(owner) + "_sm";
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
 		//---------
-		
+
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);

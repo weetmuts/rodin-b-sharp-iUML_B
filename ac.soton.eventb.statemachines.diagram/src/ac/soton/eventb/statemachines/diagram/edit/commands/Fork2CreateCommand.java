@@ -70,14 +70,16 @@ public class Fork2CreateCommand extends EditElementCommand {
 		owner.getNodes().add(newElement);
 
 		//+++++++++
-		String name = NameUtils.getName( (Diagram) newElement.getContaining(DiagramsPackage.Literals.DIAGRAM))+
-				"_"+newElement.eClass().getName().toLowerCase();
+		String name = NameUtils.getName((Diagram) newElement
+				.getContaining(DiagramsPackage.Literals.DIAGRAM))
+				+ "_"
+				+ newElement.eClass().getName().toLowerCase();
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
 		//---------
-		
+
 		doConfigure(newElement, monitor, info);
-		
+
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
 		return CommandResult.newOKCommandResult(newElement);
 	}

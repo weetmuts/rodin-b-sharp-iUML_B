@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <!--
-Copyright (c) 2010-2014 University of Southampton.
+Copyright (c) 2010-2015 University of Southampton.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -161,10 +161,10 @@ http://www.eclipse.org/legal/epl-v10.html
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
       <?gmfgen generated="true"?>
       <page
-            category="ac.soton.eventb.iumlb"
-            class="ac.soton.eventb.statemachines.diagram.preferences.DiagramGeneralPreferencePage"
             id="ac.soton.eventb.statemachines.diagram.general"
-            name="%prefpage.ac.soton.eventb.statemachines.diagram.general">
+            name="%prefpage.ac.soton.eventb.statemachines.diagram.general"
+            category="ac.soton.eventb.iumlb"
+            class="ac.soton.eventb.statemachines.diagram.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="ac.soton.eventb.statemachines.diagram.appearance"
@@ -489,20 +489,87 @@ http://www.eclipse.org/legal/epl-v10.html
       </editpartProvider>
    </extension>
 
+   
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.StatemachinesModelingAssistantProvider">
+      <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfRootStatemachineEditPart">
          <Priority name="Lowest"/>
          <object class="ac.soton.eventb.statemachines.diagram.edit.parts.RootStatemachineEditPart" id="Statemachine_1000"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart" id="Initial_2006"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart" id="Final_2007"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart" id="State_2008"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.JunctionEditPart" id="Junction_2009"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.AnyEditPart" id="Any_2010"/>
-         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.ForkEditPart" id="Fork_2011"/>
-         <context elements="Statemachine_1000,Initial_2006,Final_2007,State_2008,Junction_2009,Any_2010,Fork_2011"/>
+         <context elements="Statemachine_1000"/>
       </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfInitialEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InitialEditPart" id="Initial_2006"/>
+         <context elements="Initial_2006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfFinalEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.FinalEditPart" id="Final_2007"/>
+         <context elements="Final_2007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfStateEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart" id="State_2008"/>
+         <context elements="State_2008"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfJunctionEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.JunctionEditPart" id="Junction_2009"/>
+         <context elements="Junction_2009"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfAnyEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.AnyEditPart" id="Any_2010"/>
+         <context elements="Any_2010"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfForkEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.ForkEditPart" id="Fork_2011"/>
+         <context elements="Fork_2011"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfStatemachineEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart" id="Statemachine_3001"/>
+         <context elements="Statemachine_3001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfInnerInitialEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InnerInitialEditPart" id="Initial_3011"/>
+         <context elements="Initial_3011"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfInnerFinalEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InnerFinalEditPart" id="Final_3012"/>
+         <context elements="Final_3012"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfInnerStateEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InnerStateEditPart" id="State_3013"/>
+         <context elements="State_3013"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfInvariantEditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.InvariantEditPart" id="Invariant_3014"/>
+         <context elements="Invariant_3014"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfJunction2EditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart" id="Junction_3015"/>
+         <context elements="Junction_3015"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfAny2EditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart" id="Any_3016"/>
+         <context elements="Any_3016"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="ac.soton.eventb.statemachines.diagram.providers.assistants.StatemachinesModelingAssistantProviderOfFork2EditPart">
+         <Priority name="Lowest"/>
+         <object class="ac.soton.eventb.statemachines.diagram.edit.parts.Fork2EditPart" id="Fork_3017"/>
+         <context elements="Fork_3017"/>
+      </modelingAssistantProvider>
+      
    </extension>
+
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
       <?gmfgen generated="true"?>
@@ -931,7 +998,7 @@ http://www.eclipse.org/legal/epl-v10.html
          categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"
          defaultHandler="ac.soton.eventb.statemachines.diagram.part.CreateShortcutAction"/>
       <command id="ac.soton.eventb.statemachines.diagram.OpenDiagramAction"
-         name="&amp;Open Diagram"
+         name="Open Diagram"
          categoryId="ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorID"/>
    </extension>
 

@@ -83,8 +83,7 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 				new StatemachineItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		installEditPolicy(EditPolicyRoles.OPEN_ROLE,
-				new OpenDiagramEditPolicy());
-		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
+				new OpenDiagramEditPolicy()); // XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 	}
 
@@ -162,7 +161,6 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof StatemachineStatesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureStatemachineCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.remove(((StatemachineStatesCompartmentEditPart) childEditPart)
 					.getFigure());
 			return true;
@@ -284,118 +282,6 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 		if (primaryShape instanceof Shape) {
 			((Shape) primaryShape).setLineStyle(style);
 		}
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
 	}
 
 	/**

@@ -136,20 +136,22 @@ public class StatemachinesValidationDecoratorProvider extends AbstractProvider
 			return;
 		}
 		final Diagram fdiagram = diagram;
-		final TransactionalEditingDomain ed = TransactionUtil.getEditingDomain(fdiagram);
-		if (ed==null) return;
+		final TransactionalEditingDomain ed = TransactionUtil
+				.getEditingDomain(fdiagram);
+		if (ed == null)
+			return;
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				try {
-					ed.runExclusive(
-							new Runnable() {
-								public void run() {
-									for (Iterator it = decorators.iterator(); it.hasNext();) {
-										IDecorator decorator = (IDecorator) it.next();
-										decorator.refresh();
-									}
-								}
-							});
+					ed.runExclusive(new Runnable() {
+						public void run() {
+							for (Iterator it = decorators.iterator(); it
+									.hasNext();) {
+								IDecorator decorator = (IDecorator) it.next();
+								decorator.refresh();
+							}
+						}
+					});
 				} catch (Exception e) {
 					StatemachinesDiagramEditorPlugin.getInstance().logError(
 							"Decorator refresh failure", e); //$NON-NLS-1$

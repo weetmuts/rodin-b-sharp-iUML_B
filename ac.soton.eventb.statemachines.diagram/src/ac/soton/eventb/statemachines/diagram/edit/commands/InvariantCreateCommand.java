@@ -66,13 +66,13 @@ public class InvariantCreateCommand extends EditElementCommand {
 
 		State owner = (State) getElementToEdit();
 		owner.getInvariants().add(newElement);
-		
+
 		//+++++++++
-		String name = NameUtils.getName(owner)+"_inv";
+		String name = NameUtils.getName(owner) + "_inv";
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
 		//---------
-		
+
 		doConfigure(newElement, monitor, info);
 
 		((CreateElementRequest) getRequest()).setNewElement(newElement);
