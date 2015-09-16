@@ -1,0 +1,28 @@
+modeltype gmfgen uses "http://www.eclipse.org/gmf/2009/GenModel";
+modeltype ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
+library OclMigrationProblems;
+
+helper isUnbounded(typedElement : ecore::ETypedElement) : Boolean {
+	return typedElement.upperBound = *
+}
+
+helper isSingleValued(typedElement : ecore::ETypedElement) : Boolean {
+	return typedElement.upperBound = 1 or typedElement.upperBound = -2
+}
+
+helper firstOrNull(oSet : OrderedSet(gmfgen::DefaultSizeAttributes)) : gmfgen::DefaultSizeAttributes {
+	return (if oSet->isEmpty() then null else oSet->first() endif)
+} 
+
+helper firstOrNull(oSet : OrderedSet(gmfgen::ResizeConstraints)) : gmfgen::ResizeConstraints {
+	return (if oSet->isEmpty() then null else oSet->first() endif)
+} 
+
+helper firstOrNull(oSet : OrderedSet(gmfgen::LabelOffsetAttributes)) : gmfgen::LabelOffsetAttributes {
+	return (if oSet->isEmpty() then null else oSet->first() endif)
+} 
+
+helper undefinedAsFalse(param : Boolean) : Boolean {
+	return if param.oclIsUndefined() then false else param endif 
+}

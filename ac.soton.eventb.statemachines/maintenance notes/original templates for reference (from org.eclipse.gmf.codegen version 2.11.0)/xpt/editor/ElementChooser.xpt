@@ -1,0 +1,145 @@
+﻿/*
+ * Copyright (c) 2007, 2010 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Alexander Shatalin (Borland) - initial API and implementation
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::editor::Utils»
+
+«DEFINE ElementChooser FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::copyright FOR editorGen-»
+package «editorGen.editor.packageName»;
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «elementChooserClassName» «EXPAND extendsList» {
+
+	«EXPAND _constructor-»
+	
+	«EXPAND context-»
+	
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::GenDiagram»extends org.eclipse.gmf.tooling.runtime.part.DefaultElementChooserDialog«ENDDEFINE»
+
+«DEFINE _constructor FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «elementChooserClassName»(org.eclipse.swt.widgets.Shell parentShell, org.eclipse.gmf.runtime.notation.View view) {
+		this(parentShell, view, false);
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «elementChooserClassName»(org.eclipse.swt.widgets.Shell parentShell, org.eclipse.gmf.runtime.notation.View view, boolean allowMultiSelection) {
+		super(parentShell, view, new «EXPAND contextClassName»(allowMultiSelection));
+	}
+«ENDDEFINE»
+
+«DEFINE contextClassName FOR gmfgen::GenDiagram»«elementChooserClassName»ContextImpl«ENDDEFINE»
+
+«DEFINE context FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedClassComment»
+	private static class «EXPAND contextClassName» implements org.eclipse.gmf.tooling.runtime.part.DefaultElementChooserDialog.Context {
+			
+		«EXPAND context_attributes»
+			
+		«EXPAND context_constructors»
+			
+		«EXPAND getItemProvidersAdapterFactory»
+			
+		«EXPAND getDiagramPreferencesHint»
+			
+		«EXPAND getFileExtensions»
+			
+		«EXPAND getDialogTitle»
+			
+		«EXPAND getTreeContentProvider»
+			
+		«EXPAND allowMultiSelection»
+		
+		«EXPAND context_additions»
+			
+	}
+«ENDDEFINE»
+
+«DEFINE context_attributes FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	private static final String[] FILE_EXTENSIONS = new String[]{«FOREACH containsShortcutsTo AS ext SEPARATOR ', '»"«ext»"«ENDFOREACH»};
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	private final boolean myAllowMultiSelection;
+«ENDDEFINE»
+
+«DEFINE context_constructors FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	private «EXPAND contextClassName»(boolean allowMultiSelection) {
+		myAllowMultiSelection = allowMultiSelection;
+	}
+«ENDDEFINE»
+
+«DEFINE getItemProvidersAdapterFactory FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::overrideI»
+	public org.eclipse.emf.common.notify.AdapterFactory getAdapterFactory() {
+		return «self.editorGen.plugin.getActivatorQualifiedClassName()».getInstance().getItemProvidersAdapterFactory();
+	}
+«ENDDEFINE»
+
+«DEFINE getDiagramPreferencesHint FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::overrideI»
+	public org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint getPreferenceHint() {
+		return «self.editorGen.plugin.getActivatorQualifiedClassName()».DIAGRAM_PREFERENCES_HINT;
+	}
+«ENDDEFINE»
+
+«DEFINE getFileExtensions FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::overrideI»
+	public String[] getFileExtesions() {
+		return FILE_EXTENSIONS.clone();
+	}
+«ENDDEFINE»
+
+«DEFINE getDialogTitle FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::overrideI»
+	public String getDialogTitle() {
+		return «EXPAND xpt::Externalizer::accessorCall(titleKey(i18nKeyForSelectModelElement(self))) FOR editorGen»;
+	}
+«ENDDEFINE»
+
+«DEFINE getTreeContentProvider FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment-»
+	«EXPAND CodeStyle::overrideI-»
+	public org.eclipse.jface.viewers.ITreeContentProvider getTreeContentProvider() {
+		return new «IF not self.editorGen.application.oclIsUndefined()»new org.eclipse.ui.model.WorkbenchContentProvider«ELSE-»
+		 org.eclipse.ui.model.BaseWorkbenchContentProvider«ENDIF»();
+	}
+«ENDDEFINE»
+	
+«DEFINE allowMultiSelection FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment-»
+	public boolean allowMultiSelection() {
+		return myAllowMultiSelection;
+	}
+«ENDDEFINE»
+
+«DEFINE context_additions FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE i18nValues FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Externalizer::messageEntry(titleKey(i18nKeyForSelectModelElement(self)), 'Select model element')-»
+«ENDDEFINE»
+
+«DEFINE i18nAccessors FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Externalizer::accessorField(titleKey(i18nKeyForSelectModelElement(self)))-»
+«ENDDEFINE»

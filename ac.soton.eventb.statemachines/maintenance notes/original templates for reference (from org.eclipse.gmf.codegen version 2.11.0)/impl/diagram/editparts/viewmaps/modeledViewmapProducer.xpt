@@ -1,0 +1,73 @@
+﻿/*
+ * Copyright (c) 2011 Montages AG
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Michael Golubev (Montages) - initial API and implementation
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«IMPORT 'http://www.eclipse.org/gmf/2006/GraphicalDefinition'»
+«IMPORT 'http://www.eclipse.org/emf/2002/Ecore'»
+
+«EXTENSION impl::diagram::editparts::viewmaps::BareFigure»
+
+«DEFINE viewmapFigureFQN FOR gmfgen::ModeledViewmap-»
+«EXPAND figureFQN FOR self.figureModel-»
+«ENDDEFINE»
+
+«DEFINE figureFQN FOR ecore::EObject-»
+«ERROR 'Unknown figureModel: ' + self.repr()-»
+«ENDDEFINE»
+
+«DEFINE figureFQN FOR gmfgraph::DiagramLabel-»
+«IF self.figure.actualFigure.oclIsUndefined()-»
+org.eclipse.draw2d.Label«-»
+«ELSEIF self.accessor.oclIsUndefined()-»
+«REM»FIXME: bare instances«ENDREM»«-»
+«EXPAND Runtime::fqn FOR self.figure.actualFigure-»
+«ELSE-»
+«EXPAND Runtime::fqn FOR self.accessor.figure-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE figureFQN FOR gmfgraph::Node-»
+«EXPAND nodeOrLinkFQN FOR self-»
+«ENDDEFINE»
+
+«DEFINE figureFQN FOR gmfgraph::Connection-»
+«EXPAND nodeOrLinkFQN FOR self-»
+«ENDDEFINE»
+
+«DEFINE nodeOrLinkFQN FOR gmfgraph::DiagramElement-»
+«IF self.figure.actualFigure.oclIsUndefined()-»
+org.eclipse.draw2d.RoundedRectangle«-»
+«ELSEIF isBareFigureDescriptor(self.figure)-»
+«EXPAND Runtime::fqn FOR self.figure.actualFigure-»
+«ELSE-»
+«REM»actual InnerClassViewmap case«ENDREM»«-»
+«self.figure.name.firstToUpper()-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE viewmapClassBody FOR gmfgen::ModeledViewmap-»
+«EXPAND classBody FOR self.figureModel-»
+«ENDDEFINE»
+
+«DEFINE classBody FOR ecore::EObject-»
+«ERROR 'Unknown figureModel: ' + self.repr()-»
+«ENDDEFINE»
+
+«DEFINE classBody FOR gmfgraph::DiagramElement-»
+«IF self.figure.actualFigure.oclIsUndefined() or isBareFigureDescriptor(self.figure)-»
+«REM»nothing to do«ENDREM»«-»
+«ELSE-»
+«REM»actual InnerClassViewmap case«ENDREM»«-»
+«EXPAND top::Descriptor::Inner FOR self.figure-»
+«ENDIF-»
+«ENDDEFINE»
+

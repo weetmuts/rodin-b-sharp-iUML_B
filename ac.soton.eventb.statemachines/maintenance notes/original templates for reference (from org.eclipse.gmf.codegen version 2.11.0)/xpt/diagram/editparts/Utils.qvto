@@ -1,0 +1,105 @@
+/*
+ * Copyright (c) 2006, 2010 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ */
+
+modeltype gmfgen uses "http://www.eclipse.org/gmf/2009/GenModel";
+modeltype gmfgraph uses "http://www.eclipse.org/gmf/2006/GraphicalDefinition";
+
+library Utils;
+
+helper isStoringChildPositions(node : gmfgen::GenNode) : Boolean {
+	return node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT
+}
+
+helper getExternalLabels(node : gmfgen::GenNode) : Sequence(gmfgen::GenExternalNodeLabel) {
+	return (node.labels)[gmfgen::GenExternalNodeLabel]->asSequence()
+}
+
+helper getSideAffixedChildren(node : gmfgen::GenNode) : Sequence(gmfgen::GenChildSideAffixedNode) {
+	return (node.childNodes)[gmfgen::GenChildSideAffixedNode]->asSequence()
+}
+
+helper getInnerFixedLabels(node : gmfgen::GenNode) : Sequence(gmfgen::GenLabel) {
+	return node.labels->asSequence()[not oclIsKindOf(gmfgen::GenExternalNodeLabel)]->select(e | e.oclAsType(gmfgen::GenLabel).viewmap.oclIsKindOf(gmfgen::ParentAssignedViewmap));
+}
+
+helper getInnerFixedLabelsWithModeledViewmaps(node : gmfgen::GenNode) : Sequence(gmfgen::GenLabel) {
+	return node.labels->asSequence()[not oclIsKindOf(gmfgen::GenExternalNodeLabel)]
+		->select(e | 
+			let modeledViewmap = e.oclAsType(gmfgen::GenLabel).viewmap.oclAsType(gmfgen::ModeledViewmap) in
+			let diagramLabel = modeledViewmap.figureModel.oclAsType(gmfgraph::DiagramLabel) in
+			not diagramLabel.accessor.oclIsUndefined()
+		);
+}
+
+helper getPinnedCompartments(node : gmfgen::GenNode) : Sequence(gmfgen::GenCompartment) {
+	return node.compartments->select(e | e.viewmap.oclIsKindOf(gmfgen::ParentAssignedViewmap))->asSequence()
+}
+
+helper getPinnedCompartmentsWithModeledViewmaps(node : gmfgen::GenNode) : Sequence(gmfgen::GenCompartment) {
+	return node.compartments->select(c | 
+			let modeledViewmap = c.viewmap.oclAsType(gmfgen::ModeledViewmap) in
+			let compartment = modeledViewmap.figureModel.oclAsType(gmfgraph::Compartment) in
+			not compartment.accessor.oclIsUndefined())
+		->asSequence()
+}
+
+helper hasFixedChildren(node : gmfgen::GenNode) : Boolean {
+	return 
+		getInnerFixedLabels(node)->size() > 0 
+		or getPinnedCompartments(node)->size() > 0
+		or getInnerFixedLabelsWithModeledViewmaps(node)->size() > 0
+		or getPinnedCompartmentsWithModeledViewmaps(node)->size() > 0
+}
+
+helper listCompartmentHasChildren(compartment : gmfgen::GenCompartment) : Boolean {
+	return compartment.listLayout and compartment.childNodes->size() > 0
+}
+
+helper hasChildrenInListCompartments(node : gmfgen::GenNode) : Boolean {
+	return node.compartments->exists(e | listCompartmentHasChildren(e))
+}
+
+helper hasBorderItems(node : gmfgen::GenNode) : Boolean {
+	return getSideAffixedChildren(node)->size() > 0 or getExternalLabels(node)->size() > 0
+}
+
+helper needsGraphicalNodeEditPolicy(node : gmfgen::GenNode) : Boolean {
+	return null <> node.modelFacet and node.reorientedIncomingLinks->size() > 0
+}
+
+helper i18nKeyForCompartmentTitle(compartment : gmfgen::GenCompartment) : String {
+	return compartment.editPartClassName + '.title'
+}
+
+helper shouldGenerateDiagramViewmap(genDiagram : gmfgen::GenDiagram) : Boolean {
+	return not Sequence { gmfgen::ViewmapLayoutType::UNKNOWN, gmfgen::ViewmapLayoutType::XY_LAYOUT }->includes(genDiagram.viewmap.layoutType)
+}
+
+helper getAssistantOutgoingLinks(node : gmfgen::GenNode) : Sequence(gmfgen::GenLink) {
+	return node.genOutgoingLinks->select(link | link.targets->exists(oclIsKindOf(GenNode)))->asSequence()
+}
+
+helper getAssistantIncomingLinks(node : gmfgen::GenNode) : Sequence(gmfgen::GenLink) {
+	return node.genIncomingLinks->select(link | link.sources->exists(oclIsKindOf(GenNode)))->asSequence()
+}
+
+helper selectGenNodes(ends : OrderedSet(gmfgen::GenLinkEnd)) : Sequence(gmfgen::GenLinkEnd) {
+	return ends->asSequence()[gmfgen::GenNode]
+}
+
+helper haveOneOfChildNodesIncomimgLinks(it : gmfgen::GenCompartment) : Boolean {
+	return it.childNodes->exists(n | getAssistantIncomingLinks(n)->notEmpty())
+}
+
+helper collectIncomingLinks(it : gmfgen::GenCompartment) : Sequence(gmfgen::GenLink) {
+	return it.childNodes->collect(n | getAssistantIncomingLinks(n))->flatten()->asSet()->asSequence()->sortedBy(n | n.visualID)
+}

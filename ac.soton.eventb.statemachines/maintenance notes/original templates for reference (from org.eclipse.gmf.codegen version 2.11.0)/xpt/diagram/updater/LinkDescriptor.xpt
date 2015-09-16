@@ -1,0 +1,44 @@
+﻿/*
+ * Copyright (c) 2007, 2009, 2012 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Alexander Shatalin (Borland) - initial API and implementation
+ *    Michael Golubev (Montages) - API extracted to gmf.tooling.runtime (#372479)  	  
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«DEFINE LinkDescriptor FOR gmfgen::GenDiagramUpdater-»
+	«EXPAND xpt::Common::copyright FOR editorGen-»
+package «editorGen.editor.packageName»;
+
+	«EXPAND xpt::Common::generatedClassComment»
+public class «linkDescriptorClassName» extends org.eclipse.gmf.tooling.runtime.update.UpdaterLinkDescriptor {
+	«EXPAND refOnlyLinkConstructor-»
+	
+	«EXPAND typeLinkConstructor-»
+	
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE refOnlyLinkConstructor FOR gmfgen::GenDiagramUpdater-»
+	«EXPAND xpt::Common::generatedMemberComment»
+public «linkDescriptorClassName»(org.eclipse.emf.ecore.EObject source, org.eclipse.emf.ecore.EObject destination, org.eclipse.gmf.runtime.emf.type.core.IElementType elementType, int linkVID) {
+	super(source, destination, elementType, linkVID);
+}
+«ENDDEFINE»
+
+«DEFINE typeLinkConstructor FOR gmfgen::GenDiagramUpdater-»
+	«EXPAND xpt::Common::generatedMemberComment»
+public «linkDescriptorClassName»(org.eclipse.emf.ecore.EObject source, org.eclipse.emf.ecore.EObject destination, org.eclipse.emf.ecore.EObject linkElement, org.eclipse.gmf.runtime.emf.type.core.IElementType elementType, int linkVID) {
+	super(source, destination, linkElement, elementType, linkVID);
+}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagramUpdater»«ENDDEFINE»

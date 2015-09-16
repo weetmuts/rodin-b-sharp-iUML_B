@@ -1,0 +1,44 @@
+/*
+﻿ * Copyright (c) 2011 Montages AG
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Artem Tikhomirov (Borland) - initial API and implementation
+ *    Michael Golubev (Montages) - xPand implementation
+ */
+modeltype gmfgraph uses "http://www.eclipse.org/gmf/2006/GraphicalDefinition";
+modeltype ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+ 
+library BareFigure;
+
+helper isSomethingToWorkWith() : Boolean {
+	return false
+}
+
+helper isBareFigureDescriptor(descriptor : gmfgraph::FigureDescriptor) : Boolean {
+	return 
+		descriptor.actualFigure.oclIsKindOf(gmfgraph::RealFigure) and  
+		isBareFigure(descriptor.actualFigure.oclAsType(gmfgraph::RealFigure))
+}
+
+helper isBareFigure(figure : gmfgraph::RealFigure) : Boolean {
+	return 
+		let eClass : ecore::EClass = figure.oclAsType(ecore::EObject).eClass() in 
+		let featuresToCheck : OrderedSet(ecore::EStructuralFeature) = eClass.eAllStructuralFeatures->
+			reject(f : ecore::EStructuralFeature | 
+				f._derived  
+				or (f.eContainingClass.name = 'RealFigure' and f.name = 'name')
+				or (f.eContainingClass.name = 'RealFigure' and f.name = 'children')
+				or (f.eContainingClass.name = 'CustomClass' and f.name = 'qualifiedClassName')
+				or (f.eContainingClass.name = 'CustomFigure' and f.name = 'customChildren')
+			)
+		in 
+			figure.children->isEmpty() 
+			and not featuresToCheck->exists(f : ecore::EStructuralFeature |
+				figure.oclAsType(ecore::EObject).eIsSet(f)
+			) 
+}

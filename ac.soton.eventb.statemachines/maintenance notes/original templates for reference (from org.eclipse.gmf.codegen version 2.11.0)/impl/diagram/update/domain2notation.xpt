@@ -1,0 +1,125 @@
+﻿/*
+ * Copyright (c) 2012, Montages AG
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«EXTENSION xpt::GenEditorGenerator»
+
+«DEFINE DomainToNotationClassName FOR gmfgen::GenDiagram»Domain2Notation«ENDDEFINE»
+
+«DEFINE DomainToNotationClass FOR gmfgen::GenDiagram-»
+	«EXPAND DomainToNotationClass_One2One-»
+«ENDDEFINE»
+
+«DEFINE DomainToNotationClass_One2One FOR gmfgen::GenDiagram-»
+    «EXPAND xpt::Common::generatedMemberComment»
+	@SuppressWarnings("serial")
+	protected static class «EXPAND DomainToNotationClassName» extends «EXPAND CodeStyle::G2('java.util.HashMap', 'org.eclipse.emf.ecore.EObject', 'org.eclipse.gmf.runtime.notation.View')» {
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public boolean containsDomainElement(org.eclipse.emf.ecore.EObject domainElement){
+			return this.containsKey(domainElement);
+		}
+		
+		«EXPAND xpt::Common::generatedMemberComment»
+		public org.eclipse.gmf.runtime.notation.View getHinted(org.eclipse.emf.ecore.EObject domainEObject, String hint) {
+			return «IF self.jdkComplianceLevel() < 5»(org.eclipse.gmf.runtime.notation.View)«ENDIF»this.get(domainEObject);
+		}
+		
+		«EXPAND xpt::Common::generatedMemberComment»
+		public void putView(org.eclipse.emf.ecore.EObject domainElement, org.eclipse.gmf.runtime.notation.View view) {
+			«REM»
+			Before GMFT 3.0 the call to put() was guarded by the same check in order to store element only once and to prefer non-shortcuts to shortcuts
+			As part of the #389368, we moved this guard to callee implementation, to optionally allow *_One2Many case
+			«ENDREM»«-»
+			if (!containsKey(view.getElement()) «IF getDiagram().containsShortcutsTo->notEmpty()»|| !isShortcut(view)«ENDIF») {
+				this.put(domainElement, view);
+			}
+		}
+		
+	}
+«ENDDEFINE»
+
+«DEFINE DomainToNotationClass_One2Many FOR gmfgen::GenDiagram»
+    «EXPAND xpt::Common::generatedMemberComment»
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	protected static class «EXPAND DomainToNotationClassName» {
+	    «EXPAND xpt::Common::generatedMemberComment»
+		private final java.util.HashMap myMap = new java.util.HashMap();
+		
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public boolean containsDomainElement(org.eclipse.emf.ecore.EObject domainElement){
+			return myMap.containsKey(domainElement);
+		}
+
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public boolean containsKey(org.eclipse.emf.ecore.EObject domainElement){
+			return containsDomainElement(domainElement);
+		}
+		
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public void putView(org.eclipse.emf.ecore.EObject domainElement, org.eclipse.gmf.runtime.notation.View view){
+			Object viewOrList = myMap.get(domainElement);
+			if (viewOrList instanceof org.eclipse.gmf.runtime.notation.View){
+				myMap.remove(domainElement);
+				java.util.List<org.eclipse.gmf.runtime.notation.View> list = new java.util.LinkedList<org.eclipse.gmf.runtime.notation.View>();
+				list.add((org.eclipse.gmf.runtime.notation.View)viewOrList);
+				myMap.put(domainElement, list);
+				list.add(view);
+			} else if (viewOrList instanceof java.util.List){
+				((java.util.List)viewOrList).add(view);
+			} else {
+				myMap.put(domainElement, view);
+			}
+		}
+		
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public org.eclipse.gmf.runtime.notation.View get(org.eclipse.emf.ecore.EObject domainEObject){
+			Object viewOrList = myMap.get(domainEObject);
+			if (viewOrList instanceof org.eclipse.gmf.runtime.notation.View){
+				return (org.eclipse.gmf.runtime.notation.View)viewOrList;
+			}
+			if (viewOrList instanceof java.util.List){
+				// preferring not-shortcut to shortcut -- important for cases when links arr to/from 
+				// the element that is additionally shortcutted to the same diagram
+				for (Object next : (java.util.List)viewOrList){
+					org.eclipse.gmf.runtime.notation.View nextView = (org.eclipse.gmf.runtime.notation.View)next;
+					if (nextView.getEAnnotation("Shortcut") == null) { «EXPAND xpt::Common::nonNLS»
+						return nextView;
+					}
+				}
+				return (org.eclipse.gmf.runtime.notation.View)((java.util.List)viewOrList).get(0);
+			}
+			return null;
+		}
+		
+	    «EXPAND xpt::Common::generatedMemberComment»
+		public org.eclipse.gmf.runtime.notation.View getHinted(org.eclipse.emf.ecore.EObject domainEObject, String hint){
+			if (hint == null){
+				return get(domainEObject);
+			}
+			Object viewOrList = myMap.get(domainEObject);
+			if (viewOrList instanceof org.eclipse.gmf.runtime.notation.View){
+				//no choice, will return what we have
+				return (org.eclipse.gmf.runtime.notation.View)viewOrList;
+			}
+			if (viewOrList instanceof java.util.List){ 
+				for (Object next : (java.util.List)viewOrList){
+					org.eclipse.gmf.runtime.notation.View nextView = (org.eclipse.gmf.runtime.notation.View)next;
+					if (hint.equals(nextView.getType())){
+						return nextView;
+					}
+				}
+				//hint not found -- return what we have
+				return (org.eclipse.gmf.runtime.notation.View)((java.util.List)viewOrList).get(0);
+			}
+			return null;
+		}
+	}
+«ENDDEFINE»
