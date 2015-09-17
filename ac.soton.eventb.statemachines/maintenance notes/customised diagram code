@@ -3,35 +3,114 @@ CUSTOMISATIONS IN GENERATED DIAGRAM CODE
 -------------------------------------------------------------------------------------
 These should possibly be moved to the custom templates before the next re-generation
 -------------------------------------------------------------------------------------
+ 
+-----------------------------------------
+InnerStateStatemachinesCompartmentEditPart
+& StateStatemachinesCompartmentEditPart
 
-Many of the edit.commands have their doExecuteWithResult method customised to automatically name the new element
-E.g. For Any2CreateCommand  
-(n.b. Any2CreateCommand is for nested statemachines. without the 2 - AnyCreateCommand - is for the root level canvas.
-In fact these two classes are identical).
+create figure is changed to add a margin and use all available space for state-machines compartments
+-----------------------------------------
 
 	/**
 	 * @generated NOT
 	 */
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) throws ExecutionException {
-		Any newElement = StatemachinesFactory.eINSTANCE.createAny();
+	public IFigure createFigure() {
+		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
+				.createFigure();
+		result.setTitleVisibility(false);
 
-		Statemachine owner = (Statemachine) getElementToEdit();
-		owner.getNodes().add(newElement);
+		//+++ add margins
+		Insets insets = result.getContentPane().getInsets();
+		insets.top = -1;
+		insets.bottom = 1;
+		insets.left = 3;
+		insets.right = 3;
+		// use all space
+		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
+				.getContentPane().getLayoutManager();
+		layoutMgr.setHorizontal(false);
+		layoutMgr.setStretchMajorAxis(true);
+		layoutMgr.setStretchMinorAxis(true);
+		layoutMgr.setSpacing(0);
+		//---
 
-		//+++++++++
-		String name = NameUtils.getName( (Diagram) newElement.getContaining(DiagramsPackage.Literals.DIAGRAM))+
-				"_"+newElement.eClass().getName().toLowerCase();
-		name = NameUtils.getSafeName(newElement, name, owner, null);
-		newElement.setName(name);
-		//---------
-		
-		doConfigure(newElement, monitor, info);
-
-		((CreateElementRequest) getRequest()).setNewElement(newElement);
-		return CommandResult.newOKCommandResult(newElement);
+		return result;
 	}
+	
+-----------------------------------------	
+InvariantEditPart
+the cell editor returned by getManager is overriden to initialiase with the Rodin Math font and a Rodin keyboard listener
+-----------------------------------------
+	/**
+	 * @generated NOT
+	 */
+	protected DirectEditManager getManager() {
+		if (manager == null) {
+			setManager(new TextDirectEditManager(this,
+					null,
+					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
+				
+				//+++ overriden to use Rodin math font and keyboard listener
+				@Override
+				protected void initCellEditor() {
+					super.initCellEditor();
+					Text text = (Text) getCellEditor().getControl();
+					Font font = JFaceResources
+							.getFont(PreferenceConstants.RODIN_MATH_FONT);
+					text.setFont(font);
+					ModifyListener eventBListener = RodinKeyboardUIPlugin
+							.getDefault().createRodinModifyListener();
+					text.addModifyListener(eventBListener);
+				}
+				//---
+				
+			});
+		}
+		return manager;
+	}
+	
+-----------------------------------------	
+StatemachineStatesCompartmentEditPart
+modified createFigure to remove border
+-----------------------------------------	
 
+		/**
+		 * @generated NOT
+		 */
+		public IFigure createFigure() {
+			ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
+					.createFigure();
+			result.setTitleVisibility(false);
+			
+			//++++ no border
+			result.setBorder(null);
+			//----
+			
+			return result;
+		}
+		
+-----------------------------------------	
+TransitionLabelEditPart
+modified refreshVisuals to enable wrapping
+-----------------------------------------
+	/**
+	 * @generated NOT
+	 */
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		refreshLabel();
+		refreshFont();
+		refreshFontColor();
+		refreshUnderline();
+		refreshStrikeThrough();
+
+		//+++Added to make label wrap cfs 11/03/13
+		if (figure instanceof WrappingLabel) {
+			((WrappingLabel) figure).setTextWrap(true);
+		}
+		//---
+	}
+	
 -----------------------------------------
 
 Some Edit Parts have extra methods to provide hover over feedback.
@@ -111,49 +190,78 @@ E.G InvariantEditPart
 		feedbackText = null;
 	}
 	
-----------------------------------
-
-Validate action did not work when fired from the property sheet
-Changed ValidatAction in ac.soton...part to get the active editor instead of the active part
+	
+-----------------------------------------
+OpenDiagramAction
+The generator leaves this as an unsupported operation.. probably not worth doing in templates?	
+-----------------------------------------
 	/**
 	 * @generated NOT
 	 */
-	public void run() {
-		IWorkbenchPart workbenchPart = page.getActiveEditor();	
-	...
-
------------------------------------
-re targetting or re-sourcing a transition (if done outside of diagram editors, such as by Rose or refactoring) would 
-not delete the old view from the layout resulting in both the old edge and the new edge being drawn.
-to fix this, RootStatemachineCanonicalEditPolicy$shouldDeleteView(View view) is modified to check that the 
-element's source and target match the edge's 
-
-
-	
-	/**
-	 * Return <tt>true</tt> if this editpolicy should try and delete the
-	 * supplied view; otherwise <tt>false<tt>. 
-	 *  
-	 * For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.
-	 * (i.e. if the transition has been moved to a different source or target state)
-	 * 
-	 * Otherwise the default behavior is returned
-	 * 
-	 * @CUSTOM
-	 */
-	protected boolean shouldDeleteView(View view) {
-		EObject sel = ViewUtil.resolveSemanticElement(view);
-		if (sel instanceof Transition && view instanceof Edge){
-			Transition tr = (Transition)sel;
-			Edge ed = (Edge)view;
-			if (ed.getSource().getElement()!=tr.getSource() || ed.getTarget().getElement()!=tr.getTarget() ){
-				return true;
-			}			
+	@SuppressWarnings("unused")
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart diagramEditor = HandlerUtil.getActiveEditorChecked(event);
+		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
+		if (selection instanceof IStructuredSelection) {
+			Object element = ((IStructuredSelection) selection)
+					.getFirstElement();
+			if (element instanceof GraphicalEditPart) {
+				EditPolicy policy = ((GraphicalEditPart) element)
+						.getEditPolicy(EditPolicyRoles.OPEN_ROLE);
+				if (policy != null) {
+					Command command = policy.getCommand(new Request(
+							RequestConstants.REQ_OPEN));
+					if (command != null && command.canExecute())
+						command.execute();
+				}
+			}
 		}
-		return super.shouldDeleteView(view) ;
+		return null;
 	}
-	
-	
+
+-----------------------------------------
+ValidateDiagramAction
+The generator leaves this as an unsupported operation.. probably not worth doing in templates?
+-----------------------------------------
+
+	/**
+	 * @generated NOT
+	 */
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart editor = HandlerUtil.getActiveEditorChecked(event);
+		if (editor instanceof IDiagramWorkbenchPart) {
+			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
+
+			// run validation
+			ValidateAction action = new ValidateAction(editor.getSite()
+					.getPage());
+			action.run();
+
+			// show feedback
+			try {
+				IFile file = WorkspaceSynchronizer.getFile(diagramEditor
+						.getDiagram().eResource());
+				String errors = ValidateAction.getValidationErrors(file);
+				if (errors.isEmpty())
+					MessageDialog.openInformation(editor.getSite().getShell(),
+							"Validation Information",
+							"Validation completed successfully");
+				else
+					MessageDialog.openError(editor.getSite().getShell(),
+							"Validation Information",
+							"Validation has found problems in your model:\n"
+									+ errors);
+			} catch (CoreException e) {
+				throw new ExecutionException(
+						"Validation result retrieval failed", e);
+			}
+		}
+
+		return null;
+	}
+
+
+-----------------------------------------	
 For Refactoring
 -----------------------------------------
 

@@ -1,0 +1,44 @@
+	
+-----------------------------------------
+StatemachinesValidationDecoratorProvider
+-----------------------------------------
+
+	/**
+	 * check for null editing domain
+	 * @generated NOT
+	 */
+	private static void refreshDecorators(String viewId, Diagram diagram) {
+		final List decorators = viewId != null ? (List) allDecorators
+				.get(viewId) : null;
+		if (decorators == null || decorators.isEmpty() || diagram == null) {
+			return;
+		}
+		final Diagram fdiagram = diagram;
+		
+		//+++ check for null editing domain
+		final TransactionalEditingDomain ed = TransactionUtil
+				.getEditingDomain(fdiagram);
+		if (ed == null)
+			return;
+		//----
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				try {
+					//+-+ nextline was: org.eclipse.emf.transaction.util.TransactionUtil.getEditingDomain(fdiagram).runExclusive(new Runnable() {
+					ed.runExclusive(new Runnable() {
+						public void run() {
+							for (Iterator it = decorators.iterator(); it
+									.hasNext();) {
+								IDecorator decorator = (IDecorator) it.next();
+								decorator.refresh();
+							}
+						}
+					});
+				} catch (Exception e) {
+					StatemachinesDiagramEditorPlugin.getInstance().logError(
+							"Decorator refresh failure", e); //$NON-NLS-1$
+				}
+			}
+		});
+	}

@@ -41,13 +41,15 @@ public class «canonicalEditPolicyClassName» extends org.eclipse.gmf.runtime.di
 
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
-ALSO In impl/diagram/editPolicies/DiagramCanonicalEditPolicy.xpt :: ???————————————————————————————————————————————————————————————————————————————
+ALSO 
+In impl/diagram/editPolicies/DiagramCanonicalEditPolicy.xpt :: 
+This adds some more method overrides which are defined in impl/diagram/update/CanonicalUpdate.xpt (see later on)
+————————————————————————————————————————————————————————————————————————————
 
 «DEFINE additions FOR gmfgen::GenDiagram»
 «REM»MY: additional methods for CanonicalConnectionEditPolicy«ENDREM»
 	«EXPAND impl::diagram::update::CanonicalUpdate::canonicalConnectionEditPolicyOverrideMethods-»
 «ENDDEFINE»
-
 
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
@@ -140,7 +142,8 @@ when refines changes and for animation events
 
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
-In impl/diagram/update/CanonicalUpdate.xpt :: added overrides to ???
+In impl/diagram/update/CanonicalUpdate.xpt :: added overrides of methods in canonicalConnectionEditPolicy
+(This is used in DiagramCanonicalEditPolicy.xpt)
 ————————————————————————————————————————————————————————————————————————————
 
 «REM»MY: method overrides for CanonicalConnectionEditPolicy«ENDREM»
@@ -188,6 +191,27 @@ protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.E
 }
 «ENDDEFINE»
 
+«REM»CFS: shouldDeleteView is overriden to return true if the transition has been moved to different source or target«ENDREM»
+«DEFINE shouldDeleteViewMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment(
+	'Return <i>true</i> if this editpolicy should delete the supplied view otherwise <i>false</i>.\n'+ 
+	'For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.\n'+
+	'(i.e. if the transition has been moved to a different source or target state). Otherwise the default behavior is returned\n'
+	)»
+@Override
+protected boolean shouldDeleteView(org.eclipse.gmf.runtime.notation.View view) {
+org.eclipse.emf.ecore.EObject sel = org.eclipse.gmf.runtime.diagram.core.util.ViewUtil.resolveSemanticElement(view);
+	if (sel instanceof ac.soton.eventb.statemachines.Transition && view instanceof org.eclipse.gmf.runtime.notation.Edge) {
+		ac.soton.eventb.statemachines.Transition tr = (ac.soton.eventb.statemachines.Transition) sel;
+		org.eclipse.gmf.runtime.notation.Edge ed = (org.eclipse.gmf.runtime.notation.Edge) view;
+		if (ed.getSource().getElement() != tr.getSource()
+			|| ed.getTarget().getElement() != tr.getTarget()) {
+			return true;
+		}
+	}
+	return super.shouldDeleteView(view);
+}
+«ENDDEFINE»
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
 In impl/editor/ :: Added ExtendedEditor.xpt ???
@@ -210,6 +234,26 @@ In impl/editor/ :: Added ExtendedEditor.xpt ???
 «DEFINE canonicalEPFactoryHintValue FOR gmfgen::GenDiagram»«editorGen.modelID»-CEP«ENDDEFINE»
 «DEFINE canonicalEPFactoryHintStringValue FOR gmfgen::GenDiagram»"«EXPAND canonicalEPFactoryHintValue»"«ENDDEFINE»
 
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/diagram/commands/CreateNodeCommand.xpt :: added auto-naming to normalElementCreation
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE normalElementCreation(node : gmfgen::GenNode, varName : String) FOR gmfgen::TypeModelFacet-»
+	«EXPAND MetaModel::NewInstance(varName) FOR metaClass»
+«IF containmentMetaFeature <> null-»
+	«EXPAND MetaModel::DeclareAndAssign('owner', 'getElementToEdit()') FOR containmentMetaFeature.genClass»
+	«EXPAND MetaModel::modifyFeature('owner', containmentMetaFeature.genClass, varName) FOR containmentMetaFeature-»
+	
+	«REM»CFS: added auto-naming of new nodes «ENDREM»
+	//auto-naming
+	java.lang.String name = org.eventb.emf.core.util.NameUtils.getName(owner)+ "_"
+				+ «varName».eClass().getName().toLowerCase();
+	name = org.eventb.emf.core.util.NameUtils.getSafeName(«varName», name, owner, null);
+	«varName».setName(name);
+	«REM»CFS: end of autonaming «ENDREM»
+	
+«ELSE-»
 
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
@@ -237,6 +281,20 @@ In xpt/providers/extensions.xpt :: ???
 ——
 add to viewProvider extension points : Node and Edge semantic hints:
 «IF synchronized»«EXPAND impl::editor::ExtendedEditor::canonicalEPFactoryHintValue»,«ENDIF»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/editor/ValidateAction.xpt :: run() changed to use page.getActiveEditor() so that Validate works from Property Sheet (sept15)
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE run FOR gmfgen::GenDiagram-»
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	public void run() {
+		«REM»CFS: changed from page.getActivePart() to page.getActiveEditor() so that it works from the property sheet «ENDREM»
+		org.eclipse.ui.IWorkbenchPart workbenchPart = page.getActiveEditor();
+		if (workbenchPart instanceof org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart) {
+			final org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart part =	(org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart) workbenchPart;
 
 ————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————
