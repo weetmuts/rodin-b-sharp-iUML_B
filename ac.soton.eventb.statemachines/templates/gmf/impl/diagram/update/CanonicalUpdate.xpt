@@ -463,6 +463,7 @@ myFeaturesToSynchronize.add(«EXPAND MetaModel::MetaFeature»);
 	«EXPAND getSemanticConnectionsListMethod-»
 	«EXPAND getSourceElementMethod-»
 	«EXPAND getTargetElementMethod-»
+	«EXPAND shouldDeleteViewMethod-»
 «ENDDEFINE»
 
 «REM»MY: «ENDREM»
@@ -500,5 +501,27 @@ protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.E
 	if (relationship instanceof ac.soton.eventb.statemachines.Transition)
 		return ((ac.soton.eventb.statemachines.Transition) relationship).getTarget();
 	return null;
+}
+«ENDDEFINE»
+
+«REM»CFS: shouldDeleteView is overriden to return true if the transition has been moved to different source or target«ENDREM»
+«DEFINE shouldDeleteViewMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment(
+	'Return <i>true</i> if this editpolicy should delete the supplied view otherwise <i>false</i>.\n'+ 
+	'For transitions, <i>true</i> is returned if the source or target of the view do not represent the semantic source or target resp.\n'+
+	'(i.e. if the transition has been moved to a different source or target state). Otherwise the default behavior is returned\n'
+	)»
+@Override
+protected boolean shouldDeleteView(org.eclipse.gmf.runtime.notation.View view) {
+org.eclipse.emf.ecore.EObject sel = org.eclipse.gmf.runtime.diagram.core.util.ViewUtil.resolveSemanticElement(view);
+	if (sel instanceof ac.soton.eventb.statemachines.Transition && view instanceof org.eclipse.gmf.runtime.notation.Edge) {
+		ac.soton.eventb.statemachines.Transition tr = (ac.soton.eventb.statemachines.Transition) sel;
+		org.eclipse.gmf.runtime.notation.Edge ed = (org.eclipse.gmf.runtime.notation.Edge) view;
+		if (ed.getSource().getElement() != tr.getSource()
+			|| ed.getTarget().getElement() != tr.getTarget()) {
+			return true;
+		}
+	}
+	return super.shouldDeleteView(view);
 }
 «ENDDEFINE»
