@@ -360,11 +360,10 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	 */
 	protected DirectEditManager getManager() {
 		if (manager == null) {
-			setManager(new TextDirectEditManager(this,
-					TextDirectEditManager.getTextCellEditorClass(this),
+			setManager(new TextDirectEditManager(this, null,
 					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
-				//FIXME: refactor this to use a custom external class;
-				// maybe generate code from templates
+
+				//+++ overriden to use Rodin math font and keyboard listener
 				@Override
 				protected void initCellEditor() {
 					super.initCellEditor();
@@ -376,6 +375,8 @@ public class InvariantEditPart extends CompartmentEditPart implements
 							.getDefault().createRodinModifyListener();
 					text.addModifyListener(eventBListener);
 				}
+				//---
+
 			});
 		}
 		return manager;

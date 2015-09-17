@@ -65,7 +65,11 @@ public class StatemachineStatesCompartmentEditPart extends
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
 				.createFigure();
 		result.setTitleVisibility(false);
+
+		//++++ no border
 		result.setBorder(null);
+		//----
+
 		return result;
 	}
 

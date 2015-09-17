@@ -74,7 +74,8 @@ public class StateStatemachinesCompartmentEditPart extends
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
 				.createFigure();
 		result.setTitleVisibility(false);
-		// add margins
+
+		//+++ add margins
 		Insets insets = result.getContentPane().getInsets();
 		insets.top = -1;
 		insets.bottom = 1;
@@ -83,10 +84,11 @@ public class StateStatemachinesCompartmentEditPart extends
 		// use all space
 		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
 				.getContentPane().getLayoutManager();
-		layoutMgr.setVertical(true);
+		layoutMgr.setHorizontal(false);
 		layoutMgr.setStretchMajorAxis(true);
 		layoutMgr.setStretchMinorAxis(true);
 		layoutMgr.setSpacing(0);
+		//---
 
 		return result;
 	}
