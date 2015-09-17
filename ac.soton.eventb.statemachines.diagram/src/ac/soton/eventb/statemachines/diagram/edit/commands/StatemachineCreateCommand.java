@@ -61,7 +61,7 @@ public class StatemachineCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -71,11 +71,11 @@ public class StatemachineCreateCommand extends EditElementCommand {
 		StatemachineOwner owner = (StatemachineOwner) getElementToEdit();
 		owner.getStatemachines().add(newElement);
 
-		//+++++++++
-		String name = NameUtils.getName(owner) + "_sm";
+		//auto-naming
+		String name = NameUtils.getName(owner) + "_"
+				+ newElement.eClass().getName().toLowerCase();
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
-		//---------
 
 		doConfigure(newElement, monitor, info);
 

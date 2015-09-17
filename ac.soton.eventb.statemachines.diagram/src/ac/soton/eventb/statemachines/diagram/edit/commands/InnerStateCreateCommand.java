@@ -58,7 +58,7 @@ public class InnerStateCreateCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
@@ -67,11 +67,11 @@ public class InnerStateCreateCommand extends EditElementCommand {
 		Statemachine owner = (Statemachine) getElementToEdit();
 		owner.getNodes().add(newElement);
 
-		//+++++++++
-		String name = NameUtils.getName(owner) + "_S";
+		//auto-naming
+		String name = NameUtils.getName(owner) + "_"
+				+ newElement.eClass().getName().toLowerCase();
 		name = NameUtils.getSafeName(newElement, name, owner, null);
 		newElement.setName(name);
-		//---------
 
 		doConfigure(newElement, monitor, info);
 
