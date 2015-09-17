@@ -67,9 +67,10 @@ public class ValidateAction extends Action {
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	public void run() {
+
 		IWorkbenchPart workbenchPart = page.getActiveEditor();
 		if (workbenchPart instanceof IDiagramWorkbenchPart) {
 			final IDiagramWorkbenchPart part = (IDiagramWorkbenchPart) workbenchPart;
