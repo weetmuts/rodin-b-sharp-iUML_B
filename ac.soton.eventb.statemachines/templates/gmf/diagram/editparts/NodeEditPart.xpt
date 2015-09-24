@@ -90,6 +90,9 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure primaryShape;
+	
+	«REM»CFS: added pref store constant «ENDREM»	
+	«EXPAND xpt::diagram::editparts::Common::prefStoreConstant-»
 «ENDDEFINE»
 
 «DEFINE createDefaultEditPolicies FOR gmfgen::GenNode-»
@@ -101,7 +104,11 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 
 «DEFINE handleNotificationEvent FOR gmfgen::GenNode-»
 «REM»MY: add handler method also for child node editparts, to refresh on state change«ENDREM»
-	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'handle notification events.\n' + 
+		'\n' +
+		'@param event - the notification event'
+	)»
 	protected void handleNotificationEvent(org.eclipse.emf.common.notify.Notification event) {
 		«EXPAND impl::diagram::editparts::NodeEditPart::handleNotificationEventBody-»
 	}
@@ -119,4 +126,28 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 «ENDDEFINE»
 
 «DEFINE additions FOR gmfgen::GenNode-»
+	«REM»CFS: added refresh line colour from preferences«ENDREM»
+	«EXPAND refreshForegroundColor-»
+	«REM»CFS: added refresh fill colour from preferences«ENDREM»
+	«EXPAND refreshBackgroundColor-»
+«ENDDEFINE»
+
+«REM»MY: added refreshForegroundColor method for node editparts, to refresh foreground colour from preferences«ENDREM»
+«DEFINE refreshForegroundColor FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the foreground from the preferences.\n' 
+	)»
+	protected void refreshForegroundColor() {
+		«EXPAND impl::diagram::editparts::NodeEditPart::refreshForegroundColorBody-»
+	}
+«ENDDEFINE»
+
+«REM»MY: added refreshForegroundColor method for node editparts, to refresh background colour from preferences«ENDREM»
+«DEFINE refreshBackgroundColor FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the background from the preferences.\n' 
+	)»
+	protected void refreshBackgroundColor() {
+		«EXPAND impl::diagram::editparts::NodeEditPart::refreshBackgroundColorBody-»
+	}
 «ENDDEFINE»

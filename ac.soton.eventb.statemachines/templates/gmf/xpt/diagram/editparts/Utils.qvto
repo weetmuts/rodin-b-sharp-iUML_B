@@ -24,6 +24,14 @@ helper isRefinedElement(node : gmfgen::GenNode) : Boolean {
 		null <> node.modelFacet.metaClass.ecoreClass.getEStructuralFeature("refines")
 }
 
+// custom query to check if element is has an active attribute (capable of being active when animating)
+// checks if domain element ecore class has "active" structural feature
+helper isActiveElement(node : gmfgen::GenNode) : Boolean {
+	return null <> node.modelFacet and
+		null <> node.modelFacet.metaClass and
+		null <> node.modelFacet.metaClass.ecoreClass and
+		null <> node.modelFacet.metaClass.ecoreClass.getEStructuralFeature("active")
+}
 
 helper isStoringChildPositions(node : gmfgen::GenNode) : Boolean {
 	return node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT

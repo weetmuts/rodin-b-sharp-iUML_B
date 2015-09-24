@@ -229,17 +229,7 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE createNodeShape(node : gmfgen::GenNode) FOR gmfgen::InnerClassViewmap-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure createNodeShape() {
-	«REM»MY: added color initialisation based on refinement«ENDREM»
 		primaryShape = new «className»()«IF node.childNodes->notEmpty() and node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT»«EXPAND forceUseLocalCoordinates»«ENDIF»;
-		«IF isRefinedElement(node)»
-		// set background color to white if domain element refines something
-		org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
-		if (element != null) {
-			org.eclipse.emf.ecore.EStructuralFeature feature = element.eClass().getEStructuralFeature("refines");
-			if (feature != null && element.eIsSet(feature))
-				primaryShape.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
-		}
-		«ENDIF»
 		return primaryShape;
 	}
 
@@ -383,7 +373,7 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE getContentPaneFor FOR gmfgen::GenNode-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure getContentPaneFor(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart editPart) {
-		«REM»it is unclear what we should return for labels here«ENDREM-»
+		«REM»it is unclear what we should return for labels here«ENDREM»
 «FOREACH getPinnedCompartments(self) AS compartment»«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
 		if (editPart instanceof «compartment.getEditPartQualifiedClassName()») {
 			return getPrimaryShape().«childViewmap.getterName»();
@@ -564,8 +554,8 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	«ENDIF-»
 «ENDDEFINE»
 
+«REM»MY: added state change handling«ENDREM»
 «DEFINE handleNotificationEventBody FOR gmfgen::GenTopLevelNode-»
-«REM»MY: added state change hanling«ENDREM»
 	«EXPAND handleStateChange»
 	if (event.getNotifier() == getModel() && org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEModelElement_EAnnotations().equals(event.getFeature())) {
 		handleMajorSemanticChange();
@@ -580,23 +570,25 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	super.handleNotificationEvent(event);
 «ENDDEFINE»
 
-«REM»MY: code to update line width for active state (currently added to all state, even stateless, so needs to be improved)«ENDREM»
+«REM»MY/CFS: code to update line width for active state changes and background colour for refines changes «ENDREM»
 «DEFINE handleStateChange FOR gmfgen::GenNode-»
-	// update line width and color if state changes
-	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getState_Active().equals(event.getFeature())) {
-		boolean active = event.getNewBooleanValue();
-		setLineWidth(1 + (active ? 2 : 0));
-		setForegroundColor(active ? org.eclipse.draw2d.ColorConstants.black : org.eclipse.draw2d.ColorConstants.gray);
-	}
+	«IF (isActiveElement(self) or isRefinedElement(self))»
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+					.getFeature()).getName() : "";
+	«ENDIF»
+	«IF isActiveElement(self)»		
+		// update line width depending on active state
+		if ("active".equals(featureName)) {
+			boolean active = event.getNewBooleanValue();
+			setLineWidth(1 + (active ? 2 : 0));
+		}
+	«ENDIF»
 	«IF isRefinedElement(self)»
-	// update background color when refines propeerty changed
-	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getState_Refines().equals(event.getFeature())
-		|| ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getStatemachine_Refines().equals(event.getFeature())) {
-		if (event.getNewValue() == null)
-			setBackgroundColor(THIS_BACK);
-		else
-			setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
-	}
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
+		}
 	«ENDIF»
 «ENDDEFINE»
 
@@ -628,5 +620,59 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «ENDFOREACH-»
 		}
 		return super.getTargetEditPart(request);
+	}
+«ENDDEFINE»
+
+«REM»CFS: added refresh foreground colour body for node editparts«ENDREM»
+«DEFINE refreshForegroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set foreground line color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getLineColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getLineColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setForegroundColor(new Color(null,rgb));
+	}else{
+		super.refreshForegroundColor();
+	}
+«ENDDEFINE»
+
+«REM»CFS: added refresh background colour body for node editparts«ENDREM»
+«DEFINE refreshBackgroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set background fill color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getFillColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getFillColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setBackgroundColor(new Color(null,rgb));
+	}else{
+		super.refreshBackgroundColor();
 	}
 «ENDDEFINE»
