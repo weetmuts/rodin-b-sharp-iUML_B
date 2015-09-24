@@ -190,6 +190,12 @@ http://www.eclipse.org/legal/epl-v10.html
             category="ac.soton.eventb.statemachines.diagram.general"
             class="ac.soton.eventb.statemachines.diagram.preferences.DiagramRulersAndGridPreferencePage">
       </page>
+      <page
+            id="ac.soton.eventb.statemachines.diagram.appearance.specific"
+            name="%prefpage.ac.soton.eventb.statemachines.diagram.appearance.specific"
+            category="ac.soton.eventb.statemachines.diagram.appearance"
+            class="ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage">
+      </page>
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
