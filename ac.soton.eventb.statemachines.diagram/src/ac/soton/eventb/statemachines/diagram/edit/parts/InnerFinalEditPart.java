@@ -13,12 +13,15 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -33,10 +36,14 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InnerFinalItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -58,6 +65,12 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure primaryShape;
+
+	/**
+	 * @generated
+	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
 
 	/**
 	 * @generated
@@ -108,9 +121,7 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-
 		primaryShape = new FinalFigure();
-
 		return primaryShape;
 	}
 
@@ -206,14 +217,6 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width and color if state changes
-		if (StatemachinesPackage.eINSTANCE.getState_Active().equals(
-				event.getFeature())) {
-			boolean active = event.getNewBooleanValue();
-			setLineWidth(1 + (active ? 2 : 0));
-			setForegroundColor(active ? ColorConstants.black
-					: ColorConstants.gray);
-		}
 
 		super.handleNotificationEvent(event);
 	}
@@ -228,7 +231,6 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 		 */
 		public FinalFigure() {
 			this.setLayoutManager(new StackLayout());
-			this.setForegroundColor(ColorConstants.black);
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(28),
 					getMapMode().DPtoLP(28)));
 
@@ -246,7 +248,6 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 			Ellipse innerEllipse0 = new Ellipse();
 
 			innerEllipse0.setOutline(false);
-			innerEllipse0.setBackgroundColor(ColorConstants.black);
 			innerEllipse0.setPreferredSize(new Dimension(getMapMode()
 					.DPtoLP(20), getMapMode().DPtoLP(20)));
 
@@ -254,6 +255,73 @@ public class InnerFinalEditPart extends ShapeNodeEditPart {
 
 		}
 
+		/**
+		 * sets the foreground colour of the primary figure and also sets the 
+		 * background and foreground colours of the child figure to the foreground colour
+		 * (i.e. the child is assumed to be a solid foreground item)
+		 * 
+		 * @custom
+		 */
+		public void setForegroundColor(Color fg) {
+			for (Object child : getChildren()) {
+				if (child instanceof Figure) {
+					((Figure) child).setBackgroundColor(fg);
+					((Figure) child).setForegroundColor(fg);
+				}
+			}
+			super.setForegroundColor(fg);
+		}
+
+	}
+
+	/**
+	 * Refresh the colour of the foreground from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, false));
+
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Refresh the colour of the background from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshBackgroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set background fill color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getFillColorPreference(eClazz, false));
+
+		}
+
+		if (rgb != null) {
+			setBackgroundColor(new Color(null, rgb));
+		} else {
+			super.refreshBackgroundColor();
+		}
 	}
 
 }

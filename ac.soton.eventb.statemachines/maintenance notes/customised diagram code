@@ -4,6 +4,29 @@ CUSTOMISATIONS IN GENERATED DIAGRAM CODE
 These should possibly be moved to the custom templates before the next re-generation
 -------------------------------------------------------------------------------------
  
+ 
+-----------------------------------------
+AnyEditPart, Any2EditPart, FinalEditPart, Final2editPart
+In the inner Figure class: Override setForegroundColor to set the child Figure colors
+-----------------------------------------
+ 		/**
+		 * sets the foreground colour of the primary figure and also sets the 
+		 * background and foreground colours of the child figure to the foreground colour
+		 * (i.e. the child is assumed to be a solid foreground item)
+		 * 
+		 * @custom
+		 */
+		public void setForegroundColor(Color fg) {
+			for (Object child : getChildren()){
+				if (child instanceof Figure){
+					((Figure)child).setBackgroundColor(fg);
+					((Figure)child).setForegroundColor(fg);
+				}
+			}
+			super.setForegroundColor(fg);
+		}
+		
+		
 -----------------------------------------
 InnerStateStatemachinesCompartmentEditPart
 & StateStatemachinesCompartmentEditPart

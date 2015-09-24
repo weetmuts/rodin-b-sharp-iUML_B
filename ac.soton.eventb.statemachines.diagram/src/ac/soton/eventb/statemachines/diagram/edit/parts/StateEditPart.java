@@ -7,10 +7,6 @@
  */
 package ac.soton.eventb.statemachines.diagram.edit.parts;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
@@ -25,6 +21,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -40,7 +37,6 @@ import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.edithelpers.CreateElementRequestAdapter;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
@@ -50,14 +46,19 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.RGB;
 
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -79,6 +80,12 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure primaryShape;
+
+	/**
+	 * @generated
+	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
 
 	/**
 	 * @generated
@@ -132,18 +139,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-
 		primaryShape = new StateFigure();
-
-		// set background color to white if domain element refines something
-		EObject element = resolveSemanticElement();
-		if (element != null) {
-			EStructuralFeature feature = element.eClass()
-					.getEStructuralFeature("refines");
-			if (feature != null && element.eIsSet(feature))
-				primaryShape.setBackgroundColor(ColorConstants.white);
-		}
-
 		return primaryShape;
 	}
 
@@ -230,6 +226,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
+
 		if (editPart instanceof StateStatemachinesCompartmentEditPart) {
 			return getPrimaryShape()
 					.getFigureStateStatemachinesCompartmentFigure();
@@ -362,24 +359,19 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 */
 	protected void handleNotificationEvent(Notification event) {
 
-		// update line width and color if state changes
-		if (StatemachinesPackage.eINSTANCE.getState_Active().equals(
-				event.getFeature())) {
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+				.getFeature()).getName() : "";
+
+		// update line width depending on active state
+		if ("active".equals(featureName)) {
 			boolean active = event.getNewBooleanValue();
 			setLineWidth(1 + (active ? 2 : 0));
-			setForegroundColor(active ? ColorConstants.black
-					: ColorConstants.gray);
 		}
 
-		// update background color when refines propeerty changed
-		if (StatemachinesPackage.eINSTANCE.getState_Refines().equals(
-				event.getFeature())
-				|| StatemachinesPackage.eINSTANCE.getStatemachine_Refines()
-						.equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(THIS_BACK);
-			else
-				setBackgroundColor(ColorConstants.white);
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
 		}
 
 		if (event.getNotifier() == getModel()
@@ -419,8 +411,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
-			this.setForegroundColor(ColorConstants.gray);
-			this.setBackgroundColor(THIS_BACK);
 			createContents();
 		}
 
@@ -481,9 +471,62 @@ public class StateEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
+	 * Refresh the colour of the foreground from the preferences.
+	 * 
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 196, 204, 255);
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Refresh the colour of the background from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshBackgroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set background fill color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getFillColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setBackgroundColor(new Color(null, rgb));
+		} else {
+			super.refreshBackgroundColor();
+		}
+	}
 
 	/////////// mouse-over feedback text ///////////	
 	Label feedbackFigure = null;
