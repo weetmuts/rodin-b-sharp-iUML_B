@@ -37,16 +37,16 @@ public class InvariantsPropertySection extends AbstractEditTableWithDefaultNamin
 	
 	@Override
 	protected EReference getFeature() {
-		return StatemachinesPackage.eINSTANCE.getState_Invariants();
+		return StatemachinesPackage.Literals.STATE__INVARIANTS;
 	}
 
 	@Override
 	protected EStructuralFeature getFeatureForCol(final int col) {
 		switch (col) {
-		case 0 : return CorePackage.eINSTANCE.getEventBNamed_Name();
-		case 1 : return CorePackage.eINSTANCE.getEventBDerived_Theorem();
-		case 2 : return CorePackage.eINSTANCE.getEventBPredicate_Predicate();
-		case 3 : return CorePackage.eINSTANCE.getEventBCommented_Comment();
+		case 0 : return CorePackage.Literals.EVENT_BNAMED__NAME;
+		case 1 : return CorePackage.Literals.EVENT_BDERIVED__THEOREM;
+		case 2 : return CorePackage.Literals.EVENT_BPREDICATE__PREDICATE;
+		case 3 : return CorePackage.Literals.EVENT_BCOMMENTED__COMMENT;
 		default : return null;
 		}
 	}
@@ -77,12 +77,5 @@ public class InvariantsPropertySection extends AbstractEditTableWithDefaultNamin
 		default : return -1;	//unknown
 		}
 	}
-
-	@Override
-	protected String getLabelText() {
-		return "invariants";
-	}
-	
-	
 
 }
