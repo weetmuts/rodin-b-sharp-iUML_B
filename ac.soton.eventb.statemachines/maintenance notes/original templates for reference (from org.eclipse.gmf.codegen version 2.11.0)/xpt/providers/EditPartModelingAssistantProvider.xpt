@@ -1,0 +1,207 @@
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«EXTENSION xpt::diagram::editparts::Utils»
+
+«DEFINE className FOR gmfgen::GenContainerBase»«getDiagram().modelingAssistantProviderClassName»Of«editPartClassName»«ENDDEFINE»
+
+«DEFINE packageName FOR gmfgen::GenContainerBase»«getDiagram().providersPackageName».assistants«ENDDEFINE»
+
+«DEFINE qualifiedClassName FOR gmfgen::GenContainerBase»«EXPAND packageName».«EXPAND className»«ENDDEFINE»
+
+«DEFINE EditPartModelingAssistantProvider FOR gmfgen::GenContainerBase-»
+«EXPAND xpt::Common::copyright FOR getDiagram().editorGen-»
+package «EXPAND packageName»;
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «EXPAND className» «EXPAND extendsList» {
+
+	«EXPAND getTypesForPopupBar-»
+	
+	«EXPAND linkAssistantMethods-»
+
+	«EXPAND additions-»	
+}
+«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::GenContainerBase»extends «EXPAND xpt::providers::ModelingAssistantProvider::qualifiedClassName FOR getDiagram()»«ENDDEFINE»
+
+«DEFINE getTypesForPopupBar FOR gmfgen::GenContainerBase-»
+	«LET self AS container-»
+	«IF container.getAssistantNodes()->size() > 0-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getTypesForPopupBar(org.eclipse.core.runtime.IAdaptable host) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>(«container.getAssistantNodes()->size()»);
+			«FOREACH container.getAssistantNodes()->asSequence() AS node-»
+		types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR node»);
+			«ENDFOREACH-»
+		return types;	
+	}
+	«ENDIF-»
+	«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE linkAssistantMethods FOR gmfgen::GenContainerBase»«ENDDEFINE»
+
+«DEFINE linkAssistantMethods FOR gmfgen::GenNode-»
+«IF getAssistantOutgoingLinks(self)->size() > 0-»
+	«EXPAND getRelTypesOnSource-»
+	
+	«EXPAND doGetRelTypesOnSource-»
+	
+	«EXPAND getRelTypesOnSourceAndTarget-»	
+
+	«EXPAND doGetRelTypesOnSourceAndTarget-»	
+
+	«EXPAND getTypesForTarget-»	
+
+	«EXPAND doGetTypesForTarget-»
+«ENDIF-»	
+
+«IF getAssistantIncomingLinks(self)->size() > 0-»
+	«EXPAND getRelTypesOnTarget-»	
+
+	«EXPAND doGetRelTypesOnTarget-»	
+
+	«EXPAND getTypesForSource-»
+
+	«EXPAND doGetTypesForSource-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE getRelTypesOnSource FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getRelTypesOnSource(org.eclipse.core.runtime.IAdaptable source) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart sourceEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) source.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		return doGetRelTypesOnSource((«getEditPartQualifiedClassName()») sourceEditPart);
+	}
+«ENDDEFINE»
+
+«DEFINE getRelTypesOnTarget FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getRelTypesOnTarget(org.eclipse.core.runtime.IAdaptable target) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart targetEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) target.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		return doGetRelTypesOnTarget((«getEditPartQualifiedClassName()») targetEditPart);
+	}
+«ENDDEFINE»
+
+«DEFINE getRelTypesOnSourceAndTarget FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getRelTypesOnSourceAndTarget(
+			org.eclipse.core.runtime.IAdaptable source, org.eclipse.core.runtime.IAdaptable target) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart sourceEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) source.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart targetEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) target.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		return doGetRelTypesOnSourceAndTarget((«getEditPartQualifiedClassName()») sourceEditPart, targetEditPart);
+	}
+«ENDDEFINE»
+
+«DEFINE getTypesForSource FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getTypesForSource(org.eclipse.core.runtime.IAdaptable target,
+			org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart targetEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) target.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		return doGetTypesForSource((«getEditPartQualifiedClassName()») targetEditPart, relationshipType);
+	}
+«ENDDEFINE»
+
+«DEFINE getTypesForTarget FOR gmfgen::GenNode-»
+	«IF getAssistantOutgoingLinks(self)->size() > 0-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getTypesForTarget(org.eclipse.core.runtime.IAdaptable source,
+			org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
+		org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart sourceEditPart =
+				(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart) source.getAdapter(
+						org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart.class);
+		return doGetTypesForTarget((«getEditPartQualifiedClassName()») sourceEditPart, relationshipType);
+	}
+	«ENDIF-»
+«ENDDEFINE»
+
+// pre: getAssistantOutgoingLinks(this).size() > 0
+«DEFINE doGetRelTypesOnSource FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> doGetRelTypesOnSource(«getEditPartQualifiedClassName()» source) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>(«getAssistantOutgoingLinks(self)->size()»);
+		«FOREACH getAssistantOutgoingLinks(self) AS link-»
+		types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
+		«ENDFOREACH-»
+		return types;
+	}
+«ENDDEFINE»
+
+// pre: getAssistantIncomingLinks(this).size() > 0
+«DEFINE doGetRelTypesOnTarget FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> doGetRelTypesOnTarget(«getEditPartQualifiedClassName()» target) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>(«getAssistantIncomingLinks(self)->size()»);
+		«FOREACH getAssistantIncomingLinks(self) AS link-»
+		types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
+		«ENDFOREACH-»
+		return types;
+	}
+«ENDDEFINE»
+
+// pre: getAssistantOutgoingLinks(this).size() > 0
+«DEFINE doGetRelTypesOnSourceAndTarget FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> doGetRelTypesOnSourceAndTarget(«getEditPartQualifiedClassName()» source, org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart targetEditPart) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.LinkedList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		«FOREACH getAssistantOutgoingLinks(self) AS link-»
+			«FOREACH selectGenNodes(link.targets) AS target-»
+		if (targetEditPart instanceof «target.getEditPartQualifiedClassName()») {
+			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
+		}
+			«ENDFOREACH-»
+		«ENDFOREACH-»
+		return types;
+	}
+«ENDDEFINE»
+
+// pre: getAssistantIncomingLinks(this).size() > 0
+«DEFINE doGetTypesForSource FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> doGetTypesForSource(«getEditPartQualifiedClassName()» target, org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		«FOREACH getAssistantIncomingLinks(self) AS link SEPARATOR ' else '-»
+		if (relationshipType == «EXPAND xpt::providers::ElementTypes::accessElementType FOR link») {
+			«FOREACH selectGenNodes(link.sources) AS source-»
+			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR source»);
+			«ENDFOREACH-»
+		}
+		«ENDFOREACH-»
+		return types;
+	}
+«ENDDEFINE»
+
+// pre: getAssistantOutgoingLinks(this).size() > 0
+«DEFINE doGetTypesForTarget FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> doGetTypesForTarget(«getEditPartQualifiedClassName()» source, org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
+		java.util.List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new java.util.ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		«FOREACH getAssistantOutgoingLinks(self) AS link SEPARATOR ' else '-»
+		if (relationshipType == «EXPAND xpt::providers::ElementTypes::accessElementType FOR link») {
+			«FOREACH selectGenNodes(link.targets) AS target-»
+			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR target»);
+			«ENDFOREACH-»
+		}
+		«ENDFOREACH-»
+		return types;
+	}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenContainerBase»«ENDDEFINE»

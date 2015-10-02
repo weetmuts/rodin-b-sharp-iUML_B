@@ -22,8 +22,10 @@ import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -40,11 +42,15 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.OpenDiagramEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachineItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -70,6 +76,12 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
+
+	/**
+	 * @generated
+	 */
 	public StatemachineEditPart(View view) {
 		super(view);
 	}
@@ -83,8 +95,7 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 				new StatemachineItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		installEditPolicy(EditPolicyRoles.OPEN_ROLE,
-				new OpenDiagramEditPolicy());
-		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
+				new OpenDiagramEditPolicy()); // XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 	}
 
@@ -118,18 +129,7 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-
 		primaryShape = new StatemachineFigure();
-
-		// set background color to white if domain element refines something
-		EObject element = resolveSemanticElement();
-		if (element != null) {
-			EStructuralFeature feature = element.eClass()
-					.getEStructuralFeature("refines");
-			if (feature != null && element.eIsSet(feature))
-				primaryShape.setBackgroundColor(ColorConstants.white);
-		}
-
 		return primaryShape;
 	}
 
@@ -162,7 +162,6 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof StatemachineStatesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureStatemachineCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.remove(((StatemachineStatesCompartmentEditPart) childEditPart)
 					.getFigure());
 			return true;
@@ -194,6 +193,7 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
+
 		if (editPart instanceof StatemachineStatesCompartmentEditPart) {
 			return getPrimaryShape().getFigureStatemachineCompartmentFigure();
 		}
@@ -289,137 +289,15 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StatemachineEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(1);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width and color if state changes
-		if (StatemachinesPackage.eINSTANCE.getState_Active().equals(
-				event.getFeature())) {
-			boolean active = event.getNewBooleanValue();
-			setLineWidth(1 + (active ? 2 : 0));
-			setForegroundColor(active ? ColorConstants.black
-					: ColorConstants.gray);
-		}
 
-		// update background color when refines propeerty changed
-		if (StatemachinesPackage.eINSTANCE.getState_Refines().equals(
-				event.getFeature())
-				|| StatemachinesPackage.eINSTANCE.getStatemachine_Refines()
-						.equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(THIS_BACK);
-			else
-				setBackgroundColor(ColorConstants.white);
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+				.getFeature()).getName() : "";
+
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
 		}
 
 		super.handleNotificationEvent(event);
@@ -444,8 +322,6 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 			this.setLayoutManager(layoutThis);
 
 			this.setOutline(false);
-			this.setForegroundColor(ColorConstants.gray);
-			this.setBackgroundColor(THIS_BACK);
 			this.setMinimumSize(new Dimension(getMapMode().DPtoLP(100),
 					getMapMode().DPtoLP(80)));
 			this.setBorder(createBorder0());
@@ -487,8 +363,61 @@ public class StatemachineEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
+	 * Refresh the colour of the foreground from the preferences.
+	 * 
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 240, 240, 255);
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Refresh the colour of the background from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshBackgroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set background fill color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getFillColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setBackgroundColor(new Color(null, rgb));
+		} else {
+			super.refreshBackgroundColor();
+		}
+	}
 
 }

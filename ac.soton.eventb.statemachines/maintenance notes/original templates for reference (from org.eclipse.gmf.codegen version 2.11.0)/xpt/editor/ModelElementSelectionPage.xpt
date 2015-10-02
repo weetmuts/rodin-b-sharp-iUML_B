@@ -1,0 +1,86 @@
+﻿/*
+ * Copyright (c) 2007, 2009, 2013 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ *    Svyatoslav Kovalsky (Montages) - #410477 "same-generated" code extracted to GMFT-runtime 
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::editor::Utils»
+
+«DEFINE className FOR gmfgen::GenDiagram»«defaultModelElementSelectionPageClassName(self)»«ENDDEFINE»
+
+«DEFINE qualifiedClassName FOR gmfgen::GenDiagram»«editorGen.editor.packageName».«EXPAND className»«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::GenDiagram»extends org.eclipse.gmf.tooling.runtime.part.DefaultModelElementSelectionPage«ENDDEFINE»
+
+«DEFINE ModelElementSelectionPage FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::copyright FOR editorGen-»
+package «editorGen.editor.packageName»;
+
+«EXPAND xpt::Common::generatedClassComment('Wizard page that allows to select element from model.')»
+public class «EXPAND className» «EXPAND extendsList» {
+	«EXPAND attributes-»
+
+	«EXPAND ctor-»
+
+	«EXPAND getModelElement-»
+
+	«EXPAND setModelElement-»
+
+	«EXPAND createControl-»
+
+	«EXPAND getSelectionTitle-»
+
+	«EXPAND updateSelection-»
+
+	«EXPAND validatePage-»
+
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE ctor FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment»
+public «EXPAND className»(String pageName) {
+	super(«editorGen.plugin.getActivatorQualifiedClassName()».getInstance().getItemProvidersAdapterFactory(), pageName);
+}
+«ENDDEFINE»
+
+«DEFINE getSelectionTitle FOR gmfgen::GenDiagram»
+«EXPAND xpt::Common::generatedMemberComment('Override to provide custom model element description.')»
+protected String getSelectionTitle() {
+	return «EXPAND xpt::Externalizer::accessorCall(messageKey(i18nKeyForModelElementSelectionPage(self))) FOR editorGen»;
+}
+«ENDDEFINE»
+
+«DEFINE i18nValues FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Externalizer::messageEntry(messageKey(i18nKeyForModelElementSelectionPage(self)), 'Select model element:')-»
+«ENDDEFINE»
+
+«DEFINE i18nAccessors FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Externalizer::accessorField(messageKey(i18nKeyForModelElementSelectionPage(self)))-»
+«ENDDEFINE»
+
+/**
+ * Since 3.1 the code moved to non-generated super class in GMFT-runtime. 
+ * Empty xpands are left here to support backward compatibility
+ */ 
+«DEFINE attributes FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE getModelElement FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE setModelElement FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE createControl FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE updateSelection FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE validatePage FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagram»«ENDDEFINE»

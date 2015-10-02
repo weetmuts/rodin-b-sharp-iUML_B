@@ -12,6 +12,7 @@
  */
 
 «IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«IMPORT 'http://www.eclipse.org/gmf/2006/GraphicalDefinition'»
 «EXTENSION xpt::diagram::ViewmapAttributesUtils»
 «EXTENSION xpt::diagram::editparts::Utils»
 «EXTENSION xpt::diagram::Utils»
@@ -33,13 +34,11 @@
 «ENDDEFINE»
 
 «DEFINE createDefaultEditPoliciesBody FOR gmfgen::GenNode-»
-	«EXPAND installCreationRolePolicy-»
+«EXPAND installCreationRolePolicy-»
 	super.createDefaultEditPolicies();
 	«EXPAND installPrimaryDragEditPolicy-»
 	«EXPAND xpt::diagram::editparts::Common::installSemanticEditPolicy-»
-	«IF needsGraphicalNodeEditPolicy(self)-»
-		installEditPolicy(org.eclipse.gef.EditPolicy.GRAPHICAL_NODE_ROLE, new «getGraphicalNodeEditPolicyQualifiedClassName()»());
-	«ENDIF-»
+	«EXPAND installGraphicalNodeEditPolicy-»
 	«IF not childNodes->isEmpty()-»
 		installEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.DRAG_DROP_ROLE, new org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy());
 	«ENDIF-»
@@ -48,15 +47,22 @@
 	«EXPAND xpt::diagram::editparts::Common::behaviour FOR self-»
 	// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 	// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
+	«EXPAND additionalEditPolicies-»
+«ENDDEFINE»
+
+«DEFINE additionalEditPolicies FOR gmfgen::GenNode»«ENDDEFINE»
+
+«DEFINE installGraphicalNodeEditPolicy FOR gmfgen::GenNode-»
+	«IF needsGraphicalNodeEditPolicy(self)-»
+		installEditPolicy(org.eclipse.gef.EditPolicy.GRAPHICAL_NODE_ROLE, new «getGraphicalNodeEditPolicyQualifiedClassName()»());
+	«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE installCreationRolePolicy FOR gmfgen::GenNode-»
 «IF self.childNodes->notEmpty() or hasChildrenInListCompartments(self)-»
-	installEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CREATION_ROLE, «EXPAND _creationEditPolicyNewInstance»);
+	«EXPAND xpt::diagram::editparts::Common::installCreationEditPolicy-»
 «ENDIF-»
 «ENDDEFINE»
-
-«DEFINE _creationEditPolicyNewInstance FOR gmfgen::GenNode»new org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy()«ENDDEFINE»
 
 «DEFINE installPrimaryDragEditPolicy FOR gmfgen::GenNode»«ENDDEFINE»
 
@@ -186,6 +192,21 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	«ERROR 'Unknown viewmap: ' + self.repr()-»
 «ENDDEFINE»
 
+«DEFINE createNodeShape(node : gmfgen::GenNode) FOR gmfgen::ModeledViewmap-»
+		«EXPAND xpt::Common::generatedMemberComment»
+		protected org.eclipse.draw2d.IFigure createNodeShape() {
+			return primaryShape = new «EXPAND _modeledViewmapFigureFQN»()«-»
+				«IF node.childNodes->notEmpty() and node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT»«EXPAND forceUseLocalCoordinates»«ENDIF»;
+		}
+		
+		«REM»FIXME: we don't have QVTo helper, only EXPAND, so we can't call «EXPAND getPrimaryShapeMethod FOR fqn »«ENDREM»«-»
+		«EXPAND xpt::Common::generatedMemberComment»
+		public «EXPAND _modeledViewmapFigureFQN» getPrimaryShape() {
+			return («EXPAND _modeledViewmapFigureFQN») primaryShape;
+		}
+«ENDDEFINE»
+
+«DEFINE _modeledViewmapFigureFQN FOR gmfgen::ModeledViewmap»«EXPAND impl::diagram::editparts::viewmaps::modeledViewmapProducer::viewmapFigureFQN FOR self»«ENDDEFINE»
 
 «DEFINE createNodeShape(node : gmfgen::GenNode) FOR gmfgen::FigureViewmap-»
 	«LET (if figureQualifiedClassName = null then 'org.eclipse.draw2d.RectangleFigure' else figureQualifiedClassName endif) AS fqn-»
@@ -208,17 +229,7 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE createNodeShape(node : gmfgen::GenNode) FOR gmfgen::InnerClassViewmap-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure createNodeShape() {
-	«REM»MY: added color initialisation based on refinement«ENDREM»
 		primaryShape = new «className»()«IF node.childNodes->notEmpty() and node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT»«EXPAND forceUseLocalCoordinates»«ENDIF»;
-		«IF isRefinedElement(node)»
-		// set background color to white if domain element refines something
-		org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
-		if (element != null) {
-			org.eclipse.emf.ecore.EStructuralFeature feature = element.eClass().getEStructuralFeature("refines");
-			if (feature != null && element.eIsSet(feature))
-				primaryShape.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
-		}
-		«ENDIF»
 		return primaryShape;
 	}
 
@@ -243,20 +254,48 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE addFixedChild FOR gmfgen::GenNode-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected boolean addFixedChild(org.eclipse.gef.EditPart childEditPart) {
-«FOREACH getInnerFixedLabels(self) AS label»«LET label.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+«FOREACH getInnerFixedLabels(self) AS label-»
+«LET label.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+«LET childViewmap.getterName AS getterName-»
 		if (childEditPart instanceof «label.getEditPartQualifiedClassName()») {
-			((«label.getEditPartQualifiedClassName()») childEditPart).«EXPAND impl::diagram::editparts::TextAware::labelSetterName FOR childViewmap»(getPrimaryShape().«childViewmap.getterName»());
+			((«label.getEditPartQualifiedClassName()») childEditPart).«EXPAND impl::diagram::editparts::TextAware::labelSetterName FOR childViewmap»(getPrimaryShape().«getterName»());
 			return true;
 		}
-«ENDLET»«ENDFOREACH-»
-«FOREACH getPinnedCompartments(self) AS compartment»«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+«ENDLET-»
+«ENDLET-»
+«ENDFOREACH-»
+«FOREACH getInnerFixedLabelsWithModeledViewmaps(self) AS label-»
+«LET label.viewmap.oclAsType(gmfgen::ModeledViewmap) AS childViewmap-»
+«LET childViewmap.figureModel.oclAsType(gmfgraph::DiagramLabel).accessor.accessor AS getterName-»
+		if (childEditPart instanceof «label.getEditPartQualifiedClassName()») {
+			((«label.getEditPartQualifiedClassName()») childEditPart).«EXPAND impl::diagram::editparts::TextAware::labelSetterName FOR childViewmap»(getPrimaryShape().«getterName»());
+			return true;
+		}
+«ENDLET-»
+«ENDLET-»
+«ENDFOREACH-»
+«FOREACH getPinnedCompartments(self) AS compartment-»
+«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
 		if (childEditPart instanceof «compartment.getEditPartQualifiedClassName()») {
 			org.eclipse.draw2d.IFigure pane = getPrimaryShape().«childViewmap.getterName»();
 			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.add(((«compartment.getEditPartQualifiedClassName()») childEditPart).getFigure());
 			return true;
 		}	
-«ENDLET»«ENDFOREACH-»
+«ENDLET-»
+«ENDFOREACH-»
+«FOREACH getPinnedCompartmentsWithModeledViewmaps(self) AS compartment-»
+«LET compartment.viewmap.oclAsType(gmfgen::ModeledViewmap) AS childViewmap-»
+«LET childViewmap.figureModel.oclAsType(gmfgraph::Compartment).accessor.accessor AS getterName-»
+		if (childEditPart instanceof «compartment.getEditPartQualifiedClassName()») {
+			org.eclipse.draw2d.IFigure pane = getPrimaryShape().«getterName»();
+			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			pane.add(((«compartment.getEditPartQualifiedClassName()») childEditPart).getFigure());
+			return true;
+		}	
+«ENDLET-»
+«ENDLET-»
+«ENDFOREACH-»
 «FOREACH getSideAffixedChildren(self) AS child-»
 		if (childEditPart instanceof «child.getEditPartQualifiedClassName()») {
 			org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator locator = new org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName»);
@@ -271,19 +310,36 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE removeFixedChild FOR gmfgen::GenNode-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected boolean removeFixedChild(org.eclipse.gef.EditPart childEditPart) {
-«FOREACH getInnerFixedLabels(self) AS label»«LET label.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+«FOREACH getInnerFixedLabels(self) AS label-»
 		if (childEditPart instanceof «label.getEditPartQualifiedClassName()») {
 			return true;
 		}
-«ENDLET»«ENDFOREACH-»
-«FOREACH getPinnedCompartments(self) AS compartment»«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+«ENDFOREACH-»
+«FOREACH getInnerFixedLabelsWithModeledViewmaps(self) AS label-»
+		if (childEditPart instanceof «label.getEditPartQualifiedClassName()») {
+			return true;
+		}
+«ENDFOREACH-»
+«FOREACH getPinnedCompartments(self) AS compartment-»
+«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
 		if (childEditPart instanceof «compartment.getEditPartQualifiedClassName()») {
 			org.eclipse.draw2d.IFigure pane = getPrimaryShape().«childViewmap.getterName»();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.remove(((«compartment.getEditPartQualifiedClassName()») childEditPart).getFigure());
 			return true;
 		}	
-«ENDLET»«ENDFOREACH-»
+«ENDLET-»
+«ENDFOREACH-»
+«FOREACH getPinnedCompartmentsWithModeledViewmaps(self) AS compartment-»
+«LET compartment.viewmap.oclAsType(gmfgen::ModeledViewmap) AS childViewmap-»
+«LET childViewmap.figureModel.oclAsType(gmfgraph::Compartment).accessor.accessor AS getterName-»
+		if (childEditPart instanceof «compartment.getEditPartQualifiedClassName()») {
+			org.eclipse.draw2d.IFigure pane = getPrimaryShape().«getterName»();
+			pane.remove(((«compartment.getEditPartQualifiedClassName()») childEditPart).getFigure());
+			return true;
+		}	
+«ENDLET-»
+«ENDLET-»
+«ENDFOREACH-»
 «FOREACH getSideAffixedChildren(self) AS child-»
 		if (childEditPart instanceof «child.getEditPartQualifiedClassName()») {
 			getBorderedFigure().getBorderItemContainer().remove(((«child.getEditPartQualifiedClassName()») childEditPart).getFigure());
@@ -317,12 +373,21 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «DEFINE getContentPaneFor FOR gmfgen::GenNode-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure getContentPaneFor(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart editPart) {
-		«REM»it is unclear what we should return for labels here«ENDREM-»
+		«REM»it is unclear what we should return for labels here«ENDREM»
 «FOREACH getPinnedCompartments(self) AS compartment»«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
 		if (editPart instanceof «compartment.getEditPartQualifiedClassName()») {
 			return getPrimaryShape().«childViewmap.getterName»();
 		}	
 «ENDLET»«ENDFOREACH-»
+«FOREACH getPinnedCompartmentsWithModeledViewmaps(self) AS compartment-»
+«LET compartment.viewmap.oclAsType(gmfgen::ModeledViewmap) AS childViewmap-»
+«LET childViewmap.figureModel.oclAsType(gmfgraph::Compartment).accessor.accessor AS getterName-»
+		if (editPart instanceof «compartment.getEditPartQualifiedClassName()») {
+			return getPrimaryShape().«getterName»();
+		}	
+«ENDLET-»
+«ENDLET-»
+«ENDFOREACH-»
 «IF hasBorderItems(self)-»
 		if (editPart instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart) {
 			return getBorderedFigure().getBorderItemContainer();
@@ -489,80 +554,8 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	«ENDIF-»
 «ENDDEFINE»
 
-// pre: getAssistantOutgoingLinks(this).size() > 0
-«DEFINE getMARelTypesOnSource FOR gmfgen::GenNode-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	public «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')» getMARelTypesOnSource() {
-		«EXPAND CodeStyle::newGenericInstance('types', 'java.util.ArrayList', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')»(«getAssistantOutgoingLinks(self)->size()»);
-		«FOREACH getAssistantOutgoingLinks(self) AS link-»
-		types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
-		«ENDFOREACH-»
-		return types;
-	}
-«ENDDEFINE»
-
-// pre: getAssistantIncomingLinks(this).size() > 0
-«DEFINE getMARelTypesOnTarget FOR gmfgen::GenNode-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	public «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')» getMARelTypesOnTarget() {
-		«EXPAND CodeStyle::newGenericInstance('types', 'java.util.ArrayList', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')»(«getAssistantIncomingLinks(self)->size()»);
-		«FOREACH getAssistantIncomingLinks(self) AS link-»
-		types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
-		«ENDFOREACH-»
-		return types;
-	}
-«ENDDEFINE»
-
-// pre: getAssistantOutgoingLinks(this).size() > 0
-«DEFINE getMARelTypesOnSourceAndTarget FOR gmfgen::GenNode-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	public «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')» getMARelTypesOnSourceAndTarget(org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart targetEditPart) {
-		«EXPAND CodeStyle::newGenericInstance('types', 'java.util.LinkedList', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')»();
-		«FOREACH getAssistantOutgoingLinks(self) AS link-»
-			«FOREACH selectGenNodes(link.targets) AS target-»
-		if (targetEditPart instanceof «target.getEditPartQualifiedClassName()») {
-			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR link»);
-		}
-			«ENDFOREACH-»
-		«ENDFOREACH-»
-		return types;
-	}
-«ENDDEFINE»
-
-// pre: getAssistantIncomingLinks(this).size() > 0
-«DEFINE getMATypesForSource FOR gmfgen::GenNode-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	public «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')» getMATypesForSource(org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
-		«EXPAND CodeStyle::newGenericInstance('types', 'java.util.LinkedList', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')»();
-		«FOREACH getAssistantIncomingLinks(self) AS link SEPARATOR ' else '-»
-		if (relationshipType == «EXPAND xpt::providers::ElementTypes::accessElementType FOR link») {
-			«FOREACH selectGenNodes(link.sources) AS source-»
-			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR source»);
-			«ENDFOREACH-»
-		}
-		«ENDFOREACH-»
-		return types;
-	}
-«ENDDEFINE»
-
-// pre: getAssistantOutgoingLinks(this).size() > 0
-«DEFINE getMATypesForTarget FOR gmfgen::GenNode-»
-	«EXPAND xpt::Common::generatedMemberComment»
-	public «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')» getMATypesForTarget(org.eclipse.gmf.runtime.emf.type.core.IElementType relationshipType) {
-		«EXPAND CodeStyle::newGenericInstance('types', 'java.util.LinkedList', 'org.eclipse.gmf.runtime.emf.type.core.IElementType')»();
-		«FOREACH getAssistantOutgoingLinks(self) AS link SEPARATOR ' else '-»
-		if (relationshipType == «EXPAND xpt::providers::ElementTypes::accessElementType FOR link») {
-			«FOREACH selectGenNodes(link.targets) AS target-»
-			types.add(«EXPAND xpt::providers::ElementTypes::accessElementType FOR target»);
-			«ENDFOREACH-»
-		}
-		«ENDFOREACH-»
-		return types;
-	}
-«ENDDEFINE»
-
+«REM»MY: added state change handling«ENDREM»
 «DEFINE handleNotificationEventBody FOR gmfgen::GenTopLevelNode-»
-«REM»MY: added state change hanling«ENDREM»
 	«EXPAND handleStateChange»
 	if (event.getNotifier() == getModel() && org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEModelElement_EAnnotations().equals(event.getFeature())) {
 		handleMajorSemanticChange();
@@ -577,23 +570,25 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 	super.handleNotificationEvent(event);
 «ENDDEFINE»
 
-«REM»MY: code to update line width for active state (currently added to all state, even stateless, so needs to be improved)«ENDREM»
+«REM»MY/CFS: code to update line width for active state changes and background colour for refines changes «ENDREM»
 «DEFINE handleStateChange FOR gmfgen::GenNode-»
-	// update line width and color if state changes
-	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getState_Active().equals(event.getFeature())) {
-		boolean active = event.getNewBooleanValue();
-		setLineWidth(1 + (active ? 2 : 0));
-		setForegroundColor(active ? org.eclipse.draw2d.ColorConstants.black : org.eclipse.draw2d.ColorConstants.gray);
-	}
+	«IF (isActiveElement(self) or isRefinedElement(self))»
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+					.getFeature()).getName() : "";
+	«ENDIF»
+	«IF isActiveElement(self)»		
+		// update line width depending on active state
+		if ("active".equals(featureName)) {
+			boolean active = event.getNewBooleanValue();
+			setLineWidth(1 + (active ? 2 : 0));
+		}
+	«ENDIF»
 	«IF isRefinedElement(self)»
-	// update background color when refines propeerty changed
-	if (ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getState_Refines().equals(event.getFeature())
-		|| ac.soton.eventb.statemachines.StatemachinesPackage.eINSTANCE.getStatemachine_Refines().equals(event.getFeature())) {
-		if (event.getNewValue() == null)
-			setBackgroundColor(THIS_BACK);
-		else
-			setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
-	}
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
+		}
 	«ENDIF»
 «ENDDEFINE»
 
@@ -602,6 +597,10 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 
 «DEFINE innerClassDeclaration FOR gmfgen::InnerClassViewmap»
 	«classBody»
+«ENDDEFINE»
+
+«DEFINE innerClassDeclaration FOR gmfgen::ModeledViewmap»
+	«EXPAND impl::diagram::editparts::viewmaps::modeledViewmapProducer::viewmapClassBody FOR self»
 «ENDDEFINE»
 
 «DEFINE getTargetEditPartMethod FOR gmfgen::GenNode»
@@ -621,5 +620,59 @@ new org.eclipse.gmf.runtime.diagram.ui.editpolicies.BorderItemSelectionEditPolic
 «ENDFOREACH-»
 		}
 		return super.getTargetEditPart(request);
+	}
+«ENDDEFINE»
+
+«REM»CFS: added refresh foreground colour body for node editparts«ENDREM»
+«DEFINE refreshForegroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set foreground line color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getLineColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getLineColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setForegroundColor(new Color(null,rgb));
+	}else{
+		super.refreshForegroundColor();
+	}
+«ENDDEFINE»
+
+«REM»CFS: added refresh background colour body for node editparts«ENDREM»
+«DEFINE refreshBackgroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set background fill color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getFillColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getFillColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setBackgroundColor(new Color(null,rgb));
+	}else{
+		super.refreshBackgroundColor();
 	}
 «ENDDEFINE»

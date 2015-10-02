@@ -1,0 +1,78 @@
+﻿/*
+ * Copyright (c) 2006, 2009 Borland Software Corporation
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Alexander Shatalin (Borland) - initial API and implementation
+ *    Artem Tikhomirov (Borland) - [174961] migration to Commands/Handlers 
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::editor::Utils»
+«EXTENSION xpt::StringOperations»
+
+«DEFINE Main FOR gmfgen::CreateShortcutAction-»
+«EXPAND xpt::Common::copyright FOR owner.editorGen-»
+«EXPAND xpt::Common::packageStatement FOR qualifiedClassName»
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «EXPAND className»«EXPAND extendsList» {
+«EXPAND _constructor-»
+«EXPAND createChooserDialog-»
+«EXPAND createShortcutDecorationCommand-»
+«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE className FOR gmfgen::CreateShortcutAction»«qualifiedClassName.xpandSplit('\\.')->last()»«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::CreateShortcutAction» extends org.eclipse.gmf.tooling.runtime.part.DefaultCreateShortcutHandler«ENDDEFINE»
+«DEFINE implementsList FOR gmfgen::CreateShortcutAction»«ENDDEFINE» 
+
+«DEFINE _constructor FOR gmfgen::CreateShortcutAction-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «EXPAND className»() {
+		this(«owner.editorGen.plugin.getActivatorQualifiedClassName()».getInstance().getLogHelper());
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «EXPAND className»(org.eclipse.gmf.tooling.runtime.LogHelper logHelper) {
+		super(logHelper, «EXPAND xpt::plugin::Activator::preferenceHintAccess FOR owner.editorGen»);
+	}
+«ENDDEFINE»
+
+«DEFINE createShortcutDecorationCommand FOR gmfgen::CreateShortcutAction-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override FOR owner.editorGen.diagram-»
+	public org.eclipse.gmf.runtime.common.core.command.ICommand createShortcutDecorationCommand(org.eclipse.gmf.runtime.notation.View view, org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, java.util.List<org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor> descriptors) {
+		return new «owner.editorGen.diagram.getCreateShortcutDecorationsCommandQualifiedClassName()»(editingDomain, view, descriptors);
+	}
+«ENDDEFINE»
+
+«DEFINE createChooserDialog FOR gmfgen::CreateShortcutAction-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND CodeStyle::override FOR owner.editorGen.diagram-»
+	public org.eclipse.gmf.tooling.runtime.part.DefaultElementChooserDialog createChooserDialog(org.eclipse.swt.widgets.Shell parentShell, org.eclipse.gmf.runtime.notation.View view) {
+		return new «owner.editorGen.diagram.getElementChooserQualifiedClassName()»(parentShell, view);
+	}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::CreateShortcutAction»«ENDDEFINE»
+
+«DEFINE i18nValues FOR gmfgen::GenDiagram-»
+«IF null <> editorGen.application-»
+«EXPAND xpt::Externalizer::messageEntry(titleKey(i18nKeyForCreateShortcutOpenModel()), 'Select model to reference')-»
+«EXPAND xpt::Externalizer::messageEntry(titleKey(i18nKeyForCreateShortcutWizard()), 'Create shortcut')-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE i18nAccessors FOR gmfgen::GenDiagram-»
+«IF null <> editorGen.application-»
+«EXPAND xpt::Externalizer::accessorField(titleKey(i18nKeyForCreateShortcutOpenModel()))-»
+«EXPAND xpt::Externalizer::accessorField(titleKey(i18nKeyForCreateShortcutWizard()))-»
+«ENDIF-»
+«ENDDEFINE»

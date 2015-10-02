@@ -42,6 +42,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentPro
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.part.LastClickPositionProvider;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -92,6 +93,11 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	 * @generated
 	 */
 	public static final String CONTEXT_ID = "ac.soton.eventb.statemachines.diagram.ui.diagramContext"; //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	private LastClickPositionProvider myLastClickPositionProvider;
 
 	/**
 	 * @generated
@@ -348,6 +354,28 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 					}
 
 				});
+		startupLastClickPositionProvider();
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void startupLastClickPositionProvider() {
+		if (myLastClickPositionProvider == null) {
+			myLastClickPositionProvider = new LastClickPositionProvider(this);
+			myLastClickPositionProvider.attachToService();
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void shutDownLastClickPositionProvider() {
+		if (myLastClickPositionProvider != null) {
+			myLastClickPositionProvider.detachFromService();
+			myLastClickPositionProvider.dispose();
+			myLastClickPositionProvider = null;
+		}
 	}
 
 	/**
@@ -413,7 +441,6 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	// b) provide change recording
 	////////////////////////////////////////////////////////////////////////////////
 
-
 	/**
 	 * This listens for when the outline becomes active 
 	 * <!-- begin-user-doc -->
@@ -461,15 +488,15 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 				deactivated = true;
 			}
 		}
-		
+
 		///////////////////changeRecording///////////////////
 		//FIXME: probably, this should be made into a different listener that only listens to the Statemachines Diagram Editor Part
 		//instead of all parts on the page.
 		@Override
 		public void partClosed(IWorkbenchPart part) {
-			if (part==StatemachinesDiagramEditor.this){
-				System.out.println("closing "+part.getTitle());
-				if (ecr!=null) {
+			if (part == StatemachinesDiagramEditor.this) {
+				System.out.println("closing " + part.getTitle());
+				if (ecr != null) {
 					ecr.disposeChangeRecorder();
 					System.out.println("... disposed change recorder");
 				}
@@ -478,21 +505,26 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 
 		@Override
 		public void partOpened(IWorkbenchPart part) {
-			if (part==StatemachinesDiagramEditor.this){
-				System.out.println("opening "+part.getTitle());
-				EObject diagramElement = StatemachinesDiagramEditor.this.getDiagram().getElement();
-				if (diagramElement instanceof EventBElement){
-					EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
-					ecr= Recorder.getNewRecorder((EventBNamedCommentedComponentElement)component);
-					if (ecr!=null){
+			if (part == StatemachinesDiagramEditor.this) {
+				System.out.println("opening " + part.getTitle());
+				EObject diagramElement = StatemachinesDiagramEditor.this
+						.getDiagram().getElement();
+				if (diagramElement instanceof EventBElement) {
+					EventBObject component = ((EventBElement) diagramElement)
+							.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+					ecr = Recorder
+							.getNewRecorder((EventBNamedCommentedComponentElement) component);
+					if (ecr != null) {
 						int result = ecr.resumeRecording();
-						if (result==1){
+						if (result == 1) {
 							//TODO: message dialogue here, save old changes in a different file
-							System.out.println("... previous changes were out of sync and are lost.. restarting change record");				
+							System.out
+									.println("... previous changes were out of sync and are lost.. restarting change record");
 						}
 					}
 				}
-				System.out.println(ecr==null? "...opened but not recording" : "... opened and recording");
+				System.out.println(ecr == null ? "...opened but not recording"
+						: "... opened and recording");
 			}
 		}
 	};
@@ -513,48 +545,50 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	 */
 	@Override
 	public void dispose() {
-		if (ecr!=null) ecr.disposeChangeRecorder();
+		if (ecr != null)
+			ecr.disposeChangeRecorder();
 		super.dispose();
 		getSite().getPage().removePartListener(deactivationPartListener);
 	}
-	
+
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-		
-		if (isAnimating()) return;	//must never save while animating as model contains animation artifacts which will not save
-		
-		System.out.println("saving "+this.getPartName());
-		if (ecr!=null) {
+
+		if (isAnimating())
+			return; //must never save while animating as model contains animation artifacts which will not save
+
+		System.out.println("saving " + this.getPartName());
+		if (ecr != null) {
 			ecr.endRecording();
 			System.out.println("... end recording");
 		}
 		super.doSave(progressMonitor);
 		System.out.println("... saved");
-		if (ecr!=null) {
+		if (ecr != null) {
 			ecr.resumeRecording();
 			System.out.println("... resume recording");
 		}
 
 	}
 
-	private Recorder ecr=null;
+	private Recorder ecr = null;
 
 	/////////////animating////////////////
 	private boolean animating = false;
 
-	public void startAnimating(){
+	public void startAnimating() {
 		animating = true;
-		System.out.println("started animating "+this.getPartName());
-		if (ecr!=null) {
+		System.out.println("started animating " + this.getPartName());
+		if (ecr != null) {
 			ecr.endRecording();
 			System.out.println("... stopped recording");
 		}
 	}
 
-	public void stopAnimating(){
+	public void stopAnimating() {
 		animating = false;
-		System.out.println("stopped animating "+this.getPartName());
-		if (ecr!=null) {
+		System.out.println("stopped animating " + this.getPartName());
+		if (ecr != null) {
 			ecr.resumeRecording();
 			System.out.println("... resume recording");
 		}
@@ -563,7 +597,7 @@ public class StatemachinesDiagramEditor extends DiagramDocumentEditor implements
 	/*
 	 * checks whether this diagram is being animated
 	 */
-	public boolean isAnimating(){
-		return animating; 
+	public boolean isAnimating() {
+		return animating;
 	}
 }

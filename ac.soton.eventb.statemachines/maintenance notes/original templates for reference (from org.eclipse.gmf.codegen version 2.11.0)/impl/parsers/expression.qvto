@@ -1,0 +1,25 @@
+import xpt.diagram.Utils;
+modeltype gmfgen uses "http://www.eclipse.org/gmf/2009/GenModel";
+library expression;
+
+helper gmfgen::ExpressionLabelParser::isViewExpressionDefinedAndOcl() : Boolean {
+	return not(self.viewExpression.oclIsUndefined()) and self.viewExpression.provider.oclIsKindOf(gmfgen::GenExpressionInterpreter);
+}
+
+helper gmfgen::GenParserImplementation::isViewExpressionDefinedAndOcl() : Boolean {
+	return false;
+}	
+
+helper gmfgen::GenCommonBase::isViewExpressionDefiedAndOcl() : Boolean {
+	return let labelModelFacet : gmfgen::LabelModelFacet 
+		= if self.oclIsKindOf(gmfgen::GenChildLabelNode) then self.oclAsType(gmfgen::GenChildLabelNode).labelModelFacet 
+	      else (if self.oclIsKindOf(gmfgen::GenLabel) then self.oclAsType(gmfgen::GenLabel).modelFacet 
+	 	  else null 
+	 	  endif)
+	 	  endif	 	      
+	in if labelModelFacet = null 
+			   then false 
+			   else labelModelFacet.parser.isViewExpressionDefinedAndOcl()
+		  	   endif;
+}
+

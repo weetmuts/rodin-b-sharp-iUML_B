@@ -1,0 +1,41 @@
+﻿/*
+ * Copyright (c) 2007, 2009 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ * 	  Michael Golubev (Montages) - API extracted to GMF-T runtime 
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«DEFINE EditPartProvider FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::copyright FOR editorGen-»
+package «providersPackageName»;
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «editPartProviderClassName» «EXPAND extendsList» {
+
+	«EXPAND _constructor»
+
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::GenDiagram»extends org.eclipse.gmf.tooling.runtime.providers.DefaultEditPartProvider«ENDDEFINE»
+«DEFINE implementsList FOR gmfgen::GenDiagram»«ENDDEFINE»
+
+«DEFINE _constructor FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «editPartProviderClassName»() {
+		super(new «getEditPartFactoryQualifiedClassName()»(), «-»
+			«EXPAND xpt::editor::VisualIDRegistry::runtimeTypedInstanceCall FOR self», «-»
+			«getEditPartQualifiedClassName()».MODEL_ID			
+		);
+	}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagram»«ENDDEFINE»

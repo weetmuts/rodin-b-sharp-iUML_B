@@ -20,6 +20,8 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeConnectionTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
+import org.eclipse.gmf.tooling.runtime.part.DefaultLinkToolEntry;
+import org.eclipse.gmf.tooling.runtime.part.DefaultNodeToolEntry;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -85,7 +87,7 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.State_2008);
 		types.add(StatemachinesElementTypes.State_3013);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.State1CreationTool_title,
 				Messages.State1CreationTool_desc, types);
 		entry.setId("createState1CreationTool"); //$NON-NLS-1$
@@ -102,7 +104,7 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.Initial_2006);
 		types.add(StatemachinesElementTypes.Initial_3011);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Initial2CreationTool_title,
 				Messages.Initial2CreationTool_desc, types);
 		entry.setId("createInitial2CreationTool"); //$NON-NLS-1$
@@ -119,7 +121,7 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.Final_2007);
 		types.add(StatemachinesElementTypes.Final_3012);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Final3CreationTool_title,
 				Messages.Final3CreationTool_desc, types);
 		entry.setId("createFinal3CreationTool"); //$NON-NLS-1$
@@ -136,12 +138,12 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.Any_3016);
 		types.add(StatemachinesElementTypes.Any_2010);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Any4CreationTool_title,
 				Messages.Any4CreationTool_desc, types);
 		entry.setId("createAny4CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(StatemachinesDiagramEditorPlugin
-				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/ANY.png")); //$NON-NLS-1$
+				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Any.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -153,7 +155,7 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.Junction_3015);
 		types.add(StatemachinesElementTypes.Junction_2009);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Junction5CreationTool_title,
 				Messages.Junction5CreationTool_desc, types);
 		entry.setId("createJunction5CreationTool"); //$NON-NLS-1$
@@ -170,7 +172,7 @@ public class StatemachinesPaletteFactory {
 		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
 		types.add(StatemachinesElementTypes.Fork_3017);
 		types.add(StatemachinesElementTypes.Fork_2011);
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.ForkJoin6CreationTool_title,
 				Messages.ForkJoin6CreationTool_desc, types);
 		entry.setId("createForkJoin6CreationTool"); //$NON-NLS-1$
@@ -184,7 +186,7 @@ public class StatemachinesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createStatemachine1CreationTool() {
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Statemachine1CreationTool_title,
 				Messages.Statemachine1CreationTool_desc,
 				Collections
@@ -200,7 +202,7 @@ public class StatemachinesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createInvariant2CreationTool() {
-		NodeToolEntry entry = new NodeToolEntry(
+		DefaultNodeToolEntry entry = new DefaultNodeToolEntry(
 				Messages.Invariant2CreationTool_title,
 				Messages.Invariant2CreationTool_desc,
 				Collections
@@ -216,7 +218,7 @@ public class StatemachinesPaletteFactory {
 	 * @generated
 	 */
 	private ToolEntry createTransition1CreationTool() {
-		LinkToolEntry entry = new LinkToolEntry(
+		DefaultLinkToolEntry entry = new DefaultLinkToolEntry(
 				Messages.Transition1CreationTool_title,
 				Messages.Transition1CreationTool_desc,
 				Collections
@@ -226,63 +228,5 @@ public class StatemachinesPaletteFactory {
 				.findImageDescriptor("/ac.soton.eventb.statemachines.edit/icons/png/Transition.png")); //$NON-NLS-1$
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
-	}
-
-	/**
-	 * @generated
-	 */
-	private static class NodeToolEntry extends ToolEntry {
-
-		/**
-		 * @generated
-		 */
-		private final List<IElementType> elementTypes;
-
-		/**
-		 * @generated
-		 */
-		private NodeToolEntry(String title, String description,
-				List<IElementType> elementTypes) {
-			super(title, description, null, null);
-			this.elementTypes = elementTypes;
-		}
-
-		/**
-		 * @generated
-		 */
-		public Tool createTool() {
-			Tool tool = new UnspecifiedTypeCreationTool(elementTypes);
-			tool.setProperties(getToolProperties());
-			return tool;
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	private static class LinkToolEntry extends ToolEntry {
-
-		/**
-		 * @generated
-		 */
-		private final List<IElementType> relationshipTypes;
-
-		/**
-		 * @generated
-		 */
-		private LinkToolEntry(String title, String description,
-				List<IElementType> relationshipTypes) {
-			super(title, description, null, null);
-			this.relationshipTypes = relationshipTypes;
-		}
-
-		/**
-		 * @generated
-		 */
-		public Tool createTool() {
-			Tool tool = new UnspecifiedTypeConnectionTool(relationshipTypes);
-			tool.setProperties(getToolProperties());
-			return tool;
-		}
 	}
 }

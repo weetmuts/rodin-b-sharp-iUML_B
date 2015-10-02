@@ -1,0 +1,398 @@
+
+CUSTOMISATIONS IN GENERATED DIAGRAM CODE
+-------------------------------------------------------------------------------------
+These should possibly be moved to the custom templates before the next re-generation
+-------------------------------------------------------------------------------------
+ 
+ 
+-----------------------------------------
+AnyEditPart, Any2EditPart, FinalEditPart, Final2editPart
+In the inner Figure class: Override setForegroundColor to set the child Figure colors
+-----------------------------------------
+ 		/**
+		 * sets the foreground colour of the primary figure and also sets the 
+		 * background and foreground colours of the child figure to the foreground colour
+		 * (i.e. the child is assumed to be a solid foreground item)
+		 * 
+		 * @custom
+		 */
+		public void setForegroundColor(Color fg) {
+			for (Object child : getChildren()){
+				if (child instanceof Figure){
+					((Figure)child).setBackgroundColor(fg);
+					((Figure)child).setForegroundColor(fg);
+				}
+			}
+			super.setForegroundColor(fg);
+		}
+		
+		
+-----------------------------------------
+InnerStateStatemachinesCompartmentEditPart
+& StateStatemachinesCompartmentEditPart
+
+create figure is changed to add a margin and use all available space for state-machines compartments
+-----------------------------------------
+
+	/**
+	 * @generated NOT
+	 */
+	public IFigure createFigure() {
+		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
+				.createFigure();
+		result.setTitleVisibility(false);
+
+		//+++ add margins
+		Insets insets = result.getContentPane().getInsets();
+		insets.top = -1;
+		insets.bottom = 1;
+		insets.left = 3;
+		insets.right = 3;
+		// use all space
+		ConstrainedToolbarLayout layoutMgr = (ConstrainedToolbarLayout) result
+				.getContentPane().getLayoutManager();
+		layoutMgr.setHorizontal(false);
+		layoutMgr.setStretchMajorAxis(true);
+		layoutMgr.setStretchMinorAxis(true);
+		layoutMgr.setSpacing(0);
+		//---
+
+		return result;
+	}
+	
+-----------------------------------------	
+InvariantEditPart
+the cell editor returned by getManager is overriden to initialiase with the Rodin Math font and a Rodin keyboard listener
+-----------------------------------------
+	/**
+	 * @generated NOT
+	 */
+	protected DirectEditManager getManager() {
+		if (manager == null) {
+			setManager(new TextDirectEditManager(this,
+					null,
+					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
+				
+				//+++ overriden to use Rodin math font and keyboard listener
+				@Override
+				protected void initCellEditor() {
+					super.initCellEditor();
+					Text text = (Text) getCellEditor().getControl();
+					Font font = JFaceResources
+							.getFont(PreferenceConstants.RODIN_MATH_FONT);
+					text.setFont(font);
+					ModifyListener eventBListener = RodinKeyboardUIPlugin
+							.getDefault().createRodinModifyListener();
+					text.addModifyListener(eventBListener);
+				}
+				//---
+				
+			});
+		}
+		return manager;
+	}
+	
+-----------------------------------------	
+StatemachineStatesCompartmentEditPart
+modified createFigure to remove border
+-----------------------------------------	
+
+		/**
+		 * @generated NOT
+		 */
+		public IFigure createFigure() {
+			ResizableCompartmentFigure result = (ResizableCompartmentFigure) super
+					.createFigure();
+			result.setTitleVisibility(false);
+			
+			//++++ no border
+			result.setBorder(null);
+			//----
+			
+			return result;
+		}
+		
+-----------------------------------------	
+TransitionLabelEditPart
+modified refreshVisuals to enable wrapping
+-----------------------------------------
+	/**
+	 * @generated NOT
+	 */
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		refreshLabel();
+		refreshFont();
+		refreshFontColor();
+		refreshUnderline();
+		refreshStrikeThrough();
+
+		//+++Added to make label wrap cfs 11/03/13
+		if (figure instanceof WrappingLabel) {
+			((WrappingLabel) figure).setTextWrap(true);
+		}
+		//---
+	}
+	
+-----------------------------------------
+
+Some Edit Parts have extra methods to provide hover over feedback.
+E.G InvariantEditPart
+
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure=null;
+	String feedbackText=null;;
+
+	
+	/*
+	 * Provides mouse over feedback:
+	 * Customised to  show the contents of the invariant
+	 * @custom
+	 */
+	@Override
+	public void showTargetFeedback(Request request) {
+		super.showTargetFeedback(request);
+		// the feedback layer figures do not receive mouse e
+		if (feedbackText==null) {
+			feedbackText = getMethodText();
+			if (feedbackText.length()>0){
+				feedbackFigure = new Label(feedbackText);
+				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				Point location = getFigure().getBounds().getLocation().translate(50, 0);			
+				getFigure().translateToAbsolute(location);
+				bounds.setLocation(location);
+				feedbackFigure.setBounds(bounds);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGreen);  //tooltipForeground);
+				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
+				feedbackFigure.setOpaque(true);
+				//feedbackFigure.setBorder(new LineBorder());
+				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+				layer.add(feedbackFigure);
+			}
+		}
+	}
+
+	private String getMethodText() {
+		Invariant invariant = (Invariant) resolveSemanticElement();
+		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
+		text = text + indent(1,"",invariant.getPredicate());
+		if (invariant.getComment()!=null && invariant.getComment().length()>0) {
+			text = text + "\n"+ indent(2, "//", invariant.getComment());
+		}
+		return text;
+	}
+	
+	private static String indent(int tabs, String prefix, String text){
+		if (text==null || text.length()<1) return "";
+		String indent = "";
+		for (int i=0; i<tabs; i++){
+			indent = indent+"\t";
+		}
+		indent = indent+prefix;
+		return indent+text.replace("\n", "\n"+indent);
+	}
+
+	/* Erases mouse-over feedback.
+	 * @custom
+	 */
+	@Override
+	public void eraseTargetFeedback(Request request) {
+		super.eraseTargetFeedback(request);
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer()==null) {
+			return;
+		}
+		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
+		if (layer != null && feedbackFigure != null
+				&& feedbackFigure.getParent() != null) {
+			layer.remove(feedbackFigure);
+		}
+		feedbackFigure = null;
+		feedbackText = null;
+	}
+	
+	
+-----------------------------------------
+OpenDiagramAction
+The generator leaves this as an unsupported operation.. probably not worth doing in templates?	
+-----------------------------------------
+	/**
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unused")
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart diagramEditor = HandlerUtil.getActiveEditorChecked(event);
+		ISelection selection = HandlerUtil.getCurrentSelectionChecked(event);
+		if (selection instanceof IStructuredSelection) {
+			Object element = ((IStructuredSelection) selection)
+					.getFirstElement();
+			if (element instanceof GraphicalEditPart) {
+				EditPolicy policy = ((GraphicalEditPart) element)
+						.getEditPolicy(EditPolicyRoles.OPEN_ROLE);
+				if (policy != null) {
+					Command command = policy.getCommand(new Request(
+							RequestConstants.REQ_OPEN));
+					if (command != null && command.canExecute())
+						command.execute();
+				}
+			}
+		}
+		return null;
+	}
+
+-----------------------------------------
+ValidateDiagramAction
+The generator leaves this as an unsupported operation.. probably not worth doing in templates?
+-----------------------------------------
+
+	/**
+	 * @generated NOT
+	 */
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart editor = HandlerUtil.getActiveEditorChecked(event);
+		if (editor instanceof IDiagramWorkbenchPart) {
+			IDiagramWorkbenchPart diagramEditor = (IDiagramWorkbenchPart) editor;
+
+			// run validation
+			ValidateAction action = new ValidateAction(editor.getSite()
+					.getPage());
+			action.run();
+
+			// show feedback
+			try {
+				IFile file = WorkspaceSynchronizer.getFile(diagramEditor
+						.getDiagram().eResource());
+				String errors = ValidateAction.getValidationErrors(file);
+				if (errors.isEmpty())
+					MessageDialog.openInformation(editor.getSite().getShell(),
+							"Validation Information",
+							"Validation completed successfully");
+				else
+					MessageDialog.openError(editor.getSite().getShell(),
+							"Validation Information",
+							"Validation has found problems in your model:\n"
+									+ errors);
+			} catch (CoreException e) {
+				throw new ExecutionException(
+						"Validation result retrieval failed", e);
+			}
+		}
+
+		return null;
+	}
+
+
+-----------------------------------------	
+For Refactoring
+-----------------------------------------
+
+in StatemachinesDiagramEditor all this has been added 
+	
+///////////////////////////////////////////////////////////////////////////////////////
+	/// The following methods have been overridden to 
+	// a) save on de-activation to avoid synch problems between several editors
+	// b) provide change recording
+	////////////////////////////////////////////////////////////////////////////////
+	
+	
+	@Override
+	public void setInput(IEditorInput input) {
+		super.setInput(input);
+		getSite().getPage().addPartListener(this);
+	}
+
+	@Override
+	public void dispose() {
+		ecr.disposeChangeRecorder();
+		super.dispose();
+		getSite().getPage().removePartListener(this);
+	}
+
+	private boolean deactivating = false;
+
+	/**
+	 * Saves editor if it is deactivated.
+	 * 
+	 * @param part
+	 */
+	@Override
+	public void partDeactivated(IWorkbenchPart part) {
+		if (part == this) {
+			deactivating = true;
+		}
+	}
+
+	@Override
+	public void partActivated(IWorkbenchPart part) {
+		if (deactivating == true) {
+			if (part != this
+					&& isDirty()
+					&& !(part instanceof PropertySheet)
+					&& !animating()		) {
+				doSave(new NullProgressMonitor());
+			}
+			if (part == this) {
+				deactivating = false;
+			}
+		}else if (part==this){
+			
+		}
+	}
+	
+	
+	/*
+	 * checks whether the Statemachine of this diagram is being animated
+	 */
+	private boolean animating(){
+		Statemachine sm = (Statemachine) this.getDiagram().getElement();
+		EList<EObject> states = sm.getAllContained(StatemachinesPackage.Literals.STATE, true);
+		for (EObject eo : states){
+			if (eo instanceof State && ((State)eo).isActive()) return true;
+		}
+		EList<EObject> transitions = sm.getAllContained(StatemachinesPackage.Literals.TRANSITION, true);
+		for (EObject eo : transitions){
+			if (eo instanceof Transition 
+					&& ((Transition)eo).getOperations()!=null
+					&& ((Transition)eo).getOperations().size()>0) return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void partBroughtToTop(IWorkbenchPart part) {
+
+	}
+	
+///////////////////changeRecording///////////////////
+
+	@Override
+	public void partClosed(IWorkbenchPart part) {
+		System.out.println("closing");
+		if (ecr!=null) ecr.disposeChangeRecorder();
+		System.out.println("closed and disposed");
+	}
+
+	@Override
+	public void partOpened(IWorkbenchPart part) {
+		System.out.println("opening");
+		EObject diagramElement = this.getDiagram().getElement();
+		if (diagramElement instanceof EventBElement){
+			EventBObject component = ((EventBElement)diagramElement).getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);
+			ecr=new Recorder((EventBNamedCommentedComponentElement)component);
+			ecr.resumeRecording();
+		}
+		System.out.println("opened and recording");
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		System.out.println("saving");
+		if (ecr!=null) ecr.saveChanges();
+		super.doSave(progressMonitor);
+		if (ecr!=null) ecr.resumeRecording();
+		System.out.println("saved and still recording");
+	}
+	
+	private Recorder ecr=null;

@@ -1,0 +1,39 @@
+﻿/*
+ * Copyright (c) 2007, 2009 Borland Software Corporation
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ *    Michael Golubev (Montages) - [407332] common API for XXXElementTypes extracted to GMFT-runtime
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«DEFINE IconProvider FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::copyright FOR editorGen-»
+package «providersPackageName»;
+
+«EXPAND xpt::Common::generatedClassComment»
+public class «iconProviderClassName» extends «EXPAND extendsList» implements «EXPAND implementsList» {
+
+	«EXPAND _constructor-»
+
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE extendsList FOR gmfgen::GenDiagram»org.eclipse.gmf.tooling.runtime.providers.DefaultElementTypeIconProvider«ENDDEFINE»
+«DEFINE implementsList FOR gmfgen::GenDiagram»org.eclipse.gmf.runtime.common.ui.services.icon.IIconProvider«ENDDEFINE»
+
+«DEFINE _constructor FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	public «iconProviderClassName»() {
+		super(«EXPAND xpt::providers::ElementTypes::typedInstanceCall»);
+	}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagram»«ENDDEFINE»

@@ -1,0 +1,524 @@
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In diagram/editParts/LinkEditPart.xpt :: (see also impl changes)
+added preference store constant to «DEFINE attributes FOR gmfgen::GenNode-»
+override refreshForegroundColor to get from preferences,
+override setLineWidth to set line width of primary shape,
+override handleNotificationEvent to change line width when enabled operations attached
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE attributes FOR gmfgen::GenNode-»
+...
+	«REM»CFS: added pref store constant «ENDREM»	
+	«EXPAND xpt::diagram::editparts::Common::prefStoreConstant-»
+..
+
+————————————————————————
+
+«DEFINE additions FOR gmfgen::GenLink-»
+	«REM»CFS: added refresh line colour from preferences«ENDREM»
+	«EXPAND refreshForegroundColor-»
+	«REM»MY: added line width control«ENDREM»
+	«EXPAND setLineWidth-»
+	«REM»MY: added state handling«ENDREM»
+	«EXPAND handleNotificationEvent-»
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added refreshForegroundColor method for link editparts, to refresh line colour from preferences«ENDREM»
+«DEFINE refreshForegroundColor FOR gmfgen::GenLink-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the connection from preferences.\n' 
+	)»
+	protected void refreshForegroundColor() {
+		«EXPAND impl::diagram::editparts::LinkEditPart::refreshForegroundColorBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added setLineWidth method for link editparts, to give control over line width«ENDREM»
+«DEFINE setLineWidth FOR gmfgen::GenLink-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Set the line width of the connection.\n' + 
+		'@param width the new line width'
+	)»
+	protected void setLineWidth(int width) {
+		«EXPAND impl::diagram::editparts::LinkEditPart::setLineWidthBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added handler method for link editparts, to refresh on enabled state change«ENDREM»
+«DEFINE handleNotificationEvent FOR gmfgen::GenLink-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'handle events.\n' + 
+		'increases the line width when enabled operations attached.\n'+
+		'@param event the notification event'
+	)»
+	protected void handleNotificationEvent(org.eclipse.emf.common.notify.Notification event) {
+		«EXPAND impl::diagram::editparts::LinkEditPart::handleNotificationEventBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In diagram/editParts/NodeEditPart.xpt :: 
+added preference store constant to «DEFINE attributes FOR gmfgen::GenNode-»
+added override of child handleNotificationEvent to allow impl to update on state changes for refines and animation (see impl changes)
+added overrides of refresh ForgroundColor and refreshBackgroundColor in order to use new preferences
+————————————————————————————————————————————————————————————————————————————
+«DEFINE attributes FOR gmfgen::GenNode-»
+...
+	«REM»CFS: added pref store constant «ENDREM»	
+	«EXPAND xpt::diagram::editparts::Common::prefStoreConstant-»
+..
+
+————————————————————————
+
+«DEFINE handleNotificationEvent FOR gmfgen::GenNode-»
+«REM»MY: add handler method also for child node editparts, to refresh on state change«ENDREM»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'handle notification events.\n' + 
+		'\n' +
+		'@param event - the notification event'
+	)»
+	protected void handleNotificationEvent(org.eclipse.emf.common.notify.Notification event) {
+		«EXPAND impl::diagram::editparts::NodeEditPart::handleNotificationEventBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«DEFINE additions FOR gmfgen::GenNode-»
+	«REM»CFS: added refresh line colour from preferences«ENDREM»
+	«EXPAND refreshForegroundColor-»
+	«REM»CFS: added refresh fill colour from preferences«ENDREM»
+	«EXPAND refreshBackgroundColor-»
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added refreshForegroundColor method for node editparts, to refresh foreground colour from preferences«ENDREM»
+«DEFINE refreshForegroundColor FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the foreground from the preferences.\n' 
+	)»
+	protected void refreshForegroundColor() {
+		«EXPAND impl::diagram::editparts::NodeEditPart::refreshForegroundColorBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added refreshForegroundColor method for node editparts, to refresh background colour from preferences«ENDREM»
+«DEFINE refreshBackgroundColor FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the background from the preferences.\n' 
+	)»
+	protected void refreshBackgroundColor() {
+		«EXPAND impl::diagram::editparts::NodeEditPart::refreshBackgroundColorBody-»
+	}
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In diagram/editPolicies/DiagramCanonicalEditPolicy.xpt :: changed superclass of CanonicalEditPolicy class 
+THIS LOOKS LIKE A BUG FIX.. MAY BE NOT RELEVANT IN LATEST GMF???
+————————————————————————————————————————————————————————————————————————————
+
+«REM»MY: superclass changed from CanonicalEditPolicy to CanonicalConnectionEditPolicy to fix problems with disappearing links«ENDREM»
+public class «canonicalEditPolicyClassName» extends org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy {
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In impl/diagram/editPolicies/DiagramCanonicalEditPolicy.xpt :: 
+This adds some more method overrides which are defined in impl/diagram/update/CanonicalUpdate.xpt (see later on)
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE additions FOR gmfgen::GenDiagram»
+«REM»MY: additional methods for CanonicalConnectionEditPolicy«ENDREM»
+	«EXPAND impl::diagram::update::CanonicalUpdate::canonicalConnectionEditPolicyOverrideMethods-»
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In impl/diagram/editParts/LinkEditPart.xpt :: 
+added refreshForegroundColor body to get from preferences,
+added setLineWidth body to set line width of primary shape,
+changed handleNotificationEventBody to change line width when enabled operations attached
+————————————————————————————————————————————————————————————————————————————
+«REM»CFS: added refresh foreground colour body for link editparts«ENDREM-»
+«DEFINE refreshForegroundColorBody FOR gmfgen::GenLink-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set foreground line color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+				prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getLineColorPreference(eClazz, false));
+	}
+	
+	if (rgb!=null){
+		setForegroundColor(new Color(null,rgb));
+	}else{
+		super.refreshForegroundColor();
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»CFS: added set line width body for link editparts«ENDREM-»
+«DEFINE setLineWidthBody FOR gmfgen::GenLink-»
+	getPrimaryShape().setLineWidth(width);
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: added notification handler body for link editparts«ENDREM»
+«DEFINE handleNotificationEventBody FOR gmfgen::GenLink-»
+	«EXPAND handleStateChange»
+	super.handleNotificationEvent(event);
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: code to update line width for enabled transition (currently added to all links)«ENDREM»
+«DEFINE handleStateChange FOR gmfgen::GenLink-»
+	String featureName = event.getFeature() instanceof EStructuralFeature? ((EStructuralFeature)event.getFeature()).getName() : "";		
+	// update line width and color if state changes
+	if ("operations".equals(featureName)) {
+		boolean active = !((Collection<?>)event.getNewValue()).isEmpty();
+		setLineWidth(1 + (active ? 2 : 0));
+	}
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In impl/diagram/editParts/NodeEditPart.xpt :: 
+changed handleNotificationEventBody to change colour etc. when refines changes and for animation events,
+added refreshForegroundColor body to get from preferences,
+added refreshBackgroundColor body to get from preferences
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE handleNotificationEventBody FOR gmfgen::GenTopLevelNode-»
+«REM»MY: added state change hanling«ENDREM»
+	«EXPAND handleStateChange»
+	if (event.getNotifier() == getModel() && org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEModelElement_EAnnotations().equals(event.getFeature())) {
+		handleMajorSemanticChange();
+	} else {
+		super.handleNotificationEvent(event);
+	}
+«ENDDEFINE»
+
+«REM»MY: added notification handler body for child node editparts«ENDREM»
+«DEFINE handleNotificationEventBody FOR gmfgen::GenNode-»
+	«EXPAND handleStateChange»
+	super.handleNotificationEvent(event);
+«ENDDEFINE»
+
+«REM»MY/CFS: code to update line width for active state changes and background colour for refines changes «ENDREM»
+«DEFINE handleStateChange FOR gmfgen::GenNode-»
+	«IF (isActiveElement(self) or isRefinedElement(self))»
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+					.getFeature()).getName() : "";
+	«ENDIF»
+	«IF isActiveElement(self)»		
+		// update line width depending on active state
+		if ("active".equals(featureName)) {
+			boolean active = event.getNewBooleanValue();
+			setLineWidth(1 + (active ? 2 : 0));
+		}
+	«ENDIF»
+	«IF isRefinedElement(self)»
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
+		}
+	«ENDIF»
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»CFS: added refresh foreground colour body for node editparts«ENDREM»
+«DEFINE refreshForegroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set foreground line color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getLineColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getLineColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setForegroundColor(new Color(null,rgb));
+	}else{
+		super.refreshForegroundColor();
+	}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»CFS: added refresh background colour body for node editparts«ENDREM»
+«DEFINE refreshBackgroundColorBody FOR gmfgen::GenNode-»
+    org.eclipse.swt.graphics.RGB rgb = null;
+	// set background fill color
+	org.eclipse.emf.ecore.EObject element = resolveSemanticElement();
+	if (element != null) {
+		org.eclipse.emf.ecore.EClass eClazz = element.eClass();
+	«IF isRefinedElement(self)»
+		org.eclipse.emf.ecore.EStructuralFeature refinesFeature = eClazz.getEStructuralFeature("refines");
+		boolean refined = refinesFeature == null ? false : element.eIsSet(refinesFeature);
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(prefStore,
+				ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage
+						.getFillColorPreference(eClazz, refined));
+	«ELSE»
+		rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(
+			prefStore,
+			ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage.getFillColorPreference(eClazz, false));
+	«ENDIF»
+	}
+	
+	if (rgb!=null){
+		setBackgroundColor(new Color(null,rgb));
+	}else{
+		super.refreshBackgroundColor();
+	}
+«ENDDEFINE»
+
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In impl/diagram/update/CanonicalUpdate.xpt ::
+ added overrides of methods in canonicalConnectionEditPolicy
+(This is used in DiagramCanonicalEditPolicy.xpt)
+————————————————————————————————————————————————————————————————————————————
+
+«REM»MY: method overrides for CanonicalConnectionEditPolicy«ENDREM»
+«DEFINE canonicalConnectionEditPolicyOverrideMethods FOR gmfgen::GenDiagram-»
+	«EXPAND getSemanticConnectionsListMethod-»
+	«EXPAND getSourceElementMethod-»
+	«EXPAND getTargetElementMethod-»
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: «ENDREM»
+«DEFINE getSemanticConnectionsListMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment»
+@Override
+protected «EXPAND CodeStyle::G('java.util.List', 'org.eclipse.emf.ecore.EObject')» getSemanticConnectionsList() {
+	«EXPAND CodeStyle::G('java.util.List', 'org.eclipse.emf.ecore.EObject')» connections = new «EXPAND CodeStyle::G('java.util.LinkedList', 'org.eclipse.emf.ecore.EObject')»();
+	«EXPAND CodeStyle::G('org.eclipse.emf.common.util.TreeIterator', 'Object')» it = org.eclipse.emf.ecore.util.EcoreUtil.getAllContents(getDiagram().getElement(), true);
+	while (it.hasNext()) {
+		Object child = it.next();
+		if (child instanceof ac.soton.eventb.statemachines.Transition)
+			connections.add((org.eclipse.emf.ecore.EObject) child);
+	}
+	return connections;
+}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: «ENDREM»
+«DEFINE getSourceElementMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment»
+@Override
+protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
+	if (relationship instanceof ac.soton.eventb.statemachines.Transition)
+		return ((ac.soton.eventb.statemachines.Transition) relationship).getSource();
+	return null;
+}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»MY: «ENDREM»
+«DEFINE getTargetElementMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment»
+@Override
+protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
+	if (relationship instanceof ac.soton.eventb.statemachines.Transition)
+		return ((ac.soton.eventb.statemachines.Transition) relationship).getTarget();
+	return null;
+}
+«ENDDEFINE»
+
+————————————————————————
+
+«REM»CFS: shouldDeleteView is overriden to return true if the transition has been moved to different source or target«ENDREM»
+«DEFINE shouldDeleteViewMethod FOR gmfgen::GenDiagram-»
+«EXPAND xpt::Common::generatedMemberComment(
+	'Return <i>true</i> if this editpolicy should delete the supplied view otherwise <i>false</i>.\n'+ 
+	'For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.\n'+
+	'(i.e. if the transition has been moved to a different source or target state). Otherwise the default behavior is returned\n'
+	)»
+@Override
+protected boolean shouldDeleteView(org.eclipse.gmf.runtime.notation.View view) {
+org.eclipse.emf.ecore.EObject sel = org.eclipse.gmf.runtime.diagram.core.util.ViewUtil.resolveSemanticElement(view);
+	if (sel instanceof ac.soton.eventb.statemachines.Transition && view instanceof org.eclipse.gmf.runtime.notation.Edge) {
+		ac.soton.eventb.statemachines.Transition tr = (ac.soton.eventb.statemachines.Transition) sel;
+		org.eclipse.gmf.runtime.notation.Edge ed = (org.eclipse.gmf.runtime.notation.Edge) view;
+		if (ed.getSource().getElement() != tr.getSource()
+			|| ed.getTarget().getElement() != tr.getTarget()) {
+			return true;
+		}
+	}
+	return super.shouldDeleteView(view);
+}
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In impl/editor/ :: Added ExtendedEditor.xpt ???
+————————————————————————————————————————————————————————————————————————————
+
+/*
+ * Copyright (c) 2010 Artem Tikhomirov and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Artem Tikhomirov (independent) - Initial API and implementation
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«DEFINE canonicalEPFactoryHintValue FOR gmfgen::GenDiagram»«editorGen.modelID»-CEP«ENDDEFINE»
+«DEFINE canonicalEPFactoryHintStringValue FOR gmfgen::GenDiagram»"«EXPAND canonicalEPFactoryHintValue»"«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/diagram/commands/CreateNodeCommand.xpt :: added auto-naming to normalElementCreation
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE normalElementCreation(node : gmfgen::GenNode, varName : String) FOR gmfgen::TypeModelFacet-»
+	«EXPAND MetaModel::NewInstance(varName) FOR metaClass»
+«IF containmentMetaFeature <> null-»
+	«EXPAND MetaModel::DeclareAndAssign('owner', 'getElementToEdit()') FOR containmentMetaFeature.genClass»
+	«EXPAND MetaModel::modifyFeature('owner', containmentMetaFeature.genClass, varName) FOR containmentMetaFeature-»
+	
+	«REM»CFS: added auto-naming of new nodes «ENDREM»
+	//auto-naming
+	java.lang.String name = org.eventb.emf.core.util.NameUtils.getName(owner)+ "_"
+				+ «varName».eClass().getName().toLowerCase();
+	name = org.eventb.emf.core.util.NameUtils.getSafeName(«varName», name, owner, null);
+	«varName».setName(name);
+	«REM»CFS: end of autonaming «ENDREM»
+	
+«ELSE-»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/diagram/editparts/Utils.qvto :: 
+Added query to check if element has a refines feature
+Added query to check if element has a active feature
+————————————————————————————————————————————————————————————————————————————
+
+// custom query to check if element is a refined element (capable of refining another element)
+// checks if domain element ecore class has 'refines' structural feature
+helper isRefinedElement(node : gmfgen::GenNode) : Boolean {
+	return null <> node.modelFacet and
+		null <> node.modelFacet.metaClass and
+		null <> node.modelFacet.metaClass.ecoreClass and
+		null <> node.modelFacet.metaClass.ecoreClass.getEStructuralFeature("refines")
+}
+
+————————————————————————
+
+// custom query to check if element is has an active attribute (capable of being active when animating)
+// checks if domain element ecore class has ‘active’ structural feature
+helper isActiveElement(node : gmfgen::GenNode) : Boolean {
+	return null <> node.modelFacet and
+		null <> node.modelFacet.metaClass and
+		null <> node.modelFacet.metaClass.ecoreClass and
+		null <> node.modelFacet.metaClass.ecoreClass.getEStructuralFeature("active")
+}
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/diagram/editparts/Common.xpt :: 
+Added definition for preference store constant
+————————————————————————————————————————————————————————————————————————————
+
+«REM»CFS: added pref store constant «ENDREM»	
+«DEFINE prefStoreConstant FOR gmfgen::GenCommonBase-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	protected static final org.eclipse.jface.preference.IPreferenceStore prefStore = ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin.getInstance().getPreferenceStore();
+«ENDDEFINE»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/providers/extensions.xpt :: ???
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE canonicalEPFactoryHintValue FOR gmfgen::GenDiagram»«editorGen.modelID»-CEP«ENDDEFINE»
+«DEFINE canonicalEPFactoryHintStringValue FOR gmfgen::GenDiagram»"«EXPAND canonicalEPFactoryHintValue»"«ENDDEFINE»
+
+————————————————————————
+
+add to viewProvider extension points : Node and Edge semantic hints:
+«IF synchronized»«EXPAND impl::editor::ExtendedEditor::canonicalEPFactoryHintValue»,«ENDIF»
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/editor/ValidateAction.xpt :: run() changed to use page.getActiveEditor() so that Validate works from Property Sheet (sept15)
+————————————————————————————————————————————————————————————————————————————
+
+«DEFINE run FOR gmfgen::GenDiagram-»
+
+	«EXPAND xpt::Common::generatedMemberComment»
+	public void run() {
+		«REM»CFS: changed from page.getActivePart() to page.getActiveEditor() so that it works from the property sheet «ENDREM»
+		org.eclipse.ui.IWorkbenchPart workbenchPart = page.getActiveEditor();
+		if (workbenchPart instanceof org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart) {
+			final org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart part =	(org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart) workbenchPart;
+
+————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————
+In xpt/providers/ViewProvider.xpt :: ???
+————————————————————————————————————————————————————————————————————————————
+
+In provider for CreateNodeViewOperation
+CHANGE:
+		if (op.getSemanticHint() == null) {
+			// Semantic hint is not specified. Can be a result of call from CanonicalEditPolicy.
+TO:
+		if (op.getSemanticHint() == null«IF synchronized» || «EXPAND impl::editor::ExtendedEditor::canonicalEPFactoryHintStringValue».equals(op.getSemanticHint())«ENDIF») {
+			// Semantic hint is not specified, or a factory hint value was provided (which can be a result of call from CanonicalEditPolicy).
+
+————————————————————————
+
+In  CreateNode
+CHANGE:
+		if (semanticHint == null) {
+
+TO:
+		if (semanticHint == null«IF synchronized» || «EXPAND impl::editor::ExtendedEditor::canonicalEPFactoryHintStringValue».equals(semanticHint)«ENDIF») {
+
+
+
+
+
+
+
+

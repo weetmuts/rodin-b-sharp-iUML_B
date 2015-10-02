@@ -70,6 +70,7 @@ import org.rodinp.keyboard.ui.preferences.PreferenceConstants;
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.diagram.edit.policies.InvariantItemSemanticEditPolicy;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextNonResizableEditPolicy;
+import ac.soton.eventb.statemachines.diagram.edit.policies.StatemachinesTextSelectionEditPolicy;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesParserProvider;
@@ -359,11 +360,10 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	 */
 	protected DirectEditManager getManager() {
 		if (manager == null) {
-			setManager(new TextDirectEditManager(this,
-					TextDirectEditManager.getTextCellEditorClass(this),
+			setManager(new TextDirectEditManager(this, null,
 					StatemachinesEditPartFactory.getTextCellEditorLocator(this)) {
-				//FIXME: refactor this to use a custom external class;
-				// maybe generate code from templates
+
+				//+++ overriden to use Rodin math font and keyboard listener
 				@Override
 				protected void initCellEditor() {
 					super.initCellEditor();
@@ -375,6 +375,8 @@ public class InvariantEditPart extends CompartmentEditPart implements
 							.getDefault().createRodinModifyListener();
 					text.addModifyListener(eventBListener);
 				}
+				//---
+
 			});
 		}
 		return manager;
@@ -398,8 +400,8 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	 * @generated
 	 */
 	protected void performDirectEdit(Point eventLocation) {
-		if (getManager().getClass() == TextDirectEditManager2.class) {
-			((TextDirectEditManager2) getManager()).show(eventLocation
+		if (getManager().getClass() == TextDirectEditManager.class) {
+			((TextDirectEditManager) getManager()).show(eventLocation
 					.getSWTPoint());
 		}
 	}
@@ -410,9 +412,6 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	private void performDirectEdit(char initialCharacter) {
 		if (getManager() instanceof TextDirectEditManager) {
 			((TextDirectEditManager) getManager()).show(initialCharacter);
-		} else // 
-		if (getManager() instanceof TextDirectEditManager2) {
-			((TextDirectEditManager2) getManager()).show(initialCharacter);
 		} else //
 		{
 			performDirectEdit();
@@ -688,11 +687,18 @@ public class InvariantEditPart extends CompartmentEditPart implements
 		return new WrappingLabel();
 	}
 
-	/////////// mouse-over feedback text ///////////	
-	Label feedbackFigure=null;
-	String feedbackText=null;;
+	/**
+	 * @generated
+	 */
+	@Override
+	public boolean isSelectable() {
+		return getFigure().isShowing();
+	}
 
-	
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure = null;
+	String feedbackText = null;;
+
 	/*
 	 * Provides mouse over feedback:
 	 * Customised to  show the contents of the invariant
@@ -702,17 +708,19 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	public void showTargetFeedback(Request request) {
 		super.showTargetFeedback(request);
 		// the feedback layer figures do not receive mouse e
-		if (feedbackText==null) {
+		if (feedbackText == null) {
 			feedbackText = getMethodText();
-			if (feedbackText.length()>0){
+			if (feedbackText.length() > 0) {
 				feedbackFigure = new Label(feedbackText);
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
-				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
-				Point location = getFigure().getBounds().getLocation().translate(50, 0);			
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy()
+						.expand(10, 10);
+				Point location = getFigure().getBounds().getLocation()
+						.translate(50, 0);
 				getFigure().translateToAbsolute(location);
 				bounds.setLocation(location);
 				feedbackFigure.setBounds(bounds);
-				feedbackFigure.setForegroundColor(ColorConstants.darkGreen);  //tooltipForeground);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGreen); //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
 				feedbackFigure.setOpaque(true);
 				//feedbackFigure.setBorder(new LineBorder());
@@ -724,23 +732,27 @@ public class InvariantEditPart extends CompartmentEditPart implements
 
 	private String getMethodText() {
 		Invariant invariant = (Invariant) resolveSemanticElement();
-		if (((State)invariant.eContainer()).getActiveInstances()!=null) return "";	//no feedback while animating
-		String text = invariant.getName()+ (invariant.isTheorem()? "(THEOREM) :\n" : " :\n");
-		text = text + indent(1,"",invariant.getPredicate());
-		if (invariant.getComment()!=null && invariant.getComment().length()>0) {
-			text = text + "\n"+ indent(2, "//", invariant.getComment());
+		if (((State) invariant.eContainer()).getActiveInstances() != null)
+			return ""; //no feedback while animating
+		String text = invariant.getName()
+				+ (invariant.isTheorem() ? "(THEOREM) :\n" : " :\n");
+		text = text + indent(1, "", invariant.getPredicate());
+		if (invariant.getComment() != null
+				&& invariant.getComment().length() > 0) {
+			text = text + "\n" + indent(2, "//", invariant.getComment());
 		}
 		return text;
 	}
-	
-	private static String indent(int tabs, String prefix, String text){
-		if (text==null || text.length()<1) return "";
+
+	private static String indent(int tabs, String prefix, String text) {
+		if (text == null || text.length() < 1)
+			return "";
 		String indent = "";
-		for (int i=0; i<tabs; i++){
-			indent = indent+"\t";
+		for (int i = 0; i < tabs; i++) {
+			indent = indent + "\t";
 		}
-		indent = indent+prefix;
-		return indent+text.replace("\n", "\n"+indent);
+		indent = indent + prefix;
+		return indent + text.replace("\n", "\n" + indent);
 	}
 
 	/* Erases mouse-over feedback.
@@ -749,8 +761,10 @@ public class InvariantEditPart extends CompartmentEditPart implements
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest) return;
-		if (getViewer()==null) return;
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer() == null)
+			return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {
@@ -759,5 +773,5 @@ public class InvariantEditPart extends CompartmentEditPart implements
 		feedbackFigure = null;
 		feedbackText = null;
 	}
-	
+
 }

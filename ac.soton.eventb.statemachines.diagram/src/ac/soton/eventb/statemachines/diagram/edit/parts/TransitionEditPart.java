@@ -17,6 +17,9 @@ import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
@@ -27,16 +30,20 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eventb.emf.core.machine.Action;
 import org.eventb.emf.core.machine.Guard;
 import org.eventb.emf.core.machine.Witness;
 
 import ac.soton.eventb.emf.core.extension.coreextension.TypedParameter;
-import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.TransitionItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 
 /**
  * @generated
@@ -52,10 +59,16 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
+
+	/**
+	 * @generated
+	 */
 	public TransitionEditPart(View view) {
 		super(view);
 	}
-	
+
 	/**
 	 * @generated
 	 */
@@ -142,7 +155,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 		 * @generated
 		 */
 		public TransitionFigure() {
-			this.setForegroundColor(ColorConstants.gray);
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());
@@ -180,29 +192,62 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	}
 
 	/**
+	 * Refresh the colour of the connection from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, false));
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Set the line width of the connection.
+	 * 
+	 * @param width - the new line width
+	 * @generated
+	 */
+	protected void setLineWidth(int width) {
+		getPrimaryShape().setLineWidth(width);
+	}
+
+	/**
+	 * handle notification events.
+	 * increases the line width when enabled operations attached.
+	 * 
+	 * @param event - the notification event
 	 * @generated
 	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width and color if link state changes
-		if (StatemachinesPackage.eINSTANCE.getTransition_Operations().equals(
-				event.getFeature())) {
-			Collection<?> operations = ((Transition) ((View) getModel())
-					.getElement()).getOperations();
-			boolean enabled = operations != null && !operations.isEmpty();
-			getPrimaryShape().setLineWidth(1 + (enabled ? 2 : 0));
-			getPrimaryShape().setForegroundColor(
-					enabled ? ColorConstants.darkGreen : ColorConstants.gray);
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+				.getFeature()).getName() : "";
+		// update line width and color if state of enabled operations changes
+		if ("operations".equals(featureName)) {
+			boolean active = event.getNewValue() == null ? false
+					: !((Collection<?>) event.getNewValue()).isEmpty();
+			setLineWidth(1 + (active ? 2 : 0));
 		}
 
 		super.handleNotificationEvent(event);
 	}
-	
-	
-	/////////// mouse-over feedback text ///////////	
-	Label feedbackFigure=null;
-	String feedbackText=null;;
 
-	
+	/////////// mouse-over feedback text ///////////	
+	Label feedbackFigure = null;
+	String feedbackText = null;;
+
 	/*
 	 * Provides mouse over feedback:
 	 * Customised to  show the contents (params, witnesses, guards and actions) of the method
@@ -212,20 +257,21 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	public void showTargetFeedback(Request request) {
 		super.showTargetFeedback(request);
 		// the feedback layer figures do not receive mouse e
-		if (feedbackText==null) {
+		if (feedbackText == null) {
 			feedbackText = getMethodText();
-			if (feedbackText.length()>0){
+			if (feedbackText.length() > 0) {
 				feedbackFigure = new Label(feedbackText);
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
-				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(10, 10);
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy()
+						.expand(10, 10);
 				bounds.setLocation(getFigure().getBounds().getLocation()
 						.translate(200, -100));
 				feedbackFigure.setBounds(bounds);
-				feedbackFigure.setForegroundColor(ColorConstants.darkGray);  //tooltipForeground);
+				feedbackFigure.setForegroundColor(ColorConstants.darkGray); //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.lightGray); //tooltipBackground);
 				feedbackFigure.setOpaque(true);
 				//feedbackFigure.setBorder(new LineBorder());
-	
+
 				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 				layer.add(feedbackFigure);
 			}
@@ -234,63 +280,69 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 
 	private String getMethodText() {
 		Transition transition = (Transition) resolveSemanticElement();
-		
-		if (transition.getOperations()!=null) return ""; //no feedback while animating
-		
+
+		if (transition.getOperations() != null)
+			return ""; //no feedback while animating
+
 		String text = "";
-		if (transition.getParameters().size()>0){
-			text = text + "\nParameters: \n"; 
-			for (TypedParameter p : transition.getParameters()){
-				text = text + "\t"+p.getName()+" : "+p.getType()+"\n";
+		if (transition.getParameters().size() > 0) {
+			text = text + "\nParameters: \n";
+			for (TypedParameter p : transition.getParameters()) {
+				text = text + "\t" + p.getName() + " : " + p.getType() + "\n";
 			}
 		}
-		if (transition.getWitnesses().size()>0){
+		if (transition.getWitnesses().size() > 0) {
 			text = text + "\nWitnesses: \n";
-			for (Witness w : transition.getWitnesses()){
-				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getPredicate());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Witness w : transition.getWitnesses()) {
+				text = text + "\t" + w.getName() + " : \n"
+						+ indent(2, "", w.getPredicate());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		if (transition.getGuards().size()>0){
+		if (transition.getGuards().size() > 0) {
 			text = text + "\nGuards: \n";
-			for (Guard w : transition.getGuards()){
-				text = text + "\t"+w.getName()+(w.isTheorem()? "(THEOREM) :\n" : " :\n");
-				text = text + indent(2,"",w.getPredicate());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Guard w : transition.getGuards()) {
+				text = text + "\t" + w.getName()
+						+ (w.isTheorem() ? "(THEOREM) :\n" : " :\n");
+				text = text + indent(2, "", w.getPredicate());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		if (transition.getActions().size()>0){
+		if (transition.getActions().size() > 0) {
 			text = text + "\nActions: \n";
-			for (Action w : transition.getActions()){
-				text = text + "\t"+w.getName()+" : \n"+indent(2,"",w.getAction());
-				if (w.getComment()!=null && w.getComment().length()>0){
-					text = text+"\n"+indent(3,"//",w.getComment())+"\n";
+			for (Action w : transition.getActions()) {
+				text = text + "\t" + w.getName() + " : \n"
+						+ indent(2, "", w.getAction());
+				if (w.getComment() != null && w.getComment().length() > 0) {
+					text = text + "\n" + indent(3, "//", w.getComment()) + "\n";
 				}
 			}
 		}
-		
-		if (text.length()>0){
+
+		if (text.length() > 0) {
 			text = transition.getLabel()
-				+(transition.isExtended()? "  [extended]":"")
-				+(transition.getComment()!=null && transition.getComment().length()>0? "  //"+transition.getComment():"")+"\n"
-				+text;
+					+ (transition.isExtended() ? "  [extended]" : "")
+					+ (transition.getComment() != null
+							&& transition.getComment().length() > 0 ? "  //"
+							+ transition.getComment() : "") + "\n" + text;
 		}
 
 		return text;
 	}
-	
-	private static String indent(int tabs, String prefix, String text){
-		if (text==null || text.length()<1) return "";
+
+	private static String indent(int tabs, String prefix, String text) {
+		if (text == null || text.length() < 1)
+			return "";
 		String indent = "";
-		for (int i=0; i<tabs; i++){
-			indent = indent+"\t";
+		for (int i = 0; i < tabs; i++) {
+			indent = indent + "\t";
 		}
-		indent = indent+prefix;
-		return indent+text.replace("\n", "\n"+indent);
+		indent = indent + prefix;
+		return indent + text.replace("\n", "\n" + indent);
 	}
 
 	/* Erases mouse-over feedback.
@@ -299,8 +351,10 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest) return;
-		if (getViewer()==null) return;
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer() == null)
+			return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {

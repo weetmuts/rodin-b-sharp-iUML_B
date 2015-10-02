@@ -61,6 +61,7 @@ Require-Bundle: org.eclipse.ui.navigator;bundle-version="[3.5.100,4.0.0)",
  ac.soton.eventb.emf.diagrams.generator;bundle-version="[3.1.0,4.0.0)",
  ac.soton.eventb.emf.diagrams.navigator;bundle-version="[2.3.0,3.0.0)",
  ac.soton.eventb.statemachines;bundle-version="[3.1.0,4.0.0)",
- ac.soton.eventb.statemachines.edit;bundle-version="[2.1.0,3.0.0)"
+ ac.soton.eventb.statemachines.edit;bundle-version="[2.1.0,3.0.0)",
+ org.eclipse.draw2d;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

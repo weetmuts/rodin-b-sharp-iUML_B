@@ -29,6 +29,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.commands.SetViewMutabilityCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -38,6 +39,7 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
+import org.eclipse.gmf.tooling.runtime.update.UpdaterLinkDescriptor;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.parts.Any2EditPart;
@@ -71,6 +73,18 @@ public class RootStatemachineCanonicalEditPolicy extends
 	/**
 	 * @generated
 	 */
+	protected void refreshOnActivate() {
+		// Need to activate editpart children before invoking the canonical refresh for EditParts to add event listeners
+		List<?> c = getHost().getChildren();
+		for (int i = 0; i < c.size(); i++) {
+			((EditPart) c.get(i)).activate();
+		}
+		super.refreshOnActivate();
+	}
+
+	/**
+	 * @generated
+	 */
 	protected EStructuralFeature getFeatureToSynchronize() {
 		return StatemachinesPackage.eINSTANCE.getStatemachine_Nodes();
 	}
@@ -95,7 +109,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 */
 	protected boolean isOrphaned(Collection<EObject> semanticChildren,
 			final View view) {
-		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
+		if (isShortcut(view)) {
 			return StatemachinesDiagramUpdater.isShortcutOrphaned(view);
 		}
 		return isMyDiagramElement(view)
@@ -122,6 +136,13 @@ public class RootStatemachineCanonicalEditPolicy extends
 	/**
 	 * @generated
 	 */
+	protected static boolean isShortcut(View view) {
+		return view.getEAnnotation("Shortcut") != null; //$NON-NLS-1$
+	}
+
+	/**
+	 * @generated
+	 */
 	protected void refreshSemantic() {
 		if (resolveSemanticElement() == null) {
 			return;
@@ -131,14 +152,17 @@ public class RootStatemachineCanonicalEditPolicy extends
 				.getStatemachine_1000SemanticChildren((View) getHost()
 						.getModel());
 		LinkedList<View> orphaned = new LinkedList<View>();
-		// we care to check only views we recognize as ours
+		// we care to check only views we recognize as ours and not shortcuts
 		LinkedList<View> knownViewChildren = new LinkedList<View>();
 		for (View v : getViewChildren()) {
+			if (isShortcut(v)) {
+				if (StatemachinesDiagramUpdater.isShortcutOrphaned(v)) {
+					orphaned.add(v);
+				}
+				continue;
+			}
 			if (isMyDiagramElement(v)) {
 				knownViewChildren.add(v);
-			}
-			if (v.getEAnnotation("Shortcut") != null && StatemachinesDiagramUpdater.isShortcutOrphaned(v)) { //$NON-NLS-1$
-				orphaned.add(v);
 			}
 		}
 		// alternative to #cleanCanonicalSemanticChildren(getViewChildren(), semanticChildren)
@@ -220,7 +244,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 * @generated
 	 */
 	private Collection<IAdaptable> refreshConnections() {
-		Map<EObject, View> domain2NotationMap = new HashMap<EObject, View>();
+		Domain2Notation domain2NotationMap = new Domain2Notation();
 		Collection<StatemachinesLinkDescriptor> linkDescriptors = collectAllLinks(
 				getDiagram(), domain2NotationMap);
 		Collection existingLinks = new LinkedList(getDiagram().getEdges());
@@ -263,7 +287,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 * @generated
 	 */
 	private Collection<StatemachinesLinkDescriptor> collectAllLinks(View view,
-			Map<EObject, View> domain2NotationMap) {
+			Domain2Notation domain2NotationMap) {
 		if (!RootStatemachineEditPart.MODEL_ID
 				.equals(StatemachinesVisualIDRegistry.getModelID(view))) {
 			return Collections.emptyList();
@@ -275,10 +299,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getStatemachine_1000ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case InitialEditPart.VISUAL_ID: {
@@ -286,10 +307,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getInitial_2006ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case FinalEditPart.VISUAL_ID: {
@@ -297,10 +315,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getFinal_2007ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case StateEditPart.VISUAL_ID: {
@@ -308,10 +323,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getState_2008ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case JunctionEditPart.VISUAL_ID: {
@@ -319,10 +331,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getJunction_2009ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case AnyEditPart.VISUAL_ID: {
@@ -330,10 +339,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getAny_2010ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case ForkEditPart.VISUAL_ID: {
@@ -341,10 +347,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getFork_2011ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case StatemachineEditPart.VISUAL_ID: {
@@ -352,10 +355,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getStatemachine_3001ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case InnerInitialEditPart.VISUAL_ID: {
@@ -363,10 +363,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getInitial_3011ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case InnerFinalEditPart.VISUAL_ID: {
@@ -374,10 +371,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getFinal_3012ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case InnerStateEditPart.VISUAL_ID: {
@@ -385,10 +379,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getState_3013ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case Junction2EditPart.VISUAL_ID: {
@@ -396,10 +387,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getJunction_3015ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case Any2EditPart.VISUAL_ID: {
@@ -407,10 +395,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getAny_3016ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case Fork2EditPart.VISUAL_ID: {
@@ -418,10 +403,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getFork_3017ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case TransitionEditPart.VISUAL_ID: {
@@ -429,10 +411,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getTransition_4001ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		case TransitionGhostEditPart.VISUAL_ID: {
@@ -440,10 +419,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 				result.addAll(StatemachinesDiagramUpdater
 						.getTransition_4002ContainedLinks(view));
 			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
+			domain2NotationMap.putView(view.getElement(), view);
 			break;
 		}
 		}
@@ -464,13 +440,13 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 */
 	private Collection<IAdaptable> createConnections(
 			Collection<StatemachinesLinkDescriptor> linkDescriptors,
-			Map<EObject, View> domain2NotationMap) {
+			Domain2Notation domain2NotationMap) {
 		LinkedList<IAdaptable> adapters = new LinkedList<IAdaptable>();
 		for (StatemachinesLinkDescriptor nextLinkDescriptor : linkDescriptors) {
-			EditPart sourceEditPart = getEditPart(
-					nextLinkDescriptor.getSource(), domain2NotationMap);
-			EditPart targetEditPart = getEditPart(
-					nextLinkDescriptor.getDestination(), domain2NotationMap);
+			EditPart sourceEditPart = getSourceEditPart(nextLinkDescriptor,
+					domain2NotationMap);
+			EditPart targetEditPart = getTargetEditPart(nextLinkDescriptor,
+					domain2NotationMap);
 			if (sourceEditPart == null || targetEditPart == null) {
 				continue;
 			}
@@ -503,7 +479,7 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 * @generated
 	 */
 	private EditPart getEditPart(EObject domainModelElement,
-			Map<EObject, View> domain2NotationMap) {
+			Domain2Notation domain2NotationMap) {
 		View view = (View) domain2NotationMap.get(domainModelElement);
 		if (view != null) {
 			return (EditPart) getHost().getViewer().getEditPartRegistry()
@@ -517,6 +493,66 @@ public class RootStatemachineCanonicalEditPolicy extends
 	 */
 	private Diagram getDiagram() {
 		return ((View) getHost().getModel()).getDiagram();
+	}
+
+	/**
+	 * @generated
+	 */
+	private EditPart getSourceEditPart(UpdaterLinkDescriptor descriptor,
+			Domain2Notation domain2NotationMap) {
+		return getEditPart(descriptor.getSource(), domain2NotationMap);
+	}
+
+	/**
+	 * @generated
+	 */
+	private EditPart getTargetEditPart(UpdaterLinkDescriptor descriptor,
+			Domain2Notation domain2NotationMap) {
+		return getEditPart(descriptor.getDestination(), domain2NotationMap);
+	}
+
+	/**
+	 * @generated
+	 */
+	protected final EditPart getHintedEditPart(EObject domainModelElement,
+			Domain2Notation domain2NotationMap, int hintVisualId) {
+		View view = (View) domain2NotationMap.getHinted(domainModelElement,
+				StatemachinesVisualIDRegistry.getType(hintVisualId));
+		if (view != null) {
+			return (EditPart) getHost().getViewer().getEditPartRegistry()
+					.get(view);
+		}
+		return null;
+	}
+
+	/**
+	 * @generated
+	 */
+	@SuppressWarnings("serial")
+	protected static class Domain2Notation extends HashMap<EObject, View> {
+		/**
+		 * @generated
+		 */
+		public boolean containsDomainElement(EObject domainElement) {
+			return this.containsKey(domainElement);
+		}
+
+		/**
+		 * @generated
+		 */
+		public View getHinted(EObject domainEObject, String hint) {
+			return this.get(domainEObject);
+		}
+
+		/**
+		 * @generated
+		 */
+		public void putView(EObject domainElement, View view) {
+			if (!containsKey(view.getElement()) || !isShortcut(view)) {
+				this.put(domainElement, view);
+			}
+		}
+
 	}
 
 	/**
@@ -554,30 +590,26 @@ public class RootStatemachineCanonicalEditPolicy extends
 			return ((Transition) relationship).getTarget();
 		return null;
 	}
-	
-	////////////CUSTOM/////
-	
+
 	/**
-	 * Return <tt>true</tt> if this editpolicy should try and delete the
-	 * supplied view; otherwise <tt>false<tt>. 
-	 *  
+	 * Return <tt>true</tt> if this editpolicy should delete the supplied view otherwise <tt>false<tt>.
 	 * For transitions, true is returned if the source or target of the view do not represent the semantic source or target resp.
-	 * (i.e. if the transition has been moved to a different source or target state)
+	 * (i.e. if the transition has been moved to a different source or target state). Otherwise the default behavior is returned
 	 * 
-	 * Otherwise the default behavior is returned
-	 * 
-	 * @CUSTOM
+	 * @generated
 	 */
+	@Override
 	protected boolean shouldDeleteView(View view) {
 		EObject sel = ViewUtil.resolveSemanticElement(view);
-		if (sel instanceof Transition && view instanceof Edge){
-			Transition tr = (Transition)sel;
-			Edge ed = (Edge)view;
-			if (ed.getSource().getElement()!=tr.getSource() || ed.getTarget().getElement()!=tr.getTarget() ){
+		if (sel instanceof Transition && view instanceof Edge) {
+			Transition tr = (Transition) sel;
+			Edge ed = (Edge) view;
+			if (ed.getSource().getElement() != tr.getSource()
+					|| ed.getTarget().getElement() != tr.getTarget()) {
 				return true;
-			}			
+			}
 		}
-		return super.shouldDeleteView(view) ;
+		return super.shouldDeleteView(view);
 	}
 
 }

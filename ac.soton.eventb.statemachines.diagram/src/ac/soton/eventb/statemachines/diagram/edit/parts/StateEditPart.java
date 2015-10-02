@@ -7,10 +7,6 @@
  */
 package ac.soton.eventb.statemachines.diagram.edit.parts;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
@@ -25,6 +21,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -40,7 +37,6 @@ import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.edithelpers.CreateElementRequestAdapter;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
@@ -49,14 +45,20 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.RGB;
 
 import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.StateItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
 import ac.soton.eventb.statemachines.diagram.part.StatemachinesVisualIDRegistry;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -82,6 +84,12 @@ public class StateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
+
+	/**
+	 * @generated
+	 */
 	public StateEditPart(View view) {
 		super(view);
 	}
@@ -91,7 +99,8 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 */
 	protected void createDefaultEditPolicies() {
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicy());
+				new CreationEditPolicyWithCustomReparent(
+						StatemachinesVisualIDRegistry.TYPED_INSTANCE));
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 				new StateItemSemanticEditPolicy());
@@ -130,18 +139,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-
 		primaryShape = new StateFigure();
-
-		// set background color to white if domain element refines something
-		EObject element = resolveSemanticElement();
-		if (element != null) {
-			EStructuralFeature feature = element.eClass()
-					.getEStructuralFeature("refines");
-			if (feature != null && element.eIsSet(feature))
-				primaryShape.setBackgroundColor(ColorConstants.white);
-		}
-
 		return primaryShape;
 	}
 
@@ -190,7 +188,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof StateStatemachinesCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureStateStatemachinesCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.remove(((StateStatemachinesCompartmentEditPart) childEditPart)
 					.getFigure());
 			return true;
@@ -198,7 +195,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof StateInvariantsCompartmentEditPart) {
 			IFigure pane = getPrimaryShape()
 					.getFigureStateInvariantsCompartmentFigure();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
 			pane.remove(((StateInvariantsCompartmentEditPart) childEditPart)
 					.getFigure());
 			return true;
@@ -230,6 +226,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
+
 		if (editPart instanceof StateStatemachinesCompartmentEditPart) {
 			return getPrimaryShape()
 					.getFigureStateStatemachinesCompartmentFigure();
@@ -338,182 +335,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Transition_4001);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof StatemachineEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4001) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Transition_4001);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4001) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getTargetEditPart(Request request) {
 		if (request instanceof CreateViewAndElementRequest) {
 			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
@@ -538,24 +359,19 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 */
 	protected void handleNotificationEvent(Notification event) {
 
-		// update line width and color if state changes
-		if (StatemachinesPackage.eINSTANCE.getState_Active().equals(
-				event.getFeature())) {
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+				.getFeature()).getName() : "";
+
+		// update line width depending on active state
+		if ("active".equals(featureName)) {
 			boolean active = event.getNewBooleanValue();
 			setLineWidth(1 + (active ? 2 : 0));
-			setForegroundColor(active ? ColorConstants.black
-					: ColorConstants.gray);
 		}
 
-		// update background color when refines propeerty changed
-		if (StatemachinesPackage.eINSTANCE.getState_Refines().equals(
-				event.getFeature())
-				|| StatemachinesPackage.eINSTANCE.getStatemachine_Refines()
-						.equals(event.getFeature())) {
-			if (event.getNewValue() == null)
-				setBackgroundColor(THIS_BACK);
-			else
-				setBackgroundColor(ColorConstants.white);
+		// update colour when refines changes
+		if ("refines".equals(featureName)) {
+			refreshForegroundColor();
+			refreshBackgroundColor();
 		}
 
 		if (event.getNotifier() == getModel()
@@ -595,8 +411,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
-			this.setForegroundColor(ColorConstants.gray);
-			this.setBackgroundColor(THIS_BACK);
 			createContents();
 		}
 
@@ -657,16 +471,67 @@ public class StateEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
+	 * Refresh the colour of the foreground from the preferences.
+	 * 
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 196, 204, 255);
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
 
-	
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Refresh the colour of the background from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshBackgroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set background fill color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			EStructuralFeature refinesFeature = eClazz
+					.getEStructuralFeature("refines");
+			boolean refined = refinesFeature == null ? false : element
+					.eIsSet(refinesFeature);
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getFillColorPreference(eClazz, refined));
+
+		}
+
+		if (rgb != null) {
+			setBackgroundColor(new Color(null, rgb));
+		} else {
+			super.refreshBackgroundColor();
+		}
+	}
+
 	/////////// mouse-over feedback text ///////////	
-	Label feedbackFigure=null;
-	String feedbackText=null;;
+	Label feedbackFigure = null;
+	String feedbackText = null;;
 
-	
 	/*
 	 * Provides mouse over feedback:
 	 * Customised to show the active instances (probably only while animating)
@@ -676,22 +541,27 @@ public class StateEditPart extends ShapeNodeEditPart {
 	public void showTargetFeedback(Request request) {
 		super.showTargetFeedback(request);
 		// the feedback layer figures do not receive mouse e
-		if (feedbackText==null) {
+		if (feedbackText == null) {
 			feedbackText = getText();
-			if (feedbackText.length()>0){
+			if (feedbackText.length() > 0) {
 				feedbackFigure = new Label(feedbackText);
 				feedbackFigure.setFont(new Font(null, "Arial", 12, SWT.NORMAL));
-				Rectangle bounds = feedbackFigure.getTextBounds().getCopy().expand(2, 2);
+				Rectangle bounds = feedbackFigure.getTextBounds().getCopy()
+						.expand(2, 2);
 				Dimension stateSize = getFigure().getSize();
-				Point location = getFigure().getBounds().getLocation().translate(stateSize.width-bounds.width,stateSize.height-bounds.height);			
+				Point location = getFigure()
+						.getBounds()
+						.getLocation()
+						.translate(stateSize.width - bounds.width,
+								stateSize.height - bounds.height);
 				getFigure().translateToAbsolute(location);
 				bounds.setLocation(location);
 				feedbackFigure.setBounds(bounds);
-				feedbackFigure.setForegroundColor(ColorConstants.black);  //tooltipForeground);
+				feedbackFigure.setForegroundColor(ColorConstants.black); //tooltipForeground);
 				feedbackFigure.setBackgroundColor(ColorConstants.white); //tooltipBackground);
 				feedbackFigure.setOpaque(true);
 				//feedbackFigure.setBorder(new LineBorder());
-	
+
 				IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 				layer.add(feedbackFigure);
 			}
@@ -702,17 +572,17 @@ public class StateEditPart extends ShapeNodeEditPart {
 		State state = (State) resolveSemanticElement();
 		String text = "";
 		EList<?> ains = state.getActiveInstances();
-		if (ains!=null && ains.size()>0){
-			for (Object ins : ains){
-				if (ins instanceof String){
-					if (text.length()>0) text=text+"\n";
-					text = text+ins;
+		if (ains != null && ains.size() > 0) {
+			for (Object ins : ains) {
+				if (ins instanceof String) {
+					if (text.length() > 0)
+						text = text + "\n";
+					text = text + ins;
 				}
 			}
 		}
 		return text;
 	}
-	
 
 	/* Erases mouse-over feedback.
 	 * @custom
@@ -720,8 +590,10 @@ public class StateEditPart extends ShapeNodeEditPart {
 	@Override
 	public void eraseTargetFeedback(Request request) {
 		super.eraseTargetFeedback(request);
-		if (request instanceof CreateConnectionRequest) return;
-		if (getViewer()==null) return;
+		if (request instanceof CreateConnectionRequest)
+			return;
+		if (getViewer() == null)
+			return;
 		IFigure layer = getLayer(LayerConstants.FEEDBACK_LAYER);
 		if (layer != null && feedbackFigure != null
 				&& feedbackFigure.getParent() != null) {

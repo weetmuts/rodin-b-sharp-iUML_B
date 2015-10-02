@@ -14,6 +14,9 @@ import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITreeBranchEditPart;
@@ -21,10 +24,15 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.swt.graphics.Color;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.Transition;
 import ac.soton.eventb.statemachines.diagram.edit.policies.TransitionGhostItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 
 /**
  * @generated
@@ -36,6 +44,12 @@ public class TransitionGhostEditPart extends ConnectionNodeEditPart implements
 	 * @generated
 	 */
 	public static final int VISUAL_ID = 4002;
+
+	/**
+	 * @generated
+	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
 
 	/**
 	 * @generated
@@ -130,7 +144,6 @@ public class TransitionGhostEditPart extends ConnectionNodeEditPart implements
 		 * @generated
 		 */
 		public TransitionFigure() {
-			this.setForegroundColor(ColorConstants.gray);
 
 			createContents();
 			setTargetDecoration(createTargetDecoration());
@@ -168,18 +181,48 @@ public class TransitionGhostEditPart extends ConnectionNodeEditPart implements
 	}
 
 	/**
+	 * Refresh the colour of the connection from preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, false));
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Set the line width of the connection.
+	 * @param width the new line width
+	 * @generated
+	 */
+	protected void setLineWidth(int width) {
+		getPrimaryShape().setLineWidth(width);
+	}
+
+	/**
 	 * @generated
 	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width and color if link state changes
-		if (StatemachinesPackage.eINSTANCE.getTransition_Operations().equals(
-				event.getFeature())) {
-			Collection<?> operations = ((Transition) ((View) getModel())
-					.getElement()).getOperations();
-			boolean enabled = operations != null && !operations.isEmpty();
-			getPrimaryShape().setLineWidth(1 + (enabled ? 2 : 0));
-			getPrimaryShape().setForegroundColor(
-					enabled ? ColorConstants.darkGreen : ColorConstants.gray);
+		String featureName = event.getFeature() instanceof EStructuralFeature ? ((EStructuralFeature) event
+				.getFeature()).getName() : "";
+		// update line width and color if state of enabled operations changes
+		if ("operations".equals(featureName)) {
+			boolean active = event.getNewValue() == null ? false
+					: !((Collection<?>) event.getNewValue()).isEmpty();
+			setLineWidth(1 + (active ? 2 : 0));
 		}
 
 		super.handleNotificationEvent(event);

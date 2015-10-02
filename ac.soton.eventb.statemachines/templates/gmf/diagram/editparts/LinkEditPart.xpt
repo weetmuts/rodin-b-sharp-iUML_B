@@ -12,6 +12,7 @@
  */
 
 «IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::diagram::editparts::Utils»
 
 «DEFINE Main FOR gmfgen::GenLink-»
 «EXPAND xpt::Common::copyright FOR getDiagram().editorGen-»
@@ -48,6 +49,8 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 
 «DEFINE attributes FOR gmfgen::GenLink-»
 	«EXPAND xpt::diagram::editparts::Common::visualIDConstant-»
+	«REM»CFS: added pref store constant «ENDREM»	
+	«EXPAND xpt::diagram::editparts::Common::prefStoreConstant-»	
 «ENDDEFINE»
 
 «DEFINE createDefaultEditPolicies FOR gmfgen::GenLink-»
@@ -58,13 +61,45 @@ public class «editPartClassName» «EXPAND extendsList» «EXPAND implementsLis
 «ENDDEFINE»
 
 «DEFINE additions FOR gmfgen::GenLink-»
-	«REM»MY: added state handling«ENDREM»
-	«EXPAND handleNotificationEvent-»
+	«REM»CFS: added refresh line colour from preferences«ENDREM»
+	«EXPAND refreshForegroundColor-»
+	«REM»couldn't find a way to make this conditional.. GenLink do not contain domain info«ENDREM»
+	«REM»«IF hasOperationsFeature(self)»«ENDREM»
+		«REM»MY: added line width control«ENDREM»
+		«EXPAND setLineWidth-»
+		«REM»MY: added state handling«ENDREM»
+		«EXPAND handleNotificationEvent-»
+	«REM»«ENDIF»«ENDREM»
+«ENDDEFINE»
+
+«REM»MY: added refreshForegroundColor method for link editparts, to refresh line colour from preferences«ENDREM»
+«DEFINE refreshForegroundColor FOR gmfgen::GenLink-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Refresh the colour of the connection from the preferences.\n' 
+	)»
+	protected void refreshForegroundColor() {
+		«EXPAND impl::diagram::editparts::LinkEditPart::refreshForegroundColorBody-»
+	}
+«ENDDEFINE»
+
+«REM»MY: added setLineWidth method for link editparts, to give control over line width«ENDREM»
+«DEFINE setLineWidth FOR gmfgen::GenLink-»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'Set the line width of the connection.\n\n' + 
+		'@param width - the new line width'
+	)»
+	protected void setLineWidth(int width) {
+		«EXPAND impl::diagram::editparts::LinkEditPart::setLineWidthBody-»
+	}
 «ENDDEFINE»
 
 «REM»MY: added handler method for link editparts, to refresh on enabled state change«ENDREM»
 «DEFINE handleNotificationEvent FOR gmfgen::GenLink-»
-	«EXPAND xpt::Common::generatedMemberComment»
+	«EXPAND xpt::Common::generatedMemberComment(
+		'handle notification events.\n' + 
+		'increases the line width when enabled operations attached.\n\n'+
+		'@param event - the notification event'
+	)»
 	protected void handleNotificationEvent(org.eclipse.emf.common.notify.Notification event) {
 		«EXPAND impl::diagram::editparts::LinkEditPart::handleNotificationEventBody-»
 	}

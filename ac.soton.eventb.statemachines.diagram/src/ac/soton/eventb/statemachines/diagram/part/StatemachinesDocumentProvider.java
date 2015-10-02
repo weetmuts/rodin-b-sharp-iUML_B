@@ -724,13 +724,7 @@ public class StatemachinesDocumentProvider extends AbstractDocumentProvider
 				// Error message to log was initially taken from org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.internal.l10n.EditorMessages.FileDocumentProvider_handleElementContentChanged
 			}
 		}
-		try{
-			//FIXME: sometimes reloading changes and proxymap fails on a "Cannot modify resource set without a write transaction" exception 
-			System.out.println("***handleElementChanged - "+info.myEditorInput.getName()+" - reloading: "+changedResource.getURI().toPlatformString(true));
-			changedResource.unload();
-		}catch(Exception e){
-			System.out.println("***handleElementChanged - "+info.myEditorInput.getName()+" - FAILED RELOADING: "+changedResource.getURI().toPlatformString(true)+" Exception: "+e.getMessage());
-		}
+		changedResource.unload();
 
 		fireElementContentAboutToBeReplaced(info.getEditorInput());
 		removeUnchangedElementListeners(info.getEditorInput(), info);

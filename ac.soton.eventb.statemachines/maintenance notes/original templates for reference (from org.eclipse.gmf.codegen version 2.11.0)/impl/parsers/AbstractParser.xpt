@@ -1,0 +1,35 @@
+﻿/*
+ * Copyright (c) 2007, 2009 Borland Software Corporation
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ *    Artem Tikhomirov (Borland) - [235113] alternative parser access
+ *                                 [244419] custom parsers
+ *	  Michael Golubev (Montages) - [368169] extract not-generated shared code to GMF-T runtime
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«REM»
+Since GMFT 3.1 we don't generate class AbstractParser into every diagram, by extending the 
+org.eclipse.gmf.tooling.runtime.parsers.AbstractAttributeParser.
+If you want to extends other custom implementation you may change the className and quialifiedClassName DEFINE's 
+which are still used in the extend's clauses for generated PredefinedParser's
+«ENDREM»
+«DEFINE className FOR gmfgen::GenParsers»AbstractAttributeParser«ENDDEFINE»
+«DEFINE qualifiedClassName FOR gmfgen::GenParsers»org.eclipse.gmf.tooling.runtime.parsers.«EXPAND className»«ENDDEFINE»
+
+«REM»
+However, for 3.1 release we still will generate empty file (without any java content), 
+to ensure that the old code, including calls to non existing i18n fields in Messages is cleaned up.
+«ENDREM»
+
+«DEFINE deprecatedQualifiedClassName FOR gmfgen::GenParsers»«implPackageName».AbstractParser«ENDDEFINE»
+«DEFINE Main FOR gmfgen::GenParsers-»
+//Since GMFT 3.1 we don't generate class AbstractParser into every diagram, instead extend org.eclipse.gmf.tooling.runtime.parsers.AbstractAttributeParser.
+«ENDDEFINE»

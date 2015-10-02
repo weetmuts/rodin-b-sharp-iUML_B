@@ -1,0 +1,35 @@
+﻿/*
+ * Copyright (c) 2007, 2009, 2012 Borland Software Corporation and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Alexander Shatalin (Borland) - initial API and implementation
+ *    Michael Golubev (Montages) - API extracted to gmf.tooling.runtime (#372479)  	  
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«DEFINE NodeDescriptor FOR gmfgen::GenDiagramUpdater-»
+	«EXPAND xpt::Common::copyright FOR editorGen-»
+package «editorGen.editor.packageName»;
+
+	«EXPAND xpt::Common::generatedClassComment»
+public class «nodeDescriptorClassName» extends org.eclipse.gmf.tooling.runtime.update.UpdaterNodeDescriptor {
+	«EXPAND _constructor-»
+
+	«EXPAND additions-»
+}
+«ENDDEFINE»
+
+«DEFINE _constructor FOR gmfgen::GenDiagramUpdater-»
+	«EXPAND xpt::Common::generatedMemberComment»
+public «nodeDescriptorClassName»(org.eclipse.emf.ecore.EObject modelElement, int visualID) {
+	super(modelElement, visualID);
+}
+«ENDDEFINE»
+
+«DEFINE additions FOR gmfgen::GenDiagramUpdater»«ENDDEFINE»

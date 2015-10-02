@@ -18,6 +18,8 @@ import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -32,10 +34,14 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 import ac.soton.eventb.statemachines.diagram.edit.policies.Junction2ItemSemanticEditPolicy;
+import ac.soton.eventb.statemachines.diagram.part.StatemachinesDiagramEditorPlugin;
+import ac.soton.eventb.statemachines.diagram.preferences.SpecificDiagramAppearancePreferencePage;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesElementTypes;
 
 /**
@@ -57,6 +63,12 @@ public class Junction2EditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure primaryShape;
+
+	/**
+	 * @generated
+	 */
+	protected static final IPreferenceStore prefStore = StatemachinesDiagramEditorPlugin
+			.getInstance().getPreferenceStore();
 
 	/**
 	 * @generated
@@ -107,9 +119,7 @@ public class Junction2EditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createNodeShape() {
-
 		primaryShape = new JunctionFigure();
-
 		return primaryShape;
 	}
 
@@ -204,191 +214,7 @@ public class Junction2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Transition_4001);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(
-			IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4001);
-		}
-		if (targetEditPart instanceof InitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof FinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof StateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof JunctionEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof AnyEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ForkEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof StatemachineEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerInitialEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerFinalEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof InnerStateEditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof ac.soton.eventb.statemachines.diagram.edit.parts.Junction2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Any2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		if (targetEditPart instanceof Fork2EditPart) {
-			types.add(StatemachinesElementTypes.Transition_4002);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4001) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(2);
-		types.add(StatemachinesElementTypes.Transition_4001);
-		types.add(StatemachinesElementTypes.Transition_4002);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == StatemachinesElementTypes.Transition_4001) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		} else if (relationshipType == StatemachinesElementTypes.Transition_4002) {
-			types.add(StatemachinesElementTypes.Initial_2006);
-			types.add(StatemachinesElementTypes.Final_2007);
-			types.add(StatemachinesElementTypes.State_2008);
-			types.add(StatemachinesElementTypes.Junction_2009);
-			types.add(StatemachinesElementTypes.Any_2010);
-			types.add(StatemachinesElementTypes.Fork_2011);
-			types.add(StatemachinesElementTypes.Statemachine_3001);
-			types.add(StatemachinesElementTypes.Initial_3011);
-			types.add(StatemachinesElementTypes.Final_3012);
-			types.add(StatemachinesElementTypes.State_3013);
-			types.add(StatemachinesElementTypes.Junction_3015);
-			types.add(StatemachinesElementTypes.Any_3016);
-			types.add(StatemachinesElementTypes.Fork_3017);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
 	protected void handleNotificationEvent(Notification event) {
-		// update line width and color if state changes
-		if (StatemachinesPackage.eINSTANCE.getState_Active().equals(
-				event.getFeature())) {
-			boolean active = event.getNewBooleanValue();
-			setLineWidth(1 + (active ? 2 : 0));
-			setForegroundColor(active ? ColorConstants.black
-					: ColorConstants.gray);
-		}
 
 		super.handleNotificationEvent(event);
 	}
@@ -402,11 +228,60 @@ public class Junction2EditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		public JunctionFigure() {
-			this.setBackgroundColor(ColorConstants.darkGray);
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(10),
 					getMapMode().DPtoLP(10)));
 		}
 
+	}
+
+	/**
+	 * Refresh the colour of the foreground from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshForegroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set foreground line color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getLineColorPreference(eClazz, false));
+
+		}
+
+		if (rgb != null) {
+			setForegroundColor(new Color(null, rgb));
+		} else {
+			super.refreshForegroundColor();
+		}
+	}
+
+	/**
+	 * Refresh the colour of the background from the preferences.
+	 * 
+	 * @generated
+	 */
+	protected void refreshBackgroundColor() {
+		org.eclipse.swt.graphics.RGB rgb = null;
+		// set background fill color
+		EObject element = resolveSemanticElement();
+		if (element != null) {
+			EClass eClazz = element.eClass();
+
+			rgb = PreferenceConverter.getColor(prefStore,
+					SpecificDiagramAppearancePreferencePage
+							.getFillColorPreference(eClazz, false));
+
+		}
+
+		if (rgb != null) {
+			setBackgroundColor(new Color(null, rgb));
+		} else {
+			super.refreshBackgroundColor();
+		}
 	}
 
 }

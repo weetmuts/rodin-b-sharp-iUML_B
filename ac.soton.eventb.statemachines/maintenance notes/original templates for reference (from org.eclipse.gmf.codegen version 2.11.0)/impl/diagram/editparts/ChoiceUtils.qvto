@@ -1,0 +1,43 @@
+modeltype gmfgen uses "http://www.eclipse.org/gmf/2009/GenModel";
+modeltype ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
+library Utils;
+
+
+helper gmfgen::GenCommonBase::isOclChoiceLabel() : Boolean {
+	return let labelModelFacet : gmfgen::LabelModelFacet 
+		= if self.oclIsKindOf(gmfgen::GenChildLabelNode) then self.oclAsType(gmfgen::GenChildLabelNode).labelModelFacet 
+	      else (if self.oclIsKindOf(gmfgen::GenLabel) then self.oclAsType(gmfgen::GenLabel).modelFacet 
+	 	  else null 
+	 	  endif)
+	 	  endif	 	      
+	in (labelModelFacet <> null) 
+		and labelModelFacet.parser.oclIsKindOf(gmfgen::OclChoiceParser);
+}
+
+helper gmfgen::GenCommonBase::isOclChoiceLabelWithShowExpr() : Boolean {
+	return let labelModelFacet : gmfgen::LabelModelFacet 
+		= if self.oclIsKindOf(gmfgen::GenChildLabelNode) then self.oclAsType(gmfgen::GenChildLabelNode).labelModelFacet 
+	      else (if self.oclIsKindOf(gmfgen::GenLabel) then self.oclAsType(gmfgen::GenLabel).modelFacet 
+	 	  else null 
+	 	  endif)
+	 	  endif	 	      
+	in (labelModelFacet <> null) 
+		and labelModelFacet.parser.oclIsKindOf(gmfgen::OclChoiceParser)
+		and (labelModelFacet.parser.oclAsType(gmfgen::OclChoiceParser).showExpression <> null);
+}
+
+helper isChoiceLabel(modelFacet : gmfgen::LabelModelFacet) : Boolean {
+	return modelFacet.parser.oclIsKindOf(gmfgen::PredefinedEnumParser)
+			or modelFacet.parser.oclIsKindOf(gmfgen::OclChoiceParser);
+}
+
+helper getDirectManagerFQN(modelFacet : gmfgen::LabelModelFacet) : String {
+	return 
+	 (if isChoiceLabel(modelFacet) then 
+		-- 'org.eclipse.gmf.runtime.diagram.ui.tools.ComboDirectEditManager'
+		'org.eclipse.gmf.tooling.runtime.directedit.ComboDirectEditManager'
+	  else
+		'org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager'
+	  endif);
+}
