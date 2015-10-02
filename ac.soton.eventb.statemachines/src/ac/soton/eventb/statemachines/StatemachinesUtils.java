@@ -16,15 +16,20 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eventb.emf.core.AbstractExtension;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedElement;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachineFactory;
 import org.eventb.emf.core.machine.MachinePackage;
+import org.eventb.emf.persistence.EMFRodinDB;
 
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
@@ -47,6 +52,18 @@ public class StatemachinesUtils {
 		// Do nothing
 	}
 
+	/**
+	 * @param domain
+	 * @param mch
+	 * @param sibling
+	 * @param name
+	 * @param refinesSM
+	 * @param instances
+	 * @param selfName
+	 *            This must not be <code>null</code>.
+	 * @param translation
+	 * @return
+	 */
 	public static Statemachine createStatemachine(
 			TransactionalEditingDomain domain, Machine mch,
 			AbstractExtension sibling, String name, Statemachine refinesSM,
@@ -275,12 +292,39 @@ public class StatemachinesUtils {
 	 * @param channel_init
 	 */
 	public static void addElaboration(TransactionalEditingDomain domain,
-			Transition transition, Event channel_init) {
+			Transition transition, Event evt) {
 		Command cmd = AddCommand.create(domain, transition,
 				CoreextensionPackage.Literals.EVENT_BEVENT_GROUP__ELABORATES,
-				channel_init);
+				evt);
 		cmd.execute();
 	}
 
+	/**
+	 * @param domain
+	 * @param setINSTANCE
+	 */
+	public static void delete(TransactionalEditingDomain domain,
+			EventBElement element) {
+		Command cmd = DeleteCommand.create(domain, element);
+
+		if (cmd.canExecute())
+			cmd.execute();
+	}
+
+	/**
+	 * @param emfRodinDB
+	 * @param c0
+	 * @return
+	 */
+	public static EventBElement reload(EMFRodinDB emfRodinDB,
+			EventBElement element) {
+		Resource resource = element.eResource();
+		resource.eSetDeliver(false);
+		resource.unload();
+		EventBElement loaded = emfRodinDB.loadEventBComponent(EcoreUtil
+				.getURI(element));
+		resource.eSetDeliver(true);
+		return loaded;
+	}
 
 }
