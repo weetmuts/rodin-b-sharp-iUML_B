@@ -12,11 +12,13 @@
 package ac.soton.eventb.statemachines.generator.tests;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eventb.core.IEvent;
 import org.eventb.core.IEventBProject;
+import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.machine.Event;
 import org.eventb.emf.core.machine.Machine;
+import org.eventb.emf.persistence.EMFRodinDB;
 import org.eventb.emf.persistence.EventBEMFUtils;
 import org.junit.Test;
 
@@ -57,17 +59,38 @@ public class ValidatorTests7_RootLevel_Transition extends
 	private Machine m0;
 
 	/**
-	 * The event <code>INITIALISATION</code> within machine <code>m0</code>.
+	 * The event <code>INITIALISATION</code> within <code>m0</code> (created in
+	 * the {@link #setUp()} method).
 	 */
 	private Event m0_init;
 
 	/**
-	 * The state machine <code>SM</code> within <code>m0</code>.
+	 * The event <code>e</code> within <code>m0</code> (created in the
+	 * {@link #setUp()} method).
+	 */
+	private Event m0_e;
+
+	/**
+	 * The event <code>f</code> within <code>m0</code> (created in the
+	 * {@link #setUp()} method).
+	 */
+	private Event m0_f;
+
+	/**
+	 * The state machine <code>SM</code> within <code>m0</code> (created in the
+	 * {@link #setUp()} method).
 	 */
 	private Statemachine SM;
 
 	/**
-	 * The state <code>S0</code> within <code>SM</code>.
+	 * The inital state within <code>SM</code> (created in the {@link #setUp()}
+	 * method).
+	 */
+	private Initial init;
+
+	/**
+	 * The state <code>S0</code> within <code>SM</code> (created in the
+	 * {@link #setUp()} method).
 	 */
 	private State s0;
 
@@ -82,6 +105,10 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * <li>Create the machine <code>m0</code> within <code>P</code>.</li>
 	 * 
 	 * <li>Create the event <code>INITIALISATION</code> within <code>m0</code>.</li>
+	 * 
+	 * <li>Create the event <code>e</code> within <code>m0</code>.</li>
+	 * 
+	 * <li>Create the event <code>f</code> within <code>m0</code>.</li>
 	 * 
 	 * <li>Create the statemachine <code>SM</code> within <code>m0</code>.</li>
 	 * 
@@ -102,13 +129,14 @@ public class ValidatorTests7_RootLevel_Transition extends
 		prj = EventBUtils.createEventBProject("P", nullMonitor);
 		m0 = EventBEMFUtils.createMachine(emfRodinDB, prj, "m0");
 		m0_init = EventBEMFUtils.createEvent(domain, m0, IEvent.INITIALISATION);
+		m0_e = EventBEMFUtils.createEvent(domain, m0, "e");
+		m0_f = EventBEMFUtils.createEvent(domain, m0, "f");
 		SM = StatemachinesUtils.createStatemachine(domain, m0, null, "SM",
 				null, null, "", TranslationKind.SINGLEVAR);
-		Initial initialState = StatemachinesUtils.createInitialState(domain,
-				SM, "");
+		init = StatemachinesUtils.createInitialState(domain, SM, "");
 		s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
 		Transition initTransition = StatemachinesUtils.createTransition(domain,
-				SM, initialState, s0);
+				SM, init, s0);
 		StatemachinesUtils.addElaboration(domain, initTransition, m0_init);
 		EventBEMFUtils.save(emfRodinDB, m0);
 	}
@@ -123,13 +151,11 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * 
 	 * <ul>
 	 * <li><b>Setting:</b> A root statemachine <code>SM</code> with a state
-	 * <code>S0</code>, and an incoming transition (without elaboration).</li>
+	 * <code>S0</code>, and an incoming transition with a <code>null</code>
+	 * source (without elaboration).</li>
 	 * 
 	 * <li><b>Expected result:</b>
 	 * <ol>
-	 * <li><i>(ERROR)</i> Validation fails the constraint '<i>Root statemachine
-	 * should have initial state</i>'.</li>
-	 * 
 	 * <li><i>(ERROR)</i> Required feature '<i>source</i>' must be set.</li>
 	 * 
 	 * <li><i>(WARNING)</i> Validation fails the constraint '<i>Transition
@@ -137,23 +163,22 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * </ol>
 	 * </li>
 	 * </ul>
+	 * 
+	 * @see Error_FeatureMissing
+	 * @see Warning_TransitionMissingElaboration
 	 */
 	@Test
 	public void test_Transition_Source_Null() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
-		Transition transition = StatemachinesUtils.createTransition(domain, SM, null, s0);
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				null, s0);
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic, Diagnostic.ERROR);
-		assertDiagnostic(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				new Error_SMMissingInitialState(SM),
-				new Error_FeatureMissing(transition, StatemachinesPackage.Literals.TRANSITION__SOURCE),
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_FeatureMissing(transition,
+						StatemachinesPackage.Literals.TRANSITION__SOURCE),
 				new Warning_TransitionMissingElaboration(transition));
 	}
 
@@ -168,9 +193,6 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * 
 	 * <li><b>Expected result:</b>
 	 * <ol>
-	 * <li><i>(ERROR)</i> Validation fails the constraint '<i>Root statemachine
-	 * should have initial state</i>'.</li>
-	 * 
 	 * <li><i>(ERROR)</i> Feature '<i>source</i>' contains a dangling reference.
 	 * </li>
 	 * 
@@ -179,29 +201,25 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * </ol>
 	 * </li>
 	 * </ul>
+	 * 
+	 * @see Error_FeatureDanglingReference
+	 * @see Warning_TransitionMissingElaboration
 	 */
 	@Test
 	public void test_Transition_Source_Dangling() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
 		State s1 = StatemachinesFactory.eINSTANCE.createState();
 		s1.setName("S1");
-		StatemachinesUtils.createTransition(domain, SM, s1, s0);
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				s1, s0);
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR, Diagnostic.ERROR,
-				Diagnostic.WARNING);
-		assertDiagnosticCauses(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'",
-				"The feature 'source' of 'm0::SM::<Transition>' contains a dangling reference 'S1'",
-				"The 'Transition should elaborate an event' constraint is violated on 'm0::SM::<Transition>'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_FeatureDanglingReference(transition,
+						StatemachinesPackage.Literals.TRANSITION__SOURCE, s1),
+				new Warning_TransitionMissingElaboration(transition));
 	}
 
 	/**
@@ -210,9 +228,30 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * 
 	 */
 	@Test
-	public void test_Transition_Source_Invalid() {
-		// TODO Create an invalid reference for source.
-		fail("Not yet implemented");
+	public void test_Transition_Source_Unresolved() {
+		State s1 = StatemachinesUtils.createState(domain, SM, "S1", null);
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				s1, s0);
+		EventBEMFUtils.save(emfRodinDB, m0);
+
+		// Remove S1 using another EMFRodinDB
+		EMFRodinDB emfRodinDB2 = new EMFRodinDB();
+		EventBElement loadedM0 = emfRodinDB2.loadEventBComponent(EcoreUtil
+				.getURI(m0));
+		State loadedS1 = (State) emfRodinDB2.loadElement(EcoreUtil.getURI(s1));
+		StatemachinesUtils.delete(emfRodinDB2.getEditingDomain(), loadedS1);
+		EventBEMFUtils.save(emfRodinDB2, loadedM0);
+
+		// Reload SM from the origina EMFRodinDB.
+		SM = (Statemachine) emfRodinDB2.loadElement(EcoreUtil.getURI(SM));
+
+		Diagnostic diagnostic = validate(SM);
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_FeatureMissing(transition,
+						StatemachinesPackage.Literals.TRANSITION__SOURCE),
+				new Warning_TransitionMissingElaboration(transition));
 	}
 
 	/**
@@ -239,26 +278,17 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 */
 	@Test
 	public void test_Transition_Target_Null() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
-		State s1 = StatemachinesFactory.eINSTANCE.createState();
-		s1.setName("S1");
-		StatemachinesUtils.createTransition(domain, SM, s0, s1);
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				s0, null);
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR, Diagnostic.ERROR,
-				Diagnostic.WARNING);
-		assertDiagnosticCauses(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'",
-				"The feature 'target' of 'm0::SM::<Transition>' contains a dangling reference 'S1'",
-				"The 'Transition should elaborate an event' constraint is violated on 'm0::SM::<Transition>'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_FeatureMissing(transition,
+						StatemachinesPackage.Literals.TRANSITION__TARGET),
+				new Warning_TransitionMissingElaboration(transition));
 	}
 
 	/**
@@ -285,24 +315,19 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 */
 	@Test
 	public void test_Transition_Target_Dangling() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
-		StatemachinesUtils.createTransition(domain, SM, s0, null);
+		State s1 = StatemachinesFactory.eINSTANCE.createState();
+		s1.setName("S1");
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				s0, s1);
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR, Diagnostic.ERROR,
-				Diagnostic.WARNING);
-		assertDiagnosticCauses(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'",
-				"The required feature 'target' of 'm0::SM::<Transition>' must be set",
-				"The 'Transition should elaborate an event' constraint is violated on 'm0::SM::<Transition>'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_FeatureDanglingReference(transition,
+						StatemachinesPackage.Literals.TRANSITION__TARGET, s1),
+				new Warning_TransitionMissingElaboration(transition));
 	}
 
 	/**
@@ -337,23 +362,16 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 */
 	@Test
 	public void test_Transition_Elaborates_None() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
 		State s1 = StatemachinesUtils.createState(domain, SM, "S1", null);
-		StatemachinesUtils.createTransition(domain, SM, s0, s1);
+		Transition transition = StatemachinesUtils.createTransition(domain, SM,
+				s0, s1);
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR, Diagnostic.WARNING);
-		assertDiagnosticCauses(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'",
-				"The 'Transition should elaborate an event' constraint is violated on 'm0::SM::<Transition>'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.WARNING);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Warning_TransitionMissingElaboration(transition));
 	}
 
 	/**
@@ -377,10 +395,6 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 */
 	@Test
 	public void test_Transition_Elaborates_INITIALISATION() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
 		State s1 = StatemachinesUtils.createState(domain, SM, "S1", null);
 		Transition transition = StatemachinesUtils.createTransition(domain, SM,
 				s0, s1);
@@ -388,14 +402,10 @@ public class ValidatorTests7_RootLevel_Transition extends
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR, Diagnostic.WARNING);
-		assertDiagnosticCauses(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'",
-				"The 'Only transition going out initial state can elaborate INITIALISATION' constraint is violated on 'm0::SM::INITIALISATION'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.ERROR);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic,
+				new Error_TransitionElaboratingINITIALISATION(transition));
 	}
 
 	/**
@@ -407,23 +417,11 @@ public class ValidatorTests7_RootLevel_Transition extends
 	 * <code>S0</code> and <code>S1</code>, and a transition from
 	 * <code>S0</code> to <code>S1</code> elaborates the INITIALISATION event.</li>
 	 * 
-	 * <li><b>Expected result:</b>
-	 * <ol>
-	 * <li><i>(ERROR)</i> Validation fails the constraint '<i>Root statemachine
-	 * should have initial state</i>'.</li>
-	 * <li><i>(WARNING)</i> Validation fails the constraint '<i>Only transition
-	 * going out initial state can elaborate INITIALISATION</i>'.</li>
-	 * </ol>
-	 * </li>
+	 * <li><b>Expected result:</b> <i>(OK)</i>.</li>
 	 * </ul>
 	 */
 	@Test
 	public void test_Transition_Elaborates_Event() {
-		TransactionalEditingDomain domain = emfRodinDB.getEditingDomain();
-		Event m0_e = EventBEMFUtils.createEvent(domain, m0, "e");
-		Statemachine SM = StatemachinesUtils.createStatemachine(domain, m0,
-				null, "SM", null, null, "", TranslationKind.SINGLEVAR);
-		State s0 = StatemachinesUtils.createState(domain, SM, "S0", null);
 		State s1 = StatemachinesUtils.createState(domain, SM, "S1", null);
 		Transition transition = StatemachinesUtils.createTransition(domain, SM,
 				s0, s1);
@@ -431,13 +429,10 @@ public class ValidatorTests7_RootLevel_Transition extends
 		EventBEMFUtils.save(emfRodinDB, m0);
 
 		Diagnostic diagnostic = validate(SM);
-		assertDiagnosticError("Incorrect root diagnostic", diagnostic);
-		assertDiagnosticSeverities("Incorrect sub-diagnostics' severities",
-				diagnostic, Diagnostic.ERROR);
-		assertDiagnostic(
-				"Incorrect sub-diagnostics",
-				diagnostic,
-				"The 'Root statemachine should have initial state' constraint is violated on 'm0::SM'");
+		assertDiagnosticSeverity("Incorrect root diagnostic", diagnostic,
+				Diagnostic.OK);
+		assertDiagnostic("Incorrect sub-diagnostics", diagnostic);
+
 	}
 
 	// =========================================================================

@@ -112,7 +112,7 @@ public abstract class AbstractValidatorTests extends AbstractEventBEMFTests {
 			if (expectedObj instanceof EventBElement) {
 				assertTrue(msg + "object must be an EventBElement",
 						obj instanceof EventBElement);
-				assertEquals(msg + "Incorrect reference",
+				assertEquals(msg + ": Incorrect reference",
 						((EventBElement) expectedObj).getReference(),
 						((EventBElement) obj).getReference());
 			} else if (expectedObj instanceof EReference) {

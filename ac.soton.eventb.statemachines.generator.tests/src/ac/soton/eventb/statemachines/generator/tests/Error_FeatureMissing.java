@@ -12,6 +12,7 @@
 package ac.soton.eventb.statemachines.generator.tests;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
 import org.eventb.emf.core.EventBElement;
 
 /**
@@ -32,6 +33,14 @@ public class Error_FeatureMissing extends AbstractErrorDiagnostic implements
 	 * @param inv
 	 */
 	public Error_FeatureMissing(EventBElement element, EAttribute feature) {
+		super("required feature", element, feature);
+	}
+
+	/**
+	 * @param eventBpredicatePredicate
+	 * @param inv
+	 */
+	public Error_FeatureMissing(EventBElement element, EReference feature) {
 		super("required feature", element, feature);
 	}
 
