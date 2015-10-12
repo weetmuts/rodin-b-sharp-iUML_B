@@ -1,7 +1,9 @@
 package ac.soton.eventb.statemachines.generator.utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eventb.emf.core.machine.Action;
@@ -425,6 +427,42 @@ public class Utils {
 		
 	}
 	
+	/**
+	 * Gets the elaborated events for a complete upstream transition path
+	 * given one transition segment of the path. I.e. the elaborated events of all upstream 
+	 * transition segments between the given transition and the next proper target state
+	 * 
+	 * @param t : a transition
+	 * @return a list of events
+	 */
+	public static Set<Event> getAllUpstreamElaboratedEvents(Transition t){
+		Set<Event> ret = new HashSet<Event>();
+		ret.addAll(t.getElaborates());
+		if(!(t.getSource() instanceof State)){
+			for(Transition it : t.getSource().getIncoming())
+				ret.addAll(getAllUpstreamElaboratedEvents(it));
+		}
+		return ret;
+	}
+
+	
+	/**
+	 * Gets the elaborated events for a complete downstream transition path
+	 * given one transition segment of the path. I.e. the elaborated events of all downstream 
+	 * transition segments between the given transition and next proper target state
+	 * 
+	 * @param t : a transition
+	 * @return a list of events
+	 */
+	public static Set<Event> getAllDownstreamElaboratedEvents(Transition t){
+		Set<Event> ret = new HashSet<Event>();
+		ret.addAll(t.getElaborates());
+		if(!(t.getTarget() instanceof State)){
+			for(Transition it : t.getTarget().getOutgoing())
+				ret.addAll(getAllDownstreamElaboratedEvents(it));
+		}
+		return ret;
+	}
 	
 	public static List<AbstractNode> getAllTrueSources(Transition t){
 		List<AbstractNode> ret = new ArrayList<AbstractNode>();

@@ -109,7 +109,17 @@
                rule_class="ac.soton.eventb.statemachines.generator.rules.TransitionAction2ActionRule"
                source_class="Transition">
          </rule>
-          <rule
+         <rule
+               name="StateEntryAction2Action"
+               rule_class="ac.soton.eventb.statemachines.generator.rules.StateEntryAction2ActionRule"
+               source_class="State">
+         </rule>
+         <rule
+               name="StateExitAction2Action"
+               rule_class="ac.soton.eventb.statemachines.generator.rules.StateExitAction2ActionRule"
+               source_class="State">
+         </rule>
+         <rule
                name="Transition2EnterAction"
                rule_class="ac.soton.eventb.statemachines.generator.rules.Transition2EnterActionRule"
                source_class="Transition">
