@@ -43,7 +43,7 @@ import ac.soton.eventb.statemachines.Transition;
  * @see
  * @since
  */
-public class AbstractStatemachinesTests extends AbstractEventBEMFTests {
+public abstract class AbstractStatemachinesTests extends AbstractEventBEMFTests {
 
 	/**
 	 * @param msg
