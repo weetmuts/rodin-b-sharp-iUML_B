@@ -83,7 +83,7 @@ public class RemoveRedundantContextsRule extends AbstractRule implements IRule{
 		List<Context> redundantCtxs = findRedundantCtx(implicitContext);
 		for(Context ctx : redundantCtxs){
 			if(Find.named(sourceMachine.getSees(), ctx.getName()) != null){
-				ret.add(Make.descriptor(sourceMachine, sees, ctx, 1, true));
+				ret.add(Make.descriptor(sourceMachine, sees, ctx, true));
 			}
 		}
 		

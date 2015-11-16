@@ -18,12 +18,12 @@ import ac.soton.eventb.statemachines.State;
 import ac.soton.eventb.statemachines.StatemachinesPackage;
 
 /**
- * Invariants property section for State.
+ * Entry Actions property section for State.
  * 
  * @author cfs
  *
  */
-public class InvariantsPropertySection extends AbstractEditTableWithDefaultNamingPropertySection {
+public class EntryActionsPropertySection extends AbstractEditTableWithDefaultNamingPropertySection {
 
 	/**
 	 * Element Filter for this property section.
@@ -37,32 +37,30 @@ public class InvariantsPropertySection extends AbstractEditTableWithDefaultNamin
 	
 	@Override
 	protected EReference getFeature() {
-		return StatemachinesPackage.Literals.STATE__INVARIANTS;
+		return StatemachinesPackage.Literals.STATE__ENTRY_ACTIONS;
 	}
 
 	@Override
 	protected EStructuralFeature getFeatureForCol(final int col) {
 		switch (col) {
 		case 0 : return CorePackage.Literals.EVENT_BNAMED__NAME;
-		case 1 : return CorePackage.Literals.EVENT_BDERIVED__THEOREM;
-		case 2 : return CorePackage.Literals.EVENT_BPREDICATE__PREDICATE;
-		case 3 : return CorePackage.Literals.EVENT_BCOMMENTED__COMMENT;
+		case 1 : return CorePackage.Literals.EVENT_BACTION__ACTION;
+		case 2 : return CorePackage.Literals.EVENT_BCOMMENTED__COMMENT;
 		default : return null;
 		}
 	}
 
 	@Override
 	protected boolean isRodinKeyboard(final int col) {
-		return col==2 ? true : false;
+		return col==1 ? true : false;
 	}
 	
 	@Override
 	protected boolean isMulti(final int col){
 		switch (col) {
 		case 0 : return false;	//name
-		case 1 : return false;		//theorem field
-		case 2 : return true;	//predicate field
-		case 3 : return true;	//comment field
+		case 1 : return true;	//action field
+		case 2 : return true;	//comment field
 		default : return false;	//unknown
 		}
 	}
@@ -71,9 +69,8 @@ public class InvariantsPropertySection extends AbstractEditTableWithDefaultNamin
 	protected int columnWidth(final int col){
 		switch (col) {
 		case 0 : return 160;	//name
-		case 1 : return 60;		//theorem field
-		case 2 : return 400;	//predicate field
-		case 3 : return 400;	//comment field
+		case 1 : return 400;	//action field
+		case 2 : return 400;	//comment field
 		default : return -1;	//unknown
 		}
 	}
