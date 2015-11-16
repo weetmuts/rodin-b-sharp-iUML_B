@@ -94,7 +94,7 @@ public class GeneratorTests extends AbstractEventBEMFTests {
 
 			// Test the generated context.
 			IRodinFile contextFile = prj.getContextFile("m0_implicitContext");
-			assertTrue("Context should not exist", contextFile.exists());
+			assertTrue("Context should exist", contextFile.exists());
 			Context m0ImplicitContext = (Context) emfRodinDB
 					.loadElement(contextFile.getRoot());
 			testContextExtendsClauses(
