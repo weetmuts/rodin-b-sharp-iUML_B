@@ -15,14 +15,14 @@
                source_class="Class">
          </rule>
          <rule
-               name="AssociationRule"
-               rule_class="ac.soton.eventb.classdiagrams.generator.rules.AssociationRule"
-               source_class="Association">
-         </rule>
-         <rule
                name="ClassAttributeRule"
                rule_class="ac.soton.eventb.classdiagrams.generator.rules.ClassAttributeRule"
                source_class="ClassAttribute">
+         </rule>
+         <rule
+               name="AssociationRule"
+               rule_class="ac.soton.eventb.classdiagrams.generator.rules.AssociationRule"
+               source_class="Association">
          </rule>
          <rule
                name="ClassConstraintRule"

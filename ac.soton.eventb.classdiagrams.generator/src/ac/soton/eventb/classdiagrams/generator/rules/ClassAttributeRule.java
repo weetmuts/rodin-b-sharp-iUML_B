@@ -54,9 +54,9 @@ public class ClassAttributeRule extends AbstractRule  implements IRule {
 			}
 			break;
 		}
-		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 5));
+		ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer,newGeneratedTypePredicate, 6));
 		if (newGeneratedInjectionPredicate != null){
-			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, 6));			
+			ret.add(Make.descriptor(component, newGeneratedTypePredicateContainer, newGeneratedInjectionPredicate, 7));			
 		}
 		return ret;
 	}
