@@ -1,66 +1,32 @@
+/**
+ * Copyright (c) 2012, 2015 University of Southampton.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * 	University of Southampton - Initial implementation
+ *  
+ */
 package ac.soton.eventb.statemachines.generator.validator;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.jface.action.Action;
 
+import ac.soton.eventb.emf.diagrams.generator.AbstractValidator;
+import ac.soton.eventb.emf.diagrams.generator.IValidator;
 import ac.soton.eventb.statemachines.diagram.part.ValidateAction;
 import ac.soton.eventb.statemachines.diagram.providers.StatemachinesMarkerNavigationProvider;
-import ac.soton.eventb.emf.diagrams.generator.IValidator;
 
-public class Validator implements IValidator {
-
-	@Override
-	public boolean validate(DiagramDocumentEditor diagramDocumentEditor) throws Exception {
-		// run validation
-		ValidateAction action = new ValidateAction(diagramDocumentEditor.getSite().getPage());
-		action.run();
-		return hasMarkers(diagramDocumentEditor)==false;
-	}
-		
-	/**
-	 * Returns a string of errors from validation markers for file.
-	 * 
-	 * @param diagramDocumentEditor
-	 * @return string of errors
-	 * 
-	 */
-	@Override
-	public String getValidationErrors(DiagramDocumentEditor diagramDocumentEditor) {
-		IMarker[] markers;
-		try {
-			markers = getFile(diagramDocumentEditor).findMarkers(
-					getMarkerType(),
-					true,
-					IResource.DEPTH_ZERO);
-		} catch (CoreException e) {
-			return "ERRORS UNKNOWN: COULD NOT RETRIEVE VALIDATION ERROR MARKERS FROM FILE";
-		}
-		StringBuilder errors = new StringBuilder();
-		for (IMarker marker : markers) {
-			//int severity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
-			if (true) //severity == IMarker.SEVERITY_ERROR)
-				errors.append("\n"
-						+ marker.getAttribute(IMarker.MESSAGE, "unknown error"));
-		}
-		return errors.toString();
-	}
-	
-	
-	/////////// not in interface (currently) /////////////
+public class Validator extends AbstractValidator implements IValidator {
 
 	public String getMarkerType() {
 		return StatemachinesMarkerNavigationProvider.MARKER_TYPE;
 	}
 
-	public boolean hasMarkers(DiagramDocumentEditor diagramDocumentEditor) throws CoreException{
-		return getFile(diagramDocumentEditor).findMarkers(getMarkerType(),true,IResource.DEPTH_ZERO).length>0;
-	}
-	
-	public IFile getFile(DiagramDocumentEditor diagramDocumentEditor){
-		return WorkspaceSynchronizer.getFile(diagramDocumentEditor.getDiagram().eResource());
+	@Override
+	protected Action getValidateAction(DiagramEditor diagramDocumentEditor) {
+		return new ValidateAction(diagramDocumentEditor.getSite().getPage());
 	}
 }
