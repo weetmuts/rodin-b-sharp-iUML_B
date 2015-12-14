@@ -1,27 +1,32 @@
 package ac.soton.eventb.classdiagrams.generator.validator;
 
 
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.jface.action.Action;
 
+import ac.soton.eventb.classdiagrams.diagram.part.ValidateAction;
+import ac.soton.eventb.classdiagrams.diagram.providers.ClassdiagramsMarkerNavigationProvider;
+import ac.soton.eventb.emf.diagrams.generator.AbstractValidator;
 import ac.soton.eventb.emf.diagrams.generator.IValidator;
 
-public class Validator implements IValidator {
+public class Validator extends AbstractValidator implements IValidator {
 
-	@Override
-	public boolean validate(DiagramDocumentEditor diagramDocumentEditor) throws Exception {
-		return true;
-	}
-		
-	/**
-	 * Returns a string of errors from validation markers for file.
-	 * 
-	 * @param diagramDocumentEditor
-	 * @return string of errors
-	 * 
+	/* (non-Javadoc)
+	 * @see ac.soton.eventb.emf.diagrams.generator.AbstractValidator#getMarkerType()
 	 */
 	@Override
-	public String getValidationErrors(DiagramDocumentEditor diagramDocumentEditor) {
-		return "no errors";
+	protected String getMarkerType() {
+		return ClassdiagramsMarkerNavigationProvider.MARKER_TYPE;
 	}
+
+	/* (non-Javadoc)
+	 * @see ac.soton.eventb.emf.diagrams.generator.AbstractValidator#getValidateAction(org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor)
+	 */
+	@Override
+	protected Action getValidateAction(DiagramEditor diagramDocumentEditor) {
+		return new ValidateAction(diagramDocumentEditor.getSite().getPage());
+	}
+	
+	
 	
 }
