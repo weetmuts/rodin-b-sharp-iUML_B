@@ -21,10 +21,17 @@ import ac.soton.eventb.statemachines.diagram.providers.StatemachinesMarkerNaviga
 
 public class Validator extends AbstractValidator implements IValidator {
 
-	public String getMarkerType() {
+	/* (non-Javadoc)
+	 * @see ac.soton.eventb.emf.diagrams.generator.AbstractValidator#getMarkerType()
+	 */
+	@Override
+	protected String getMarkerType() {
 		return StatemachinesMarkerNavigationProvider.MARKER_TYPE;
 	}
 
+	/* (non-Javadoc)
+	 * @see ac.soton.eventb.emf.diagrams.generator.AbstractValidator#getValidateAction(org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor)
+	 */
 	@Override
 	protected Action getValidateAction(DiagramEditor diagramDocumentEditor) {
 		return new ValidateAction(diagramDocumentEditor.getSite().getPage());
