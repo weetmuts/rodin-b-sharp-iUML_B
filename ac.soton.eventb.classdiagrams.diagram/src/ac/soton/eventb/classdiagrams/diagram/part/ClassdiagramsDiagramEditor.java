@@ -74,7 +74,7 @@ import org.eventb.emf.core.EventBElement;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.EventBObject;
 
-import ac.soton.eventb.emf.diagrams.navigator.refactor.Recorder;
+import ac.soton.eventb.emf.diagrams.refactor.Recorder;
 import ac.soton.eventb.classdiagrams.diagram.navigator.ClassdiagramsNavigatorItem;
 
 /**
