@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
@@ -325,6 +326,42 @@ public class StatemachinesUtils {
 				.getURI(element));
 		resource.eSetDeliver(true);
 		return loaded;
+	}
+
+	/**
+	 * @param statemachine
+	 * @return
+	 */
+	public static boolean isTopLevel(Statemachine statemachine) {
+		return !(statemachine.eContainer() instanceof State);
+	}
+
+	public static List<State> getContainingStates(State state) {
+		List<State> result = new ArrayList<State>();
+		result.add(state);
+		Statemachine statemachine = (Statemachine) state.eContainer();
+		EObject eContainer = statemachine.eContainer();
+		while (eContainer instanceof State) {
+			result.add((State) eContainer);
+			eContainer = eContainer.eContainer().eContainer();
+		}
+		return result;
+	}
+
+	/**
+	 * @param state
+	 * @return
+	 */
+	public static List<Statemachine> getContainingStatemachines(State state) {
+		List<Statemachine> result = new ArrayList<Statemachine>();
+		Statemachine statemachine = (Statemachine) state.eContainer();
+		result.add(statemachine);
+		while (!isTopLevel(statemachine)) {
+			statemachine = (Statemachine) statemachine.eContainer()
+					.eContainer();
+			result.add(statemachine);
+		}
+		return result;
 	}
 
 }
