@@ -44,9 +44,13 @@ public class Strings {
 		return MessageFormat.format(message, bindings);
 	}
 
+	public static String INSTANCES(Class cl){
+		return cl.getElaborates() == null? "("+cl.getName()+")" : cl.getName();
+	}
+	
 	public static String CLASS_SUPERTYPE_PRED;
 	public static String CLASS_SUPERTYPE_PRED(Class cp, Class sc) {
-		return bind(CLASS_SUPERTYPE_PRED, cp.getName(), sc.getName());
+		return bind(CLASS_SUPERTYPE_PRED, INSTANCES(cp), INSTANCES(sc));
 	}
 
 	public static String CLASS_SUPERTYPE_NAME;
