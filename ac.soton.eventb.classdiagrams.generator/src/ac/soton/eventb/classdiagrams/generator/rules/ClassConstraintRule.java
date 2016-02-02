@@ -6,7 +6,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EReference;
 import org.eventb.emf.core.CorePackage;
 import org.eventb.emf.core.EventBElement;
-import org.eventb.emf.core.EventBNamed;
 import org.eventb.emf.core.EventBNamedCommentedComponentElement;
 import org.eventb.emf.core.context.Context;
 import org.eventb.emf.core.machine.Machine;
@@ -24,25 +23,25 @@ public class ClassConstraintRule extends AbstractRule  implements IRule {
 	
 	protected static final EReference elaborates = CoreextensionPackage.Literals.EVENT_BDATA_ELABORATION__ELABORATES;
 
-	@Override
-	public boolean enabled(EventBElement sourceElement) throws Exception{
-		assert(sourceElement instanceof ClassConstraint);
-		if (!(((ClassConstraint)sourceElement).eContainer() instanceof Class)) return false;
-		return ((Class)((ClassConstraint)sourceElement).eContainer()).getElaborates() != null;
-	}
+//	@Override
+//	public boolean enabled(EventBElement sourceElement) throws Exception{
+//		assert(sourceElement instanceof ClassConstraint);
+//		if (!(((ClassConstraint)sourceElement).eContainer() instanceof Class)) return false;
+//		return ((Class)((ClassConstraint)sourceElement).eContainer()).getElaborates() != null;
+//	}
 
 	@Override
 	public List<GenerationDescriptor> fire(EventBElement sourceElement, List<GenerationDescriptor> generatedElements) throws Exception {
 		List<GenerationDescriptor> ret = new ArrayList<GenerationDescriptor>();
 		ClassConstraint element = (ClassConstraint)sourceElement;
 		Class parentClass = (Class) element.eContainer();
-		EventBNamed classSet = parentClass.getElaborates();
+		String instances = parentClass.getElaborates() == null? "("+parentClass.getName()+")" : parentClass.getElaborates().getName();
 		EventBNamedCommentedComponentElement component = (EventBNamedCommentedComponentElement) element.getContaining(CorePackage.Literals.EVENT_BNAMED_COMMENTED_COMPONENT_ELEMENT);		
 
 		//create element
 		EventBElement newGeneratedPredicateElement = null;
 		EReference newGeneratedPredicateContainmentFeature = null;
-		String predicate = Strings.CLASS_CONSTRAINT_PRED(parentClass.getSelfName(), classSet.getName(), element.getPredicate());
+		String predicate = Strings.CLASS_CONSTRAINT_PRED(parentClass.getSelfName(), instances, element.getPredicate());
 
 		if (component instanceof Machine){
 			newGeneratedPredicateContainmentFeature = invariants;
