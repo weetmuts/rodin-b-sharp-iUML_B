@@ -17,8 +17,6 @@ import java.util.List;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -30,7 +28,6 @@ import org.eventb.emf.core.machine.Invariant;
 import org.eventb.emf.core.machine.Machine;
 import org.eventb.emf.core.machine.MachineFactory;
 import org.eventb.emf.core.machine.MachinePackage;
-import org.eventb.emf.persistence.EMFRodinDB;
 
 import ac.soton.eventb.emf.core.extension.coreextension.CoreextensionPackage;
 
@@ -312,21 +309,23 @@ public class StatemachinesUtils {
 			cmd.execute();
 	}
 
-	/**
-	 * @param emfRodinDB
-	 * @param c0
-	 * @return
-	 */
-	public static EventBElement reload(EMFRodinDB emfRodinDB,
-			EventBElement element) {
-		Resource resource = element.eResource();
-		resource.eSetDeliver(false);
-		resource.unload();
-		EventBElement loaded = emfRodinDB.loadEventBComponent(EcoreUtil
-				.getURI(element));
-		resource.eSetDeliver(true);
-		return loaded;
-	}
+//	REMOVED as not specific to statemachines and creates a dependency on the persistence plugin
+//
+//	/**
+//	 * @param emfRodinDB
+//	 * @param c0
+//	 * @return
+//	 */
+//	public static EventBElement reload(EMFRodinDB emfRodinDB,
+//			EventBElement element) {
+//		Resource resource = element.eResource();
+//		resource.eSetDeliver(false);
+//		resource.unload();
+//		EventBElement loaded = emfRodinDB.loadEventBComponent(EcoreUtil
+//				.getURI(element));
+//		resource.eSetDeliver(true);
+//		return loaded;
+//	}
 
 	/**
 	 * @param statemachine

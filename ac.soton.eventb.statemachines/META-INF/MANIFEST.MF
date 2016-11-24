@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: ac.soton.eventb.statemachines;singleton:=true
-Bundle-Version: 3.2.0
+Bundle-Version: 3.2.1.shouldGoTo4
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -15,7 +15,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
  org.eventb.emf.core;bundle-version="[4.2.0,5.0.0)",
  ac.soton.eventb.emf.core.extension;bundle-version="[4.0.0,5.0.0)",
  ac.soton.eventb.emf.diagrams;bundle-version="[4.0.0,5.0.0)",
- org.eclipse.emf.transaction;bundle-version="1.8.0",
- org.eventb.emf.persistence;bundle-version="[3.4.0,4.0.0)",
- org.rodinp.core;bundle-version="[1.7.0,2.0.0)"
+ org.eclipse.emf.transaction;bundle-version="[1.8.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
