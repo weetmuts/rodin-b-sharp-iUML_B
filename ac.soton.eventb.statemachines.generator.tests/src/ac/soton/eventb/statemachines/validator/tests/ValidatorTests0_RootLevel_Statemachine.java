@@ -13,6 +13,7 @@ package ac.soton.eventb.statemachines.validator.tests;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eventb.core.IEventBProject;
@@ -462,7 +463,12 @@ public final class ValidatorTests0_RootLevel_Statemachine extends
 		EventBEMFUtils.save(emfRodinDB2, loadedC0);
 
 		// Reload c0 from the origina EMFRodinDB.
-		c0 = (Context) StatemachinesUtils.reload(emfRodinDB, c0);
+		Resource resource = c0.eResource();
+		resource.eSetDeliver(false);
+		resource.unload();
+		c0 = (Context) emfRodinDB.loadEventBComponent(EcoreUtil
+				.getURI(c0));
+		resource.eSetDeliver(true);
 
 		// Validate the statemachine.
 		Diagnostic diagnostic = validate(SM);
